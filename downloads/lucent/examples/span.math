@@ -1,0 +1,14 @@
+# Blue is a*u; amber is b*v; rose is their sum. A parallelogram adds vectors.
+# At h=0, u and v are dependent and every combination lies on one line.
+scene "Span: all the vectors a basis can reach";
+domain -7 7;
+range -4 4;
+coordinates equal;
+param a = 1 from -2 to 2;
+param b = 1 from -2 to 2;
+param h = 1 from -1.5 to 1.5;
+vector first = (2*a,0) color blue;
+vector second = (b,h*b) color amber;
+vector combination = (2*a+b,h*b) color rose;
+segment translatedsecond from (2*a,0) to (2*a+b,h*b) color amber;
+segment translatedfirst from (b,h*b) to (2*a+b,h*b) color blue;

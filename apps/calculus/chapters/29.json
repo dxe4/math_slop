@@ -1,0 +1,531 @@
+{
+  "id": "29",
+  "title": "Differential forms and the general Stokes theorem",
+  "subtitle": "What is the common oriented quantity behind line, surface, and volume integration?",
+  "prerequisites": [
+    "Calculus chapters 19 and 21: vectors, determinants, total derivatives, and the multivariable chain rule.",
+    "Calculus chapters 23–24: multiple integrals, parametrizations, and change of variables.",
+    "Calculus chapters 25–26: line integrals, complete oriented boundaries, and the classical integral theorems.",
+    "L2 linear algebra: alternating determinants and composition of linear maps; the required wedge algebra is developed here."
+  ],
+  "objectives": [
+    "Interpret a differential form as an alternating multilinear measurement with a stated degree.",
+    "Compute wedge products, pullbacks, and exterior derivatives with correct signs.",
+    "Distinguish signed form integration from scalar area and volume measurement.",
+    "Prove Stokes on coordinate boxes and compatible finite cell decompositions, and state the general smooth-manifold theorem precisely.",
+    "Recover the classical integral theorems and identify the hypotheses hidden by a compact formula.",
+    "Distinguish closed from exact forms using a proved star-shaped potential construction and a nonexact form around a hole."
+  ],
+  "sections": [
+    {
+      "title": "1. Forms measure oriented directions",
+      "paragraphs": [
+        "A line integral of $P\\,dx+Q\\,dy$ assigns a number to a point and a direction of travel. The expression is not an ordinary scalar function: at a point, it takes a tangent vector $(v_x,v_y)$ to $Pv_x+Qv_y$. Definition 29.1: a covector is a linear map from vectors to real numbers. The coordinate covector $dx_i$ returns the $i$th component. A one-form on an open set assigns a covector at each point, with coefficient functions of the declared regularity. A zero-form is an ordinary function.",
+        "Definition 29.2: a $k$-form assigns an alternating $k$-linear map to each point. Alternating means swapping two arguments changes the sign, so equal arguments give zero. In coordinates on $\\mathbb R^n$, it is a sum $\\omega=\\sum_{i_1<\\cdots<i_k}a_{i_1\\ldots i_k}\\,dx_{i_1}\\wedge\\cdots\\wedge dx_{i_k}$. The basis wedge evaluated on vectors $v_1,\\ldots,v_k$ is the determinant of the matrix whose row $p$, column $q$ entry is $(v_q)_{i_p}$. This determinant convention fixes the normalization and every orientation sign.",
+        "The wedge product is bilinear and concatenates basis covectors, using $dx_i\\wedge dx_j=-dx_j\\wedge dx_i$ and $dx_i\\wedge dx_i=0$. Order the remaining indices and include the sign of that permutation. If $\\alpha$ has degree $p$ and $\\beta$ degree $q$, then $\\alpha\\wedge\\beta=(-1)^{pq}\\beta\\wedge\\alpha$: moving each of the $p$ covectors past all $q$ requires $pq$ swaps. This proof applies term by term; repeated-index terms vanish on both sides. Two two-forms therefore commute, while two one-forms anticommute.",
+        "A $k$-form vanishes when $k>n$, because every coordinate wedge then repeats an index. A one-form wedges with itself to zero, but an even-degree form need not. For example, $(dx_1\\wedge dx_2+dx_3\\wedge dx_4)^2$ is $2\\,dx_1\\wedge dx_2\\wedge dx_3\\wedge dx_4$, where the square means wedge product. Treating every wedge as ordinary multiplication or claiming every form squares to zero would destroy this distinction.",
+        "A form carries orientation information without requiring lengths or angles. In Euclidean coordinates a one-form can be represented by a vector using a dot product, but that identification uses the metric. Under a coordinate change its covector components follow a pullback rule, not an arbitrary vector-component mnemonic. The ordinary area measure $dA$ is nonnegative; the area form $dx\\wedge dy$ changes sign under an orientation reversal. Their numerical values agree only after an orientation convention is fixed."
+      ],
+      "formula": "(dx ∧ dy)(v,w) = vₓwᵧ − vᵧwₓ; α ∧ β = (−1)^(pq) β ∧ α.",
+      "formulaTex": "(dx\\wedge dy)(v,w)=v_xw_y-v_yw_x,\\qquad \\alpha_p\\wedge\\beta_q=(-1)^{pq}\\beta_q\\wedge\\alpha_p."
+    },
+    {
+      "title": "2. Pullback is the chain rule for integrands",
+      "paragraphs": [
+        "Definition 29.3: for a continuously differentiable map $\\phi:V\\subset\\mathbb R^m\\to U\\subset\\mathbb R^n$, define the pullback by $(\\phi^*\\omega)_u(v_1,\\ldots,v_k)=\\omega_{\\phi(u)}(D\\phi(u)v_1,\\ldots,D\\phi(u)v_k)$. For a function, $\\phi^*f=f\\circ\\phi$. The map may lower the available dimension; if $k>m$, the pulled-back form is zero. Injectivity is unnecessary for defining a pullback. It becomes important when the map is used to parametrize an integral without counting a region repeatedly.",
+        "The coordinate rule is $\\phi^*(dx_i)=d\\phi_i$. Indeed both sides evaluate a vector $v$ to the $i$th component of $D\\phi\\,v$, which is the directional derivative of $\\phi_i$. Thus substitute the coordinate functions into each coefficient, replace every coordinate differential by the corresponding differential, and expand the wedges. The determinant definition also proves $\\phi^*(\\alpha\\wedge\\beta)=\\phi^*\\alpha\\wedge\\phi^*\\beta$, first for coordinate wedges and then by bilinearity.",
+        "Pullback respects composition: $(\\phi\\circ\\psi)^*\\omega=\\psi^*(\\phi^*\\omega)$. At a point, the chain rule says $D(\\phi\\circ\\psi)=D\\phi\\,D\\psi$. Substituting this identity into every vector argument of the definition produces the same alternating map on both sides. The reversal in the written order is meaningful: an integrand travels backward through maps, whereas points travel forward. No inverse of either map is required.",
+        "For a curve $r(t)$, the one-form $P\\,dx+Q\\,dy+R\\,dz$ pulls back to $[P(r)x'+Q(r)y'+R(r)z']\\,dt$. This is the usual work integral. For a surface $r(u,v)$, the two-form $P\\,dy\\wedge dz+Q\\,dz\\wedge dx+R\\,dx\\wedge dy$ pulls back to $\\mathbf F(r)\\cdot(r_u\\times r_v)\\,du\\wedge dv$. Expand each two-by-two minor to verify the cross-product formula. The order of $u,v$ fixes its sign.",
+        "For a map between equal dimensions, the top-degree form pulls back by the signed Jacobian determinant. In the plane, $\\phi^*(f\\,dx\\wedge dy)=f(\\phi)\\det D\\phi\\,du\\wedge dv$. Ordinary change of variables for a nonnegative area measure uses the absolute determinant instead. The two rules answer different orientation questions. Replacing the signed determinant by an absolute value in every forms calculation changes an oriented integral into a different quantity."
+      ],
+      "formula": "φ*(f dx₁ ∧ ⋯ ∧ dxₙ) = (f∘φ) det(Dφ) du₁ ∧ ⋯ ∧ duₙ.",
+      "formulaTex": "\\phi^*(f\\,dx_1\\wedge\\cdots\\wedge dx_n)=(f\\circ\\phi)\\det(D\\phi)\\,du_1\\wedge\\cdots\\wedge du_n."
+    },
+    {
+      "title": "3. Exterior differentiation and its identities",
+      "paragraphs": [
+        "Definition 29.4: for a form with continuously differentiable coefficients, set $d\\omega=\\sum_I da_I\\wedge dx_I$, where $da_I=\\sum_j(\\partial_j a_I)dx_j$. This raises degree by one. In particular, $df=f_xdx+f_ydy+f_zdz$. For $\\alpha=Pdx+Qdy+Rdz$, collecting increasing coordinate orders gives $d\\alpha=(Q_x-P_y)dx\\wedge dy+(R_x-P_z)dx\\wedge dz+(R_y-Q_z)dy\\wedge dz$. Every sign follows from reordering a wedge.",
+        "For a flux form $\\beta=P\\,dy\\wedge dz+Q\\,dz\\wedge dx+R\\,dx\\wedge dy$, the derivative is $d\\beta=(P_x+Q_y+R_z)dx\\wedge dy\\wedge dz$. The three cyclic orders have positive sign in three dimensions. This is divergence in form notation. The preceding one-form derivative encodes curl, but a vector representation of that two-form requires the chosen Euclidean metric and orientation. The form itself is already a well-defined integrand.",
+        "Proposition 29.5: for a $C^2$ form, $d(d\\omega)=0$. It suffices to examine one term $a\\,dx_I$. Its second derivative is $\\sum_{j,\\ell}\\partial_\\ell\\partial_j a\\,dx_\\ell\\wedge dx_j\\wedge dx_I$. Terms with repeated indices vanish. The terms indexed by distinct $j,\\ell$ cancel in pairs because their mixed partial derivatives agree and their first two wedges have opposite signs. Summing over $I$ proves the assertion. Continuous second partial derivatives are an explicit sufficient regularity hypothesis.",
+        "The graded product rule is $d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^p\\alpha\\wedge d\\beta$ when $\\alpha$ has degree $p$. For coordinate monomials $\\alpha=a\\,dx_I$, $\\beta=b\\,dx_J$, apply $d(ab)=b\\,da+a\\,db$. The second term initially places $db$ before $dx_I$; moving this one-form past $p$ coordinate factors introduces $(-1)^p$. Bilinearity proves the formula for sums. A missing sign in this rule can turn a true cancellation into a false nonzero derivative.",
+        "For a $C^2$ map and a $C^1$ form, $d(\\phi^*\\omega)=\\phi^*(d\\omega)$. On $a\\,dx_I$, the pulled-back expression is $(a\\circ\\phi)d\\phi_{i_1}\\wedge\\cdots\\wedge d\\phi_{i_k}$. The product rule and $d(d\\phi_i)=0$ leave only $d(a\\circ\\phi)$ wedged with these factors. The ordinary chain rule identifies this differential with $\\phi^*(da)$. Summing proves naturality. The calculation explains both the smoothness and the compatibility of differentiation with parametrization."
+      ],
+      "theorems": [
+        {
+          "title": "Exterior differentiation commutes with a smooth pullback",
+          "statement": "If $\\phi:V\\to U$ is $C^2$ and $\\omega$ has $C^1$ coefficients, then $d(\\phi^*\\omega)=\\phi^*(d\\omega)$ wherever the maps are defined.",
+          "proof": [
+            "For each coordinate covector, $\\phi^*dx_i=d\\phi_i$. Pullback preserves wedge products by the alternating determinant definition.",
+            "For one coefficient term, use the graded product rule on $(a\\circ\\phi)d\\phi_{i_1}\\wedge\\cdots\\wedge d\\phi_{i_k}$. All terms differentiating a factor $d\\phi_i$ vanish by equality of its continuous mixed partials.",
+            "The surviving coefficient derivative is $d(a\\circ\\phi)=\\phi^*da$ by the chain rule. This gives the desired equality for that term; linearity gives the full result."
+          ],
+          "equationTex": "d(\\phi^*\\omega)=\\phi^*(d\\omega)."
+        }
+      ],
+      "formula": "d²ω = 0 for C² coefficients; d(α∧β) = dα∧β + (−1)^p α∧dβ.",
+      "formulaTex": "d^2\\omega=0,\\qquad d(\\alpha_p\\wedge\\beta)=d\\alpha_p\\wedge\\beta+(-1)^p\\alpha_p\\wedge d\\beta."
+    },
+    {
+      "title": "4. Integration includes dimension, coverage, and orientation",
+      "paragraphs": [
+        "Definition 29.6: if an oriented $k$-dimensional patch is parametrized by $r:D\\subset\\mathbb R^k\\to\\mathbb R^n$, integrate a $k$-form by $\\int_D r^*\\omega$. After pullback, the integrand is one coefficient times $du_1\\wedge\\cdots\\wedge du_k$, so this is an ordinary multiple integral of that signed coefficient. Use a regular parametrization, meaning rank $Dr=k$ in the interior, which covers the patch once there. Seams and exceptional boundary sets must be accounted for rather than counted as extra copies.",
+        "An orientation-compatible change of parameters preserves the integral: the chain rule gives pullback composition, and ordinary change of variables cancels the positive Jacobian factor. An orientation-reversing change negates it. Covering a circle twice is not an innocent reparametrization of a once-covered curve; its integral counts the traversal twice. Orientation describes sign, while coverage describes multiplicity, and both must be stated.",
+        "For a compact oriented manifold with boundary, the induced boundary orientation uses the outward-first convention. An outward transverse vector followed by a positively oriented boundary basis must give a positive basis of the manifold. On a planar region with orientation $dx\\wedge dy$, this makes the outer boundary counterclockwise and a hole boundary clockwise. On an upward surface, it is the familiar right-hand rule. On a closed surface there is no boundary curve.",
+        "On a positively oriented $n$-box, the face $x_j=b_j$ has orientation $(-1)^{j-1}$ times the coordinate order with $dx_j$ omitted; the face $x_j=a_j$ has the opposite orientation. To check the upper sign, move the outward vector $e_j$ from the first position into its $j$th coordinate position, making $j-1$ swaps. Replacing $e_j$ by $-e_j$ at the lower face changes the sign once more.",
+        "The boundary of a boundary cancels as an oriented chain. A corner belongs to two adjacent faces with opposite induced signs, so their contributions cancel. It is imprecise to claim the set of corners does not exist. The algebraic cancellation is what connects the boundary operation to $d^2=0$. When a surface or solid is split into compatible pieces, shared faces likewise occur twice with opposite orientations, leaving the complete external boundary."
+      ],
+      "formula": "∫patch ω = ∫parameter domain r*ω; boundary orientation is outward-first.",
+      "formulaTex": "\\int_{r(D)}\\omega=\\int_D r^*\\omega\\qquad\\text{for a one-to-one, regular, orientation-compatible patch}."
+    },
+    {
+      "title": "5. Stokes on boxes and the general theorem",
+      "paragraphs": [
+        "Theorem 29.7, coordinate-box Stokes: let $B=\\prod_{j=1}^n[a_j,b_j]$ with $a_j<b_j$, carrying the standard orientation, and let $\\omega$ be a $C^1$ $(n-1)$-form on an open neighborhood of $B$. Then $\\int_B d\\omega=\\int_{\\partial B}\\omega$, with the complete induced oriented boundary. A box has corners; this statement is proved directly and does not quietly identify it with a smooth-boundary manifold.",
+        "Write $\\omega=\\sum_j(-1)^{j-1}A_j\\,dx_1\\wedge\\cdots\\wedge\\widehat{dx_j}\\wedge\\cdots\\wedge dx_n$, where the hat means omit that coordinate. Exterior differentiation gives $d\\omega=(\\sum_j\\partial_jA_j)dx_1\\wedge\\cdots\\wedge dx_n$: all other coefficient derivatives repeat an existing coordinate. On a face with fixed $x_j$, all terms except the $j$th pull back to zero.",
+        "The upper $j$th face contributes the integral of $A_j$ with $x_j=b_j$; the lower contributes its negative with $x_j=a_j$. These signs follow from the outward-first calculation and the factor $(-1)^{j-1}$ in $\\omega$. Their difference is the iterated integral of $\\partial_jA_j$ by the one-variable fundamental theorem. Adding over $j$ yields exactly the integral of $d\\omega$. This proves the theorem, using finite sums and the ordinary multiple-integral theorem for continuous functions on a box.",
+        "For a $C^2$ regular parametrized curvilinear box, apply this proof to the pulled-back form. Naturality gives $d(r^*\\omega)=r^*(d\\omega)$, and the mapped face orientations must agree with the chosen orientation. For a finite collection of such cells with matching common faces, sum the identities: opposite internal faces cancel. This proves Stokes for that specified finite cell representation. The existence of a compatible cell representation for an arbitrary manifold is a separate question, not something a cancellation picture proves.",
+        "Theorem 29.8, general smooth Stokes: let $M$ be a compact oriented smooth $k$-manifold with smooth boundary, $k\\ge1$, and let $\\omega$ be a $C^1$ $(k-1)$-form on a neighborhood of $M$ (or a form on $M$ with $C^1$ coefficients up to its boundary). Then $\\int_Md\\omega=\\int_{\\partial M}\\omega$, where the boundary has the induced orientation. Empty boundary gives zero on the right. Compactness means every open cover has a finite subcover, so finitely many suitable coordinate neighborhoods suffice. Smooth charts make these local pieces look like open subsets of Euclidean space or a half-space.",
+        "The general theorem is an explicitly cited result here. Its full manifold proof uses a partition of unity to localize to interior and boundary charts; that construction and the coordinate independence of general manifold integration are developed in the primary references. The complete proofs supplied above cover boxes, their regular parametrized images, and compatible finite cell sums. The applications below use those cases or the classical surface theorems already studied. This distinction keeps the genuinely global theorem separate from the argument actually established in this chapter."
+      ],
+      "formula": "∫M dω = ∫∂M ω, with degree(ω) = dim(M) − 1 and induced orientation.",
+      "formulaTex": "\\int_M d\\omega=\\int_{\\partial M}\\omega,\\qquad \\deg\\omega=\\dim M-1."
+    },
+    {
+      "title": "6. The classical theorems are degree-specific cases",
+      "paragraphs": [
+        "On an interval, $\\omega=f$ is a zero-form and $d\\omega=f'(t)dt$. The induced boundary is the terminal endpoint minus the initial endpoint, so Stokes reads $\\int_a^bf'(t)dt=f(b)-f(a)$. For a curve in space and a scalar function $f$, pullback and the chain rule give $\\int_Cdf=f(\\text{end})-f(\\text{start})$. This is the fundamental theorem for line integrals, with no arc-length factor.",
+        "On a planar region, take $\\omega=Pdx+Qdy$. Its exterior derivative is $(Q_x-P_y)dx\\wedge dy$. General Stokes becomes Green's circulation formula with the complete positively oriented boundary. The flux version follows by using the one-form $Pdy-Qdx$, whose derivative is $(P_x+Q_y)dx\\wedge dy$. The same boundary supports two different integrands, and matching the requested quantity remains essential.",
+        "For a surface in $\\mathbb R^3$, let $\\alpha=F_1dx+F_2dy+F_3dz$. Its derivative pulls back to $(\\nabla\\times\\mathbf F)\\cdot(r_u\\times r_v)du\\wedge dv$. Thus $\\int_Sd\\alpha=\\int_{\\partial S}\\alpha$ is the classical curl Stokes theorem. Reversing the surface orientation reverses the induced edge direction as well. Reversing only one of them produces an incompatible setup.",
+        "For a three-dimensional solid, use $\\beta=F_1dy\\wedge dz+F_2dz\\wedge dx+F_3dx\\wedge dy$. Its derivative is $(\\nabla\\cdot\\mathbf F)dx\\wedge dy\\wedge dz$, while its boundary integral is outward flux. Hence Stokes gives the divergence theorem. The distinction between a work one-form and a flux two-form is part of the dimension bookkeeping; it cannot be removed by naming both simply “the field”.",
+        "Smoothness must hold where the theorem integrates a derivative, including the whole chosen interior or spanning surface. A form can be smooth along a boundary yet undefined inside it. A hole does not itself prevent Stokes: it creates another boundary component. A singularity lying in the region does prevent an invocation requiring a smooth neighborhood. Degree, domain, complete boundary, and orientation should be written before evaluating either side."
+      ],
+      "formula": "df ↔ gradient; d(work form) ↔ curl; d(flux form) ↔ divergence.",
+      "formulaTex": "d(Pdx+Qdy)=(Q_x-P_y)dx\\wedge dy,\\qquad d\\beta_{\\mathbf F}=(\\nabla\\cdot\\mathbf F)\\,dx\\wedge dy\\wedge dz."
+    },
+    {
+      "title": "7. Closed forms, exact forms, and a hole",
+      "paragraphs": [
+        "Definition 29.9: a differentiable form is closed if $d\\omega=0$; it is exact if $\\omega=d\\eta$ for an appropriately differentiable form of one lower degree. With a $C^2$ primitive, exact implies closed by $d^2=0$. The converse is a global question about the domain. All closed one-forms are locally exact on sufficiently small balls by the construction below; a single global primitive can still fail around a hole.",
+        "Proposition 29.10, star-shaped one-form lemma: let $U$ be open and star-shaped about zero, meaning $tx\\in U$ for $x\\in U$ and $0\\le t\\le1$. If $\\alpha=\\sum_iP_i(x)dx_i$ has $C^1$ coefficients and is closed, then $\\Phi(x)=\\int_0^1\\sum_iP_i(tx)x_i\\,dt$ satisfies $d\\Phi=\\alpha$. A translated formula applies when the star centre is a different point.",
+        "Proof: closedness means $\\partial_jP_i=\\partial_iP_j$. Differentiate the proposed integral with respect to $x_j$ to obtain $\\partial_j\\Phi=\\int_0^1[P_j(tx)+t\\sum_ix_i\\partial_jP_i(tx)]dt$. Replace the cross partial by $\\partial_iP_j$. The bracket is the derivative in $t$ of $tP_j(tx)$, so the fundamental theorem gives $\\partial_j\\Phi=P_j(x)$. Differentiating inside the finite integral is valid because continuous first partials are uniformly continuous on a compact neighborhood of each radial segment; difference quotients then converge uniformly there. Thus the integral construction gives a $C^2$ potential.",
+        "On the punctured plane, $\\alpha=(-y\\,dx+x\\,dy)/(x^2+y^2)$ is smooth and closed. Its pullback by the unit circle is $dt$, so its integral over one counterclockwise circuit is $2\\pi$. If it were $d\\Phi$ for a single-valued potential throughout the punctured plane, the line-integral theorem would make that closed-loop integral zero. It is therefore not exact there. The field is undefined at the origin, so applying Green on the full disk would violate its hypotheses.",
+        "On the right half-plane, the same form has potential $\\arctan(y/x)$. Differentiation gives the two displayed coefficients, and that domain admits one continuous angle branch. The local potential does not extend to a single angle around the whole punctured plane. This example separates the local differential condition from the global antiderivative. Higher-degree versions lead toward de Rham theory, which is a continuation rather than an unstated prerequisite.",
+        "A finite numerical agreement cannot decide closedness, exactness, or the general theorem. Closedness asks for a derivative identity at every point, and exactness asks for a globally defined primitive. The laboratory below uses an analytic error formula to explain a finite polygon calculation. Its success supplies a check on that calculation, while the theorem's domain and orientation hypotheses remain mathematical obligations."
+      ],
+      "theorems": [
+        {
+          "title": "Closed one-forms on a star-shaped domain have a potential",
+          "statement": "For an open set star-shaped about $0$ and a closed $C^1$ one-form $\\alpha=\\sum_iP_i dx_i$, the function $\\Phi(x)=\\int_0^1\\sum_iP_i(tx)x_i\\,dt$ satisfies $d\\Phi=\\alpha$.",
+          "proof": [
+            "The coefficient functions and their first derivatives are continuous on compact neighborhoods of the radial segments, so the finite integral may be differentiated by a uniform difference-quotient bound.",
+            "For each coordinate $j$, differentiate and use $\\partial_jP_i=\\partial_iP_j$ to write the integrand as $P_j(tx)+t\\sum_i x_i\\partial_iP_j(tx)=\\frac{d}{dt}[tP_j(tx)]$.",
+            "The fundamental theorem evaluates that integral as $P_j(x)-0$. Hence every partial derivative of $\\Phi$ is the required coefficient, proving the claimed potential."
+          ],
+          "equationTex": "\\Phi(x)=\\int_0^1\\sum_iP_i(tx)x_i\\,dt,\\qquad d\\Phi=\\alpha."
+        }
+      ],
+      "formula": "Exact ⇒ closed under the stated smoothness; closed ⇒ exact on a star-shaped domain for one-forms.",
+      "formulaTex": "\\omega=d\\eta\\Longrightarrow d\\omega=0,\\qquad \\oint_C d\\Phi=0\\quad\\text{for every closed curve in the potential's domain}."
+    }
+  ],
+  "examples": [
+    {
+      "id": "forms-wedge-evaluation",
+      "title": "An alternating measurement with two independent signs",
+      "problem": "For $\\alpha=dx+2dy$ and $\\beta=3dx-dy$, compute $\\alpha\\wedge\\beta$ and evaluate it on $v=(1,2)$, $w=(3,-1)$.",
+      "steps": [
+        "Expand by bilinearity. The $dx\\wedge dx$ and $dy\\wedge dy$ terms vanish. The remaining expression is $-dx\\wedge dy+6dy\\wedge dx=-7dx\\wedge dy$. Antisymmetry, not ordinary cancellation, supplies the second negative sign.",
+        "The coordinate area form evaluates to $(dx\\wedge dy)(v,w)=1(-1)-2(3)=-7$. Therefore $(\\alpha\\wedge\\beta)(v,w)=(-7)(-7)=49$. One sign comes from the form's coefficient, the other from the ordered vector pair.",
+        "Check directly using the two-by-two determinant of covector evaluations. We have $\\alpha(v)=5$, $\\beta(w)=10$, $\\alpha(w)=1$, and $\\beta(v)=1$. Thus $\\alpha(v)\\beta(w)-\\alpha(w)\\beta(v)=50-1=49$.",
+        "Swapping the vector arguments gives $-49$, while replacing the wedge by a symmetric product would not. Equal vector arguments give zero. These checks verify that the computed object measures oriented area rather than an unsigned size."
+      ],
+      "answer": "$\\alpha\\wedge\\beta=-7dx\\wedge dy$, and its value on the ordered pair $(v,w)$ is $49$."
+    },
+    {
+      "id": "forms-polar-pullback",
+      "title": "Polar coordinates preserve the derivative identity",
+      "problem": "For $\\phi(r,\\theta)=(r\\cos\\theta,r\\sin\\theta)$ with $r>0$, pull back $dx\\wedge dy$ and $\\alpha=x\\,dy-y\\,dx$, then compare $d(\\phi^*\\alpha)$ with $\\phi^*(d\\alpha)$.",
+      "steps": [
+        "The coordinate differentials are $dx=\\cos\\theta\\,dr-r\\sin\\theta\\,d\\theta$ and $dy=\\sin\\theta\\,dr+r\\cos\\theta\\,d\\theta$. Their wedge has only two nonzero terms; its coefficient is $r(\\cos^2\\theta+\\sin^2\\theta)=r$.",
+        "Substituting into the one-form gives $r\\cos\\theta(\\sin\\theta\\,dr+r\\cos\\theta\\,d\\theta)-r\\sin\\theta(\\cos\\theta\\,dr-r\\sin\\theta\\,d\\theta)=r^2d\\theta$. The radial terms cancel.",
+        "In Cartesian coordinates $d\\alpha=2dx\\wedge dy$, so $\\phi^*(d\\alpha)=2r\\,dr\\wedge d\\theta$. In parameter coordinates $d(r^2d\\theta)=2r\\,dr\\wedge d\\theta$, agreeing exactly.",
+        "The determinant is positive for $r>0$. Integrating over an angular interval spanning more than one full turn would count the image with multiplicity; pullback alone does not certify that a chosen parameter domain covers a region once."
+      ],
+      "answer": "$\\phi^*(dx\\wedge dy)=r\\,dr\\wedge d\\theta$ and $\\phi^*\\alpha=r^2d\\theta$; both derivative routes give $2r\\,dr\\wedge d\\theta$."
+    },
+    {
+      "id": "forms-exact-space-curve",
+      "title": "A space-curve integral checked two ways",
+      "problem": "Integrate $\\alpha=(2xy+z)dx+x^2dy+x\\,dz$ along $r(t)=(t,t^2,t^3)$, $0\\le t\\le1$.",
+      "steps": [
+        "Observe that $f(x,y,z)=x^2y+xz$ has partial derivatives $f_x=2xy+z$, $f_y=x^2$, and $f_z=x$. Hence $\\alpha=df$ on all of $\\mathbb R^3$. The potential is globally defined and smooth, so the line-integral theorem applies.",
+        "The endpoints are $(0,0,0)$ and $(1,1,1)$. The integral is $f(1,1,1)-f(0,0,0)=2$. The curve's speed does not enter an exact work integral.",
+        "For a direct check, the three pulled-back terms are $3t^3dt$, $2t^3dt$, and $3t^3dt$. Their sum is $8t^3dt$, whose integral from zero to one is two.",
+        "Reversing the curve negates the answer. Any other piecewise smooth path with the same endpoints gives the same value because the potential exists throughout the entire ambient domain, not merely along the displayed path."
+      ],
+      "answer": "The oriented integral is $2$."
+    },
+    {
+      "id": "forms-tilted-graph-flux",
+      "title": "A flux two-form differs from scalar surface area",
+      "problem": "For $\\mathbf F=(x,y,z)$, integrate its flux form $\\beta=x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy$ over $z=1+x+2y$ above the unit square, with upward orientation.",
+      "steps": [
+        "Use $r(u,v)=(u,v,1+u+2v)$, $0\\le u,v\\le1$. The tangent cross product is $r_u\\times r_v=(-1,-2,1)$, whose third component is positive, so it supplies the required orientation.",
+        "The flux coefficient is $\\mathbf F(r)\\cdot(-1,-2,1)=-u-2v+(1+u+2v)=1$. Thus $r^*\\beta=du\\wedge dv$ and the integral is one.",
+        "The same result follows by wedge expansion: $dy\\wedge dz=dv\\wedge(du+2dv)=-du\\wedge dv$, $dz\\wedge dx=-2du\\wedge dv$, and $dx\\wedge dy=du\\wedge dv$. Multiply by the respective coefficients and add.",
+        "Scalar area is instead $\\int_{[0,1]^2}\\sqrt{1+1+4}\\,du\\,dv=\\sqrt6$. Reversing the surface orientation changes the flux to minus one but leaves scalar area unchanged. Taking a norm in the flux coefficient would answer another question."
+      ],
+      "answer": "Upward flux is $1$; scalar area is $\\sqrt6$."
+    },
+    {
+      "id": "forms-three-box-stokes",
+      "title": "Three-dimensional box Stokes with every face",
+      "problem": "For $B=[0,a]\\times[0,b]\\times[0,c]$, $a,b,c>0$, verify Stokes for $\\beta=x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy$.",
+      "steps": [
+        "Differentiation gives $d\\beta=3dx\\wedge dy\\wedge dz$, so the interior integral is $3abc$. The form is polynomial on an open neighborhood of the entire box.",
+        "At $x=a$, the outward-first orientation is $dy\\wedge dz$ and the face integral is $abc$. At $x=0$, the coefficient $x$ vanishes, so that face contributes zero despite its reversed orientation.",
+        "At $y=b$, the induced orientation is $dz\\wedge dx$, and its contribution is again $abc$. At $z=c$, the orientation is $dx\\wedge dy$, also giving $abc$. The other two lower faces have zero coefficients.",
+        "The complete boundary sum is $3abc$. Omitting a nonzero face, or using increasing coordinate order without the induced sign on the $y$-faces, would spoil the equality. The corners have lower dimension and do not add separate surface terms."
+      ],
+      "answer": "Both integrals equal $3abc$."
+    },
+    {
+      "id": "forms-annular-boundary",
+      "title": "A hole adds a negatively oriented inner loop",
+      "problem": "Let $0<a<b$ and $\\alpha=(-y\\,dx+x\\,dy)/2$. Compute its integral around the complete positive boundary of the annulus $a\\le\\sqrt{x^2+y^2}\\le b$.",
+      "steps": [
+        "We have $d\\alpha=dx\\wedge dy$, so the interior integral is the annular area $\\pi(b^2-a^2)$. The form is smooth everywhere, including the annulus and its boundary.",
+        "A counterclockwise circle of radius $R$ has pullback $\\alpha=(R^2/2)dt$, $0\\le t\\le2\\pi$, giving $\\pi R^2$. The outer annular boundary has this counterclockwise direction.",
+        "The inner boundary must be clockwise, since the annular material must remain on the left during positive travel. Its contribution is therefore $-\\pi a^2$. Adding both loops gives exactly $\\pi(b^2-a^2)$.",
+        "If both circles were travelled counterclockwise, the sum would be $\\pi(b^2+a^2)$, a different oriented chain. The presence of a hole does not invalidate Stokes; omitting or misorienting its boundary changes the problem."
+      ],
+      "answer": "The complete oriented boundary integral is $\\pi(b^2-a^2)$."
+    },
+    {
+      "id": "forms-vortex-obstruction",
+      "title": "A closed one-form with a nonzero period",
+      "problem": "On $U=\\mathbb R^2\\setminus\\{0\\}$, show that $\\alpha=(-y\\,dx+x\\,dy)/(x^2+y^2)$ is closed but not exact, and find a potential on $x>0$.",
+      "steps": [
+        "Let $P=-y/(x^2+y^2)$ and $Q=x/(x^2+y^2)$. The quotient rule gives $Q_x=(y^2-x^2)/(x^2+y^2)^2=P_y$. Hence $d\\alpha=0$ throughout its stated domain.",
+        "On the counterclockwise unit circle, $x=\\cos t$, $y=\\sin t$, and $dx=-\\sin t\\,dt$, $dy=\\cos t\\,dt$. The denominator is one and the numerator becomes $dt$. The closed-loop integral is $2\\pi$.",
+        "If $\\alpha=d\\Phi$ on all of $U$, integrating along this closed curve would give the difference of the same endpoint value of $\\Phi$, namely zero. This contradiction excludes a global potential.",
+        "On $x>0$, set $\\Phi=\\arctan(y/x)$. Its derivatives are $\\Phi_x=-y/(x^2+y^2)$ and $\\Phi_y=x/(x^2+y^2)$, so it is a valid local-domain potential. The restricted domain avoids the need to choose one angle around a complete circuit."
+      ],
+      "answer": "The form is closed on the punctured plane, has period $2\\pi$ around the unit circle, and equals $d\\arctan(y/x)$ on the right half-plane."
+    },
+    {
+      "id": "forms-hemisphere-boundary",
+      "title": "A curved surface and the same oriented edge",
+      "problem": "For $\\alpha=-y\\,dx/2+x\\,dy/2+z\\,dz$, compare $\\int_Sd\\alpha$ and $\\int_{\\partial S}\\alpha$ on the upper unit hemisphere with outward orientation.",
+      "steps": [
+        "Differentiating gives $d\\alpha=dx\\wedge dy$ because the $z\\,dz$ term differentiates to $dz\\wedge dz=0$. The flux interpretation of $dx\\wedge dy$ is upward unit-vector flux.",
+        "The upper outward hemisphere induces a counterclockwise equator viewed from positive $z$. On that circle, $z=0$ and the one-form pulls back to $dt/2$, so its boundary integral is $\\pi$.",
+        "For the surface integral, use spherical coordinates $r(\\phi,\\theta)=(\\sin\\phi\\cos\\theta,\\sin\\phi\\sin\\theta,\\cos\\phi)$ with $0\\le\\phi\\le\\pi/2$, $0\\le\\theta\\le2\\pi$. The order $(\\phi,\\theta)$ is outward, and $r^*(dx\\wedge dy)=\\sin\\phi\\cos\\phi\\,d\\phi\\wedge d\\theta$.",
+        "The surface integral is $2\\pi\\int_0^{\\pi/2}\\sin\\phi\\cos\\phi\\,d\\phi=\\pi$. The pole and angular seam are exceptional parameter boundaries of area zero, not extra coverings. The direct calculation supplies an independent orientation check."
+      ],
+      "answer": "Both oriented integrals equal $\\pi$."
+    },
+    {
+      "id": "forms-four-box-stokes",
+      "title": "A case beyond the three-dimensional vector dictionary",
+      "problem": "On the standard oriented four-dimensional unit box, verify Stokes for $\\omega=x_1\\,dx_2\\wedge dx_3\\wedge dx_4$.",
+      "steps": [
+        "The form has degree three, one less than the dimension of the box. Its derivative is $dx_1\\wedge dx_2\\wedge dx_3\\wedge dx_4$, whose integral over the unit box is one.",
+        "On the upper face $x_1=1$, the induced orientation is $dx_2\\wedge dx_3\\wedge dx_4$, so the face contribution is one. On the lower face $x_1=0$, the coefficient vanishes.",
+        "On every face with another coordinate fixed, that coordinate's differential pulls back to zero, so the displayed three-form vanishes. The other six face contributions are therefore zero.",
+        "The boundary sum is one. No three-dimensional cross-product notation is needed: the degree and the outward-first rule already determine the appropriate integrals. This is why differential forms continue beyond the dimensions where the familiar curl vector is available."
+      ],
+      "answer": "The four-dimensional interior integral and the oriented three-dimensional boundary integral both equal $1$."
+    }
+  ],
+  "misconceptions": [
+    "“A wedge is ordinary multiplication.” Its order records orientation, and repeated coordinate covectors make a term zero. The graded sign depends on both degrees.",
+    "“A signed Jacobian can always be replaced by its absolute value.” Absolute values belong to unsigned area or volume measure; a form retains orientation.",
+    "“A hole prevents Stokes.” A smooth form can satisfy Stokes on a region with holes, provided every boundary component is included with its induced direction.",
+    "“Closed means globally exact.” The punctured-plane vortex is closed but has a nonzero closed-loop integral and no global single-valued potential.",
+    "“The coordinate-box proof proves the entire manifold theorem without further work.” General chart integration and the localization step require additional results, explicitly cited here.",
+    "“The boundary of the boundary has no points.” Faces can meet at corners; it is their oriented chain contributions that cancel."
+  ],
+  "lab": {
+    "title": "Annular circulation: polygons, orientation, and a proved error bound",
+    "description": "Approximate the complete annular boundary integral of $\\alpha=(-y\\,dx+x\\,dy)/2$ by two regular polygons. Each straight chord is integrated exactly in ideal arithmetic using its midpoint, because the coefficients are linear. The curved-circle discrepancy is geometric. The table and plot use polygon side count as the horizontal coordinate and signed circulation as the vertical coordinate. Floating-point output is an approximation, while the formula and bound are derived mathematically in the tasks.",
+    "code": "const a = 1, b = 2, orientation = 1;\nif (!(Number.isFinite(a) && Number.isFinite(b) && 0 < a && a < b && b <= 1e6)) throw new Error('Use finite radii 0 < a < b <= 1000000.');\nif (orientation !== 1 && orientation !== -1) throw new Error('Use orientation +1 or -1.');\nconst areaDifference = (b-a)*(b+a);\nif (!(Number.isFinite(areaDifference) && areaDifference > 0)) throw new Error('The derived area difference must be positive and representable.');\nfunction polygonIntegral(radius, sides, direction) {\n  let total = 0;\n  for (let j = 0; j < sides; j++) {\n    const t0 = direction*2*Math.PI*j/sides, t1 = direction*2*Math.PI*(j+1)/sides;\n    const x0 = radius*Math.cos(t0), y0 = radius*Math.sin(t0);\n    const x1 = radius*Math.cos(t1), y1 = radius*Math.sin(t1);\n    const xm = (x0+x1)/2, ym = (y0+y1)/2;\n    total += (xm*(y1-y0)-ym*(x1-x0))/2;\n  }\n  return total;\n}\nconst estimates = [], references = [];\nconst exact = orientation*Math.PI*areaDifference;\nconsole.log('sides | polygon circulation | circle value | absolute error | ideal geometric bound');\nfor (const sides of [4,8,16,32,64,128]) {\n  const estimate = polygonIntegral(b,sides,orientation)+polygonIntegral(a,sides,-orientation);\n  const bound = 2*Math.PI**3*areaDifference/(3*sides**2);\n  if (![estimate,exact,bound].every(Number.isFinite)) throw new Error('A derived value is outside the finite range.');\n  estimates.push([sides,estimate]);\n  references.push([sides,exact]);\n  console.log(sides,estimate.toFixed(9),exact.toFixed(9),Math.abs(estimate-exact).toExponential(3),bound.toExponential(3));\n}\nplot(estimates,'Polygon boundary integral vs side count');\nplot(references,'Exact circle integral vs side count');\nconsole.log('The bound concerns ideal geometric arithmetic; displayed floats are not rounding certificates.');",
+    "tasks": [
+      "Before running, derive the exact circle value $\\pi(b^2-a^2)$ and the sign of the inner contribution. Why would traversing both polygons in the same direction compute a different chain?",
+      "For one chord from $p_j$ to $p_{j+1}$, prove that the midpoint expression equals half the determinant of its endpoint vectors. Deduce the ideal polygon formula $(b^2-a^2)(n/2)\\sin(2\\pi/n)$ with the chosen orientation.",
+      "With $a=1,b=2$, compute the ideal results at $n=4$ and $n=8$ by hand. Use $0\\le x-\\sin x\\le x^3/6$ for $0\\le x\\le\\pi/2$ to prove the geometric error bound $2\\pi^3(b^2-a^2)/(3n^2)$. This is an exact-arithmetic geometric statement, separate from rounding.",
+      "Reverse orientation and then double both radii. Predict the sign reversal and factor-four scaling before comparing the output. Explain why numerical agreement cannot justify a Stokes application to a form singular inside a proposed region."
+    ],
+    "expected": "For $a=1,b=2$ and positive orientation, the exact circle value is $3\\pi$. The ideal polygon values are $6$ at $n=4$ and $6\\sqrt2$ at $n=8$, increasing toward $3\\pi$. The signed estimate is negated when orientation is reversed; both value and geometric error scale by four when both radii double. The bound follows from $(n/2)(x-\\sin x)$ with $x=2\\pi/n$. Floating-point outputs approximate these formulas and do not certify their own rounding error."
+  },
+  "exercises": [
+    {
+      "id": "forms-wedge-basis",
+      "question": "Expand $(2dx+dy)\\wedge(dx-3dy)$ into increasing coordinate order.",
+      "hint": "First: Distribute the wedge product and remove repeated-coordinate terms. Next: Replace $dy\\wedge dx$ by $-dx\\wedge dy$.",
+      "solution": "The expansion is $2dx\\wedge dx-6dx\\wedge dy+dy\\wedge dx-3dy\\wedge dy$. The first and last terms vanish, and the third is $-dx\\wedge dy$. Thus the result is $-7dx\\wedge dy$. The order change is essential to the coefficient.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-wedge-repeat",
+      "question": "Prove that $(a\\,dx+b\\,dy)\\wedge(a\\,dx+b\\,dy)=0$ for scalar coefficient functions $a,b$. Does every two-form also wedge with itself to zero?",
+      "hint": "First: Use bilinearity and antisymmetry for the one-form. Next: For the second question, try $dx_1\\wedge dx_2+dx_3\\wedge dx_4$ in four dimensions.",
+      "solution": "The one-form square is $ab\\,dx\\wedge dy+ab\\,dy\\wedge dx=0$, with the repeated-coordinate terms already zero. The analogous statement for all two-forms is false. For $\\eta=dx_1\\wedge dx_2+dx_3\\wedge dx_4$, the two cross terms have the same sign because degree-two forms commute. Hence $\\eta\\wedge\\eta=2dx_1\\wedge dx_2\\wedge dx_3\\wedge dx_4\\ne0$.",
+      "lesson": 1,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-alternating-evaluation",
+      "question": "Evaluate $3dx\\wedge dy$ on $v=(2,1)$, $w=(-1,4)$, then reverse the arguments.",
+      "hint": "First: Compute the determinant of the two ordered vectors. Next: The determinant is $2\\cdot4-1(-1)$.",
+      "solution": "The determinant is nine, so the form evaluates to $27$ on $(v,w)$. Reversing the vectors negates the determinant and gives $-27$. Evaluating on $(v,v)$ gives zero, illustrating alternation. These are signed measurements of ordered directions, not unsigned parallelogram areas.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-graded-commutation",
+      "question": "For $\\alpha=dx_1$ and $\\beta=dx_2\\wedge dx_3$, compare $\\alpha\\wedge\\beta$ with $\\beta\\wedge\\alpha$.",
+      "hint": "First: Move $dx_1$ past both other covectors. Next: Two sign changes cancel.",
+      "solution": "We have $\\alpha\\wedge\\beta=dx_1\\wedge dx_2\\wedge dx_3$. Moving $dx_1$ in $\\beta\\wedge\\alpha$ to the first position uses two swaps, so the sign is positive and the same form results. This agrees with $(-1)^{1\\cdot2}=1$. Degree-one forms anticommute with each other, but not with every degree.",
+      "lesson": 1,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-degree-vanishing",
+      "question": "Explain why every three-form on $\\mathbb R^2$ vanishes, and why a three-form on $\\mathbb R^3$ need not vanish.",
+      "hint": "First: A nonzero coordinate wedge cannot repeat an index. Next: Compare how many distinct coordinate covectors are available.",
+      "solution": "In two dimensions only $dx,dy$ are available. A wedge of three coordinate covectors repeats one of them and is zero by alternation, so every sum of such terms is zero. In three dimensions $dx\\wedge dy\\wedge dz$ uses three distinct indices and evaluates to one on the standard ordered basis, so it is nonzero.",
+      "lesson": 1,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-curve-pullback",
+      "question": "For $r(t)=(t,t^2)$, $0\\le t\\le1$, pull back $\\alpha=y\\,dx+2x\\,dy$ and integrate it.",
+      "hint": "First: Substitute both coordinates and their differentials. Next: Here $dx=dt$ and $dy=2t\\,dt$.",
+      "solution": "The pullback is $t^2dt+2t(2t\\,dt)=5t^2dt$. Integrating over the parameter interval gives $5/3$. Reversing the curve would give $-5/3$. There is no speed factor because a one-form already evaluates the directed tangent.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-surface-pullback",
+      "question": "For $r(u,v)=(u,v,u^2)$, pull back $dy\\wedge dz$ to the parameter plane.",
+      "hint": "First: The coordinate differentials are $dy=dv$ and $dz=2u\\,du$. Next: Put $du$ before $dv$ in the final expression.",
+      "solution": "We obtain $dv\\wedge(2u\\,du)=-2u\\,du\\wedge dv$. The sign agrees with the first component of $r_u\\times r_v=(-2u,0,1)$. Dropping the sign would change the oriented flux represented by the form.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-polar-jacobian",
+      "question": "For the polar map on $1\\le r\\le2$, $0\\le\\theta\\le\\pi/2$, integrate the pullback of $dx\\wedge dy$.",
+      "hint": "First: Use the signed determinant $r$. Next: Integrate $r$ first over the radial interval.",
+      "solution": "The integral is $\\int_0^{\\pi/2}\\int_1^2 r\\,dr\\,d\\theta=(\\pi/2)(3/2)=3\\pi/4$. This is the area of the quarter annulus. Here the chosen map is regular for $r>0$, positively oriented, and covers the interior once, so no multiplicity correction is needed.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-reverse-orientation",
+      "question": "Let $\\psi(u,v)=(v,u)$ on the unit square. Compute $\\psi^*(dx\\wedge dy)$ and explain the integral's sign.",
+      "hint": "First: The two coordinate differentials exchange order. Next: The Jacobian determinant of the swap is minus one.",
+      "solution": "The pullback is $dv\\wedge du=-du\\wedge dv$, whose standard-parameter integral is $-1$. The map reverses orientation, even though its image is the same unit square. Unsigned area is still one. The negative value records the chosen oriented parametrization.",
+      "lesson": 2,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-pullback-composition",
+      "question": "Let $\\phi(u,v)=(2u,v)$ and $\\psi(s,t)=(s,s+t)$. Compute $(\\phi\\circ\\psi)^*(dx\\wedge dy)$ directly and by successive pullbacks.",
+      "hint": "First: The composite is $(2s,s+t)$. Next: The first pullback through $\\phi$ is $2du\\wedge dv$.",
+      "solution": "Directly, $dx=2ds$ and $dy=ds+dt$, giving $2ds\\wedge dt$. Successively, $\\phi^*(dx\\wedge dy)=2du\\wedge dv$ and then $\\psi^*$ sends it to $2ds\\wedge(ds+dt)=2ds\\wedge dt$. The agreement is a concrete instance of pullback composition.",
+      "lesson": 2,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-function-differential",
+      "question": "Find $df$ for $f(x,y,z)=x^2z+\\sin y$, and verify $d(df)=0$ by cancellation.",
+      "hint": "First: Differentiate with respect to each coordinate separately. Next: Only the mixed $x,z$ terms can survive a second derivative.",
+      "solution": "We have $df=2xz\\,dx+\\cos y\\,dy+x^2dz$. Differentiating again gives $(2zdx+2xdz)\\wedge dx-\\sin y\\,dy\\wedge dy+2x\\,dx\\wedge dz$. Repeated-coordinate terms vanish. The remaining terms are $2x\\,dz\\wedge dx+2x\\,dx\\wedge dz=0$. The function is smooth, so the mixed-partial justification holds everywhere.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-one-form-derivative",
+      "question": "Compute $d\\alpha$ for $\\alpha=x^2y\\,dx+xy^2\\,dy$ on the plane. Where is this form closed?",
+      "hint": "First: Use $d\\alpha=(Q_x-P_y)dx\\wedge dy$. Next: Differentiate $Q=xy^2$ in $x$ and $P=x^2y$ in $y$.",
+      "solution": "The derivative is $(y^2-x^2)dx\\wedge dy$. It vanishes at the points $y=x$ or $y=-x$, but not throughout any open planar neighborhood. Thus the form is not closed on the whole plane, nor on any nonempty open subset: a one-dimensional zero locus is insufficient for a two-dimensional closedness claim.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-flux-derivative",
+      "question": "For $\\beta=x^2dy\\wedge dz+yz\\,dz\\wedge dx+z^2dx\\wedge dy$, compute $d\\beta$.",
+      "hint": "First: Match each flux coefficient with its omitted coordinate. Next: The three contributions are $2x$, $z$, and $2z$.",
+      "solution": "Only $x$-differentiation of the first coefficient, $y$-differentiation of the second, and $z$-differentiation of the third survive. Their sum is $2x+3z$, so $d\\beta=(2x+3z)dx\\wedge dy\\wedge dz$. The cyclic coordinate orders give positive signs.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-d-squared",
+      "question": "Prove $d(d\\alpha)=0$ for a $C^2$ one-form $\\alpha=\\sum_iP_i dx_i$ by pairing terms, and identify the regularity used.",
+      "hint": "First: Write the second exterior derivative before collecting increasing indices. Next: Pair the ordered derivative indices $(j,\\ell)$ and $(\\ell,j)$.",
+      "solution": "The second derivative is $\\sum_{i,j,\\ell}\\partial_\\ell\\partial_jP_i\\,dx_\\ell\\wedge dx_j\\wedge dx_i$. Repeated-index terms vanish. For distinct $j,\\ell$, equality of the continuous mixed second partials gives equal coefficients, while exchanging the first two wedge factors changes sign. Each pair therefore cancels. The $C^2$ hypothesis is an explicit sufficient condition for that mixed-partial equality.",
+      "lesson": 3,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-graded-product",
+      "question": "Check the graded product rule for $\\alpha=x\\,dy$ and the zero-form $f=z$ in $\\mathbb R^3$.",
+      "hint": "First: The degree of $\\alpha$ is one, so the second term has a negative sign. Next: Expand $d(xz\\,dy)$ directly as an independent check.",
+      "solution": "Directly, $d(\\alpha f)=d(xz\\,dy)=z\\,dx\\wedge dy+x\\,dz\\wedge dy$. The graded rule gives $d\\alpha\\,f-\\alpha\\wedge df=z\\,dx\\wedge dy-x\\,dy\\wedge dz$, which is the same because $dz\\wedge dy=-dy\\wedge dz$. Using a plus sign before $\\alpha\\wedge df$ would give the wrong result.",
+      "lesson": 3,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-exact-line-integral",
+      "question": "Integrate $\\alpha=2xy\\,dx+x^2dy$ along $r(t)=(t,2t)$, $0\\le t\\le1$, using both a potential and a pullback.",
+      "hint": "First: Find a function whose two partial derivatives are the coefficients. Next: The potential is $x^2y$, and the pulled-back coefficient is $6t^2$.",
+      "solution": "Since $\\alpha=d(x^2y)$ on the plane, the integral is $1^2\\cdot2-0=2$. Directly, $dx=dt$, $dy=2dt$, so $\\alpha=4t^2dt+2t^2dt=6t^2dt$. Its integral is also two. The equality checks the chain rule and the path orientation.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-graph-flux",
+      "question": "Find the upward flux of $\\mathbf F=(0,0,z)$ through $z=2+x+y$ over the unit square. What happens if the orientation is reversed?",
+      "hint": "First: The upward vector area element is $(-1,-1,1)dx\\,dy$. Next: The dot product is $2+x+y$.",
+      "solution": "The flux is $\\int_0^1\\int_0^1(2+x+y)dx\\,dy=2+1/2+1/2=3$. Equivalently the flux two-form $z\\,dx\\wedge dy$ pulls back to $(2+u+v)du\\wedge dv$. Reversing orientation gives $-3$. Scalar area is $\\sqrt3$ and does not change sign.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-signed-area",
+      "question": "For $r(u,v)=(u,-2v)$ on the unit square, compute the integral of $dx\\wedge dy$ and compare with unsigned image area.",
+      "hint": "First: The determinant is negative. Next: Distinguish the form from a nonnegative area measure.",
+      "solution": "The pullback is $du\\wedge(-2dv)=-2du\\wedge dv$, so the oriented integral is $-2$. The image is a rectangle of side lengths one and two and therefore has unsigned area two. The minus sign records the reversed orientation rather than a negative geometric area.",
+      "lesson": 4,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-covering-multiplicity",
+      "question": "For $\\alpha=(-y\\,dx+x\\,dy)/2$ and $r(t)=(\\cos2t,\\sin2t)$, $0\\le t\\le2\\pi$, compute the integral and explain why it differs from a once-traversed unit circle.",
+      "hint": "First: Differentiate the doubled angle as well as substituting it. Next: The pullback is $dt$, rather than $dt/2$.",
+      "solution": "The numerator $-y\\,dx+x\\,dy$ becomes $2dt$, so the form pulls back to $dt$. Its integral is $2\\pi$. A once-traversed counterclockwise unit circle gives $\\pi$; the displayed curve travels around twice, so it counts the oriented integral twice. Its image set alone does not specify traversal multiplicity.",
+      "lesson": 4,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-dimension-audit",
+      "question": "A proposed formula integrates a one-form $\\alpha$ over the two-dimensional boundary of a solid and $d\\alpha$ over the three-dimensional interior. Explain the degree mismatch and identify the appropriate form degree for a flux theorem.",
+      "hint": "First: A form's degree must equal the integration domain's dimension. Next: A solid needs a three-form in its interior and a two-form on its boundary.",
+      "solution": "A one-form is naturally integrated over a curve, not an entire surface, and its derivative is a two-form, not a volume form. The displayed expression is therefore not a correctly typed Stokes formula. For a three-dimensional flux theorem use a two-form $\\beta$ on the boundary, so $d\\beta$ is a three-form in the solid.",
+      "lesson": 4,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-rectangle-stokes",
+      "question": "Verify Stokes for $\\alpha=x\\,dy$ on $[0,2]\\times[0,3]$ with standard orientation by computing the interior and all four boundary edges.",
+      "hint": "First: The exterior derivative is the standard area form. Next: Only the right edge has both nonzero $x$ and nonzero $dy$.",
+      "solution": "The interior integral of $d\\alpha=dx\\wedge dy$ is six. On bottom and top edges $dy=0$. On the left edge $x=0$. The right edge is traversed upward with $x=2$, so its integral is $\\int_0^3 2dy=6$. The complete boundary sum is six, as required.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-four-dimensional-box",
+      "question": "On the standard four-dimensional unit box, verify Stokes for $\\omega=x_1^2dx_2\\wedge dx_3\\wedge dx_4$.",
+      "hint": "First: Differentiate the coefficient in its missing coordinate. Next: Every boundary face except $x_1=1$ has either zero coefficient or a repeated zero differential.",
+      "solution": "We have $d\\omega=2x_1dx_1\\wedge dx_2\\wedge dx_3\\wedge dx_4$, whose box integral is one. At $x_1=1$ the induced boundary form integrates to one. At $x_1=0$ its coefficient is zero. On the other faces one of $dx_2,dx_3,dx_4$ pulls back to zero. Thus the complete boundary sum is one as well.",
+      "lesson": 5,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-annulus-boundaries",
+      "question": "For the vortex form $\\alpha=(-y\\,dx+x\\,dy)/(x^2+y^2)$, apply Stokes on $1\\le\\sqrt{x^2+y^2}\\le2$. Compute both boundary contributions.",
+      "hint": "First: The form is smooth on a neighborhood of the annulus and is closed there. Next: Each counterclockwise circle has integral $2\\pi$, independent of radius.",
+      "solution": "The interior derivative integral is zero. The outer radius-two loop is counterclockwise and contributes $2\\pi$. The inner radius-one loop has the induced clockwise direction and contributes $-2\\pi$. Their sum is zero, consistent with Stokes. The nonzero integral on the outer loop alone is not a contradiction because that is not the complete annular boundary.",
+      "lesson": 5,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-closed-surface-exact",
+      "question": "For $\\alpha=x\\,dy$, find $\\int_{S^2}d\\alpha$ on the outward unit sphere, and check it by splitting into hemispheres.",
+      "hint": "First: The sphere has empty boundary and $\\alpha$ is smooth on its neighborhood. Next: The upper and lower hemisphere integrals of $dx\\wedge dy$ have opposite signs.",
+      "solution": "Since $d\\alpha=dx\\wedge dy$, general Stokes on the closed sphere gives zero. Directly, the upper outward hemisphere has integral $\\pi$, while the lower outward hemisphere has integral $-\\pi$, from the sign of its vertical normal component. Their common equatorial contributions cancel with opposite induced orientations. The sum is zero.",
+      "lesson": 6,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-orientability-audit",
+      "question": "Suppose a proposed surface has no globally consistent orientation. Can the usual oriented form version of Stokes be applied by choosing normals independently on its patches? Explain what remains meaningful.",
+      "hint": "First: The theorem requires a single compatible orientation across patch overlaps. Next: Scalar area does not require the same global signed choice.",
+      "solution": "Independent patch normals need not agree on overlaps, so they do not define the global oriented integral or the induced boundary orientation required by Stokes. The usual theorem cannot be invoked in that form. Scalar surface area remains meaningful because it uses a nonnegative area factor. More general theories can integrate other objects on nonorientable spaces, but that is not the theorem stated here.",
+      "lesson": 6,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-vortex-closed",
+      "question": "Compute $Q_x-P_y$ for $P=-y/(x^2+y^2)$ and $Q=x/(x^2+y^2)$, stating the domain.",
+      "hint": "First: Use the quotient rule before simplifying. Next: Both derivatives equal $(y^2-x^2)/(x^2+y^2)^2$.",
+      "solution": "On $x^2+y^2>0$, $Q_x=[(x^2+y^2)-2x^2]/(x^2+y^2)^2=(y^2-x^2)/(x^2+y^2)^2$. Also $P_y=[-(x^2+y^2)+2y^2]/(x^2+y^2)^2$, the same expression. Thus the form is closed on the punctured plane. Nothing in this computation defines it at the origin.",
+      "lesson": 7,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-vortex-period",
+      "question": "Integrate the vortex form counterclockwise around a circle of radius $R>0$, and use the result to exclude a global potential on the punctured plane.",
+      "hint": "First: The numerator and denominator both contain $R^2$. Next: A single-valued potential has zero integral around every closed curve in its domain.",
+      "solution": "With $x=R\\cos t$, $y=R\\sin t$, the numerator becomes $R^2dt$ and the denominator is $R^2$. The integral is $\\int_0^{2\\pi}dt=2\\pi$. If a global potential existed, the same integral would be its endpoint difference, zero. The contradiction proves nonexactness on that domain.",
+      "lesson": 7,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-star-shaped-potential",
+      "question": "Apply the radial potential formula to $\\alpha=(2x+y)dx+(x+4y)dy$ on $\\mathbb R^2$, and verify the result.",
+      "hint": "First: First check that the cross partial derivatives agree. Next: The radial integrand is $t(2x^2+2xy+4y^2)$.",
+      "solution": "The cross partials both equal one, and the plane is star-shaped. The formula gives $\\Phi=\\int_0^1t(2x^2+2xy+4y^2)dt=x^2+xy+2y^2$. Differentiation gives $\\Phi_x=2x+y$, $\\Phi_y=x+4y$, so $d\\Phi=\\alpha$. Adding a constant would give another potential.",
+      "lesson": 7,
+      "type": "Fluency"
+    },
+    {
+      "id": "forms-singular-disk-audit",
+      "question": "A calculation uses the vortex form's zero exterior derivative to claim its unit-circle integral is zero by integrating over the full unit disk. Identify the failed hypothesis and provide a valid replacement region.",
+      "hint": "First: Inspect the form at the disk's centre. Next: An annulus excludes the singularity but introduces an inner boundary.",
+      "solution": "The form is undefined at the origin, so it is not $C^1$ on a neighborhood of the full disk. That Stokes invocation is invalid. On an annulus $\\varepsilon\\le r\\le1$, it is smooth and closed, so the complete boundary integral is zero: outer contribution $2\\pi$, inner clockwise contribution $-2\\pi$. This valid calculation does not make the single outer integral zero.",
+      "lesson": 7,
+      "type": "Reasoning"
+    },
+    {
+      "id": "forms-finite-sampling-limits",
+      "question": "Suppose $d\\alpha$ vanishes at finitely many sampled planar points $(x_j,y_j)$. Construct a smooth one-form showing this does not prove $\\alpha$ is closed everywhere.",
+      "hint": "First: Choose a polynomial that vanishes at every sampled first coordinate. Next: Take $p(x)=\\prod_j(x-x_j)^2$ and let $Q$ be an antiderivative of $p$.",
+      "solution": "Set $Q(x)=\\int_0^x p(s)ds$ and $\\alpha=Q(x)dy$. This is a polynomial one-form on the entire plane, with $d\\alpha=p(x)dx\\wedge dy$. At each sample it vanishes, but $p$ is a nonzero polynomial and is positive away from its finitely many roots. Thus the form is not closed on the plane despite all the sampled zero values. A finite display cannot replace a derivative identity.",
+      "lesson": 7,
+      "type": "Reasoning"
+    }
+  ],
+  "summary": [
+    "A differential form measures oriented k-dimensional directions; its degree must match the domain being integrated.",
+    "Pullback implements the chain rule for integrands, including signed Jacobian determinants and multiplicity.",
+    "Exterior differentiation raises degree, satisfies a graded product rule, and has d²=0 under explicit regularity.",
+    "Stokes equates a derivative integral with the complete induced boundary integral; the coordinate-box proof is a repeated fundamental theorem calculation.",
+    "Closedness is local differential information, while a global potential can be obstructed by the domain."
+  ],
+  "next": "Chapter 30 uses invertible derivative blocks to solve implicit constraints locally, identify tangent directions, and quantify sensitivity. The full inverse and implicit function theorem proofs are in Real Analysis, Chapter 21.",
+  "readingLinks": [
+    {
+      "resourceId": "library:book-proof-safe-real-analysis:inverse-implicit-function-theorems",
+      "label": "Full inverse and implicit function theorem proofs for the next chapter (Real Analysis, Chapter 21)"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Terence Tao, Differential Forms and Integration (author-hosted notes)",
+      "href": "https://www.math.ucla.edu/~tao/preprints/forms.pdf"
+    },
+    {
+      "title": "Brian Conrad, Stokes' Theorem on Riemannian Manifolds (author's Stanford course notes)",
+      "href": "https://math.stanford.edu/~conrad/diffgeomPage/handouts/stokesthm.pdf"
+    },
+    {
+      "title": "John M. Lee, Integration on Manifolds, Chapter 16 of Introduction to Smooth Manifolds (publisher record and full general Stokes theorem reference)",
+      "href": "https://link.springer.com/chapter/10.1007/978-1-4419-9982-5_16"
+    }
+  ]
+}

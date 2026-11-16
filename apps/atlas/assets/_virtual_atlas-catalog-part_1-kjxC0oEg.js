@@ -1,0 +1,1 @@
+var e={key:`version`,array:!1,value:`0.1.0`};export{e as default};

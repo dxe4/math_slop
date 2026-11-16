@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 360" role="img" aria-labelledby="title desc">
+  <title id="title">Enumeration and Monte Carlo routes for a randomization test</title>
+  <desc id="desc">The sharp null makes all reassigned outcomes known. One branch enumerates every allowed assignment and obtains the exact distribution. The other samples B assignments: its histogram is approximate, while the plus-one rank p-value defines a valid finite Monte Carlo test.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#334155"/></marker></defs>
+  <rect x="1" y="1" width="818" height="358" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <g font-family="system-ui, sans-serif" fill="#172033" text-anchor="middle">
+    <rect x="250" y="28" width="320" height="66" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="410" y="56" font-size="18" font-weight="700">Sharp null + original assignment design</text>
+    <text x="410" y="79" font-size="14">every allowed reassignment is imputable</text>
+    <rect x="55" y="160" width="285" height="145" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+    <text x="197.5" y="191" font-size="18" font-weight="700">Enumerate all assignments</text>
+    <text x="197.5" y="222" font-size="15">complete randomization distribution</text>
+    <text x="197.5" y="248" font-size="15" font-weight="700">exact design tail proportion</text>
+    <text x="197.5" y="279" font-size="14">ties/order declared</text>
+    <rect x="480" y="140" width="285" height="185" rx="10" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="622.5" y="171" font-size="18" font-weight="700">Sample B assignments</text>
+    <text x="622.5" y="204" font-size="15">sampled histogram = approximation</text>
+    <line x1="510" y1="224" x2="735" y2="224" stroke="#94a3b8"/>
+    <text x="622.5" y="254" font-size="15">plus-one rank rule</text>
+    <text x="622.5" y="280" font-size="18" font-weight="700">pMC = (K + 1)/(B + 1)</text>
+    <text x="622.5" y="306" font-size="14">finite Monte Carlo validity</text>
+  </g>
+  <g fill="none" stroke="#334155" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M350 94C300 117 250 125 210 158"/>
+    <path d="M470 94C525 115 570 119 605 138"/>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Independent chains expose a parallelism tradeoff</title><desc id="desc">Schematic execution timeline: each chain has its own stream, warmup, and retained draws.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Independent chains expose a parallelism tradeoff</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Schematic execution timeline: each chain has its own stream, warmup, and retained draws.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Compare accuracy per wall time and total work; adding chains repeats warmup and does not fix within-chain bias.</text>
+<text x="75.00" y="115.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">worker / RNG stream</text>
+<text x="595.00" y="115.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="start">retained samples</text>
+<text x="60.00" y="180.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Chain 1</text>
+<rect x="180" y="155" width="190" height="40" rx="7" fill="#f1d6c5" stroke="none"/>
+<rect x="375" y="155" width="410" height="40" rx="7" fill="#d1e6e9" stroke="none"/>
+<text x="205.00" y="181.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="start">warmup</text>
+<text x="405.00" y="181.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="start">sampling with a frozen kernel</text>
+<text x="60.00" y="245.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Chain 2</text>
+<rect x="180" y="220" width="190" height="40" rx="7" fill="#f1d6c5" stroke="none"/>
+<rect x="375" y="220" width="410" height="40" rx="7" fill="#d1e6e9" stroke="none"/>
+<text x="205.00" y="246.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="start">warmup</text>
+<text x="405.00" y="246.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="start">sampling with a frozen kernel</text>
+<text x="60.00" y="310.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Chain 3</text>
+<rect x="180" y="285" width="190" height="40" rx="7" fill="#f1d6c5" stroke="none"/>
+<rect x="375" y="285" width="410" height="40" rx="7" fill="#d1e6e9" stroke="none"/>
+<text x="205.00" y="311.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="start">warmup</text>
+<text x="405.00" y="311.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="start">sampling with a frozen kernel</text>
+<text x="60.00" y="375.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Chain 4</text>
+<rect x="180" y="350" width="190" height="40" rx="7" fill="#f1d6c5" stroke="none"/>
+<rect x="375" y="350" width="410" height="40" rx="7" fill="#d1e6e9" stroke="none"/>
+<text x="205.00" y="376.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="start">warmup</text>
+<text x="405.00" y="376.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="start">sampling with a frozen kernel</text>
+<line x1="180.00" y1="440.00" x2="820.00" y2="440.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="475.00" y="467.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="middle">wall-clock time →</text>
+<line x1="805.00" y1="175.00" x2="875.00" y2="260.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="805.00" y1="370.00" x2="875.00" y2="290.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="875.00" y="245.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">Pool after</text>
+<text x="875.00" y="270.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">diagnostics</text>
+</svg>

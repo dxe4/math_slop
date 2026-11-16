@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Chain, fork, and collider path behavior in directed graphs</title>
+  <desc id="desc">Three panels compare directed graph motifs on nodes A, B, and C. In the chain A to B to C and fork A from B to C, conditioning on middle node B blocks the path between A and C. In the collider A to B from C, the unconditioned path is blocked, while conditioning on B opens it. Solid teal paths are open, dashed gray paths are blocked, and a ring marks conditioning.</desc>
+  <style>
+    .panel{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}.node{fill:#eff6ff;stroke:#1d4ed8;stroke-width:3}.edge{fill:none;stroke:#0f766e;stroke-width:4;marker-end:url(#arrow)}.blocked{stroke:#64748b;stroke-dasharray:8 7}.condition{fill:none;stroke:#be185d;stroke-width:4}.title{fill:#172033;font:700 21px system-ui,sans-serif}.nodeText{fill:#172033;font:700 21px system-ui,sans-serif}.note{fill:#334155;font:16px system-ui,sans-serif}.openNote{fill:#0f766e;font:700 16px system-ui,sans-serif}.blockedNote{fill:#475569;font:700 16px system-ui,sans-serif}
+    @media (prefers-color-scheme:dark){.panel{fill:#0f172a;stroke:#64748b}.node{fill:#172554;stroke:#93c5fd}.edge{stroke:#5eead4}.blocked{stroke:#94a3b8}.condition{stroke:#f472b6}.title,.nodeText{fill:#f8fafc}.note{fill:#cbd5e1}.openNote{fill:#99f6e4}.blockedNote{fill:#cbd5e1}}
+  </style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
+  <rect class="panel" x="15" y="15" width="290" height="330" rx="16"/>
+  <rect class="panel" x="335" y="15" width="290" height="330" rx="16"/>
+  <rect class="panel" x="655" y="15" width="290" height="330" rx="16"/>
+  <g text-anchor="middle">
+    <text class="title" x="160" y="51">chain</text><text class="title" x="480" y="51">fork</text><text class="title" x="800" y="51">collider</text>
+    <g>
+      <circle class="node" cx="70" cy="135" r="29"/><circle class="node" cx="160" cy="135" r="29"/><circle class="node" cx="250" cy="135" r="29"/>
+      <path class="edge blocked" d="M100 135H126"/><path class="edge blocked" d="M190 135H216"/><circle class="condition" cx="160" cy="135" r="38"/>
+      <text class="nodeText" x="70" y="143">A</text><text class="nodeText" x="160" y="143">B</text><text class="nodeText" x="250" y="143">C</text>
+      <text class="blockedNote" x="160" y="215">conditioning on B blocks</text><text class="note" x="160" y="246">A and C are then independent</text><text class="note" x="160" y="270">in every factorizing model</text>
+    </g>
+    <g>
+      <circle class="node" cx="390" cy="135" r="29"/><circle class="node" cx="480" cy="135" r="29"/><circle class="node" cx="570" cy="135" r="29"/>
+      <path class="edge blocked" d="M446 135H420"/><path class="edge blocked" d="M510 135H536"/><circle class="condition" cx="480" cy="135" r="38"/>
+      <text class="nodeText" x="390" y="143">A</text><text class="nodeText" x="480" y="143">B</text><text class="nodeText" x="570" y="143">C</text>
+      <text class="blockedNote" x="480" y="215">conditioning on B blocks</text><text class="note" x="480" y="246">A and C are then independent</text><text class="note" x="480" y="270">in every factorizing model</text>
+    </g>
+    <g>
+      <circle class="node" cx="710" cy="135" r="29"/><circle class="node" cx="800" cy="135" r="29"/><circle class="node" cx="890" cy="135" r="29"/>
+      <path class="edge" d="M740 135H766"/><path class="edge" d="M860 135H834"/><circle class="condition" cx="800" cy="135" r="38"/>
+      <text class="nodeText" x="710" y="143">A</text><text class="nodeText" x="800" y="143">B</text><text class="nodeText" x="890" y="143">C</text>
+      <text class="openNote" x="800" y="215">conditioning on B opens</text><text class="note" x="800" y="246">dependence is permitted;</text><text class="note" x="800" y="270">faithfulness makes it present</text>
+    </g>
+  </g>
+</svg>

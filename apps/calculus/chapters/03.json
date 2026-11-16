@@ -1,0 +1,504 @@
+{
+  "id": "03",
+  "title": "Computing with numbers and functions",
+  "subtitle": "How can a short program reveal mathematical behavior without mistaking its rounded answers for exact truth?",
+  "prerequisites": [
+    "Function notation, domains, intervals, and composition from Chapter 1.",
+    "Powers, square roots, radians, and algebraic rearrangement from Chapter 2; no programming experience is assumed."
+  ],
+  "objectives": [
+    "Translate a mathematical function into a small JavaScript function and use the Math API.",
+    "Build and inspect a reusable sampler with arrays, bounded loops, and endpoint checks.",
+    "Measure absolute and relative error and recognize cancellation in floating-point arithmetic.",
+    "Separate a numerical experiment, a counterexample, and a proof."
+  ],
+  "sections": [
+    {
+      "title": "1. Names, expressions, and reusable functions",
+      "paragraphs": [
+        "A program is a precise recipe for calculations. Start with const x = 3; const y = x*x + 1; console.log(y);. The first statement associates the name x with the number 3. The second evaluates an expression and names its result y. The last displays 10. A semicolon ends a statement, and // begins a comment extending to the end of its line. Comments explain intentions to a reader; the computer does not execute them. You can change the input and run the same recipe again.",
+        "Use const when the name will keep its assigned value and let when it will change. For example, let total = 0; total = total + 4; leaves total equal to 4. Here = means assignment: evaluate the expression on the right and store it under the name on the left. It is not an assertion of mathematical equality. The comparison total === 4 instead produces true or false. Comparisons such as x < 0 and x <= 2 help programs choose actions and stop loops.",
+        "The declaration function squarePlusOne(x) { return x*x + 1; } defines a reusable rule. Calling squarePlusOne(3) produces 10, and squarePlusOne(-2) produces 5. The parameter x is a local input name; return supplies the output and ends that function call. The compact form const squarePlusOne = x => x*x + 1; expresses the same rule. A function with braces after the arrow needs an explicit return to supply a value. Functions can also receive functions as inputs, which will let one sampler work with many mathematical rules.",
+        "Arithmetic uses +, -, *, /, and ** for powers. Write 2*x rather than 2x, and x**2 rather than x^2: the ^ symbol has a different, bitwise meaning in JavaScript. Parentheses make grouping explicit. Math.sqrt(x), Math.abs(x), Math.exp(x), and Math.log(x) compute square root, absolute value, exponential, and natural logarithm. Math.sin(x) and Math.cos(x) take radians; Math.PI supplies an approximation to π. A logarithm to base 10 is Math.log10(x). These are function calls with a case-sensitive name followed by parentheses.",
+        "Code does not automatically enforce a mathematical domain or track physical units. For real computations Math.sqrt(-1) produces NaN, meaning not a number; Math.log(0) produces -Infinity. Neither is a finite graph coordinate. Number.isFinite(y) checks whether an output is a finite number. If time is measured in seconds and position in meters, the constants in your formula must carry compatible units, and the plot label should say so. Keeping units in comments and labels is part of communicating the model.",
+        "A variable name should describe the quantity it stores, but a name does not enforce units or domain. const timeSeconds = 3 makes an interpretation clear to a reader, while the runtime still treats it as a number. A formula such as distance = speed*timeSeconds is dimensionally meaningful only if speed has matching distance-per-second units. Choose names and comments that preserve the model's assumptions, and validate inputs before using operations such as square roots or logarithms that have restricted real domains.",
+        "A pure numerical function returns an output determined by its input without changing hidden state. For example function g(t) { return 3*t*t-2; } gives $g(-2)=10$ on every call. This mirrors a mathematical function and makes a laboratory reproducible. A function that reads a mutable global variable can return different results for the same t, which may be useful in an application but needs an explicit interpretation. The book's experiments favor explicit parameters so a plotted curve can be traced back to one stated rule.",
+        "JavaScript uses floating-point numbers for both ordinary decimals and most integers. The expression 0.1+0.2 may not compare exactly equal to 0.3 because those decimals have repeating binary representations. This is not a failure of arithmetic laws over real numbers; it is a feature of the finite stored approximations. Use exact symbolic reasoning for identities and numerical tolerances for computed values. Avoid changing a mathematical claim into an exact JavaScript equality test without considering representation.",
+        "Validation should match the mathematical task. A real square-root sampler should reject $x<0$ rather than quietly send NaN to a chart. A reciprocal function should reject $x=0$ even though JavaScript evaluates 1/0 as Infinity. Number.isFinite checks the resulting value but a clear error message can also name the violated domain condition. Stopping on a bad input is better than plotting a broken line whose missing segment looks like a feature of the function.",
+        "The value returned by a function is distinct from text printed by console.log. A reusable sampler needs actual numeric outputs to store pairs and compute comparisons; a function that only prints a number returns undefined. Likewise, an array of points is data, while plot(points,label) is a display action. Keeping computation and display separate lets one test results before drawing them and makes the same function usable in an error table, graph, or numerical integral.",
+        "Parentheses make precedence auditable. In 3*t*t-2, multiplication happens before subtraction; in (a+b)/2, parentheses ensure the sum is divided. The expression -x**2 has syntax and precedence traps in JavaScript, so write -(x**2) for the negative square or (-x)**2 for the square of a negative number. These produce opposite signs when $x\\ne0$. Translating a written formula into code is a mathematical step that deserves its own check with a simple test input."
+      ]
+    },
+    {
+      "title": "2. Arrays, loops, and a reusable sampler",
+      "paragraphs": [
+        "An array stores an ordered collection: const values = [2, 5, 10];. Its first item is values[0], its last here is values[2], and values.length is 3. A point can itself be an array, [x, y], so a collection of graph samples is an array of pairs. With const points = []; the name points stays fixed, but points.push([x, y]) can append a pair to the array. Const does not make the contents of an array immutable.",
+        "A for loop repeats a calculation with a controlled counter. In for (let i = 0; i <= n; i += 1) { ... }, the initialization runs once, the comparison is checked before each repetition, and the increment runs afterward. If n is the positive integer 4, the body runs for i = 0, 1, 2, 3, 4: five times. This is the correct count for four subintervals including both endpoints. A loop whose counter never approaches its stopping condition may run forever, so bounds are mathematical assumptions as well as programming details.",
+        "For an interval $[a,b]$, choose a positive integer $n$ and use $x_i=a+\\frac{b-a}{n}i$ for $i$ from $0$ to $n$. Computing each coordinate from its integer index avoids repeatedly adding an inexact step. Explicitly assigning x = b when i === n also preserves the requested final endpoint. Our sampler accepts finite endpoints with $a<b$ and $n$ from $1$ to $1999$, yielding at most 2000 points. Restricting these inputs makes the function suitable for the book’s plotting interface. The laboratory evaluates the algebraically equal convex form $a(1-i/n)+b(i/n)$ at interior indices. It blends the endpoints and can avoid overflow in forming $b-a$ for some finite endpoints. Floating-point rounding can make the two formulas differ slightly, so the code explicitly uses $a$ and $b$ at the first and last indices.",
+        "The lab defines sample(f, a, b, n). It creates an empty array, evaluates f at each coordinate, checks that the coordinate and result are finite, appends the pair, and returns the array. A failed check throws an Error with a descriptive message. Stopping is preferable to drawing a believable curve through invalid values. This finite-value check still cannot establish continuity between samples. If you know there is a gap or singularity, divide the domain into separate valid pieces and plot them separately.",
+        "Calling plot(points, label) joins the supplied pairs in their given order. It displays a polygonal approximation, not the entire mathematical graph. More samples often improve a picture, but a narrow peak can lie between every tested coordinate. For $f(x)=\\frac{1}{x}$, samples on opposite sides of zero may be finite while a connecting segment crosses a location where the function is undefined. Domain analysis from Chapter 1 remains necessary. A table of coordinates exposes what was actually evaluated and helps distinguish those evaluations from connecting lines.",
+        "A sampler with $n$ subintervals returns $n+1$ endpoint-inclusive points: indices $0$ through $n$. For sample(f,2,5,6), the step is $\\frac{5-2}{6}=0.5$, so the inputs are $2,2.5,3,3.5$, $4,4.5,5$. Counting only six points would omit one endpoint or use a different step. A table of the first, middle, and last coordinates checks a loop more effectively than glancing at the plotted line.",
+        "Computing $x_i=a+\\frac{b-a}{n}i$ from the integer index limits accumulated rounding drift. If a step $h$ is repeatedly added, each addition rounds and the final value may miss $b$. This difference is often small, but an endpoint has mathematical significance when a domain includes or excludes it. The code can explicitly set the final coordinate to $b$ as a further guarantee. If the function is undefined at $b$, the sampler should instead use a half-open grid or stop before that endpoint.",
+        "Uniform sampling can miss a narrow feature. Let $f(x)=\\exp\\!\\left(-\\left(\\frac{x-c}{w}\\right)^2\\right)$ on $[0,1]$, with a small width $w$. If $c$ lies between grid points and $w$ is much smaller than spacing $1/n$, every sampled value can be near zero even though $f(c)=1$. Joining the samples produces a nearly flat line that hides the true peak. Move the grid, refine it, or derive analytic information about the function. A graph is evidence about sampled coordinates, not a proof about every input.",
+        "Sampling across a discontinuity can create a false visual bridge. For $f(x)=\\frac{1}{x}$ on $[-1,1]$, a uniform grid with an even number of subintervals hits zero and should reject the invalid point. A grid that misses zero may join a large negative value to a large positive value with a diagonal segment, suggesting a line through the vertical asymptote. A plotting routine should split curves at domain gaps or nonfinite values rather than connect across them. Mathematical domain knowledge guides visualization.",
+        "A loop should state its termination condition and its expected count. In for (let i=0;i<=n;i+=1), the <= comparison includes n, while < excludes it. If n is not a nonnegative integer, a sampler's count becomes unclear and may lead to invalid steps. Validate n before the loop. For computational calculus, an explicit grid size and interval are part of a reproducible experiment, not implementation trivia.",
+        "Sampling density and line thickness interact. Hundreds of points may still fail to show a rapid oscillation if the sampling frequency aliases it into a slower pattern. For $\\sin(100x)$ on $[0,2\\pi]$, evenly spaced points at unlucky phases can all lie near zero. Changing $n$ or shifting the grid may reveal the missed oscillation. Analytic bounds on frequency or adaptive sampling can guide an honest plot. Increasing $n$ blindly improves many pictures but does not guarantee every feature is captured."
+      ],
+      "formula": "xᵢ = a + (b − a)i/n,  i = 0, …, n;  n subintervals give n + 1 samples.",
+      "formulaTex": "x_i=a+\\frac{b-a}{n}i,\\qquad i=0,1,\\ldots,n,\\quad n\\in\\mathbb N_{>0}"
+    },
+    {
+      "title": "3. Finite precision and meaningful error",
+      "paragraphs": [
+        "The numbers used in these labs are JavaScript Number values, normally represented in binary floating-point arithmetic. A finite set of significant binary digits is combined with an exponent, rather like scientific notation in base two. Some numbers, such as $1/2$, have exact finite binary representations. Decimal $1/10$ does not, just as $1/3$ has no finite decimal representation. Its stored value is a nearby representable number. Consequently 0.1 + 0.2 === 0.3 is false, and displaying the sum commonly gives 0.30000000000000004. For a calculation such as $0.1+0.2$, inspect the stored result before using exact equality as a test.",
+        "Rounding occurs when storing inputs and when an arithmetic result is not representable. Number.EPSILON is the spacing from 1 to the next larger representable number, about $2.22\\times10^{-16}$. It is not a universal absolute accuracy guarantee. The spacing depends on magnitude, and a sequence of operations can amplify previous errors. Very large operations may overflow to Infinity; extremely small positive quantities may underflow to zero. The fact that a display has many digits does not show that all those digits describe the intended exact quantity. Every integer in the safe range $|n|\\le2^{53}-1$ is exactly representable as a Number, but many decimal fractions are not.",
+        "If $q$ is an exact target and $\\hat q$ an approximation, the absolute error is $\\lvert\\hat q-q\\rvert$. It has the same units as $q$. For nonzero $q$, the relative error is $\\frac{\\lvert\\hat q-q\\rvert}{\\lvert q\\rvert}$, a dimensionless fraction; multiply by 100 for percent error. An error of 0.01 meters is relatively small when measuring a 100-meter length and relatively large when measuring a 0.02-meter length. At $q=0$ relative error is undefined, so use an absolute tolerance or a scale justified by the problem. For example, estimating $2$ m by $1.98$ m gives absolute error $0.02$ m and relative error $1\\%$; near a zero target, a fixed relative tolerance alone can be unsuitable.",
+        "A practical comparison can require $\\lvert\\hat q-q\\rvert\\le\\mathrm{atol}+\\mathrm{rtol}\\lvert q\\rvert$, where $\\mathrm{atol}$ has the units of $q$ and $\\mathrm{rtol}$ is dimensionless. This specifies what you regard as close; it does not prove the computation satisfies a mathematical error bound. If the exact target is unavailable and you compare two numerical methods, call their discrepancy a difference or an estimated error. Agreement is useful evidence, but both methods may share the same mistake or rounding effect. This reference-based test is asymmetric; if a symmetric comparison is wanted, one may scale by $\\max(|\\hat q|,|q|)$ instead. Choose the convention for the question and report its units.",
+        "Conditioning asks how sensitive the exact mathematical answer is to small input changes. Stability asks whether a particular algorithm adds avoidable error beyond that sensitivity. Subtracting two nearly equal measured quantities is inherently sensitive to uncertainty in each measurement, even with exact arithmetic. Separately, using the naive quadratic formula for a small root introduces avoidable floating-point cancellation; an algebraically equivalent formula is more stable. Keeping these ideas separate helps diagnose whether better data or a better algorithm is needed.",
+        "Numbers can overflow or underflow. A product of very large finite values may become Infinity, while a very small positive quantity may round to zero. Number.isFinite catches overflow but not a positive value that has underflowed to zero. Scaling formulas can help: instead of multiplying several large terms before dividing, rearrange when algebra allows to keep intermediate magnitudes moderate. Always check that such rearrangement preserves domain and does not introduce a new zero divisor.",
+        "Rounding error is not the same as model error or discretization error. A finite-difference derivative has truncation error because it replaces a limit by a nonzero step, and rounding error because stored values are finite precision. A physical model may have parameter uncertainty even if both numerical errors are tiny. Reporting one error estimate as if it covered all three is misleading. State what was compared, what was held exact, and which source of uncertainty remains.",
+        "An error budget can combine several known contributions without pretending they are identical. If measured inputs have at most 0.01 unit uncertainty and a numerical method has a proved discretization error at most 0.002 output units, a sensitivity bound is needed to turn the input uncertainty into output uncertainty before adding the two. Simply writing 0.012 assumes the input and output units match and that the function does not amplify input error. For $f(x)=100x$, a 0.01 input uncertainty can cause one output unit of variation, dwarfing the numerical method error. The derivative or another Lipschitz bound supplies the missing conversion.",
+        "A loop that adds readings has three different targets: the exact real sum of the stipulated input numbers, the rounded result of a chosen arithmetic procedure, and the sum of any unknown physical values behind those readings. For the next example, the inputs themselves are exactly represented binary64 values. For normal numbers, binary64 has 53 significant binary digits and unit roundoff $u=2^{-53}$, half of Number.EPSILON. Let $A=2^{53}$ and use reports $(1,A,3,-A)$. Their exact real sum is $S=4$. The value $A$ is exactly representable even though Number.isSafeInteger(A) is false: the safe range guarantees representation of every integer in that range, not a converse test for individual integers.",
+        "Use round-to-nearest with ties to even: at a tie, choose the candidate whose last stored significand bit is zero. The significand is its fixed-length sequence of significant binary digits. At $A$, the next larger representable number is $A+2$, so $1+A$ rounds to $A$. Then $A+3$ is halfway between $A+2$ and $A+4$ and rounds to $A+4$; subtracting $A$ gives $4$. Adjacent-pair summation instead forms $1+A\\mapsto A$ and $3-A=-A+3$ exactly, then returns $3$. Both procedures use three additions. Their maximum leaf-to-root depths are three and two, respectively. The recursive answer happens to be exact because two rounding effects compensate. Pairwise summation is not always more accurate for a particular input.",
+        "The finite-tree theorem below gives an arithmetic certificate. Put $W=\\sum_i|x_i|$ and $\\gamma_d=du/(1-du)$ when $du<1$. The baseline has $W=2A+4$. Its recursive bound is $\\gamma_3W=(6A+12)/(A-3)$, while its pairwise bound is $\\gamma_2W=(4A+8)/(A-2)$, which is smaller. Yet the actual absolute errors are zero and one. A smaller upper bound need not mean a smaller observed error. For nonzero exact sum, $\\kappa=W/|S|$ measures relative input sensitivity; here $\\kappa=A/2+1$. At a zero sum this relative expression is undefined, while the absolute arithmetic certificate remains meaningful.",
+        "Now add a separate measurement specification: each true value $z_i$ may differ from its stipulated report $x_i$ by at most $1/16$. The exact sum of the true values lies in $[4-4/16,4+4/16]=[15/4,17/4]$. All four deviations of the same sign attain its endpoints. Exact summation would not remove this uncertainty. In this particular case the recursive output $4$ is within $1/4$ of every allowed true sum, while the pairwise output $3$ has worst-case error $5/4$. These deviations describe the input model; they are not additional roundings at intermediate additions. All quantities being added must have compatible units."
+      ],
+      "formula": "Absolute error = |q̂ − q|. Relative error = |q̂ − q|/|q| when q ≠ 0.",
+      "formulaTex": "\\begin{aligned}E_{\\mathrm{abs}}&=|\\hat q-q|,\\\\ E_{\\mathrm{rel}}&=\\frac{|\\hat q-q|}{|q|}\\quad(q\\ne0).\\end{aligned}",
+      "theorems": [
+        {
+          "title": "Cancellation amplifies relative input error",
+          "statement": "Let $a\\ne b$, $u\\ge0$, $\\tilde a=a+\\delta_a$, and $\\tilde b=b+\\delta_b$, with $|\\delta_a|\\le u|a|$ and $|\\delta_b|\\le u|b|$. Before any further rounding in subtraction, the relative error of $\\tilde a-\\tilde b$ is at most $u(|a|+|b|)/|a-b|$; the factor can be large when the true difference is small.",
+          "equationTex": "\\substack{a\\ne b,\\ u\\ge0,\\\\ |\\delta_a|\\le u|a|,\\ |\\delta_b|\\le u|b|}\\quad\\Longrightarrow\\quad\\frac{|(\\tilde a-\\tilde b)-(a-b)|}{|a-b|}\\le\\frac{u(|a|+|b|)}{|a-b|},\\quad\\tilde a=a+\\delta_a,\\ \\tilde b=b+\\delta_b",
+          "proof": [
+            "First suppose only that $|\\delta_a|\\le A$ and $|\\delta_b|\\le B$. Since $(\\tilde a-\\tilde b)-(a-b)=\\delta_a-\\delta_b$, the triangle inequality gives the absolute bound $|(\\tilde a-\\tilde b)-(a-b)|\\le A+B$. Now substitute $A=u|a|$ and $B=u|b|$, then divide by $|a-b|>0$. This isolates input perturbation: any further rounding in the subtraction is excluded from the displayed bound.",
+            "If $a$ and $b$ are both around $10^8$ but their true difference is around one, the ratio $(|a|+|b|)/|a-b|$ is enormous. Small relative errors in the inputs can then dominate the relative accuracy of the difference. The subtraction operation is not necessarily implemented incorrectly; the requested difference is sensitive to the supplied values. This is a conditioning issue. Additional rounding in the subtraction can add error, so the bound here isolates input perturbation rather than claiming to cover an entire floating-point computation.",
+            "The stable quadratic-root case later in this chapter rearranges a formula to avoid such subtraction. Algebraic equivalence in exact arithmetic does not imply equal numerical behavior. Report the scale of the input uncertainty and a residual or invariant check before trusting many printed digits."
+          ]
+        },
+        {
+          "title": "A finite addition tree has a depth-dependent error bound",
+          "statement": "Let $x_1,\\ldots,x_n$ be finite, exactly represented binary64 inputs, with $n\\ge1$, and let $S$ be their exact real sum. Compute $\\widehat S$ by a binary tree that adds each input exactly once. Assume round-to-nearest with ties to even, no overflow or underflow, and that all nonzero exact intermediate addition results are in the normal floating-point range. Each addition then has the relative model $\\operatorname{fl}(a+b)=(a+b)(1+\\delta)$ with $|\\delta|\\le u=2^{-53}$. Let $d$ be the largest number of rounded additions on a leaf-to-root path. If $du<1$, the bound below holds. This bounds arithmetic on the stipulated inputs, excluding any uncertainty or conversion error in those inputs.",
+          "proof": [
+            "Expand the computed tree from its root. At each internal vertex, the rounded sum equals its children's computed sum times that vertex's factor $1+\\delta$. Distributing these finite sums proves $\\widehat S=\\sum_i x_i p_i$, where $p_i$ is the product of the rounding factors on input $i$'s path to the root. The factors need not be independent. If a sum is exactly zero, its rounded value is zero and one may choose $\\delta=0$. A single input has no additions: $d=0$ and the empty product is one.",
+            "For any path of length at most $d$, pad with factors one if necessary. Since $0\\le u<1$, its product $p$ lies between $(1-u)^d$ and $(1+u)^d$. The finite inequality $(1-u)^m\\ge1-mu$ follows by induction: multiplying the previous lower bound by $1-u$ leaves the extra nonnegative term $mu^2$. Also $1+u\\le(1-u)^{-1}$. Thus $1-du\\le p\\le(1-u)^{-d}\\le(1-du)^{-1}$, and $|p-1|\\le du/(1-du)=\\gamma_d$. No infinite series or limiting argument is used.",
+            "Subtract $S=\\sum_i x_i$ from the expanded tree and apply the triangle inequality: $|\\widehat S-S|\\le\\sum_i|x_i||p_i-1|\\le\\gamma_d W$. For $S\\ne0$, divide by $|S|$ to get relative bound $\\gamma_d\\kappa$, with $\\kappa=W/|S|$. For $S=0$, relative error and this relative condition number are undefined, even if $\\widehat S=0$; use the absolute bound. The constants $u$, $\\gamma_d$ and $\\kappa$ are dimensionless, while $S$, $W$ and the absolute bound carry the common input units.",
+            "Recursive left-to-right summation starts from $x_1$ without rounding that assignment. For $n\\ge2$, its first inputs pass through $n-1$ additions, so $d=n-1$. A balanced tree with $n=2^k$ inputs has $d=k$. Both use $n-1$ additions: smaller depth does not mean fewer operations. For other sizes, count the actual paths in the stated tree. A five-input tree cannot have depth two, since a binary tree of depth two has at most four leaves. The theorem certifies each declared tree; it does not rank every tree's actual error on every input.",
+            "Separately suppose the true quantities satisfy $|z_i-x_i|\\le\\eta_i$ with $\\eta_i\\ge0$. Then $|\\sum_i z_i-S|\\le\\sum_i\\eta_i$. With no further restrictions on those deviations, the endpoints $S\\pm\\sum_i\\eta_i$ are attained by choosing all deviations with the same sign. Combining this data bound with the arithmetic certificate gives $|\\widehat S-\\sum_i z_i|\\le\\gamma_d W+\\sum_i\\eta_i$. This combined bound can be conservative. A probability law, averaging of errors, or cancellation of a shared offset must not be inferred from separate absolute tolerances."
+          ],
+          "equationTex": "\\begin{aligned}S&=\\sum_{i=1}^{n}x_i,\\qquad W=\\sum_{i=1}^{n}|x_i|,\\\\ |\\widehat S-S|&\\le\\gamma_d W,\\qquad \\gamma_d=\\frac{du}{1-du},\\quad du<1.\\end{aligned}"
+        }
+      ],
+      "comparisonTable": {
+        "caption": "Same exact reports, different trees and rounding errors",
+        "headers": [
+          "Grouping",
+          "First two rounded additions",
+          "Final sum",
+          "Maximum depth",
+          "Absolute arithmetic error"
+        ],
+        "rows": [
+          [
+            "Recursive, left to right",
+            "$A,\\ A+4$",
+            "$4$",
+            "$3$",
+            "$0$"
+          ],
+          [
+            "Adjacent pairs",
+            "$A,\\ -A+3$",
+            "$3$",
+            "$2$",
+            "$1$"
+          ]
+        ]
+      },
+      "investigation": {
+        "id": "finite-summation",
+        "title": "Audit an addition tree before trusting its digits",
+        "introduction": "Use the theorem's binary64 rounding and range assumptions in both dimensionless tasks. Treat the stipulated reports as exact input values; any stated physical uncertainty is a separate model. These optional written tasks are outside the numbered problem bank.",
+        "tasks": [
+          {
+            "title": "Five leaves and unequal reading tolerances",
+            "question": "Let $A=2^{54}$ and reports $(x_1,\\ldots,x_5)=(A,3,-A,1,2)$. Compare recursive left-to-right summation with the specified tree $T=((x_1+x_2)+(x_3+x_4))+x_5$, rounding after every addition. Find the exact reported sum, both computed results and absolute arithmetic errors, each maximum depth, and the two generic bounds in terms of $\\gamma_d$ and $W$. Both methods use how many additions? If $|z_i-x_i|\\le\\eta_i$ with $(\\eta_1,\\ldots,\\eta_5)=(1/16,1/32,1/64,1/128,1/256)$, find the sharp interval for the exact true sum. Does better arithmetic remove that interval?",
+            "hint": "Above $2^{54}$ the adjacent floating-point spacing is $4$; just below it the spacing is $2$. Apply ties-to-even at $-A+1$. Count every addition on each input's route to the final result; five leaves do not form a depth-two binary tree.",
+            "solution": "The exact reported sum is $S=6$ and $W=2A+6$. Recursive partial sums are $A$, $A+4$, $4$, $5$, $7$, so its result is $7$ and its absolute arithmetic error is $1$. For $T$, the first pair results are $A+4$ and $-A$; combining them gives $4$, then adding $2$ gives $6$, with error zero.\n\nBoth trees use four additions. Recursive maximum depth is $4$, giving bound $\\gamma_4W$. In $T$, the first four leaves pass through three additions and the last through one, so maximum depth is $3$ and the bound is $\\gamma_3W$. Counting only the first pair level would miss later rounding.\n\nThe tolerances sum to $31/256$. Thus the true sum lies in $[1505/256,1567/256]$, with both endpoints attained by taking all true-minus-reported deviations at their same-sign limits. Even the exact computed report sum $6$ leaves this interval. These input deviations are separate from the four rounded additions."
+          },
+          {
+            "title": "A zero sum and an offset that does not cancel",
+            "question": "Let $B=2^{52}$ and reports $(B,1/2,-B,-1/2)$. Compute recursive and adjacent-pairwise sums, then recursively sum the explicit reordered sequence $(B,-B,1/2,-1/2)$. Give each absolute arithmetic error, appropriate generic bounds, and explain whether relative error and $\\kappa$ are defined. Finally suppose every report equals its true value plus one common unknown offset $c$, with $|c|\\le1/32$. Find the sharp interval for the exact true sum. Does an identical offset cancel in a sum as it does in a difference?",
+            "hint": "At $B+1/2$ and $-B-1/2$, use nearest-even tie rounding. Reordering changes the arithmetic path while preserving the exact real sum. In an unweighted four-input sum, a common offset contributes four times; at exact target zero, avoid dividing by that target.",
+            "solution": "The exact reported sum is $S=0$, with $W=2B+1$. Original recursive partial sums are $B$, $B$, $0$, $-1/2$, giving absolute arithmetic error $1/2$. Adjacent pairs each round to $B$ and $-B$, then sum to $0$, with error zero. The reordered recursive partial sums are $B$, $0$, $1/2$, $0$, also exact.\n\nBoth recursive orders have maximum depth $3$ and bound $\\gamma_3W$; adjacent pairs have depth $2$ and bound $\\gamma_2W$. All use three additions. The bounds do not predict these actual errors. Relative error and $\\kappa=W/|S|$ are undefined because $S=0$, including for the two exact computed results.\n\nHere reports satisfy $x_i=z_i+c$, so $\\sum_i z_i=\\sum_i x_i-4c=-4c\\in[-1/8,1/8]$. The allowed offsets attain both endpoints. A shared offset adds in this sum; it cancels in a difference because that operation has opposite coefficients. This physical input uncertainty is not extra intermediate rounding."
+          }
+        ]
+      }
+    },
+    {
+      "title": "4. Cancellation and the boundary between evidence and proof",
+      "paragraphs": [
+        "Consider $D(h)=(\\sqrt{1+h}-1)/h$ for $h>0$. When $h$ is small, the square root is close to $1$. Subtracting these nearly equal values removes their leading matching digits; the remaining small difference may contain few trustworthy digits. Dividing by $h$ then magnifies its absolute error. This is called cancellation. The subtraction itself can be exactly rounded and still expose errors already present in its operands. A smaller $h$ therefore need not produce a better numerical answer.",
+        "Algebra gives a second expression. Multiply numerator and denominator by $\\sqrt{1+h}+1$. Since $(\\sqrt{1+h}-1)(\\sqrt{1+h}+1)=h$, cancel the nonzero $h$ to obtain $D(h)=\\frac{1}{\\sqrt{1+h}+1}$. The equality holds over the real numbers for $h\\ge-1$ with $h\\ne0$. The rearranged expression also has a value at $h=0$, namely $1/2$, while the original quotient is undefined there. Giving an extension a value does not change the original domain.",
+        "The rearranged formula avoids the troublesome subtraction for small positive $h$. As $h$ approaches zero, its denominator approaches 2, suggesting an approach to $1/2$. Chapter 4 will justify such limit statements precisely. In the lab we compare both computed formulas with $1/2$. The displayed errors relative to $1/2$ measure distance from that limiting target, combining the nonzero-$h$ difference with numerical effects. They are not pure roundoff errors. The difference between the two computed formulas is separately reported and signals their disagreement.",
+        "An experiment has a question, chosen inputs, observations, and a qualified conclusion. Predict before running; then vary one parameter and explain surprises. Even checking a million inputs cannot prove an identity for all real inputs. The conjugate calculation above is a proof of equality on its stated domain because each algebraic step applies to every allowed $h$. Conversely, a trustworthy exact counterexample can disprove a universal claim. A strange floating-point output first calls for diagnosis: it may refute a claim about the implementation without refuting the corresponding real-number theorem.",
+        "The direct quotient $D(h)=\\frac{\\sqrt{1+h}-1}{h}$ is mathematically equal to $\\frac{1}{\\sqrt{1+h}+1}$ for $h\\ge-1$, $h\\ne0$. In floating-point arithmetic the two evaluation paths need not return the same stored value. When $h$ is tiny, $1+h$ may round to $1$, making the direct numerator zero and the direct quotient zero. The rationalized expression remains near one-half because it avoids subtracting nearby square roots. This is a striking example of exact algebra guiding a reliable numerical algorithm.",
+        "For moderate $h$, the direct formula may be perfectly adequate. Numerical stability is not a statement that one formula is always bad; it concerns behavior under the intended input scale and precision. Compare both formulas over a range of $h$ values, including positive and allowed negative $h$, and inspect the domain. Near $h=-1$, the rationalized denominator remains at least one, so it is well behaved. At $h=0$, the original quotient is undefined, while the rationalized expression is defined and equals $\\frac12$; it gives the continuous extension at that input.",
+        "A finite-difference derivative introduces another tradeoff. For $f(x)=\\sqrt{x}$ at $x=1$, the forward difference equals $D(h)$. As $h$ shrinks, its mathematical bias from the true derivative $1/2$ decreases roughly in proportion to $h$. But direct floating-point subtraction loses digits for very small $h$. The total observed error can first decrease and then increase. A central difference or analytic derivative can improve the comparison, but each choice has its own domain and computation cost.",
+        "Proof and computation answer different questions. Evaluating $D(h)$ at many steps shows a pattern and can reveal a failure of naive arithmetic. The conjugate identity proves equality of the two formulas on the stated domain. A later limit theorem proves that their common real value approaches $1/2$ as $h\\to0$. These three claims have different evidence: sampled output, algebraic identity, and limiting argument. Keeping them separate makes the laboratory more instructive and prevents a smooth graph from being mistaken for a theorem.",
+        "If a program prints NaN or Infinity, the right response is to inspect the mathematical domain and the numerical path, not to delete the offending point silently. A nonfinite value might mean a true singularity, an invalid input, overflow, or an unstable formula. Those cases require different fixes. A chart that quietly drops values can obscure all of them. The lab should surface a descriptive error or annotate a deliberate domain gap so the reader can relate the code result to the mathematics.",
+        "A useful experimental record includes the formula, the input sequence, the numeric type, the computed values, and the expected limiting or exact value. When a surprise appears, change one factor at a time: use a rationalized formula at the same $h$, or hold the formula fixed while varying $h$. This controlled comparison isolates cancellation from truncation. An exploratory graph is strongest when paired with a symbolic explanation of why its trend occurs."
+      ]
+    },
+    {
+      "title": "A quadratic root lost to cancellation",
+      "paragraphs": [
+        "Consider $x^2-10^8x+1=0$. Its exact roots are $[10^8\\pm\\sqrt{10^{16}-4}]/2$. The smaller root subtracts two nearly equal numbers around $10^8$. In finite precision, both may round to the same stored value, producing zero even though the exact smaller root is positive. The algebraic formula is correct; the direct numerical evaluation is fragile.",
+        "Vieta’s product relation says the two roots multiply to 1. Compute the large root with addition, $x_{\\text{large}}=\\frac{10^8+\\sqrt{10^{16}-4}}{2}$, then compute $x_{\\text{small}}=\\frac{1}{x_{\\text{large}}}$. Equivalently rationalize the subtraction to get $x_{\\text{small}}=\\frac{2}{10^8+\\sqrt{10^{16}-4}}$. These formulas avoid subtracting almost equal positive quantities and give $x_{\\text{small}}\\approx10^{-8}$. Their product with the large root is exactly 1 in real arithmetic and approximately 1 in floating-point arithmetic.",
+        "The discriminant $10^{16}-4$ is positive, so both roots are real. The parabola has positive leading coefficient and positive constant term, while the sum of roots is positive; both roots must be positive. Zero fails the original equation because substituting $x=0$ gives 1, an immediate residual check that catches the bad numeric result. A residual alone is not always a full accuracy certificate, but it is a useful first test.",
+        "This case separates mathematical conditioning from the stability of an algorithm. The small root itself is meaningful; the chosen subtraction wastes significant digits. Algebraic rearrangement, scale analysis, and invariant checks often improve a numerical computation more than simply asking for more decimal places.",
+        "For $x^2-Bx+1=0$ with $B>2$, the exact roots are $\\frac{B\\pm\\sqrt{B^2-4}}{2}$. The smaller root is positive because the product is one and both roots are positive. When $B$ is large, $B$ and $\\sqrt{B^2-4}$ agree in many leading digits, so subtracting them discards precision. The large root uses addition and is well conditioned to compute by this formula. Vieta then gives the small root as its reciprocal, avoiding the dangerous subtraction.",
+        "Rationalizing the small-root expression yields $x_{\\text{small}}=\\frac{2}{B+\\sqrt{B^2-4}}$. This identity is exact for $B>2$ and has a denominator near $2B$, so $x_{\\text{small}}$ is approximately $1/B$. For $B=10^8$ the small root is about $10^{-8}$, not zero. Substituting zero into the polynomial gives one, a large residual relative to the exact zero target. A computed result should be checked against the original equation, especially when a subtraction returns zero suspiciously.",
+        "The residual $p(\\hat x)=\\hat x^2-B\\hat x+1$ is one diagnostic, but its interpretation depends on conditioning. A tiny residual does not always imply a tiny error in $\\hat x$ when the polynomial is flat near a root; conversely, rounding the coefficients can move the true roots. Here $p^{\\prime}(x)=2x-B$ has large magnitude near the small root for large $B$, so a residual can provide useful local evidence. Numerical analysis separates residual, forward error in the root, and uncertainty in the polynomial coefficients.",
+        "The two-root product is an invariant check: if computed roots are $x_{\\text{large}}$ and $x_{\\text{small}}$, their product should be close to one in a suitable relative sense. A direct small-root formula that returns zero fails this check immediately. Yet passing the product check alone is not a proof of accurate roots if both values share a compensating error. Combine it with substitution into the original polynomial and, when possible, a stable analytic expression. Multiple independent checks are stronger than one plotted number.",
+        "For a general quadratic $ax^2+bx+c=0$ with $a\\ne0$ and real discriminant, one stable strategy is $q=-\\frac{b+\\operatorname{sign}(b)\\sqrt{b^2-4ac}}{2}$ when $b\\ne0$, then roots $q/a$ and $c/q$, provided $q\\ne0$. This chooses addition of like-signed magnitudes in $q$ rather than cancellation. The formula needs special handling when $b=0$ or $c=0$, and scaled discriminant evaluation may be needed to avoid overflow. It illustrates a design principle, not a universal one-line replacement without domain checks.",
+        "The broader lesson is algorithmic choice. Exact formulas can be algebraically equivalent while their finite-precision evaluations differ greatly. Before trusting an answer, consider input scale, expected sign and magnitude, conservation or product relations, and the original equation's residual. A numerical experiment should report the method used, not just the final decimal. These habits prepare the reader for quadrature, optimization, and differential-equation solvers, where no exact closed-form benchmark may be available.",
+        "A useful final check compares scales before running code. For $B=10^8$, the large quadratic root is on the order of $10^8$, and Vieta predicts the small one on the order of $10^{-8}$. A result of zero or a negative small root violates that expectation even if a displayed decimal has many digits. Scale analysis is cheap and often detects an error earlier than a detailed residual calculation. It also helps select a safe numerical representation before intermediate values become too large or too close to subtract reliably."
+      ],
+      "formula": "x_small=2/[B+√(B²−4)] for x²−Bx+1=0 with B>2.",
+      "formulaTex": "\\begin{gathered}x^2-Bx+1=0,\\qquad B>2,\\\\ x_{\\mathrm{small}}=\\frac{2}{B+\\sqrt{B^2-4}}.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Sampling a parabola by hand",
+      "problem": "Sample $f(x)=x^2+1$ on $[-1,1]$ using four equal subintervals. Predict what the sampler returns.",
+      "steps": [
+        "The step is $(1-(-1))/4=1/2$, and the five input coordinates are $-1,-1/2,0,1/2,1$.",
+        "Evaluate each input: $f(-1)=2$, $f(-1/2)=5/4$, $f(0)=1$, $f(1/2)=5/4$, and $f(1)=2$.",
+        "The call sample(x => x*x + 1, -1, 1, 4) returns the coordinate pairs. All inputs and outputs here have exact binary representations, so this case is a useful independent check of endpoint handling and array length."
+      ],
+      "answer": "The result is $[[-1,2],[-0.5,1.25],[0,1],[0.5,1.25],[1,2]]$. The connected plot has four straight segments, while the mathematical parabola is curved."
+    },
+    {
+      "title": "An exact cancellation check",
+      "problem": "Compute $D(h)$ at $h=3$, then explain what can happen at $h=10^{-16}$ in machine arithmetic.",
+      "steps": [
+        "At $h=3$, $\\sqrt{1+h}=2$, so the original expression is $(2-1)/3=1/3$. The rearranged expression is $1/(2+1)=1/3$ as well.",
+        "At $h=10^{-16}$, the rounded sum $1+h$ equals $1$ in ordinary Number arithmetic. The direct formula therefore computes $(1-1)/h=0$.",
+        "The rearranged formula computes $1/(1+1)=0.5$. In exact arithmetic the value for positive $h$ is slightly below $0.5$, but the rounding has not destroyed its scale.",
+        "Relative to the limiting target $0.5$, the direct computed result has absolute error $0.5$ and relative error $1$, or $100\\%$. The rearranged computed result has zero displayed discrepancy from that target, which is not proof of exact equality to $D(h)$."
+      ],
+      "answer": "Algebraically equivalent expressions can behave very differently in finite precision; rearranging the quotient preserves a useful approximation."
+    },
+    {
+      "title": "A reusable numerical rule",
+      "problem": "Write a JavaScript function for $g(t)=3t^2-2$ and evaluate $g(-2)$.",
+      "steps": [
+        "Translate multiplication explicitly: function g(t) { return 3*t*t-2; }.",
+        "Substitute $t=-2$: $3\\cdot4-2=10$.",
+        "A return value can be stored, compared, or plotted; printing alone would not return $10$."
+      ],
+      "answer": "JavaScript `function g(t) { return 3*t*t - 2; }` returns $10$ at $t=-2$."
+    },
+    {
+      "title": "Counting sampler points",
+      "problem": "For sample(f,2,5,6), state all input coordinates and count the points.",
+      "steps": [
+        "Six subintervals have step $(5-2)/6=0.5$.",
+        "Indices $i=0,\\ldots,6$ produce $2+0.5i$.",
+        "Include both endpoints."
+      ],
+      "answer": "Seven points at $2,2.5,3,3.5,4,4.5,5$."
+    },
+    {
+      "title": "Absolute and relative error",
+      "problem": "A $2\\,\\mathrm{m}$ target length is approximated by $1.98\\,\\mathrm{m}$. Find three error measures.",
+      "steps": [
+        "Absolute error is $|1.98-2|=0.02\\,\\mathrm{m}$.",
+        "Relative error is $0.02/2=0.01$.",
+        "Percent error is $100$ times the relative error."
+      ],
+      "answer": "$0.02\\,\\mathrm{m}$ absolute, $0.01$ relative, $1\\%$ percent error."
+    },
+    {
+      "title": "A sampler misses a narrow peak",
+      "problem": "Consider $f(x)=\\exp(-((x-0.37)/0.01)^2)$ on $[0,1]$ sampled every $0.1$. What can the plot miss?",
+      "steps": [
+        "The true maximum is $f(0.37)=1$.",
+        "Nearby grid points $0.3$ and $0.4$ are $0.07$ and $0.03$ away, several widths.",
+        "Their values are tiny, so a joined sample plot can look almost flat."
+      ],
+      "answer": "The sample can miss a height-one peak; refine or shift the grid and use analytic knowledge."
+    },
+    {
+      "title": "Rationalization as a stable algorithm",
+      "problem": "For $h\\ne0$, $h\\ge-1$, rewrite $(\\sqrt{1+h}-1)/h$ and find its limit as $h\\to0$.",
+      "steps": [
+        "Multiply by $\\sqrt{1+h}+1$ and cancel $h$ on the stated domain.",
+        "The result is $1/(\\sqrt{1+h}+1)$.",
+        "As $h\\to0$, the denominator approaches two."
+      ],
+      "answer": "The stable equivalent is $1/(\\sqrt{1+h}+1)$, with limit $1/2$."
+    },
+    {
+      "title": "A stable small quadratic root",
+      "problem": "For $x^2-10^8x+1=0$, write a stable expression for the smaller root and estimate its size.",
+      "steps": [
+        "The large root uses addition: $(10^8+\\sqrt{10^{16}-4})/2$.",
+        "Use product of roots one, or rationalize the small-root subtraction.",
+        "$x_{\\mathrm{small}}=2/[10^8+\\sqrt{10^{16}-4}]\\approx10^{-8}$."
+      ],
+      "answer": "The small root is positive and approximately $10^{-8}$, not zero."
+    }
+  ],
+  "misconceptions": [
+    "“A smoother plot proves the function is continuous.” Connecting finitely many samples can conceal a jump, hole, or pole; continuity requires information about every nearby input.",
+    "“A smaller step and more printed digits always mean greater accuracy.” Cancellation can make a smaller $h$ less reliable, and extra displayed digits can describe a rounded computation rather than the exact target."
+  ],
+  "lab": {
+    "title": "Explore cancellation and finite precision",
+    "description": "Run the reusable sample(f, a, b, n) check, then compare the direct quotient $D(h)=(\\sqrt{1+h}-1)/h$ with its rearrangement $1/(\\sqrt{1+h}+1)$ at $h=10^{-k}$. The table labels every column; plots use $k$ horizontally and absolute distance from the limiting target $1/2$ vertically. Both $h$ and the quotient are dimensionless. Change maxPower to inspect the onset of cancellation.",
+    "code": "// Adjustable: largest exponent k; keep it an integer from 1 to 20.\nconst maxPower = 18;\nfunction sample(f, a, b, n) {\n  if (!Number.isFinite(a) || !Number.isFinite(b) || !(a < b) ||\n      !Number.isInteger(n) || n < 1 || n > 1999) {\n    throw new Error('Use finite a < b and integer n from 1 to 1999.');\n  }\n  const points = [];\n  for (let i = 0; i <= n; i += 1) {\n    const t = i / n;\n    const x = i === 0 ? a : i === n ? b : a * (1 - t) + b * t;\n    const y = f(x);\n    if (!Number.isFinite(x) || !Number.isFinite(y)) {\n      throw new Error('Nonfinite sample at index ' + i);\n    }\n    points.push([x, y]);\n  }\n  return points;\n}\nif (!Number.isInteger(maxPower) || maxPower < 1 || maxPower > 20) {\n  throw new Error('maxPower must be an integer from 1 to 20.');\n}\nconsole.log('Sampler check [x, x*x+1]:', sample(x => x*x + 1, -1, 1, 4));\nconsole.log('0.1 + 0.2:', 0.1 + 0.2, 'spacing above 1:', Number.EPSILON);\nconsole.log('Columns: k, h, direct, rearranged, |direct-rearranged|, |direct-0.5|, |rearranged-0.5|');\nconst directErrors = [];\nconst rearrangedErrors = [];\nfor (let k = 1; k <= maxPower; k += 1) {\n  const h = 10**(-k);\n  const direct = (Math.sqrt(1 + h) - 1)/h;\n  const rearranged = 1/(Math.sqrt(1 + h) + 1);\n  const directError = Math.abs(direct - 0.5);\n  const rearrangedError = Math.abs(rearranged - 0.5);\n  console.log(k, h, direct, rearranged, Math.abs(direct-rearranged), directError, rearrangedError);\n  directErrors.push([k, directError]);\n  rearrangedErrors.push([k, rearrangedError]);\n}\nif (directErrors.length >= 2) {\n  plot(directErrors, 'Direct: x = exponent k, y = absolute distance from 0.5');\n  plot(rearrangedErrors, 'Rearranged: x = exponent k, y = absolute distance from 0.5');\n} else console.log('Only one exponent: error plots need at least two points.');",
+    "tasks": [
+      "Before running, predict whether both computed formulas move steadily closer to $1/2$ as $k$ grows. Explain your prediction.",
+      "Set maxPower to 8, then 18. Find the first printed $k$ where the direct result becomes zero and compare the two distances from $1/2$.",
+      "In the existing Sampler check console.log call, replace sample(x => x*x + 1, -1, 1, 4) with sample(x => Math.sin(x), 0, Math.PI, 4). Predict the five input-output pairs and explain why the final output may be a tiny nonzero number.",
+      "In that same console.log call, try sample(x => 1/x, -1, 1, 4), then sample(x => 1/x, -1, 1, 3). Explain why the first call fails and why joining the four returned points from the second call would falsely cross the gap at $x=0$.",
+      "Explain why a zero displayed distance from $1/2$ in the rearranged formula does not prove that $D(h)=1/2$ at positive $h$."
+    ],
+    "expected": "The sampler returns five pairs with output values $2,1.25,1,1.25,2$. At $k=1$ the rearranged quotient is approximately $0.4880884817$. At $k=16,17,18$ the direct result is $0$ and its distance from $1/2$ is $1/2$, while the rearranged result is $1/2$. The first zero direct result is at $k=16$; setting maxPower = 8 instead produces eight pairs per plot without that zero. Each default plot contains 18 finite pairs. Intermediate final digits may depend on the implementation of Math.sqrt."
+  },
+  "exercises": [
+    {
+      "question": "Translate $g(t)=3t^2-2$ into a JavaScript function and evaluate it at $t=-2$.",
+      "hint": "Multiplication must be explicit, and ^ does not mean a power.",
+      "solution": "function g(t) { return 3*t*t - 2; } evaluates to $g(-2)=3\\cdot4-2=10$. The arrow form const g = t => 3*t*t - 2; works too. The code uses * for multiplication. If $g$ measures metres and $t$ seconds, the coefficient $3$ has units metres per second squared and the constant $2$ has units metres.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Write JavaScript expression for $3t^2-2$ using variable t.",
+      "hint": "Use explicit multiplication or **.",
+      "solution": "JavaScript uses * for multiplication and ** for powers, so write 3*t*t-2 or 3*t**2-2. The ^ operator is bitwise XOR in JavaScript.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $g(t)=3t^2-2$ at $t=-2$.",
+      "hint": "Square $-2$ before multiplying by $3$.",
+      "solution": "Substitute $t=-2$: $g(-2)=3(-2)^2-2=3\\cdot4-2=10$. Squaring the negative input produces a positive square.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "What does a function that only console.log values return by default?",
+      "hint": "Distinguish printing and return.",
+      "solution": "Calling console.log creates an output side effect, but it does not return the printed value to the caller. A JavaScript function with no executed return expression returns undefined. Code that needs the computed value later should return it explicitly; printing alone cannot be used in another calculation.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What does Math.sqrt(-1) produce in real-number JavaScript computation?",
+      "hint": "Check real square-root domain.",
+      "solution": "Math.sqrt(-1) produces NaN because $-1$ is outside the real square-root domain. A real-valued sampler should reject or label that input; subsequent arithmetic with NaN generally remains NaN.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What is the JavaScript difference between x**2 and x^2?",
+      "hint": "One is power, one bitwise XOR.",
+      "solution": "x**2 squares; x^2 is bitwise exclusive-or and is not a square.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "How many points does $\\texttt{sample}(f,2,5,6)$ return, and what are its first two and last input coordinates?",
+      "hint": "The loop includes the endpoint indices $0$ and $6$.",
+      "solution": "Six equal subintervals have seven endpoints. The spacing is $(5-2)/6=0.5$, so sample(f,2,5,6) uses inputs $2,2.5,3,3.5,4,4.5,5$. The outputs depend on $f$, and every evaluation must be finite for the sampler to return.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use sample(x => Math.sqrt(x), 0, 1, 4) to test $f(x)=\\sqrt{x}$ on $[0,1]$. Why is relative error against the exact value $f(0)$ undefined at the left endpoint? What happens if the interval is changed to $[-1,1]$?",
+      "hint": "Choose $f(x)=\\sqrt x$ on $[0,1]$, then consider relative error at zero.",
+      "solution": "sample(x => Math.sqrt(x), 0, 1, 4) evaluates inputs $0,0.25,0.5,0.75,1$ and returns finite outputs. At $x=0$ the exact target is zero, so relative error divides by zero; use absolute error. Changing the interval to $[-1,1]$ fails at the first input because Math.sqrt(-1) gives NaN.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "If f returns a finite value at every sampled input, how many points does sample(f,2,5,6) return?",
+      "hint": "Count indices $0$ through $6$.",
+      "solution": "Six subintervals have both endpoints included, so sample(f,2,5,6) returns $6+1=7$ points if all seven calls to $f$ succeed with finite values. Otherwise it throws instead of returning points.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\texttt{sample}(f,2,5,6)$, what are the first, second, and last input coordinates?",
+      "hint": "The step is $(5-2)/6$.",
+      "solution": "The step is $(5-2)/6=0.5$. Starting at $2$ gives the first two inputs $2$ and $2.5$; after six steps the last input is $5$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can a uniform ten-point plot prove a function has no narrow peak?",
+      "hint": "Think of a peak between grid points.",
+      "solution": "No. Ten samples inspect only ten inputs, so a narrow peak can lie entirely between adjacent grid points and remain invisible. The plot is evidence about the sampled values, not a proof of behavior on the continuum. A proof needs analytic bounds, while better numerical evidence needs refinement or adaptive sampling.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why should a plot of $1/x$ split near zero?",
+      "hint": "The function is undefined at zero.",
+      "solution": "Because $1/x$ is undefined at $x=0$, joining sampled negative and positive branches would draw a false line across a domain gap. Plot the branches separately.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "An approximation to a 2-meter length is 1.98 meters. Find its absolute error, relative error, and percentage error.",
+      "hint": "Divide the absolute difference by the target, not by the approximation.",
+      "solution": "The absolute error is $|1.98-2|=0.02$ metres. Dividing by the $2$ metre target gives relative error $0.02/2=0.01$, which is $1\\%$ when expressed as a percentage. The same absolute error can have different relative significance at another target length.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Suppose $a=100.0$ and $b=99.9$, each known only within $\\pm0.05$. Bound the absolute error in $a-b$ and compare it with the reported difference.",
+      "hint": "Add the two possible absolute input errors.",
+      "solution": "The reported difference is $100.0-99.9=0.1$. The two absolute input errors can add to $0.05+0.05=0.1$, so the true difference can range from $0$ to $0.2$. The error bound equals $100\\%$ of the reported difference, but relative error against the unknown true difference cannot be bounded and is undefined if the true difference is zero.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "For target $2\\,\\mathrm{m}$ and approximation $1.98\\,\\mathrm{m}$, find absolute error.",
+      "hint": "Subtract and take magnitude.",
+      "solution": "Absolute error is $|\\text{approximation}-\\text{target}|=|1.98-2.00|=0.02$ metres. The absolute value makes the error nonnegative.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "A $2\\,\\mathrm{m}$ target length is approximated by $1.98\\,\\mathrm{m}$. Find the relative error and percentage error.",
+      "hint": "Divide by target magnitude.",
+      "solution": "Relative error is $0.02/2=0.01$. Expressed as a percentage, this is $1\\%$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is relative error undefined for exact target zero?",
+      "hint": "The denominator is the exact target magnitude $|q|$.",
+      "solution": "Relative error is $|\\widetilde q-q|/|q|$. When $q=0$, the denominator vanishes, so the ratio is undefined. Use absolute error or a mixed tolerance with a positive scale near zero.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does Number.EPSILON give a universal absolute error bound?",
+      "hint": "It is spacing near one.",
+      "solution": "No. Number.EPSILON is the spacing between $1$ and the next representable double, a relative scale near $1$. Absolute spacing changes with magnitude, and algorithms can amplify rounding. Choose a tolerance suited to the scale and computation.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "If $a$ and $b$ each have absolute measurement error at most 0.05, bound error in $a-b$.",
+      "hint": "Use triangle inequality.",
+      "solution": "Write measured values as $a+\\delta_a$ and $b+\\delta_b$, with $|\\delta_a|,|\\delta_b|\\le0.05$. The subtraction error is $\\delta_a-\\delta_b$, so $|\\delta_a-\\delta_b|\\le|\\delta_a|+|\\delta_b|\\le0.10$. The bound has the same units as $a,b$ and is sharp for opposite-sign errors.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "Explain why testing $p(x)=x(x-1)(x-2)$ at $x=0,1,2$ does not prove that $p$ is the zero function.",
+      "hint": "Try an input outside the tested set.",
+      "solution": "Each tested input $x=0,1,2$ makes one factor of $p(x)=x(x-1)(x-2)$ zero. But $p(3)=3\\cdot2\\cdot1=6$. This exact counterexample shows that $p$ is not identically zero; three sampled zeros cannot prove a universal identity.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Rewrite $\\sqrt{x^2+1}-x$ to avoid cancellation for large positive $x$. State the real domain of the identity.",
+      "hint": "Multiply by the conjugate divided by itself.",
+      "solution": "Multiplying by the conjugate gives $(\\sqrt{x^2+1}-x)(\\sqrt{x^2+1}+x)=1$. Thus $\\sqrt{x^2+1}-x=1/(\\sqrt{x^2+1}+x)$. Since $\\sqrt{x^2+1}>|x|$, the denominator is positive for every real $x$, so the identity holds on $\\mathbb R$. It avoids cancellation for large positive $x$, although computing x*x can still overflow.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rationalize $\\frac{\\sqrt{1+h}-1}{h}$.",
+      "hint": "Multiply by conjugate.",
+      "solution": "Multiply by the conjugate: $\\frac{\\sqrt{1+h}-1}{h}=\\frac1{\\sqrt{1+h}+1}$ for $h\\ge-1$ and $h\\ne0$. The numerator product becomes $h$, which cancels only because $h$ is nonzero.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $Q(h)=(\\sqrt{1+h}-1)/h$ with $h>0$, why can direct floating-point evaluation return zero for a tiny positive $h$ even though $\\lim_{h\\to0^+}Q(h)=1/2$?",
+      "hint": "The stored value of $1+h$ may round to one.",
+      "solution": "For tiny positive $h$, floating-point evaluation may store $1+h$ as $1$. Then the computed numerator $\\sqrt{1+h}-1$ is zero, even though the real quotient approaches $1/2$. The rationalized expression avoids that subtraction.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Give an example of two expressions that agree at a chosen finite set of one million real inputs but differ at another real input. Explain why testing an identity at those inputs cannot prove it for all real inputs.",
+      "hint": "Let the tested inputs be $x_1,\\ldots,x_m$. Build a product with a zero at each tested input.",
+      "solution": "Let $x_1,\\ldots,x_m$ be any distinct real inputs that were tested. Compare $f(x)=0$ with $g(x)=\\prod_{j=1}^{m}(x-x_j)$. At each tested $x_j$, both functions equal zero. At any real $y$ outside this finite set, every factor is nonzero, so $g(y)\\ne0=f(y)$. Thus even a million matching tests do not prove a universal identity; that requires an argument covering every allowed input.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "For $Q(h)=(\\sqrt{1+h}-1)/h$ with $h\\ge-1$ and $h\\ne0$, what is the real limit as $h\\to0$? Use the rationalized form.",
+      "hint": "Denominator approaches two.",
+      "solution": "For $h\\ne0$ in the real domain, the quotient equals $1/(\\sqrt{1+h}+1)$. As $h\\to0$, the denominator tends to $2$, so the limit is $1/2$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x^2-1000x+1=0$, write a cancellation-resistant expression for the smaller root and estimate it.",
+      "hint": "Rationalize the subtractive quadratic formula.",
+      "solution": "Rationalizing the smaller quadratic-formula root gives $x_{\\mathrm{small}}=2/(1000+\\sqrt{1000000-4})\\approx0.001000001$. The two roots multiply to $1$, so computing the large root accurately and taking its reciprocal gives the same value.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is $x=0$ an invalid numerical answer for $x^2-10^8x+1=0$ even if a calculator displays it?",
+      "hint": "Substitute it into the original polynomial.",
+      "solution": "Substitution gives residual $p(0)=1$, so zero is not a root. The exact smaller root is positive and approximately $10^{-8}$. Direct subtraction of nearly equal large terms can round it to zero; rationalizing the formula avoids that cancellation.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $x^2-Bx+1=0$, $B>2$, give a stable smaller-root formula.",
+      "hint": "Rationalize the subtraction.",
+      "solution": "Rationalize the smaller root to obtain $x_{\\mathrm{small}}=2/(B+\\sqrt{B^2-4})$ for $B>2$. This denominator adds positive terms instead of subtracting nearly equal ones.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x^2-Bx+1=0$ with $B=10^8$, estimate the smaller root.",
+      "hint": "The stable denominator is close to $2B$.",
+      "solution": "With $B=10^8$, the stable denominator is approximately $2B=2\\cdot10^8$. Thus $x_{\\mathrm{small}}\\approx2/(2\\cdot10^8)=10^{-8}$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why can zero not be a root of $x^2-10^8x+1=0$?",
+      "hint": "Substitute zero.",
+      "solution": "Direct substitution gives $p(0)=0^2-10^8\\cdot0+1=1$. A root must give zero, so $x=0$ is invalid. A floating-point result of zero has lost the small positive root through cancellation or rounding.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What invariant relates the two roots of $x^2-Bx+1=0$?",
+      "hint": "Use Vieta.",
+      "solution": "If the roots are $r_1,r_2$, then $x^2-Bx+1=(x-r_1)(x-r_2)=x^2-(r_1+r_2)x+r_1r_2$. Comparing constant terms gives $r_1r_2=1$. Computed roots should therefore have a product near one.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Does a small residual always guarantee a small root error?",
+      "hint": "Conditioning matters.",
+      "solution": "No. Near a flat root, a substantial input error can produce a small polynomial residual. A residual measures output error; relating it to root error requires a slope or conditioning bound.",
+      "lesson": 5,
+      "type": "Interpretation"
+    }
+  ],
+  "summary": [
+    "Functions turn mathematical rules into reusable calculations; arrays and bounded loops organize their sampled values.",
+    "A plotted line interpolates finitely many samples, so domains and unsampled behavior require separate reasoning.",
+    "Finite precision makes algebraic form matter. Absolute and relative errors answer different questions, and numerical agreement is evidence rather than proof."
+  ],
+  "next": "Chapter 4 uses limits and continuity to express what it means for inputs to approach a point. The cancellation experiment explains why a table can suggest a limit while leaving its proof to mathematics."
+}

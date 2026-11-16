@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "lab_id": "06_hmc_prior_sensitivity",
+  "seed": 616,
+  "method": "Four-chain pinned PyMC NUTS; independent Beta(24,16) reference",
+  "source_hashes": {
+    "scripts/verify_hmc_prior_sensitivity.py": "74d222dff43856388c7812fbe0bd6fb8e2edbf19c9728d921442482ecf1bdfd2",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "prior_alpha": 10,
+    "prior_beta": 10,
+    "successes": 14,
+    "trials": 20
+  },
+  "metrics": {
+    "posterior_mean": 0.5966065282493311,
+    "posterior_ci90": [
+      0.46891299100087047,
+      0.7193429707983273
+    ],
+    "exact_mean": 0.6,
+    "exact_ci90": [
+      0.47114273271958806,
+      0.7230985087401103
+    ],
+    "original_prior_exact_mean": 0.6666666666666666,
+    "original_prior_exact_ci90": [
+      0.5035649162859372,
+      0.8136561967828891
+    ]
+  },
+  "mcmc_diagnostics": {
+    "max_rhat": 1.003231078614156,
+    "min_bulk_ess": 1719.236721498605,
+    "min_tail_ess": 1728.4080640424856,
+    "max_mcse_mean": 0.0018458711134981417,
+    "divergences": 0,
+    "min_bfmi": 1.0128834382056462,
+    "max_treedepth_hits": 0,
+    "screen_passed": true
+  },
+  "checks": [
+    {
+      "id": "mean_vs_exact",
+      "actual": 0.5966065282493311,
+      "expected": 0.6,
+      "atol": 0.01107522668098885,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Simple conjugate benchmark; diagnostic success is not a general NUTS guarantee."
+  ]
+}

@@ -1,0 +1,440 @@
+{
+  "id": "13",
+  "title": "Geometric and physical applications",
+  "subtitle": "How can one integral describe the volume of a vessel, the length of a curve, and the work needed to lift water?",
+  "prerequisites": [
+    "Definite integrals as limits of sums and their units (chapter 10).",
+    "The fundamental theorem of calculus and substitution (chapter 11).",
+    "Basic integration techniques and derivatives (chapters 6 and 12)."
+  ],
+  "objectives": [
+    "Choose a small representative piece and turn its approximate contribution into a definite integral.",
+    "Compute areas, volumes, curve lengths, and surfaces of revolution with correct geometric bounds.",
+    "Model work, mass, and center of mass while tracking units and assumptions.",
+    "Compare a numerical solid approximation with an exact result and identify its limitations."
+  ],
+  "sections": [
+    {
+      "title": "1. The piece determines the integral",
+      "paragraphs": [
+        "Integration becomes a modeling tool when we stop asking only which antiderivative to use. Begin instead with an object, a quantity to measure, and a partition into pieces. Describe one piece using quantities that are nearly constant there. Add those contributions, then take the limit as the largest piece shrinks. Chapter 10 supplied the meaning of this limit; chapter 11 supplied a way to evaluate it. The new challenge is choosing the contribution correctly.",
+        "For the region between continuous curves $y=f(x)$ and $y=g(x)$ on $[a,b]$, a thin vertical rectangle has width $\\Delta x$ and height $|f(x)-g(x)|$. Its area is approximately height times width. Therefore the geometric area is $A=\\int_a^b|f(x)-g(x)|\\,dx$. If $f\\ge g$ throughout, this becomes $A=\\int_a^b(f(x)-g(x))\\,dx$. If the curves cross, find their intersections and split into intervals with a fixed ordering. A signed integral of $f-g$ can cancel positive and negative pieces even though neither piece has zero area.",
+        "For example, $y=x$ and $y=x^2$ meet at $x=0$ and $x=1$. Between those points, $x\\ge x^2$, so the enclosed area is $\\int_0^1(x-x^2)\\,dx=\\frac12-\\frac13=\\frac16$ square coordinate units. The inequalities matter as much as the antiderivative. Drawing a representative slice and naming its top and bottom often prevents more mistakes than additional algebra.",
+        "Horizontal rectangles give an equally valid description when right and left boundaries are easier to express as functions of $y$. Their contributions are $[\\operatorname{right}(y)-\\operatorname{left}(y)]\\,dy$. There is no obligation to integrate with respect to $x$. Choose the coordinate that describes the whole piece most simply, and split the region whenever its boundary description changes. Physical coordinates measured in metres give an area in square metres because both the height and the width carry a length unit.",
+        "A slice formula should include its orientation. For vertical slicing, write $\\Delta A\\approx[\\operatorname{top}(x)-\\operatorname{bottom}(x)]\\Delta x$. For horizontal slicing, write $\\Delta A\\approx[\\operatorname{right}(y)-\\operatorname{left}(y)]\\Delta y$. These are statements about a representative small rectangle; the integral follows only after the full interval and any switching points are identified. If a curve is given implicitly, horizontal slices may avoid solving two branches as functions of $x$. Conversely, a region described by simple top and bottom functions is usually easiest vertically. Choosing the slice is a modeling decision made before antiderivatives enter.",
+        "For $y=x$ and $y=-x$ on $[-1,1]$, neither curve stays on top throughout. Their vertical separation is $|2x|$. Splitting at $x=0$ gives area $\\int_{-1}^0(-2x)\\,dx+\\int_0^1 2x\\,dx=1+1=2$. The signed integral $\\int_{-1}^1 2x\\,dx=0$ describes cancellation, not enclosed area. A diagram can reveal the switch, but the inequality $x\\ge -x$ exactly when $x\\ge0$ proves where it occurs. This distinction matters for any two crossing curves, even when their drawn lobes look roughly symmetric.",
+        "An intersection point is found by solving $f(x)=g(x)$, but not every algebraic solution lies in the region under study. For $y=x^2$ and $y=2-x$, solve $x^2=2-x$ to obtain $x=-2$ and $x=1$. On the interval $[-2,1]$, the line lies above the parabola, so the enclosed area is $\\int_{-2}^1[(2-x)-x^2]\\,dx=\\frac92$ square units. The sign can be checked at $x=0$, where the line has height $2$ and the parabola height $0$. A representative test point is a quick ordering check after solving intersections.",
+        "If the axes carry different physical units, the integral still records the product of those units. Integrating a velocity graph over time gives metres rather than square metres, although the drawn region looks like a geometric area on paper. Integrating a force graph over displacement gives joules. The same mathematical rectangle $\\text{height}\\times\\text{width}$ can model different quantities; its units and sign convention determine the interpretation. This is why labeling both axes and a sample slice is part of a correct application solution, not merely a presentational flourish."
+      ],
+      "formula": "A = ∫ₐᵇ |f(x) − g(x)| dx; if f ≥ g throughout, A = ∫ₐᵇ [f(x) − g(x)] dx.",
+      "formulaTex": "\\begin{gathered}A=\\int_a^b |f(x)-g(x)|\\,dx,\\\\ f(x)\\ge g(x)\\ \\text{for all }x\\in[a,b]\\quad\\Longrightarrow\\quad A=\\int_a^b(f(x)-g(x))\\,dx.\\end{gathered}"
+    },
+    {
+      "title": "2. Volume by cross-sections and shells",
+      "paragraphs": [
+        "A solid can be sliced into thin slabs perpendicular to an axis. If $A(x)$ is its cross-sectional area, the volume of a slab is approximately $A(x)\\Delta x$, so $V=\\int_a^b A(x)\\,dx$. Continuity of $A$ is a convenient sufficient hypothesis; piecewise continuous cross-sections can be handled by splitting. This principle applies to square and triangular sections as well as circles. It is the area of the section, not the height of a boundary curve, that belongs in the volume integrand.",
+        "Rotating a region about the $x$-axis produces disks when the region touches the axis and washers when a hole remains. With outer radius $R(x)$ and inner radius $r(x)$, where $0\\le r(x)\\le R(x)$, the section has area $\\pi[R(x)^2-r(x)^2]$. A disk is the case $r(x)=0$. Radii are distances to the rotation axis: about $y=c$, a boundary at height $y$ has distance $|y-c|$. If the axis passes through the region, inspect the whole rotated section; subtracting two squared boundary heights blindly can create a fictitious hole.",
+        "Cylindrical shells use slices parallel to the axis of revolution. A vertical strip at $x\\ge0$ rotated about the $y$-axis has radius $x$, height $h(x)$, and thickness $\\Delta x$. Unrolling its thin shell suggests volume $2\\pi xh(x)\\Delta x$, circumference times height times thickness. Over the strip interval $[a,b]$, the limit is $V=2\\pi\\int_a^b xh(x)\\,dx$. For a shifted axis replace $x$ with distance to that axis. The usual shell formula assumes these strips sweep distinct radial layers. If a region crosses the axis, opposite strips can sweep overlapping material; separate the geometry before adding volumes.",
+        "Disks and shells are different partitions of the same solid, not different answers. For the region under $y=x^2$ from $x=0$ to $x=1$, rotating about the $y$-axis gives shells of height $x^2$. A horizontal washer instead runs from $x=\\sqrt y$ to $x=1$, with radii $\\sqrt y$ and $1$. Both approaches give $\\pi/2$ cubic coordinate units. The lab checks this agreement numerically. Every volume contribution has units length squared times length, or circumference times height times thickness: length cubed.",
+        "For a solid of revolution, sketch the cross-section at a typical coordinate and label radii from the actual axis. Rotating the region $1\\le y\\le3$, $0\\le x\\le2$ about the $x$-axis produces a washer with outer radius $3$ and inner radius $1$, so $V=\\int_0^2\\pi(3^2-1^2)\\,dx=16\\pi$. The region never touches the axis, so treating it as a solid disk would overcount the central cylinder. The order outer squared minus inner squared is forced by the cross-sectional area, not by whichever boundary equation appears first in the problem.",
+        "A shifted axis can reverse which boundary is farther away. Rotate the region $0\\le y\\le x$ on $0\\le x\\le1$ about $y=2$. At each $x$ the outer radius to $y=0$ is $2$, while the inner radius to $y=x$ is $2-x$. The washer area is $\\pi[4-(2-x)^2]=\\pi(4x-x^2)$, and the volume is $\\pi[2x^2-x^3/3]_0^1=5\\pi/3$. Using radii $x$ and $0$, appropriate for rotation about $y=0$, would answer a different question. A single labeled cross-section prevents this common axis error.",
+        "Crossing the axis can make shells overlap. Rotate $-1\\le x\\le1$, $0\\le y\\le1$ about the $y$-axis. The solid is a cylinder of radius and height $1$, so $V=\\pi$. If both sides are added as distinct shells, $2\\pi\\int_{-1}^{1}|x|\\,dx=2\\pi$, because each positive radial layer is counted twice. Take one representative radius instead: $2\\pi\\int_0^1r\\,dr=\\pi$. Horizontal washers give the independent check $\\pi\\int_0^1dy=\\pi$. The issue is coverage, not a failure of the shell formula on distinct layers.",
+        "Overlaps require care. If a region crosses the rotation axis, slices on opposite sides may sweep the same radial layer. Adding their shell volumes would double-count material. A washer description may still work after finding the actual inner and outer radii, or the region may need to be split into nonoverlapping pieces. This is analogous to area between crossing curves: the integral must measure each physical piece once. The shell expression $2\\pi\\cdot\\text{radius}\\cdot\\text{height}\\cdot\\text{thickness}$ is a local approximation, not a license to sum overlapping shells as though they were disjoint.",
+        "A dimension check distinguishes volume methods from area methods. Washer area is $\\pi(R^2-r^2)$ for outer and inner radii $R$ and $r$, and has square-length units; multiplying by slice thickness gives cubic length. A shell contribution has circumference times height times thickness, again cubic length. If a proposed volume integrand is merely a radius or a height, it is missing a geometric factor. This check is independent of the final antiderivative and applies even when the rotated shape is too complicated to visualize perfectly. It should accompany a labeled sketch of the slice."
+      ],
+      "formula": "V = π∫ [R(x)² − r(x)²] dx; for distinct shells, V = 2π∫ radius × height × thickness-coordinate differential.",
+      "formulaTex": "\\begin{aligned}V_{\\mathrm{washer}}&=\\pi\\int_a^b(R(x)^2-r(x)^2)\\,dx,\\quad0\\le r(x)\\le R(x),\\\\ V_{\\mathrm{shell}}&=2\\pi\\int_c^d\\rho(s)h(s)\\,ds,\\quad\\rho,h\\ge0\\text{; shells sweep distinct layers.}\\end{aligned}"
+    },
+    {
+      "title": "3. Length and the skin of a solid",
+      "paragraphs": [
+        "An area uses vertical height, but a curve length follows the curve. Join nearby points $(x,f(x))$ by straight segments. A segment has length $\\sqrt{(\\Delta x)^2+(\\Delta y)^2}=\\sqrt{1+(\\Delta y/\\Delta x)^2}\\,\\Delta x$ for positive $\\Delta x$. For a continuously differentiable function on $[a,b]$, the polygonal lengths converge to $\\int_a^b\\sqrt{1+(f^{\\prime}(x))^2}\\,dx$. This is the arc-length formula. Piecewise continuously differentiable curves can be split at finitely many corners and their lengths added.",
+        "The expression $ds=\\sqrt{1+(f^{\\prime}(x))^2}\\,dx$ is a useful shorthand for the length element. It is not simply $dy$: a horizontal segment still has positive length. When $x$ and $y$ are physical lengths in the same unit, the slope is dimensionless, making the square root dimensionless and $ds$ a length. A graph whose axes represent time and temperature does not acquire a physically meaningful length merely by applying this formula; a metric or scaling must first be chosen.",
+        "Rotating a short curve segment about the $x$-axis creates approximately a narrow conical band. Its area is circumference times slant length, approximately $2\\pi|f(x)|\\,ds$. For a nonnegative continuously differentiable graph, the resulting lateral surface area is $S=2\\pi\\int_a^b f(x)\\sqrt{1+(f^{\\prime}(x))^2}\\,dx$. A general distance to the axis replaces $f(x)$ when appropriate. This measures the swept skin only; closing disks at the endpoints are extra surfaces. A curve that touches the axis at an endpoint can still satisfy the formula, since the radius there is zero.",
+        "As a check, rotating $y=x$ for $0\\le x\\le1$ around the $x$-axis gives a cone with radius $1$ and slant height $\\sqrt2$. The formula gives $2\\pi\\sqrt2\\int_0^1x\\,dx=\\pi\\sqrt2$, matching the elementary lateral-area formula. Adding its base would give $\\pi\\sqrt2+\\pi$. If a derivative becomes unbounded at an endpoint, the continuously differentiable hypothesis no longer applies directly. The integral may nevertheless converge as an improper integral, a subject for chapter 14; simply inserting an infinite endpoint value into software is not a solution.",
+        "Here is the secant-to-integral step behind the formula. On each partition interval $[x_i,x_{i+1}]$, the mean value theorem gives $\\Delta y_i/\\Delta x_i=f'(\\xi_i)$ for some $\\xi_i$ in that interval. Thus the polygonal length is exactly $\\sum_i\\sqrt{1+f'(\\xi_i)^2}\\,\\Delta x_i$. If $f\\in C^1[a,b]$, then $f'$ is uniformly continuous on that closed interval (Chapter 10 Lesson 3); consequently the continuous function $q(x)=\\sqrt{1+f'(x)^2}$ is uniformly continuous and Riemann integrable. Its Riemann sums, including these choices of $\\xi_i$, approach $\\int_a^bq(x)\\,dx$ as the maximum panel width tends to zero. This explains the convergence for arbitrary fine partitions, not just a chosen sequence of equal chords. For a straight line $y=mx+c$, it reduces to $(b-a)\\sqrt{1+m^2}$.",
+        "For $y=x^2$ on $[0,1]$, length is $L=\\int_0^1\\sqrt{1+4x^2}\\,dx$. It is greater than $1$ because the curve has at least the horizontal displacement $1$, and less than $\\sqrt5$ because the integrand is at most $\\sqrt5$. A closed form exists but is less informative than these first bounds for checking a numerical value. The endpoint chord has length $\\sqrt2$, so in fact $L\\ge\\sqrt2$. These comparisons catch a result below the straight-line distance without any advanced integration technique.",
+        "Surface area requires the slant length of a strip, not its horizontal width. For $y=x$ on $[0,1]$, the circumference at $x$ is $2\\pi x$ and $ds=\\sqrt2\\,dx$, giving $S=\\pi\\sqrt2$. If $dx$ were used instead, the result would be $\\pi$, too small by the slope factor. At $x=0$ the circumference vanishes, but that single endpoint contributes no finite area; the integral remains valid. End caps are separate planar areas and should be included only when the question asks for a closed surface rather than the lateral skin.",
+        "A graph in time-temperature coordinates illustrates a modeling limit of geometric formulas. Numerical arc length of the plotted trace changes if temperature is measured in Celsius instead of Fahrenheit, or if hours are changed to seconds, because the vertical and horizontal scales are not comparable physical lengths. The formula still computes a length in the chosen coordinate plane, but its physical meaning depends on a specified metric or scale. In a spatial plane where both axes use metres, the ordinary Euclidean distance is natural. Always ask what notion of distance the application intends."
+      ],
+      "formula": "L = ∫ₐᵇ √[1 + f′(x)²] dx; S = ∫ 2π(distance to axis) ds.",
+      "formulaTex": "\\begin{aligned}L&=\\int_a^b\\sqrt{1+(f^{\\prime}(x))^2}\\,dx,\\quad f\\in C^1[a,b],\\\\ S_{\\mathrm{lateral}}&=2\\pi\\int_a^b\\rho(x)\\sqrt{1+(f^{\\prime}(x))^2}\\,dx,\\\\ \\rho(x)&=\\operatorname{dist}((x,f(x)),\\text{axis})\\quad\\text{for a sweep without overlap.}\\end{aligned}"
+    },
+    {
+      "title": "4. Work adds force times displacement",
+      "paragraphs": [
+        "A constant force parallel to motion does work $Fd$. If the force varies along a straight path, divide the displacement into short intervals. The force is approximately constant on each, giving a contribution $F(x)\\Delta x$ and work $W=\\int_a^b F(x)\\,dx$. Here $F$ is the signed component along the chosen positive direction. A resisting force does negative work on the moving object. An external agent moving the object slowly may do positive work of the same magnitude. Specify whose force is being integrated before assigning a sign.",
+        "For an ideal spring, the restoring force is $-kx$ when $x$ measures extension from equilibrium. To stretch it slowly from extension $a$ to $b$, an external agent supplies approximately $+kx$, so its work is $W_{\\mathrm{ext}}=\\int_a^b kx\\,dx=k(b^2-a^2)/2$. This assumes the spring remains in its linear range and ignores dissipative losses. With $k$ in newtons per metre, $x$ and $dx$ in metres, the result is newton metres, called joules. The final force multiplied by the total displacement is generally too large because it applies the maximum force to every part of the motion.",
+        "Lifting a distributed material requires another kind of partition. For water pumped from a tank, a horizontal layer at height $y$ has volume $A(y)\\,dy$, mass $\\rho A(y)\\,dy$, and weight $\\rho gA(y)\\,dy$. If the outlet is at height $H$ above the same reference level, that layer travels distance $H-y$. Thus the ideal lifting work is $W_{\\mathrm{pump}}=\\int_{y_0}^{y_1}\\rho gA(y)(H-y)\\,dy$, where $y_0$ and $y_1$ bound the occupied water heights and $y_1\\le H$. We assume constant density, constant gravitational acceleration, slow motion, and no pipe friction. A real pump can consume more energy; the integral describes the stated gravitational model.",
+        "Work is a dot-product idea in one dimension. If motion is along positive $x$ and the force component $F(x)$ is positive, the force adds energy; a negative component removes it. For a spring with restoring force $-kx$, moving slowly from $x=0$ to $x=b>0$ makes the spring’s work $-kb^2/2$ while the external agent’s ideal work is $+kb^2/2$. Both statements are correct because they describe different forces. In a faster motion, kinetic energy may change, so the external work need not equal the stored spring-energy change at every instant. State the quasistatic assumption when using the simple positive work formula.",
+        "A force law need not be linear. If an external force along a path is $F(x)=(3\\,\\mathrm{N/m^2})x^2$, with $x$ measured in metres, the work from $x=0$ to $x=2\\,\\mathrm m$ is $W=\\int_{0}^{2\\,\\mathrm m}(3\\,\\mathrm{N/m^2})x^2\\,dx=8\\,\\mathrm J$. Multiplying the final force $F(2\\,\\mathrm m)=12\\,\\mathrm N$ by $2\\,\\mathrm m$ gives $24\\,\\mathrm J$, an overestimate because the force was smaller earlier. The mean force over the path is work divided by distance, here $4\\,\\mathrm N$. That average provides an intuitive cross-check: it lies between the initial $0\\,\\mathrm N$ and final $12\\,\\mathrm N$ for an increasing force.",
+        "The tank-lifting formula can be checked at limiting layers. A layer close to the outlet at height $H$ travels almost no distance and contributes little work despite its mass. A layer near the bottom travels nearly $H$ and costs more. For a cylinder with constant horizontal area $A$ and water from $y=0$ to $y=h\\le H$, ideal work is $W=\\rho gA\\int_0^h(H-y)\\,dy=\\rho gA(Hh-h^2/2)$. The result has joule units and grows with $h$. If the outlet were below some water layers, the assumed upward-lifting model would need revision rather than silently using negative travel distance.",
+        "The work-energy theorem offers another consistency check: net work on a particle equals the change in kinetic energy, under the usual Newtonian assumptions. If a $3\\,\\mathrm{kg}$ object slows from $4\\,\\mathrm{m/s}$ to $2\\,\\mathrm{m/s}$, net work is $W_{\\mathrm{net}}=\\frac12(3\\,\\mathrm{kg})[(2\\,\\mathrm{m/s})^2-(4\\,\\mathrm{m/s})^2]=-18\\,\\mathrm J$. This does not identify which individual force did the work; friction, a motor, and gravity could contribute. It also does not replace a force integral when the problem asks how work varies along a path. The two formulations connect when force and motion models are both known."
+      ],
+      "formula": "W = ∫ F(x) dx; ideal pumping work = ∫ ρgA(y)(H − y) dy.",
+      "formulaTex": "\\begin{aligned}W&=\\int_a^b F(x)\\,dx\\quad(F\\text{ is the signed force along the motion}),\\\\ W_{\\mathrm{pump}}&=\\int_{y_0}^{y_1}\\rho gA(y)(H-y)\\,dy,\\quad y_1\\le H.\\end{aligned}",
+      "theorems": [
+        {
+          "title": "Work by a variable force recovers kinetic-energy change",
+          "statement": "For one-dimensional motion on a closed time interval with constant mass $m$, continuously differentiable signed velocity $v(t)$, position $x^{\\prime}(t)=v(t)$, and net force $F(t)=mv^{\\prime}(t)$, work equals the change in kinetic energy.",
+          "equationTex": "W=\\int_{t_0}^{t_1}F(t)v(t)\\,dt=\\frac{m}{2}\\bigl(v(t_1)^2-v(t_0)^2\\bigr)",
+          "proof": [
+            "Parameterize the work integral by time rather than assuming velocity stays positive. Along the path, a small displacement is $dx=v(t)dt$, so $W=\\int_{t_0}^{t_1}F(t)v(t)\\,dt$. The continuous velocity and acceleration make the proper integrand continuous. Newton’s law gives $F=ma=mv^{\\prime}$. The chain rule identifies $mv^{\\prime} v=(m/2)(v^2)^{\\prime}$. The fundamental theorem therefore yields $W=(m/2)[v(t_1)^2-v(t_0)^2]$. The time form remains meaningful through a reversal of motion because signed displacement is retained.",
+            "If a $2\\,\\mathrm{kg}$ cart changes speed from $3\\,\\mathrm{m/s}$ to $5\\,\\mathrm{m/s}$, net work is $(2/2)(25-9)=16\\,\\mathrm J$. A negative result would mean the net force removed kinetic energy over the interval. The formula uses the vector force component along the one-dimensional motion; in several dimensions work is a dot-product line integral, developed later.",
+            "This is a theorem within a model, not a universal statement about energy. It assumes constant mass, continuously differentiable velocity and $x^{\\prime}=v$, and the stated force law. Friction or propulsion can be included in the net force, while other forms of energy enter separate accounting. Units check: $\\mathrm{kg\\cdot m^2/s^2}$ equals a joule."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. Mass and balance as weighted accumulation",
+      "paragraphs": [
+        "A rod need not have uniform mass per unit length. If $\\lambda(x)$ is its nonnegative linear density on $[a,b]$, a short piece has mass approximately $\\lambda(x)\\Delta x$. Total mass is $M=\\int_a^b\\lambda(x)\\,dx$. Density measured in kilograms per metre produces mass in kilograms. A volume density $\\rho$, measured in kilograms per cubic metre, must instead be multiplied by a cross-sectional area before integrating along a length. Density is always density with respect to some measure; the units tell you which one.",
+        "To locate the balance point, first take moments about the origin. A small mass at $x$ contributes $x$ times its mass, so the total first moment is $Q=\\int_a^b x\\lambda(x)\\,dx$. A single mass $M$ placed at $\\bar x$ has the same moment when $M\\bar x=Q$. Hence $\\bar x=Q/M$, provided $M>0$ and the integrals are finite. This is a weighted average of positions. For nonnegative density it lies between the rod endpoints, an immediate check on a computed answer. If $M=0$, there is no defined center of mass from this ratio.",
+        "A uniform thin plate between continuous curves $f\\ge g$ on $[a,b]$ also reduces to one-dimensional integrals. Each vertical strip has its own center halfway between $g(x)$ and $f(x)$. With constant positive area density $\\sigma$, $M=\\sigma\\int_a^b(f-g)\\,dx$ and $\\bar x=(\\sigma/M)\\int_a^b x(f-g)\\,dx$. The other coordinate is $\\bar y=(\\sigma/(2M))\\int_a^b(f^2-g^2)\\,dx$. The factor one half comes from the strip midpoint, not from an arbitrary rule. The constant density cancels in each coordinate. Density varying only with $x$ can be included inside both moment integrals; general planar density leads to double integrals in chapter 23.",
+        "Center of mass is a ratio of two integrals, so numerator and denominator have different units. For a rod, $M=\\int_a^b\\lambda(x)\\,dx$ has kilograms, while $Q=\\int_a^b x\\lambda(x)\\,dx$ has kilogram-metres. Their ratio $Q/M$ has metres, as a position should. If $\\lambda(x)\\ge0$ and $M>0$, multiply $a\\le x\\le b$ by $\\lambda(x)$, integrate, and divide by $M$ to prove $a\\le\\bar x\\le b$. This bound is stronger than a casual sketch: any computed center outside the rod contradicts either the algebra or the nonnegative-density assumption.",
+        "For $\\lambda(x)=1+x$ on $[0,2]$ with consistent units, mass is $M=\\int_0^2(1+x)\\,dx=4$, and first moment is $Q=\\int_0^2x(1+x)\\,dx=2+8/3=14/3$. Therefore $\\bar x=(14/3)/4=7/6$, slightly to the right of the midpoint $1$ because density increases with $x$. This qualitative direction check is useful: a heavier right end should pull the balance point rightward. Treating the density formula’s numerical coefficients without their units is shorthand; in a physical model the constant term and slope carry compatible units.",
+        "For a uniform plate under $y=f(x)\\ge0$ above the $x$-axis, one vertical strip of area $f(x)\\,dx$ has its center at height $f(x)/2$. Its moment about the $x$-axis is $\\sigma[f(x)\\,dx][f(x)/2]=\\sigma f(x)^2\\,dx/2$. That derivation explains the formula for $\\bar y$ and shows why it contains a square of the boundary height. A moment is not an area: it weights each area piece by its distance from the axis. If the lower boundary is $g(x)$, integrating $y$ from $g(x)$ to $f(x)$ yields $(f(x)^2-g(x)^2)/2$ for the strip’s moment before multiplying by $\\sigma\\,dx$.",
+        "Negative density is not an ordinary mass model, though signed weights can appear in other mathematical applications. The center-of-mass bound $a\\le\\bar x\\le b$ relies on $\\lambda\\ge0$. If signed weights cancel to $M=0$, $Q/M$ is undefined even when $Q$ exists. For a physical rod with a small but positive total mass, the ratio can still be sensitive to measurement error if density data are uncertain. State positivity and finite integrals before interpreting a computed ratio as a balance point."
+      ],
+      "formula": "M = ∫ₐᵇ λ(x) dx, Q = ∫ₐᵇ xλ(x) dx, x̄ = Q/M for M > 0.",
+      "formulaTex": "\\begin{aligned}M&=\\int_a^b\\lambda(x)\\,dx,\\qquad Q=\\int_a^b x\\lambda(x)\\,dx,\\\\ \\bar x&=\\frac{Q}{M}\\qquad(M>0,\\ \\lambda\\ge0).\\end{aligned}"
+    },
+    {
+      "title": "Modeling hydrostatic force from pressure slices",
+      "paragraphs": [
+        "Let $y$ measure metres downward from a calm free surface in a static fluid of constant density $\\rho=1000\\,\\mathrm{kg/m^3}$, with $g=9.81\\,\\mathrm{m/s^2}$. A thin horizontal fluid column of area $A$ and thickness $\\Delta y$ has weight $\\rho gA\\Delta y$. Vertical force balance says the increase in pressure force down that column is $[p(y+\\Delta y)-p(y)]A=\\rho gA\\Delta y$ in this constant-density model. Taking surface gauge pressure $p(0)=0$ gives $p(y)=\\rho gy$ pascals, with $1\\,\\mathrm{Pa}=1\\,\\mathrm{N/m^2}$. This uses pressure relative to the surface; any unequal pressure on the opposite side of a gate must be included separately. For a flat vertical gate 2 m wide from depth 1 m to 3 m, a horizontal strip of height $dy$ has area $(2\\,\\mathrm m)dy$ and force $dF\\approx p(y)(2\\,\\mathrm m)dy$. All strip forces point in the same horizontal direction.",
+        "Integrating the strips gives $F=\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}\\rho gy(2\\,\\mathrm m)\\,dy=(2\\,\\mathrm m)\\rho g[y^2/2]_{1\\,\\mathrm m}^{3\\,\\mathrm m}=\\rho g(9-1)\\,\\mathrm{m^3}=78{,}480\\,\\mathrm N$. The units check is explicit: $(\\mathrm{kg/m^3})(\\mathrm{m/s^2})(\\mathrm m)(\\mathrm m)(\\mathrm m)=\\mathrm{kg\\,m/s^2}=\\mathrm N$. As a second check, the pressure is linear in depth, so its average across this rectangular gate equals its value at the midpoint depth $2\\,\\mathrm m$. That average is $19{,}620\\,\\mathrm{Pa}$; multiplying by the gate area $4\\,\\mathrm{m^2}$ again gives $78{,}480\\,\\mathrm N$. This shortcut works here because the gate has constant width and pressure is linear in $y$.",
+        "Where does the resultant force act? The moment of a strip about the water surface is $y\\,dF$. The depth of the resultant, often called the center of pressure, is $y_{\\mathrm{cp}}=(\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y\\,dF)/F$. Constants $2\\rho g$ cancel, leaving $y_{\\mathrm{cp}}=\\frac{\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y^2\\,dy}{\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y\\,dy}=\\frac{(27-1)\\,\\mathrm{m^3}/3}{4\\,\\mathrm{m^2}}=\\frac{13}{6}\\,\\mathrm m\\approx2.167\\,\\mathrm m$. This is deeper than the geometric center at $2\\,\\mathrm m$ because lower strips feel greater pressure. Placing the force at the gate center would give the right total magnitude but the wrong turning effect on a hinge.",
+        "The model assumes a static constant-density fluid, level free surface, and constant gate width on the stated interval. If the width changes, replace $2\\,\\mathrm m$ by $w(y)$ in both force and moment integrals. Atmospheric pressure is omitted from gauge pressure only when equal pressure on the other side cancels it; otherwise integrate the actual pressure difference across the gate. These assumptions govern the force direction and magnitude as much as the antiderivative does.",
+        "The same slice method transfers to other physical integrals: identify a small piece, write its contribution with units, integrate over the actual geometry, and check whether the output is total amount or a moment. The antiderivative is usually the shortest part of a sound modeling solution.",
+        "The hydrostatic force formula is pressure times area integrated over depth. With a general vertical gate width $w(y)$, a strip contributes $dF\\approx\\rho gy\\,w(y)\\,dy$. The width is not necessarily the horizontal coordinate of a drawn boundary; it is the total length of the gate at that depth. For a triangular gate widening downward with $w(y)=ky$ on $0\\le y\\le H$, the force is $F=\\rho gk\\int_0^H y^2\\,dy=\\rho gkH^3/3$. The cubic dependence on $H$ is a useful design warning: doubling depth under this geometry multiplies force by eight, assuming $k$ and fluid properties remain fixed.",
+        "The center of pressure is a weighted average of depth with weight equal to force per depth. For the same triangular gate, $y_{\\mathrm{cp}}=\\frac{\\int_0^H y(\\rho gk y^2)\\,dy}{\\int_0^H\\rho gk y^2\\,dy}=\\frac{H^4/4}{H^3/3}=\\frac{3H}{4}$. The geometric centroid of the triangular shape is at $2H/3$ from the surface when it widens downward, so pressure pushes the resultant deeper than the area centroid. The reason is not a memorized formula: pressure itself increases with depth, giving lower strips more force per unit area.",
+        "Pressure is a scalar, while the actual force on a small surface element acts normal to the surface. On the flat vertical gate in the case study, all elemental forces point in the same horizontal direction, so their magnitudes add directly. A curved gate would require resolving directions before finding the net force vector, even if the scalar pressure law $p=\\rho gy$ still held at each depth. This is an example of how the same slice idea survives while the contribution changes. The geometry of each piece determines what must be summed.",
+        "An engineering result should report the measurement reference. The depth $y$ is measured downward from the free surface; the outlet height $H$ in a pumping problem is measured from the same datum as the water layers; a moment arm is measured from a named hinge. Shifting the coordinate origin does not change physical force or work if all distances are transformed consistently, but mixing reference levels does. Units, direction, and datum are part of the model specification that makes an integral interpretable.",
+        "For pressure calculations, two different weighted averages can appear. Average pressure over a flat gate is total force divided by gate area. Center of pressure is depth weighted by force, so it generally lies below the depth associated with average pressure. On a constant-width rectangular gate under a linear pressure law, average pressure equals pressure at mean depth, but the resultant force acts deeper. Confusing the location of an equivalent uniform pressure with the line of action of the total force leads to an incorrect torque even when the total force is correct."
+      ],
+      "formula": "F = ∫₁³ ρgy(2 m)dy = 78,480 N; y_cp = (∫₁³ y²dy)/(∫₁³ ydy) = 13/6 m.",
+      "formulaTex": "\\begin{aligned}\\rho&=1000\\,\\mathrm{kg/m^3},\\qquad g=9.81\\,\\mathrm{m/s^2},\\\\ F&=\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}\\rho gy(2\\,\\mathrm m)\\,dy=78{,}480\\,\\mathrm N,\\\\ y_{\\mathrm{cp}}&=\\frac{\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y^2\\,dy}{\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y\\,dy}=\\frac{13}{6}\\,\\mathrm m.\\end{aligned}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "One solid, two partitions",
+      "problem": "Rotate the region $0 \\le x \\le 1$, $0 \\le y \\le x^{2}$ about the y-axis. Find its volume in cubic coordinate units.",
+      "steps": [
+        "A vertical strip gives shell radius $x$ and height $x^{2}$. Therefore $V=2\\pi\\int_0^1x^3\\,dx=\\frac{2\\pi}{4}=\\frac\\pi2$.",
+        "For a horizontal strip, fix $y$ between $0$ and $1$. The inequality $y \\le x^{2}$ with $x \\ge 0$ gives $\\sqrt y \\le x \\le 1$. Rotation therefore produces a washer with outer radius $1$ and inner radius $\\sqrt y$.",
+        "The washer integral is $\\pi\\int_0^1(1-y)\\,dy=\\pi\\left(1-\\frac12\\right)=\\frac\\pi2$. This independently checks the geometry. Numerically the value is approximately $1.570796327$."
+      ],
+      "answer": "$V = \\pi /2$ cubic coordinate units. The shell and washer descriptions agree."
+    },
+    {
+      "title": "Pumping a cylindrical tank",
+      "problem": "A vertical cylindrical tank of radius $1\\,\\mathrm{m}$ contains water to depth $2\\,\\mathrm{m}$. Pump all water to an outlet $3\\,\\mathrm{m}$ above the bottom. Use $\\rho=1000\\,\\mathrm{kg/m^3}$ and $g=9.8\\,\\mathrm{m/s^2}$.",
+      "steps": [
+        "Choose $y$ measured upward from the bottom, so $0 \\le y \\le 2$. A layer has volume $\\pi(1\\,\\mathrm m)^2\\,dy$ when $dy$ is measured in metres.",
+        "Its weight is $9800\\pi\\,dy$ newtons and its lifting distance is $3 - y$ metres. Thus $W=9800\\pi\\int_0^2(3-y)\\,dy$.",
+        "Evaluate the integral as $\\left[3y-\\frac{y^2}{2}\\right]_0^2=4$. Hence $W=39200\\pi\\,\\mathrm J$, approximately $123150.432\\,\\mathrm J$.",
+        "For an independent check, the water mass is $2000\\pi\\,\\mathrm{kg}$ and its initial center is $1\\,\\mathrm m$ above the bottom. Raising every particle to $3\\,\\mathrm m$ increases gravitational potential energy by $(2000\\pi)(9.8)(2)\\,\\mathrm J$, the same result."
+      ],
+      "answer": "The ideal gravitational work is $39200\\pi\\,\\mathrm J$, about $123\\,\\mathrm{kJ}$, before losses."
+    },
+    {
+      "title": "Crossing curves demand an absolute separation",
+      "problem": "Find the geometric area between $y=x$ and $y=-x$ on $[-1,1]$.",
+      "steps": [
+        "The curves switch vertical order at $x=0$ because $x\\ge -x$ exactly for $x\\ge 0$.",
+        "Area is $\\int_{-1}^0(-2x)\\,dx+\\int_0^1(2x)\\,dx$.",
+        "Each triangular half has area $1$, giving total $2$. The signed integral of $2x$ over the symmetric interval is zero and is not the area."
+      ],
+      "answer": "The geometric area is $2$ square coordinate units."
+    },
+    {
+      "title": "Washers around a shifted axis",
+      "problem": "Rotate $0\\le y\\le x$, $0\\le x\\le 1$, about the horizontal line $y=2$. Find the volume.",
+      "steps": [
+        "A vertical slice sweeps a washer. The outer radius to $y=0$ is $2$; the inner radius to $y=x$ is $2-x$.",
+        "The cross-sectional area is $\\pi[2^2-(2-x)^2]=\\pi(4x-x^2)$.",
+        "Integrate from $0$ to $1$: $V=\\pi\\left[2x^2-\\frac{x^3}{3}\\right]_0^1=\\frac{5\\pi}{3}$."
+      ],
+      "answer": "The volume is $5\\pi /3$ cubic coordinate units."
+    },
+    {
+      "title": "A straight-line arc length check",
+      "problem": "Find the arc length of $y=3x+1$ on $[0,2]$ by calculus and by endpoint distance.",
+      "steps": [
+        "The derivative is $3$, so $ds=\\sqrt{1+3^2}\\,dx=\\sqrt{10}\\,dx$.",
+        "Integrating gives $L=2\\sqrt 10$.",
+        "Endpoints are $(0,1)$ and $(2,7)$; their distance is $\\sqrt{2^2+6^2}=2\\sqrt{10}$, matching the formula."
+      ],
+      "answer": "The length is $2\\sqrt 10$ coordinate units."
+    },
+    {
+      "title": "Variable force and mean force",
+      "problem": "A force $F(x)=(3\\,\\mathrm{N/m^2})x^2$, where $x$ is distance in metres, acts along positive displacement from $x=0$ to $x=2\\,\\mathrm m$. Find work and mean force.",
+      "steps": [
+        "A short displacement contributes approximately $F(x)dx$ joules, so $W=\\int_{0\\,\\mathrm m}^{2\\,\\mathrm m}(3\\,\\mathrm{N/m^2})x^2\\,dx$.",
+        "Integrating gives $W=(1\\,\\mathrm{N/m^2})[x^3]_{0\\,\\mathrm m}^{2\\,\\mathrm m}=8\\,\\mathrm J$.",
+        "Mean force over the two-metre path is $\\frac W{2\\,\\mathrm m}=4\\,\\mathrm N$, between the initial and final force values."
+      ],
+      "answer": "Work is $8\\,\\mathrm J$; average force is $4\\,\\mathrm N$."
+    },
+    {
+      "title": "A denser right end moves the balance point",
+      "problem": "A rod on $0\\le x\\le2\\,\\mathrm m$ has linear density $\\lambda(x)=1\\,\\mathrm{kg/m}+(1\\,\\mathrm{kg/m^2})x$. Find mass and center of mass.",
+      "steps": [
+        "Mass $M=\\int_0^2(1+x)\\,dx=4$. Thus $M=4\\,\\mathrm{kg}$.",
+        "Moment $Q=\\int_0^2x(1+x)\\,dx=2+\\frac83=\\frac{14}{3}$. Thus $Q=14/3\\,\\mathrm{kg\\,m}$.",
+        "Divide $Q$ by $M$ to get $\\bar x=7/6$, which lies right of midpoint $1$ as expected."
+      ],
+      "answer": "Mass $4\\,\\mathrm{kg}$; center of mass $x=7/6\\,\\mathrm m$."
+    },
+    {
+      "title": "A triangular gate has a deeper pressure center",
+      "problem": "A vertical gate has width $w(y)=y$ metres at depth $y$, $0\\le y\\le2\\,\\mathrm m$. Find the gauge-pressure force and center of pressure for water with $\\rho g=9810\\,\\mathrm{N/m^3}$.",
+      "steps": [
+        "A strip has area $y dy$ and pressure $9810y$ Pa, so $dF=9810y^2\\,dy$.",
+        "Force is $9810\\int_0^2y^2\\,dy=9810\\cdot\\frac83=26160\\,\\mathrm N$.",
+        "Its depth moment is $9810\\int_0^2y^3\\,dy=9810\\cdot4$. Dividing by force gives $y_{\\mathrm{cp}}=\\frac32\\,\\mathrm m$."
+      ],
+      "answer": "Force is $26{,}160\\,\\mathrm N$; center of pressure is $1.5\\,\\mathrm m$ below the surface."
+    }
+  ],
+  "misconceptions": [
+    "“Washer area is $\\pi(R-r)^2$.” This squares the wall thickness; for inner and outer radii $0\\le r\\le R$, the cross-sectional area is $\\pi(R^2-r^2)$.",
+    "“Surface area is circumference times $dx$.” For a continuously differentiable graph revolved about the $x$-axis, lateral area uses circumference times slant width $ds=\\sqrt{1+(f^{\\prime}(x))^2}\\,dx$.",
+    "“Center of mass is always the geometric midpoint.” That holds for a uniform rod, but extra mass near one end moves the weighted average toward that end."
+  ],
+  "lab": {
+    "title": "Approximate a solid of revolution",
+    "description": "Rotate the region below $y=x^p$ on $[0,1]$ about the $y$-axis. Edit the exponent and maximum number of slices. Compare midpoint shell sums in $x$ and midpoint washer sums in $y$ against the exact volume. Coordinates are dimensionless; volumes are in cubic coordinate units. The plots show approximation error versus slice count, not a three-dimensional rendering.",
+    "code": "// Adjustable exponent p > 0 and refinement limit (at most 1024).\nconst p = 2;\nconst maxSlices = 64;\nif (!Number.isFinite(p) || p <= 0 || !Number.isInteger(maxSlices) || maxSlices < 4 || maxSlices > 1024) {\n  throw new Error('Use finite p > 0 and an integer maxSlices from 4 to 1024.');\n}\n// Both 2π∫₀¹ x^(p+1) dx and π∫₀¹(1−y^(2/p)) dy equal this value.\nconst exact = 2 * Math.PI / (p + 2);\nconst shellErrors = [];\nconst washerErrors = [];\nconsole.log('Exact volume:', exact);\nconsole.log('n | midpoint shells | midpoint washers | absolute shell error');\nfor (let n = 4; n <= maxSlices; n *= 2) {\n  let shells = 0;\n  let washers = 0;\n  const h = 1 / n;\n  for (let i = 0; i < n; i++) {\n    const midpoint = (i + 0.5) * h;\n    shells += 2 * Math.PI * midpoint ** (p + 1) * h;\n    // At height y, inner radius = y^(1/p), outer radius = 1.\n    washers += Math.PI * (1 - midpoint ** (2 / p)) * h;\n  }\n  const error = Math.abs(shells - exact);\n  shellErrors.push([n, error]);\n  washerErrors.push([n, Math.abs(washers - exact)]);\n  console.log(n, shells.toFixed(10), washers.toFixed(10), error.toExponential(4));\n}\nif (shellErrors.length >= 2) {\n  plot(shellErrors, 'Shell absolute volume error versus slice count n');\n  plot(washerErrors, 'Washer absolute volume error versus slice count n');\n} else console.log('Only one slice count: error plots need at least two points.');",
+    "tasks": [
+      "Predict which method is exact at p = 2: inspect each integrand before running the code.",
+      "Change p to 1 and then 4. Explain why, for each exponent separately, the shell and washer descriptions refer to the same solid even though their finite sums differ.",
+      "Double the refinement limit. At p = 2, compare successive shell errors and explain the observed factor using the cubic integrand.",
+      "Try p = 20 and examine small slice counts. Explain why strong variation near an endpoint can make a coarse midpoint approximation misleading, and why a finite table does not prove convergence."
+    ],
+    "expected": "For any $p>0$, both shell and washer integrals give $2\\pi/(p+2)$. At $p=2$, the exact volume is $\\pi/2\\approx1.5707963268$. Shell estimates at $n=4$ and $n=64$ are approximately 1.5217089416 and 1.5706045792. Their exact errors are $\\pi/(4n^2)$, so doubling $n$ divides the error by four. The washer integrand $\\pi(1-y)$ is linear, so every midpoint washer sum is exact apart from roundoff."
+  },
+  "exercises": [
+    {
+      "question": "Find the area between $y = x$ and $y = -x$ on $[-1, 1]$. Why is integrating $2x$ over the whole interval wrong for this purpose?",
+      "hint": "Identify the upper curve separately on each side of zero.",
+      "solution": "The vertical height is $2|x|$. Thus $A=\\int_{-1}^0(-2x)\\,dx+\\int_0^1 2x\\,dx=1+1=2$ square units. Integrating $2x$ over the whole interval gives $0$ because signed contributions cancel.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the area between $y=x$ and $y=-x$ on $[-2,2]$.",
+      "hint": "Split at their intersection.",
+      "solution": "The curves switch order at $x=0$, so area is $\\int_{-2}^2|2x|\\,dx=2\\int_0^2 2x\\,dx=8$ square units.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Where do $y=x^2$ and $y=2-x$ intersect?",
+      "hint": "Solve $x^2=2-x$.",
+      "solution": "Equating heights gives $x^2=2-x$, or $x^2+x-2=(x+2)(x-1)=0$. At $x=-2$, $y=4$; at $x=1$, $y=1$. The intersection points are $(-2,4)$ and $(1,1)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the enclosed area between $y=x^2$ and $y=2-x$.",
+      "hint": "The line is above the parabola between intersections.",
+      "solution": "Between $x=-2$ and $x=1$, the line $2-x$ lies above $x^2$. Thus area is $\\int_{-2}^1(2-x-x^2)\\,dx=[2x-x^2/2-x^3/3]_{-2}^1=9/2$ square units.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why can $\\int(f-g)$ give zero while the region between graphs has positive area?",
+      "hint": "Consider a crossing.",
+      "solution": "If $f-g$ changes sign at a crossing, positive and negative signed contributions may cancel. Geometric area is $\\int|f-g|\\,dx$, split where the vertical order changes.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Rotate the region $0\\le x\\le2$, $1\\le y\\le3$ about the $x$-axis. Find its volume.",
+      "hint": "The hole has radius 1 throughout.",
+      "solution": "Each washer has outer radius $3$ and inner radius $1$, so section area is $\\pi(3^2-1^2)=8\\pi$. Over length $2$, $V=\\int_0^2 8\\pi\\,dx=16\\pi$ cubic units. Squaring the radial thickness would give the wrong area.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rotate $1\\le y\\le3$, $0\\le x\\le2$ about the $x$-axis. Find volume.",
+      "hint": "Use washers with fixed radii.",
+      "solution": "The washer radii are fixed at $3$ and $1$ for $0\\le x\\le2$. Thus $V=\\int_0^2\\pi(3^2-1^2)\\,dx=16\\pi$ cubic units.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rotate $0\\le y\\le x$, $0\\le x\\le1$ about $y=2$. Find volume.",
+      "hint": "Measure both radii from $y=2$.",
+      "solution": "The axis $y=2$ is above the region. The outer radius is $2$ and the inner radius is $2-x$, so $V=\\pi\\int_0^1[4-(2-x)^2]\\,dx=5\\pi/3$ cubic units.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rotate the region $0\\le x\\le1$, $0\\le y\\le x^2$ about the $y$-axis. Find its volume using shells.",
+      "hint": "Radius is $x$ and height is $x^2$.",
+      "solution": "A shell at $x$ has radius $x$ and height $x^2$. Therefore $V=2\\pi\\int_0^1 x\\cdot x^2\\,dx=2\\pi[x^4/4]_0^1=\\pi/2$ cubic units.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "What is wrong with adding shell volumes from both sides when a region crosses its axis?",
+      "hint": "Consider overlap of swept radial layers.",
+      "solution": "Strips on opposite sides of the axis can sweep the same radial layer. Adding their shell volumes can double-count it; determine nonoverlapping swept geometry or integrate actual washer cross-sections.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the length of $y = 3x + 1$ on $[0, 2]$ and check it using the endpoints.",
+      "hint": "The slope is constant, so the arc-length integrand is constant.",
+      "solution": "Since $f^{\\prime}(x)=3$, arc length is $L=\\int_0^2\\sqrt{1+3^2}\\,dx=2\\sqrt{10}$. The endpoints $(0,1)$ and $(2,7)$ are separated by $\\sqrt{2^2+6^2}=2\\sqrt{10}$, agreeing with the straight-line result.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rotate $y=2$, $0\\le x\\le3$, about the $x$-axis. Find the lateral surface area and then the area including both end caps.",
+      "hint": "The radius is 2 and the slope factor is 1.",
+      "solution": "The radius is $2$ and the slope factor is $1$, so lateral area is $S=2\\pi\\int_0^3 2\\,dx=12\\pi$ square units. Each end disk adds $\\pi2^2=4\\pi$; with both caps, area is $20\\pi$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the arc length of $y=3x+1$ on $[0,2]$.",
+      "hint": "The slope is constant.",
+      "solution": "The graph has constant slope $y^{\\prime}=3$. Thus its arc-length integrand is constant, and $L=\\int_0^2\\sqrt{1+(y^{\\prime})^2}\\,dx=\\int_0^2\\sqrt{10}\\,dx=2\\sqrt{10}$. This also equals the endpoint distance.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Give an elementary lower bound for the arc length of $y=x^2$ on $[0,1]$.",
+      "hint": "A curve is at least as long as its endpoint chord.",
+      "solution": "The chord from $(0,0)$ to $(1,1)$ has length $\\sqrt{(1-0)^2+(1-0)^2}=\\sqrt2$. Arc length is at least its endpoint chord, so $L\\ge\\sqrt2$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the lateral area when $y=x$, $0\\le x\\le1$, rotates around the $x$-axis.",
+      "hint": "Use circumference times slant element.",
+      "solution": "Here $y=x$ and $y^{\\prime}=1$, so lateral area is $S=2\\pi\\int_0^1y\\sqrt{1+(y^{\\prime})^2}\\,dx=2\\pi\\sqrt2\\int_0^1x\\,dx=\\pi\\sqrt2$ square units.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rotating $y=x$ on $0\\le x\\le1$ about the $x$-axis forms a cone. What area must be added at $x=1$ to close it, and what is the resulting total surface area?",
+      "hint": "Add its circular base.",
+      "solution": "The base at $x=1$ has radius $1$ and area $\\pi$. The lateral area is $2\\pi\\int_0^1x\\sqrt2\\,dx=\\pi\\sqrt2$, so the total with the base is $\\pi(\\sqrt2+1)$ square units.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "A spring has $k = 200\\,\\mathrm{N}/\\mathrm{m}$. How much work does an external agent do stretching it slowly from $0.1\\,\\mathrm{m}$ to $0.3\\,\\mathrm{m}$?",
+      "hint": "Integrate the applied force $kx$ over extension.",
+      "solution": "For a slow stretch the applied force is $kx=200x\\,\\mathrm N$. Thus $W=\\int_{0.1}^{0.3}200x\\,dx=100(0.3^2-0.1^2)=8\\,\\mathrm J$. The average force $40\\,\\mathrm N$ over $0.2\\,\\mathrm m$ confirms $8\\,\\mathrm J$.",
+      "lesson": 4,
+      "type": "Modeling"
+    },
+    {
+      "question": "A $3\\,\\mathrm{kg}$ object slows from $4\\,\\mathrm{m}/\\mathrm{s}$ to $2\\,\\mathrm{m}/\\mathrm{s}$ under a net force. Find net work.",
+      "hint": "Use the change in $\\frac12mv^2$.",
+      "solution": "The work-energy theorem gives $W=\\frac12(3)(2^2-4^2)=-18\\,\\mathrm J$. Negative work matches the kinetic-energy decrease.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "A spring has $k=100\\,\\mathrm{N}/\\mathrm{m}$. Find external work to stretch it slowly from $0$ to $0.2\\,\\mathrm{m}$.",
+      "hint": "Integrate $kx$ over the stretch.",
+      "solution": "For a slow stretch, applied force balances the restoring-force magnitude $kx=100x\\,\\mathrm N$. Therefore $W=\\int_0^{0.2}100x\\,dx=50(0.2)^2=2\\,\\mathrm J$. The slow-stretch assumption makes kinetic-energy change negligible.",
+      "lesson": 4,
+      "type": "Modeling"
+    },
+    {
+      "question": "An ideal spring with $k=100\\,\\mathrm{N/m}$ is stretched slowly from extension $x=0$ to $x=0.2\\,\\mathrm m$. What work does the spring force do?",
+      "hint": "The restoring force is $-kx$.",
+      "solution": "The spring force is $-kx$, opposite the outward displacement. Hence its work is $-\\int_0^{0.2}100x\\,dx=-2\\,\\mathrm J$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A particle moves along the positive $x$-direction from $x=0$ to $x=2\\,\\mathrm m$. The force component along that direction is $F(x)=(3\\,\\mathrm{N/m^2})x^2$, with $x$ measured in metres. Find the work done by this force.",
+      "hint": "Integrate force over displacement.",
+      "solution": "Work is force integrated along displacement: $W=\\int_{0\\,\\mathrm m}^{2\\,\\mathrm m}(3\\,\\mathrm{N/m^2})x^2\\,dx=(1\\,\\mathrm{N/m^2})[x^3]_0^{2\\,\\mathrm m}=8\\,\\mathrm{N\\,m}=8\\,\\mathrm J$. Force and motion have the same direction, so work is positive.",
+      "lesson": 4,
+      "type": "Modeling"
+    },
+    {
+      "question": "Find net work for a $3\\,\\mathrm{kg}$ particle slowing from $4\\,\\mathrm{m}/\\mathrm{s}$ to $2\\,\\mathrm{m}/\\mathrm{s}$.",
+      "hint": "Use kinetic-energy change.",
+      "solution": "By the work-energy theorem, $W_{\\mathrm{net}}=\\frac12(3)(2^2-4^2)=-18\\,\\mathrm J$. The negative sign matches the decrease in kinetic energy.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "A rod runs from $x=0$ to $x=2\\,\\mathrm{m}$. Its linear density is $\\lambda(x)=(1+x)\\,\\mathrm{kg}/\\mathrm{m}$, where $x$ is the numerical distance in metres. Find its mass and center of mass.",
+      "hint": "Calculate both $\\int\\lambda\\,dx$ and $\\int x\\lambda\\,dx$.",
+      "solution": "With $x$ the numerical distance in metres, $M=\\int_0^2(1+x)\\,dx=4\\,\\mathrm{kg}$. The first moment is $Q=\\int_0^2(x+x^2)\\,dx=14/3\\,\\mathrm{kg\\,m}$. Thus $\\bar x=Q/M=7/6\\,\\mathrm m$, right of the midpoint as density increases.",
+      "lesson": 5,
+      "type": "Modeling"
+    },
+    {
+      "question": "A rod has $\\lambda(x)=1+x$ on $[0,2]$. Find its mass.",
+      "hint": "Integrate density.",
+      "solution": "Integrating the linear density over the rod gives its total mass: $M=\\int_0^2(1+x)\\,dx=[x+x^2/2]_0^2=4$ mass units. Both the constant and increasing density terms contribute.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "A rod spans $0\\le x\\le2$ in a fixed length unit and has linear density $\\lambda(x)=1+x$ in compatible mass-per-length units. Find its center of mass.",
+      "hint": "Divide moment by mass.",
+      "solution": "The mass is $M=\\int_0^2(1+x)\\,dx=4$ mass units. The first moment is $Q=\\int_0^2x(1+x)\\,dx=14/3$ mass–length units. Thus $\\bar x=Q/M=7/6$ length units, inside the rod.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why must a positive-density rod's center of mass lie inside its interval?",
+      "hint": "Multiply $a\\le x\\le b$ by $\\lambda(x)\\ge0$.",
+      "solution": "Since $a\\le x\\le b$ and $\\lambda(x)\\ge0$, integrate $a\\lambda(x)\\le x\\lambda(x)\\le b\\lambda(x)$ to obtain $aM\\le Q\\le bM$. With $M=\\int_a^b\\lambda(x)\\,dx>0$ and $Q=\\int_a^b x\\lambda(x)\\,dx$, division yields $a\\le\\bar x=Q/M\\le b$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "For a uniform plate under $y=x$ on $[0,1]$, find its vertical centroid coordinate.",
+      "hint": "Use the strip moment formula.",
+      "solution": "Uniform density cancels from the centroid ratio. The area is $A=\\int_0^1x\\,dx=1/2$. Each strip has centroid height $x/2$, so its moment is $M_x=\\int_0^1(x/2)x\\,dx=1/6$. Hence $\\bar y=M_x/A=(1/6)/(1/2)=1/3$.",
+      "lesson": 5,
+      "type": "Modeling"
+    },
+    {
+      "question": "A vertical triangular gate extends from the water surface at depth $y=0$ to $y=2\\,\\mathrm m$, where $y$ is a physical depth. Its width at depth $y$ is $w(y)=y$. Find the gauge-pressure force in water with $\\rho=1000\\,\\mathrm{kg/m^3}$ and $g=9.81\\,\\mathrm{m/s^2}$.",
+      "hint": "A strip has area $w(y)\\,dy$ and pressure $\\rho gy$.",
+      "solution": "At depth $y$, pressure is $\\rho gy$ and strip area is $y\\,dy$. Thus $F=\\rho g\\int_0^{2\\,\\mathrm m}y^2\\,dy=(9810\\,\\mathrm{N/m^3})(8/3\\,\\mathrm{m^3})=26160\\,\\mathrm N$.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "A vertical rectangular gate is $2\\,\\mathrm m$ wide and extends from depth $1\\,\\mathrm m$ to $3\\,\\mathrm m$ below the water surface. In water with $\\rho=1000\\,\\mathrm{kg/m^3}$ and $g=9.81\\,\\mathrm{m/s^2}$, find the gauge-pressure moment about a horizontal hinge at the water surface. Set up the force on a representative horizontal strip and its moment about the hinge before evaluating the total moment.",
+      "hint": "At depth $y$, pressure is $\\rho gy$. Multiply it by the area of a 2-metre-wide horizontal strip, then use $y$ as its hinge lever arm.",
+      "solution": "Let $w=2\\,\\mathrm m$ be the physical width and $y$ the physical depth below the surface. Assuming constant-density water at rest, a horizontal strip of thickness $dy$ has area $dA=w\\,dy$ and gauge pressure $p(y)=\\rho gy$. Its force is $dF=\\rho gw y\\,dy$. The hinge lever arm is $y$, so $dM=y\\,dF=\\rho gw y^2\\,dy$.\n\nThus $M=\\rho gw\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y^2\\,dy=\\rho gw\\big((3\\,\\mathrm m)^3-(1\\,\\mathrm m)^3\\big)/3$. Substituting the given SI values gives $M=170040\\,\\mathrm{N\\,m}$. Similarly, $F=\\rho gw\\int_{1\\,\\mathrm m}^{3\\,\\mathrm m}y\\,dy=\\rho gw\\big((3\\,\\mathrm m)^2-(1\\,\\mathrm m)^2\\big)/2=78480\\,\\mathrm N$. The center-of-pressure depth is $M/F=13/6\\,\\mathrm m$.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "A vertical triangular gate extends from the water surface at depth $y=0$ to $y=2\\,\\mathrm m$, where $y$ is a physical depth. Its width is $w(y)=y$. Find its gauge-pressure force when $\\rho g=9810\\,\\mathrm{N/m^3}$.",
+      "hint": "Integrate pressure times strip width.",
+      "solution": "At depth $y$, pressure is $(9810\\,\\mathrm{N/m^3})y$ and strip area is $y\\,dy$. Therefore $F=(9810\\,\\mathrm{N/m^3})\\int_0^{2\\,\\mathrm m}y^2\\,dy=(9810\\,\\mathrm{N/m^3})(8/3\\,\\mathrm{m^3})=26160\\,\\mathrm N$.",
+      "lesson": 6,
+      "type": "Modeling"
+    }
+  ],
+  "summary": [
+    "Build an integral by naming a representative piece, its contribution, the bounds, and the units.",
+    "Area uses positive strip height; volume uses cross-sectional area or distinct shell layers.",
+    "Curve length contributes ds, and a surface of revolution contributes circumference times ds.",
+    "Work accumulates signed force over displacement; mass and moments accumulate density-weighted pieces."
+  ],
+  "next": "Chapter 14 develops numerical integration when these models lack convenient antiderivatives, and improper integrals when intervals or integrands have troublesome endpoints."
+}

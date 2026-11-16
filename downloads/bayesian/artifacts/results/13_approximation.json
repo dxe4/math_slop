@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "lab_id": "13_approximation",
+  "seed": 1313,
+  "method": "Exact Gaussian algebra; Laplace and reverse-KL mean-field",
+  "source_hashes": {
+    "labs/13_approximation.py": "f7ff338557b32c5bb0064d03fa20cc2f6433ae1929f60b60ea58a6dc3412ca75",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "labs/extension_common.py": "3fdb0437bbd31cff4336dd0c1d6bdadd7f79eb7eb31cea9b216257383e75d56c",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "mean": [
+      1.0,
+      -0.5
+    ],
+    "covariance": [
+      [
+        1.0,
+        0.8
+      ],
+      [
+        0.8,
+        1.0
+      ]
+    ],
+    "sum_threshold": 2.5,
+    "gamma_shape": 3,
+    "gamma_rate": 2
+  },
+  "metrics": {
+    "laplace_covariance": [
+      [
+        0.9999999999999994,
+        0.7999999999999996
+      ],
+      [
+        0.7999999999999996,
+        0.9999999999999996
+      ]
+    ],
+    "mean_field_covariance": [
+      [
+        0.3599999999999999,
+        0.0
+      ],
+      [
+        0.0,
+        0.3599999999999999
+      ]
+    ],
+    "exact_sum_variance": 3.6,
+    "mean_field_sum_variance": 0.7199999999999998,
+    "exact_difference_variance": 0.3999999999999999,
+    "mean_field_difference_variance": 0.7199999999999998,
+    "exact_sum_tail": 0.14592027257189422,
+    "mean_field_sum_tail": 0.009211062727049486,
+    "gamma_exact_tail": 0.06196880441665898,
+    "gamma_laplace_tail": 0.002338867490523633,
+    "gamma_laplace_negative_mass": 0.07864960352514258,
+    "gamma_log_laplace_mean": 1.772040619298469
+  },
+  "checks": [
+    {
+      "id": "laplace_covariance_error",
+      "actual": 5.551115123125783e-16,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "sum_variance",
+      "actual": 3.6,
+      "expected": 3.6,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mf_difference_variance",
+      "actual": 0.7199999999999998,
+      "expected": 0.7199999999999998,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "gamma_tail_quadrature",
+      "actual": 0.061968804416658994,
+      "expected": 0.06196880441665898,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Optimisation convergence is not an accuracy certificate.",
+    "A Gaussian approximation can put mass outside positive support."
+  ]
+}

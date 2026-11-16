@@ -1,0 +1,3113 @@
+{
+  "topics": [
+    {
+      "id": "probability",
+      "title": "Probability",
+      "summary": "Chance from countable outcomes to distributions; each exploration uses small games and explicit assumptions.",
+      "entryPrerequisites": [
+        "fractions and simple algebra"
+      ]
+    },
+    {
+      "id": "statistics-inference",
+      "title": "Statistics and inference",
+      "summary": "Describe data, sample honestly and interpret uncertainty without turning thresholds into truths.",
+      "entryPrerequisites": [
+        "fractions, graphs and basic probability"
+      ]
+    },
+    {
+      "id": "stochastic-processes",
+      "title": "Stochastic processes",
+      "summary": "Random paths, memory, arrivals and queues in small toy worlds.",
+      "entryPrerequisites": [
+        "conditional probability and expected value"
+      ]
+    },
+    {
+      "id": "information-theory",
+      "title": "Information theory",
+      "summary": "Bits, surprise, compression and noisy clues as mathematical measures of uncertainty.",
+      "entryPrerequisites": [
+        "probability, expected value and logarithms"
+      ]
+    },
+    {
+      "id": "game-social-choice",
+      "title": "Game theory and social choice",
+      "summary": "Strategic choices and collective rankings explored through small transparent games and ballots.",
+      "entryPrerequisites": [
+        "tables, fractions and ordered rankings"
+      ]
+    },
+    {
+      "id": "mathematical-modelling",
+      "title": "Mathematical modelling",
+      "summary": "Build, test and critique models through art, sound, networks and physical sketches.",
+      "entryPrerequisites": [
+        "functions, units and basic probability"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "probability-sample-space",
+      "title": "A deck, a die, and the sample space",
+      "topic": "probability",
+      "level": "L1",
+      "hook": "A homemade board game has two dice but only one reroll.",
+      "outcome": "List outcomes and distinguish event from outcome.",
+      "prerequisites": [
+        "explorations:refresher:counting"
+      ],
+      "formula": "P(A)=|A|/|Omega| for equally likely elementary outcomes",
+      "visual": "Grid of ordered die pairs with highlighted event.",
+      "proof": "Derive finite equiprobable rule; unequal likelihood is deferred.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "counting finite sets"
+      ],
+      "tags": [
+        "sample-spaces",
+        "event-counting",
+        "equiprobability"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-addition-rule",
+      "title": "Why two chances can overlap",
+      "topic": "probability",
+      "level": "L1",
+      "hook": "Count how often a card is red or a face card.",
+      "outcome": "Use inclusion-exclusion without double counting.",
+      "prerequisites": [
+        "explorations:refresher:sets",
+        "explorations:refresher:fractions"
+      ],
+      "formula": "P(A union B)=P(A)+P(B)-P(A intersect B)",
+      "visual": "Venn diagram and enumerated card table.",
+      "proof": "Derive by partitioning disjoint regions.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "sets",
+        "fractions"
+      ],
+      "tags": [
+        "inclusion-exclusion",
+        "event-unions",
+        "disjoint-events"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-conditional-probability",
+      "title": "The clue changes the denominator",
+      "topic": "probability",
+      "level": "L1",
+      "hook": "A mystery card is known to be a heart.",
+      "outcome": "Rebuild a sample space after conditioning.",
+      "prerequisites": [
+        "explorations:refresher:fractions",
+        "explorations:probability-sample-space"
+      ],
+      "formula": "P(A|B)=P(A intersect B)/P(B), P(B)>0",
+      "visual": "Card grid that fades excluded outcomes.",
+      "proof": "Derive finite conditioning and state positive-denominator condition.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "fractions",
+        "events"
+      ],
+      "tags": [
+        "conditional-probability",
+        "reporting-protocols",
+        "likelihood-weighting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-bayes-odds",
+      "title": "Bayes with two bags of marbles",
+      "topic": "probability",
+      "level": "L1",
+      "hook": "One of two bags was chosen before a blue marble appeared.",
+      "outcome": "Update prior odds using the likelihood ratio.",
+      "prerequisites": [
+        "explorations:refresher:fractions"
+      ],
+      "formula": "posterior odds=prior odds x likelihood ratio",
+      "visual": "Two-branch frequency tree with counts.",
+      "proof": "Derive from conditional probability; prior choice remains an assumption.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "conditional probability"
+        ],
+        "editionPrerequisites": [
+          "Fractions; conditional probability is refreshed on the page"
+        ],
+        "rationale": "The background capsule refreshes conditional probability and the product rule before deriving Bayes by natural frequencies. The actual entry assumptions are fraction and percentage arithmetic.",
+        "previousCatalogLevel": "L2",
+        "levelRationale": "Natural-frequency arithmetic and a refreshed conditioning rule suffice; no prior probability course is assumed.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "fractions",
+        "percentages"
+      ],
+      "tags": [
+        "bayes-rule",
+        "posterior-odds",
+        "likelihood-ratios",
+        "natural-frequencies"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-independence",
+      "title": "A test for independence, not a feeling",
+      "topic": "probability",
+      "level": "L2",
+      "hook": "Does replacing a token matter on the second draw?",
+      "outcome": "Check independence through an equality and expose dependence.",
+      "prerequisites": [
+        "explorations:probability-conditional-probability"
+      ],
+      "formula": "A independent of B iff P(A intersect B)=P(A)P(B)",
+      "visual": "Two draw tables with and without replacement.",
+      "proof": "Show equality for replacement and counterexample without replacement.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "conditional probability"
+      ],
+      "tags": [
+        "event-independence",
+        "pairwise-independence",
+        "mutual-independence",
+        "joint-distributions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-expectation",
+      "title": "Fair games and expected score",
+      "topic": "probability",
+      "level": "L2",
+      "hook": "Invent a carnival game using paper tokens.",
+      "outcome": "Compute long-run mean score from outcomes.",
+      "prerequisites": [
+        "explorations:refresher:fractions",
+        "explorations:refresher:probability"
+      ],
+      "formula": "E[X]=sum_x x P(X=x)",
+      "visual": "Payoff bars with area contributions.",
+      "proof": "Derive linearity for finite sums; expected value is not promised in one play.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "weighted averages"
+        ],
+        "editionPrerequisites": [
+          "fractions",
+          "probability"
+        ],
+        "rationale": "The main route defines random variables, probability-weighted averages and summation notation. Fractions and elementary outcome probabilities are assumed; weighted averages are taught. The optional stopping investigation supplies its own additional background.",
+        "previousCatalogLevel": "L1",
+        "levelRationale": "Finite random variables, linearity of expectation and dependent-score reasoning are Year 1 probability; the optional stopping investigation is explicitly additional.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "fractions",
+        "basic probability"
+      ],
+      "tags": [
+        "expected-value",
+        "linearity-of-expectation",
+        "optional-stopping",
+        "uniform-integrability"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-variance",
+      "title": "Same average, different surprises",
+      "topic": "probability",
+      "level": "L2",
+      "hook": "Compare a steady puzzle score with a volatile one.",
+      "outcome": "Calculate variance and standard deviation for discrete outcomes.",
+      "prerequisites": [
+        "explorations:probability-expectation"
+      ],
+      "formula": "Var(X)=E[(X-E[X])^2]=E[X^2]-E[X]^2",
+      "visual": "Two distributions with equal mean and different spread.",
+      "proof": "Expand square to prove identity.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "expected value",
+        "squares"
+      ],
+      "tags": [
+        "variance",
+        "standard-deviation",
+        "second-moments"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-binomial",
+      "title": "How many successes in ten tries?",
+      "topic": "probability",
+      "level": "L2",
+      "hook": "Ten independent coin flips create a count, not a sequence.",
+      "outcome": "Use binomial probabilities and identify its assumptions.",
+      "prerequisites": [
+        "explorations:combinations",
+        "explorations:probability-independence"
+      ],
+      "formula": "P(X=k)=C(n,k)p^k(1-p)^(n-k)",
+      "visual": "Sequence tree collapsing into count bars.",
+      "proof": "Count sequences with k successes; independence and constant p are explicit.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "combinations",
+        "independence"
+      ],
+      "tags": [
+        "binomial-distribution",
+        "bernoulli-trials",
+        "success-indicators"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-normal-approximation",
+      "title": "When a bell curve is a useful sketch",
+      "topic": "probability",
+      "level": "L2",
+      "hook": "A long run of dice sums looks smooth.",
+      "outcome": "Compare a standardized count with a normal approximation and its limits.",
+      "prerequisites": [
+        "explorations:probability-expectation",
+        "explorations:probability-variance",
+        "explorations:probability-binomial"
+      ],
+      "formula": "Z=(X-np)/sqrt(np(1-p))",
+      "visual": "Exact binomial bars overlaid with normal density for several n,p.",
+      "proof": "State CLT conditions and approximation status; no exact equality is claimed.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/Lesson27"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L3",
+        "levelRationale": "Standardizes binomial counts and applies a stated CLT with continuity correction; the proof of the CLT is explicitly outside the article.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "mean, variance, binomial distribution"
+      ],
+      "tags": [
+        "normal-approximation",
+        "central-limit-theorem",
+        "continuity-correction"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-sampling-frame",
+      "title": "Who is missing from the sample?",
+      "topic": "statistics-inference",
+      "level": "L1",
+      "hook": "A club polls only people who attend a meeting.",
+      "outcome": "Separate target population, sampling frame and observed sample.",
+      "prerequisites": [
+        "explorations:refresher:fractions"
+      ],
+      "formula": "sample proportion=sum responses/n",
+      "visual": "Nested population and frame diagram.",
+      "proof": "Show an explicit selection-bias counterexample; no general bias correction is claimed.",
+      "sources": [
+        "https://openstax.org/books/introductory-statistics-2e/pages/1-introduction"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "percentages"
+      ],
+      "tags": [
+        "sampling-frames",
+        "selection-bias",
+        "inclusion-probabilities",
+        "inverse-probability-weighting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-histogram-bin",
+      "title": "One dataset, several histograms",
+      "topic": "statistics-inference",
+      "level": "L1",
+      "hook": "Rebin a set of puzzle completion times.",
+      "outcome": "Explain how bin width changes a histogram without changing observations.",
+      "prerequisites": [
+        "explorations:refresher:counting",
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "relative frequency=count in bin/n",
+      "visual": "Linked dotplot and three bin widths.",
+      "proof": "Direct tally identity; smooth shape is an exploratory reading.",
+      "sources": [
+        "https://openstax.org/books/introductory-statistics-2e/pages/1-introduction"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "counting",
+        "axes"
+      ],
+      "tags": [
+        "histograms",
+        "bin-width",
+        "frequency-density"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-mean-median",
+      "title": "The typical value depends on the question",
+      "topic": "statistics-inference",
+      "level": "L1",
+      "hook": "One exceptionally long song changes the playlist average.",
+      "outcome": "Contrast mean and median under an outlier.",
+      "prerequisites": [],
+      "formula": "mean=sum x_i/n; median=middle ordered observation",
+      "visual": "Movable outlier with two markers.",
+      "proof": "Calculate both statistics and exhibit outlier sensitivity.",
+      "sources": [
+        "https://openstax.org/books/introductory-statistics-2e/pages/1-introduction"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "averages",
+        "ordering"
+      ],
+      "tags": [
+        "arithmetic-mean",
+        "median",
+        "outlier-sensitivity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-sampling-variation",
+      "title": "Why two honest polls disagree",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "Sample colored tiles repeatedly from a jar.",
+      "outcome": "Distinguish parameter, statistic and sampling distribution.",
+      "prerequisites": [
+        "explorations:refresher:probability"
+      ],
+      "formula": "SE(phat)=sqrt(p(1-p)/n) under iid Bernoulli sampling",
+      "visual": "Repeated sample proportions as dots and histogram.",
+      "proof": "Derive variance under iid assumption; simulation illustrates finite runs.",
+      "sources": [
+        "https://openstax.org/books/introductory-statistics-2e/pages/1-introduction"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "probability",
+        "sample proportion"
+      ],
+      "tags": [
+        "sampling-distributions",
+        "standard-error",
+        "cluster-sampling",
+        "total-variance"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-confidence-coverage",
+      "title": "What a 95% confidence interval covers",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "Many jars have the same hidden color proportion.",
+      "outcome": "Interpret coverage as a property of the interval procedure.",
+      "prerequisites": [
+        "explorations:statistics-inference-sampling-variation"
+      ],
+      "formula": "P_theta(theta in C(X)) approximately 0.95 under stated method",
+      "visual": "Repeated intervals against fixed hidden parameter.",
+      "proof": "Derive specified interval under assumptions; avoid posterior claim for realized interval.",
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm",
+        "https://csrc.nist.gov/glossary/term/confidence_interval"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "sampling variation"
+      ],
+      "tags": [
+        "confidence-intervals",
+        "coverage",
+        "interval-inversion"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-p-value",
+      "title": "A p-value is a conditional probability",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "A supposedly fair spinner lands blue unusually often.",
+      "outcome": "Compute a tail probability under a named null model.",
+      "prerequisites": [
+        "explorations:probability-binomial"
+      ],
+      "formula": "p-value=P_null(T(X)>=T(observed)) for prespecified upper-tail test",
+      "visual": "Null distribution with observed statistic and tail shaded.",
+      "proof": "Exact finite binomial tail for toy spinner; p is not P(null true).",
+      "sources": [
+        "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf",
+        "https://online.stat.psu.edu/stat414/Lesson12"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "binomial probability"
+      ],
+      "tags": [
+        "p-values",
+        "null-distributions",
+        "sequential-testing",
+        "optional-peeking"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-multiple-testing",
+      "title": "The winner from twenty guesses",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "Try twenty patterns in random coin tosses and report the most striking.",
+      "outcome": "Explain how selection inflates false discoveries.",
+      "prerequisites": [
+        "explorations:statistics-inference-p-value",
+        "explorations:probability-independence"
+      ],
+      "formula": "P(at least one p<=alpha)=1-(1-alpha)^m for independent Uniform(0,1) null p-values",
+      "visual": "Twenty null-test tiles and minimum-p distribution, with exact uniform and discrete-binomial cases distinguished.",
+      "proof": "Prove exact formula under independent continuous uniform true-null p-values; for independent valid super-uniform p-values it is an upper bound, and dependent tests need separate analysis.",
+      "sources": [
+        "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "p-values",
+        "independence"
+      ],
+      "tags": [
+        "multiple-testing",
+        "familywise-error",
+        "bonferroni-correction",
+        "selection-effects"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-correlation",
+      "title": "Same trend, different story",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "Track umbrella drawings and rainy days on a shared calendar.",
+      "outcome": "Interpret correlation as association, inspect shape and confounding.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "explorations:statistics-inference-mean-median"
+      ],
+      "formula": "r=sum((x_i-xbar)(y_i-ybar))/sqrt(sum(x_i-xbar)^2 sum(y_i-ybar)^2)",
+      "visual": "Four datasets with matched r but different scatterplots.",
+      "proof": "Compute r; association alone cannot establish cause.",
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda33q.htm"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "scatterplots",
+        "averages"
+      ],
+      "tags": [
+        "pearson-correlation",
+        "scatterplots",
+        "nonlinear-dependence",
+        "causal-interpretation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-simpsons-paradox",
+      "title": "When every subgroup wins but the total loses",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "Compare two fictional puzzle routes across easy and hard boards; the aggregate ranking reverses the within-board ranking.",
+      "outcome": "Calculate within-group and pooled rates, then explain how unequal group weights reverse the comparison.",
+      "prerequisites": [
+        "explorations:refresher:fractions",
+        "explorations:statistics-inference-mean-median",
+        "explorations:refresher:algebra"
+      ],
+      "formula": "pooled rate=sum_g w_g r_g, with group weights w_g summing to 1",
+      "visual": "Two rate tables linked to weighted bars; a slider changes group allocation while preserving within-group rates.",
+      "proof": "Exhibit an explicit arithmetic reversal and show the weighted-average mechanism; no causal conclusion follows from aggregation or stratification alone.",
+      "sources": [
+        "https://online.stat.psu.edu/stat555/node/10/"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "weighted averages",
+          "two-way tables"
+        ],
+        "editionPrerequisites": [
+          "Fractions, proportions and weighted averages; all are refreshed on the page"
+        ],
+        "rationale": "The capsule teaches weighted averages and the worked table teaches two-way denominators. Fraction arithmetic and ordinary averages are assumed; the required transfer tasks solve linear inequalities. The optional potential-outcome investigation introduces its own notation.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "fractions",
+        "proportions",
+        "ordinary averages",
+        "simple algebra"
+      ],
+      "tags": [
+        "simpsons-paradox",
+        "weighted-averages",
+        "standardisation",
+        "causal-identification"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "statistics-inference-regression-residuals",
+      "title": "The line misses in patterned ways",
+      "topic": "statistics-inference",
+      "level": "L2",
+      "hook": "Fit a line to the tempo and length of invented tracks.",
+      "outcome": "Use residual plots to test a linear description.",
+      "prerequisites": [
+        "explorations:statistics-inference-correlation",
+        "library:book-algebra-and-functions:straight-lines-linear-models"
+      ],
+      "formula": "e_i=y_i-(a+b x_i)",
+      "visual": "Scatterplot linked to residual plot and fitted line.",
+      "proof": "Least-squares normal-equation sketch; causal and extrapolation claims deferred.",
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda33q.htm"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L3",
+        "levelRationale": "Finite least-squares algebra and diagnostic residual calculations; advanced distributional inference is stated only as a boundary.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "correlation",
+        "straight lines"
+      ],
+      "tags": [
+        "least-squares",
+        "residuals",
+        "curvature",
+        "heteroscedasticity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-random-walk",
+      "title": "A random walk on a tiny map",
+      "topic": "stochastic-processes",
+      "level": "L1",
+      "hook": "A wandering token moves left or right at each chime.",
+      "outcome": "Enumerate path probabilities and position after steps.",
+      "prerequisites": [],
+      "formula": "S_n=sum_{i=1}^n X_i, X_i in {-1,+1}",
+      "visual": "Path tree and endpoint distribution.",
+      "proof": "Finite enumeration is exact; paths are illustrative samples.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-445-introduction-to-stochastic-processes-spring-2015/365d85ac35a7c006bc33dd03da633997_MIT18_445S15_lecture1.pdf"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "independent coin tosses"
+      ],
+      "tags": [
+        "stochastic-processes",
+        "probability",
+        "random-walks",
+        "path-counting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-gambler-ruin",
+      "title": "How long until the token reaches an edge?",
+      "topic": "stochastic-processes",
+      "level": "L2",
+      "hook": "A game piece bounces between two absorbing board edges.",
+      "outcome": "Set up and solve a small hitting-probability recurrence.",
+      "prerequisites": [
+        "explorations:stochastic-processes-random-walk",
+        "explorations:refresher:algebra"
+      ],
+      "formula": "h_i=p h_{i+1}+(1-p)h_{i-1}, h_0=0,h_N=1",
+      "visual": "State strip and highlighted absorbing edges.",
+      "proof": "Solve finite fair-walk case; simulation only checks it.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-445-introduction-to-stochastic-processes-spring-2015/365d85ac35a7c006bc33dd03da633997_MIT18_445S15_lecture1.pdf"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "random walk",
+        "equations"
+      ],
+      "tags": [
+        "absorbing-boundaries",
+        "hitting-probabilities",
+        "stopping-times",
+        "censored-durations"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-markov-property",
+      "title": "Memory lives in the state",
+      "topic": "stochastic-processes",
+      "level": "L1",
+      "hook": "Weather icons on a fictional planet change daily.",
+      "outcome": "Test whether a proposed state captures the needed history.",
+      "prerequisites": [
+        "explorations:refresher:probability"
+      ],
+      "formula": "P(X_{t+1}=j|X_t=i,history)=P(X_{t+1}=j|X_t=i)",
+      "visual": "History cards and next-state probabilities.",
+      "proof": "Definition plus counterexample with hidden two-day cycle.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-445-introduction-to-stochastic-processes-spring-2015/365d85ac35a7c006bc33dd03da633997_MIT18_445S15_lecture1.pdf"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "conditional probability"
+      ],
+      "tags": [
+        "markov-property",
+        "state-augmentation",
+        "strong-lumpability",
+        "conditional-distributions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-transition-matrix",
+      "title": "A playlist that chooses its next mood",
+      "topic": "stochastic-processes",
+      "level": "L2",
+      "hook": "A generative playlist moves among calm, bright and tense moods.",
+      "outcome": "Advance a distribution with a transition matrix.",
+      "prerequisites": [
+        "explorations:refresher:probability"
+      ],
+      "formula": "pi_{t+1}=pi_t P; sum_j P_ij=1",
+      "visual": "Three-node weighted graph and stacked probability bars.",
+      "proof": "Derive law of total probability for one step.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-445-introduction-to-stochastic-processes-spring-2015/365d85ac35a7c006bc33dd03da633997_MIT18_445S15_lecture1.pdf"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "matrix multiplication",
+        "conditional probability"
+      ],
+      "tags": [
+        "transition-matrices",
+        "distribution-propagation",
+        "row-stochastic-matrices"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-stationary-distribution",
+      "title": "What a Markov chain settles into",
+      "topic": "stochastic-processes",
+      "level": "L3",
+      "hook": "Run the mood playlist for a long time.",
+      "outcome": "Solve stationary probabilities and distinguish them from guaranteed convergence.",
+      "prerequisites": [
+        "explorations:stochastic-processes-transition-matrix",
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems"
+      ],
+      "formula": "pi=pi P, sum_i pi_i=1",
+      "visual": "Iteration bars beside stationary solution.",
+      "proof": "Solve finite example; convergence needs irreducibility and aperiodicity.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-445-introduction-to-stochastic-processes-spring-2015/365d85ac35a7c006bc33dd03da633997_MIT18_445S15_lecture1.pdf"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "transition matrices",
+        "linear equations"
+      ],
+      "tags": [
+        "stationary-distributions",
+        "detailed-balance",
+        "time-reversal",
+        "periodicity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-poisson-counts",
+      "title": "Random arrivals at an imaginary museum",
+      "topic": "stochastic-processes",
+      "level": "L2",
+      "hook": "Visitors arrive at a tiny model museum at random times.",
+      "outcome": "Use a Poisson count model and check rate assumptions.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:exponential-functions",
+        "explorations:refresher:probability"
+      ],
+      "formula": "P(N(t)=k)=e^(-lambda t)(lambda t)^k/k!",
+      "visual": "Event timeline and count histogram.",
+      "proof": "Derive from stated Poisson-process axioms or small-interval limit; model is illustrative.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/Lesson12"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "exponential function",
+        "probability"
+      ],
+      "tags": [
+        "poisson-processes",
+        "independent-increments",
+        "rare-event-limits"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-waiting-times",
+      "title": "The next chime has no appointment",
+      "topic": "stochastic-processes",
+      "level": "L2",
+      "hook": "Wait for the next event in the toy arrival model.",
+      "outcome": "Connect exponential waiting times to a Poisson process.",
+      "prerequisites": [
+        "explorations:stochastic-processes-poisson-counts",
+        "explorations:calc-area-accumulates"
+      ],
+      "formula": "P(T>t)=e^(-lambda t)",
+      "visual": "Survival curve and sampled waiting times.",
+      "proof": "Use zero-count probability to derive survival; lack-of-memory depends on model.",
+      "sources": [
+        "https://online.stat.psu.edu/stat414/Lesson15"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Poisson counts",
+        "integrals"
+      ],
+      "tags": [
+        "exponential-distribution",
+        "survival-probabilities",
+        "memorylessness"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-queue",
+      "title": "Why a short queue sometimes grows",
+      "topic": "stochastic-processes",
+      "level": "L3",
+      "hook": "One artist signs imaginary postcards as visitors arrive.",
+      "outcome": "Model a single-server queue and compare arrival and service rates.",
+      "prerequisites": [
+        "explorations:probability-expectation",
+        "explorations:stochastic-processes-poisson-counts"
+      ],
+      "formula": "rho=lambda/mu; stable M/M/1 requires rho<1",
+      "visual": "Queue length timeline under two load settings.",
+      "proof": "State M/M/1 assumptions and stationary result; finite animation is no proof of stability.",
+      "sources": [
+        "https://ocw.mit.edu/courses/2-854-introduction-to-manufacturing-systems-fall-2016/resources/mit2_854f16_mm1queue/"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "expected values",
+        "Poisson counts"
+      ],
+      "tags": [
+        "mm1-queue",
+        "queue-stability",
+        "observation-bias",
+        "jump-chains",
+        "uniformisation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stochastic-processes-branching",
+      "title": "A family tree that may end",
+      "topic": "stochastic-processes",
+      "level": "L3",
+      "hook": "Each fantasy creature leaves 0, 1 or 2 story descendants.",
+      "outcome": "Calculate expected generation size and extinction in a toy branching process.",
+      "prerequisites": [
+        "explorations:probability-expectation",
+        "explorations:refresher:probability"
+      ],
+      "formula": "E[Z_n]=m^n Z_0; q=f(q)",
+      "visual": "Branching trees and extinction-fraction readout.",
+      "proof": "Derive expectation recursively and fixed-point equation; simulated trees are examples.",
+      "sources": [
+        "https://ocw.mit.edu/courses/14-15j-networks-spring-2018/5bf642a45aafcfde7a0e8bc92da7601b_MIT14_15JS18_lec9-10.pdf"
+      ],
+      "catalogFields": [
+        "stochastic-processes"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "expectation",
+        "probability"
+      ],
+      "tags": [
+        "galton-watson-processes",
+        "extinction-probabilities",
+        "generating-functions",
+        "conditioned-branching"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-surprise",
+      "title": "How surprising is a symbol?",
+      "topic": "information-theory",
+      "level": "L1",
+      "hook": "Compare a rare glyph and a common glyph in a made-up alphabet.",
+      "outcome": "Measure idealized self-information in bits.",
+      "prerequisites": [
+        "explorations:refresher:probability",
+        "explorations:refresher:powers"
+      ],
+      "formula": "I(x)=-log_2 p(x)",
+      "visual": "Probability slider with bit-height bars.",
+      "proof": "Derive additivity under independent symbols; probabilities are assumed.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "probability",
+        "logarithms refresher"
+      ],
+      "tags": [
+        "self-information",
+        "logarithms",
+        "independent-observations"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-entropy",
+      "title": "Average surprise in a mystery bag",
+      "topic": "information-theory",
+      "level": "L2",
+      "hook": "A bag contains symbols with unequal frequencies.",
+      "outcome": "Compute Shannon entropy and locate the maximum for a binary alphabet.",
+      "prerequisites": [
+        "explorations:probability-expectation",
+        "explorations:refresher:powers"
+      ],
+      "formula": "H(X)=-sum_x p(x)log_2 p(x)",
+      "visual": "Entropy curve for a binary source.",
+      "proof": "Derive the binary maximum at p=1/2 by calculus or concavity; general finite-alphabet maximum is deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "expected value",
+        "logarithms"
+      ],
+      "tags": [
+        "shannon-entropy",
+        "average-surprise",
+        "binary-entropy"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-joint-entropy",
+      "title": "Two clues can repeat information",
+      "topic": "information-theory",
+      "level": "L2",
+      "hook": "Two colored clue cards are drawn together.",
+      "outcome": "Compare joint and separate uncertainty.",
+      "prerequisites": [
+        "explorations:information-theory-entropy",
+        "library:book-introduction-to-probability:joint-distributions-covariance"
+      ],
+      "formula": "H(X,Y)=H(X)+H(Y|X)",
+      "visual": "Joint probability heatmap.",
+      "proof": "Derive chain rule by expanding log joint probability.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "entropy",
+        "joint probabilities"
+      ],
+      "tags": [
+        "joint-entropy",
+        "conditional-entropy",
+        "entropy-chain-rule"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-mutual-information",
+      "title": "How much does one clue reveal?",
+      "topic": "information-theory",
+      "level": "L3",
+      "hook": "A noisy hint predicts a hidden card suit.",
+      "outcome": "Compute mutual information and distinguish it from correlation.",
+      "prerequisites": [
+        "explorations:information-theory-joint-entropy"
+      ],
+      "formula": "I(X;Y)=H(X)-H(X|Y)",
+      "visual": "Linked contingency table and uncertainty bars.",
+      "proof": "Prove nonnegativity via KL divergence sketch; estimation bias deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "conditional entropy"
+      ],
+      "tags": [
+        "mutual-information",
+        "conditional-entropy",
+        "nonlinear-dependence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-prefix-code",
+      "title": "Make a code no symbol can confuse",
+      "topic": "information-theory",
+      "level": "L2",
+      "hook": "Encode a small fictional alphabet for a secret note.",
+      "outcome": "Build a prefix-free code and compute its average length.",
+      "prerequisites": [
+        "explorations:trees",
+        "explorations:information-theory-entropy"
+      ],
+      "formula": "L=sum_x p(x)ell(x); Kraft: sum_x 2^(-ell(x))<=1",
+      "visual": "Binary code tree and encoded string.",
+      "proof": "Explain unique decoding for prefix codes; optimality of Huffman deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-200-principles-of-discrete-applied-mathematics-spring-2024/mit18_200_s24_lec19.pdf"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "binary trees",
+        "entropy"
+      ],
+      "tags": [
+        "prefix-free-codes",
+        "kraft-inequality",
+        "instantaneous-decoding"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-huffman",
+      "title": "Why common symbols get short codes",
+      "topic": "information-theory",
+      "level": "L3",
+      "hook": "Compress a tiny set of handmade icons.",
+      "outcome": "Apply Huffman merging and compare code length with entropy.",
+      "prerequisites": [
+        "explorations:information-theory-prefix-code",
+        "explorations:probability-expectation"
+      ],
+      "formula": "H(X)<=L_Huffman<H(X)+1",
+      "visual": "Merge tree with weighted leaf depths.",
+      "proof": "Prove greedy exchange idea in finite case; full theorem optional.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-200-principles-of-discrete-applied-mathematics-spring-2024/mit18_200_s24_lec19.pdf"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "prefix codes",
+        "weighted averages"
+      ],
+      "tags": [
+        "huffman-coding",
+        "greedy-algorithms",
+        "block-coding",
+        "expected-code-length"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-noisy-channel",
+      "title": "A message through a fickle switch",
+      "topic": "information-theory",
+      "level": "L2",
+      "hook": "A bit flips with chosen probability in a toy channel.",
+      "outcome": "Compute output error and conditional uncertainty.",
+      "prerequisites": [
+        "explorations:refresher:probability",
+        "explorations:information-theory-entropy"
+      ],
+      "formula": "P(Y!=X)=epsilon for binary symmetric channel",
+      "visual": "Input-output transition diagram.",
+      "proof": "Exact channel table calculation; practical communication systems are out of scope.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "conditional probability",
+        "entropy"
+      ],
+      "tags": [
+        "binary-symmetric-channel",
+        "bit-errors",
+        "channel-information"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-kl-divergence",
+      "title": "The cost of a wrong probability model",
+      "topic": "information-theory",
+      "level": "L3",
+      "hook": "One guessed symbol distribution differs from the bag.",
+      "outcome": "Calculate KL divergence and explain why it is not a distance.",
+      "prerequisites": [
+        "explorations:refresher:powers",
+        "explorations:information-theory-entropy"
+      ],
+      "formula": "D_KL(P||Q)=sum_x p(x)log_2(p(x)/q(x))",
+      "visual": "Two probability bars and log-loss contributions.",
+      "proof": "State Gibbs inequality and sketch via log u<=u-1; asymmetry by counterexample.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "logarithms",
+        "entropy"
+      ],
+      "tags": [
+        "kl-divergence",
+        "log-loss",
+        "data-processing",
+        "support-conditions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "information-theory-information-estimation",
+      "title": "The tiny sample looks too predictable",
+      "topic": "information-theory",
+      "level": "L3",
+      "hook": "Estimate alphabet entropy from only a handful of draws.",
+      "outcome": "Observe plug-in estimator bias and report uncertainty.",
+      "prerequisites": [
+        "explorations:information-theory-entropy",
+        "explorations:statistics-inference-sampling-variation"
+      ],
+      "formula": "Hhat=-sum_x phat(x)log_2 phat(x)",
+      "visual": "Sampling histogram of entropy estimates.",
+      "proof": "Finite-sample bias shown by enumeration for small cases; simulation is illustrative.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/"
+      ],
+      "catalogFields": [
+        "information-coding-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "entropy",
+        "sampling variation"
+      ],
+      "tags": [
+        "empirical-entropy",
+        "mutual-information-estimation",
+        "finite-sample-bias"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-payoff-matrix",
+      "title": "Two players, four outcomes",
+      "topic": "game-social-choice",
+      "level": "L1",
+      "hook": "Two friends choose independent moves in a tabletop puzzle.",
+      "outcome": "Read a payoff matrix and separate preference from payoff numbers.",
+      "prerequisites": [],
+      "formula": "u_i(s_1,s_2)",
+      "visual": "Two-by-two cells with both players’ scores.",
+      "proof": "Definitions and payoff comparisons are exact for the stated toy game.",
+      "sources": [
+        "https://ocw.mit.edu/courses/17-810-game-theory-spring-2021/pages/lecture-slides/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "tables",
+        "ordered pairs"
+      ],
+      "tags": [
+        "payoff-matrices",
+        "ordered-payoffs",
+        "simultaneous-games"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-dominant-strategy",
+      "title": "A move that wins every comparison",
+      "topic": "game-social-choice",
+      "level": "L1",
+      "hook": "A tabletop puzzle gives each player two move options.",
+      "outcome": "Check strict and weak dominance, including when neither action dominates.",
+      "prerequisites": [
+        "explorations:game-social-choice-payoff-matrix"
+      ],
+      "formula": "s_i weakly dominates t_i iff u_i(s_i,s_-i)>=u_i(t_i,s_-i) for every s_-i, with > for at least one; strict dominance has > for every s_-i",
+      "visual": "Highlight row-wise payoff comparisons.",
+      "proof": "Exhaustive finite comparisons; at least one strict improvement distinguishes weak dominance from payoff equivalence.",
+      "sources": [
+        "https://ocw.mit.edu/courses/17-810-game-theory-spring-2021/pages/lecture-slides/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "payoff matrices"
+      ],
+      "tags": [
+        "strict-dominance",
+        "weak-dominance",
+        "dominant-strategies"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-nash",
+      "title": "Stable choices are not always nicest",
+      "topic": "game-social-choice",
+      "level": "L2",
+      "hook": "Players pick paths that can block each other.",
+      "outcome": "Locate pure Nash equilibria using unilateral deviations.",
+      "prerequisites": [
+        "explorations:game-social-choice-payoff-matrix"
+      ],
+      "formula": "s* Nash iff u_i(s*)>=u_i(s_i,s*_-i) for every player i and action s_i",
+      "visual": "Best-response arrows over a payoff grid.",
+      "proof": "Check all deviations in the finite toy game; existence in pure actions not guaranteed.",
+      "sources": [
+        "https://ocw.mit.edu/courses/17-810-game-theory-spring-2021/pages/lecture-slides/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "best responses"
+      ],
+      "tags": [
+        "nash-equilibrium",
+        "best-responses",
+        "unilateral-deviations"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-mixed-strategy",
+      "title": "Why randomize a move?",
+      "topic": "game-social-choice",
+      "level": "L2",
+      "hook": "A hide-and-seek game has no stable pure choice.",
+      "outcome": "Solve a two-by-two mixed equilibrium by indifference.",
+      "prerequisites": [
+        "explorations:probability-expectation",
+        "explorations:game-social-choice-nash"
+      ],
+      "formula": "E[u_i(a, sigma_-i)]=E[u_i(b, sigma_-i)] on mixed support",
+      "visual": "Payoff lines crossing as mix probability varies.",
+      "proof": "Derive for finite two-action example; mixing models strategic uncertainty.",
+      "sources": [
+        "https://ocw.mit.edu/courses/17-810-game-theory-spring-2021/pages/lecture-slides/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L3",
+        "levelRationale": "Solves two finite indifference equations and checks all pure deviations; no general equilibrium existence proof is required.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "expected payoff",
+        "Nash equilibrium"
+      ],
+      "tags": [
+        "mixed-strategies",
+        "indifference-conditions",
+        "zero-sum-games"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-repeated-games",
+      "title": "What changes when play repeats?",
+      "topic": "game-social-choice",
+      "level": "L3",
+      "hook": "The same two-player puzzle is played many evenings.",
+      "outcome": "Compare one-shot and repeated incentives under a stated discount factor.",
+      "prerequisites": [
+        "explorations:game-social-choice-payoff-matrix",
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem"
+      ],
+      "formula": "V=sum_{t=0}^infty delta^t u_t, 0<delta<1",
+      "visual": "Round timeline with strategy branches.",
+      "proof": "Compute payoff comparison in one toy repeated game; no universal cooperation claim.",
+      "sources": [
+        "https://ocw.mit.edu/courses/17-810-game-theory-spring-2021/pages/lecture-slides/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "payoff matrices",
+        "geometric series"
+      ],
+      "tags": [
+        "repeated-games",
+        "grim-trigger",
+        "discounted-payoffs",
+        "subgame-perfection"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-majority-cycle",
+      "title": "The group can prefer A to B to C to A",
+      "topic": "game-social-choice",
+      "level": "L1",
+      "hook": "A book club ranks three covers.",
+      "outcome": "Construct a Condorcet cycle from individual rankings.",
+      "prerequisites": [],
+      "formula": "A>B, B>C, C>A by pairwise majorities",
+      "visual": "Three ballots and directed majority cycle.",
+      "proof": "Enumerate pairwise votes; no theorem about all profiles.",
+      "sources": [
+        "https://plato.stanford.edu/entries/social-choice/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "ordering",
+        "majority counts"
+      ],
+      "tags": [
+        "majority-cycles",
+        "condorcet-winners",
+        "agenda-dependence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-borda",
+      "title": "Scoring ranked choices changes the winner",
+      "topic": "game-social-choice",
+      "level": "L1",
+      "hook": "Vote on three possible mural colors.",
+      "outcome": "Compare plurality and Borda counts on the same ballots.",
+      "prerequisites": [
+        "explorations:discovery:voting-circle"
+      ],
+      "formula": "Borda score(c)=sum_v points_v(c)",
+      "visual": "Ballot table and score bars.",
+      "proof": "Exact tally; fairness depends on chosen criteria.",
+      "sources": [
+        "https://plato.stanford.edu/entries/social-choice/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L2",
+        "levelRationale": "Ranked-ballot scoring and comparison use finite sums and ordering.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "ranked ballots",
+        "addition"
+      ],
+      "tags": [
+        "borda-count",
+        "plurality-voting",
+        "rank-scoring"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-arrow",
+      "title": "What Arrow’s theorem actually assumes",
+      "topic": "game-social-choice",
+      "level": "L2",
+      "hook": "Design rules for a fictional club constitution.",
+      "outcome": "State the domain and conditions behind Arrow’s impossibility theorem.",
+      "prerequisites": [
+        "explorations:discovery:voting-circle"
+      ],
+      "formula": "unrestricted domain + Pareto + IIA + non-dictatorship cannot all hold for >=3 options",
+      "visual": "Condition cards and counterexample profiles.",
+      "proof": "State theorem accurately; full proof deferred to course.",
+      "sources": [
+        "https://plato.stanford.edu/entries/arrows-theorem/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L3",
+        "levelRationale": "Illustrates ranking axioms by finite ballots and states Arrow with an explicit proof boundary; the general impossibility proof is not required.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "rankings",
+        "pairwise comparisons"
+      ],
+      "tags": [
+        "arrow-impossibility",
+        "independence-of-irrelevant-alternatives",
+        "social-rankings",
+        "pareto-condition"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "game-social-choice-strategic-voting",
+      "title": "Sincere ballots can be unstable",
+      "topic": "game-social-choice",
+      "level": "L2",
+      "hook": "A voter changes a ranking to help a favorite cover.",
+      "outcome": "Show a manipulable profile for a named rule.",
+      "prerequisites": [
+        "explorations:game-social-choice-borda"
+      ],
+      "formula": "outcome(report_i, reports_-i) compared with outcome(truth_i, reports_-i)",
+      "visual": "Editable ballot with before-and-after tally.",
+      "proof": "Give explicit counterexample; no claim that every profile is manipulable.",
+      "sources": [
+        "https://plato.stanford.edu/entries/social-choice/"
+      ],
+      "catalogFields": [
+        "game-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L3",
+        "levelRationale": "A finite counterexample and a quantified deviation check establish manipulability; broader impossibility results are outside the proof.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "plurality or Borda counting"
+      ],
+      "tags": [
+        "strategic-voting",
+        "plurality-voting",
+        "tie-breaking",
+        "preference-manipulation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-model-cycle",
+      "title": "A model begins with a question",
+      "topic": "mathematical-modelling",
+      "level": "L1",
+      "hook": "Estimate how many paper tiles cover an imagined wall mural.",
+      "outcome": "Choose variables, assumptions, units and a checkable output.",
+      "prerequisites": [],
+      "formula": "tile count approximately area/area per tile",
+      "visual": "Question-assumption-prediction diagram.",
+      "proof": "Dimensional check is exact; approximation relies on tile and gap assumptions.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "arithmetic",
+        "units"
+      ],
+      "tags": [
+        "modelling-assumptions",
+        "dimensional-analysis",
+        "tile-counting",
+        "boundary-effects"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-scaling",
+      "title": "Build a miniature gallery that scales",
+      "topic": "mathematical-modelling",
+      "level": "L1",
+      "hook": "Scale a room drawing while estimating paint area.",
+      "outcome": "Separate length, area and volume scaling.",
+      "prerequisites": [
+        "explorations:refresher:powers",
+        "library:book-euclidean-geometry-trigonometry:area-pythagorean-theorem"
+      ],
+      "formula": "L~s, A~s^2, V~s^3",
+      "visual": "Scale slider with linked lengths, areas and volumes.",
+      "proof": "Derive from products of dimensions for similar shapes.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "powers",
+        "geometry"
+      ],
+      "tags": [
+        "geometric-scaling",
+        "similarity",
+        "area-volume-scaling"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-sensitivity",
+      "title": "Which assumption matters most?",
+      "topic": "mathematical-modelling",
+      "level": "L2",
+      "hook": "A toy mural budget depends on tile size and waste.",
+      "outcome": "Vary one input at a time and compare output change.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "explorations:refresher:fractions"
+      ],
+      "formula": "elasticity=(x/y)(dy/dx) when differentiable",
+      "visual": "Parameter sliders and tornado-style output bars.",
+      "proof": "Exact for stated formula; local derivative does not cover large nonlinear shifts.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "percentages"
+      ],
+      "tags": [
+        "sensitivity-analysis",
+        "elasticity",
+        "finite-changes",
+        "rounding-thresholds"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-beats",
+      "title": "Two tones make a slow pulse",
+      "topic": "mathematical-modelling",
+      "level": "L1",
+      "hook": "Two nearby notes produce a rhythmic beat.",
+      "outcome": "Use superposition to predict beat frequency.",
+      "prerequisites": [
+        "library:book-precalculus:sine-cosine-tangent",
+        "library:book-precalculus:trigonometric-identities"
+      ],
+      "formula": "sin(2pi f1 t)+sin(2pi f2 t)=2 sin(pi(f1+f2)t)cos(pi(f1-f2)t)",
+      "visual": "Waveform and envelope linked to optional audio.",
+      "proof": "Trigonometric identity exact; acoustic perception is simplified.",
+      "sources": [
+        "https://ocw.mit.edu/courses/21m-380-music-and-technology-sound-design-spring-2016/"
+      ],
+      "catalogFields": [
+        "mathematical-physics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L2",
+        "levelRationale": "Uses the sine sum identity and elementary trigonometric periods, with no calculus requirement.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "sine waves",
+        "basic trig"
+      ],
+      "tags": [
+        "wave-superposition",
+        "beats",
+        "amplitude-envelopes"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-random-art",
+      "title": "Rules, randomness and repeatability in art",
+      "topic": "mathematical-modelling",
+      "level": "L1",
+      "hook": "Generate a field of dots with a chosen seed.",
+      "outcome": "Distinguish deterministic rules, random draws and aesthetic interpretation.",
+      "prerequisites": [
+        "explorations:refresher:probability",
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "(x_i,y_i) sampled iid Uniform([0,1]^2)",
+      "visual": "Seeded dot field with density readout.",
+      "proof": "Uniform sampling statement is model definition; aesthetic judgement is subjective.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "probability",
+        "coordinates"
+      ],
+      "tags": [
+        "uniform-sampling",
+        "pseudorandom-seeds",
+        "rejection-rules",
+        "selection-effects"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-network-diffusion",
+      "title": "A rumor on a small fictional network",
+      "topic": "mathematical-modelling",
+      "level": "L2",
+      "hook": "Colored markers move across a drawn friendship graph.",
+      "outcome": "Compare network structure under an explicit transmission rule.",
+      "prerequisites": [
+        "explorations:refresher:networks",
+        "explorations:refresher:probability"
+      ],
+      "formula": "P(no transmission to v in step)=product_{u active neighbor}(1-p_uv)",
+      "visual": "Editable graph and stepwise state table.",
+      "proof": "Conditional product requires independent edge attempts; simulation is illustrative, not social prediction.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "graph-theory",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "graphs",
+        "probability"
+      ],
+      "tags": [
+        "graph-theory",
+        "dynamical-systems",
+        "synchronous-diffusion",
+        "conditional-independence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-oscillator",
+      "title": "A swinging sketch and a linear model",
+      "topic": "mathematical-modelling",
+      "level": "L3",
+      "hook": "A drawn pendulum decorates a digital clock.",
+      "outcome": "Compare small-angle linear oscillator with nonlinear pendulum.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "library:book-precalculus:sine-cosine-tangent"
+      ],
+      "formula": "theta''+(g/L)sin(theta)=0; for small |theta|, sin(theta) approximately theta",
+      "visual": "Side-by-side paths with amplitude slider.",
+      "proof": "Derive small-angle approximation and show mismatch at large angles.",
+      "sources": [
+        "https://ocw.mit.edu/courses/es-1803-differential-equations-spring-2024/mites_1803_s24_topic_full.pdf"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "derivatives",
+        "sine refresher"
+      ],
+      "tags": [
+        "pendulum-equation",
+        "small-angle-approximation",
+        "linearisation",
+        "restoring-force"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-fit-vs-explain",
+      "title": "A curve can fit and still mislead",
+      "topic": "mathematical-modelling",
+      "level": "L1",
+      "hook": "Fit several curves to invented gallery visitor counts.",
+      "outcome": "Distinguish interpolation, extrapolation and mechanism.",
+      "prerequisites": [
+        "explorations:refresher:functions"
+      ],
+      "formula": "residual_i=y_i-f(x_i)",
+      "visual": "Data and competing fitted curves with held-out points.",
+      "proof": "Residual calculation exact; predictive claim depends on validation design.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L2",
+        "levelRationale": "Compares a line and polynomial by direct substitution and subtraction; no statistical inference is needed.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "residuals"
+      ],
+      "tags": [
+        "interpolation",
+        "extrapolation",
+        "overfitting",
+        "held-out-prediction"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "mathematical-modelling-model-validation",
+      "title": "Stress-test a model before sharing it",
+      "topic": "mathematical-modelling",
+      "level": "L1",
+      "hook": "Predict supplies for a fantasy festival from sparse pilot data.",
+      "outcome": "Run unit, boundary, sensitivity and held-out checks, then write a limitation note.",
+      "prerequisites": [],
+      "formula": "error=observed-predicted; MAE=sum_i |error_i|/n",
+      "visual": "Checklist linked to prediction and error table.",
+      "proof": "Error metrics exact on sample; model validity beyond it remains uncertain.",
+      "sources": [
+        "https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/"
+      ],
+      "catalogFields": [
+        "statistics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "previousCatalogLevel": "L3",
+        "levelRationale": "Defines residuals, absolute errors, held-out comparisons and sensitivity using arithmetic and a linear formula.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "sampling variation",
+        "sensitivity"
+      ],
+      "tags": [
+        "dimensional-analysis",
+        "boundary-checks",
+        "held-out-errors",
+        "mean-absolute-error"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "probability-independence-return",
+      "title": "Return to the model: three chances and a remembered draw",
+      "topic": "probability",
+      "level": "L2",
+      "hook": "What can three pair checks leave undecided, and what does putting a token back actually guarantee?",
+      "outcome": "Audit pairwise versus mutual independence and a replacement mechanism using exact finite laws, then solve fresh return tasks.",
+      "prerequisites": [
+        "explorations:refresher:fractions",
+        "explorations:probability-sample-space",
+        "explorations:probability-conditional-probability"
+      ],
+      "formula": "For three events, mutual independence requires all three pair products and the triple product.",
+      "visual": "Complete eight-ticket and sixteen-ticket word tables, with exact two-colour procedure tables.",
+      "proof": "Direct finite calculations establish every pair product and a failed triple product; a conditional branch calculation distinguishes replacement from fresh uniform selection.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_pset03_sol.pdf"
+      ],
+      "catalogFields": [
+        "probability"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "fractions",
+        "finite sample spaces",
+        "conditional probability"
+      ],
+      "tags": [
+        "pairwise-independence",
+        "mutual-independence",
+        "selection-mechanisms",
+        "conditional-probability"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "courses": [
+    {
+      "id": "probability-primer",
+      "title": "Probability sampler",
+      "topic": "probability",
+      "prerequisites": [
+        "fractions and simple algebra (local refresher provided)"
+      ],
+      "outcomes": [
+        "Count finite outcomes and calculate a conditional chance",
+        "Explain expected score in a small game"
+      ],
+      "modules": [
+        {
+          "title": "A short starting pair",
+          "articleIds": [
+            "probability-sample-space",
+            "probability-addition-rule"
+          ]
+        },
+        {
+          "title": "One useful connection",
+          "articleIds": [
+            "probability-conditional-probability",
+            "probability-expectation"
+          ]
+        }
+      ],
+      "capstone": "Design a two-dice card game; count an event, condition on a clue, and calculate expected score.",
+      "assessment": "Rubric: correct event count, explicit conditioning denominator, correct expected score, and one assumption. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-probability"
+    },
+    {
+      "id": "probability-accelerated",
+      "title": "Probability accelerated route",
+      "topic": "probability",
+      "prerequisites": [
+        "fractions and simple algebra"
+      ],
+      "outcomes": [
+        "Derive Bayes odds from a frequency tree",
+        "Check independence and compute moments of a binomial count"
+      ],
+      "modules": [
+        {
+          "title": "Refresh core ideas",
+          "articleIds": [
+            "probability-sample-space",
+            "probability-addition-rule",
+            "probability-conditional-probability"
+          ]
+        },
+        {
+          "title": "Work across examples",
+          "articleIds": [
+            "probability-bayes-odds",
+            "probability-independence",
+            "probability-expectation",
+            "probability-variance",
+            "probability-binomial"
+          ]
+        }
+      ],
+      "capstone": "Compare two marble-bag priors and a ten-draw game; show posterior odds, expectation, variance and binomial count.",
+      "assessment": "Rubric: frequency-tree counts reconcile, prior and posterior are distinguished, binomial assumptions are stated, and variance is computed. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-probability"
+    },
+    {
+      "id": "probability-deep",
+      "title": "Finite probability and distribution arguments",
+      "topic": "probability",
+      "prerequisites": [
+        "fractions and simple algebra"
+      ],
+      "outcomes": [
+        "Prove finite probability identities and conditional updates",
+        "State the assumptions behind a normal approximation and identify a counterexample"
+      ],
+      "modules": [
+        {
+          "title": "Foundations",
+          "articleIds": [
+            "probability-sample-space",
+            "probability-addition-rule",
+            "probability-conditional-probability"
+          ]
+        },
+        {
+          "title": "Mechanisms and examples",
+          "articleIds": [
+            "probability-bayes-odds",
+            "probability-independence",
+            "probability-expectation"
+          ]
+        },
+        {
+          "title": "Limits and deeper questions",
+          "articleIds": [
+            "probability-variance",
+            "probability-binomial",
+            "probability-normal-approximation"
+          ]
+        }
+      ],
+      "capstone": "Write a finite-game probability note proving Bayes odds and moment identities, then compare exact binomial bars with a qualified normal approximation.",
+      "assessment": "Rubric: finite derivations are valid, approximation conditions are named, a failure case is shown, and simulation is labelled illustrative. Covers all listed articles in this bounded route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-probability"
+    },
+    {
+      "id": "statistics-inference-primer",
+      "title": "Statistics and inference sampler",
+      "topic": "statistics-inference",
+      "prerequisites": [
+        "fractions, graphs and basic probability (local refresher provided)"
+      ],
+      "outcomes": [
+        "Describe a sample frame and two resistant summaries",
+        "Explain why repeated samples give different estimates"
+      ],
+      "modules": [
+        {
+          "title": "A short starting pair",
+          "articleIds": [
+            "statistics-inference-sampling-frame",
+            "statistics-inference-histogram-bin"
+          ]
+        },
+        {
+          "title": "One useful connection",
+          "articleIds": [
+            "statistics-inference-mean-median",
+            "statistics-inference-sampling-variation"
+          ]
+        }
+      ],
+      "capstone": "Create a fictional club poll with a biased sampling frame and two honest samples; report summaries and sampling variation.",
+      "assessment": "Rubric: target and frame are distinct, summaries match displayed data, and sample-to-sample variation is explained. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-statistics-inference"
+    },
+    {
+      "id": "statistics-inference-accelerated",
+      "title": "Statistics and inference accelerated route",
+      "topic": "statistics-inference",
+      "prerequisites": [
+        "fractions, graphs and basic probability"
+      ],
+      "outcomes": [
+        "Interpret interval coverage and a null-model p-value correctly",
+        "Inspect correlation, subgroup rates and residuals before describing a trend"
+      ],
+      "modules": [
+        {
+          "title": "Refresh core ideas",
+          "articleIds": [
+            "statistics-inference-sampling-frame",
+            "statistics-inference-mean-median",
+            "statistics-inference-sampling-variation"
+          ]
+        },
+        {
+          "title": "Work across examples",
+          "articleIds": [
+            "statistics-inference-confidence-coverage",
+            "statistics-inference-p-value",
+            "statistics-inference-correlation",
+            "statistics-inference-regression-residuals",
+            "statistics-inference-simpsons-paradox"
+          ]
+        }
+      ],
+      "capstone": "Analyse fictional puzzle-route counts: construct a confidence interval, prespecify a null-tail calculation and show a Simpson reversal.",
+      "assessment": "Rubric: interval is described by coverage, p-value by its null tail, group rates reconcile with totals, and no causal claim is made. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-statistics-inference"
+    },
+    {
+      "id": "statistics-inference-deep",
+      "title": "Sampling, inference and interpretation limits",
+      "topic": "statistics-inference",
+      "prerequisites": [
+        "fractions, graphs and basic probability"
+      ],
+      "outcomes": [
+        "Derive a sampling-variation result and audit multiple testing",
+        "Build and critique an inference using assumptions, effect size and uncertainty"
+      ],
+      "modules": [
+        {
+          "title": "Foundations",
+          "articleIds": [
+            "statistics-inference-sampling-frame",
+            "statistics-inference-histogram-bin",
+            "statistics-inference-mean-median"
+          ]
+        },
+        {
+          "title": "Mechanisms and examples",
+          "articleIds": [
+            "statistics-inference-sampling-variation",
+            "statistics-inference-confidence-coverage",
+            "statistics-inference-p-value"
+          ]
+        },
+        {
+          "title": "Limits and deeper questions",
+          "articleIds": [
+            "statistics-inference-multiple-testing",
+            "statistics-inference-correlation",
+            "statistics-inference-regression-residuals",
+            "statistics-inference-simpsons-paradox"
+          ]
+        }
+      ],
+      "capstone": "Audit one invented study from frame to residuals: derive a standard error, calculate coverage and p-value under stated models, and construct a confounding counterexample.",
+      "assessment": "Rubric: assumptions precede calculations, uncertainty and effect size are both reported, a Simpson counterexample is arithmetically sound, and residual limits are clear. Covers all listed articles in this bounded route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 17
+      },
+      "retained": true,
+      "seriesId": "unhurried-statistics-inference"
+    },
+    {
+      "id": "stochastic-processes-primer",
+      "title": "Stochastic processes sampler",
+      "topic": "stochastic-processes",
+      "prerequisites": [
+        "conditional probability and expected value (local refresher provided)"
+      ],
+      "outcomes": [
+        "Trace a random walk and explain the Markov state",
+        "Translate an arrival story into a count model"
+      ],
+      "modules": [
+        {
+          "title": "A short starting pair",
+          "articleIds": [
+            "stochastic-processes-random-walk",
+            "stochastic-processes-markov-property"
+          ]
+        },
+        {
+          "title": "One useful connection",
+          "articleIds": [
+            "stochastic-processes-transition-matrix",
+            "stochastic-processes-poisson-counts"
+          ]
+        }
+      ],
+      "capstone": "Describe a three-state playlist and a toy arrival timeline; calculate one transition and one Poisson count.",
+      "assessment": "Rubric: state is sufficient for the proposed next-step rule, transition rows normalize, and arrival-rate units are correct. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-stochastic-processes"
+    },
+    {
+      "id": "stochastic-processes-accelerated",
+      "title": "Stochastic processes accelerated route",
+      "topic": "stochastic-processes",
+      "prerequisites": [
+        "conditional probability and expected value"
+      ],
+      "outcomes": [
+        "Solve a finite hitting probability and iterate a transition matrix",
+        "Connect Poisson counts with waiting times under model assumptions"
+      ],
+      "modules": [
+        {
+          "title": "Refresh core ideas",
+          "articleIds": [
+            "stochastic-processes-random-walk",
+            "stochastic-processes-gambler-ruin",
+            "stochastic-processes-markov-property"
+          ]
+        },
+        {
+          "title": "Work across examples",
+          "articleIds": [
+            "stochastic-processes-transition-matrix",
+            "stochastic-processes-stationary-distribution",
+            "stochastic-processes-poisson-counts",
+            "stochastic-processes-waiting-times"
+          ]
+        }
+      ],
+      "capstone": "Build a finite random walk and playlist chain; solve a hitting probability, iterate the matrix and compare an arrival/waiting calculation.",
+      "assessment": "Rubric: recurrence boundaries are right, matrix multiplication is checked, and Poisson/exponential assumptions are stated. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-stochastic-processes"
+    },
+    {
+      "id": "stochastic-processes-deep",
+      "title": "Finite chains, arrivals and branching models",
+      "topic": "stochastic-processes",
+      "prerequisites": [
+        "conditional probability and expected value",
+        "matrix multiplication and linear equations (bridges provided)",
+        "exponentials and elementary integrals (bridges provided)"
+      ],
+      "outcomes": [
+        "Derive and qualify a stationary distribution and queue model",
+        "Compare finite simulated paths with recurrence or limit claims"
+      ],
+      "modules": [
+        {
+          "title": "Foundations",
+          "articleIds": [
+            "stochastic-processes-random-walk",
+            "stochastic-processes-gambler-ruin",
+            "stochastic-processes-markov-property"
+          ]
+        },
+        {
+          "title": "Mechanisms and examples",
+          "articleIds": [
+            "stochastic-processes-transition-matrix",
+            "stochastic-processes-stationary-distribution",
+            "stochastic-processes-poisson-counts"
+          ]
+        },
+        {
+          "title": "Limits and deeper questions",
+          "articleIds": [
+            "stochastic-processes-waiting-times",
+            "stochastic-processes-queue",
+            "stochastic-processes-branching"
+          ]
+        }
+      ],
+      "capstone": "Analyse a small absorbing walk, a three-state chain and a toy queue; derive recurrence or stationary claims and test one branching extinction equation.",
+      "assessment": "Rubric: derivations identify conditions for convergence or stability, extinction root is chosen correctly, and finite runs are not used as proof. Covers all listed articles in this bounded route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-stochastic-processes"
+    },
+    {
+      "id": "information-theory-primer",
+      "title": "Information theory sampler",
+      "topic": "information-theory",
+      "prerequisites": [
+        "probability, expected value and logarithms (local refresher provided)"
+      ],
+      "outcomes": [
+        "Calculate surprise and entropy for a small alphabet",
+        "Build a uniquely decodable prefix code"
+      ],
+      "modules": [
+        {
+          "title": "A short starting pair",
+          "articleIds": [
+            "information-theory-surprise",
+            "information-theory-entropy"
+          ]
+        },
+        {
+          "title": "One useful connection",
+          "articleIds": [
+            "information-theory-joint-entropy",
+            "information-theory-prefix-code"
+          ]
+        }
+      ],
+      "capstone": "Invent a four-symbol alphabet; calculate surprise and entropy, then draw a valid prefix code.",
+      "assessment": "Rubric: probabilities sum to one, bit calculations are correct, code is prefix-free, and expected length uses source weights. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-information-theory"
+    },
+    {
+      "id": "information-theory-accelerated",
+      "title": "Information theory accelerated route",
+      "topic": "information-theory",
+      "prerequisites": [
+        "probability, expected value and logarithms"
+      ],
+      "outcomes": [
+        "Use chain rule and mutual information for noisy clues",
+        "Compare Huffman length with entropy for a stipulated distribution"
+      ],
+      "modules": [
+        {
+          "title": "Refresh core ideas",
+          "articleIds": [
+            "information-theory-surprise",
+            "information-theory-entropy",
+            "information-theory-joint-entropy"
+          ]
+        },
+        {
+          "title": "Work across examples",
+          "articleIds": [
+            "information-theory-mutual-information",
+            "information-theory-prefix-code",
+            "information-theory-huffman",
+            "information-theory-noisy-channel"
+          ]
+        }
+      ],
+      "capstone": "Send a toy alphabet through a noisy bit switch; compute conditional information and compare two code trees.",
+      "assessment": "Rubric: joint table normalizes, conditional entropy is computed, code lengths are compared fairly, and noise assumptions are explicit. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-information-theory"
+    },
+    {
+      "id": "information-theory-deep",
+      "title": "Discrete entropy and source coding",
+      "topic": "information-theory",
+      "prerequisites": [
+        "probability, expected value and logarithms"
+      ],
+      "outcomes": [
+        "Prove coding bounds in the finite setting",
+        "Distinguish model divergence from metric distance and audit entropy estimates"
+      ],
+      "modules": [
+        {
+          "title": "Foundations",
+          "articleIds": [
+            "information-theory-surprise",
+            "information-theory-entropy",
+            "information-theory-joint-entropy"
+          ]
+        },
+        {
+          "title": "Mechanisms and examples",
+          "articleIds": [
+            "information-theory-mutual-information",
+            "information-theory-prefix-code",
+            "information-theory-huffman"
+          ]
+        },
+        {
+          "title": "Limits and deeper questions",
+          "articleIds": [
+            "information-theory-noisy-channel",
+            "information-theory-kl-divergence",
+            "information-theory-information-estimation"
+          ]
+        }
+      ],
+      "capstone": "Construct a four-symbol source and channel; derive entropy chain rule, a code-length bound and a divergence example, then audit a tiny-sample entropy estimate.",
+      "assessment": "Rubric: identities have valid algebra, coding bound has its hypotheses, KL asymmetry uses a counterexample, and estimator bias is not ignored. Covers all listed articles in this bounded route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-information-theory"
+    },
+    {
+      "id": "game-social-choice-primer",
+      "title": "Game theory and social choice sampler",
+      "topic": "game-social-choice",
+      "prerequisites": [
+        "tables, fractions and ordered rankings (local refresher provided)"
+      ],
+      "outcomes": [
+        "Read a payoff matrix and test unilateral deviations",
+        "Construct a three-option majority cycle"
+      ],
+      "modules": [
+        {
+          "title": "A short starting pair",
+          "articleIds": [
+            "game-social-choice-payoff-matrix",
+            "game-social-choice-dominant-strategy"
+          ]
+        },
+        {
+          "title": "One useful connection",
+          "articleIds": [
+            "game-social-choice-nash",
+            "game-social-choice-majority-cycle"
+          ]
+        }
+      ],
+      "capstone": "Create a two-by-two puzzle payoff table and a three-cover ballot profile; find best responses and a majority cycle.",
+      "assessment": "Rubric: payoff comparisons use unilateral changes, pairwise ballot totals are correct, and the cycle is displayed explicitly. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-game-social-choice"
+    },
+    {
+      "id": "game-social-choice-accelerated",
+      "title": "Game theory and social choice accelerated route",
+      "topic": "game-social-choice",
+      "prerequisites": [
+        "tables, fractions and ordered rankings"
+      ],
+      "outcomes": [
+        "Solve a two-action mixed equilibrium",
+        "Compare voting counts and show a manipulable ballot profile"
+      ],
+      "modules": [
+        {
+          "title": "Refresh core ideas",
+          "articleIds": [
+            "game-social-choice-payoff-matrix",
+            "game-social-choice-dominant-strategy",
+            "game-social-choice-nash"
+          ]
+        },
+        {
+          "title": "Work across examples",
+          "articleIds": [
+            "game-social-choice-mixed-strategy",
+            "game-social-choice-majority-cycle",
+            "game-social-choice-borda",
+            "game-social-choice-strategic-voting"
+          ]
+        }
+      ],
+      "capstone": "Design a hide-and-seek payoff game and a mural-color election; solve a mixed equilibrium and show a strategic ballot.",
+      "assessment": "Rubric: mixed probabilities make supported actions indifferent, ballot outcome changes are calculated, and incentive claims stay within the toy rules. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-game-social-choice"
+    },
+    {
+      "id": "game-social-choice-deep",
+      "title": "Small games and ranked-ballot impossibility",
+      "topic": "game-social-choice",
+      "prerequisites": [
+        "tables, fractions and ordered rankings"
+      ],
+      "outcomes": [
+        "State the conditions of Arrow’s theorem precisely",
+        "Distinguish equilibrium, welfare and rule design through worked counterexamples"
+      ],
+      "modules": [
+        {
+          "title": "Foundations",
+          "articleIds": [
+            "game-social-choice-payoff-matrix",
+            "game-social-choice-dominant-strategy",
+            "game-social-choice-nash"
+          ]
+        },
+        {
+          "title": "Mechanisms and examples",
+          "articleIds": [
+            "game-social-choice-mixed-strategy",
+            "game-social-choice-repeated-games",
+            "game-social-choice-majority-cycle"
+          ]
+        },
+        {
+          "title": "Limits and deeper questions",
+          "articleIds": [
+            "game-social-choice-borda",
+            "game-social-choice-arrow",
+            "game-social-choice-strategic-voting"
+          ]
+        }
+      ],
+      "capstone": "Write a fictional club constitution comparing three ballot rules and one repeated game; prove small examples and state Arrow’s exact axioms.",
+      "assessment": "Rubric: equilibrium check is complete, voting rules use the same ballots, Arrow assumptions are stated without overreach, and repeated-game discounting is correct. Covers all listed articles in this bounded route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-game-social-choice"
+    },
+    {
+      "id": "mathematical-modelling-primer",
+      "title": "Mathematical modelling sampler",
+      "topic": "mathematical-modelling",
+      "prerequisites": [
+        "functions, units and basic probability (local refresher provided)"
+      ],
+      "outcomes": [
+        "Write assumptions, units and a sensitivity check for a toy model",
+        "Use a seeded random-art rule and explain its uncertainty"
+      ],
+      "modules": [
+        {
+          "title": "A short starting pair",
+          "articleIds": [
+            "mathematical-modelling-model-cycle",
+            "mathematical-modelling-scaling"
+          ]
+        },
+        {
+          "title": "One useful connection",
+          "articleIds": [
+            "mathematical-modelling-sensitivity",
+            "mathematical-modelling-random-art"
+          ]
+        }
+      ],
+      "capstone": "Estimate paper tiles for a mural, vary two assumptions and generate a seeded dot composition with a short model note.",
+      "assessment": "Rubric: units are consistent, assumptions are visible, sensitivity changes use the stated formula, and seeded output is reproducible. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-mathematical-modelling"
+    },
+    {
+      "id": "mathematical-modelling-accelerated",
+      "title": "Mathematical modelling accelerated route",
+      "topic": "mathematical-modelling",
+      "prerequisites": [
+        "functions, units and basic probability"
+      ],
+      "outcomes": [
+        "Derive a beat envelope and model a network spread rule",
+        "Compare fit with held-out performance and a limitation note"
+      ],
+      "modules": [
+        {
+          "title": "Refresh core ideas",
+          "articleIds": [
+            "mathematical-modelling-model-cycle",
+            "mathematical-modelling-scaling",
+            "mathematical-modelling-sensitivity"
+          ]
+        },
+        {
+          "title": "Work across examples",
+          "articleIds": [
+            "mathematical-modelling-beats",
+            "mathematical-modelling-random-art",
+            "mathematical-modelling-network-diffusion",
+            "mathematical-modelling-fit-vs-explain"
+          ]
+        }
+      ],
+      "capstone": "Model a two-tone beat and a toy network spread; compare formulas, simulation and held-out checks under changed parameters.",
+      "assessment": "Rubric: beat formula is correct, network edge independence is stated, simulation labels are clear, and validation uses held-out data. Covers selected articles only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-mathematical-modelling"
+    },
+    {
+      "id": "mathematical-modelling-deep",
+      "title": "Toy models from assumption to validation",
+      "topic": "mathematical-modelling",
+      "prerequisites": [
+        "functions, units and basic probability",
+        "derivatives and trigonometry (bridges provided)"
+      ],
+      "outcomes": [
+        "Derive one approximation and test its boundary",
+        "Validate and communicate a model through residual, sensitivity and assumption checks"
+      ],
+      "modules": [
+        {
+          "title": "Foundations",
+          "articleIds": [
+            "mathematical-modelling-model-cycle",
+            "mathematical-modelling-scaling",
+            "mathematical-modelling-sensitivity"
+          ]
+        },
+        {
+          "title": "Mechanisms and examples",
+          "articleIds": [
+            "mathematical-modelling-beats",
+            "mathematical-modelling-random-art",
+            "mathematical-modelling-network-diffusion"
+          ]
+        },
+        {
+          "title": "Limits and deeper questions",
+          "articleIds": [
+            "mathematical-modelling-oscillator",
+            "mathematical-modelling-fit-vs-explain",
+            "mathematical-modelling-model-validation"
+          ]
+        }
+      ],
+      "capstone": "Build a miniature sound-and-network exhibit: derive a beat or small-angle equation, test sensitivity and residuals, then write a validation and limits memo.",
+      "assessment": "Rubric: approximation range is named, model equations and units agree, sensitivity and residual checks are reproducible, and limits are candid. Covers all listed articles in this bounded route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-mathematical-modelling"
+    }
+  ],
+  "labs": [
+    {
+      "id": "probability-condition-reveal",
+      "title": "Reveal the denominator",
+      "topic": "probability",
+      "articleIds": [
+        "probability-conditional-probability",
+        "probability-bayes-odds"
+      ],
+      "controls": [
+        "Prior bag probabilities",
+        "Marble compositions",
+        "Number of draws"
+      ],
+      "readout": "Frequency tree, exact posterior and simulated estimate",
+      "invariant": "Posterior probabilities sum to 1; empirical frequencies approach values only with enough independent draws",
+      "pitfalls": "A likelihood is not a posterior; zero-probability evidence cannot be conditioned on",
+      "accessibleFallback": "Full branch-count table, formulas, keyboard controls and static worked cases",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "probability-distribution-builder",
+      "title": "Build a fair or lopsided game",
+      "topic": "probability",
+      "articleIds": [
+        "probability-expectation",
+        "probability-variance",
+        "probability-binomial"
+      ],
+      "controls": [
+        "Outcome scores",
+        "Outcome probabilities",
+        "Trial count"
+      ],
+      "readout": "Exact expectation and variance beside simulated running averages",
+      "invariant": "Probabilities sum to 1; exact mean is unchanged by trial count",
+      "pitfalls": "A small simulation can wander far from expectation",
+      "accessibleFallback": "Data table, exact arithmetic and downloadable text transcript",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "statistics-inference-coverage-factory",
+      "title": "Watch interval coverage",
+      "topic": "statistics-inference",
+      "articleIds": [
+        "statistics-inference-sampling-variation",
+        "statistics-inference-confidence-coverage"
+      ],
+      "controls": [
+        "Hidden proportion",
+        "Sample size",
+        "Nominal coverage",
+        "Repeat count"
+      ],
+      "readout": "Intervals that cover fixed parameter, observed coverage and nominal target",
+      "invariant": "Coverage claim concerns the method under its sampling assumptions",
+      "pitfalls": "A realized interval is not assigned a 95% posterior probability",
+      "accessibleFallback": "Text list of intervals with cover/miss flags and summary counts",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "statistics-inference-null-tail",
+      "title": "Explore null tails and selection",
+      "topic": "statistics-inference",
+      "articleIds": [
+        "statistics-inference-p-value",
+        "statistics-inference-multiple-testing"
+      ],
+      "controls": [
+        "Null spinner probability",
+        "Sample size",
+        "Number of prespecified tests",
+        "Tail direction"
+      ],
+      "readout": "Exact binomial tail and simulated minimum p-value distribution",
+      "invariant": "Exact null distribution normalized to 1",
+      "pitfalls": "p-value is not P(null true); choosing direction afterward changes the test; the exact familywise formula requires independent uniform null p-values.",
+      "accessibleFallback": "Exact probability table, keyboard tail selection and text histogram",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "stochastic-processes-walk-edges",
+      "title": "Walk until an edge",
+      "topic": "stochastic-processes",
+      "articleIds": [
+        "stochastic-processes-random-walk",
+        "stochastic-processes-gambler-ruin"
+      ],
+      "controls": [
+        "Start position",
+        "Board width",
+        "Step probability",
+        "Run count"
+      ],
+      "readout": "Exact finite hitting probability and sampled paths",
+      "invariant": "Absorbing states remain absorbing; probabilities total 1",
+      "pitfalls": "Finite runs cannot establish eventual absorption or exact probability",
+      "accessibleFallback": "Path table, recurrence solution and pauseable step controls",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "stochastic-processes-mood-chain",
+      "title": "Playlist mood chain",
+      "topic": "stochastic-processes",
+      "articleIds": [
+        "stochastic-processes-markov-property",
+        "stochastic-processes-transition-matrix",
+        "stochastic-processes-stationary-distribution"
+      ],
+      "controls": [
+        "Three-state transition rows",
+        "Start distribution",
+        "Step count"
+      ],
+      "readout": "Distribution by step and stationary candidate",
+      "invariant": "Every transition row sums to 1; distribution stays normalized",
+      "pitfalls": "Stationarity does not ensure convergence when chain is periodic or reducible",
+      "accessibleFallback": "Transition table, iteration table and plain-language state descriptions",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "information-theory-entropy-mixer",
+      "title": "Mix an alphabet",
+      "topic": "information-theory",
+      "articleIds": [
+        "information-theory-surprise",
+        "information-theory-entropy",
+        "information-theory-joint-entropy"
+      ],
+      "controls": [
+        "Symbol probabilities",
+        "Alphabet size",
+        "Optional second variable"
+      ],
+      "readout": "Surprise bars, entropy and conditional entropy",
+      "invariant": "Probabilities sum to 1; H(X,Y)=H(X)+H(Y|X)",
+      "pitfalls": "Observed sample frequencies differ from stipulated probabilities",
+      "accessibleFallback": "Editable probability table and computed values with formulas",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "information-theory-code-tree",
+      "title": "Code a tiny alphabet",
+      "topic": "information-theory",
+      "articleIds": [
+        "information-theory-prefix-code",
+        "information-theory-huffman"
+      ],
+      "controls": [
+        "Symbol weights",
+        "Merge choice",
+        "Message text"
+      ],
+      "readout": "Prefix tree, code lengths, expected length and entropy",
+      "invariant": "No leaf code is prefix of another; Kraft sum <= 1",
+      "pitfalls": "Entropy is a lower bound on ideal average length, not an achieved length for every finite code",
+      "accessibleFallback": "Tree as indented text and full encode/decode transcript",
+      "priority": "P2",
+      "status": "published"
+    },
+    {
+      "id": "game-social-choice-best-response",
+      "title": "Follow the best-response arrows",
+      "topic": "game-social-choice",
+      "articleIds": [
+        "game-social-choice-payoff-matrix",
+        "game-social-choice-dominant-strategy",
+        "game-social-choice-nash",
+        "game-social-choice-mixed-strategy"
+      ],
+      "controls": [
+        "Four payoff pairs",
+        "Player to deviate",
+        "Mix probabilities"
+      ],
+      "readout": "Pure equilibrium cells and expected payoff lines",
+      "invariant": "Marked pure equilibria pass every unilateral deviation check",
+      "pitfalls": "An equilibrium need not maximize joint payoff",
+      "accessibleFallback": "Payoff table with best-response labels and keyboard-selectable cells",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "game-social-choice-ballot-rules",
+      "title": "Count the same ballots three ways",
+      "topic": "game-social-choice",
+      "articleIds": [
+        "game-social-choice-majority-cycle",
+        "game-social-choice-borda",
+        "game-social-choice-arrow"
+      ],
+      "controls": [
+        "Ranked ballots",
+        "Vote weights",
+        "Counting rule"
+      ],
+      "readout": "Plurality, Borda and pairwise outcomes with cycle indicator",
+      "invariant": "Every ballot ranks each option once; totals reconcile with voter count",
+      "pitfalls": "Arrow theorem applies to stated ranking and fairness axioms, not a claim all voting is pointless",
+      "accessibleFallback": "Ballot table, pairwise count table and textual winner explanations",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "mathematical-modelling-beats-lab",
+      "title": "Two tones and a beat envelope",
+      "topic": "mathematical-modelling",
+      "articleIds": [
+        "mathematical-modelling-beats",
+        "mathematical-modelling-oscillator"
+      ],
+      "controls": [
+        "Tone frequencies",
+        "Amplitudes",
+        "Time scale"
+      ],
+      "readout": "Wave sum, envelope period and exact frequency difference",
+      "invariant": "For equal-amplitude sinusoidal tones, algebraic superposition identity holds",
+      "pitfalls": "The simple model ignores timbre and hearing context",
+      "accessibleFallback": "Numeric sample table, waveform description, optional muted audio and no autoplay",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "mathematical-modelling-model-stress",
+      "title": "Stress-test a toy network model",
+      "topic": "mathematical-modelling",
+      "articleIds": [
+        "mathematical-modelling-network-diffusion",
+        "mathematical-modelling-sensitivity",
+        "mathematical-modelling-model-validation"
+      ],
+      "controls": [
+        "Graph edges",
+        "Transmission chance",
+        "Random seed",
+        "Number of repetitions"
+      ],
+      "readout": "Outcome spread, sensitivity summary and model assumption card",
+      "invariant": "Node count bounded by graph size; fixed seed reproduces a run",
+      "pitfalls": "Simulation explores chosen rule, not real-world social behavior or causal impact",
+      "accessibleFallback": "Adjacency list, per-step state table and numeric sensitivity results",
+      "priority": "P1",
+      "status": "published"
+    }
+  ]
+}

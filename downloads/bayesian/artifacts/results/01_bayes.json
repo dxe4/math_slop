@@ -1,0 +1,5 @@
+{
+  "alarm_probability": 0.067,
+  "defect_given_alarm": 0.26865671641791045,
+  "posterior_odds": 0.3673469387755102
+}

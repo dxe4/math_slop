@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="430" viewBox="0 0 920 430" role="img" aria-labelledby="title desc">
+  <title id="title">Exact orientation minus one lost by binary32 cancellation</title>
+  <desc id="desc">Vectors B equals 8193 comma 8192 and C equals 8192 comma 8191 are nearly parallel. Exact cross products differ by one: 67108863 minus 67108864 equals minus one. Binary32 rounds both products to 67108864, so their computed difference is zero.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#174a7e"/></marker>
+    <style>
+      .axis{stroke:#586879;stroke-width:2}.ray{fill:none;stroke-width:5;marker-end:url(#arrow)}
+      .txt{font:18px system-ui,sans-serif;fill:#17212b}.small{font:15px system-ui,sans-serif;fill:#34495e}
+      .exact{fill:#dbeafe;stroke:#2563eb;stroke-width:2}.rounded{fill:#fee2e2;stroke:#b91c1c;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="920" height="430" fill="#ffffff"/>
+  <text x="28" y="34" class="txt" font-weight="700">A determinant can lose its sign although every input is exact</text>
+  <line x1="70" y1="210" x2="320" y2="210" class="axis"/>
+  <line x1="70" y1="210" x2="70" y2="64" class="axis"/>
+  <circle cx="70" cy="210" r="5" fill="#17212b"/>
+  <text x="48" y="233" class="small">A</text>
+  <path d="M70,210 L292,82" class="ray" stroke="#2563eb"/>
+  <path d="M70,210 L287,85" class="ray" stroke="#d97706" opacity="0.9"/>
+  <text x="300" y="70" class="small" fill="#2563eb">B=(8193,8192)</text>
+  <text x="300" y="101" class="small" fill="#b45309">C=(8192,8191)</text>
+  <text x="38" y="272" class="small"><tspan x="38" dy="0">The rays are nearly parallel.</tspan><tspan x="38" dy="22">Their drawn separation is enlarged for legibility.</tspan></text>
+
+  <text x="540" y="74" class="txt" font-weight="700">Exact products</text>
+  <rect x="540" y="92" width="270" height="45" rx="4" class="exact"/>
+  <text x="555" y="121" class="small">8193 × 8191 = 67,108,863</text>
+  <rect x="540" y="146" width="272" height="45" rx="4" class="exact"/>
+  <text x="555" y="175" class="small">8192 × 8192 = 67,108,864</text>
+  <text x="540" y="218" class="txt">exact difference = −1</text>
+
+  <text x="540" y="272" class="txt" font-weight="700">Direct binary32 products</text>
+  <rect x="540" y="290" width="272" height="45" rx="4" class="rounded"/>
+  <text x="555" y="319" class="small">first product → 67,108,864</text>
+  <rect x="540" y="344" width="272" height="45" rx="4" class="rounded"/>
+  <text x="555" y="373" class="small">second product → 67,108,864</text>
+  <text x="540" y="416" class="txt" fill="#991b1b">computed difference = 0</text>
+</svg>

@@ -1,0 +1,580 @@
+{
+  "id": "27",
+  "title": "Differential equations and dynamical models",
+  "subtitle": "How can a rule for change determine an entire future trajectory?",
+  "prerequisites": [
+    "Derivatives, the chain rule, and exponential functions from chapters 5–6",
+    "Antiderivatives, substitution, and integration by parts from chapters 11–12",
+    "For Lesson 9: power-series convergence and termwise differentiation from Chapter 17."
+  ],
+  "objectives": [
+    "Read a slope field and distinguish a differential equation from an initial value problem",
+    "Solve separable and first-order linear equations without losing equilibrium solutions",
+    "Compare exponential and logistic growth using units, equilibria, and stability",
+    "State local existence and uniqueness hypotheses and recognize their limitations",
+    "Solve homogeneous second-order constant-coefficient equations and interpret damping",
+    "Construct forced responses by trial families and resonance multiplicity, then fit initial data.",
+    "Derive variation of parameters using a nonzero Wronskian on a valid interval.",
+    "Construct IVP series, prove convergence of required derivatives, and verify ODE residuals."
+  ],
+  "sections": [
+    {
+      "title": "A derivative becomes the unknown's defining rule",
+      "paragraphs": [
+        "Previously we differentiated a known function to obtain its rate. A differential equation reverses that direction: the rate is specified, and the function must be found. In $y'=f(t,y)$, the independent variable $t$ often measures time and $y$ describes a state such as temperature or population. A solution on an interval $I$ is a differentiable function $y(t)$ whose values remain in the domain of $f$ and satisfy the equation at every point of $I$. A formula that works only at selected sample times is not a solution in this sense.",
+        "The equation $y^{\\prime}=2y$ admits $y(t)=Ce^{2t}$ for every real constant $C$. An initial condition, such as $y(0)=3$, selects $C=3$. Together, the rate equation and initial condition form an initial value problem, abbreviated IVP. We should specify the interval as well: some solutions exist for all real $t$, while others become unbounded after finite time. A model used only for $t\\ge0$ may nevertheless have a mathematical solution for negative $t$. The modeling interval and the maximal mathematical interval are different questions.",
+        "A slope field depicts $f$ without first solving the equation. At a grid point $(t,y)$, draw a short segment with slope $f(t,y)$. A solution curve must be tangent to the displayed direction wherever it passes. For $y^{\\prime}=t-y$, the segments are horizontal along $y=t$, slope upward below that line, and downward above it. The line $y=t$ itself is not a solution: its derivative is $1$ although the prescribed derivative on it is $0$. A set of horizontal field segments is a nullcline, not automatically a trajectory.",
+        "Axis scales matter in a slope field. If $y$ is measured in degrees Celsius and $t$ in minutes, $f$ has units degrees Celsius per minute; changing the time unit changes its numerical value. A picture suggests qualitative behavior but cannot establish existence or uniqueness. Its finite grid may miss a singularity or a narrow region of rapid change. Substitute any proposed exact solution back into both the differential equation and the initial condition before accepting it.",
+        "An equation can describe many functions until enough conditions are supplied. For $y^{\\prime}=2y$, every $Ce^{2t}$ is a solution on $\\mathbb R$, and an initial value selects $C$. A boundary condition, such as values at two different times, is a different kind of requirement and can be inconsistent or overdetermined for a first-order equation. The order of the equation suggests the usual number of independent initial data, but nonlinear singularities and restricted domains can complicate that count. State the interval on which the solution is claimed.",
+        "Checking a proposed solution means differentiating it and substituting into the original equation, not only matching the initial value. For $y^{\\prime}=t-y$, the candidate $y=t-1$ has derivative $1$, while the right side is $t-(t-1)=1$, so it is a solution. Its initial value at $t=0$ is $-1$. A curve can pass through the correct starting point and still fail the rate equation elsewhere, so both checks are essential. A slope field shows this as a tangency condition along the entire curve.",
+        "A differential equation is a model only after variables and units are assigned. If $y$ is concentration in mg/L and $t$ is hours, $y^{\\prime}$ has units mg/(L·h). In $y^{\\prime}=-ky$, $k$ must have units $\\mathrm h^{-1}$. A sum such as $y^{\\prime}=t+y$ is dimensionally inconsistent unless coefficients or nondimensional variables make the terms compatible. Units can reveal a missing rate constant before any solution is attempted. The same equation form can model population, temperature difference, or chemical concentration with different physical limits.",
+        "Read each slope-field mark as a local tangent suggestion, then compare it with a proposed full curve. A finite grid may miss a rapidly changing or undefined rate. For $y^{\\prime}=t-y$, the exact curve $y=t-1$ passes every substitution check; the nullcline $y=t$ is not a solution because its slope is $1$ while the prescribed slope there is $0$. State an initial point and validate the equation before treating a drawn trace as a trajectory.",
+        "A maximal solution interval may end even when the formula for $f$ is smooth everywhere. For $y^{\\prime}=y^2$ with $y(0)=2$, separation gives $y(t)=2/(1-2t)$, defined for $t<1/2$. As $t$ approaches $1/2$ from below, $y$ diverges, so this solution cannot be extended as a finite-valued solution through that time. Local existence and uniqueness near the initial point do not promise a global solution. This distinction matters when interpreting a model far beyond its observed time range.",
+        "An initial condition is a measured or specified state, not a guarantee that the differential equation fits observations. Given $y^{\\prime}=2y$ and $y(0)=3$, the mathematical prediction is $y(t)=3e^{2t}$. To test it as a growth model, compare measured ratios over equal time intervals: the model predicts the same multiplicative factor $e^{2\\Delta t}$ for every interval of length $\\Delta t$. Systematic departures may point to changing rates, resource limits, or measurement bias. The calculation and the empirical judgment are separate. A precise book should derive the prediction while making clear which assumptions produced it.",
+        "The blow-up solution $2/(1-2t)$ from above has maximal interval $(-\\infty,1/2)$ through $t=0$. Its algebraic pole prevents continuation as a finite solution, even though $f(y)=y^2$ is smooth everywhere. A physical model can fail earlier than the mathematical interval. Keep the two boundaries separate when interpreting a long-range prediction."
+      ],
+      "formula": "Initial value problem: y′(t) = f(t,y(t)), y(t₀) = y₀.",
+      "formulaTex": "y^{\\prime}(t)=f(t,y(t)),\\qquad y(t_0)=y_0"
+    },
+    {
+      "title": "Separation, growth, and the solutions division can lose",
+      "paragraphs": [
+        "A separable equation has the form $y'=a(t)b(y)$. On an interval where $b(y)$ is nonzero, choose an antiderivative $H$ with $H'(y)=1/b(y)$. The chain rule gives $dH(y(t))/dt=a(t)$, so $H(y(t))=\\int a(t)\\,dt+C$. The familiar notation $dy/b(y)=a(t)\\,dt$ summarizes this chain-rule argument. Before dividing, record every root of $b$: each gives a constant equilibrium solution that the division would otherwise remove. After integration, determine which interval makes the resulting expression a valid solution.",
+        "If each member of a population contributes the same average net growth rate, $P^{\\prime}=rP$. Here $P$ is a continuous population approximation, $t$ might be measured in days, and $r$ has units $\\mathrm{day}^{-1}$. Separation yields $\\ln|P|=rt+C$ and hence $P(t)=P_0e^{rt}$. The zero solution is included separately. For $P_0>0$ and $r>0$, the doubling time is $(\\ln 2)/r$, independent of $P_0$. With $r<0$ the same equation describes exponential decay. Constancy of the per-capita rate, not merely an upward trend, is the decisive modeling assumption.",
+        "Resource limitation motivates $P^{\\prime}=rP(1-P/K)$, with $r>0$ and carrying capacity $K>0$ in the same units as $P$. The per-capita rate now decreases linearly with population. For $P_0>0$, separation and partial fractions give $P(t)=K/[1+(K/P_0-1)e^{-rt}]$. One way to integrate is to note that $1/[P(1-P/K)]=1/P+1/(K-P)$. Thus the antiderivative is $\\ln|P|-\\ln|K-P|$. The cases $P=0$ and $P=K$ must be checked before this division; both are equilibria.",
+        "For $0<P_0<K$ the logistic solution increases toward $K$ without attaining it at any finite forward time. If $P_0>K$, it decreases toward $K$; exceeding carrying capacity is not forbidden by the equation. Such a solution has a finite-time singularity in its backward extension, so a forward model need not exist for every negative time. Logistic growth approximates exponential growth when $P/K$ is small, but neither model establishes that actual birth rates, resources, or measurement practices stay fixed. Negative populations are algebraically possible initial data and physically inappropriate here.",
+        "Separation is an application of the chain rule on intervals where the divided factor is nonzero. For $y^{\\prime}=y(1-y)$, dividing by $y(1-y)$ excludes $y=0$ and $y=1$. Those constant functions still solve the original equation and must be restored. If a solution starts exactly at one of these equilibria and uniqueness holds, it remains there. A solver that reports only the nonconstant logistic family is incomplete. Checking zeros of $b(y)$ before division is a general safeguard.",
+        "For $y^{\\prime}=-ky$ with $k>0$, the solution $y(t)=y_0e^{-kt}$ stays the same sign as $y_0$ and has half-life $(\\ln 2)/k$ when $y_0>0$. Half-life does not depend on the starting amount in this linear model. If data show a half-life that changes with concentration, the simple proportional-decay assumption may be inadequate. The exponential formula is an exact consequence of the differential equation, while the equation itself is an empirical modeling choice that should be checked against context.",
+        "Logistic growth has two positive parameters with distinct roles: $r$ sets the initial time scale, while $K$ sets a population scale and long-run level for positive initial data. The instantaneous per-capita rate $P^{\\prime}/P=r(1-P/K)$ decreases as $P$ grows. For small $P$ relative to $K$, this is close to $r$, so early growth resembles an exponential. Near $K$, the rate slows. Fitting $r$ and $K$ from short early data can be difficult because the curve has not yet revealed its carrying capacity.",
+        "For numerical evaluation of the logistic formula already derived, $KP_0e^{rt}/[K+P_0(e^{rt}-1)]$ makes positivity transparent for $r,K,P_0>0$ and $t\\ge0$, but $e^{rt}$ can overflow. The equivalent $e^{-rt}$ form is safer at large positive time. If $0<P_0<K$, the normalized denominator $1+(K/P_0-1)e^{-rt}$ exceeds one and the population stays below $K$; if $P_0>K$, it remains above $K$. These domain and evaluation checks are separate from the separation algebra.",
+        "For a separable equation, an antiderivative can introduce absolute values and branch choices. In $\\int dy/y=\\int r\\,dt$, the equation $\\ln|y|=rt+C$ describes nonzero solutions on an interval where $y$ keeps its sign. Exponentiating gives $y=Ce^{rt}$ with $C\\ne0$; the zero solution is then added separately. One should not silently cross through $y=0$ by manipulating $\\ln|y|$, because the antiderivative is undefined there. The original differential equation and uniqueness theorem determine whether a solution can cross an equilibrium.",
+        "A solution found by separation should always be substituted back, especially after exponentiating or taking roots. Algebraic transformations can introduce sign branches or lose a constant solution, and an implicit equation may define several branches rather than one function. For $y^{\\prime}=y^2$, integration gives $-1/y=t+C$ on intervals where $y\\ne0$. The zero function also solves the equation, and each nonzero branch has a pole where its denominator vanishes. A complete answer lists branches with their domains and checks the initial value against the chosen branch."
+      ],
+      "formula": "Exponential: P = P₀e^(rt). Logistic: P = K/[1 + (K/P₀ − 1)e^(−rt)] for P₀ > 0, t ≥ 0.",
+      "formulaTex": "\\begin{aligned}P^{\\prime}&=rP,&P(t)&=P_0e^{rt},\\\\ P^{\\prime}&=rP\\left(1-\\frac PK\\right),&P(t)&=\\frac K{1+(K/P_0-1)e^{-rt}},\\\\ &&r,K,P_0&>0,\\quad t\\ge0\\quad\\text{(logistic model)}.\\end{aligned}"
+    },
+    {
+      "title": "Linear equations and integrating factors",
+      "paragraphs": [
+        "A first-order linear equation has the form $y'+p(t)y=q(t)$. Linear refers to how $y$ and its derivative occur: their coefficients may vary with time, but terms such as $y^2$ or $yy'$ are absent. The equation $y'+ty=\\sin t$ is linear even though its coefficients are not straight lines. On an interval where $p$ and $q$ are continuous, define $\\mu(t)=\\exp(\\int p(t)\\,dt)$. The multiplicative constant in $\\mu$ is arbitrary and nonzero; choosing it conveniently changes no solution.",
+        "Multiplication produces $\\mu y^{\\prime}+\\mu py=\\mu q$. Because $\\mu^{\\prime}=p\\mu$, the left side is the product derivative $(\\mu y)^{\\prime}$. Integration therefore gives $y=[C+\\int\\mu q\\,dt]/\\mu$. For initial data at $t_0$, a less ambiguous form uses $\\mu(t)=\\exp(\\int_{t_0}^{t}p(s)\\,ds)$, so $\\mu(t_0)=1$. Then $y(t)=[y_0+\\int_{t_0}^{t}\\mu(s)q(s)\\,ds]/\\mu(t)$. This remains a useful exact description when the final integral has no elementary antiderivative.",
+        "Newton's cooling model assumes a well-mixed object whose temperature $T$ changes at a rate proportional to its difference from ambient temperature $A$: $T^{\\prime}=-k(T-A)$, with $k>0$ measured in inverse time. Constant $A$ gives $T(t)=A+(T_0-A)e^{-kt}$. If the room temperature changes, $T^{\\prime}+kT=kA(t)$ is still linear, but inserting the current $A(t)$ into the constant-ambient formula is generally incorrect. The integral accounts for the entire past forcing.",
+        "An integrating factor is chosen to manufacture a product derivative. For $y^{\\prime}+2y=6$, $\\mu=e^{2t}$, so $(e^{2t}y)^{\\prime}=6e^{2t}$. Integration yields $y=3+Ce^{-2t}$. With $y(0)=1$, $C=-2$ and the solution approaches three. Direct substitution verifies both the differential equation and initial condition. The limiting value is also the equilibrium obtained by setting $y^{\\prime}=0$; the transient term quantifies how quickly the initial discrepancy decays.",
+        "The coefficient $p(t)$ need only be continuous on the interval where the standard integrating-factor derivation is used. If $p(t)=1/t$, a solution interval must stay on one side of zero; a factor based on $\\ln|t|$ cannot be extended through a coefficient singularity by algebra alone. A reported formula should include its interval and any initial point. For variable ambient temperature $A(t)$, cooling becomes $T^{\\prime}+kT=kA(t)$, still linear, but the long-run behavior depends on the forcing rather than a fixed constant equilibrium.",
+        "For initial data, retain the normalized definite-integral formula proved below: $\\mu(t)=\\exp(\\int_{t_0}^{t}p(s)\\,ds)$ and $y(t)=\\mu(t)^{-1}[y_0+\\int_{t_0}^{t}\\mu(s)q(s)\\,ds]$. It remains exact even when the forcing integral is nonelementary. The choice $\\mu(t_0)=1$ exposes the initial value and avoids an extra arbitrary constant.",
+        "Linear does not mean constant-coefficient or easy closed form. The equation $y^{\\prime}+ty=\\sin t$ is linear, with integrating factor $e^{t^2/2}$, but its forcing integral may not have an elementary antiderivative. The definite-integral formula is still a valid exact solution, and numerical quadrature can evaluate it. Conversely $y^{\\prime}=y^2$ is nonlinear even though its separated solution is elementary. Classification concerns how the unknown function enters the equation, not whether an answer fits familiar elementary functions.",
+        "A physical model may include a constant input and proportional loss: $y^{\\prime}=q-ky$ with $k>0$. The equilibrium is $q/k$, and $y(t)=q/k+(y_0-q/k)e^{-kt}$. If $q$ and $y$ describe mass per unit volume, $q$ has concentration per time units and $k$ inverse-time units. The solution approaches equilibrium from above or below without crossing it, as the exponential factor stays positive. This model appears in mixing tanks, drug clearance, and thermal relaxation, but each application requires checking the constant-rate assumptions.",
+        "The integrating factor is not arbitrary: any nonzero constant multiple of $\\mu$ works because it multiplies both sides of the product derivative equally. Choosing $\\mu(t_0)=1$ is a normalization that makes the initial term transparent. If $p$ is continuous, $\\mu$ is positive and never zero, so division by $\\mu$ is safe on the interval. This positivity also shows uniqueness for the linear IVP: two solutions with the same initial value have a difference $z$ satisfying $(\\mu z)^{\\prime}=0$ and $z(t_0)=0$, hence $z=0$ throughout the common interval. The algebraic method and uniqueness theorem reinforce each other."
+      ],
+      "formula": "For y′ + py = q and μ′ = pμ: (μy)′ = μq.",
+      "formulaTex": "\\begin{gathered}y^{\\prime}+p(t)y=q(t),\\qquad \\mu(t)=e^{\\int p(t)\\,dt}>0,\\\\ \\mu^{\\prime}=p\\mu\\quad\\Longrightarrow\\quad(\\mu y)^{\\prime}=\\mu q,\\qquad p,q\\text{ continuous on the solution interval}.\\end{gathered}",
+      "theorems": [
+        {
+          "title": "The integrating factor also proves uniqueness",
+          "statement": "For continuous $p$ and $q$ on an interval, the linear initial-value problem $y^{\\prime}+p(t)y=q(t)$ with one initial value has exactly one solution on that interval.",
+          "equationTex": "\\mu(t)=e^{\\int_{t_0}^{t}p(s)\\,ds},\\qquad (\\mu y)^{\\prime}=\\mu q",
+          "proof": [
+            "Set $\\mu(t)=\\exp(\\int_{t_0}^{t}p(s)\\,ds)$. The fundamental theorem and chain rule give $\\mu^{\\prime}=p\\mu$, and $\\mu$ is positive everywhere on the interval. Multiply the differential equation by $\\mu$; the product rule turns its left side into $(\\mu y)^{\\prime}$. Integrating from $t_0$ to $t$ gives $\\mu(t)y(t)=y_0+\\int_{t_0}^{t}\\mu(s)q(s)\\,ds$ because $\\mu(t_0)=1$. Dividing by $\\mu(t)$ constructs a solution.",
+            "If $y_1$ and $y_2$ both satisfy the same equation and initial value, their difference $z=y_1-y_2$ satisfies $z^{\\prime}+pz=0$ and $z(t_0)=0$. Thus $(\\mu z)^{\\prime}=0$, so $\\mu z$ is constant; at $t_0$ it is zero. Since $\\mu>0$, $z=0$ everywhere. This proves uniqueness rather than merely observing one formula that seems to work.",
+            "The conclusion assumes continuous coefficients on the interval under discussion. If a coefficient becomes singular, the interval may have to stop or split. The proof also shows why an initial value fixes the arbitrary integration constant in an antiderivative solution."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Equilibria, stability, and the limits of uniqueness",
+      "paragraphs": [
+        "For an autonomous equation $y'=g(y)$, the field does not explicitly depend on time. An equilibrium $y^*$ satisfies $g(y^*)=0$. A phase line marks those roots and the sign of $g$ between them; positive signs indicate increasing solutions, and negative signs decreasing ones. For logistic growth, $g$ is positive on $(0,K)$ and negative above $K$. Arrows point toward $K$ and away from $0$ on the nonnegative state domain. This predicts the long-term direction without solving the equation.",
+        "An equilibrium is stable if every sufficiently small initial displacement stays small for all future time, and asymptotically stable if nearby trajectories also converge to it. These statements concern a neighborhood, not every possible initial state. Under continuous differentiability near an equilibrium, $g^{\\prime}(y^*)<0$ implies local asymptotic stability and $g^{\\prime}(y^*)>0$ implies instability. This follows from the nearby sign pattern and can also be motivated by the linear approximation $\\delta^{\\prime}\\approx g^{\\prime}(y^*)\\delta$. If $g^{\\prime}(y^*)=0$, the test is inconclusive: $y^{\\prime}=-y^3$ attracts toward zero, whereas $y^{\\prime}=y^3$ repels.",
+        "A standard local theorem says that if $f$ and $f_y$ are continuous on an open rectangle around $(t_0,y_0)$, an IVP $y^{\\prime}=f(t,y)$ has a unique solution on some interval about $t_0$. More generally, continuity of $f$ and a local Lipschitz bound in $y$ suffice: on a smaller closed rectangle there is one finite $L$ such that $|f(t,u)-f(t,v)|\\le L|u-v|$ for every allowed $t,u,v$ there. One $L$ must work throughout that rectangle, not a new constant for each pair. Continuity alone gives local existence under the usual rectangle conditions but may not give uniqueness. These are sufficient tests; their failure alone proves neither nonexistence nor nonuniqueness.",
+        "For $y^{\\prime}=3|y|^{2/3}$ at $y(0)=0$, the quotient $|f(\\varepsilon)-f(0)|/|\\varepsilon|=3|\\varepsilon|^{-1/3}$ is unbounded as $\\varepsilon\\to0$, so no such local Lipschitz constant exists near zero. More decisively, for any $a\\ge0$ define $y_a(t)=0$ for $t\\le a$ and $y_a(t)=(t-a)^3$ for $t\\ge a$. At the join, both one-sided derivatives are zero. Before it, $y_a^{\\prime}=f(0)=0$; after it, $y_a^{\\prime}=3(t-a)^2=3|(t-a)^3|^{2/3}$. Thus every $y_a$ and the zero solution satisfy the same IVP, proving actual nonuniqueness. By contrast, smooth $f(y)=y^2$ has a unique local solution for $y(0)=1$, namely $1/(1-t)$, which blows up at $t=1$; uniqueness does not give global existence.",
+        "A phase line for $g(y)=y(2-y)$ has equilibria zero and two. Below zero, $g$ is negative; between zero and two, $g$ is positive; above two, $g$ is negative. Thus two attracts nearby positive and larger states, while zero repels on both sides: negative states move farther negative and can blow up in finite forward time. Stability is a local statement in both directions around an equilibrium, so the sign chart must include both sides before assigning a label.",
+        "When $g$ is $C^1$ near an equilibrium, the derivative test follows from its local sign: $g(y)-g(y^*)=g^{\\prime}(y^*)(y-y^*)+o(|y-y^*|)$. A negative derivative makes $g(y)$ point toward $y^*$ on both sides; a positive derivative points away. If the derivative is zero, the linear term gives no decision: $-y^3$ attracts and $y^3$ repels. The phase line, with its state-domain qualification, settles those examples.",
+        "Uniqueness prevents solution curves of a well-behaved scalar autonomous equation from crossing in the $(t,y)$ plane at the same time. If two solutions share one point $(t_0,y_0)$ where the hypotheses hold, they agree on their common interval. In particular, a non-equilibrium trajectory cannot cross an equilibrium line in finite time under local uniqueness, because the constant equilibrium solution passes through any such meeting point. This gives qualitative information without solving the equation explicitly.",
+        "The waiting-time family just verified proves nonuniqueness at zero; a failed sufficient test by itself would not. For comparison, a field can fail a differentiability test while still being locally Lipschitz, so one should check the quantitative bound or construct two solutions before claiming failure. A later visual can vary the waiting time, but direct substitution at every time, especially the join, is the proof.",
+        "Stable does not necessarily mean convergent. For $y^{\\prime}=0$, every initial value remains fixed, so an equilibrium is stable but a nearby nonzero solution does not approach a chosen equilibrium. For a frictionless oscillator, trajectories near equilibrium remain bounded and orbit rather than converge. Asymptotic stability adds convergence to the stay-nearby requirement. In applications, damping often determines whether a system merely stays bounded or actually settles.",
+        "Stability should be stated relative to the future-time direction and the model's domain. For $y^{\\prime}=-y^2$, a small positive starting value decreases toward zero, while a small negative starting value decreases away and eventually blows up in finite forward time. Thus zero attracts on the physically feasible half-line $y\\ge0$ but is unstable on the full real state space. Calling it simply “stable” without naming the state domain would be misleading. A phase-line sign chart on both sides exposes the distinction, and an application may then restrict attention to a justified feasible region."
+      ],
+      "formula": "For logistic growth: g′(0) = r > 0 and g′(K) = −r < 0.",
+      "formulaTex": "\\begin{aligned}g(P)&=rP\\left(1-\\frac PK\\right),\\qquad r,K>0,\\\\ g^{\\prime}(0)&=r>0\\quad(\\text{unstable}),\\\\ g^{\\prime}(K)&=-r<0\\quad(\\text{locally asymptotically stable}).\\end{aligned}"
+    },
+    {
+      "title": "Second-order equations: two initial conditions and oscillation",
+      "paragraphs": [
+        "A second-order equation usually needs two initial conditions, such as position and velocity. For $ay^{\\prime\\prime}+by^{\\prime}+cy=0$ with $a\\ne0$, set $D=d/dt$ and $L=aD^2+bD+c$. Trying $e^{\\lambda t}$ gives $p(\\lambda)=a\\lambda^2+b\\lambda+c=0$. Distinct real roots produce $e^{\\lambda_1t},e^{\\lambda_2t}$; a repeated root $\\lambda$ produces $e^{\\lambda t},te^{\\lambda t}$ because $L[te^{\\lambda t}]=e^{\\lambda t}[tp(\\lambda)+p^{\\prime}(\\lambda)]=0$. Complex roots $\\alpha\\pm i\\beta$ yield the real pair $e^{\\alpha t}\\cos\\beta t,e^{\\alpha t}\\sin\\beta t$. The local lemma below explains why these independent modes give every homogeneous solution, rather than merely two examples.",
+        "For a mass on a spring, $mx^{\\prime\\prime}+bx^{\\prime}+kx=F(t)$, with $m>0$, $k>0$, and $b\\ge0$, Newton's law balances inertia, damping, spring force, and applied force. If $x$ is in metres and $t$ in seconds, $m$ is in kilograms, $b$ in kilograms per second, $k$ in kilograms per second squared, and $F$ in newtons. When $F=0$, the sign of $b^2-4mk$ distinguishes overdamping, critical damping, and underdamping. Underdamping gives oscillations whose amplitude decays if $b>0$. At $b=0$, ideal oscillations persist: stability does not necessarily mean convergence to rest.",
+        "For nonzero forcing, add a particular solution to the homogeneous solution. For $x^{\\prime\\prime}+x=\\cos(2t)$, substitute $A\\cos(2t)+B\\sin(2t)$: comparing coefficients gives $-3A=1$ and $-3B=0$, so $A=-1/3$, $B=0$. At resonance, $x^{\\prime\\prime}+x=\\cos t$, the ordinary sine-cosine trial lies in the homogeneous solution and is annihilated. Multiply the trial by $t$; substitution and direct differentiation give $x_p=(t/2)\\sin t$. Its growing amplitude is resonance. These trial rules cover the stated constant-coefficient sinusoidal cases; other forcing terms need an appropriate trial or another method. Initial position and velocity determine the remaining constants. Real systems may leave this linear model’s range before the predicted amplitude grows large; Chapter 28 develops numerical experiments when an exact formula is unavailable.",
+        "The characteristic polynomial for $y^{\\prime\\prime}+2\\zeta\\omega y^{\\prime}+\\omega^2y=0$ has roots $-\\zeta\\omega\\pm\\omega\\sqrt{\\zeta^2-1}$. When $0\\le\\zeta<1$, the roots are complex and motion oscillates; its envelope decays if $\\zeta>0$ and stays constant if $\\zeta=0$. The case $\\zeta=1$ gives critical damping; $\\zeta>1$ gives two real negative modes and no oscillation. Here $\\omega>0$ has inverse-time units and $\\zeta$ is dimensionless. This classification explains why changing damping affects both the qualitative trace and, when $\\zeta>0$, the time required to settle.",
+        "In scaled, dimensionless time and displacement, $x^{\\prime\\prime}+x=0$ with $x(0)=1$ and $x^{\\prime}(0)=0$ has solution $x(t)=\\cos t$. It repeatedly crosses the equilibrium and never decays, so the origin in phase space is stable but not asymptotically stable. Adding positive damping $bx^{\\prime}$ decreases the normalized energy: for $E=((x^{\\prime})^2+x^2)/2$, differentiation along $x^{\\prime\\prime}+bx^{\\prime}+x=0$ gives $E^{\\prime}=-b(x^{\\prime})^2\\le0$. Physical displacement and time instead require the mass and spring-constant energy formula below. This calculation shows dissipation without requiring the explicit root formulas.",
+        "The forced equation $x^{\\prime\\prime}+x=\\cos t$ has a resonant particular solution $(t/2)\\sin t$. Its amplitude envelope grows linearly because the forcing frequency matches the undamped natural frequency. This does not mean every forced oscillator grows forever; damping changes the long-run response, and forcing at other frequencies has different particular solutions. The idealized unbounded growth signals that a linear undamped model eventually leaves its physical range of validity.",
+        "Two initial conditions fix the two constants in a second-order homogeneous solution. For $y^{\\prime\\prime}-2y^{\\prime}+y=0$, the repeated characteristic root one gives $y=(C_1+C_2t)e^t$. If $y(0)=2$ and $y^{\\prime}(0)=1$, then $C_1=2$ and $C_2=-1$, so $y=(2-t)e^t$. Check by differentiation and substitution; a repeated root does not yield two independent copies of $e^t$. The extra factor $t$ provides the second independent solution.",
+        "A second-order scalar equation can be rewritten as a first-order system by setting $v=x^{\\prime}$: then $x^{\\prime}=v$ and $v^{\\prime}=-(b/m)v-(k/m)x+F(t)/m$. This viewpoint makes position and velocity the state variables and prepares phase-plane plots and numerical solvers. The units remain explicit: $x$ is length, $v$ is length/time, and each term in $v^{\\prime}$ is acceleration. A phase-plane curve is not the same as the physical path of the mass; its axes are state coordinates.",
+        "For the damped oscillator, energy $E=[m(x^{\\prime})^2+kx^2]/2$ has derivative $E^{\\prime}=-b(x^{\\prime})^2+x^{\\prime}F(t)$ when $mx^{\\prime\\prime}+bx^{\\prime}+kx=F(t)$. Damping removes energy at rate $b(x^{\\prime})^2$; external forcing adds or removes it depending on the sign of $x^{\\prime}F$. In the unforced case with $b>0$, energy never increases, yet proving convergence to equilibrium requires more than this one inequality alone. The formula does provide an immediate physical audit: a numerical solution whose energy grows steadily without forcing is inconsistent with the model or its numerical step size."
+      ],
+      "formula": "Characteristic equation: aλ² + bλ + c = 0; second-order IVP: y(t₀) = y₀, y′(t₀) = v₀.",
+      "formulaTex": "\\begin{gathered}ay^{\\prime\\prime}+by^{\\prime}+cy=0\\quad(a\\ne0;\\ a,b,c\\text{ constant}),\\\\ a\\lambda^2+b\\lambda+c=0,\\\\ y(t_0)=y_0,\\qquad y^{\\prime}(t_0)=v_0.\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Two independent modes exhaust a linear second-order IVP",
+          "statement": "On an interval with continuous coefficients and nonzero leading coefficient, two homogeneous solutions whose value-and-derivative determinant is nonzero at one initial time span every homogeneous solution on that interval.",
+          "equationTex": "W(t_0)=y_1(t_0)y_2^{\\prime}(t_0)-y_1^{\\prime}(t_0)y_2(t_0)\\ne0",
+          "proof": [
+            "At $t_0$, solve the two-by-two linear system $C_1y_1(t_0)+C_2y_2(t_0)=A$ and $C_1y_1^{\\prime}(t_0)+C_2y_2^{\\prime}(t_0)=B$. Its determinant is $W(t_0)\\ne0$, so the constants exist uniquely for any prescribed value $A$ and slope $B$. Linearity makes $z=C_1y_1+C_2y_2$ a homogeneous solution with those data.",
+            "Here is the needed uniqueness step rather than an appeal to the characteristic trial. If $w$ is the difference of two solutions with zero value and slope at $t_0$, normalize its equation to $w^{\\prime\\prime}+p(t)w^{\\prime}+q(t)w=0$. On any compact subinterval the continuous coefficients satisfy $|p|,|q|\\le M$. From a zero-data point $s$, take a short compact interval $J$ extending forward or backward from $s$, of length $L$, and define $Z=\\sup_{t\\in J}(|w(t)|+|w^{\\prime}(t)|)$. The finite integral identities give $|w(t)|\\le LZ$ and $|w^{\\prime}(t)|\\le M\\int_{\\min(s,t)}^{\\max(s,t)}(|w(u)|+|w^{\\prime}(u)|)\\,du\\le MLZ$ for $t\\in J$. Hence $Z\\le(1+M)LZ$. Choose $L<1/(1+M)$; then $Z=0$. Repeating adjacent short intervals, forward and backward, proves $w=0$ on any compact part of the connected coefficient interval.",
+            "Thus the pair spans every homogeneous solution. Distinct exponentials have determinant $(\\lambda_2-\\lambda_1)e^{(\\lambda_1+\\lambda_2)t_0}\\ne0$; a repeated-root pair has determinant $e^{2\\lambda t_0}\\ne0$; the sine-cosine pair has determinant $\\beta e^{2\\alpha t_0}\\ne0$ when $\\beta>0$. Direct substitution establishes each mode. Continuity and a nonzero leading coefficient, not a formal characteristic equation by itself, justify the all-solutions claim."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "A logistic model with its equilibria restored",
+      "paragraphs": [
+        "Let $P(t)$ be a population measured in individuals and suppose $P'=rP(1-P/K)$, with $r>0$ in reciprocal time units and carrying capacity $K>0$ in individuals. The right-hand side is positive for $0<P<K$ and negative for $P>K$. The model predicts growth below capacity, decline above capacity, and stationary populations at $P=0$ and $P=K$. These sign conclusions follow before solving the equation and make later algebra easier to check.",
+        "Use the separated logistic formula established in Lesson 2, now as a model diagnostic: $P(t)=K/[1+(K/P_0-1)e^{-rt}]$ for $P_0>0$ and a nonzero denominator. On $t\\ge0$ with $r,K>0$, $0<P_0<K$ gives growth below capacity, while $P_0>K$ gives decline above it; neither crosses $K$. The purpose here is to test data, units, and the equilibrium branches rather than repeat partial fractions.",
+        "The separation step divided by $P$ and $K-P$, so it omitted the equilibrium solutions $P(t)=0$ and $P(t)=K$. Restore them by direct substitution into the original equation. This is a general check for separable differential equations: every factor divided away may produce a valid constant solution. For example, with $K=1000$ individuals, $r=0.4\\,\\mathrm{month}^{-1}$, and $P_0=100$, the formula becomes $P(t)=1000/[1+9e^{-0.4t}]$. The halfway population $P=500$ occurs at $t=(\\ln 9)/0.4\\approx5.493$ months.",
+        "The growth rate is fastest at $P=K/2$ because $rP(1-P/K)$ is a downward quadratic in $P$. For $0<P_0<K/2$ the solution has an inflection when it passes that level; afterward it continues to grow but its growth rate declines. A fixed $K$ assumes fixed environmental conditions and no migration, age structure, or delayed response. Fitting the curve to data does not prove those assumptions; it only tests whether this simplified model describes the observed period.",
+        "The exact logistic solution can be checked without repeating separation. Write $A=K/P_0-1$ and $P=K/(1+Ae^{-rt})$. Differentiating gives $P^{\\prime}=KrAe^{-rt}/(1+Ae^{-rt})^2$. Meanwhile $rP(1-P/K)$ simplifies to the same expression. At $t=0$, $P=K/(1+A)=P_0$. These two checks verify the formula on any interval where its denominator is nonzero and reinforce that the initial condition fixes the integration constant.",
+        "The inflection time for $0<P_0<K/2$ occurs when $P$ reaches $K/2$, equivalently $Ae^{-rt}=1$. Thus $t_{\\mathrm{inf}}=(1/r)\\ln A=(1/r)\\ln(K/P_0-1)$. If $P_0=K/2$, the inflection is at $t=0$; if $K/2<P_0<K$, the corresponding crossing occurred at negative time, so the forward solution is already concave down. This case distinction matters when fitting an S-shaped curve to data: not every observed time window contains an inflection.",
+        "A logistic population beginning at $K/2$ reaches $3K/4$ when $1/(1+e^{-rt})=3/4$. Solving gives $e^{-rt}=1/3$ and $t=(\\ln 3)/r$. The carrying capacity cancels from this elapsed time because both target levels were expressed as fractions of $K$. If the targets were fixed absolute populations, $K$ would generally remain in the formula. This dimensional check is useful: $\\ln 3$ is dimensionless, so dividing by $r$ produces time units.",
+        "After restoring $P=0$ and $P=K$ by direct substitution, use the phase line: on the nonnegative state domain, zero repels positive perturbations and $K$ attracts from both sides. These labels require $r,K>0$ and a stated state domain; an algebraic family obtained by division cannot replace the omitted equilibrium solutions. For an independent application, the linked logistic-calibration project tests the model against synthetic measurements and asks which parameter claims those data support.",
+        "A fixed carrying capacity assumes the environment does not change on the modeled time scale. If resources vary seasonally or migration occurs, $r$ and $K$ may need to depend on time or new terms may be added. The logistic curve remains a useful baseline because its predictions are explicit and testable: early near-exponential growth, a peak growth rate at $K/2$, and saturation toward $K$. A deep mathematical solution should distinguish these deductions from a claim that every real population actually follows them."
+      ],
+      "formula": "P(t)=K/[1+(K/P₀−1)e^(−rt)] for P₀>0; P=0 and P=K are equilibria.",
+      "formulaTex": "\\begin{gathered}P^{\\prime}=rP\\left(1-\\frac PK\\right),\\quad P(0)=P_0>0,\\quad r,K>0,\\\\ P(t)=\\frac K{1+(K/P_0-1)e^{-rt}}\\quad(t\\ge0),\\\\ P(t)\\equiv0\\quad\\text{and}\\quad P(t)\\equiv K\\quad\\text{are equilibria}.\\end{gathered}"
+    },
+    {
+      "title": "Constructing forced solutions",
+      "paragraphs": [
+        "Set $D=d/dt$. For $L=aD^2+bD+c$ with constant real coefficients and $a\\ne0$, first find one $y_p$ satisfying $L[y_p]=f$. Every other solution differs from it by a homogeneous solution because $L[y-y_p]=0$. Conversely $L[y_p+C_1y_1+C_2y_2]=f$. The previous lesson’s spanning lemma shows why a fundamental pair supplies all remaining freedom; two initial conditions then fix its constants.",
+        "For polynomial, exponential and trigonometric forcing, start with a family closed under differentiation and substitute every coefficient. A degree-$n$ polynomial needs a general degree-$n$ polynomial trial. A polynomial times $e^{\\alpha t}\\cos\\beta t$ or sine generally needs both sine and cosine polynomial factors. Split sums of forcing terms and add their particular solutions.",
+        "See the failure before using a resonance rule. For $x^{\\prime\\prime}+x=\\cos t$, the plain trial $A\\cos t+B\\sin t$ is annihilated by $D^2+1$, whatever $A,B$ are. Trying $t(A\\cos t+B\\sin t)$ instead gives $(D^2+1)[t(A\\cos t+B\\sin t)]=-2A\\sin t+2B\\cos t$, so $A=0,B=1/2$ and $x_p=(t/2)\\sin t$. For the general polynomial $p(z)=az^2+bz+c$, differentiating $e^{\\lambda t}Q$ factors out $e^{\\lambda t}$ and replaces $D$ by $D+\\lambda$: $L[e^{\\lambda t}Q]=e^{\\lambda t}p(D+\\lambda)Q$. If $\\lambda$ is a root of multiplicity $s$, write $p(\\lambda+z)=z^sh(z)$ with $h(0)\\ne0$. A polynomial trial multiplied by $t^s$ survives the $D^s$ factor; on powers $t^{k+s}$ its leading coefficient is $h(0)(k+s)!/k!\\ne0$, while other derivative terms lower degree. This triangular coefficient system gives the shifted-trial rule. It applies to the stated constant-coefficient finite forcing families, with real parts used for sine and cosine.",
+        "This finite trial method does not cover an arbitrary forcing such as $\\sec t$. Verify the finished expression in the equation and both initial conditions. For a spring $mx''+bx'+kx=F(t)$, dividing by mass changes the forcing to acceleration units $F/m$ while $x$ remains a displacement.",
+        "The superposition formula is an exact consequence of linearity. If $y_p$ is one forced response, subtracting it from any other response removes $f$ and leaves a homogeneous solution. Conversely adding any homogeneous response leaves the forcing unchanged. This separates the two tasks in an initial-value problem: construct a particular response and then fit position and velocity. For a second-order equation on an interval with a fundamental pair, two constants are necessary and sufficient. Checking only the differential residual cannot establish that the chosen constants satisfy the initial data.",
+        "Trial families should be chosen to survive differentiation. A constant forcing needs a constant trial unless constants lie in the homogeneous kernel; a polynomial forcing of degree $n$ needs every polynomial power down to zero because derivatives mix those terms. For a sine forcing, derivatives alternate sine and cosine, so both coefficients usually belong in the trial even if the forcing displays only one. For a sum of forcing types, linearity permits separate particular responses and their sum. Substitution, not pattern recognition alone, determines the coefficients and reveals whether a resonance multiplier was needed.",
+        "The shifted-operator formula above now diagnoses both simple and double resonance. For example, $(D-1)^2[e^tP]=e^tP^{\\prime\\prime}$. For forcing $e^t$, a plain $e^t$ and $te^t$ both vanish under the operator; $P=t^2/2$ gives a particular solution because $P^{\\prime\\prime}=1$. This is a substitution check of the multiplicity-two rule, not an additional assumed pattern.",
+        "A real trigonometric forcing can be handled by pairing sine and cosine or by taking real parts of a complex exponential calculation. Both approaches use the characteristic roots to detect frequency resonance. For $X''+4X=\\cos(2t)$ with zero data, the response $t\\sin(2t)/4$ has a growing amplitude envelope but crosses zero repeatedly. For forcing $\\cos(3t)$, the bounded zero-data response is $(\\cos2t-\\cos3t)/5$. At a particular time the bounded response can have greater absolute displacement; resonance describes long-time growth of an envelope, not pointwise ordering of two curves.",
+        "A physical spring equation supplies a dimensional check. In $mx''+bx'+kx=F(t)$, $F$ is a force and $x$ a displacement; after division by $m$, the forcing $F/m$ has acceleration units. A proposed response with units of force would be wrong even if a dimensionless algebraic pattern looked familiar. The trial method is limited to finite combinations of the listed families for constant coefficients. A forcing such as $\\sec t$ does not have a finite closed trial of that type, motivating an interval-aware variation-of-parameters construction.",
+        "After the ordinary trials, try the linked Lesson 7 written problems and the forced-response lab. They include a mixed forcing, zero-data resonant comparison, and a dimensional spring model. Their original problem numbers and lesson tags remain in chapter practice. A response with a growing resonance envelope can still be zero at a time when a bounded nonresonant response is nonzero."
+      ],
+      "formula": "For L=aD²+bD+c and L[y]=f, every solution is y=yₚ+C₁y₁+C₂y₂. A characteristic root of multiplicity s requires a t^s multiplier in the matching polynomial-exponential trial.",
+      "formulaTex": "\\begin{gathered}L=aD^2+bD+c,\\\\L[y]=f\\Rightarrow y=y_p+C_1y_1+C_2y_2,\\\\L[e^{\\lambda t}Q]=e^{\\lambda t}p(D+\\lambda)Q.\\end{gathered}"
+    },
+    {
+      "title": "Variation of parameters",
+      "paragraphs": [
+        "Consider $y''+p(t)y'+q(t)y=g(t)$ on an open interval $I$ where $p,q,g$ are continuous. Let $y_1,y_2$ be independent homogeneous solutions with Wronskian $W=y_1y_2'-y_1'y_2\\ne0$ throughout $I$. Seek $y_p=u_1y_1+u_2y_2$. These hypotheses give a valid local construction.",
+        "Impose $u_1'y_1+u_2'y_2=0$ to simplify $y_p'=u_1y_1'+u_2y_2'$. Differentiating and using the homogeneous equations leaves $u_1'y_1'+u_2'y_2'=g$. The two constraints form a linear system with determinant $W$, so Cramer's rule gives $u_1'=-y_2g/W$ and $u_2'=y_1g/W$. This derivation explains the formula rather than guessing antiderivatives.",
+        "Integrating those derivatives from $t_0\\in I$ produces $y_p(t_0)=y_p'(t_0)=0$; homogeneous coefficients then fit the two prescribed data. Other integration constants merely add homogeneous terms. Differentiating $W$ and substituting $y_i^{\\prime\\prime}=-py_i^{\\prime}-qy_i$ gives $W^{\\prime}=-pW$. Hence $W(t)=W(t_0)\\exp[-\\int_{t_0}^tp(s)\\,ds]$; a fundamental pair's Wronskian remains nonzero on the connected coefficient interval. A pole in forcing or a coefficient separates intervals, so a real formula involving $\\log|\\cos t|$ cannot be carried through a zero of cosine.",
+        "The derivation above is the method: the two parameter derivatives solve a linear system with determinant $W$. A proposed pair such as $\\cos t,2\\cos t$ has $W=0$ and misses the sine mode. The relation $W^{\\prime}=-pW$ then shows that an independent pair stays independent on a connected interval of continuous normalized coefficients. Before calculating, divide any original equation by its nonzero leading coefficient so that the right side in the parameter formulas is the normalized forcing $g$.",
+        "Use the definite integrals from $t_0$ to normalize $y_p(t_0)=y_p^{\\prime}(t_0)=0$; any indefinite integration constants simply add homogeneous solutions. This zero-data form lets the two initial conditions determine homogeneous coefficients without double counting constants. The formulas require one connected coefficient-and-forcing interval; a pole cannot be crossed by a numerical continuation of the same derivation.",
+        "For an unaided check, the linked Lesson 8 practice asks for the Wronskian constraints and for separate real solutions to $y^{\\prime\\prime}+y=\\sec t$ around $0$ and $\\pi$. The logarithm is $\\log(\\cos t)$ on $(-\\pi/2,\\pi/2)$ but $\\log|\\cos t|$ on $(\\pi/2,3\\pi/2)$; both intervals stop at forcing poles. Preserve the actual initial point when choosing the lower limit of each parameter integral.",
+        "The interval restrictions are part of the theorem. For $y''+y=\\sec t$ near zero, $I=(-\\pi/2,\\pi/2)$ is the maximal open interval containing zero on which the forcing is continuous. With $y_1=\\cos t,y_2=\\sin t,W=1$, the parameter derivatives are $-\\tan t$ and $1$. Their zero-based integrals are $\\log(\\cos t)$ and $t$ because cosine is positive on this interval. The resulting response has zero initial data and direct differentiation gives $y''+y=\\sec t$. The real logarithm cannot be carried through a cosine zero.",
+        "At an initial time $t_0=\\pi$, the valid forcing interval is instead $(\\pi/2,3\\pi/2)$, where cosine is negative. The antiderivative of $-\\tan t$ is $\\log|\\cos t|$, and integrating the second parameter derivative from $\\pi$ gives $t-\\pi$. Thus a real zero-data response is $\\cos t\\log|\\cos t|+(t-\\pi)\\sin t$ on that interval. The same formula pattern adapts to the interval, but the pole boundaries remain uncrossable for this continuous-coefficient construction. A few sampled Wronskian values or residual values would not prove validity across a pole."
+      ],
+      "formula": "For y''+p(t)y'+q(t)y=g(t) on an open continuous-coefficient interval, W≠0 gives u₁'=−y₂g/W and u₂'=y₁g/W; integrate from the initial time.",
+      "formulaTex": "\\begin{gathered}W=y_1y_2^{\\prime}-y_1^{\\prime}y_2\\ne0,\\quad u_1^{\\prime}=-y_2g/W,\\quad u_2^{\\prime}=y_1g/W,\\\\y_p(t)=-y_1(t)\\int_{t_0}^{t}\\frac{y_2(s)g(s)}{W(s)}\\,ds+y_2(t)\\int_{t_0}^{t}\\frac{y_1(s)g(s)}{W(s)}\\,ds.\\end{gathered}"
+    },
+    {
+      "title": "Building an ODE solution from a series",
+      "paragraphs": [
+        "For $y'=ty$, $y(0)=1$, set $y=\\sum_{n\\ge0}a_nt^n$. Reindexing gives $a_0=1$, $a_1=0$ and $(n+1)a_{n+1}=a_{n-1}$ for $n\\ge1$. Odd coefficients vanish and $a_{2k}=1/(2^kk!)$, producing the candidate $\\sum_{k\\ge0}(t^2/2)^k/k!$. The initial value fixes the constant coefficient before the recurrence begins.",
+        "On $|t|\\le T$, successive even terms have ratio at most $T^2/[2(k+1)]\\to0$. The differentiated series has the same factorial ratio property, uniformly on every bounded interval. Termwise substitution is therefore valid and verifies the ODE and initial value for all real $t$; the exponential series identifies $y=e^{t^2/2}$. For $P_{2m}=\\sum_{k=0}^m(t^2/2)^k/k!$, the exact residual is $P_{2m}'-tP_{2m}=-t^{2m+1}/(2^mm!)$, and on $|t|\\le T$ its value error is at most $e^{T^2/2}(T^2/2)^{m+1}/(m+1)!$.",
+        "For $y''+y=0$, $y(0)=A,y'(0)=B$, the recurrence $(n+2)(n+1)a_{n+2}=-a_n$ creates even and odd factorial chains, giving $A\\cos t+B\\sin t$. Factorial bounds justify both derivative series. For $y''+ty=0$, $y(0)=1,y'(0)=2$, we instead have $a_2=0$ and $a_{m+3}=-a_m/[(m+3)(m+2)]$. The nonzero chains begin $1-t^3/6+t^6/180+\\cdots$ and $2t-t^4/6+t^7/252+\\cdots$; the residue-two chain vanishes.",
+        "For each nonzero residue-three chain on $|t|\\le T$, the absolute-term ratio is at most $T^3/[(3k+s+3)(3k+s+2)]\\to0$. Multiplying terms by degree or by degree times degree minus one leaves convergent majorants, so the function and first two derivative series converge uniformly on every bounded interval. Only now may the recurrence cancel every ODE coefficient and verify the data. A formal recurrence or a small sampled residual alone would not establish a solution.",
+        "Here the initial value sets $a_0=1$, while the constant coefficient of $y^{\\prime}=ty$ sets $a_1=0$; for $n\\ge1$, $(n+1)a_{n+1}=a_{n-1}$. Thus odd coefficients vanish and $a_{2k}=1/(2^kk!)$. This indexing is the useful prerequisite for the convergence argument. Lesson 2 of Chapter 17 proves termwise differentiation on every closed interval strictly inside a power series radius; apply that theorem only after verifying this candidate’s radius.",
+        "For each fixed $T$, $|t|\\le T$, the even-series majorant has successive ratio $T^2/[2(k+1)]\\to0$. Multiplying a term by its degree or by degree times degree minus one still leaves a convergent factorial majorant. Thus the series and the first two derivative series converge uniformly on the closed interval, so Chapter 17.2’s termwise theorem applies; the radius is infinite because $T$ was arbitrary. Substitution now cancels the recurrence coefficient by coefficient, and $a_0=1$ checks the data. The independent identity $e^{t^2/2}$ checks the result.",
+        "For $y^{\\prime\\prime}+y=0$, two initial coefficients $a_0=A,a_1=B$ start even and odd chains. The recurrence gives $a_{2k}=A(-1)^k/(2k)!$ and $a_{2k+1}=B(-1)^k/(2k+1)!$. Factorial majorants justify the function and first two derivative series on each bounded interval, then the sums identify with $A\\cos t+B\\sin t$. The initial-value uniqueness lemma from Lesson 5 gives an independent completeness check of this pair.",
+        "For $y^{\\prime\\prime}+ty=0$, $a_0=1,a_1=2$ and the constant equation sets $a_2=0$. Coefficient matching gives $a_{m+3}=-a_m/[(m+3)(m+2)]$, producing $a_3=-1/6$, $a_4=-1/6$, and $a_6=1/180$; the residue-two chain stays zero. On $|t|\\le T$, a step along either nonzero residue-three chain has absolute ratio at most $T^3/[(3k+s+3)(3k+s+2)]\\to0$. Degree factors from the first two derivatives preserve convergence, so all three series converge uniformly on the chosen interval before the ODE is verified.",
+        "A finite truncation and the infinite solution answer different questions. For $P_{2m}=\\sum_{k=0}^m(t^2/2)^k/k!$, direct algebra leaves the exact residual $-t^{2m+1}/(2^mm!)$. On $|t|\\le T$, Taylor's theorem bounds value error by $e^{T^2/2}(T^2/2)^{m+1}/(m+1)!$. The residual is a defect in the differential equation; the error is a difference from the exact solution, so they are not numerically interchangeable. A plot showing nearly overlapping curves can illustrate both, but the factorial proof and interval bound are what certify convergence and approximation.",
+        "The linked Lesson 9 written problems and ode-series-error lab make the distinction operational: a truncated polynomial’s residual is $P^{\\prime}-tP$, whereas value error compares $P$ with the actual solution. Their numerical sizes need not agree. The factorial bound above is uniform only on its declared $|t|\\le T$ interval; a small sampled residual beyond it is not a certificate."
+      ],
+      "formula": "For y'=ty with y(0)=1, a_(2k)=1/(2^k k!), so y=e^(t²/2). For y''+ty=0, a_(m+3)=−a_m/[(m+3)(m+2)]. Convergence of the derivative series licenses substitution.",
+      "formulaTex": "\\begin{gathered}y'=ty,\\ y(0)=1:\\quad a_{2k}=1/(2^kk!),\\quad y=e^{t^2/2};\\\\y''+ty=0,\\ y(0)=1,\\ y'(0)=2:\\quad a_2=0,\\quad a_{m+3}=-a_m/[(m+3)(m+2)].\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A population approaching capacity",
+      "problem": "Solve $P^{\\prime}=0.5P(1-P/1000)$, $P(0)=100$, with time in days. When does $P$ reach $500$?",
+      "steps": [
+        "Both $0$ and $1000$ are equilibria, but the initial condition lies strictly between them. Use the positive logistic solution with $K=1000$ and $r=0.5\\ \\mathrm{day^{-1}}$.",
+        "The constant $K/P_0-1$ is $9$, so $P(t)=1000/(1+9e^{-0.5t})$. Setting $P=500$ gives $9e^{-0.5t}=1$.",
+        "Taking logarithms gives $t=2\\ln9\\approx4.39445$ days. At that moment $P^{\\prime}=0.5\\cdot500\\cdot0.5=125\\ \\mathrm{individuals/day}$. Substitution at $t=0$ returns $100$, and $P^{\\prime}(0)=45\\ \\mathrm{individuals/day}$."
+      ],
+      "answer": "$P(t)=1000/(1+9e^{-0.5t})$; the population reaches $500$ after approximately $4.39445$ days and approaches $1000$ as $t$ increases."
+    },
+    {
+      "title": "Cooling in a warming room",
+      "problem": "An object starts at $30\\,^\\circ\\mathrm C$. The room starts at $20\\,^\\circ\\mathrm C$ and warms at $1\\,^\\circ\\mathrm C/\\mathrm{min}$. Let $t$ be the numerical value of elapsed minutes, and let $T(t)$ and $A(t)$ be numerical temperatures in $^\\circ\\mathrm C$. Then $A(t)=20+t$. In these numerical coordinates solve $T^{\\prime}=-(T-A)$, corresponding to the physical cooling constant $k=1\\ \\mathrm{min^{-1}}$.",
+      "steps": [
+        "Write $T^{\\prime}+T=20+t$. The integrating factor is $e^t$ when time is expressed numerically in minutes.",
+        "Integrating $(e^tT)^{\\prime}=e^t(20+t)$ gives $e^tT=e^t(19+t)+C$. Thus $T=19+t+Ce^{-t}$.",
+        "$T(0)=30$ gives $C=11$. Differentiate: $T^{\\prime}=1-11e^{-t}$. Meanwhile $-(T-A)=1-11e^{-t}$, confirming the equation."
+      ],
+      "answer": "$T(t)=19+t+11e^{-t}$ (numerical temperature in $^\\circ\\mathrm C$) for $t\\ge0$ while the ambient model applies. Eventually the object tracks the room about $1\\,^\\circ\\mathrm C$ behind."
+    },
+    {
+      "title": "A damped initial displacement",
+      "problem": "Solve $x^{\\prime\\prime}+2x^{\\prime}+5x=0$, $x(0)=1$, $x^{\\prime}(0)=0$ in consistent units.",
+      "steps": [
+        "The characteristic roots are $-1\\pm2i$, giving $x=e^{-t}(C_1\\cos2t+C_2\\sin2t)$.",
+        "Position at zero gives $C_1=1$. Differentiating and evaluating at zero gives $x^{\\prime}(0)=-C_1+2C_2$, so $C_2=1/2$."
+      ],
+      "answer": "$x(t)=e^{-t}(\\cos2t+0.5\\sin2t)$. The motion oscillates with an exponentially decaying envelope."
+    },
+    {
+      "title": "A candidate solution needs two checks",
+      "problem": "Verify $y=t-1$ solves $y^{\\prime}=t-y$ and report its value at $t=0$.",
+      "steps": [
+        "Differentiate to get $y^{\\prime}=1$.",
+        "Substitute $y=t-1$ into the right side to get $t-(t-1)=1$.",
+        "Evaluate $y(0)=-1$."
+      ],
+      "answer": "It solves the equation and has initial value $-1$ at zero."
+    },
+    {
+      "title": "Separation and a lost equilibrium",
+      "problem": "Solve $y^{\\prime}=y(1-y)$ for positive initial $y_0$ and list equilibria.",
+      "steps": [
+        "Check constant solutions $y=0$ and $y=1$ before dividing by $y(1-y)$.",
+        "On a non-equilibrium branch, $1/[y(1-y)]=1/y+1/(1-y)$, so integration gives $\\ln|y|-\\ln|1-y|=t+C$.",
+        "With $y(0)=y_0>0$, solve to obtain $y(t)=1/[1+(1/y_0-1)e^{-t}]$ wherever its denominator is nonzero.",
+        "For $y_0=1$, substitution gives the constant solution $1$; substitution also restores equilibrium $0$, outside the requested positive initial data.",
+        "If $y_0>1$, the denominator vanishes backward in time at $t=\\ln(1-1/y_0)<0$; it stays positive for $t\\ge0$."
+      ],
+      "answer": "For $y_0>0$, $y(t)=1/[1+(1/y_0-1)e^{-t}]$ where defined; $y_0=1$ gives the constant solution $1$. The equilibria are $0$ and $1$."
+    },
+    {
+      "title": "An integrating factor with forcing",
+      "problem": "Use an integrating factor to solve $y^{\\prime}+2y=6$ with $y(0)=1$.",
+      "steps": [
+        "Multiply by $e^{2t}$ to obtain $(e^{2t}y)^{\\prime}=6e^{2t}$.",
+        "Integrate to get $y=3+Ce^{-2t}$.",
+        "Initial value gives $C=-2$, and the transient decays."
+      ],
+      "answer": "$y(t)=3-2e^{-2t}$, approaching $3$."
+    },
+    {
+      "title": "A repeated characteristic root",
+      "problem": "Solve $y^{\\prime\\prime}-2y^{\\prime}+y=0$ with $y(0)=2$, $y^{\\prime}(0)=1$.",
+      "steps": [
+        "Characteristic polynomial $(\\lambda-1)^2$ has repeated root one.",
+        "General solution is $(C_1+C_2t)e^t$.",
+        "Initial values give $C_1=2$ and $C_2=-1$."
+      ],
+      "answer": "$y(t)=(2-t)e^t$."
+    },
+    {
+      "title": "Time to a logistic milestone",
+      "problem": "A logistic solution starts at $P_0=K/2$. Find time to reach $3K/4$, assuming $K>0$ and $r>0$.",
+      "steps": [
+        "The explicit solution is $P=K/(1+e^{-rt})$.",
+        "Set $P/K=3/4$, giving $e^{-rt}=1/3$.",
+        "Take logarithms and use $r>0$."
+      ],
+      "answer": "The elapsed time is $(\\ln3)/r$."
+    },
+    {
+      "title": "Mixed forcing without resonance",
+      "problem": "Solve $y^{\\prime\\prime}-y=5t+8e^{2t}-6\\sin t$.",
+      "steps": [
+        "The homogeneous roots are $1,-1$, giving $C_1e^t+C_2e^{-t}$.",
+        "Trials $At+B$, $Ce^{2t}$ and $M\\cos t+N\\sin t$ yield $-5t$, $(8/3)e^{2t}$ and $3\\sin t$.",
+        "Under $D^2-1$, these terms give $5t$, $8e^{2t}$ and $-6\\sin t$ respectively; linearity checks their sum."
+      ],
+      "answer": "$y=C_1e^t+C_2e^{-t}-5t+(8/3)e^{2t}+3\\sin t$."
+    },
+    {
+      "title": "Repeated-root resonant initial values",
+      "problem": "Solve $y^{\\prime\\prime}-2y^{\\prime}+y=2e^t$ with $y(0)=1$ and $y^{\\prime}(0)=0$.",
+      "steps": [
+        "The root $1$ has multiplicity two. Writing $y=e^tP$ reduces the equation to $P^{\\prime\\prime}=2$.",
+        "A particular polynomial is $t^2$; $P=1-t+t^2$ fits the two initial data.",
+        "Indeed $L[e^tP]=e^tP^{\\prime\\prime}=2e^t$, $y(0)=1$, and $y^{\\prime}(0)=P(0)+P^{\\prime}(0)=0$."
+      ],
+      "answer": "$y=e^t(1-t+t^2)$."
+    },
+    {
+      "title": "Variable forcing on its interval",
+      "problem": "Solve $y^{\\prime\\prime}+y=2\\sec t$ with $y(0)=1$ and $y^{\\prime}(0)=-1$.",
+      "steps": [
+        "On $(-\\pi/2,\\pi/2)$ use $y_1=\\cos t,y_2=\\sin t,W=1$. The parameter derivatives are $u_1^{\\prime}=-2\\tan t,u_2^{\\prime}=2$.",
+        "Integration from zero gives the zero-data particular response $2\\cos t\\log(\\cos t)+2t\\sin t$. Add $\\cos t-\\sin t$ to satisfy the prescribed position and velocity.",
+        "For $v=\\cos t\\log(\\cos t)+t\\sin t$, $v^{\\prime}=-\\sin t\\log(\\cos t)+t\\cos t$ and $v^{\\prime\\prime}+v=\\sec t$. Thus the proposed $y=\\cos t-\\sin t+2v$ has residual $2\\sec t$ and both initial values."
+      ],
+      "answer": "$y=\\cos t-\\sin t+2\\cos t\\log(\\cos t)+2t\\sin t$ on $(-\\pi/2,\\pi/2)$."
+    },
+    {
+      "title": "An exact benchmark for ODE series",
+      "problem": "Construct $y^{\\prime}=ty$, $y(0)=3$, and compare its degree-four truncation at $t=1$.",
+      "steps": [
+        "Reindexing gives $a_{2k}=3/(2^kk!)$ and zero odd coefficients. Factorial ratios prove convergence of this and its derivative series on every bounded interval.",
+        "Thus substitution verifies $y=3e^{t^2/2}$. The polynomial $P_4=3+3t^2/2+3t^4/8$ gives $P_4(1)=39/8$.",
+        "Its exact residual is $P_4^{\\prime}-tP_4=-3t^5/8$; at $1$, the value error is $3e^{1/2}-39/8\\approx0.0711638$."
+      ],
+      "answer": "The full series is exact; degree four has a distinct residual and value error."
+    },
+    {
+      "title": "Two freely chosen coefficients",
+      "problem": "Construct $y''+y=0$ with $y(0)=1,y'(0)=2$.",
+      "steps": [
+        "The recurrence $(n+2)(n+1)a_{n+2}=-a_n$ starts an even chain at $a_0=1$ and odd chain at $a_1=2$.",
+        "They give $a_{2k}=(-1)^k/(2k)!$ and $a_{2k+1}=2(-1)^k/(2k+1)!$. Factorial bounds justify both derivatives.",
+        "The full sum is $\\cos t+2\\sin t$. For $P_5=1+2t-t^2/2-t^3/3+t^4/24+t^5/60$, direct differentiation gives $P_5''+P_5=t^4/24+t^5/60$."
+      ],
+      "answer": "$y=\\cos t+2\\sin t$; the finite polynomial has the stated residual."
+    },
+    {
+      "title": "A variable-coefficient three-chain series",
+      "problem": "Construct $y^{\\prime\\prime}+2ty=0$ with $y(0)=2,y^{\\prime}(0)=-1$.",
+      "steps": [
+        "The constant coefficient gives $a_2=0$; the remaining equations give $a_{m+3}=-2a_m/[(m+3)(m+2)]$.",
+        "The start is $2-t-2t^3/3+t^4/6+2t^6/45-t^7/126+\\cdots$; indices congruent to two modulo three vanish.",
+        "On $|t|\\le T$, each nonzero chain has successive-term ratio bounded by $2T^3/[(3k+s+3)(3k+s+2)]\\to0$; degree factors preserve convergence for two derivatives. Uniform convergence licenses substitution, and $a_0,a_1$ fit the data."
+      ],
+      "answer": "The displayed series defines the verified solution for every real $t$."
+    }
+  ],
+  "misconceptions": [
+    "Dividing by the state variable preserves every solution. It can discard equilibria: dividing $y^{\\prime}=ry$ by $y$ loses $y=0$ unless it is recorded first.",
+    "A smooth differential equation has a solution for all time. The smooth equation $y^{\\prime}=y^2$ has the solution $y(t)=1/(1-t)$ through $(t,y)=(0,1)$, which blows up at $t=1$.",
+    "Carrying capacity is a rigid upper bound on initial population. With growth rate $r>0$ and capacity $K>0$, a logistic population starting at $P(0)>K$ decreases toward $K$; $K$ is an attracting equilibrium, not an upper bound on admissible initial data."
+  ],
+  "lab": {
+    "title": "Compare exponential and logistic growth",
+    "description": "Edit the growth rate r (in $\\mathrm{day}^{-1}$), carrying capacity K and initial population P0 (individuals), duration T (days), and samples (plot intervals). The exact-formula plots have time in days on the horizontal axis and population in individuals on the vertical axis. The logged table compares the two populations and their ratio at selected times; evaluation incurs floating-point rounding but no time-stepping error.",
+    "code": "// Adjustable physical parameters; P0 and K must be positive.\nconst r = 0.5;\nconst K = 1000;\nconst P0 = 100;\nconst T = 10;\nconst samples = 200;\nif (![r, K, P0, T].every(Number.isFinite) || r < 0 || K <= 0 || P0 <= 0 || T <= 0 || !Number.isInteger(samples) || samples < 1 || samples > 1999) {\n  throw new Error('Use finite nonnegative r, positive K, P0 and T; integer samples 1..1999.');\n}\nconst exponential = t => t === 0 || r === 0 ? P0 : Math.exp(Math.log(P0) + r*t);\nconst logistic = t => {\n  if (t === 0 || r === 0 || P0 === K) return P0;\n  if (P0 > K) {\n    // Add denominator contributions on a log scale so tiny growth is not lost.\n    const logInitial = Math.log(K) - Math.log(P0);\n    const gained = -Math.expm1(-r*t);\n    const logGained = Math.log1p(-K/P0) + (gained > 0 ? Math.log(gained) : Math.log(r) + Math.log(t));\n    const high = Math.max(logInitial, logGained);\n    const logDenominator = high + Math.log(Math.exp(logInitial-high) + Math.exp(logGained-high));\n    return Math.exp(Math.log(K) - logDenominator);\n  }\n  const logOdds = Math.log(K - P0) - Math.log(P0) - r*t;\n  const logDenominator = logOdds > 0 ? logOdds + Math.log1p(Math.exp(-logOdds)) : Math.log1p(Math.exp(logOdds));\n  return Math.exp(Math.log(K) - logDenominator);\n};\nconst expPoints = [];\nconst logPoints = [];\nconst capacity = [];\nfor (let i = 0; i <= samples; i++) {\n  const t = T * (i / samples);\n  const e = exponential(t);\n  const p = logistic(t);\n  if (!Number.isFinite(e) || !Number.isFinite(p)) throw new Error('Population overflow: reduce parameter magnitudes.');\n  expPoints.push([t,e]);\n  logPoints.push([t,p]);\n  capacity.push([t,K]);\n}\nconst expRate = r === 0 ? 0 : Math.exp(Math.log(r) + Math.log(P0));\nconst logRate = r === 0 || P0 === K ? 0 : Math.sign(K-P0) * Math.exp(Math.log(r) + Math.log(P0) + Math.log(Math.abs(K-P0)) - Math.log(K));\nif (![expRate, logRate].every(Number.isFinite)) throw new Error('Initial rate overflows; reduce parameters.');\nplot(expPoints, 'Exponential population; time in days');\nplot(logPoints, 'Logistic population; time in days');\nplot(capacity, 'Carrying capacity (individuals)');\nconsole.log('time (days) | exponential | logistic | logistic/exponential');\nfor (let i = 0; i <= 5; i++) {\n  const t = T * (i / 5);\n  console.log(t.toFixed(2), exponential(t).toFixed(6), logistic(t).toFixed(6), (logistic(t)/exponential(t)).toFixed(6));\n}\nconsole.log('Initial rates (individuals/day):', expRate, logRate);\n",
+    "tasks": [
+      "Before running, predict which curve initially rises faster and whether the logistic curve will cross K. Justify with the derivative signs.",
+      "Set P0 = 1500 with the other defaults unchanged. Predict and then inspect the logistic direction. Next set P0 = K and explain the constant trajectory.",
+      "Set r = 0. Explain both curves. Then increase samples without changing parameters: does this improve an ODE solver's accuracy or only the displayed sampling?",
+      "Use the table values at days 4 and 6 to bracket the halfway time from the first worked example, $t=2\\ln 9$, then substitute that time into the exact logistic formula. Explain why finitely many samples cannot prove asymptotic convergence or validate the population assumptions."
+    ],
+    "expected": "Default initial rates are 50 and 45 individuals/day. At day 10, exponential population is approximately 14841.315910 and logistic population is approximately 942.825619. The logistic samples increase from 100 and remain below 1000. There are three plots of 201 finite points each. At $t=0$ the plotted logistic population equals any accepted positive P0, including a very small one; fixed-six-decimal table values can round such populations to zero."
+  },
+  "exercises": [
+    {
+      "question": "For $y^{\\prime}=t-y$, determine the slope at $(2,1)$ and decide whether $y(t)=t-1$ is a solution.",
+      "hint": "Compare the candidate derivative with the equation's right side.",
+      "solution": "At $(2,1)$, the slope is $t-y=2-1=1$. For $y(t)=t-1$, $y^{\\prime}(t)=1=t-(t-1)$ at every real $t$, so it solves the equation and passes through $(2,1)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Show that local uniqueness does not guarantee global existence by solving $y^{\\prime}=y^2$, $y(0)=2$.",
+      "hint": "Separate variables and locate the denominator's zero.",
+      "solution": "Integration gives $-1/y=t+C$; $y(0)=2$ makes $C=-1/2$. Thus $y(t)=2/(1-2t)$ on the maximal interval $(-\\infty,1/2)$ containing zero. The right side $y^2$ is locally smooth, so local uniqueness holds, yet $y(t)\\to+\\infty$ as $t\\to(1/2)^-$.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "For $y^{\\prime}=t-y$, what slope occurs at $(2,1)$?",
+      "hint": "Substitute the point into $t-y$.",
+      "solution": "At $(t,y)=(2,1)$, the equation gives $y^{\\prime}=t-y=2-1=1$, so the slope is one.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Verify $y=t-1$ solves $y^{\\prime}=t-y$.",
+      "hint": "Compare the derivative and the right side for all $t$.",
+      "solution": "For $y=t-1$, the derivative is $y^{\\prime}=1$. The equation's right side is $t-y=t-(t-1)=1$, so the identity holds for every real $t$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does one slope-field segment determine a global solution?",
+      "hint": "One segment gives only a local tangent direction.",
+      "solution": "No. A full solution must follow the differential equation throughout an interval and satisfy any supplied initial condition; a single slope-field segment verifies only one local slope.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Show $y^{\\prime}=y^2$, $y(0)=2$ has finite-time blow-up.",
+      "hint": "Separate variables and solve for $y(t)$.",
+      "solution": "Separating gives $y^{-2}\\,dy=dt$ and $-1/y=t+C$. Since $y(0)=2$, $C=-1/2$, so $y(t)=2/(1-2t)$. As $t\\to(1/2)^-$, the denominator tends to zero from above and $y(t)\\to+\\infty$.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Solve $y^{\\prime}=-2y$, $y(0)=5$, and find its half-life when $t$ is in hours.",
+      "hint": "Solve the exponential decay equation, then halve the initial value.",
+      "solution": "Separation gives $y(t)=5e^{-2t}$. The half-life solves $e^{-2t}=1/2$, hence $t=(\\ln2)/2\\approx0.346574$ hours. The rate coefficient has units $\\mathrm{hour}^{-1}$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "What solutions are lost if separation divides the logistic equation by $P(1-P/K)$?",
+      "hint": "Check zeros of the factor divided out.",
+      "solution": "The constants $P(t)=0$ and $P(t)=K$ both satisfy $P^{\\prime}=rP(1-P/K)$, since the right side vanishes. Dividing by $P(1-P/K)$ excludes both equilibria, so they must be restored separately.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Solve $y^{\\prime}=-3y$, $y(0)=4$.",
+      "hint": "Use the exponential solution and the initial condition.",
+      "solution": "Separation yields $y(t)=Ce^{-3t}$. From $y(0)=4$, $C=4$, so the solution is $y(t)=4e^{-3t}$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-ky$ with $k>0$ and $y(0)=y_0>0$, find the half-life.",
+      "hint": "Set the decay factor equal to $1/2$.",
+      "solution": "The solution is $y(t)=y_0e^{-kt}$. Because $y_0>0$, the half-life is the time at which $y(t)=y_0/2$. Thus $e^{-kt}=1/2$ and $t=\\ln2/k$. For $y_0=0$, the solution stays zero and has no uniquely defined half-life.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Which logistic solutions are lost by dividing by $P(1-P/K)$?",
+      "hint": "Find zeros of the divided factor in the original equation.",
+      "solution": "Dividing by $P(1-P/K)$ assumes it is nonzero. Yet $P=0$ and $P=K$ make both sides of $P^{\\prime}=rP(1-P/K)$ zero, giving two equilibrium solutions omitted by that division.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For the logistic equation $P^{\\prime}=rP(1-P/K)$ with $r,K>0$, where is $P^{\\prime}$ largest for $P\\ge0$?",
+      "hint": "Find the vertex of the quadratic rate function.",
+      "solution": "Assuming $r,K>0$, the rate $rP(1-P/K)$ is a concave quadratic with zeros at $P=0$ and $P=K$. Its vertex is $P=K/2$, where $P^{\\prime}=rK/4$ is largest for $P\\ge0$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $y^{\\prime}+2y=6$, $y(0)=1$, and explain the limiting value.",
+      "hint": "Use an integrating factor or find the equilibrium first.",
+      "solution": "Multiplying by $e^{2t}$ gives $(e^{2t}y)^{\\prime}=6e^{2t}$. Integration yields $y=3+Ce^{-2t}$; $y(0)=1$ makes $C=-2$. Thus $y=3-2e^{-2t}\\to3$, where $6-2y=0$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $y^{\\prime}+2y=4$ with $y(0)=1$ and check the limit as $t\\to\\infty$.",
+      "hint": "Use integrating factor $e^{2t}$.",
+      "solution": "Multiplying by $e^{2t}$ gives $(e^{2t}y)^{\\prime}=4e^{2t}$. Hence $y=2+Ce^{-2t}$ and $y(0)=1$ sets $C=-1$. Therefore $y(t)=2-e^{-2t}\\to2$ as $t\\to\\infty$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $y^{\\prime}+2y=6$, $y(0)=1$.",
+      "hint": "Find a constant particular solution, then add the homogeneous term.",
+      "solution": "The constant solution is $3$ because $2(3)=6$. Adding $Ce^{-2t}$ and imposing $y(0)=1$ gives $C=-2$, so $y(t)=3-2e^{-2t}$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=q-ky$, $k>0$, find equilibrium.",
+      "hint": "Set the time derivative to zero.",
+      "solution": "At equilibrium, $0=q-ky$, so $y_*=q/k$. Perturbations satisfy $u^{\\prime}=-ku$ and decay for $k>0$, making this equilibrium stable.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Is $y^{\\prime}+ty=\\sin t$ linear?",
+      "hint": "Check how $y$ and $y^{\\prime}$ enter.",
+      "solution": "Yes. The equation has linear form $y^{\\prime}+p(t)y=q(t)$ with $p(t)=t$ and $q(t)=\\sin t$. The unknown and its derivative appear only to the first power and are not multiplied together.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $p$ and $q$ be continuous on an interval $I$ containing $t_0$. State and derive the integrating-factor formula on $I$ for $y^{\\prime}+p(t)y=q(t)$ with $y(t_0)=y_0$.",
+      "hint": "Normalize the integrating factor at $t_0$.",
+      "solution": "For $t\\in I$, set $\\mu(t)=\\exp(\\int_{t_0}^t p(u)\\,du)$, so $\\mu(t_0)=1$ and $\\mu^{\\prime}=p\\mu$. Multiplying gives $(\\mu y)^{\\prime}=\\mu q$. Integrating yields $y(t)=\\mu(t)^{-1}[y_0+\\int_{t_0}^t\\mu(s)q(s)\\,ds]$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Classify all equilibria of $y^{\\prime}=y(2-y)$ on the real line using a phase line.",
+      "hint": "Check the sign of the rate below, between, and above the roots.",
+      "solution": "The equilibria are $y=0$ and $y=2$. The rate $y(2-y)$ is negative on $(-\\infty,0)$, positive on $(0,2)$, and negative on $(2,\\infty)$. Arrows leave zero, so it is unstable, and point toward two, so it is locally asymptotically stable.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify equilibria of $y^{\\prime}=y(2-y)$ for nearby positive populations.",
+      "hint": "Inspect signs on each side of the equilibrium values.",
+      "solution": "For nearby positive populations, $y(2-y)>0$ between $0$ and $2$, so zero repels to the right. Just above $2$, the rate is negative, while just below it the rate is positive; thus two attracts locally.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify zero for $y^{\\prime}=-y^3$.",
+      "hint": "Check arrows on either side even though the linearization vanishes.",
+      "solution": "If $y>0$, then $y^{\\prime}=-y^3<0$; if $y<0$, then $y^{\\prime}>0$. Both sides move toward zero, so zero is asymptotically stable despite $g^{\\prime}(0)=0$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does failure of a sufficient Lipschitz condition always prove nonuniqueness?",
+      "hint": "Distinguish a sufficient condition from a necessary one.",
+      "solution": "No. A Lipschitz condition is sufficient for uniqueness, so its failure merely leaves that theorem inconclusive. To establish nonuniqueness one must exhibit distinct solutions with the same initial data or use another applicable result.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Solve $y^{\\prime\\prime}-2y^{\\prime}+y=0$ with $y(0)=2$ and $y^{\\prime}(0)=1$.",
+      "hint": "Use the repeated root of the characteristic equation.",
+      "solution": "The polynomial is $(\\lambda-1)^2$, so $y=(C_1+C_2t)e^t$. From $y(0)=2$, $C_1=2$; from $y^{\\prime}(0)=C_1+C_2=1$, $C_2=-1$. Hence $y=(2-t)e^t$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $y^{\\prime\\prime}+4y^{\\prime}+4y=0$ with $y(0)=1$ and $y^{\\prime}(0)=0$.",
+      "hint": "Use the repeated root $\\lambda=-2$.",
+      "solution": "The general solution is $y=(C_1+C_2t)e^{-2t}$. Initial data give $C_1=1$ and $y^{\\prime}(0)=C_2-2C_1=0$, so $C_2=2$. Thus $y=(1+2t)e^{-2t}$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $x^{\\prime\\prime}+x=0$ with $x(0)=1$, $x^{\\prime}(0)=0$.",
+      "hint": "Use the sine and cosine solution basis.",
+      "solution": "The general solution is $x=A\\cos t+B\\sin t$. Conditions $x(0)=1$ and $x^{\\prime}(0)=0$ give $A=1$, $B=0$, hence $x(t)=\\cos t$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x^{\\prime\\prime}+bx^{\\prime}+x=0$, find derivative of $E=((x^{\\prime})^2+x^2)/2$.",
+      "hint": "Differentiate the energy, then substitute the equation.",
+      "solution": "$E^{\\prime}=x^{\\prime}x^{\\prime\\prime}+xx^{\\prime}=x^{\\prime}(x^{\\prime\\prime}+x)$. Since $x^{\\prime\\prime}+x=-bx^{\\prime}$, $E^{\\prime}=-b(x^{\\prime})^2$. It is nonpositive for $b\\ge0$. The sign follows from the square of the velocity, so energy cannot increase when damping is nonnegative.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "For $P^{\\prime}=rP(1-P/K)$ with $r,K>0$, a population starts at $P(0)=K/2$. How long until it reaches $3K/4$?",
+      "hint": "Insert the starting value into the logistic solution.",
+      "solution": "Assuming $r>0$, $P(t)=K/(1+e^{-rt})$ when $P(0)=K/2$. Setting $P=3K/4$ gives $e^{-rt}=1/3$, hence $t=\\ln3/r$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A logistic population has carrying capacity $K=1000$, growth rate $r=0.4$ per year, and initial population $P_0=100$. According to the model, when does it first reach $800$, and what assumption limits that forecast?",
+      "hint": "Find the logistic constant from the initial population.",
+      "solution": "Here $A=(K-P_0)/P_0=9$, so $P(t)=1000/(1+9e^{-0.4t})$. Setting $P=800$ gives $e^{-0.4t}=1/36$ and $t=\\ln36/0.4\\approx8.96$ years. This forecast assumes constant fitted $r$, constant $K$, and a credible closed-population model over that period.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $P^{\\prime}=rP(1-P/K)$ with $r,K>0$ and $0<P_0<K/2$, when does $P$ reach $K/2$?",
+      "hint": "Set the closed logistic solution equal to $K/2$.",
+      "solution": "Assuming $r>0$, write $P(t)=K/(1+Ae^{-rt})$ with $A=K/P_0-1>1$. The condition $P=K/2$ gives $Ae^{-rt}=1$, so $t=\\ln(K/P_0-1)/r$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $P_0>K$ violate the logistic equation?",
+      "hint": "Check the sign of the rate above capacity.",
+      "solution": "No. For $P>K$ with $r,K>0$, $P>0$ but $1-P/K<0$, so $P^{\\prime}=rP(1-P/K)<0$. The mathematical solution decreases toward $K$; model plausibility depends on the application.",
+      "lesson": 6,
+      "type": "Interpretation"
+    }
+  ],
+  "summary": [
+    "A differential equation specifies a rate rule; initial conditions and an interval identify the solution problem.",
+    "Separation uses the chain rule, while integrating factors turn linear equations into product derivatives.",
+    "Phase lines and uniqueness hypotheses explain behavior that formulas and sampled graphs alone cannot certify.",
+    "Second-order linear equations require two initial conditions and connect characteristic roots to growth, decay, and oscillation."
+  ],
+  "next": "Chapter 28 approximates solutions by Euler, improved Euler, and Runge–Kutta methods, then tests step-size error and numerical stability against exact models from this chapter. For a full L2 treatment with existence proofs, exact methods, boundary spectra and linear systems, continue to [ODE: A First Course](/books/ode-first-course/).",
+  "readingLinks": [
+    {
+      "resourceId": "library:book-ode-first-course",
+      "label": "Ordinary Differential Equations: A First Course — the full treatment"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 260" role="img" aria-labelledby="title desc">
+  <title id="title">Holm step-down comparisons stop at the first failure</title>
+  <desc id="desc">Four ordered p-value comparisons at alpha 0.05. Ranks one and two pass. Rank three fails, so rank four is not tested even though its p-value is below its own threshold.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect width="920" height="260" rx="18" fill="#0f172a"/>
+  <text x="460" y="32" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Holm step-down rule: continue only after a pass</text>
+  <g font-family="system-ui, sans-serif" font-size="15" text-anchor="middle">
+    <g transform="translate(35 70)">
+      <rect width="185" height="112" rx="12" fill="#064e3b" stroke="#6ee7b7" stroke-width="3"/>
+      <text x="92.5" y="27" fill="#d1fae5" font-weight="700">rank 1 — PASS</text>
+      <text x="92.5" y="55" fill="#f8fafc">p₍₁₎ = 0.008</text>
+      <text x="92.5" y="80" fill="#f8fafc">threshold = 0.0125</text>
+      <text x="92.5" y="101" fill="#a7f3d0">reject H₍₁₎</text>
+    </g>
+    <g transform="translate(255 70)">
+      <rect width="185" height="112" rx="12" fill="#064e3b" stroke="#6ee7b7" stroke-width="3"/>
+      <text x="92.5" y="27" fill="#d1fae5" font-weight="700">rank 2 — PASS</text>
+      <text x="92.5" y="55" fill="#f8fafc">p₍₂₎ = 0.015</text>
+      <text x="92.5" y="80" fill="#f8fafc">threshold = 0.0167</text>
+      <text x="92.5" y="101" fill="#a7f3d0">reject H₍₂₎</text>
+    </g>
+    <g transform="translate(475 70)">
+      <rect width="185" height="112" rx="12" fill="#7f1d1d" stroke="#fca5a5" stroke-width="3"/>
+      <text x="92.5" y="27" fill="#fee2e2" font-weight="700">rank 3 — FAIL</text>
+      <text x="92.5" y="55" fill="#f8fafc">p₍₃₎ = 0.030</text>
+      <text x="92.5" y="80" fill="#f8fafc">threshold = 0.025</text>
+      <text x="92.5" y="101" fill="#fecaca">stop</text>
+    </g>
+    <g transform="translate(695 70)">
+      <rect width="190" height="112" rx="12" fill="#334155" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8 6"/>
+      <text x="95" y="27" fill="#e2e8f0" font-weight="700">rank 4 — NOT TESTED</text>
+      <text x="95" y="55" fill="#f8fafc">p₍₄₎ = 0.040</text>
+      <text x="95" y="80" fill="#f8fafc">threshold = 0.050</text>
+      <text x="95" y="101" fill="#cbd5e1">no restart</text>
+    </g>
+  </g>
+  <g stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M220 126 H248"/>
+    <path d="M440 126 H468"/>
+    <path d="M660 126 H688" stroke-dasharray="6 6"/>
+  </g>
+  <path d="M555 200 H885" stroke="#fca5a5" stroke-width="3"/>
+  <text x="720" y="229" text-anchor="middle" fill="#fecaca" font-family="system-ui, sans-serif" font-size="16">failure at rank 3 blocks all later rejections</text>
+</svg>

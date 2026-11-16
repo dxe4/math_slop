@@ -1,0 +1,13 @@
+# Predict where e1 and e2 land before moving k. The determinant stays 1.
+# A shear changes angles and lengths, but preserves signed areas.
+scene "Shear: move a basis and the whole plane follows";
+domain -4 4;
+range -3 3;
+coordinates equal;
+param k = 0.8 from -2 to 2;
+param u = 1 from -2 to 2;
+param v = 1 from -2 to 2;
+transform A = (1,k,0,1);
+vector original = (u,v) color rose;
+vector image = (u+k*v,v) color amber;
+segment displacement from (u,v) to (u+k*v,v) color white;

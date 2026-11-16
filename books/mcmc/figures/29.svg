@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Local moves connect a discrete state space</title><desc id="desc">The cube is the state graph of three binary variables under one-bit proposals.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Local moves connect a discrete state space</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">The cube is the state graph of three binary variables under one-bit proposals.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Edges connect states at Hamming distance 1. Constraints can remove vertices and disconnect local proposals.</text>
+<line x1="150.00" y1="300.00" x2="350.00" y2="300.00" stroke="#82909b" stroke-width="2"/>
+<line x1="150.00" y1="300.00" x2="150.00" y2="140.00" stroke="#82909b" stroke-width="2"/>
+<line x1="150.00" y1="300.00" x2="250.00" y2="395.00" stroke="#82909b" stroke-width="2"/>
+<line x1="350.00" y1="300.00" x2="350.00" y2="140.00" stroke="#82909b" stroke-width="2"/>
+<line x1="350.00" y1="300.00" x2="450.00" y2="395.00" stroke="#82909b" stroke-width="2"/>
+<line x1="350.00" y1="140.00" x2="450.00" y2="235.00" stroke="#82909b" stroke-width="2"/>
+<line x1="150.00" y1="140.00" x2="350.00" y2="140.00" stroke="#82909b" stroke-width="2"/>
+<line x1="150.00" y1="140.00" x2="250.00" y2="235.00" stroke="#82909b" stroke-width="2"/>
+<line x1="250.00" y1="395.00" x2="450.00" y2="395.00" stroke="#82909b" stroke-width="2"/>
+<line x1="250.00" y1="395.00" x2="250.00" y2="235.00" stroke="#82909b" stroke-width="2"/>
+<line x1="450.00" y1="395.00" x2="450.00" y2="235.00" stroke="#82909b" stroke-width="2"/>
+<line x1="250.00" y1="235.00" x2="450.00" y2="235.00" stroke="#82909b" stroke-width="2"/>
+<circle cx="150.00" cy="300.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="150.00" y="305.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">000</text>
+<circle cx="350.00" cy="300.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="350.00" y="305.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">100</text>
+<circle cx="350.00" cy="140.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="350.00" y="145.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">110</text>
+<circle cx="150.00" cy="140.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="150.00" y="145.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">010</text>
+<circle cx="250.00" cy="395.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="250.00" y="400.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">001</text>
+<circle cx="450.00" cy="395.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="450.00" y="400.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">101</text>
+<circle cx="450.00" cy="235.00" r="24" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<text x="450.00" y="240.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">111</text>
+<circle cx="250.00" cy="235.00" r="24" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="250.00" y="240.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">011</text>
+<rect x="565" y="155" width="335" height="95" rx="7" fill="#ffffff" stroke="#167d8d"/>
+<text x="732.50" y="195.50" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">Glauber: update one coordinate</text>
+<text x="732.50" y="219.50" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">from its full conditional</text>
+<rect x="565" y="305" width="335" height="95" rx="7" fill="#ffffff" stroke="#275c91"/>
+<text x="732.50" y="345.50" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">MH: propose a neighboring state</text>
+<text x="732.50" y="369.50" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">then correct proposal asymmetry</text>
+</svg>

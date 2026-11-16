@@ -1,0 +1,165 @@
+# Complex analysis problems
+
+Exact complex arithmetic, holomorphic functions, contour integrals, series, residues and conformal maps.
+
+150 problems with hints and worked solutions. Answers are checked in your browser; nothing you enter is stored.
+
+## Complex analysis: contours, growth and analytic compactness
+
+Ninety problems connect zero counts, logarithmic derivatives, real contour integrals, finite root filters, local singularities, coefficient extraction, conformal normalization, entire growth, normal families and meromorphic products. Begin with the finite computations before the compactness and product arguments. Eleven problems use L4 methods. Proof entries invite a written argument and personal rubric reflection.
+
+- [Include poles when converting an argument change into a zero count](ca.extension.argument-change-with-poles.md) · easy
+- [Subtract the inner winding before adding annular poles](ca.extension.annular-argument-count.md) · easy
+- [Choose the correct dominant term on a unit circle](ca.extension.linear-rouche-dominance.md) · medium
+- [Separate a nearby root cluster from a distant root](ca.extension.local-cluster-rouche.md) · medium
+- [Use only the interior root in a logarithmic mean](ca.extension.jensen-average-normalization.md) · medium
+- [Subtract a pole after counting numerator zeros](ca.extension.meromorphic-boundary-winding.md) · medium
+- [Handle a boundary-root polynomial before trying an argument count](ca.extension.unit-circle-reciprocal-factorization.md) · hard
+- [Count roots in an annulus using different comparisons on its two circles](ca.extension.annulus-two-different-dominant-terms.md) · hard
+- [Use real monotonicity and Vieta to locate a nonreal pair](ca.extension.half-plane-root-count-via-conjugates.md) · hard
+- [Read zero multiplicity from a logarithmic derivative](ca.extension.log-derivative-zero-residue.md) · easy
+- [Retain the negative sign for an original pole](ca.extension.log-derivative-pole-residue.md) · easy
+- [Compute a signed first moment of zeros and poles](ca.extension.weighted-log-derivative-moment.md) · medium
+- [Use symmetry for a weighted contour without including an outside pole](ca.extension.log-derivative-second-root-moment.md) · medium
+- [Extract the residue of a squared logarithmic derivative](ca.extension.square-log-derivative-local-residue.md) · medium
+- [Recover a root reciprocal sum without solving a cubic](ca.extension.reciprocal-root-sum-from-constant-data.md) · medium
+- [Use an exact derivative to transfer a contour weight](ca.extension.derivative-log-derivative-integral.md) · hard
+- [Evaluate a rational root sum at two nonroot inputs](ca.extension.root-rational-sum-by-log-derivatives.md) · hard
+- [Extract an infinity coefficient by two reciprocal-power expansions](ca.extension.log-derivative-infinity-coefficient.md) · hard
+- [Apply a supplied whole-line kernel integral with its scale](ca.extension.cauchy-real-integral-normalization.md) · easy
+- [Evaluate a circle-kernel normalization after checking its positivity condition](ca.extension.trigonometric-kernel-supplied-formula.md) · easy
+- [Add both upper-half-plane residues before using evenness conventions](ca.extension.two-upper-pole-real-integral.md) · medium
+- [Differentiate the regular factor at a repeated upper pole](ca.extension.double-pole-quadratic-numerator-integral.md) · medium
+- [Recover a real Fourier integral from an exponentially decaying contour](ca.extension.fourier-kernel-cosine-integral.md) · medium
+- [Use both diagonal poles of a quartic before halving the real integral](ca.extension.quartic-factor-upper-poles.md) · medium
+- [Justify parameter differentiation of a branch contour identity](ca.extension.log-squared-mellin-contour-integral.md) · hard
+- [Use an auxiliary simple pole without introducing a principal value into the final answer](ca.extension.sinc-square-indented-contour.md) · hard
+- [Extract the imaginary part after a derivative cancellation at a repeated pole](ca.extension.weighted-fourier-double-pole.md) · hard
+- [Use a complete nontrivial geometric orbit](ca.extension.complete-root-sum-orthogonality.md) · easy
+- [Evaluate a cyclotomic quotient at the removable input one](ca.extension.nontrivial-root-gap-product.md) · easy
+- [Project a binomial row onto one residue class](ca.extension.binomial-coefficients-divisible-index-three.md) · medium
+- [Compute a trigonometric second moment by orthogonality](ca.extension.cosine-square-full-root-average.md) · medium
+- [Evaluate a reciprocal sum without constructing individual roots](ca.extension.root-resolvent-logarithmic-sum.md) · medium
+- [Take one real part after evaluating the whole binomial expansion](ca.extension.binomial-cosine-fourier-value.md) · medium
+- [Differentiate a root product twice with the correct sign](ca.extension.second-reciprocal-root-gap-moment.md) · hard
+- [Group complete root blocks before projecting weighted subset sums](ca.extension.subset-sums-mod-five-filter.md) · hard
+- [Combine a convergent geometric expansion with a nonzero Fourier weight](ca.extension.weighted-root-resolvent-filter.md) · hard
+- [Use local derivative data rather than an explicit quotient expansion](ca.extension.simple-pole-jet-data.md) · easy
+- [Use the opposite sign of the large-variable simple coefficient](ca.extension.infinity-residue-sign-convention.md) · easy
+- [Invert a local exponential series before squaring](ca.extension.exponential-denominator-square-residue.md) · medium
+- [Retain the next odd correction in a reciprocal trigonometric series](ca.extension.reciprocal-sine-third-pole-residue.md) · medium
+- [Include local mapping degree in a pulled-back residue](ca.extension.ramified-residue-pullback-example.md) · medium
+- [Justify a Laurent coefficient inside an infinite two-sided product](ca.extension.essential-product-residue-series.md) · hard
+- [Resolve a hidden third-order pole before extracting its residue](ca.extension.cancelled-linear-trigonometric-denominator.md) · hard
+- [Prove the pullback residue rule including essential singularities](ca.extension.general-ramified-residue-theorem.md) · hard
+- [Prove density from the removable reciprocal obstruction](ca.extension.essential-image-density.md) · hard
+- [Read a coefficient bound at the correct radius](ca.extension.cauchy-coefficient-bound.md) · easy
+- [Recover a derivative from a normalized coefficient contour](ca.extension.derivative-from-coefficient-contour.md) · easy
+- [Match two exponent lattices in a product series](ca.extension.mixed-exponential-geometric-coefficient.md) · medium
+- [Distinguish coefficientwise and ordinary series multiplication](ca.extension.hadamard-product-radius.md) · medium
+- [Track a Laurent index after removing lower Taylor terms](ca.extension.cancelled-exponential-laurent-coefficient.md) · medium
+- [Extract an implicit analytic coefficient by inversion](ca.extension.implicit-cubic-lagrange-coefficient.md) · hard
+- [Prove a natural boundary through dense radial singularities](ca.extension.factorial-gap-natural-boundary.md) · hard
+- [Derive the sharp coefficient estimate from a positive harmonic part](ca.extension.positive-real-part-coefficient-estimate.md) · hard
+- [Turn infinite-order local decay into global rigidity](ca.extension.finite-jet-flat-holomorphic-function.md) · hard
+- [Differentiate a normalized disk automorphism](ca.extension.disk-automorphism-central-derivative.md) · easy
+- [Extend boundary Fourier modes into the disk](ca.extension.harmonic-fourier-extension-value.md) · easy
+- [Preserve conjugation in a disk invariant](ca.extension.pseudohyperbolic-opposite-points.md) · medium
+- [Recover a Mobius map from three marked images](ca.extension.three-point-mobius-normalization.md) · medium
+- [Fix the additive ambiguity of a harmonic conjugate](ca.extension.normalized-harmonic-conjugate-value.md) · medium
+- [Normalize both points before applying Schwarz's lemma](ca.extension.schwarz-pick-noncentral-sharp-bound.md) · hard
+- [Prove rigidity from two interior fixed points](ca.extension.two-interior-fixed-points-rigidity.md) · hard
+- [Remove finitely many exceptional boundary values from a uniqueness argument](ca.extension.bounded-harmonic-finite-boundary-exceptions.md) · hard
+- [Detect the obstruction to a global harmonic conjugate](ca.extension.annular-conjugate-period-obstruction.md) · hard
+- [Read the integer degree threshold from fractional growth](ca.extension.polynomial-growth-fractional-threshold.md) · easy
+- [Use an exponential to turn a real-part bound into a modulus bound](ca.extension.bounded-real-part-entire-derivative.md) · easy
+- [Recover an entire function from growth and a short jet](ca.extension.quadratic-growth-finite-jet.md) · medium
+- [Turn a growth bound into a multiplicity count](ca.extension.jensen-interior-zero-upper-count.md) · medium
+- [Derive an inner-disk modulus bound using a Cayley transform](ca.extension.real-part-to-modulus-inner-bound.md) · medium
+- [Optimize the Cauchy radius instead of fixing it](ca.extension.optimized-exponential-type-coefficients.md) · hard
+- [Prove the three-circle inequality without a multivalued power](ca.extension.three-circle-log-convexity.md) · hard
+- [Classify entire injections by their singularity at infinity](ca.extension.injective-entire-affine.md) · hard
+- [Control an unbounded sector by a strictly slower angular growth exponent](ca.extension.sector-phragmen-lindelof.md) · hard
+- [Read a finite value in the spherical metric](ca.extension.chordal-distance-to-infinity.md) · easy
+- [Separate spherical convergence from finite Euclidean convergence](ca.extension.spherical-constant-sequence-limit.md) · medium
+- [Pass local bounds to a derivative family](ca.extension.derivative-family-normality.md) · medium
+- [Preserve injectivity under a nonconstant locally uniform limit](ca.extension.univalent-limit-dichotomy.md) · medium
+- [Build analytic compactness from equicontinuity and a diagonal argument](ca.extension.montel-from-cauchy-ascoli.md) · hard
+- [Prove the zero-free limit alternative using a small contour](ca.extension.hurwitz-zero-free-limit.md) · hard
+- [Upgrade sparse pointwise convergence through normality and uniqueness](ca.extension.vitali-uniqueness-upgrade.md) · hard
+- [Use spherical derivative bounds and local target charts](ca.extension.marty-sufficiency-chart-proof.md) · hard
+- [Combine rescaling and omitted-value rigidity](ca.extension.three-omitted-values-normality.md) · hard
+- [Compare the first nonconstant coefficient of a normal product](ca.extension.sine-product-basel-coefficient.md) · easy
+- [Construct an entire function from summable linear factors](ca.extension.summable-zero-product.md) · medium
+- [Explain why a divergent linear zero sequence needs a canonical factor](ca.extension.genus-one-regularization.md) · medium
+- [Build a meromorphic function by subtracting pole-tail constants](ca.extension.regularized-pole-sum.md) · medium
+- [Construct a global logarithm from a derivative primitive](ca.extension.nonvanishing-entire-logarithm.md) · hard
+- [Justify logarithmic differentiation of a normal sine product](ca.extension.cotangent-partial-fraction-expansion.md) · hard
+- [Identify a periodic function from poles and two end limits](ca.extension.periodic-meromorphic-uniqueness.md) · hard
+- [Use zero cancellation and a strip lower bound to identify sine](ca.extension.minimal-type-antiperiodic-sine-rigidity.md) · hard
+- [Obstruct exponential type using Jensen's zero budget](ca.extension.quadratically-dense-zero-growth.md) · hard
+
+## Complex analysis: first 60 problems
+
+Twelve skills connect exact complex arithmetic, holomorphic functions, directed contours, residues, local series and Mobius maps. The first arithmetic and root problems begin at L2. Contour orientations, Laurent annuli and logarithm conventions are stated explicitly.
+
+- [Add real and imaginary components](ca.arithmetic.add-components.md) · easy
+- [Multiply two complex numbers](ca.arithmetic.multiply-complex.md) · easy
+- [Divide using a conjugate](ca.arithmetic.complex-quotient.md) · medium
+- [Find a complex reciprocal](ca.arithmetic.complex-reciprocal.md) · easy
+- [Solve a linear complex equation](ca.arithmetic.linear-complex-equation.md) · medium
+- [Raise a complex number by repeated squaring](ca.polar-powers.eighth-power.md) · medium
+- [Use modulus and argument in a power](ca.polar-powers.triple-argument.md) · medium
+- [Choose the principal argument](ca.polar-powers.principal-argument.md) · easy
+- [Use multiplicativity of the modulus](ca.polar-powers.quotient-modulus-squared.md) · easy
+- [Respect the principal square-root convention](ca.polar-powers.principal-square-root.md) · medium
+- [List the fourth roots of unity](ca.roots.fourth-unity-roots.md) · medium
+- [Resolve a quadratic into conjugate roots](ca.roots.quadratic-conjugates.md) · medium
+- [Read a zero multiplicity](ca.roots.zero-multiplicity.md) · easy
+- [Count roots in a half-plane](ca.roots.roots-right-half-plane.md) · medium
+- [Sum roots without solving them](ca.roots.sum-complex-roots.md) · easy
+- [Differentiate an entire polynomial](ca.analyticity.polynomial-complex-derivative.md) · easy
+- [Restrict the real part to a horizontal line](ca.analyticity.real-part-cubic-line.md) · medium
+- [Check a harmonic polynomial](ca.analyticity.harmonic-laplacian.md) · easy
+- [Choose a harmonic parameter](ca.analyticity.harmonic-parameter.md) · easy
+- [Compute a derivative at one point directly](ca.analyticity.isolated-derivative.md) · medium
+- [Use Cauchy-Riemann on a square map](ca.cauchy-riemann.square-derivative.md) · medium
+- [Find pointwise complex differentiability](ca.cauchy-riemann.modulus-square-points.md) · medium
+- [Compare directions for conjugation](ca.cauchy-riemann.conjugation-directions.md) · medium
+- [A partial derivative of an analytic exponential](ca.cauchy-riemann.exponential-imaginary-part.md) · easy
+- [Construct a normalized harmonic conjugate](ca.cauchy-riemann.normalized-harmonic-conjugate.md) · hard
+- [Integrate a polynomial along a segment](ca.contour-integrals.straight-polynomial-path.md) · medium
+- [Integrate a conjugate along a circle](ca.contour-integrals.conjugate-unit-circle.md) · medium
+- [Integrate an entire derivative around a triangle](ca.contour-integrals.closed-triangle.md) · easy
+- [Keep the contour orientation](ca.contour-integrals.clockwise-pole.md) · easy
+- [Parameterize a directed circular arc](ca.contour-integrals.quarter-circle.md) · medium
+- [Read an analytic value through Cauchy](ca.cauchy-formula.exponential-value.md) · easy
+- [Read a derivative through Cauchy](ca.cauchy-formula.polynomial-derivative.md) · medium
+- [Exclude an exterior singularity](ca.cauchy-formula.pole-outside.md) · easy
+- [Use a nonreal evaluation point](ca.cauchy-formula.shifted-center-value.md) · medium
+- [Keep the derivative factorial](ca.cauchy-formula.second-derivative-factorial.md) · medium
+- [A cosine Taylor coefficient](ca.taylor-series.cosine-fourth-coefficient.md) · easy
+- [A local logarithm coefficient](ca.taylor-series.normalized-logarithm.md) · medium
+- [Differentiate a geometric series](ca.taylor-series.geometric-derivative-coefficient.md) · medium
+- [A scaled exponential coefficient](ca.taylor-series.scaled-exponential.md) · easy
+- [Write a finite Taylor polynomial](ca.taylor-series.geometric-taylor-polynomial.md) · easy
+- [Residue at a nonreal simple pole](ca.residues.nonreal-simple-pole.md) · medium
+- [Read a double-pole residue locally](ca.residues.double-pole-polynomial.md) · medium
+- [Residue from an exponential series](ca.residues.exponential-double-pole.md) · easy
+- [A pole with zero residue](ca.residues.zero-residue-pole.md) · medium
+- [Cancel the correct simple-pole factor](ca.residues.rational-simple-pole.md) · easy
+- [A Laurent coefficient inside the nearest pole](ca.laurent-series.inner-simple-coefficient.md) · medium
+- [Read a two-term principal part](ca.laurent-series.principal-part-vector.md) · medium
+- [Expand outside a pole circle](ca.laurent-series.outer-expansion-coefficient.md) · medium
+- [Extract one coefficient at an essential singularity](ca.laurent-series.essential-coefficient.md) · medium
+- [Choose opposite expansions between two poles](ca.laurent-series.between-two-poles.md) · hard
+- [Find a geometric power-series radius](ca.convergence.geometric-radius.md) · easy
+- [A factorial coefficient radius](ca.convergence.factorial-radius.md) · medium
+- [A radius from an even-power series](ca.convergence.even-power-radius.md) · medium
+- [A Taylor radius at a nonreal center](ca.convergence.nonreal-taylor-center.md) · medium
+- [A radius with square-decaying coefficients](ca.convergence.subexponential-coefficients.md) · medium
+- [Evaluate a Cayley transformation](ca.conformal-maps.cayley-point.md) · medium
+- [Evaluate a rotation-dilation and translation](ca.conformal-maps.affine-map-point.md) · easy
+- [Invert one Mobius value](ca.conformal-maps.inverse-mobius-point.md) · medium
+- [Image of an imaginary ray under squaring](ca.conformal-maps.square-imaginary-ray.md) · medium
+- [Find real fixed points of a Mobius map](ca.conformal-maps.real-mobius-fixed-points.md) · medium

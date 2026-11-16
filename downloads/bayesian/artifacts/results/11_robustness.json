@@ -1,0 +1,9 @@
+{
+  "sbc_mean_rank": 98.766,
+  "expected_mean_rank": 100.0,
+  "biased_sbc_mean_rank": 33.478,
+  "normal_location_mean": 1.1448275862068737,
+  "student_t_location_mean": 0.1368180874437684,
+  "population_mean": -0.003871887134250011,
+  "observed_mean_after_selection": -0.40818106183887426
+}

@@ -1,0 +1,518 @@
+{
+  "id": "22",
+  "title": "Multivariable optimization",
+  "subtitle": "How can we find the best feasible choice when several variables can change at once?",
+  "prerequisites": [
+    "Chapter 20: partial derivatives, domains, and continuity.",
+    "Chapter 21: differentiability, the gradient, and the multivariable chain rule.",
+    "Chapter 9: local versus absolute extrema and iterative optimization."
+  ],
+  "objectives": [
+    "Find interior critical points and classify them using second derivatives or direct comparisons.",
+    "Check every part of a compact feasible domain, including edges, corners, and singular constraint points.",
+    "Use Lagrange multipliers with their regularity hypotheses and distinguish candidates from certified extrema.",
+    "Explain and experimentally test step-size restrictions for gradient descent on a quadratic."
+  ],
+  "sections": [
+    {
+      "title": "Stationary points are candidates",
+      "paragraphs": [
+        "An optimization problem begins with an objective and a feasible set. A manufacturer might minimize cost over possible dimensions, while a scientist might minimize a sum of squared measurement errors over model parameters. Write both ingredients before differentiating: minimize $f(x,y)$ subject to $(x,y)$ belonging to $K$. A local minimum compares nearby feasible points; an absolute minimum compares every point of $K$. The distinction matters even when all the equations are easy to solve.",
+        "If $f$ is differentiable on an open neighborhood of an interior local extremum $p$, then $\\nabla f(p)=0$. To see why, restrict $f$ to each coordinate line through $p$. Each resulting one-variable function has a local extremum, so its derivative is zero. This necessary condition gives stationary points. We also inspect interior points where differentiability fails: the minimum of $\\sqrt{x^2+y^2}$ occurs at the origin even though no gradient exists there. We use critical point to include stationary points and points where a needed derivative is undefined.",
+        "A vanishing gradient means that the first-order linear model is flat. It does not say that the surface is flat nearby, or that moving away raises the objective. The functions $x^2+y^2$, $-x^2-y^2$, and $x^2-y^2$ all have zero gradient at the origin, yet they describe a bowl, a dome, and a saddle. The third function increases along the x-axis and decreases along the y-axis. A saddle point has arbitrarily nearby points with values both above and below its own value.",
+        "The interior qualification is essential. On the square $0\\le x,y\\le1$, the function $x+y$ has its minimum at $(0,0)$, where its gradient is $(1,1)$. No feasible direction from that corner decreases both coordinates. The correct derivative condition depends on which motions the domain permits. Solving $\\nabla f=0$ over the plane and stopping would miss both absolute extrema of this simple constrained problem.",
+        "A critical point is an interior point where the gradient vanishes or a needed derivative does not exist. Thus $|x|+y^2$ has a critical minimum at the origin although $f_x$ is undefined. For a constrained region, partition the search into smooth interior, nonsmooth interior, smooth boundary, singular boundary, and corners. The necessary stationary equation applies only in the smooth interior.",
+        "A stationary equation can have many solutions. For $f(x,y)=x^2y-y^3/3$, the equations $2xy=0$ and $x^2-y^2=0$ meet only at the origin, but the local shape still needs classification. Along $y=0$, $f=0$; along $y=x$, $f=2x^3/3$ takes both signs on either side. The origin is not an extremum. Solving equations locates candidates; testing the objective on nearby feasible points decides what they mean. A contour plot can suggest promising test directions but cannot by itself certify every nearby value.",
+        "Optimization language distinguishes local from absolute. A local minimum at $p$ compares $f(p)$ only with feasible points in some neighborhood of $p$; an absolute minimum compares it with every feasible point. For $f(x)=x^4-2x^2$ on the whole real line, zero is a local maximum while $\\pm1$ are absolute minima. In several variables a stationary point can be a local minimum but not the lowest among distant regions. State the comparison set and whether boundary points are included before interpreting any derivative condition.",
+        "The feasible set can change the answer even when the formula does not. Minimize $x^2+y^2$ over all of $\\mathbb R^2$ and the origin is the unique solution. Restrict to $x+y\\ge1$ and the nearest feasible point becomes $(1/2,1/2)$ on the boundary, where the unconstrained gradient is $(1,1)$, not zero. The active constraint blocks motion toward the origin. This is the geometry behind multiplier and inequality-constraint methods: at an optimum, permissible first-order directions must not decrease the objective.",
+        "An explicit existence check prevents wasted algebra. The function $f(x,y)=x^2+y^2$ on $\\mathbb R^2$ has a minimum but no maximum because it grows without bound. On the open unit disk, it has a minimum at zero and supremum one but no maximum. On the closed unit disk, both are attained. These three problems use the same formula and different sets. Before finding critical points, ask whether an extremum is guaranteed, merely possible, or ruled out by unboundedness or an excluded boundary.",
+        "One can use a directional test before calculating a full Hessian. If a feasible line through $p$ has values both above and below $f(p)$ arbitrarily close to $p$, then p is not a local extremum. For $x^2-y^2$ the coordinate axes give exactly such a contradiction. If every tested direction rises, the result remains inconclusive: a curved route may still fall. The function in chapter 20 with a hidden curved-path limit is a reminder that finite families of straight lines do not exhaust a neighborhood. Positive-definite Hessian or a global inequality is the kind of uniform evidence that can turn favorable directional observations into a proof."
+      ],
+      "formula": "Interior differentiable local extremum ⇒ f_x=0 and f_y=0; the converse is false.",
+      "formulaTex": "\\text{interior differentiable extremum at }(a,b)\\implies\\nabla f(a,b)=\\mathbf0"
+    },
+    {
+      "title": "The Hessian measures quadratic shape",
+      "paragraphs": [
+        "Assume $f$ has continuous second partial derivatives near a stationary point $p$. Its Hessian is the symmetric matrix $H$ with rows $(f_{xx},f_{xy})$ and $(f_{yx},f_{yy})$, evaluated at $p$. The second-order Taylor model is $f(p+h)=f(p)+\\frac12 h^{\\mathsf T}Hh+o(\\lVert h\\rVert^2)$. Here the remainder divided by $\\lVert h\\rVert^2$ tends to zero. Thus a strictly positive quadratic term in every nonzero direction dominates the remainder close enough to $p$ and produces a strict local minimum.",
+        "For two variables put $A=f_{xx}(p)$, $B=f_{xy}(p)$, $C=f_{yy}(p)$, and $D=AC-B^2$. At a stationary point, $D>0,A>0$ gives a strict local minimum, $D>0,A<0$ gives a strict local maximum, and $D<0$ gives a saddle. The theorem proof below completes the square and uses the $o(\\|h\\|^2)$ remainder; the determinant sign by itself is not a classification when $D>0$.",
+        "When $D=0$, the Hessian test gives no classification. At the origin $x^4+y^4$ has a strict minimum, $-x^4-y^4$ has a strict maximum, and $x^4-y^4$ has a saddle, although all three Hessians are zero. Direct inequalities or higher-order terms settle these examples. Checking a few straight lines can disprove a minimum by finding a descending direction, but agreement along finitely many lines does not establish a minimum over a neighborhood.",
+        "In more variables the corresponding condition is positive definiteness of $H$ for a strict minimum and negative definiteness for a strict maximum. A real symmetric Hessian is positive definite exactly when all its eigenvalues are positive. Mixed positive and negative eigenvalues imply a saddle. A zero eigenvalue leaves some directions unresolved by the quadratic approximation; it does not automatically imply that the point is a saddle or that there is a whole curve of minima.",
+        "A Hessian test is local and requires a stationary base point. At a nonstationary point, the linear term usually dominates the quadratic form for small steps, so the sign of the Hessian cannot classify an extremum there. For $f=x+x^2+y^2$ at zero, the Hessian is positive definite, but the gradient is $(1,0)$ and negative x steps decrease $f$. The actual minimum is at $(-1/2,0)$. Always solve the first-order equations and check the point's feasibility before using second-order classification.",
+        "When $D=0$, higher-order behavior can vary even if one quadratic direction is positive. For $f=x^2+y^4$ at zero, the Hessian is $\\operatorname{diag}(2,0)$ and the point is a strict minimum. For $g=x^2-y^4$, the same Hessian occurs, yet values along $x=0$ are negative and along $y=0$ positive, so zero is a saddle. This pair isolates the inconclusive direction: the second derivative in $y$ is zero, and fourth-order terms decide the sign there. An inconclusive test is a request for another argument, not a classification.",
+        "Positive definiteness can be interpreted through directional curvature. At a stationary point, the second derivative of $f(p+tu)$ at $t=0$ is $u^{\\mathsf T}Hu$ for a unit vector $u$. If this is positive for every direction, the smooth quadratic model rises away from the point. The smallest eigenvalue gives the weakest quadratic curvature; if it is very small, the function may look almost flat in one direction. This affects numerical optimization because steps along weak-curvature directions can converge slowly even when a strict minimum is mathematically clear.",
+        "Second-order Taylor's remainder is essential to a strict classification. A positive-definite quadratic term dominates an $o(r^2)$ remainder for sufficiently small $r$, because the quadratic form is bounded below by a positive constant times $r^2$. Without a controlled remainder, the sign of second derivatives at the point alone may not describe neighboring values. Continuous second partial derivatives near the point provide the usual sufficient setting. The resulting conclusion is local; other feasible points may still have lower values.",
+        "The determinant $D=AC-B^2$ is unchanged by rotating orthonormal coordinates because it is the product of Hessian eigenvalues. The signs of the eigenvalues describe curvature along principal directions. When $D<0$, one eigenvalue is positive and one negative, so a saddle is unavoidable at a stationary point under the Taylor assumptions. When $D>0$, both eigenvalues have the same sign; $A$ then identifies that sign. This spectral view explains the compact two-variable test and prepares the higher-dimensional version, where checking one determinant alone is insufficient to prove positive definiteness."
+      ],
+      "formula": "H=[[f_xx,f_xy],[f_yx,f_yy]], D=f_xx f_yy−f_xy², with all derivatives evaluated at the stationary point.",
+      "formulaTex": "\\begin{gathered}\n\\nabla f(p)=0,\\qquad f\\in C^2\\text{ near }p,\\\\\nH_f(p)=\\begin{pmatrix}f_{xx}(p)&f_{xy}(p)\\\\f_{yx}(p)&f_{yy}(p)\\end{pmatrix},\\\\\nD=f_{xx}(p)f_{yy}(p)-f_{xy}(p)^2.\n\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Why the two-variable second-derivative test works",
+          "statement": "At a critical point where $f$ has continuous second partial derivatives nearby, its Hessian supplies the quadratic term in the Taylor expansion. A positive definite Hessian gives a strict local minimum; a negative definite one gives a strict local maximum; an indefinite one gives a saddle.",
+          "equationTex": "Q(h,k)=Ah^2+2Bhk+Ck^2=A\\left(h+\\frac BA k\\right)^2+\\frac{AC-B^2}{A}k^2\\quad(A\\ne0)",
+          "proof": [
+            "Write $A=f_{xx}$, $B=f_{xy}$, and $C=f_{yy}$ at the critical point, and let $D=AC-B^2$. Taylor’s second-order formula has leading change $Q(h,k)/2$ plus a remainder small relative to $h^2+k^2$. If $A\\ne0$, complete the square as displayed. When $D>0$ and $A>0$, both coefficients are positive, so $Q$ is positive for every nonzero small displacement; the small remainder cannot reverse that sign near the point. This proves a strict local minimum. If $D>0$ and $A<0$, both coefficients are negative and the point is a strict local maximum.",
+            "If $D<0$, the quadratic form takes both signs. With $A\\ne0$, the square and remaining term have opposite signs; if $A=0$, then $B\\ne0$ and $Q=2Bhk+Ck^2$ also changes sign along suitable directions. The function therefore rises along some directions and falls along others: a saddle. This classification requires the second-order remainder to be controlled, which continuous second partials in a neighborhood provide.",
+            "When $D=0$, the quadratic form is inconclusive. Higher-order terms may create a minimum, maximum, or saddle. For example, $x^4+y^4$ has a strict minimum at the origin with zero Hessian, while $x^4-y^4$ has a saddle with the same zero Hessian. State “inconclusive” rather than treating zero determinant as a type."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute extrema require the whole domain",
+      "paragraphs": [
+        "The extreme value theorem extends naturally to several variables: a continuous real-valued function on a nonempty compact set attains an absolute minimum and an absolute maximum. In Euclidean space, compact means closed and bounded. This theorem guarantees that winning candidates exist; it does not identify them. On an open disk a continuous function may approach its best value only at an excluded boundary point. On an unbounded closed set it may decrease without bound.",
+        "For a compact region with a manageable piecewise smooth boundary, first find all interior critical points. Next restrict $f$ to each smooth boundary piece using a parametrization, and optimize the resulting one-variable function. Include endpoints of the parameter interval, corners, intersections, and any points where the parametrization or constraint is singular. Evaluate $f$ at every candidate and compare the values. A boundary point may be a constrained minimum while failing to be a minimum in the surrounding plane.",
+        "This candidate method is a framework rather than a promise of finitely many equations. A constant function has infinitely many stationary points, and an entire boundary arc can share one value. In such cases describe the candidate family and its objective values instead of forcing a finite list. Derivatives also do not remove the need to check domain restrictions inherited from logarithms, denominators, or physical constraints.",
+        "Units help audit the model. If $x$ and $y$ represent lengths in meters and $f$ is cost in pounds, $f_x$ has units pounds per meter. Bounds such as $x\\ge0$ represent feasible dimensions, not optional algebraic decorations. A numerical optimizer that reports a cheaper negative length has solved a different problem. Finally, a maximum and minimum of the mathematical model need not be useful engineering designs if the model excludes material limits or measurement uncertainty.",
+        "For a rectangle $[a,b]\\times[c,d]$, the boundary consists of four edges. Restricting $f$ to $x=a$, $x=b$, $y=c$, and $y=d$ produces four one-variable problems. Endpoints belong to two edges, but it is harmless to compare them twice. If f is differentiable in the interior, solve $\\nabla f=0$ there; if not, include interior nonsmooth points. A systematic table of candidate coordinates and objective values is more reliable than trying to guess which corner or stationary point wins from a plot.",
+        "For a disk, parametrizing the circle $x=R\\cos\\theta$, $y=R\\sin\\theta$ converts boundary optimization into a periodic one-variable problem. The interval $[0,2\\pi]$ includes the same point at both ends, so endpoint bookkeeping is easy, but every critical angle still matters. Alternatively a multiplier equation can locate regular boundary candidates. The best method depends on the objective: a linear objective is simplest by Cauchy–Schwarz, while a polynomial on a circle may be easiest after substitution. The existence theorem supplies attainment, not the candidates themselves.",
+        "A noncompact domain can still have extrema; compactness is sufficient, not necessary. For $f=x^2+y^2$ on $\\mathbb R^2$, the origin is a global minimum because a sum of squares is nonnegative, despite the unbounded domain. Conversely, a continuous function on a bounded but open domain need not attain a maximum. Avoid the mistaken converse “not compact means no extrema.” Direct inequalities, coercivity, or limiting behavior can establish existence in particular noncompact problems.",
+        "When the boundary has a corner, a smooth-boundary multiplier equation may not apply there. Consider $f=x+y$ on the square $[0,1]^2$. Along each open edge, the restricted derivative is nonzero; all extrema occur at corners. A routine that checks only interior stationary points and smooth Lagrange candidates would return nothing. In higher dimensions, edges and faces form a hierarchy: optimize in each stratum and compare shared boundaries. This is why feasible geometry must be drawn or described before the calculus begins.",
+        "An absolute-extrema report should give both values and locations. Saying “maximum $\\sqrt2$” omits where it occurs; saying “at $(1/\\sqrt2,1/\\sqrt2)$” omits the objective value and whether other points tie. If a constant function is optimized, every feasible point is both a maximizer and minimizer. If the feasible set has disconnected pieces, each piece may supply separate candidates. A clear final comparison records all ties and indicates whether the extrema are attained or only approached as suprema and infima."
+      ],
+      "formula": "Continuous f on nonempty compact K ⇒ there exist p,q in K with f(p) ≤ f(x) ≤ f(q) for every x in K.",
+      "formulaTex": "\\begin{gathered}\n\\varnothing\\ne K\\subset\\mathbb R^n\\text{ compact},\\quad f\\in C(K)\\\\\n\\Longrightarrow\\quad\\exists\\,p,q\\in K:\\quad\nf(p)\\le f(x)\\le f(q)\\quad\\text{for every }x\\in K.\n\\end{gathered}"
+    },
+    {
+      "title": "Lagrange multipliers and feasible directions",
+      "paragraphs": [
+        "Suppose the feasible boundary is a smooth level curve $g(x,y)=c$. At a point where $\\nabla g\\ne0$, tangent directions are perpendicular to $\\nabla g$. If $f$ has a constrained local extremum there, its derivative along every tangent direction vanishes. Therefore $\\nabla f$ is also perpendicular to the tangent line, so $\\nabla f=\\lambda\\nabla g$ for some scalar $\\lambda$. This geometric argument explains why gradients are parallel and why the constraint equation must accompany the derivative equations.",
+        "The standard necessary-condition theorem assumes $f$ and $g$ are continuously differentiable near the point and $\\nabla g$ is nonzero there. Solve $f_x=\\lambda g_x$, $f_y=\\lambda g_y$, and $g=c$, then classify or compare the feasible candidates. These equations alone do not distinguish maxima, minima, and stationary behavior along the curve. Dividing by $x$, $y$, or $\\lambda$ can silently discard valid zero cases, so separate those cases before division.",
+        "Regularity is a real restriction. Let $g=x^2+y^2$ and constrain $g=0$. The feasible set is the single point $(0,0)$, which minimizes and maximizes $f=x$ over that set. Yet $\\nabla f=(1,0)$ cannot equal $\\lambda\\nabla g=(0,0)$. The multiplier equation misses this extremum because the constraint gradient vanishes. Always inspect feasible points where regularity fails separately. With several equality constraints, their gradients must be linearly independent for the usual multiplier theorem.",
+        "A multiplier can also describe sensitivity. If a smooth family of constrained optimizers $p(c)$ exists and $\\nabla f=\\lambda\\nabla g$, differentiating $g(p(c))=c$ gives $\\nabla g\\cdot p^{\\prime}(c)=1$. Consequently $\\frac{d}{dc}f(p(c))=\\lambda$. This interpretation requires that differentiable optimizer branch; switches between competing optima can create a corner in the optimal-value function. The units of $\\lambda$ are objective units divided by constraint units, and its sign depends on the chosen convention for the multiplier equation.",
+        "The multiplier equation says the objective gradient has no component tangent to a regular constraint curve. It does not say the gradients must point the same way: $\\lambda$ may be negative. For $f=x+y$ on the unit circle, the maximum and minimum occur at opposite points; the corresponding $\\lambda$ signs differ. The equation is necessary at a regular constrained extremum, not sufficient. A solution can be a constrained maximum, minimum, or saddle relative to the feasible set, so objective values or second-order feasible tests are still needed.",
+        "A regular multiplier candidate need not be an extremum. On $g(x,y)=x^2+y^2=1$, take $f(x,y)=x^3$. At $(0,1)$, $\\nabla g=(0,2)\\ne0$ and $\\nabla f=(0,0)=0\\nabla g$, so the multiplier equations hold. Nearby feasible points $(t,\\sqrt{1-t^2})$ have values $t^3$, positive for $t>0$ and negative for $t<0$. Thus this candidate is neither a constrained maximum nor minimum. Classify candidates by feasible motion or a justified constrained second-order test.",
+        "A simple ellipse problem shows the geometry. Maximize $x+y$ subject to $x^2+4y^2=4$. The equations $(1,1)=\\lambda(2x,8y)$ give $x=4y$ when $\\lambda\\ne0$. The constraint then gives $16y^2+4y^2=4$, so $(x,y)=\\pm(4/\\sqrt5,1/\\sqrt5)$. The objective is $\\pm\\sqrt5$. Because the ellipse is compact and these are all regular boundary candidates, the positive point is the absolute maximum and the negative point the minimum. Directly parametrizing the ellipse gives the same result.",
+        "At singular feasible points and corners, inspect feasible motion directly; one smooth constraint normal may not describe every blocked direction. The singleton $g=x^2+y^2=0$ in paragraph 3 is the simplest case. Normal-cone and inequality-multiplier methods are optional later extensions of this geometric idea.",
+        "The numerical value of $\\lambda$ depends on how the constraint is written. Replacing $g=c$ by $2g=2c$ doubles $\\nabla g$, so the multiplier in $\\nabla f=\\lambda\\nabla g$ is halved. The underlying feasible set and optimizer do not change. Its sensitivity interpretation also changes consistently because the right-hand parameter has been rescaled. This is why a reported multiplier should be paired with its exact constraint equation and units. It is not an intrinsic property of the point alone.",
+        "For an inequality $g(x,y)\\le c$, an optimum may lie in the interior where the constraint is inactive, or on the boundary where it is active. A plain equality multiplier search on $g=c$ examines only the latter. To solve a simple bounded-region problem, check interior stationary points first, then each active boundary. At an active boundary, feasible directions point to one side, so the sign of $\\lambda$ can carry information; the full Karush–Kuhn–Tucker theorem formalizes this under constraint qualifications. Here direct candidate comparison is often clearer and safer.",
+        "A numerical optimizer may report a point outside the feasible region because of roundoff, loose constraint tolerances, or a mismatch between units. A candidate only has meaning after feasibility is checked. For $x^2+4y^2=4$, a reported point $(1.8,0.5)$ gives $1.8^2+4(0.5)^2=4.24$, so it is not on the ellipse even though it looks close in a plot. Projecting onto the constraint changes the point and objective value. Exact symbolic candidates, when available, give a useful reference for choosing tolerances and interpreting the numerical result.",
+        "Optional investigation: classify a regular multiplier candidate by its second-order change along the constraint. Lesson 22.2 treats an unconstrained stationary point, where $\\nabla f=0$. Here $\\nabla f$ need not vanish: fix the multiplier from $\\nabla f(P)=\\lambda\\nabla g(P)$ and use $L=f-\\lambda(g-c)$. All derivatives below are with respect to the position variables, with $\\lambda$ held fixed. Work in $\\mathbb R^2$ or $\\mathbb R^3$, with one regular equality constraint and $C^2$ functions on an open neighborhood of $P$.",
+        "A tangent line records first-order motion, but usually leaves a curved constraint. If a $C^2$ feasible curve has $\\gamma(0)=P$ and $\\gamma'(0)=v$, the second derivative of $f(\\gamma(t))$ contains both $v^{\\mathsf T}H_f(P)v$ and $\\nabla f(P)\\cdot\\gamma''(0)$. Twice differentiating $g(\\gamma(t))=c$ and using the multiplier equation cancels the acceleration term. The remaining quadratic form is $Q(v)=v^{\\mathsf T}(H_f(P)-\\lambda H_g(P))v$ for $v$ tangent to the constraint. The theorem proves why every tangent direction is available and why a definite sign gives a local conclusion.",
+        "For a worked dimensionless model, take $f=x+y^2/4$, $g=x^2+y^2=1$, and $P=(1,0)$. Here $\\lambda=1/2$ and tangent vectors are $(0,b)$. The objective Hessian alone gives $b^2/2>0$ for $b\\ne0$, but the corrected form is $Q(0,b)=-b^2/2<0$: $P$ is a strict constrained local maximum. The exact on-circle identity $f-1=-y^2/4-(x-1)^2/2$ also proves it is the unique global maximum. The positive objective curvature along the tangent line does not describe motion on the circle.",
+        "Positive definiteness on every nonzero tangent vector proves a strict constrained local minimum; negative definiteness proves a strict constrained local maximum. A semidefinite form alone can leave higher-order motion unresolved, just as in Lesson 22.2. It does not by itself prove a saddle. The tasks change a parameter through a zero-curvature boundary and then change to a two-dimensional tangent plane. Replacing $g=c$ by $\\alpha g=\\alpha c$ with fixed $\\alpha\\ne0$ changes the multiplier to $\\lambda/\\alpha$ and leaves $H_f-\\lambda H_g$ unchanged. The test concerns local feasible behavior; global optimality needs a separate argument."
+      ],
+      "formula": "One regular equality constraint: ∇f(p)=λ∇g(p), g(p)=c, with ∇g(p)≠0.",
+      "formulaTex": "\\begin{gathered}\n\\nabla f(p)=\\lambda\\nabla g(p),\\qquad g(p)=c,\\\\\n\\nabla g(p)\\ne0,\\quad f,g\\in C^1\\text{ near }p,\\\\\np\\text{ a constrained local extremum on }g=c.\n\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Second-order classification on one regular equality constraint",
+          "statement": "Let $f,g\\in C^2$ on an open neighborhood of $P\\in\\mathbb R^n$, where $n=2$ or $3$, with $g(P)=c$ and $\\nabla g(P)\\ne0$. Suppose $\\nabla f(P)=\\lambda\\nabla g(P)$ and define $T=\\{v:\\nabla g(P)\\cdot v=0\\}$ and $Q(v)=v^{\\mathsf T}(H_f(P)-\\lambda H_g(P))v$. A constrained local minimum requires $Q(v)\\ge0$ for every $v\\in T$; a constrained local maximum requires $Q(v)\\le0$. If $Q(v)>0$ for every nonzero $v\\in T$, then $P$ is a strict constrained local minimum; if $Q(v)<0$ for every nonzero $v\\in T$, it is a strict constrained local maximum. If $Q$ takes both signs on $T$, feasible values on both sides of $f(P)$ occur arbitrarily near $P$. Semidefiniteness without definiteness does not in general classify the point.",
+          "equationTex": "\\begin{gathered}\n\\gamma\\in C^2,\\\\\n\\gamma(0)=P,\\\\\ng\\circ\\gamma=c,\\\\\nv=\\gamma^{\\prime}(0),\\\\\n(f\\circ\\gamma)^{\\prime\\prime}(0)\\\\\n=Q(v).\n\\end{gathered}",
+          "proof": [
+            "Permute coordinates so the last partial derivative of $g$ at $P$ is nonzero. Write the other one or two coordinates as $q$. The local graph construction in Lesson 21.6, with the same coordinate IVT and MVT argument for one or two free coordinates, gives a $C^1$ graph $\\Phi(q)=(q,\\phi(q))$ containing every nearby feasible point. Its first derivatives satisfy $\\phi_{q_j}=-(g_{q_j}/g_z)\\circ\\Phi$, with the denominator nonzero throughout a smaller neighborhood. Since $g$ is $C^2$ and $\\Phi$ is $C^1$, these ratios are $C^1$; hence $\\phi$ and $\\Phi$ are $C^2$. Differentiating $g\\circ\\Phi=c$ shows that the injective map $D\\Phi(q_0)$ has image $T$: its image lies in $T$ and both spaces have dimension $n-1$. Every tangent vector $v$ is therefore the velocity at zero of $\\gamma(t)=\\Phi(q_0+ta)$ for some $a$.",
+            "For any $C^2$ feasible curve with $\\gamma(0)=P$ and $\\gamma'(0)=v$, the chain rule gives $(f\\circ\\gamma)''(0)=v^{\\mathsf T}H_f(P)v+\\nabla f(P)\\cdot\\gamma''(0)$. The constraint gives $0=v^{\\mathsf T}H_g(P)v+\\nabla g(P)\\cdot\\gamma''(0)$. Subtract $\\lambda$ times the second equality from the first and use $\\nabla f(P)=\\lambda\\nabla g(P)$ to obtain the displayed identity. At a constrained local minimum, every realized scalar function $f\\circ\\gamma$ has a local minimum at zero, so its second derivative is nonnegative. This proves necessity for all $v\\in T$. Apply the same argument to $-f$ for the maximum case.",
+            "For sufficiency, put $K(q)=f(\\Phi(q))$. Stationarity gives $DK(q_0)=0$. Applying the curve identity to $\\Phi(q_0+ta)$ for every $a$ gives $a^{\\mathsf T}H_K(q_0)a=Q(D\\Phi(q_0)a)$. If $Q$ is positive definite on $T$, injectivity of $D\\Phi(q_0)$ makes $H_K(q_0)$ positive definite. Its continuous quadratic form has a positive minimum $\\mu$ on the unit sphere in the one- or two-dimensional parameter space. Taylor's formula is $K(q_0+h)-K(q_0)=\\tfrac12 h^{\\mathsf T}H_K(q_0)h+o(\\|h\\|^2)$. For sufficiently small nonzero $h$, the remainder has magnitude at most $\\mu\\|h\\|^2/4$, leaving a strictly positive change. Every nearby feasible point is in this graph, so this is a strict constrained local minimum. The negative-definite case follows by replacing $f$ by $-f$.",
+            "If $Q$ takes both signs, choose tangent vectors with $Q(v_+)>0$ and $Q(v_-)<0$ and realize them by the graph curves above. Their scalar Taylor expansions have leading terms $t^2Q(v_\\pm)/2$, so values respectively above and below $f(P)$ occur arbitrarily near $P$. When a nonzero tangent direction has $Q=0$, this argument supplies no sign along that direction. The tasks settle two such cases by exact feasible identities rather than inferring a classification from an inconclusive test."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "constrained-second-variation",
+        "title": "Constraint curvature and a flat tangent direction",
+        "introduction": "Use the fixed convention $\\nabla f(P)=\\lambda\\nabla g(P)$ and $L=f-\\lambda(g-c)$. All coordinates, objective values and parameters in these two exact models are dimensionless. Analyze the stated point, not every stationary point on the whole constraint. Give a feasible argument whenever the quadratic test is inconclusive.",
+        "tasks": [
+          {
+            "title": "Cross a constrained-curvature threshold",
+            "question": "On $x^2+y^2=1$, let $f_a(x,y)=x+a y^2$ for any real $a$ and consider $P=(1,0)$. Find its multiplier, the tangent quadratic form and its strict local classification for $a<1/2$, $a=1/2$ and $a>1/2$. At the boundary value, settle the actual behavior by an exact feasible identity. For $0<a<1/2$, explain why restricting $H_{f_a}$ to the tangent line gives the wrong sign. Does the local minimum obtained when $a>1/2$ have to be a global minimum?",
+            "hint": "The tangent vectors at $P$ are $(0,b)$, and the constraint Hessian is $2I$. From $y^2=1-x^2$, derive $f_a-1=(a-1/2)y^2-(x-1)^2/2$. For the last question, compare with the opposite feasible point. Keep the equality case separate from the strict second-order inequalities.",
+            "solution": "At $P$, $\\nabla f_a=(1,0)$ and $\\nabla g=(2,0)$, so $\\lambda=1/2$. The two Hessians are $H_{f_a}=\\operatorname{diag}(0,2a)$ and $H_g=2I$. Thus $H_L=\\operatorname{diag}(-1,2a-1)$ and $Q(0,b)=(2a-1)b^2$. The theorem gives a strict constrained local maximum for $a<1/2$ and a strict constrained local minimum for $a>1/2$. Positive definiteness here concerns the tangent line; $H_L$ is still indefinite as an ambient matrix in the minimum case.\n\nAt $a=1/2$, $Q$ vanishes on the tangent line and the theorem is inconclusive. The exact on-circle identity is $f_a-1=(a-1/2)y^2-(x-1)^2/2$. At the boundary this becomes $f_{1/2}-1=-(x-1)^2/2$. A circle point has $x=1$ only at $P$, so $P$ is the unique global maximum, and in particular a strict local maximum. The same identity proves a unique global maximum for every $a<1/2$, although that stronger conclusion was not required by the local test.\n\nFor $0<a<1/2$, the naive objective form on $(0,b)$ is $2ab^2>0$, whereas the actual constrained form is $(2a-1)b^2<0$. The missing acceleration of the curved feasible motion reverses the sign. For $a>1/2$, $P$ has value $1$ but $f_a(-1,0)=-1$, so the strict local minimum is not global."
+          },
+          {
+            "title": "A semidefinite form on a sphere",
+            "question": "Change the dimension and objective: on $x^2+y^2+z^2=1$, take $F(x,y,z)=x+y^2/2+z^2$ at $P=(1,0,0)$. Compute the multiplier and the corrected quadratic form on its tangent plane. State exactly what the second-order theorem can and cannot conclude. Then prove the actual constrained classification using two feasible curves whose values lie on opposite sides of $F(P)$ arbitrarily near $P$.",
+            "hint": "The tangent plane has first component zero. The substitution $x=(1-t^2)/(1+t^2)$ and one other coordinate $2t/(1+t^2)$ gives an exact circle on the sphere. Use it once with $y$ varying and once with $z$ varying, and keep $0<|t|<1$ for the positive-value comparison.",
+            "solution": "Here $\\nabla F(P)=(1,0,0)$ and $\\nabla g(P)=(2,0,0)$, so $\\lambda=1/2$. Since $H_F=\\operatorname{diag}(0,1,2)$ and $H_g=2I$, the corrected Hessian is $\\operatorname{diag}(-1,0,1)$. For a tangent vector $(0,b,d)$ the form is $Q=d^2$. It is positive semidefinite, not positive definite, because nonzero vectors $(0,b,0)$ give zero. It satisfies a necessary condition for a local minimum but does not prove a minimum. Its positive values rule out a local maximum. Semidefiniteness alone does not prove a saddle.\n\nFor real $t$ near zero, put $X(t)=(1-t^2)/(1+t^2)$ and $U(t)=2t/(1+t^2)$. Define $\\gamma_y(t)=(X(t),U(t),0)$ and $\\gamma_z(t)=(X(t),0,U(t))$. Both curves lie exactly on the sphere and approach $P$. Direct substitution gives\n\n$F(\\gamma_y(t))-1=-\\frac{2t^4}{(1+t^2)^2}<0\\quad(t\\ne0)$.\n\nFor the other curve,\n\n$F(\\gamma_z(t))-1=\\frac{2t^2(1-t^2)}{(1+t^2)^2}>0\\quad(0<|t|<1)$.\n\nThus feasible values below and above $F(P)=1$ occur arbitrarily near $P$: it is a constrained saddle. The negative change is fourth order along the tangent direction where $Q$ vanishes; that is why the semidefinite form alone missed it. The curves have velocities $(0,2,0)$ and $(0,0,2)$, so the second derivatives are $0$ and $4$, consistent with $Q$ on those actual velocities."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Gradient descent is an algorithm, not a certificate",
+      "paragraphs": [
+        "For unconstrained minimization, gradient descent repeats $p_{k+1}=p_k-\\alpha\\nabla f(p_k)$, where $\\alpha>0$ is a step size. At a point with nonzero gradient, the derivative along the parameterized vector $-\\nabla f$ is $-\\lVert\\nabla f\\rVert^2$; per unit distance along the normalized negative-gradient direction it is $-\\lVert\\nabla f\\rVert$. A sufficiently small step therefore decreases a differentiable objective locally. A fixed large step can cross a narrow valley and climb the opposite side. A small gradient can also occur at a saddle or maximum, so a stopping rule based on the gradient needs interpretation.",
+        "The quadratic $f(x,y)=(x^2+\\kappa y^2)/2$ with $\\kappa\\ge1$ makes the issue exact. Its minimum is $(0,0)$, and the iteration satisfies $x_{k+1}=(1-\\alpha)x_k$ and $y_{k+1}=(1-\\alpha\\kappa)y_k$. Every starting point converges to the minimum precisely when $0<\\alpha<2/\\kappa$. At $\\alpha=2/\\kappa$ the y-coordinate alternates without shrinking; above this value a nonzero y-coordinate grows in magnitude. Large $\\kappa$ gives a long narrow valley and forces small steps even when progress along the x-direction is slow.",
+        "The lab displays paths in the coordinate plane and logs final objective values. Its connecting segments show the discrete iteration order; they are not a continuously solved trajectory. Changing units rescales coordinates and gradients, so the convenient formula assumes nondimensional variables or a deliberate consistent scaling. For constrained optimization a raw gradient step can leave the feasible set; projections or specialized constrained methods are needed. Backtracking step selection and better scaling improve practical descent, but a finite run still does not prove global optimality for a general nonconvex objective.",
+        "For $f=(x^2+\\kappa y^2)/2$, the gradient is $(x,\\kappa y)$. One gradient step multiplies $x$ by $1-\\alpha$ and $y$ by $1-\\alpha\\kappa$. The y component converges only if $|1-\\alpha\\kappa|<1$, equivalent to $0<\\alpha<2/\\kappa$. A step that works for $x$ alone may therefore oscillate or diverge in the steep $y$ direction. The ratio $\\kappa$ between curvatures makes the level ellipses narrow and is a simple measure of conditioning. A path plot can reveal zigzags, but the multiplier equations prove the threshold.",
+        "A decrease at the next step is different from convergence of the entire sequence. For a smooth function with Lipschitz gradient constant $L$, sufficiently small fixed steps can guarantee descent, yet convergence to a global minimum generally needs additional structure such as convexity. On a nonconvex surface, gradient descent may approach a local minimum or stationary saddle. A finite run that ends near a low objective value is evidence about that run, not a certificate that all feasible points have been beaten.",
+        "Step size should be interpreted in the model's units. If a physical length has coordinate $y_{\\mathrm m}$ in metres, its numerical coordinate in millimetres is $y_{\\mathrm{mm}}=1000y_{\\mathrm m}$. Rewriting the same objective as $\\widetilde f(x,y_{\\mathrm{mm}})=f(x,y_{\\mathrm{mm}}/1000)$ changes its numerical gradient and Hessian. A fixed numerical $\\alpha$ in raw coordinates is therefore not invariant under unit conversion. Scaling or preconditioning balances coordinates before iteration. When comparing algorithms, report the coordinate convention, starting point, step rule, stopping criterion, and final objective value.",
+        "A stopping rule based only on a small gradient can be misleading. Near a flat saddle, $\\lVert\\nabla f\\rVert$ may be tiny while the point is not a local minimum. A better diagnostic combines gradient size with feasible-step behavior, Hessian information, or objective comparisons when available. Numerical precision also sets a floor: if updates become smaller than machine resolution, the iteration may appear to stop despite a nonzero mathematical gradient. The lab should be read as an experiment about an explicit update map, not a theorem about arbitrary objectives.",
+        "For the exact quadratic model, one can predict the objective after $k$ steps: $f_k=\\bigl[(1-\\alpha)^{2k}x_0^2+\\kappa(1-\\alpha\\kappa)^{2k}y_0^2\\bigr]/2$. This formula distinguishes component convergence from objective convergence and makes the step-size boundary visible. At $\\alpha=2/\\kappa$, the $y$ component flips sign each step without shrinking; the objective contribution from $y$ stays fixed. Just below the boundary, it decays very slowly. Such exact solvable examples are valuable calibration tests for a plotted numerical algorithm.",
+        "An inverse calibration problem adds uncertain data to optimization. Assume the dimensionless linear model $z(t)=a+bt$ holds throughout the observation and prediction domain. The two input locations $t=-\\varepsilon$ and $t=\\varepsilon$ are known exactly, with $\\varepsilon>0$; their reported outputs are $y_-$ and $y_+$. Each true output may differ from its report by at most $\\eta\\ge0$. These are deterministic tolerance bounds, with no probability distribution or averaging assumption. Different allowed pairs of true readings may correspond to different true lines, even when the reported data have a unique best fit.",
+        "Minimize $F(a,b)=\\tfrac12[(a-\\varepsilon b-y_-)^2+(a+\\varepsilon b-y_+)^2]$. The exact optimizer is $\\hat a=(y_-+y_+)/2$, $\\hat b=(y_+-y_-)/(2\\varepsilon)$. Indeed, completing squares gives $F(a,b)=(a-\\hat a)^2+\\varepsilon^2(b-\\hat b)^2$, which proves a unique global minimum with zero residual. This is a certificate about fitting the reported readings. It does not certify that the fitted parameters equal the true parameters: those readings themselves have a tolerance.",
+        "For $0<\\varepsilon\\le1$, the Hessian of $F$ is $\\operatorname{diag}(2,2\\varepsilon^2)$, so its curvature ratio is $1/\\varepsilon^2$. Bringing the measurement locations together makes the objective valley narrow and can slow an unscaled gradient iteration. It also makes slope recovery more sensitive to data error. Better scaling can improve the iteration without reducing the range of true slopes consistent with the same observations. These are different questions: how accurately the reported optimization problem was solved, and how much its answer can change when allowed data change.",
+        "For example, let $\\varepsilon=1/10$, $\\eta=1/100$, and reports $y_-=9/10$, $y_+=11/10$. The fit is $(\\hat a,\\hat b)=(1,1)$. The theorem below gives $|a-1|+(1/10)|b-1|\\le1/100$, hence $9/10\\le b\\le11/10$. At the interior input $T=0$, the true model output differs from its fitted value by at most $1/100$; at $T=1$, the sharp bound is $1/10$. The slope interval and intercept interval cannot be combined freely: $a=101/100$, $b=11/10$ lies in both marginal intervals but violates the joint inequality. Prediction bounds concern true model output; a new sensor reading would need its own error allowance."
+      ],
+      "theorems": [
+        {
+          "title": "A unique fit and a sharp joint uncertainty region",
+          "statement": "Assume $z(t)=a+bt$ on the observation and prediction domain, exact locations $\\pm\\varepsilon$ with $\\varepsilon>0$, and $|z(-\\varepsilon)-y_-|\\le\\eta$, $|z(\\varepsilon)-y_+|\\le\\eta$, where $\\eta\\ge0$. Relative to the unique reported-data fit, write $\\delta a=a-\\hat a$, $\\delta b=b-\\hat b$. The possible true parameters form exactly the region below. Its prediction bound is attained for every real $T$ in the declared model domain.",
+          "equationTex": "\\begin{gathered}\n|\\delta a|+\\varepsilon|\\delta b|\\le\\eta,\\\\\n|z(T)-(\\hat a+T\\hat b)|\n\\le\\eta\\max\\left(1,\\frac{|T|}{\\varepsilon}\\right).\n\\end{gathered}",
+          "proof": [
+            "The fitted line passes through both reported outputs. The two true endpoint errors are therefore $\\delta a-\\varepsilon\\delta b$ and $\\delta a+\\varepsilon\\delta b$. For real $u,v$, $\\max(|u-v|,|u+v|)=|u|+|v|$: when their signs agree the sum realizes the right side, and when they disagree the difference does. Thus both endpoint errors have magnitude at most $\\eta$ exactly when $|\\delta a|+\\varepsilon|\\delta b|\\le\\eta$. Every point in this region defines a line satisfying both data tolerances. These are possible true lines, not additional minimizers of the fixed reported-data objective.",
+            "The region is a diamond with vertices $(\\delta a,\\delta b)=(\\pm\\eta,0)$ and $(0,\\pm\\eta/\\varepsilon)$; it reduces to one point when $\\eta=0$. Its marginal bounds are $|\\delta a|\\le\\eta$ and $|\\delta b|\\le\\eta/\\varepsilon$. For $\\eta>0$, the corner $(\\eta,\\eta/\\varepsilon)$ of the marginal rectangle is excluded: its second endpoint error is $2\\eta$. Retaining the joint region prevents combining incompatible parameter extremes.",
+            "Any linear model obeys $z(T)=\\tfrac12(1-T/\\varepsilon)z(-\\varepsilon)+\\tfrac12(1+T/\\varepsilon)z(\\varepsilon)$. Apply the same identity to the fitted line and subtract. The sum of the absolute weights is $\\tfrac12|1-T/\\varepsilon|+\\tfrac12|1+T/\\varepsilon|=\\max(1,|T|/\\varepsilon)$, giving the stated bound. Choose each allowed endpoint error to have the sign of its weight to attain the upper bound, and reverse both signs for the lower bound. The resulting pair defines an admissible true line.",
+            "Inside the measurement interval, $|T|\\le\\varepsilon$, the weights are nonnegative and their sum is one: prediction uncertainty remains $\\eta$ even when slope uncertainty is large. Outside that interval one weight is negative, and the sharp bound grows as $\\eta|T|/\\varepsilon$. No more accurate minimization of the same reported objective removes this data uncertainty. The conclusion is conditional on the declared linear model and exact input locations; it does not validate extrapolation of a physical model."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "inverse-calibration",
+        "title": "Perfect fit, uncertain calibration",
+        "introduction": "Use the exact model and deterministic tolerances to distinguish computational residual, uncertainty in possible true parameters, and identifiability. Give the joint region before reporting separate intervals. All variables and input locations below are dimensionless; no additional future-reading error is included.",
+        "tasks": [
+          {
+            "title": "Change the spacing and sensor tolerance",
+            "question": "Measure at $t=\\pm1/100$ with reports $99/100$ and $101/100$ and tolerance $\\eta=1/100$. Find the unique reported-data optimizer, its residual, and the complete region of possible true $(a,b)$. Give sharp prediction ranges at $T=1/200$ and $T=1$. Exhibit two allowed lines with different slopes. Then halve $\\eta$ while keeping the locations and reports: how do the slope interval and the $T=1$ range change, and does the reported-data optimizer change?",
+            "hint": "Use $\\hat a=(y_-+y_+)/2$ and $\\hat b=(y_+-y_-)/(2\\varepsilon)$, then retain $|\\delta a|+\\varepsilon|\\delta b|\\le\\eta$. The interior prediction uses nonnegative endpoint weights; the exterior prediction uses a negative weight. Changing the allowed tolerance does not change the reported objective.",
+            "solution": "The unique fit is $(\\hat a,\\hat b)=(1,1)$ and both reported residuals are zero. The possible true parameters satisfy $|a-1|+(1/100)|b-1|\\le1/100$, so $0\\le b\\le2$. This diamond describes data-consistent true lines, not alternate minimizers of the fixed objective.\n\nAt $T=1/200$, the fitted value is $201/200$ and the sharp uncertainty is $1/100$, giving $[199/200,203/200]$. At $T=1$, the fitted value is $2$ and the sharp uncertainty is $1$, giving $[1,3]$. Both $z(t)=1$ and $z(t)=1+2t$ satisfy the original reading tolerances; they attain the two exterior endpoints. Constant endpoint errors instead attain the interior endpoints.\n\nWith $\\eta=1/200$, the region becomes $|a-1|+(1/100)|b-1|\\le1/200$, so $1/2\\le b\\le3/2$ and $z(1)\\in[3/2,5/2]$. The optimizer and its zero residual are unchanged. A smaller permitted data error improves parameter and prediction bounds; solving the original objective more accurately cannot supply that new measurement information."
+          },
+          {
+            "title": "Spread the measurements, then merge them",
+            "question": "Keep $\\eta=1/100$ and the nominal line $1+t$, but measure at $t=\\pm1/2$, obtaining reports $1/2$ and $3/2$. Find the fit, joint uncertainty region, slope interval, and sharp range of $z(1)$. Compare its exterior uncertainty with Task 1 at the original tolerance. State the model assumption needed when spreading the locations. Finally, put both measurements at $t=0$ with reports $1,1$: find every optimizer and the possible $z(1)$ values. Would exact readings at that same location identify the slope?",
+            "hint": "The wider-location reports change to preserve the nominal line. Treat coincident inputs separately instead of dividing by $\\varepsilon=0$: the objective then has no dependence on $b$. Uncertain readings concern possible true parameters; minimizers concern the fixed reports.",
+            "solution": "For the wider design, $(\\hat a,\\hat b)=(1,1)$ and $|a-1|+(1/2)|b-1|\\le1/100$. Hence $b\\in[49/50,51/50]$ and $z(1)\\in[99/50,101/50]$. The sharp exterior uncertainty is $1/50$, fifty times smaller than Task 1's original uncertainty $1$. The same linear model must remain valid over the wider observation interval and the prediction input; changed locations do not establish that physical assumption.\n\nWith both inputs zero and reports $1,1$, the reported objective is $F(a,b)=(a-1)^2$. Every pair $(1,b)$ with arbitrary real $b$ is a zero-residual global minimizer. Under the reading tolerance the possible true parameters form the strip $|a-1|\\le1/100$, with unrestricted $b$, so $z(1)=a+b$ ranges over all real numbers.\n\nEven exact readings at zero would fix only $a=1$ and leave $b$ arbitrary. Distinct locations with $\\varepsilon>0$ give a unique fit whose slope can be sensitive; coincident locations lose slope identifiability itself. The theorem for positive $\\varepsilon$ cannot be evaluated by dividing by zero."
+          }
+        ]
+      },
+      "formula": "For f=(x²+κy²)/2: x_k=(1−α)^k x_0, y_k=(1−ακ)^k y_0.",
+      "formulaTex": "\\begin{gathered}\nf(x,y)=\\tfrac12(x^2+\\kappa y^2),\\quad\\kappa\\ge1,\\quad\\alpha>0,\\\\\nx_k=(1-\\alpha)^k x_0,\\qquad y_k=(1-\\alpha\\kappa)^k y_0,\\\\\n(x_k,y_k)\\xrightarrow{k\\to\\infty}(0,0)\\text{ for every start}\\iff0<\\alpha<\\frac{2}{\\kappa}.\n\\end{gathered}"
+    },
+    {
+      "title": "Global optimization: interior, boundary, and compactness",
+      "paragraphs": [
+        "Consider $f(x,y)=x+y$ on the closed unit disk $D=\\{(x,y):x^2+y^2\\le1\\}$. Because $f$ is continuous and $D$ is compact, the extreme value theorem guarantees an absolute maximum and minimum. Its gradient is $(1,1)$, so there is no interior critical point. This fact does not mean the optimization problem has no answer; it directs attention to the boundary circle. A common error is to stop after solving $\\nabla f=0$ and forget the feasible boundary.",
+        "The Cauchy–Schwarz inequality gives a complete calculation without a parameter: $|x+y|=|(1,1)\\cdot(x,y)|\\le\\sqrt2\\sqrt{x^2+y^2}\\le\\sqrt2$. Equality at the upper bound requires a unit point aligned with (1,1), namely $(1/\\sqrt2,1/\\sqrt2)$. The lower bound is attained at its negative. Hence the absolute maximum is $\\sqrt2$ and the absolute minimum is $-\\sqrt2$. This proof simultaneously checks every interior and boundary point, not just a short list of guesses.",
+        "Lagrange multipliers give the same boundary candidates when used with the constraint $g(x,y)=x^2+y^2-1=0$. The boundary gradient $\\nabla g=(2x,2y)$ is never zero on the unit circle. Solve $(1,1)=\\lambda(2x,2y)$ together with $x^2+y^2=1$. The first two equations imply $x=y$, and the constraint then gives the two points above. The multiplier equations identify candidates; comparing their values and checking the interior complete the global argument.",
+        "Compactness matters. On the open disk $x^2+y^2<1$, Cauchy–Schwarz gives $|f(x,y)|<\\sqrt2$ at every point. For $n\\ge2$, the feasible sequence $(1-1/n)(1,1)/\\sqrt2$ has values $\\sqrt2(1-1/n)\\uparrow\\sqrt2$; its negative approaches $-\\sqrt2$. Hence $\\sqrt2$ and $-\\sqrt2$ are respectively the supremum and infimum, but neither is attained. A supremum is a least upper bound, not necessarily a function value. A numerical near-boundary point cannot establish attainment.",
+        "For other constraints, inspect singular points, corners, and separate boundary pieces directly. State the feasible set and whether attainment is known; then test smooth interior candidates and each actual boundary part before comparing values. A regular multiplier equation supplies boundary candidates but does not certify which value wins.",
+        "If the disk radius becomes $R>0$, the same argument gives maximum $\\sqrt2R$ and minimum $-\\sqrt2R$. The optimizer locations scale to $\\pm R(1,1)/\\sqrt2$. The optimal value changes at rate $\\sqrt2$ per unit radius, consistent with the relevant boundary multiplier after the constraint is parameterized by $R$. Changing the right-hand side to $x^2+y^2\\le c$ instead gives optimum $\\sqrt{2c}$ for $c>0$ and derivative $1/\\sqrt{2c}$, illustrating again that sensitivity depends on the chosen parameter.",
+        "A boundary with several pieces requires a separate check on each piece. For $f(x,y)=xy$ on the closed triangle $x\\ge0$, $y\\ge0$, $x+y\\le1$, continuity and compactness guarantee extrema. In its interior both coordinates are positive, so $\\nabla f=(y,x)$ never vanishes there. On the two axis edges the value is zero. On the remaining edge put $y=1-x$ with $0\\le x\\le1$: then $f=x(1-x)=1/4-(x-1/2)^2$. Its maximum is $1/4$ at $(1/2,1/2)$, while the vertices have value zero. Comparing all pieces gives a unique absolute maximum there and a minimum of zero along both axis edges. The direct bound $0\\le xy\\le(x+y)^2/4\\le1/4$ independently checks every feasible point; equality at the upper bound requires both $x=y$ and $x+y=1$. A multiplier calculation on the line $x+y=1$ finds the top-edge candidate, but does not inspect the two other edges or their corners. Boundary minima can occur where the unconstrained gradient is nonzero."
+      ],
+      "formula": "On x²+y²≤1, −√2 ≤ x+y ≤ √2, with equality at the two aligned boundary points.",
+      "formulaTex": "\\begin{gathered}\nD=\\{(x,y):x^2+y^2\\le1\\},\\qquad (x,y)\\in D,\\\\\n-\\sqrt2\\le x+y\\le\\sqrt2,\\\\\nx+y=\\pm\\sqrt2\\iff(x,y)=\\pm\\left(\\tfrac1{\\sqrt2},\\tfrac1{\\sqrt2}\\right).\n\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Interior point and all four edges",
+      "problem": "Find the absolute extrema of $f(x,y)=x^2+y^2-2x$ on the rectangle $0\\le x\\le3$, $0\\le y\\le2$.",
+      "steps": [
+        "Complete the square: $f=(x-1)^2+y^2-1$. The only stationary point in the plane is $(1,0)$, which lies on the boundary, so there is no interior stationary point in this rectangle.",
+        "On $y=0$, $f=(x-1)^2-1$ has minimum $-1$ at $x=1$ and endpoint values $0$ and $3$. On $y=2$, $f=(x-1)^2+3$ has minimum $3$ at $x=1$ and endpoint values $4$ and $7$.",
+        "On $x=0$, $f=y^2$ ranges from $0$ to $4$. On $x=3$, $f=3+y^2$ ranges from $3$ to $7$. These checks include every edge endpoint and hence every corner.",
+        "Continuity and compactness guarantee attainment. Comparing all candidate values gives the result; completing the square independently certifies the minimum. A grid containing $(1,0)$ and $(3,2)$ can cross-check both values, though it cannot replace the boundary argument."
+      ],
+      "answer": "Absolute minimum $-1$ at $(1,0)$; absolute maximum $7$ at $(3,2)$."
+    },
+    {
+      "title": "A regular circular constraint",
+      "problem": "Find the largest and smallest values of $f(x,y)=xy$ on $x^2+y^2=1$.",
+      "steps": [
+        "Use $g=x^2+y^2$. Its gradient $(2x,2y)$ never vanishes on the unit circle. The multiplier equations are $y=2\\lambda x$, $x=2\\lambda y$, and $x^2+y^2=1$.",
+        "Neither coordinate can be zero in a multiplier solution: $x=0$ would force $y=0$ from the first equation. Substitution therefore gives $4\\lambda^2=1$. For $\\lambda=1/2$ we have $y=x$; for $\\lambda=-1/2$ we have $y=-x$.",
+        "The candidates are $(1/\\sqrt2,1/\\sqrt2)$, $(-1/\\sqrt2,-1/\\sqrt2)$, $(1/\\sqrt2,-1/\\sqrt2)$, and $(-1/\\sqrt2,1/\\sqrt2)$. Their objective values are respectively $1/2$, $1/2$, $-1/2$, and $-1/2$.",
+        "The circle is compact, so all extrema are among these regular candidates. As a separate check, $(x-y)^2\\ge0$ implies $xy\\le1/2$ and $(x+y)^2\\ge0$ implies $xy\\ge-1/2$ on the circle."
+      ],
+      "answer": "Maximum $1/2$ where $x=y=\\pm1/\\sqrt2$; minimum $-1/2$ where $x=-y=\\pm1/\\sqrt2$."
+    },
+    {
+      "title": "A nonsmooth minimum",
+      "problem": "Find the minimum of $f(x,y)=|x|+y^2$ on $\\mathbb R^2$ and explain why $\\nabla f=0$ misses it.",
+      "steps": [
+        "Both terms are nonnegative and vanish together only at $(0,0)$.",
+        "The $x$ partial at the origin does not exist because one-sided slopes of $|x|$ are $-1$ and $1$.",
+        "The minimum is established by inequality, not by solving a gradient equation."
+      ],
+      "answer": "Unique absolute minimum $0$ at $(0,0)$."
+    },
+    {
+      "title": "An inconclusive Hessian",
+      "problem": "Classify the origin for $f=x^2-y^4$ and compare it with $g=x^2+y^4$.",
+      "steps": [
+        "Both gradients vanish and both Hessians at zero are $\\operatorname{diag}(2,0)$, giving determinant zero.",
+        "For $f$, values along $y=0$ are positive and along $x=0$ negative: a saddle.",
+        "For $g$, both terms are nonnegative and vanish only at zero: a strict minimum."
+      ],
+      "answer": "The same inconclusive Hessian permits different classifications."
+    },
+    {
+      "title": "Rectangle boundary audit",
+      "problem": "Find absolute extrema of $f=x+y$ on $[0,1]^2$.",
+      "steps": [
+        "The gradient $(1,1)$ has no interior zero.",
+        "On each edge the restriction is linear, so its extrema occur at edge endpoints.",
+        "Compare the four corners: values $0,1,1,2$."
+      ],
+      "answer": "Minimum $0$ at $(0,0)$; maximum $2$ at $(1,1)$."
+    },
+    {
+      "title": "A regular ellipse constraint",
+      "problem": "Maximize and minimize $x+y$ on $x^2+4y^2=4$.",
+      "steps": [
+        "The constraint gradient $(2x,8y)$ is nonzero on the ellipse.",
+        "Let $g=x^2+4y^2$. On $g=4$, $\\nabla g=(2x,8y)\\ne0$, so $(1,1)=\\lambda(2x,8y)$. Since $\\lambda\\ne0$, these equations give $x=4y$; substitution gives $20y^2=4$ and the two listed points. The ellipse is compact and $x+y$ continuous, so comparing these regular candidates gives absolute extrema.",
+        "The two points are $\\pm(4/\\sqrt5,1/\\sqrt5)$, giving objective values $\\pm\\sqrt5$."
+      ],
+      "answer": "Maximum $\\sqrt5$ at $(4/\\sqrt5,1/\\sqrt5)$ and minimum $-\\sqrt5$ at $(-4/\\sqrt5,-1/\\sqrt5)$."
+    },
+    {
+      "title": "Gradient descent threshold",
+      "problem": "For $f=(x^2+10y^2)/2$, find fixed-step $\\alpha$ values that converge from every initial point.",
+      "steps": [
+        "The update is $x_{\\mathrm{next}}=(1-\\alpha)x$ and $y_{\\mathrm{next}}=(1-10\\alpha)y$.",
+        "Require both multipliers to have magnitude less than one.",
+        "The $x$ condition gives $0<\\alpha<2$; the $y$ condition gives $0<\\alpha<0.2$."
+      ],
+      "answer": "Convergence from every start requires $0<\\alpha<0.2$."
+    },
+    {
+      "title": "Sharp but unattained bound",
+      "problem": "Find the supremum and infimum of $x+y$ on $x^2+y^2<1$.",
+      "steps": [
+        "Cauchy–Schwarz gives $|x+y|<\\sqrt2$ for every interior point.",
+        "Along $r(1,1)/\\sqrt2$ with $r\\to1^{-}$, values approach $\\sqrt2$; the opposite ray approaches $-\\sqrt2$.",
+        "Boundary equality points are excluded."
+      ],
+      "answer": "Supremum $\\sqrt2$ and infimum $-\\sqrt2$; neither is attained."
+    }
+  ],
+  "misconceptions": [
+    "“Zero gradient proves a minimum.” The origin is stationary for $x^2-y^2$, but values have both signs arbitrarily close to it.",
+    "“A zero Hessian determinant means a saddle.” The function $x^4+y^4$ has determinant zero at its strict minimum; the test is inconclusive.",
+    "“Multipliers find every constrained extremum.” Their usual theorem requires regular constraints; singular feasible points and endpoints need separate checks."
+  ],
+  "lab": {
+    "title": "Compare descent paths on a quadratic",
+    "description": "Adjust the curvature $\\kappa$ (the code variable kappa), starting coordinates, step sizes, and iteration count. Each plot has horizontal coordinate $x$ and vertical coordinate $y$ and joins successive iterates for one step size. The console reports initial and final objective values and checks the exact geometric-sequence formulas.",
+    "code": "// Nondimensional coordinates; edit curvature and step sizes together.\nconst kappa = 10;\nconst start = [2, 1];\nconst steps = [0.05, 0.15, 0.21];\nconst iterations = 40;\nif (!(kappa >= 1 && kappa <= 100) || !Number.isInteger(iterations) || iterations < 1 || iterations > 200) throw new Error('Use 1 <= kappa <= 100 and 1..200 iterations.');\nif (steps.length < 1 || steps.length > 8 || !steps.every(a => Number.isFinite(a) && a > 0 && a <= 3 / kappa)) throw new Error('Use 1..8 step sizes in (0, 3/kappa].');\nif (!start.every(v => Number.isFinite(v) && Math.abs(v) <= 10) || start.length !== 2) throw new Error('Use two finite starting coordinates with magnitude <= 10.');\nconst f = (x, y) => (x*x + kappa*y*y)/2;\nconsole.log('Axes: horizontal x, vertical y. Initial f =', f(...start));\nconsole.log('Convergence from every start requires 0 < alpha <', 2/kappa);\nfor (const alpha of steps) {\n  let [x, y] = start;\n  const path = [[x, y]];\n  for (let k = 0; k < iterations; k++) {\n    x -= alpha * x;\n    y -= alpha * kappa * y;\n    path.push([x, y]);\n  }\n  plot(path, 'Descent path: x versus y; alpha=' + alpha);\n  const exactX = start[0] * (1-alpha)**iterations;\n  const exactY = start[1] * (1-alpha*kappa)**iterations;\n  console.log('alpha, final x, final y, final f, formula discrepancy:', alpha, x, y, f(x,y), Math.hypot(x-exactX,y-exactY));\n}",
+    "tasks": [
+      "Before running, predict which values in steps produce convergence, which paths alternate across the $x$-axis, and which path eventually grows. Justify each prediction using the update factors $1-\\alpha$ and $1-\\alpha\\kappa$.",
+      "Set one entry of steps to 0.2. Explain why its $y$-coordinate fails to approach zero even though its $x$-coordinate shrinks. Then set start to [2, 0] and explain this exceptional start.",
+      "Compare kappa=1 with kappa=10. For each, use a step size in the all-start convergence range $0<\\alpha<2/\\kappa$. Explain how greater curvature restricts that range and limits progress in the less curved $x$ direction.",
+      "Increase iterations within its allowed range and compare the printed formula discrepancy with the objective gap $f(x_k,y_k)-0$ (the printed final f). Why can a small discrepancy coexist with a growing objective?"
+    ],
+    "expected": "Initially $f=7$. After 40 updates, alpha=0.05 gives $x\\approx0.2570243$, $y\\approx9.09495\\times10^{-13}$, and $f\\approx0.0330307$; alpha=0.15 gives $x\\approx0.00300460$, $y\\approx9.09495\\times10^{-13}$, and $f\\approx0.00000451382$; alpha=0.21 gives $x\\approx0.000160736$, $y\\approx45.2593$, and $f\\approx10242.0011$. Formula discrepancies are near floating-point rounding scale; the last path diverges because its $y$ update factor has magnitude $1.1>1$."
+  },
+  "exercises": [
+    {
+      "question": "Find all stationary points of $f=x^2+y^2-2x-4y$.",
+      "hint": "Set both first partial derivatives to zero.",
+      "solution": "The gradient is $\\nabla f=\\langle 2x-2,2y-4\\rangle$. Setting both components to zero gives the unique stationary point $(1,2)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does $\\nabla f=0$ miss the minimum of $|x|+y^2$?",
+      "hint": "Check whether the partial derivative with respect to $x$ exists at the origin.",
+      "solution": "The function is nonnegative and equals zero at $(0,0)$. There $|x|$ has no $x$ derivative, so the minimum is not a stationary point with $\\nabla f=0$.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Show $x^2+y^2$ has no absolute maximum on $\\mathbb R^2$.",
+      "hint": "Evaluate the function along $(t,0)$ as $|t|$ grows.",
+      "solution": "On the $x$-axis, $f(t,0)=t^2$. Given any upper bound $M>0$, choose $|t|>\\sqrt M$; then $f(t,0)>M$. Thus there is no absolute maximum on $\\mathbb R^2$.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Minimize $x^2+y^2$ subject to $x+y\\ge1$.",
+      "hint": "Use Cauchy–Schwarz and examine its equality condition.",
+      "solution": "Cauchy–Schwarz gives $(x+y)^2\\le 2(x^2+y^2)$. Feasibility gives $x+y\\ge1$, so $x^2+y^2\\ge(x+y)^2/2\\ge1/2$. Equality requires $x=y$ and $x+y=1$, hence the unique minimum is $1/2$ at $(1/2,1/2)$.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Classify the critical point of $f=3x^2+2xy+2y^2$.",
+      "hint": "Solve the gradient equations, then use the Hessian determinant.",
+      "solution": "The equations $6x+2y=0$ and $2x+4y=0$ give only $(0,0)$. Here $D=6\\cdot4-2^2=20>0$ and $f_{xx}=6>0$, so it is a strict local minimum. Since $f=3(x+y/3)^2+(5/3)y^2\\ge0$, it is also the unique absolute minimum.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify the origin for $f=x^4-y^4$ and $h=x^4+y^4$ despite their identical Hessians there.",
+      "hint": "Compare values on the axes, then use nonnegativity.",
+      "solution": "Both gradients and Hessians vanish at the origin. For $f$, values $f(t,0)=t^4>0$ and $f(0,t)=-t^4<0$ show a saddle. For $h$, $h=x^4+y^4\\ge0$, with equality only at the origin, so the origin is a strict absolute minimum.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Classify the origin for $f(x,y)=x^2+2xy+2y^2$ using the Hessian test.",
+      "hint": "Compute $A=f_{xx}$, $B=f_{xy}$, $C=f_{yy}$, and $D=AC-B^2$.",
+      "solution": "The origin is stationary. Here $A=2$, $B=2$, $C=4$, so $D=2\\cdot4-2^2=4>0$ and $A>0$. The Hessian test gives a strict local minimum; $f=(x+y)^2+y^2\\ge0$ proves it is the unique absolute minimum.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify the origin for $f=2x^2+2xy+3y^2$.",
+      "hint": "Compute $A$, $B$, $C$, then the sign of $AC-B^2$.",
+      "solution": "The origin is stationary and $A=4$, $B=2$, $C=6$, giving $D=4\\cdot6-2^2=20>0$. Since $A>0$, the Hessian test gives a strict local minimum.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does positive-definite Hessian at a nonstationary point prove a local minimum?",
+      "hint": "Check the gradient of $f=x+x^2+y^2$ at the origin.",
+      "solution": "No. This Hessian is positive definite, but $\\nabla f(0,0)=\\langle1,0\\rangle$. For small negative $x$, $f(x,0)=x+x^2<0=f(0,0)$, so the origin is not a local minimum.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Classify zero for $x^2-y^4$ although the Hessian determinant is zero.",
+      "hint": "Compare values on the coordinate axes.",
+      "solution": "At $(t,0)$ the value is $t^2>0$, while at $(0,t)$ it is $-t^4<0$ for $t\\ne0$. Both occur arbitrarily near zero, so the origin is a saddle despite the inconclusive Hessian determinant.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Classify zero for $x^2+y^4$.",
+      "hint": "Use the fact that both terms are nonnegative.",
+      "solution": "For every $(x,y)$, $x^2+y^4\\ge0=f(0,0)$. Equality requires $x=y=0$, so the origin is the unique strict global minimum even though its Hessian test is inconclusive.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the absolute extrema of $f=x+2y$ on the closed disk $x^2+y^2\\le1$.",
+      "hint": "Use Cauchy–Schwarz to bound the linear objective on the disk.",
+      "solution": "There is no interior stationary point because $\\nabla f=\\langle1,2\\rangle$. Cauchy–Schwarz gives $|x+2y|\\le\\sqrt5\\sqrt{x^2+y^2}\\le\\sqrt5$. Equality occurs at $(1/\\sqrt5,2/\\sqrt5)$ for the maximum $\\sqrt5$ and at its negative for the minimum $-\\sqrt5$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find extrema of $x+y$ on $[0,1]^2$.",
+      "hint": "Check the allowable ranges of both coordinates.",
+      "solution": "On $[0,1]^2$, each coordinate lies between zero and one. Hence $0\\le x+y\\le2$, with minimum $0$ at $(0,0)$ and maximum $2$ at $(1,1)$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does noncompactness always prevent a global minimum?",
+      "hint": "Consider a nonnegative sum of squares on $\\mathbb R^2$.",
+      "solution": "No. A continuous real-valued function on a nonempty compact set attains both absolute extrema, but compactness is not necessary for a minimum. On noncompact $\\mathbb R^2$, $f=x^2+y^2\\ge0$ attains its minimum $0$ at the origin.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find extrema of $x^2+y^2$ on the closed unit disk.",
+      "hint": "Use $0\\le x^2+y^2\\le1$ throughout the disk.",
+      "solution": "The objective $x^2+y^2$ is nonnegative, with minimum $0$ only at the origin. Its maximum is $1$ at every boundary point satisfying $x^2+y^2=1$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is a corner checked separately from smooth-edge multiplier points?",
+      "hint": "Think about the tangent to a square boundary at a corner.",
+      "solution": "At a square corner the boundary has two incident edge directions and no single smooth tangent, so a regular single-edge multiplier equation need not capture the corner. Check each smooth boundary piece, any singular boundary points, and the corners before completing the boundary search.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why do the ordinary multiplier equations fail for minimizing $f=y$ subject to $x^2+y^2=0$, and what are the extrema?",
+      "hint": "Identify the feasible set before applying a multiplier equation.",
+      "solution": "The equation $x^2+y^2=0$ allows only $(0,0)$, where $f=0$ is both constrained minimum and maximum. But $\\nabla g(0,0)=\\langle0,0\\rangle$ and $\\nabla f(0,0)=\\langle0,1\\rangle$, so $\\nabla f=\\lambda\\nabla g$ cannot hold. The regularity hypothesis fails.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Maximize $x+y$ on the ellipse $x^2+4y^2=4$.",
+      "hint": "Scale the ellipse to a unit circle, then apply Cauchy–Schwarz.",
+      "solution": "Let $u=x/2$ and $v=y$, so $u^2+v^2=1$ and $x+y=2u+v\\le\\sqrt5$. Equality holds at $(u,v)=(2/\\sqrt5,1/\\sqrt5)$, or $(x,y)=(4/\\sqrt5,1/\\sqrt5)$. Thus the maximum is $\\sqrt5$; the opposite point gives minimum $-\\sqrt5$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve the multiplier candidates for $x+y$ on $x^2+4y^2=4$.",
+      "hint": "Set $\\langle1,1\\rangle=\\lambda\\langle2x,8y\\rangle$ and use the constraint.",
+      "solution": "The equations give $x=1/(2\\lambda)$ and $y=1/(8\\lambda)$. Substitution into $x^2+4y^2=4$ yields candidates $\\pm(4/\\sqrt5,1/\\sqrt5)$, with objective values $\\pm\\sqrt5$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why can $f=x$ constrained by $x^2+y^2=0$ have an extremum without a multiplier?",
+      "hint": "Inspect the feasible set and the constraint gradient.",
+      "solution": "The constraint $g=x^2+y^2=0$ leaves only $(0,0)$, so $f=x$ has both constrained extrema there. At that point $\\nabla f=(1,0)$ while $\\nabla g=(0,0)$, so $\\nabla f=\\lambda\\nabla g$ has no solution. The multiplier theorem does not apply because its regularity hypothesis fails.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "If a constraint equation $g=c$ is replaced by $2g=2c$, what happens to $\\lambda$?",
+      "hint": "Compare the old and new constraint gradients.",
+      "solution": "Since $\\nabla(2g)=2\\nabla g$, an equation $\\nabla f=\\lambda\\nabla g$ becomes $\\nabla f=(\\lambda/2)\\nabla(2g)$. The multiplier halves; the feasible set and optimizer do not change.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does every solution of multiplier equations give a constrained maximum?",
+      "hint": "Recall whether multiplier equations are necessary or sufficient.",
+      "solution": "No. At a regular constrained local extremum, the multiplier equations are necessary, not sufficient. A solution may be a local maximum, a local minimum, or neither along the feasible set. A feasible local test can classify local behavior; an absolute maximum requires a global bound or comparison of all relevant candidates after establishing that a maximum is attained.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f=(x^2+10y^2)/2$ starting at $(2,1)$, analyze gradient descent with $\\alpha=0.2$. Give $f$ after $k$ steps.",
+      "hint": "Apply the coordinate update factors $1-\\alpha$ and $1-10\\alpha$.",
+      "solution": "The recurrence gives $x_k=2(0.8)^k$ and $y_k=(-1)^k$. Thus $f(x_k,y_k)=2(0.64)^k+5\\to5$, although the minimum is zero. The $y$ coordinate oscillates because its update factor is $-1$; the chosen step is the stability endpoint.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f=(x^2+10y^2)/2$, what happens with $\\alpha=0.2$ and $y_0\\ne0$?",
+      "hint": "Compute the update factor for $y$.",
+      "solution": "Gradient descent gives $y_{k+1}=(1-10\\alpha)y_k=-y_k$ at $\\alpha=0.2$. Thus $y_k=(-1)^k y_0$ oscillates without shrinking when $y_0\\ne0$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the interval of positive fixed step sizes for which gradient descent on $(x^2+4y^2)/2$ converges to its minimum from every starting point.",
+      "hint": "Require both coordinate update factors to have magnitude below one.",
+      "solution": "The updates are $x_{k+1}=(1-\\alpha)x_k$ and $y_{k+1}=(1-4\\alpha)y_k$. Convergence from every starting point requires $|1-\\alpha|<1$ and $|1-4\\alpha|<1$. Their intersection is $0<\\alpha<1/2$; at $\\alpha=1/2$, a nonzero $y$-component alternates without shrinking.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x,y)=x^2-y^2$, calculate the gradient at the origin. Does its zero value certify a local or absolute minimum? Check nearby points on both coordinate axes.",
+      "hint": "Consider a stationary saddle.",
+      "solution": "The gradient is $\\nabla f=(2x,-2y)$, so $\\nabla f(0,0)=(0,0)$. Yet $f(t,0)=t^2>0$ and $f(0,t)=-t^2<0$ for every nonzero $t$. The origin is a saddle, neither a local nor an absolute minimum. A zero or tiny gradient alone cannot certify optimality.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Show that $f(x,y)=x+y$ has no maximum on the open unit disk, although it has supremum $\\sqrt2$.",
+      "hint": "Approach the maximizing boundary point from inside.",
+      "solution": "For $n\\ge2$, let $(x_n,y_n)=((1-1/n)/\\sqrt2,(1-1/n)/\\sqrt2)$. Its radius is $1-1/n<1$, while $x_n+y_n=\\sqrt2(1-1/n)\\to\\sqrt2$. Cauchy–Schwarz gives $x+y<\\sqrt2$ everywhere inside, so no maximum is attained.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove $x+y\\le\\sqrt2$ on the closed unit disk and find equality.",
+      "hint": "Apply Cauchy–Schwarz and check equality conditions.",
+      "solution": "Write $x+y=\\langle x,y\\rangle\\cdot\\langle1,1\\rangle\\le\\sqrt{x^2+y^2}\\sqrt2\\le\\sqrt2$. Equality requires the unit boundary point $(1/\\sqrt2,1/\\sqrt2)$, where the maximum is attained.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f(x,y)=x+y$ on the open unit disk $x^2+y^2<1$, explain the difference between its maximum and supremum.",
+      "hint": "Approach the missing boundary point in the direction $(1,1)$.",
+      "solution": "Cauchy–Schwarz bounds $x+y<\\sqrt2$ in the open disk, but interior points can approach $(1/\\sqrt2,1/\\sqrt2)$ and make $x+y\\to\\sqrt2$. Thus $\\sqrt2$ is the supremum, with no maximum.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For the closed disk $x^2+y^2\\le R^2$, where $R\\ge0$, find the extrema of $x+y$.",
+      "hint": "Scale the unit-disk bound by $R$.",
+      "solution": "On the radius-$R$ disk, Cauchy–Schwarz gives $|x+y|\\le\\sqrt2R$. The maximum is $\\sqrt2R$ at $(R/\\sqrt2,R/\\sqrt2)$ and the minimum is $-\\sqrt2R$ at the opposite point, assuming $R\\ge0$.",
+      "lesson": 6,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "Interior extrema require critical-point checks, and second derivatives classify only when their quadratic information is decisive.",
+    "Compact-domain optimization combines interior analysis with every boundary piece, endpoint, corner, and singular point.",
+    "Lagrange multipliers express vanishing tangential variation at regular constrained extrema and supply candidates rather than automatic classifications.",
+    "Gradient descent needs controlled step sizes; exact quadratic recurrences explain slow convergence, oscillation, and divergence."
+  ],
+  "next": "Chapter 23 changes the question from finding the best value over a region to accumulating values throughout it. The same care in describing feasible domains will determine the bounds of double and triple integrals."
+}

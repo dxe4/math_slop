@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Math Atlas is a connected, self-contained library for learning mathematics from first principles to advanced theory."
+    />
+    <meta name="theme-color" content="#f4f0e8" />
+    <script>
+      (() => {
+        const hosted = document.documentElement.hasAttribute('data-euler-hosted');
+        const defaults = { theme: 'system', font: 'serif', textSize: 'medium' };
+        const systemPrefersDark = () => typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches;
+        try {
+          const raw = localStorage.getItem('math-atlas:reading-preferences');
+          const stored = raw && raw.length <= 16384 && new TextEncoder().encode(raw).length <= 16384
+            ? JSON.parse(raw) || {} : {};
+          const theme = ['light', 'dark', 'system'].includes(stored.theme) ? stored.theme : defaults.theme;
+          const font = ['serif', 'sans'].includes(stored.font) ? stored.font : defaults.font;
+          const textSize = ['small', 'medium', 'large'].includes(stored.textSize) ? stored.textSize : defaults.textSize;
+          const resolved = theme === 'system'
+            ? (systemPrefersDark() ? 'dark' : 'light')
+            : theme;
+          if (!hosted) document.documentElement.dataset.theme = resolved;
+          if (!hosted) document.documentElement.dataset.themePreference = theme;
+          document.documentElement.dataset.readerFont = font;
+          document.documentElement.dataset.readerSize = textSize;
+          if (!hosted) document.documentElement.style.colorScheme = resolved;
+          if (!hosted) document.querySelector('meta[name="theme-color"]').content = resolved === 'dark' ? '#101a18' : '#f5f1e8';
+        } catch {
+          const dark = systemPrefersDark();
+          if (!hosted) document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+          if (!hosted) document.documentElement.dataset.themePreference = defaults.theme;
+          document.documentElement.dataset.readerFont = defaults.font;
+          document.documentElement.dataset.readerSize = defaults.textSize;
+          if (!hosted) document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        }
+      })();
+    </script>
+    <link rel="icon" href="./mark.svg" type="image/svg+xml" />
+    <title>Math Atlas — See how mathematics connects</title>
+    <script type="module" crossorigin src="./assets/index-CqiFd9ll.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-BpQH8Ho1.js">
+    <link rel="modulepreload" crossorigin href="./assets/base-path-86vEGx49.js">
+    <link rel="modulepreload" crossorigin href="./assets/publication-data-CvVmReTZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/vocabulary-CJM9U2DP.js">
+    <link rel="modulepreload" crossorigin href="./assets/catalog-client-Zmx-RusP.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-_N4z2YRi.css">
+  <style>.euler-breadcrumb ol{display:flex;flex-wrap:wrap;gap:0 .5em;margin:0 0 1rem;padding:0;list-style:none;font-size:.9rem}.euler-breadcrumb li+li::before{content:"\203A";padding-inline-end:.5em;opacity:.7}</style></head>
+  <body>
+    <div id="root"><a class="skip-link" href="#main-content">Skip to content</a><main id="main-content" tabindex="-1" class="inner-page page-shell empty-state"><h1>Explore the mathematical atlas</h1><p role="status">Opening the topic map, reading paths and mathematical library.</p><noscript><p>Enable JavaScript and reload to use this interactive reader.</p></noscript></main></div>
+  </body>
+</html>

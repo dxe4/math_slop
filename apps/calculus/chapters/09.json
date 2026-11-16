@@ -1,0 +1,470 @@
+{
+  "id": "09",
+  "title": "Optimization and root finding",
+  "subtitle": "How can derivatives identify the best feasible design, and how can an algorithm locate it reliably?",
+  "prerequisites": [
+    "Continuity and the intermediate value theorem (chapter 4).",
+    "Derivative rules, tangent lines, and linear approximation (chapters 5–7).",
+    "Extreme value theorem, critical points, and derivative sign tests (chapter 8).",
+    "JavaScript loops and floating-point error (chapter 3)."
+  ],
+  "objectives": [
+    "Translate a design problem into an objective and a feasible interval, then justify a global optimum.",
+    "Compare bisection and Newton iteration using hypotheses, error bounds, and failure cases.",
+    "Apply elementary gradient descent and explain how the step size affects convergence."
+  ],
+  "sections": [
+    {
+      "title": "From a practical question to an objective",
+      "paragraphs": [
+        "Optimization asks for the largest or smallest value of a quantity among admissible choices. The objective is the quantity being compared; constraints describe the admissible, or feasible, choices. Before differentiating, define variables and units, translate the constraints, and state the domain. Maximizing area under a fixed perimeter is different from maximizing area with no size restriction. In the latter problem there may be no largest area at all.",
+        "A constraint often eliminates a variable. If a rectangular enclosure uses 100 m of fencing on three sides beside a straight wall, let $x$ metres be its width perpendicular to the wall and $y$ metres its length along the wall. Then $2x+y=100$, so its area is $A(x)=x(100-2x)$ square metres. Positive dimensions require $0<x<50$. Including the degenerate endpoints gives a convenient continuous extension to $[0,50]$; we must subsequently verify that the maximizing design has positive dimensions.",
+        "The model assumes a straight wall long enough for the design, negligible fence thickness, no gate allowance, and a fixed fence supply. Calculus can optimize this model exactly without making those assumptions true. A useful conclusion therefore includes both a mathematical certificate and a statement about the design it describes. If a regulation imposes a minimum width, that additional boundary belongs in the feasible set before any comparison is made.",
+        "A reliable translation starts with a sentence: “Choose $x$ in this interval to make this measurable quantity as large as possible.” That sentence forces us to separate choices from outcomes. In the fence problem, $x$ is a width in metres and $A(x)$ is an area in square metres. The equality $2x+y=100$ is a resource constraint, while $x>0$ and $y>0$ are feasibility constraints. If the wall is only 40 m long, a further restriction $y\\le 40$ changes the answer; algebraically it requires $x\\ge 30$. The calculus on the old interval remains correct, but it answers the wrong design question. Recheck the feasible set whenever a real condition changes.",
+        "A diagram is often the quickest way to expose a mistaken formula. In the enclosure, only three sides need fence; charging for the wall side would replace $2x+y=100$ by $2x+2y=100$ and solve a different problem. Once the formula is written, check limiting cases before differentiating: $x$ near zero makes a narrow enclosure with almost no area, while $x$ near $50$ makes $y$ nearly zero. The area expression $A(x)=100x-2x^2$ is nonnegative on the feasible interval and has square-metre units because each term multiplies two lengths. These checks do not prove the optimum, but they catch many modeling errors cheaply.",
+        "Equality constraints sometimes offer several valid parameterizations. Solving the fence equation for $x$ gives $x=(100-y)/2$ and area $B(y)=y(100-y)/2$ for $0<y<100$. Its derivative vanishes at $y=50$, the same design as $x=25$. The numerical coordinates differ because the decision variable changed; the physical dimensions and $1250\\,\\mathrm{m}^2$ maximum do not. If two parameterizations give different designs, inspect their domains and algebra. This is a useful independent cross-check, especially when a more complicated model includes a cost per metre, a fixed width, or a minimum required area.",
+        "Optimization is more than setting a derivative to zero. The mathematical problem has a set $S$ of allowable inputs and an objective $F:S\\to\\mathbb{R}$. A maximum is a feasible $x^*$ with $F(x^*)\\ge F(x)$ for every $x\\in S$. A stationary point only compares behavior infinitesimally close to one input. In a practical report, state the selected input, the objective value, the units, and whether the solution lies on a constraint boundary. These are different deliverables: a correct area without the corresponding fence lengths cannot be built, and a plausible fence layout without a global comparison need not be best."
+      ],
+      "formula": "objective: A(x) = 100x − 2x²; feasible nondegenerate designs: 0 < x < 50",
+      "formulaTex": "A(x)=100x-2x^2,\\qquad 0<x<50"
+    },
+    {
+      "title": "A global certificate on a closed interval",
+      "paragraphs": [
+        "The extreme value theorem says that a continuous real-valued function on a closed bounded interval $[a,b]$ attains both its maximum and its minimum. It guarantees existence, not the location. At any interior local extremum where the derivative exists, the derivative is zero. Consequently global extrema can occur at stationary points, interior points where the derivative does not exist, or endpoints. Endpoints do not need horizontal tangents.",
+        "The closed-interval method combines these facts: check continuity and the interval; find all interior critical points; evaluate the objective at these points and at both endpoints; compare the resulting values. For the functions in our examples the candidate list is finite. A function can instead have infinitely many critical points, in which case a sign argument or another global comparison may be needed. Solving $f^{\\prime}(x)=0$ is only one part of optimization.",
+        "For example, $f(x)=|x-1|$ on $[0,3]$ has its minimum at the nondifferentiable point $x=1$ and its maximum at $x=3$. Ignoring corners loses the minimum; ignoring boundaries loses the maximum. A second derivative test can classify an interior stationary point but cannot replace the comparison needed to establish a global result.",
+        "If the feasible set is open or unbounded, the existence guarantee no longer applies. The function $f(x)=x$ on $(0,1)$ has supremum 1 but no maximum, because 1 is approached and never attained. Likewise a singular objective needs separate analysis near excluded points. When we extend a physical model to a closed interval, an extremum at a degenerate endpoint may be only a limiting value, not a usable design.",
+        "Why must an interior differentiable maximum have derivative zero? Suppose $f$ has a local maximum at $c$. For small positive $h$, $f(c+h)-f(c)\\le 0$, so the right difference quotients are nonpositive. For small negative $h$, division reverses the inequality, so the left quotients are nonnegative. If one two-sided derivative exists, its common value must be both nonpositive and nonnegative, hence zero. The same reasoning holds for a local minimum with reversed inequalities. The theorem says nothing about an endpoint because only one side of the interval is available there. It also says nothing about a corner where the derivative fails to exist.",
+        "A critical number is a point in the interior of the domain where $f^{\\prime}$ is zero or fails to exist. Domain membership matters: the expression $f^{\\prime}$ may be undefined at a vertical asymptote, but a point where $f$ itself is absent is not a critical number. For $f(x)=x^{2/3}$ on $[-1,1]$, $x=0$ is in the domain and is a cusp with a minimum of zero. For $f(x)=1/x$ on $[-1,1]$ excluding zero, the origin is not a candidate value at all; the pieces require separate analysis and the function is unbounded near zero. A candidate list is only meaningful after the domain is fixed.",
+        "The extreme value theorem needs both continuity and a compact interval. Removing either condition can destroy attainment. On $[0,1)$, $f(x)=x$ approaches one but has no maximum. On $[0,1]$, define $g(0)=0$ and $g(x)=1/x$ for $x>0$; the interval is closed, but $g$ is discontinuous and has no finite maximum. Conversely, a function can attain an optimum without those hypotheses: $x^2$ has an absolute minimum at zero on all real numbers. Thus the theorem is a guarantee under sufficient conditions, not an “if and only if” test for every particular function.",
+        "The candidate method can be strengthened by monotonicity. For $f$ continuous on $[a,b]$, if $f^{\\prime}>0$ everywhere in $(a,b)$, the mean value theorem makes $f$ strictly increasing, so its minimum and maximum on $[a,b]$ occur at $a$ and $b$. If $f^{\\prime}$ changes from positive to negative at $c$ and there are no other changes, $f$ rises to $c$ and then falls, making $c$ a global maximum on the interval. This derivative-sign argument is often clearer than a large table of values. Still compare limits at excluded boundaries on open intervals, and check discontinuities separately; a sign chart cannot silently bridge a hole in the domain."
+      ]
+    },
+    {
+      "title": "Bisection: preserve a bracket and measure uncertainty",
+      "paragraphs": [
+        "Root finding seeks $r$ with $f(r)=0$. It enters optimization when solving an equation such as $A^{\\prime}(x)=0$, but also occurs whenever two quantities must agree. If $f$ is continuous on $[a,b]$ and $f(a)$ and $f(b)$ have opposite signs, the intermediate value theorem guarantees at least one root inside. Check first whether an endpoint is already a root. Continuity is essential: $1/x$ changes sign across zero but has no root there.",
+        "Bisection evaluates the midpoint $m=a+(b-a)/2$. If $f(m)=0$, the mathematical problem is solved. Otherwise retain the half whose endpoints have opposite signs. The root remains bracketed after each update, and the interval width halves. There may be several roots initially; the method guarantees convergence to a root, not a prescribed choice among them. A monotonicity argument can establish uniqueness separately.",
+        "After $n$ completed halvings of an initial interval of length $L$, the remaining width is $L/2^n$. The midpoint of that remaining interval is within $L/2^{n+1}$ of a root. Thus a requested absolute error $\\varepsilon$ in $x$ has a direct stopping rule: stop when half the width is at most $\\varepsilon$. This bound measures uncertainty in the input variable, with that variable’s units. It is different from the residual $|f(x)|$, which has the units of the output.",
+        "Finite precision eventually prevents further halving when the computed midpoint equals an endpoint. Software should detect that event and report stagnation. A maximum iteration count protects edited experiments too. A sign change is sufficient but not necessary for a root: $f(x)=x^2$ has a root at zero without changing sign, so an ordinary sign-bracketing search across zero cannot start. This is a limitation of this method, not evidence that no root exists.",
+        "The bisection invariant is a promise maintained at every step: $a$ and $b$ are ordered, $f$ is continuous on $[a,b]$, and either an endpoint is a root or $f(a)$ and $f(b)$ have opposite signs. The midpoint evaluation decides which half can inherit that promise. If $f(a)$ and $f(m)$ have opposite signs, keep $[a,m]$; otherwise keep $[m,b]$, provided $f(m)$ is not zero. This is an example of an algorithm with a mathematical certificate attached to its state. Merely plotting a curve that seems to cross the axis gives no comparable bound on where the root lies.",
+        "The width guarantee is independent of how steep $f$ is. Starting from $[1,2]$, after ten completed halvings the retained width is $1/1024$ and its midpoint is within $1/2048$ of some root in that interval. The residual at the midpoint may be much larger or much smaller than this input error, depending on vertical scaling. Multiplying $f$ by a million leaves the root and bisection decisions unchanged but multiplies every residual by a million. Thus choose stopping rules in the units that matter: a tolerance in $x$ for a physical parameter, perhaps also a tolerance in $f$ for an engineering balance equation.",
+        "When $f$ has multiple roots in the initial bracket, bisection still encloses at least one root but need not return a particular one. For $f(x)=x^3-x$ on $[-2,2]$, the midpoint is exactly the root zero; another implementation with a slightly different bracket could isolate $-1$ or $1$. If the task asks for all roots, first separate the domain into monotonic pieces or scan for candidate brackets and then certify each. A sign scan by itself can miss even-multiplicity roots such as the zero of $x^2$, so derivative information or analytic factorization may be needed.",
+        "Floating-point arithmetic adds a practical limit. Computing $m=a+(b-a)/2$ avoids some overflow that can occur in $(a+b)/2$, but $b-a$ can still overflow for extreme finite endpoints, and eventually $m$ rounds to $a$ or $b$. Stop on that stagnation rather than reporting unlimited precision. A displayed interval is certified only if function evaluations and signs are reliable at the chosen precision; cancellation or uncertain data can undermine the invariant. For the elementary polynomials in this chapter, ordinary double precision is adequate well before stagnation, but numerical libraries sometimes use interval arithmetic when rigorous machine-certified bounds are required."
+      ],
+      "formula": "After n halvings: width = (b₀ − a₀)/2ⁿ; midpoint error ≤ width/2.",
+      "formulaTex": "\\begin{gathered}\\text{If }f\\in C([a_0,b_0]),\\ f(a_0)f(b_0)<0,\\ n\\ge0:\\\\ b_n-a_n=\\frac{b_0-a_0}{2^n},\\quad r\\in[a_n,b_n],\\\\ |m_n-r|\\le\\frac{b_n-a_n}{2}=\\frac{b_0-a_0}{2^{n+1}}.\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Bisection supplies an error guarantee",
+          "statement": "If a continuous function has opposite signs at the endpoints of $[a_0,b_0]$, bisection keeps a root inside nested intervals whose widths halve at every step.",
+          "equationTex": "b_n-a_n=\\frac{b_0-a_0}{2^n},\\qquad |m_n-r|\\le\\frac{b_n-a_n}{2}",
+          "proof": [
+            "Continuity and the intermediate value theorem give at least one root $r$ in the starting interval. At a step, let $m=(a+b)/2$. If $f(m)=0$, the root is found. Otherwise at least one of the two half-intervals has endpoint values of opposite signs; retain it. Continuity again guarantees a root there. Inductively, after $n$ halvings the retained interval has width $(b_0-a_0)/2^n$ and still contains a root. If no midpoint is an exact root, the retained closed intervals are nested and their widths tend to zero. They have one common point $r$. Choose a root $r_n$ in each retained interval by the intermediate value theorem; $|r_n-r|$ is at most that interval’s width. Hence $r_n\\to r$, and continuity gives $f(r)=\\lim f(r_n)=0$. This fixed root lies in every retained interval, even when an earlier choice of root was discarded.",
+            "Its midpoint $m_n$ lies at most half that width from any root inside the interval. Therefore choosing $n$ with $(b_0-a_0)/2^{n+1}\\le\\varepsilon$ certifies absolute location error at most $\\varepsilon$. The result does not require differentiability or a good initial guess for a tangent. It also does not prove uniqueness; if several roots lie in the original interval, the process isolates one of them.",
+            "The sign-change hypothesis is sufficient, not necessary: $f(x)=x^2$ has a root at zero yet has the same sign at both sides. A discontinuity can create a sign change with no zero. State continuity and the bracket before applying the algorithm, and report the certified interval rather than only a rounded midpoint."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Newton iteration: let the tangent suggest the next point",
+      "paragraphs": [
+        "At an estimate $x_n$, replace $f$ locally by its tangent model $f(x_n)+f^{\\prime}(x_n)(x-x_n)$. Setting that model to zero gives Newton’s update. Unlike bisection, the step uses the local slope and does not maintain an enclosing interval. A tangent that crosses the axis close to the true root can make a dramatic improvement; a misleading tangent can send the next estimate outside the function’s domain.",
+        "For a twice continuously differentiable function near a simple root $r$, where $f^{\\prime}(r)\\ne 0$, all sufficiently close initial guesses converge quadratically: the next error is bounded by a constant times the square of the current error. This is a local statement. It does not promise convergence from every starting point. At a repeated root the derivative vanishes at the root, and ordinary Newton iteration generally loses its quadratic rate. For $f(x)=(x-1)^2$, the error is merely halved at each step.",
+        "Newton can fail conspicuously. For $f(x)=x^3-2x+2$, starting at 0 gives 1, and starting at 1 gives 0, producing a two-cycle even though a real root exists elsewhere. For $f(x)=x^2-2$, the initial guess 0 causes division by zero. A tiny nonzero slope can produce a huge step. Implementations should check finite values, small slopes, domain restrictions, iteration limits, and stagnation rather than treating any returned number as success.",
+        "A small residual alone need not mean a small root error. For $f(x)=10^{-12}(x-1)$, $x=100$ has residual only $9.9\\times10^{-11}$ despite being 99 units from the root. If $|f^{\\prime}|\\ge m>0$ throughout an interval joining an estimate to a root, the mean value theorem gives $|x-r|\\le |f(x)|/m$. Without such information, a bracket is a clearer error certificate. A useful hybrid accepts Newton steps within a maintained bracket and otherwise bisects.",
+        "Newton's formula comes directly from solving a local linear equation. Write $f(x)\\approx f(a)+f^{\\prime}(a)(x-a)$; setting the right side to zero gives $x_{\\mathrm{new}}=a-f(a)/f^{\\prime}(a)$. The approximation improves as the guess approaches a simple root because the neglected Taylor term is quadratic in $x-a$. If $f^{\\prime}(a)$ is tiny, however, the tangent is almost horizontal and its axis crossing can be far away. The update may also leave a domain where $f$ is defined, as happens for some starting points when solving equations involving $\\log x$ or $\\sqrt{x}$. A formula alone is not a complete algorithm.",
+        "For $f(x)=x^2-2$ and a positive estimate $x$, Newton gives $N(x)=(x+2/x)/2$. Its error has the exact expression $N(x)-\\sqrt2=(x-\\sqrt2)^2/(2x)$. Therefore every positive update is at least $\\sqrt2$. Put $e_k=x_k-\\sqrt2$ after the first update. Since $x_k\\ge\\sqrt2$ and $0\\le e_k<x_k$, the identity gives $0\\le e_{k+1}=e_k^2/(2x_k)\\le e_k/2$. Induction yields $0\\le e_k\\le e_1/2^{k-1}\\to0$, proving convergence directly from a geometric bound already taught in Chapter 3. The same identity shows quadratic improvement when the error is small. Starting at $x=0$ is undefined; negative initial values track the negative root. These features depend on this equation and do not generalize to arbitrary smooth functions.",
+        "A repeated root behaves differently. If $f(x)=(x-r)^2$, then $f^{\\prime}(x)=2(x-r)$, and for $x\\ne r$ Newton gives $x_{\\mathrm{new}}=(x+r)/2$. The error is halved rather than squared at each step. More generally $f(x)=(x-r)^m$ produces an error factor $(m-1)/m$ for integer $m>1$. A small residual can therefore appear long before a small input error, because the residual is proportional to the mth power of the distance. Factoring an exact polynomial or using a multiplicity-aware update can help, but the ordinary local convergence theorem assumes a simple root.",
+        "A safeguarded solver combines the strengths of two methods: retain a sign-changing interval and propose a Newton step only when it is finite and lies safely inside that interval; otherwise bisect. After evaluating the proposal, update the bracket by signs. The bracket gives a location certificate even if Newton stops accelerating. A stopping report should distinguish an exact algebraic zero, a small residual, a small bracket, and iteration exhaustion. These are different outcomes. In the code laboratory, edit the start while keeping the bracket fixed and observe that the Newton sequence has no automatic knowledge of the certified interval.",
+        "The safeguarded recommendation above has two separate jobs: preserve a root and make its location interval small. An interior Newton proposal can preserve opposite endpoint signs without reducing the width by any fixed fraction. Even strict residual decrease does not imply progress of that width. The point returned by Newton and the midpoint used for a bracket certificate are different estimates; state which one is being reported. The following optional investigation develops a simple progress rule, while leaving the independent-method code laboratory unchanged.",
+        "For an exact dimensionless example, take $f(x)=x^2-1$ on $[0,2]$ and always propose Newton from the upper endpoint $b>1$. Then $N(b)=(b+1/b)/2$, $N(b)-1=(b-1)^2/(2b)>0$ and $b-N(b)=(b^2-1)/(2b)>0$. Every proposal is strictly inside the bracket and has a smaller positive residual, so an inside-only rule keeps $[0,b_n]$. The Newton points tend to $1$, but the widths tend to $1$. Indeed, $s_n=(b_n-1)/(b_n+1)$ obeys $s_{n+1}=s_n^2$ and $s_0=1/3$, so $b_n=(1+3^{-2^n})/(1-3^{-2^n})$. The bracket midpoints tend to $1/2$, not the root. A valid enclosure can stay too wide even while one sequence of points succeeds.",
+        "Fix one dimensionless number $0<\\theta\\le1/2$ for the whole run. In a current bracket $[a,b]$, write $w=b-a$ and accept a proposed point only if it belongs to the closed middle interval $[a+\\theta w,b-\\theta w]$; otherwise use the midpoint. A zero, undefined or nonfinite derivative makes a Newton proposal unavailable, so use the midpoint instead of dividing. Check an exact root first, then update endpoint signs at the accepted point. The midpoint itself belongs to the allowed interval. Smaller $\\theta$ permits more proposals but gives a weaker worst-case width bound; $\\theta=1/2$ allows only the midpoint.",
+        "The theorem is about exact real points, a continuous real function on the entire bracket, and correct signs and zeros. An initial endpoint that is proved to be a root may end the calculation immediately. A degenerate interval is either such a proved exact root or an invalid sign bracket. On a computer, signs, the interval arithmetic, the central-margin test and the returned midpoint need justified enclosures or a separate rounding budget; a rounded zero is not automatically an exact real root. This conservative policy does not promise Newton's quadratic rate, and need not find every root in the initial interval. Report the retained interval, its midpoint certificate, the number of completed bracket updates and any exhausted budget separately."
+      ],
+      "formula": "xₙ₊₁ = xₙ − f(xₙ)/f′(xₙ), provided f′(xₙ) ≠ 0.",
+      "formulaTex": "x_{n+1}=x_n-\\frac{f(x_n)}{f^{\\prime}(x_n)}\\qquad\\bigl(f^{\\prime}(x_n)\\ne0\\bigr)",
+      "theorems": [
+        {
+          "title": "A fixed interior margin forces bracket progress",
+          "statement": "Let $f$ be continuous on a finite interval $[a_0,b_0]$ with $a_0<b_0$ and endpoint values of opposite signs. Fix $0<\\theta\\le1/2$. At update $n$, accept any available proposal in $[a_n+\\theta w_n,b_n-\\theta w_n]$, where $w_n=b_n-a_n$; otherwise use the midpoint. If its exact function value is zero, stop with that root. Otherwise retain the subinterval whose endpoint signs are opposite. In exact arithmetic the bracket remains valid, $w_n\\le(1-\\theta)^n w_0$, and its midpoint is within $w_n/2$ of some root in that bracket. If no exact zero ends the process, the nested intervals enclose one common root $r$ and their midpoints converge to it. No derivative hypothesis or initial uniqueness is needed.",
+          "equationTex": "\\begin{gathered}\\frac{w_{n+1}}{w_n}\\le1-\\theta,\\\\ \\frac{w_n}{w_0}\\le(1-\\theta)^n,\\\\ m_n=\\frac{a_n+b_n}{2},\\\\ |m_n-r|\\le\\frac{w_n}{2}.\\end{gathered}",
+          "proof": [
+            "Initially continuity and the intermediate value theorem supply a root. Because $0<\\theta\\le1/2$, the allowed middle interval is nonempty and lies strictly inside the bracket, and the midpoint belongs to it. Thus every point actually evaluated for the update is in that middle interval. This remains true when Newton is unavailable or its proposal lies outside the allowed interval: use the midpoint without evaluating the rejected proposal. If a value is exactly zero, it is a proved root and no further interval shrink is needed. Every existing retained bracket has positive width: initially its endpoints are distinct, and each nonzero interior update retains distinct endpoints. Thus the displayed ratios are equivalent to the undivided width bounds for existing brackets and completed nonzero updates. An exact-zero stop creates no next bracket and no next ratio.",
+            "For a nonzero value at the chosen point $p$, one of $[a_n,p]$ and $[p,b_n]$ inherits opposite endpoint signs. Continuity supplies a root in the retained interval. The bounds $a_n+\\theta w_n\\le p\\le b_n-\\theta w_n$ give both $p-a_n\\le(1-\\theta)w_n$ and $b_n-p\\le(1-\\theta)w_n$. Either possible retained interval therefore has width $w_{n+1}\\le(1-\\theta)w_n$. Induction proves $w_n\\le(1-\\theta)^n w_0$. Any root in that interval lies at distance at most $w_n/2$ from its exact midpoint.",
+            "If the process continues indefinitely, the closed intervals are nested and their widths tend to zero. The real-number completeness argument already used for bisection gives one common point $r$. Choose a root $r_n$ in each interval using the intermediate value theorem. Then $|r_n-r|\\le w_n\\to0$, so continuity gives $f(r)=0$. Every midpoint and accepted point lies in the corresponding interval and hence tends to this same $r$. The starting interval may contain other roots that later updates discard. This proves convergence to some root, not to a prescribed root or to every initial root.",
+            "For a requested non-strict midpoint certificate at most $\\varepsilon>0$, the zero-update case already suffices if $w_0/2\\le\\varepsilon$. Otherwise any integer $n$ with $(1-\\theta)^n w_0/2\\le\\varepsilon$ suffices. Equivalently, one may use $n=\\max(0,\\lceil\\log(w_0/(2\\varepsilon))/\\log(1/(1-\\theta))\\rceil)$. This is the least integer guaranteed by this width bound, not necessarily the first actual iteration to meet the tolerance. It counts completed bracket updates, not all function and derivative evaluations. If the problem has units, $w_0$ and $\\varepsilon$ have the same input units and their logarithm ratio is dimensionless."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "safeguarded-root-progress",
+        "title": "An interval that survives must also make progress",
+        "introduction": "All coordinates, functions and tolerances below are dimensionless exact models. A bracket certifies at least one root, while a derivative or a separate argument may establish uniqueness. Use the fixed-margin policy from the theorem, not the weaker test that a Newton point merely lies between the endpoints. Keep proposal, accepted point, retained bracket and certificate distinct.",
+        "tasks": [
+          {
+            "title": "Three global roots and a zero endpoint derivative",
+            "question": "Let $f(x)=x^3-3x-1$ and start from $[a_0,b_0]=[-1,0]$. Use $\\theta=1/4$ and propose Newton from the current upper endpoint at every update. Carry out three completed bracket updates in exact fractions, recording the proposal, whether it passes the middle-interval test, the accepted value's sign and the new bracket. Give the final midpoint and its certified error. Find the least sufficient update count supplied by the generic width bound for error at most $1/100$, first from the original width and then as an additional count from the measured third bracket. Does $f'(-1)=0$ invalidate the theorem? Does this process find every real root of $f$? Use other sign-changing intervals to support the last answer.",
+            "hint": "Initially $f(-1)=1$ and $f(0)=-1$. The first Newton proposal is $-1/3$; on later steps the same upper endpoint can be retained. Compare every proposal with both central endpoints before evaluating the accepted point. For the budgets compare integer powers of $3$ and $4$, and distinguish an initial worst-case budget from a budget restarted at an actually measured width. Check the signs at $-2,-1,1,2$.",
+            "solution": "The first central interval is $[-3/4,-1/4]$. Newton from $b_0=0$ gives $q=-1/3$, which is accepted. Its value is $f(-1/3)=-1/27<0$, so the new bracket is $[-1,-1/3]$.\n\nFor the second update Newton from $b_1=-1/3$ gives $q=-25/72$. The central interval is $[-5/6,-1/2]$, so this proposal is rejected. The midpoint $p=-2/3$ has $f(p)=19/27>0$, giving $[-2/3,-1/3]$.\n\nFor the third update the upper endpoint is still $-1/3$, so the proposal is again $-25/72$. It lies outside the new central interval $[-7/12,-5/12]$. The fallback midpoint $p=-1/2$ has $f(p)=3/8>0$, giving $[-1/2,-1/3]$. Its midpoint is $-5/12$ and its half-width certificate is $1/12$.\n\nFrom the original width $1$, the generic bound is $(3/4)^n/2$. Error at most $1/100$ requires $(3/4)^n\\le1/50$. At $n=13$, $50\\cdot3^{13}=79716150>4^{13}=67108864$; at $n=14$, $50\\cdot3^{14}=239148450<4^{14}=268435456$. Thus $14$ is the least sufficient count from that bound. Restarting from the actual third width $1/6$, the bound after $k$ more updates is $(3/4)^k/12$. It suffices that $(3/4)^k\\le3/25$. The integer comparisons are $25\\cdot3^7=54675>3\\cdot4^7=49152$ and $25\\cdot3^8=164025<3\\cdot4^8=196608$, so $8$ more updates suffice. These are certificate budgets, not claims about the first actual successful iteration.\n\nThe zero derivative at the unused lower endpoint does not invalidate a continuity-and-sign theorem. If a proposal required division by zero, use the midpoint instead. The derivative is negative on $(-1,0)$, so the mean value theorem makes the root in this bracket unique. This does not make it the only real root: $f(-2)=-3$, $f(-1)=1$, $f(1)=-3$ and $f(2)=1$ give additional roots in $(-2,-1)$ and $(1,2)$. A cubic has at most three distinct real roots, so these three disjoint brackets contain all three, but this single run isolates only the middle one."
+          },
+          {
+            "title": "Positive margins that shrink too quickly",
+            "question": "Change the algorithm as well as the function. Let $g(x)=x-3/2$ on $[0,2]$. At update $n=0,1,\\ldots$, replace the fixed guard by $\\theta_n=2^{-n-2}$ and deliberately propose the left boundary of that step's middle interval, $q_n=a_n+\\theta_n(b_n-a_n)$. Apply the same sign update. Each guard is positive and each proposal passes its own central test. Prove that all updates keep the upper endpoint at $2$, yet their widths stay above $9/8$. Deduce that even the bracket midpoints stay more than $1/16$ from the unique root. Explain exactly which fixed-margin hypothesis has been lost, without claiming that every variable-margin policy fails.",
+            "hint": "For any finite list $0\\le c_j\\le1$, prove $\\prod_j(1-c_j)\\ge1-\\sum_j c_j$ by induction. Separate the first factor $1-\\theta_0=3/4$ before using the geometric sum for the remaining guards. Use the resulting width bound to verify the proposed points' signs, rather than assuming the endpoint update you want to prove.",
+            "solution": "Consider the candidate endpoint recurrence with $b_n=2$. If $w_n=2-a_n$, its proposed next lower endpoint is $q_n=a_n+\\theta_n w_n$, so $w_{n+1}=(1-\\theta_n)w_n$. Consequently\n\n$w_n=2\\prod_{j=0}^{n-1}(1-2^{-j-2})$.\n\nThe finite-product inequality follows from $(1-u)(1-v)=1-u-v+uv\\ge1-u-v$ and induction; multiplying by another nonnegative factor preserves the needed inequality. For $n\\ge1$, separate the first factor and sum the remaining geometric terms:\n\n$\\sum_{j=1}^{n-1}2^{-j-2}=1/4-2^{-n-1}$.\n\nIt follows that\n\n$w_n\\ge(3/2)(3/4+2^{-n-1})=9/8+3/2^{n+2}>9/8$.\n\nThese candidate widths give $q_n=a_{n+1}=2-w_{n+1}<7/8<3/2$, so every proposed point has $g(q_n)<0$. Since $g(2)=1/2>0$, the actual sign update indeed keeps the upper endpoint at $2$ and chooses exactly that recurrence. Each $q_n$ is strictly interior and is the allowed central interval's left boundary because $0<\\theta_n\\le1/4$.\n\nThe exact midpoint is $m_n=2-w_n/2<23/16$. The unique root is $3/2=24/16$, so its error is $3/2-m_n=w_n/2-1/2>1/16$ for every completed update, despite valid brackets and positive guards. Positivity of each separate guard does not supply a single positive lower margin for the whole run: $\\theta_n\\to0$. The fixed-$\\theta$ theorem therefore does not apply. This example disproves a guarantee based only on positive per-step margins; it does not show that every variable-margin safeguard fails."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Descending an objective instead of solving an equation",
+      "paragraphs": [
+        "Elementary gradient descent in one variable updates $x_{n+1}=x_n-\\alpha F^{\\prime}(x_n)$, where $\\alpha>0$ is a chosen step size. A positive derivative points toward increasing values, so moving in the opposite direction initially decreases the objective. The word initially matters: a large step can overshoot a valley and increase the objective. If $x$ and $F$ carry units, $\\alpha$ must convert the derivative’s units into units of $x$; rescaling variables changes the meaning of a numerical step size.",
+        "For $F(x)=(x-3)^2$, subtracting 3 from the update gives $e_{n+1}=(1-2\\alpha)e_n$. Thus convergence from every starting point occurs exactly when $0<\\alpha<1$. At $\\alpha=1$ the error changes sign without shrinking; at $\\alpha>1$ its magnitude grows. At $\\alpha=1/2$ this particular quadratic reaches its minimum in one step. This calculation explains step-size sensitivity without relying on a picture.",
+        "For a general smooth objective, descent does not automatically find a global minimum. It may settle at a local minimum, remain at a stationary maximum if initialized there exactly, or encounter flat regions that slow progress. On a constrained interval, an unconstrained step can become infeasible. One elementary modification projects the proposal onto $[a,b]$ by replacing it with $\\min(b,\\max(a,\\text{proposal}))$; a boundary optimum then need not satisfy $F^{\\prime}=0$. The closed-interval analysis remains our certificate for the simple design problems here.",
+        "Newton applied to $F^{\\prime}$ uses the update $x_{n+1}=x_n-F^{\\prime}(x_n)/F^{\\prime\\prime}(x_n)$. It seeks a stationary point and can therefore converge to a maximum. Gradient descent and Newton root finding solve related but distinct tasks. Always identify whether the desired outcome is a root, a stationary point, or the best feasible objective value before interpreting a numerical sequence.",
+        "For a differentiable $F$, Taylor's local model gives $F(x-\\alpha F^{\\prime}(x))\\approx F(x)-\\alpha(F^{\\prime}(x))^2$. This explains why a sufficiently small positive step normally decreases $F$ whenever $F^{\\prime}(x)\\ne 0$. The omitted terms matter for a finite step, so one cannot claim decrease for every $\\alpha>0$. A line search tests trial steps and shortens $\\alpha$ until a decrease criterion is met. For a convex differentiable function, every stationary point is a global minimum; without convexity, gradient descent needs extra global reasoning. A one-dimensional plot can suggest convexity, but a proof may use $F^{\\prime\\prime}\\ge 0$ on the interval.",
+        "The quadratic model $F(x)=(x-3)^2$ makes the mechanism exact. At $x=5$, $F^{\\prime}=4$. With $\\alpha=1/4$, the next point is $x=4$ and the objective drops from 4 to 1; the following step reaches $x=3.5$ and objective $0.25$. With $\\alpha=1$, the sequence jumps from 5 to 1 and back, retaining objective 4 forever. With $\\alpha=1.2$, it jumps to 0.2 and then beyond 6, increasing its distance from the minimizer. The descent direction at the start does not guarantee that a long finite move ends lower.",
+        "If $F$ has a constrained domain $[a,b]$, the derivative need not vanish at its constrained minimum. For $F(x)=(x-3)^2$ on $[0,2]$, $F^{\\prime}$ is negative throughout the interval, so the global minimum is the boundary point $x=2$ with value 1. An unconstrained gradient step from 2 moves to the right and becomes infeasible; projection maps it back to 2. This fixed point is appropriate because every feasible small displacement points left, where $F$ increases. The corresponding first-order boundary condition is directional, not the unconstrained equation $F^{\\prime}=0$.",
+        "Algorithm choice depends on the question and the structure. A derivative zero may locate candidates for the fence design, but direct completion of the square gives a global certificate without any iteration. Bisection can solve $A^{\\prime}(x)=0$ if only function signs are available; Newton can accelerate when derivatives are stable; gradient descent follows objective decrease but may need many steps. In higher-dimensional work, feasible constraints and nonconvexity make these distinctions even sharper. For elementary one-variable problems, exact algebra and endpoint comparison should be the reference against which numerical experiments are checked."
+      ]
+    },
+    {
+      "title": "A box optimization with its feasible boundary",
+      "paragraphs": [
+        "A square sheet has side length 12 cm. Cut squares of side $x$ cm from all four corners and fold up the sides to make an open-top box. The base has dimensions $(12-2x)$ by $(12-2x)$ cm and height $x$ cm, so volume is $V(x)=x(12-2x)^2$ cm³. A physical box requires $0<x<6$; including the degenerate endpoints produces the closed comparison interval $[0,6]$ with zero volume at both ends.",
+        "Differentiate: $V^{\\prime}(x)=(12-2x)^2-4x(12-2x)=(12-2x)(12-6x)$. The interior critical number is $x=2$; $x=0$ and $x=6$ are endpoint candidates on $[0,6]$. The latter is a degenerate boundary, not an interior box. $V$ rises on $(0,2)$, falls on $(2,6)$, and $V(2)=2\\cdot8^2=128\\,\\mathrm{cm}^3$. Since $V(0)=V(6)=0$, the absolute maximum occurs at the genuine box with 8 cm square base and 2 cm height.",
+        "The modeling step matters as much as the derivative. Cutting $x=7$ cm would give negative base lengths in the algebraic formula and has no physical interpretation. A stationary point outside the feasible interval would not solve the design problem. Likewise, an open interval need not attain a minimum: physical boxes can have positive volumes arbitrarily close to zero as $x$ approaches either endpoint, but the zero-volume limiting shapes are not boxes.",
+        "For a sheet of side $L$, the same calculation gives $V=x(L-2x)^2$ on $0<x<L/2$ and maximum at $x=L/6$, with volume $2L^3/27$. The optimum cut is a fixed fraction of the sheet side, while the maximum volume scales cubically with overall size. This scaling check is a useful way to detect an incorrect power of $L$.",
+        "The box volume is a product of height and base area, so its cubic units are a useful guardrail. For the 12 cm sheet, $x=1$ produces a 10 cm square base and volume $100\\,\\mathrm{cm}^3$, while $x=2$ produces an 8 cm square base and volume $128\\,\\mathrm{cm}^3$. Increasing the cut from $2$ to $3$ shortens the base to 6 cm and drops volume to $108\\,\\mathrm{cm}^3$. The changing terms compete: a taller box does not necessarily hold more. Sampling these values helps anticipate the graph, but it cannot rule out a higher peak between samples. The derivative and endpoint comparison supply that conclusion.",
+        "The factorization in paragraph 2 also certifies uniqueness: on the physical interval $0<x<6$, $12-2x>0$, while $12-6x$ changes sign only at $x=2$. The other derivative zero at the degenerate endpoint $x=6$ is not another interior optimum. Keeping the feasible domain beside the sign chart prevents a formal root from becoming a false box design.",
+        "The general square-sheet formula reveals a scale-free answer. Write $u=x/L$; then $V/L^3=u(1-2u)^2$ for $0<u<1/2$. The optimum $u=1/6$ depends on shape, not on the numerical unit used for $L$. If every length doubles, the maximizing cut doubles and the volume increases eightfold. That cubic scaling follows both from the formula $2L^3/27$ and from dimensional reasoning. It offers a strong cross-check of any spreadsheet or simulation: a result proportional to $L^2$ could not have units of volume.",
+        "Real construction may change the model. A sheet with a fixed-width seam, a lid, a required minimum base side, or nonzero material thickness will alter either the objective or the feasible interval. If the minimum base side is 10 cm for a 12 cm sheet, then $12-2x\\ge 10$ forces $x\\le 1$ and the unconstrained optimum $x=2$ is infeasible; volume increases on $0<x\\le 1$, so the best allowed design is the boundary cut $x=1$ with volume $100\\,\\mathrm{cm}^3$. State such restrictions first. The solution is a conclusion about the declared model, not an unconditional manufacturing recommendation."
+      ],
+      "formula": "For a square sheet of side L, the maximizing cut is x=L/6 and V_max=2L³/27.",
+      "formulaTex": "\\begin{gathered}L>0,\\quad V(x)=x(L-2x)^2,\\quad 0<x<\\frac L2,\\\\ x_{\\max}=\\frac L6,\\qquad V_{\\max}=\\frac{2L^3}{27}.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "The best enclosure beside a wall",
+      "problem": "Use $100\\,\\mathrm m$ of fence for three sides of a rectangular enclosure. Find the largest area and justify that the design is feasible.",
+      "steps": [
+        "Let $x$ be each perpendicular side and $y$ the side parallel to the wall. The constraint gives $y = 100 - 2x$ and $A(x) = 100x - 2x^{2}$ on the extended interval $[0, 50]$.",
+        "$A$ is continuous, so compare endpoints and interior critical points. $A^{\\prime}(x) = 100 - 4x$ vanishes only at $x = 25$.",
+        "$A(0) = 0$, $A(25) = 1250$, and $A(50) = 0$ square metres. The interior candidate has the largest value. Its other dimension is $y = 50\\,\\mathrm{m}$, so both dimensions are positive.",
+        "As an independent check, complete the square: $A(x) = 1250 - 2(x - 25)^{2}$. This is never larger than $1250$. Nearby widths $24\\,\\mathrm{m}$ and $26\\,\\mathrm{m}$ both give $1248\\,\\mathrm{m^{2}}$, consistent with the exact comparison."
+      ],
+      "answer": "The maximum area is $1250\\,\\mathrm{m^2}$, attained at width $25\\,\\mathrm m$ and length $50\\,\\mathrm m$ under the stated wall and fence assumptions."
+    },
+    {
+      "title": "Two routes to the positive square root of two",
+      "problem": "Approximate the positive root of $f(x) = x^{2} - 2$ using bisection on $[1, 2]$ and Newton from $x_{0} = 1.5$.",
+      "steps": [
+        "The function is continuous and changes sign from $-1$ to $2$. Since $f^{\\prime}(x) = 2x > 0$ on $[1, 2]$, this bracket contains exactly one root.",
+        "The first midpoint is $1.5$ with positive residual $0.25$, so retain $[1, 1.5]$. The next midpoint is $1.25$ with negative residual $-0.4375$, so retain $[1.25, 1.5]$. After ten halvings, the remaining midpoint error is at most $1/2048$, approximately $0.00048828125$.",
+        "Newton gives $x_1=1.5-\\frac{0.25}{3}=\\frac{17}{12}$, approximately $1.416666667$. The next step is $x_2=\\frac{577}{408}$, approximately $1.414215686$. A third step gives approximately $1.414213562375$.",
+        "These estimates agree with $\\sqrt 2$ approximately $1.414213562373$. Newton is much faster here, but its success follows from favorable function geometry and starting point; bisection carries an explicit interval bound at every step."
+      ],
+      "answer": "Newton reaches about eleven correct places after the decimal point (roughly twelve significant digits) after three updates in this example. Ten bisection halvings certify an error at most $0.00048828125$ for the remaining midpoint."
+    },
+    {
+      "title": "A wall shorter than the unconstrained enclosure",
+      "problem": "The fence model has $100\\,\\mathrm{m}$ of material, but the wall can support at most $40\\,\\mathrm{m}$ of enclosure length. Find the maximum area.",
+      "steps": [
+        "With $y=100-2x$ and $y\\le 40$, the feasible nondegenerate widths satisfy $30\\le x<50$. The area is $A(x)=100x-2x^{2}$.",
+        "$A^{\\prime}(x)=100-4x$ is negative throughout $[30,50)$, so area decreases as width grows.",
+        "At the included boundary $x=30$, $y=40$ and $A=1200\\,\\mathrm{m^{2}}$. The limiting area as $x\\to50^-$ is zero; the former stationary width $25$ is infeasible."
+      ],
+      "answer": "Use a $30\\,\\mathrm{m}$ width and the entire $40\\,\\mathrm{m}$ usable wall; the maximum area is $1200\\,\\mathrm{m^{2}}$."
+    },
+    {
+      "title": "A cusp belongs in the candidate list",
+      "problem": "Find the absolute extrema of $f(x)=|x-1|$ on $[0,3]$ and explain why differentiation alone is insufficient.",
+      "steps": [
+        "On $(0,1)$, $f^{\\prime}=-1$; on $(1,3)$, $f^{\\prime}=1$. The derivative is undefined at $x=1$, which is still in the domain.",
+        "Candidate values are $f(0)=1$, $f(1)=0$, and $f(3)=2$. There are no stationary points.",
+        "Compare all values on the closed interval. The kink is the absolute minimum and the right endpoint is the absolute maximum."
+      ],
+      "answer": "Minimum $0$ at $x=1$; maximum $2$ at $x=3$."
+    },
+    {
+      "title": "Certify a decimal place with bisection",
+      "problem": "For $f(x)=x^{3}-5$ on $[1,2]$, how many completed halvings ensure midpoint error at most $0.001$?",
+      "steps": [
+        "The polynomial is continuous, $f(1)=-4$ and $f(2)=3$, so a root is bracketed. Since $f^{\\prime}=3x^{2}>0$, it is unique there.",
+        "After $n$ halvings the midpoint error is at most $\\frac{1}{2^{n+1}}$. Require $2^{n+1}\\ge1000$.",
+        "Since $2^9=512$ and $2^10=1024$, $n=9$ is the smallest guaranteed number of halvings. This is an input-location bound, independent of the residual."
+      ],
+      "answer": "Nine completed halvings suffice; the remaining midpoint error is at most $1/1024\\approx 0.0009766$."
+    },
+    {
+      "title": "Newton error is squared near a simple root",
+      "problem": "Starting from $x_{0}=2$ for $f(x)=x^{2}-2$, compute two Newton updates and use the exact error identity.",
+      "steps": [
+        "Newton gives $x_1=\\frac{2+2/2}{2}=\\frac32$. A second update gives $x_2=\\frac{3/2+4/3}{2}=\\frac{17}{12}\\approx1.4166667$.",
+        "For any positive $x$, $N(x)-\\sqrt2=\\frac{(x-\\sqrt2)^2}{2x}$. The first error is therefore nonnegative and quadratic in the preceding error.",
+        "At $x_{2}$, the numerical error is about $0.0024531$. Further iterations improve rapidly because the derivative $2x$ stays away from zero near $\\sqrt 2$."
+      ],
+      "answer": "The first two updates are $3/2$ and $17/12$; the exact identity explains the local quadratic improvement."
+    },
+    {
+      "title": "A constrained minimum has no stationary point",
+      "problem": "Minimize $F(x)=(x-3)^{2}$ over the feasible interval $[0,2]$.",
+      "steps": [
+        "$F^{\\prime}(x)=2(x-3)<0$ on $[0,2]$, so $F$ decreases across the entire feasible interval.",
+        "The endpoint values are $F(0)=9$ and $F(2)=1$. The unconstrained stationary point $3$ lies outside the domain.",
+        "At $x=2$, $F^{\\prime}(2)=-2$. For any $\\alpha>0$, an unprojected descent step proposes $2-\\alpha F^{\\prime}(2)=2+2\\alpha>2$; projection onto $[0,2]$ returns $2$. Thus a constrained boundary minimum need not have zero derivative."
+      ],
+      "answer": "The global feasible minimum is $F(2)=1$ at the boundary $x=2$."
+    },
+    {
+      "title": "A base-width restriction changes the best box",
+      "problem": "For the $12\\,\\mathrm{cm}$ square sheet, require the folded box base to be at least $10\\,\\mathrm{cm}$ on each side. Find the maximum volume.",
+      "steps": [
+        "The base side is $12-2x$, so the restriction gives $0<x\\le 1$. The volume remains $V=x(12-2x)^{2}$.",
+        "On $0<x\\le 1$, $V^{\\prime}=(12-2x)(12-6x)>0$; therefore volume increases up to the included boundary $x=1$.",
+        "The resulting base is $10$ cm by $10$ cm, height is $1\\,\\mathrm{cm}$, and volume is $100\\,\\mathrm{cm^{3}}$. The unrestricted cut $x=2$ is infeasible."
+      ],
+      "answer": "Choose $x=1\\,\\mathrm{cm}$; the constrained maximum is $100\\,\\mathrm{cm^{3}}$."
+    }
+  ],
+  "misconceptions": [
+    "“Every zero of the derivative is the best design.” A stationary point can be a minimum, maximum, or neither; check feasibility, compare all feasible interior and boundary candidates, and consider limits at excluded boundaries before claiming an optimum.",
+    "“Newton always beats bisection.” Newton can cycle or divide by zero. For a continuous function with a sign-changing bracket, bisection halves the bracket at each step and bounds a root’s location."
+  ],
+  "lab": {
+    "title": "Compare Newton and bisection iterations",
+    "description": "Use the dimensionless equation $f(x)=x^2-T$, where the JavaScript variable target sets $T>0$. Edit target, the bracket endpoints lower and upper, the Newton starting point start, and iterations. Console rows report iteration, estimate, residual, and absolute error relative to the signed square-root reference used by each method; bisection also reports its certified half-width. Plots show absolute error against iteration. Math.sqrt(target) supplies the floating-point reference magnitude, not an independent proof of convergence.",
+    "code": "// Adjustable inputs: retain a positive target and a sign-changing bracket.\nconst target = 2;\nconst lower = 1, upper = 2;\nconst start = 1.5;\nconst iterations = 10;\nif (!(Number.isFinite(target) && target > 0 && Number.isFinite(lower) && Number.isFinite(upper) && lower < upper && Number.isFinite(start) && Number.isInteger(iterations) && iterations >= 1 && iterations <= 30)) throw new Error('Check inputs; iterations must be 1 to 30.');\nconst f = x => x*x - target;\nconst reference = Math.sqrt(target);\nlet a = lower, b = upper;\nif (![f(a), f(b)].every(Number.isFinite)) throw new Error('Bracket values overflow.');\nif (f(a) !== 0 && f(b) !== 0 && Math.sign(f(a)) === Math.sign(f(b))) throw new Error('Endpoints must bracket a root.');\nif (f(a) === 0) b = a;\nelse if (f(b) === 0) a = b;\n// Select the root enclosed by the validated bracket, including endpoint roots.\nconst bisectRoot = a < 0 && f(a) >= 0 ? -reference : reference;\nconst bisectErrors = [], newtonErrors = [];\nconsole.log('Bisection: n, midpoint, residual, absolute error, certified half-width');\nfor (let n = 0; n <= iterations; n++) {\n  const m = a + (b-a)/2;\n  const error = Math.abs(m-bisectRoot);\n  console.log(n, m, f(m), error, (b-a)/2);\n  bisectErrors.push([n,error]);\n  if (f(m) === 0 || m === a || m === b) break;\n  if (Math.sign(f(m)) === Math.sign(f(a))) a = m;\n  else b = m;\n}\nconsole.log('Newton: n, estimate, residual, absolute error');\nlet x = start;\nfor (let n = 0; n <= iterations; n++) {\n  if (!Number.isFinite(x) || !Number.isFinite(f(x))) { console.log('Stopped: nonfinite value'); break; }\n  const root = x < 0 ? -reference : reference;\n  const error = Math.abs(x-root);\n  console.log(n, x, f(x), error);\n  newtonErrors.push([n,error]);\n  if (f(x) === 0) break;\n  if (2*x === 0) { console.log('Stopped: slope too small'); break; }\n  const next = x-f(x)/(2*x);\n  if (next === x) { console.log('Stopped: floating-point stagnation'); break; }\n  x = next;\n}\nif (bisectErrors.length >= 2) plot(bisectErrors, 'Bisection: iteration vs absolute root error');\nelse console.log('Bisection has only one finite point; no error curve.');\nif (newtonErrors.length >= 2) plot(newtonErrors, 'Newton: iteration vs absolute root error');\nelse console.log('Newton has only one finite point; no error curve.');",
+    "tasks": [
+      "Before running, predict which method first achieves absolute error below $10^{-3}$. Explain which method provides an error bound without knowing the root.",
+      "Change start to 0, then to 10. Compare the failure message and the early steps with the default run. Why does a valid bisection bracket not protect an independent Newton sequence?",
+      "Change target to 3 while retaining the bracket $[1,2]$, and compare errors with certified half-widths. Then choose an invalid bracket and explain why rejecting it is appropriate.",
+      "Explain why the two error plots alone cannot establish convergence for arbitrary functions. How would a repeated root or a discontinuity change the analysis?"
+    ],
+    "expected": "With defaults, Newton reaches absolute error about $2.1239\\times10^{-6}$ at $n=2$ and about $1.595\\times10^{-12}$ at $n=3$. Bisection at $n=10$ has midpoint 1.41455078125 and certified half-width 0.00048828125; its actual error is about 0.00033721888. Starting Newton with start = 0 reports a slope failure. The actual midpoint error need not decrease every step even though its bound does. Near machine precision the default Newton sequence alternates between adjacent floating-point values; the iteration limit ends the run, and a displayed zero reference error does not imply an exact real root."
+  },
+  "exercises": [
+    {
+      "question": "Use $100\\,\\mathrm m$ of fence for three sides of a rectangular enclosure against a wall. If its perpendicular width must satisfy $x\\ge30\\,\\mathrm m$, what feasible dimensions give the largest positive area?",
+      "hint": "Restrict the previous objective before comparing candidates.",
+      "solution": "Feasible positive-area widths satisfy $30\\le x<50$. Since $A^{\\prime}(x)=100-4x<0$ there, area decreases. The maximum is at $x=30\\,\\mathrm m$, with $y=40\\,\\mathrm m$ and $A=1200\\,\\mathrm{m^2}$. The old stationary width $x=25$ is infeasible.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "A 60 m fence runs along three sides beside a wall. Express area as a function of perpendicular width and give the physical domain.",
+      "hint": "Let the two equal sides have length $x$.",
+      "solution": "The remaining side is $60-2x$ metres, so $A(x)=x(60-2x)\\,\\mathrm{m^2}$. A nondegenerate enclosure needs $x>0$ and $60-2x>0$, giving $0<x<30$. Both excluded endpoints yield zero area.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "Use $60\\,\\mathrm m$ of fence for three sides of a rectangular enclosure against a wall. Find the dimensions that give the largest area, and state that area.",
+      "hint": "Differentiate the one-variable objective.",
+      "solution": "Since $A^{\\prime}(x)=60-4x$, the stationary width is $x=15\\,\\mathrm m$. The degenerate endpoints have zero area, while $A(15)=450\\,\\mathrm{m^2}$ with remaining side $30\\,\\mathrm m$, so this is the physical maximum.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "Use $60\\,\\mathrm m$ of fence for three sides of a rectangular enclosure against a wall. If its perpendicular width $x$ must be at least $20\\,\\mathrm m$, what feasible dimensions maximize the area?",
+      "hint": "Write $A(x)=x(60-2x)$ and restrict its domain before comparing candidates.",
+      "solution": "On $20\\le x<30$, $A^{\\prime}(x)=60-4x<0$. Therefore the maximum occurs at $x=20\\,\\mathrm m$, with remaining side $20\\,\\mathrm m$ and area $400\\,\\mathrm{m^2}$.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "What are the units of $dA/dx$ if $A$ is in square metres and $x$ is in metres?",
+      "hint": "Divide output units by input units.",
+      "solution": "The units of $dA/dx$ are $\\mathrm{m^2}/\\mathrm m=\\mathrm m$. This describes area change per metre of width; the derivative is not an area.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the absolute extrema of $f(x) = x^3 - 3x$ on $[-2, 3]$.",
+      "hint": "Include both stationary points and both endpoints.",
+      "solution": "Since $f^{\\prime}(x)=3x^2-3$, stationary points are $x=-1,1$. Compare $f(-2)=-2$, $f(-1)=2$, $f(1)=-2$, and $f(3)=18$. The absolute minimum is $-2$ at $x=-2$ and $x=1$; the maximum is $18$ at $x=3$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the extrema of $f(x)=x^2$ on $[-2,1]$.",
+      "hint": "Include the stationary point and both endpoints.",
+      "solution": "The stationary point is $x=0$, as $f^{\\prime}(x)=2x$. Candidate values are $f(-2)=4$, $f(0)=0$, and $f(1)=1$. Thus the minimum is $0$ at $x=0$ and maximum $4$ at $x=-2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the extrema of $f(x)=|x|$ on $[-2,1]$.",
+      "hint": "The corner is a candidate although $f^{\\prime}$ is undefined there.",
+      "solution": "At the endpoint and corner candidates $x=-2,0,1$, the values are $2,0,1$. Hence the minimum is $0$ at $x=0$ and the maximum is $2$ at $x=-2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Give a continuous function on an open interval that has a supremum but no maximum.",
+      "hint": "Use the identity function.",
+      "solution": "The continuous function $f(x)=x$ on $(0,1)$ has supremum $1$, since values approach $1$ from below. Because $1$ is excluded, no maximum is attained.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Why is $x=0$ not a critical number of $f(x)=1/x$?",
+      "hint": "Check domain membership before derivative conditions.",
+      "solution": "The function is undefined at $x=0$. A critical number must belong to the domain, so $0$ is not one, although the derivative formula is undefined there too.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A continuous function has opposite signs at the endpoints of $[1,2]$. How many completed bisection halvings guarantee that the midpoint of the retained root bracket has error at most $10^{-6}$?",
+      "hint": "Use the half-width, not the full interval width.",
+      "solution": "After $n$ halvings of width $1$, the midpoint error is at most $2^{-(n+1)}$. We need $2^{n+1}\\ge10^6$. Since $2^{19}=524288<10^6\\le2^{20}=1048576$, the least count is $n=19$. This assumes a continuous root bracket is maintained.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can the sign change of $g(x)=1/x$ on $[-1,1]$ justify bisection? Can the lack of a sign change for $h(x)=x^2$ on that interval prove there is no root?",
+      "hint": "Separate a sufficient hypothesis from a necessary condition.",
+      "solution": "No to both. $g(x)=1/x$ is undefined at $0$, so it is not continuous on $[-1,1]$ and has no root. Yet $h(x)=x^2$ has root $0$ although $h(-1)=h(1)=1$. A continuous sign-changing bracket guarantees a root; no sign change does not exclude one.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "How many bisection halvings of a bracket of width $8$ guarantee midpoint error at most $1/128$?",
+      "hint": "After $n$ halvings, midpoint error is at most $8/2^{n+1}$.",
+      "solution": "Require $8/2^{n+1}\\le1/128$, or $2^{n+1}\\ge1024=2^{10}$. Thus $n=9$ halvings suffice. The final width is $8/512=1/64$, half of which is $1/128$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x)=x^3-5$, verify a bisection bracket $[1,2]$.",
+      "hint": "Check continuity and endpoint signs.",
+      "solution": "The polynomial is continuous on $[1,2]$, with $f(1)=-4$ and $f(2)=3$. Opposite endpoint signs guarantee a root in $(1,2)$ by the intermediate value theorem.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "After seven halvings of a width-$4$ bracket, what are the remaining width and midpoint error bound?",
+      "hint": "The width divides by $2^7$ and the bound is half of it.",
+      "solution": "The remaining width is $4/2^7=1/32$, so the midpoint error is at most half that, $1/64$, provided the root bracket is maintained.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can bisection start from $[-1,1]$ for $f(x)=x^2$? Does a root exist?",
+      "hint": "Separate method hypotheses from existence.",
+      "solution": "The endpoint values are $f(-1)=f(1)=1>0$, so the usual sign-change bisection rule cannot start. Nonetheless $f(0)=0$, so the interval contains a root.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the first two bisection brackets for $f(x)=x^2-3$ on $[1,2]$.",
+      "hint": "Evaluate at $3/2$, then the midpoint of the retained half.",
+      "solution": "Since $f(3/2)=-3/4$, retain $[3/2,2]$. Its midpoint $7/4$ gives $f(7/4)=1/16>0$, so retain $[3/2,7/4]$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x) = x^3 - 2x + 2$, calculate two Newton steps from zero and explain the result.",
+      "hint": "Differentiate first and evaluate at both 0 and 1.",
+      "solution": "Here $f^{\\prime}(x)=3x^2-2$. From $x_0=0$, Newton gives $x_1=0-2/(-2)=1$. From $x_1=1$, it gives $x_2=1-1/1=0$. The sequence cycles even though both derivative denominators are nonzero.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Compute one Newton update for $f(x)=x^2-3$ from $x=2$.",
+      "hint": "Use $f^{\\prime}(x)=2x$.",
+      "solution": "Newton gives $x_{\\mathrm{new}}=2-(4-3)/4=7/4=1.75$. This is near $\\sqrt3\\approx1.73205$, but the update alone is not an error certificate.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is Newton undefined at $x=0$ for $f(x)=x^2-3$?",
+      "hint": "Inspect the denominator of the update.",
+      "solution": "At $x=0$, $f^{\\prime}(0)=0$ while $f(0)=-3$. Newton's update $x-f(x)/f^{\\prime}(x)$ divides by zero, so a different start or bracketing method is needed.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(x)=(x-2)^2$, derive the Newton error recurrence.",
+      "hint": "Write $x_{\\mathrm{new}}=x-f/f^{\\prime}$ for $x\\ne2$.",
+      "solution": "For $x\\ne2$, $x_{\\mathrm{new}}=x-(x-2)^2/[2(x-2)]=(x+2)/2$. With error $e=x-2$, the next error is $e_{\\mathrm{new}}=x_{\\mathrm{new}}-2=e/2$. Defined steps halve the error, giving linear convergence for this double root.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f(x)=10^{-6}(x-4)$, compare the residual and root error at $x=5$.",
+      "hint": "The vertical scale is small.",
+      "solution": "The residual at $x=5$ is $f(5)=10^{-6}$, while the root is $4$, so the root error is $|5-4|=1$. The small slope makes a small residual compatible with a large input error.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $F(x) = (x - 3)^2$, compare gradient descent with $\\alpha = 0.25$ and $\\alpha = 1.2$ from $x_0 = 5$.",
+      "hint": "Write the recurrence for $e_n=x_n-3$.",
+      "solution": "As $F^{\\prime}(x)=2(x-3)$, the error satisfies $e_{n+1}=(1-2\\alpha)e_n$ and $e_0=2$. With $\\alpha=0.25$, $e_n=2(0.5)^n\\to0$; with $\\alpha=1.2$, the multiplier is $-1.4$, so errors alternate and grow. The latter iteration diverges.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $F(x)=(x-1)^2$, write the gradient descent recurrence with $\\alpha=1/4$.",
+      "hint": "Differentiate and subtract the minimizer.",
+      "solution": "Since $F^{\\prime}(x)=2(x-1)$, subtracting the minimizer gives $e_{\\mathrm{new}}=(1-2\\alpha)e=e/2$ when $\\alpha=1/4$. Every nonzero error halves each iteration.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Starting at $x_0=3$ for $F(x)=(x-1)^2$ with $\\alpha=1/4$, find $x_1$ and $x_2$.",
+      "hint": "Apply the recurrence twice.",
+      "solution": "The initial error is $e_0=3-1=2$. Halving twice gives $e_1=1$ and $e_2=1/2$, hence $x_1=2$ and $x_2=3/2$. The objective values are $F(x_0)=4$, $F(x_1)=1$, and $F(x_2)=1/4$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $F(x)=(x-1)^2$, what happens to gradient descent with step size $\\alpha=1$?",
+      "hint": "The error multiplier is $1-2\\alpha$.",
+      "solution": "With $\\alpha=1$, the error multiplier $1-2\\alpha=-1$. Any nonzero error alternates sign without shrinking, so the iterates cycle around $x=1$.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Minimize $F(x)=(x-3)^2$ on $[0,2]$ without solving $F^{\\prime}=0$ inside the interval.",
+      "hint": "Use the sign of $F^{\\prime}$ over the feasible domain.",
+      "solution": "Since $F^{\\prime}(x)=2(x-3)<0$ throughout $[0,2]$, $F$ strictly decreases on the feasible interval. The minimum is $F(2)=1$ at $x=2$.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A square sheet of side $18\\,\\mathrm{cm}$ has squares of side $x$ cut from all four corners, and the remaining sides are folded up to make an open-top box. For $0<x<9$, find the cut size that maximizes its volume and the maximum volume.",
+      "hint": "After cutting and folding, identify the height and both base sides. Differentiate the resulting volume on $0<x<9$ and check the interval ends.",
+      "solution": "The folded height is $x$ and each base side is $18-2x$ centimetres, so $V(x)=x(18-2x)^2$ for $0<x<9$.\n\nIts derivative is $V^{\\prime}(x)=(18-2x)(18-6x)$. Both factors are positive on $(0,3)$; on $(3,9)$ the first is positive and the second negative. Thus $V$ increases to $x=3$ and then decreases. The boundary limits as $x\\to0^+$ and $x\\to9^-$ are both zero. Hence the global maximum is $V(3)=3(12)^2=432\\,\\mathrm{cm^3}$, at a cut of $3\\,\\mathrm{cm}$.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "A square sheet of side $12\\,\\mathrm{cm}$ has squares of side $x$ cut from all four corners, and the remaining sides are folded up to make an open-top box. For physical boxes $0<x<6$, does the volume have a minimum positive value?",
+      "hint": "Inspect $V(x)$ as $x$ approaches either endpoint.",
+      "solution": "No. For every physical box $0<x<6$, $V(x)=x(12-2x)^2>0$. But $V(x)\\to0$ as $x\\to0^+$ or $x\\to6^-$, so the infimum $0$ is not attained by a physical box.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A square sheet of side $12\\,\\mathrm{cm}$ has squares of side $x$ cut from all four corners, and the remaining sides are folded up to make an open-top box. Calculate the volume at cuts $x=1,2,3\\,\\mathrm{cm}$.",
+      "hint": "Use $V=x(12-2x)^2$.",
+      "solution": "Substituting $x=1,2,3\\,\\mathrm{cm}$ into $V(x)=x(12-2x)^2$ gives $100,128,108\\,\\mathrm{cm^3}$ respectively. These samples suggest a peak near $2\\,\\mathrm{cm}$ but do not prove a global maximum.",
+      "lesson": 6,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "A global optimum requires an objective, a feasible domain, and comparison of all relevant interior and boundary candidates.",
+    "Bisection trades speed for a maintained interval certificate; Newton uses tangent information and requires attention to starting points and failure.",
+    "Residual, root error, and objective error measure different things. Report the quantity that answers the practical question.",
+    "Gradient descent depends on step size and geometry; a converged stationary point is not automatically the best feasible design."
+  ],
+  "next": "Chapter 10 changes the question from choosing one best input to accumulating contributions across an interval. Derivatives measure local change; definite integrals will measure its total effect."
+}

@@ -1,0 +1,10 @@
+# floor(x) = -1 on (-1,0) and 0 on [0,1).
+# With epsilon = 1/2, every delta admits a negative x that violates limit 0.
+# Explain why changing only f(0) could not repair the two-sided limit.
+scene "A jump cannot be repaired at a single point";
+domain -1.5 1.5;
+range -2.5 1.5;
+param d = 0.4 from 0.02 to 0.9;
+fn f(x) = floor(x);
+plot f color rose;
+epsilon_delta f at 0 limit 0 epsilon 0.5 delta d;

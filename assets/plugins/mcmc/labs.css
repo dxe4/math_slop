@@ -1,0 +1,66 @@
+/* MCMC labs: shared lab frame and lab rules, mapped onto the site variables (style.css). */
+.mcmc-lab{--euler-ink:var(--ink);--euler-muted:var(--muted);--euler-surface:var(--surface);--euler-surface-soft:var(--soft);--euler-rule:var(--rule-strong);--euler-accent:var(--accent);--euler-accent-2:var(--orange);--euler-danger:var(--red);--euler-focus:var(--orange);--paper:var(--surface);margin:1.5rem 0;max-width:100%}
+.euler-lab{--lab-ink:var(--euler-ink,#20352d);--lab-muted:var(--euler-muted,#526359);--lab-panel:var(--euler-surface,#fff);--lab-panel-raised:var(--euler-surface-soft,#f0f1e8);--lab-line:var(--euler-rule,#b6c0b4);--lab-cyan:var(--euler-accent,#185c4a);--lab-gold:var(--euler-accent-2,#71420e);--lab-coral:var(--euler-danger,#9b3434);--lab-radius:var(--euler-radius-md,.5rem);display:grid;gap:var(--euler-space-4,1rem);padding:var(--euler-space-5,1.5rem);border:1px solid var(--euler-rule,#b6c0b4);border-radius:var(--euler-radius-md,.75rem);background:var(--euler-surface,#fff);color:var(--euler-ink,#20352d);font-family:var(--euler-font-ui,system-ui,sans-serif)}
+.euler-lab__title,.euler-lab__question,.euler-lab__status,.euler-lab__stage{margin:0}
+.euler-lab__notice,.euler-lab__data{padding:var(--euler-space-3,.75rem);border:1px solid var(--euler-rule,#b6c0b4);border-radius:var(--euler-radius-sm,.4rem)}
+.euler-lab summary{cursor:pointer;font-weight:600}
+.euler-lab__controls{display:grid;gap:var(--euler-space-3,.75rem)}
+.euler-lab__controls fieldset{display:grid;gap:var(--euler-space-2,.5rem);min-width:0;border:1px solid var(--euler-rule,#b6c0b4)}
+.euler-lab__controls input,.euler-lab__controls select,.euler-lab button{font:inherit}
+.euler-lab__controls input[type=range],.euler-lab__controls input[type=number],.euler-lab__controls select,.euler-lab button{min-height:44px}
+.euler-lab__controls input[type=number],.euler-lab__controls select,.euler-lab button{font-size:max(16px,1rem)}
+.euler-lab__controls input[type=number]{max-width:8rem}
+.euler-lab__controls button,.euler-lab__export{justify-self:start}
+.euler-lab__stage{min-width:0;overflow:auto}
+.euler-lab__table{border-collapse:collapse;min-width:100%;margin-block:var(--euler-space-3,.75rem)}
+.euler-lab__table caption{text-align:left;font-weight:600}
+.euler-lab__table th,.euler-lab__table td{padding:var(--euler-space-2,.5rem);border:1px solid var(--euler-rule,#b6c0b4);text-align:left}
+.euler-lab :focus-visible{outline:3px solid var(--euler-focus,#9a4b00);outline-offset:3px}
+.euler-lab[data-state=error] .euler-lab__status{color:var(--euler-danger,#9b3434)}
+.euler-lab__figure-description{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+/* Only an approved single-lab page uses the compact instrument layout.
+   Book experiments retain their owner's original flow and disclosures. */
+@media(min-width:64rem){
+}
+/* Native experiment owners retain their original controls, diagrams and IDs. */
+.euler-native-lab .experiment-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.euler-native-lab > .experiment { margin: 0; border: 0; box-shadow: none; min-width: 0; }
+.euler-native-lab .euler-lab__title { font-size: clamp(1.125rem,2vw,1.5rem); line-height: 1.3; }
+.euler-native-lab .euler-lab__controls { min-width: 0; }
+.euler-native-lab input[data-euler-native-pair] { box-sizing: border-box; width: 8rem; max-width: 100%; min-height: 44px; font: inherit; }
+.euler-native-lab .euler-lab__data { max-width: 100%; min-width: 0; overflow-x: auto; }
+.euler-native-lab .euler-lab__table { font-size: max(12px, .875rem); }
+.euler-native-lab .euler-lab__reset { min-height: 44px; margin-block: .5rem; }
+@media print {
+  .euler-native-lab { display: block; border: 0; background: transparent; color: inherit; padding: 0; }
+  .euler-native-lab :is(.euler-lab__notice,.euler-lab__question,.euler-lab__reset,.euler-lab__data,.euler-lab__status,[data-euler-native-pair]) { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .euler-lab, .euler-lab *, .euler-lab *::before, .euler-lab *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  .euler-lab, .euler-lab__notice, .euler-lab__data, .euler-lab__controls fieldset, .euler-lab__table th, .euler-lab__table td { color: CanvasText; background: Canvas; border-color: CanvasText; }
+  .euler-lab button, .euler-lab input, .euler-lab select { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
+  .euler-lab :focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
+}
+@media screen {
+    font-family:var(--euler-font-heading,var(--euler-font-reading));font-size:var(--euler-h1);font-weight:500;
+    line-height:var(--euler-h1-leading);letter-spacing:var(--euler-h1-tracking);
+  }
+}
+.ancestry-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end}.ancestry-controls label{display:flex;flex-direction:column;max-width:100%}.ancestry-controls input{width:8rem;max-width:100%;padding:var(--euler-space-2,6px)}.ancestry-controls select{max-width:100%}.ancestry-inspector{display:block;margin:20px 0 6px}.ancestry-inspector input{display:block;width:100%;margin-top:8px}.ancestry-inspector output{font-weight:bold}.ancestry-scroll{overflow-x:auto;max-width:100%;margin:16px 0}.ancestry-scroll:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.ancestry-scroll svg{display:block}.prose .ancestry-results{display:table;width:100%;table-layout:fixed;font-size:12px}.ancestry-results th{width:75%;overflow-wrap:anywhere}.ancestry-results td{overflow-wrap:anywhere}.ancestry-lab h4{font-size:17px;margin:24px 0 10px}
+.mcmc-lab .euler-lab{margin:0;background:var(--surface);color:var(--ink);border-color:var(--rule);font-size:13px;line-height:1.6}
+.mcmc-lab .euler-lab__controls{display:flex;flex-wrap:wrap;align-items:end;gap:1rem}
+.mcmc-lab .euler-lab__controls fieldset{display:flex;flex-direction:column;gap:.3rem;padding:.5rem;min-width:0}
+.mcmc-lab .euler-lab__controls input[type=number]{width:8rem;max-width:100%;padding:.4rem;border:1px solid var(--euler-control-rule,var(--rule));background:var(--paper);color:var(--ink);border-radius:var(--euler-radius-sm,4px)}
+.mcmc-lab .euler-lab__controls label{font-size:12px}
+.mcmc-lab .lab-chart{display:block;width:100%;height:auto}
+.mcmc-lab .lab-chart--wide{min-width:680px}
+.mcmc-lab .lab-lattice{display:block;width:100%;max-width:320px;height:auto}
+.mcmc-lab .lab-scroll{max-width:100%;overflow-x:auto}
+.mcmc-lab .lab-scroll:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.mcmc-lab .lab-results{display:table;min-width:680px}
+.mcmc-lab .euler-lab__data{max-width:100%;overflow-x:auto}
+.mcmc-lab .euler-lab__table{display:table;min-width:100%;font-size:12px}
+.mcmc-lab .euler-lab__table caption{text-align:left}
+.mcmc-lab input,.mcmc-lab select{color:var(--ink);background:var(--paper)}.mcmc-lab .lab-chart{color:var(--muted)}

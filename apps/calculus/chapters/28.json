@@ -1,0 +1,533 @@
+{
+  "id": "28",
+  "title": "Numerical dynamics and capstone projects",
+  "subtitle": "How can a computed trajectory become a reproducible mathematical argument?",
+  "prerequisites": [
+    "Chapter 3: JavaScript functions, loops and floating-point error.",
+    "Chapters 5, 11 and 17: derivatives, accumulation and Taylor approximation.",
+    "Chapter 27: initial value problems and dynamical models; chapters 19 and 22 support the capstones."
+  ],
+  "objectives": [
+    "Implement Euler, improved Euler and classical Runge–Kutta 4 for an initial value problem.",
+    "Distinguish consistency, convergence and stability using formulas and step-size experiments.",
+    "Interpret systems in a phase plane and check physical or mathematical invariants.",
+    "Design a reproducible investigation in motion, optimization or accumulation."
+  ],
+  "sections": [
+    {
+      "title": "From a differential equation to an update rule",
+      "paragraphs": [
+        "An initial value problem specifies a rate $y'=f(t,y)$ and a starting state $y(t_0)=y_0$. A numerical solver replaces the continuous trajectory with states $y_n$ at times $t_n=t_0+nh$. The positive step $h$ has units of time, while $f$ has units of state per time, so $hf$ can be added to $y$. Before choosing a solver, specify the interval, the meaning and units of the state, and a region where $f$ is defined. A computer cannot repair an undefined rate or justify a physical assumption.",
+        "Euler follows the tangent at the beginning of each interval: $y_{n+1}=y_n+h f(t_n,y_n)$. Integrating the equation exactly would require the integral of the changing rate over the interval; Euler replaces that rate by its initial value. This is a left-endpoint accumulation rule. If the exact solution has a bounded second derivative, Taylor’s formula bounds the error of one step starting from exact data by a constant times $h^2$; the error can be zero for a linear exact solution. The geometrical simplicity explains both the method and its limitations.",
+        "Improved Euler here means the explicit trapezoidal method, also called Heun’s method. First predict $p=y_n+h f(t_n,y_n)$. Then correct using $y_{n+1}=y_n+\\frac h2\\bigl[f(t_n,y_n)+f(t_n+h,p)\\bigr]$. The second slope is evaluated at the predicted endpoint, not at the unknown true endpoint. Thus there is no equation to solve inside the step. Some books use “improved Euler” for the midpoint method instead; a reproducible report must give the actual formula.",
+        "For sufficiently smooth $f$ and solution, the corrected one-step defect is $O(h^3)$, compared with Euler’s $O(h^2)$. This statement concerns starting the step exactly; later steps start with accumulated errors. It does not promise that halving $h$ improves every calculation by a fixed factor, especially near a singularity, at a discontinuity, or when floating-point rounding dominates.",
+        "Start from an exact state and assume the needed smoothness. Taylor expansion at the predicted point gives $f(t+h,y+hf)=f+h(f_t+f_yf)+O(h^2)$. Heun’s update is therefore $y+hf+\\frac12h^2(f_t+f_yf)+O(h^3)$. Along the exact solution, the chain rule gives $y^{\\prime\\prime}=f_t+f_yf$, so these terms match its Taylor expansion. This is why the one-step defect is $O(h^3)$.",
+        "The exact step identity $y(t+h)-y(t)=\\int_t^{t+h}f(s,y(s))\\,ds$ explains Euler's left-slope approximation from paragraph 2. If $y^{\\prime\\prime}$ is merely bounded on the step, the exact-data local defect is bounded by a constant times $h^2$. If $y^{\\prime\\prime}$ is continuous at $t$, Taylor's formula gives the more precise defect $h^2y^{\\prime\\prime}(t)/2+o(h^2)$. An $O(h^3)$ remainder after that leading term needs stronger regularity, for example a locally Lipschitz second derivative. Later inputs contain inherited error, so this local calculation alone cannot establish a fixed-interval global bound; the next lesson develops the propagation sum.",
+        "The time grid must hit the requested endpoint. If $T-t_0$ is not an integer multiple of $h$, a solver can shorten its final step to $T$ or choose $N$ steps with $h=(T-t_0)/N$. Comparing runs that end at slightly different times confounds numerical error with actual evolution of the solution. In a reproducible study, record $N$ and the resulting $h$, not only a rounded display value. For a model with events, such as impact with the ground, the event time may fall between grid points and requires interpolation or a dedicated event solver.",
+        "For $y^{\\prime}=t+y$, $y(0)=1$ and $h=0.1$, Heun predicts $p=1.1$, then uses the predicted-end slope $0.1+1.1=1.2$ to return $1+0.05(1+1.2)=1.11$. Evaluating the second slope at the corrected unknown instead would create an implicit trapezoidal equation. This worked step tests the method’s stage placement; the chapter-practice task retains its own saved identity.",
+        "Local error order is measured when a step begins at the exact solution value; global error includes errors inherited from earlier steps. This distinction explains why an $O(h^2)$ local defect for Euler yields only $O(h)$ global accuracy on a fixed interval. An instability can amplify inherited errors so strongly that the expected convergence pattern is not visible at coarse steps. Before estimating an order from data, use a range of steps small enough to enter the method's stable, smooth asymptotic regime.",
+        "For vector states, the update applies to the whole vector at once. If $y=(x,v)$, Euler forms $(x_{\\mathrm{new}},v_{\\mathrm{new}})=(x+h f_x(t,x,v),v+h f_v(t,x,v))$ using the same old state for both components. Accidentally computing $v_{\\mathrm{new}}$ from $x_{\\mathrm{new}}$ creates a different sequential method, which may have different stability or conservation properties. This distinction is not merely a coding style issue. Write the mathematical stages first, then implement each stage as an immutable vector or simultaneous assignment.",
+        "The exact integral identity also gives a way to evaluate a one-step rule's defect. Insert the exact value $y(t)$ into the numerical formula and subtract the exact $y(t+h)$. For Euler, Taylor expansion gives a leading discrepancy proportional to $h^2y^{\\prime\\prime}(t)/2$ when enough derivatives exist. If $y^{\\prime\\prime}$ is large, even a nominally small step can produce a visible error. Heun uses a predicted endpoint slope to cancel that leading term under smoothness, leaving a higher-order defect. This analysis explains the method design rather than treating order labels as unexplained badges."
+      ],
+      "formula": "Euler: yₙ₊₁ = yₙ + hf(tₙ,yₙ). Heun: p = yₙ + hf(tₙ,yₙ), yₙ₊₁ = yₙ + h[f(tₙ,yₙ)+f(tₙ+h,p)]/2.",
+      "formulaTex": "\\begin{aligned}\\text{Euler: }&y_{n+1}=y_n+h f(t_n,y_n),\\\\ \\text{Heun: }&p=y_n+h f(t_n,y_n),\\quad y_{n+1}=y_n+\\frac h2\\bigl[f(t_n,y_n)+f(t_n+h,p)\\bigr].\\end{aligned}"
+    },
+    {
+      "title": "Four slopes and the meaning of order",
+      "paragraphs": [
+        "Classical Runge–Kutta 4, abbreviated RK4, combines four slopes. Define $k_1=f(t_n,y_n)$, $k_2=f(t_n+h/2,y_n+hk_1/2)$, $k_3=f(t_n+h/2,y_n+hk_2/2)$, and $k_4=f(t_n+h,y_n+hk_3)$. Then add $h(k_1+2k_2+2k_3+k_4)/6$ to $y_n$. Each $k$ is a rate, not an increment; mixing these two conventions inserts an extra factor of $h$. The weighted average matches the Taylor expansion through fourth order without asking the programmer to calculate higher derivatives.",
+        "Under sufficient smoothness on a fixed finite interval, and a Lipschitz bound in the state variable on a region containing the relevant trajectories, Euler, Heun and RK4 have global errors $O(h)$, $O(h^2)$ and $O(h^4)$, respectively. Their unscaled one-step defects are $O(h^2)$, $O(h^3)$ and $O(h^5)$. Here $O(h^p)$ means an error bounded by $Ch^p$ for sufficiently small $h$, with $C$ independent of $h$ but dependent on the problem and interval. A high order says how error eventually scales; it does not say the constant is small.",
+        "Let $e_n$ be the error at a common grid time. Under a state Lipschitz bound and uniform local defect $Dh^{p+1}$ on a fixed interval, a one-step method with stability factor at most $1+Ch$ gives $|e_{n+1}|\\le(1+Ch)|e_n|+Dh^{p+1}$. The local propagation lemma below sums these inherited defects. With exact initial data and $N=(T-t_0)/h$, it yields a fixed-interval $O(h^p)$ bound. These constants require a common region containing exact and numerical states for all sufficiently small steps; the argument does not certify an arbitrary coarse run.",
+        "RK4 costs four rate evaluations per step, Heun two and Euler one. A fair comparison reports both error and work. A complicated $f$ may dominate runtime, while a tiny example may mostly measure browser overhead. For a first investigation, count evaluations instead of treating an unstable timing measurement as evidence of mathematical efficiency.",
+        "For $y^{\\prime}=\\lambda y$ with constant $\\lambda$, every explicit Runge–Kutta method produces $y_{n+1}=R(h\\lambda)y_n$ for a polynomial $R$. Classical RK4's polynomial matches the first five terms of $e^z$ through $z^4$. This explains its high accuracy when $|z|$ is small, but a polynomial cannot approximate $e^z$ uniformly across the entire negative real axis. For sufficiently large negative $z$, $|R(z)|$ grows and the method becomes unstable. High order does not remove the need to consider step-size restrictions.",
+        "A convergence table should include errors at a common final time and ratios between successive refinements. If error behaves like $Ch^p$, halving $h$ divides it approximately by $2^p$, so Euler ratios approach two, Heun four, and RK4 sixteen. The ratios are approximate because higher-order terms and floating-point effects remain. If the exact solution is known, use it directly; otherwise successive differences can estimate order only after the asymptotic regime is reached.",
+        "Work must be counted as well as error. For $N$ fixed steps, Euler evaluates $f$ about $N$ times, Heun about $2N$, and classical RK4 about $4N$. If a fourth-order method reaches a requested tolerance with many fewer steps, it can use fewer total evaluations despite its higher cost per step. The tradeoff depends on the equation, tolerance, stability, and implementation overhead. A fair capstone report includes evaluation count or wall time under a controlled setup, not just the number of plotted points.",
+        "RK4 stages depend on one another. $k_2$ uses the state shifted by $hk_1/2$, $k_3$ uses $hk_2/2$, and $k_4$ uses $hk_3$. Replacing all three intermediate states with the Euler prediction produces a different formula with different accuracy. Likewise the final weighted average must use $1,2,2,1$ coefficients divided by six. A simple exact test equation such as $y^{\\prime}=y$ can expose stage mistakes by comparing one-step output with $e^h$ for shrinking $h$.",
+        "Order results need smoothness. If $f$ or the exact trajectory has a kink, a discontinuity, or an event that is not aligned with the grid, the expected global rate may degrade. For a piecewise forcing that switches at time $\\tau$, splitting the integration interval at $\\tau$ can restore clean behavior on each smooth piece. A high-order method cannot infer an unreported jump from evaluations that miss it. Document discontinuities and event handling alongside the method name.",
+        "A ratio table should be read cautiously near floating-point limits. As $h$ shrinks, truncation error falls, but more steps are taken and subtraction of nearby values can expose roundoff. Endpoint errors may stop decreasing or fluctuate, especially when the exact value is extremely small compared with intermediate values. Plotting $\\log(\\text{error})$ against $\\log h$ can reveal a straight asymptotic section whose slope estimates order, followed by a roundoff floor. Report the range used for the estimate and avoid fitting an order to only two noisy points."
+      ],
+      "formula": "RK4: yₙ₊₁ = yₙ + h(k₁ + 2k₂ + 2k₃ + k₄)/6.",
+      "formulaTex": "\\begin{aligned}k_1&=f(t_n,y_n),&k_2&=f\\left(t_n+\\frac h2,y_n+\\frac h2k_1\\right),\\\\ k_3&=f\\left(t_n+\\frac h2,y_n+\\frac h2k_2\\right),&k_4&=f(t_n+h,y_n+hk_3),\\\\ y_{n+1}&=y_n+\\frac h6(k_1+2k_2+2k_3+k_4),&&h>0.\\end{aligned}",
+      "theorems": [
+        {
+          "title": "How local defects accumulate on a fixed interval",
+          "statement": "Suppose the $E_n$ are nonnegative errors, $E_0=0$, and $E_{n+1}\\le(1+Ch)E_n+Dh^{p+1}$ for $0\\le n<N$, with $C,D\\ge0$, $p>0$, $h>0$, integer $N\\ge1$, and $Nh=T-t_0>0$. Then $E_N=O(h^p)$ as $h\\to0$ on that fixed interval.",
+          "equationTex": "E_N\\le Dh^{p+1}\\sum_{j=0}^{N-1}(1+Ch)^j\\le D(T-t_0)e^{C(T-t_0)}h^p",
+          "proof": [
+            "Apply the recurrence repeatedly. The first defect is multiplied by $(1+Ch)^{N-1}$ before the last time; the next by one fewer factor; the final defect is unmultiplied. Induction gives $E_N\\le Dh^{p+1}\\sum_{j=0}^{N-1}(1+Ch)^j$. This finite sum uses no assumed global-order theorem.",
+            "Every factor is at most $(1+Ch)^N\\le e^{CNh}=e^{C(T-t_0)}$, because $1+x\\le e^x$ for $x\\ge0$. There are $N=(T-t_0)/h$ terms, so $E_N\\le D(T-t_0)e^{C(T-t_0)}h^p$. The same bound holds at earlier grid points by replacing $N$ with their index. A nonzero initial error adds at most $e^{C(T-t_0)}E_0$; it must itself be controlled to claim order $p$.",
+            "For Euler, Heun, and RK4 the required local defects are respectively orders $h^2,h^3,h^5$ under their stated smoothness assumptions, giving global orders one, two, and four when a uniform propagation bound also holds. This lemma transfers such local estimates; it does not prove the separate local defect calculations or stability for a method on every problem."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Stability is a separate question",
+      "paragraphs": [
+        "Consider decay $y'=-ay$ with $a>0$ and $y(0)=1$. The exact solution $e^{-at}$ is positive and decreases. Euler instead multiplies the current state by $1-ah$. Numerical disturbances decay only if $|1-ah|<1$, or $0<ah<2$. For $1<ah<2$ the values alternate in sign while approaching zero, so stability alone does not preserve positivity. At $ah=2$ the values alternate without decaying; beyond $2$ they grow in magnitude although the true solution decays.",
+        "Absolute stability tests a method on $y^{\\prime}=\\lambda y$ through its amplification factor $R(h\\lambda)$. Euler has $R(z)=1+z$; Heun has $R(z)=1+z+z^2/2$; classical RK4 has $R(z)=1+z+z^2/2+z^3/6+z^4/24$. Decay modes require $|R(z)|<1$. Heun, like Euler, has $0<ah<2$ on the negative real axis. Higher order therefore need not enlarge this stability interval. RK4 also has a bounded stability region: arbitrarily large steps are unsafe.",
+        "A system can contain a rapidly decaying component and a slowly changing component. The fast component may force an explicit method to take very small steps even when the visible solution looks smooth. This is a basic sign of stiffness. An implicit step can address some stability restrictions, as the scalar decay comparison later in this chapter shows, but its equation may be costly to solve in a nonlinear system. Distinguish a stability restriction from a requested accuracy and avoid claiming convergence merely because plotted points form a smooth line.",
+        "For real decay, read the multiplier table from the first paragraph: $0<ah<1$ gives strictly positive shrinking iterates for positive initial data; $ah=1$ sends the state to zero in one step; $1<ah<2$ gives alternating signs with shrinking magnitude; $ah=2$ alternates without decay. These boundaries distinguish mathematical magnitude stability from a model’s positivity requirement. The exact solution remains strictly positive for all finite $t$.",
+        "At $ah>2$ the multiplier has magnitude greater than one, so errors and iterates grow. For $a=10$, $h=0.2$ is neutral, while $h=0.25$ gives multiplier $-1.5$. The later fast-decay case study measures accuracy even where $0<ah<1$ and the sign is right; the stability inequality alone supplies no finite-step tolerance.",
+        "An implicit Euler step for $y^{\\prime}=-ay$ solves $y_{n+1}=y_n-ah y_{n+1}$, giving multiplier $1/(1+ah)$. This remains between zero and one for every $h>0$, so it preserves positive decay on this test equation. The tradeoff is that a general implicit step requires solving an equation at each time point. Stiff systems often justify that cost. Introducing this comparison makes clear that numerical stability is a property of the method and step size, not solely of the differential equation.",
+        "Absolute stability is diagnosed on linear modes, but a nonlinear problem can change its local behavior as the state moves. Linearizing near a trajectory may reveal a large negative eigenvalue and a restrictive explicit step size. A fixed $h$ chosen from early behavior may become unsuitable later. Adaptive solvers estimate local error and adjust $h$, yet an error controller alone may still struggle with stiff modes if the underlying method has a small stability region. Method choice and step control are distinct decisions.",
+        "For an oscillatory mode $y^{\\prime}=i\\omega y$, Euler's amplification magnitude is $|1+i\\omega h|=\\sqrt{1+\\omega^2h^2}>1$ for every nonzero $h$. Thus its numerical amplitude grows even though the exact complex solution has constant magnitude. The real oscillator system $x^{\\prime}=v$, $v^{\\prime}=-\\omega^2x$ exhibits the same artificial energy growth. This is an especially clear example where reducing $h$ slows the drift but does not make Euler exactly energy-preserving. Specialized geometric integrators can respect some invariants better.",
+        "Stability is sometimes assessed through an amplification matrix for systems. Applied to $u^{\\prime}=Au$, Euler updates $U_{n+1}=(I+hA)U_n$. An eigenvector with eigenvalue $\\lambda$ is multiplied by $1+h\\lambda$. A stiff fast-decay eigenvalue can therefore restrict the step. However, eventual decay and decrease at every step are different statements about a vector. To make that distinction testable, use dimensionless coordinates and the Euclidean norm in the following triangular system; changing coordinate scales would change that norm.",
+        "Consider $x^{\\prime}=-x+4y$, $y^{\\prime}=-y$, with $u(0)=(x(0),y(0))=(0,1)$. Its matrix has the repeated eigenvalue $-1$. Solve the second equation first: $y=e^{-t}$. Multiplying $x^{\\prime}+x=4e^{-t}$ by $e^t$ gives $(e^tx)^{\\prime}=4$, hence $x=4te^{-t}$. Thus $u(t)=e^{-t}(4t,1)$ tends to zero, but its initial norm is one and $\\|u(1)\\|_2=\\sqrt{17}/e\\approx1.516806>1$. The exact differential equation itself has transient amplification. This is not yet numerical error. The matrix has only one independent eigenvector, so it cannot be described as two independent scalar decay modes.",
+        "Now predict Euler's first two states at $h=1$ before calculating them. Its simultaneous update is $X_{n+1}=4Y_n$, $Y_{n+1}=0$. From $(0,1)$ it produces $U_1=(4,0)$ and $U_2=(0,0)$, and then remains zero. Both amplification eigenvalues are zero, so eventual numerical decay holds, yet the first numerical norm is four. Compare states at the same times: the error at $t=1$ is $(4-4/e,-1/e)$, and at $t=2$ the exact state is $e^{-2}(8,1)$, not zero. Reaching zero in two steps is false extinction of a nonzero exact state, not an accuracy certificate.",
+        "For a general Euler step here, put $q=1-h$. If $q\\ne0$, induction gives $U_n=(4nhq^{n-1},q^n)$ for $n\\ge1$. The factor $nq^{n-1}$ explains how an early transient can coexist with decay when $|q|<1$; the case $q=0$ was calculated directly above. All initial states tend to zero for $0<h<2$, but that interval does not make every step decrease the Euclidean norm. The optional theorem below proves a sharper distinction for a changed family. Its matrix-norm step uses the standard link between symmetric-matrix eigenvalues and maximum Euclidean amplification; the explicit trajectories above need only integrating factors and simultaneous updates. Attempt the two optional transfer tasks before revealing their hints or solutions."
+      ],
+      "comparisonTable": {
+        "caption": "Triangular-system states at the same times: exact amplification and Euler error",
+        "headers": [
+          "Time",
+          "Exact state",
+          "Exact Euclidean norm",
+          "Euler state, h = 1",
+          "Euler norm"
+        ],
+        "rows": [
+          [
+            "$0$",
+            "$(0,1)$",
+            "$1$",
+            "$(0,1)$",
+            "$1$"
+          ],
+          [
+            "$1$",
+            "$e^{-1}(4,1)$",
+            "$\\sqrt{17}/e$",
+            "$(4,0)$",
+            "$4$"
+          ],
+          [
+            "$2$",
+            "$e^{-2}(8,1)$",
+            "$\\sqrt{65}/e^2$",
+            "$(0,0)$",
+            "$0$"
+          ]
+        ]
+      },
+      "formula": "Decay test for Euler: yₙ = (1−ah)ⁿy₀; asymptotic decay requires 0 < ah < 2.",
+      "formulaTex": "\\begin{gathered}y^{\\prime}=-ay,\\quad a>0,\\quad y_0>0,\\quad t_n=nh,\\\\ y_n=(1-ah)^ny_0,\\quad |1-ah|<1\\iff0<ah<2\\qquad(h>0).\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Euler can be stable while remaining inaccurate",
+          "statement": "For $y^{\\prime}=-ay$ with $a>0$ and step $h>0$, forward Euler has multiplier $1-ah$. Magnitude stability requires $0<ah<2$, but its finite-step error must be checked separately.",
+          "equationTex": "y_n=(1-ah)^ny_0,\\qquad y(t_n)=e^{-at_n}y_0\\quad\\text{with }t_n=nh",
+          "proof": [
+            "At equally spaced times $t_n=nh$, the Euler recurrence is $y_{n+1}=(1-ah)y_n$, so repeated substitution gives $y_n=(1-ah)^ny_0$. The exact solution at the same time is $e^{-anh}y_0$. If $|1-ah|<1$, numerical magnitudes decay as $n$ grows; solving the inequality gives $0<ah<2$. For $1<ah<2$, values alternate sign, so a physically positive decay has a qualitatively wrong numerical trajectory even though its magnitude shrinks.",
+            "For $0<ah<1$, $1-ah<e^{-ah}$, hence a positive Euler solution lies below the exact one after each positive number of steps. At a fixed physical time $t=nh$, expand $\\log(1-ah)=-ah-a^2h^2/2+O(h^3)$ for small $h$. Multiplying by $n=t/h$ gives $n\\log(1-ah)=-at-(a^2t/2)h+O(h^2)$, so the global discrepancy decreases on the order of $h$ as the step shrinks. This asymptotic statement does not provide a certified error for one coarse step.",
+            "For $a=10$ and $h=0.05$, the multiplier is $0.5$, which is positive and stable. At $t=0.1$ Euler returns $0.25y_0$, while the exact solution is $e^{-1}y_0\\approx0.367879y_0$. Stability is a statement about long-run recurrence behavior, not a guarantee of the accuracy required by a particular model."
+          ]
+        },
+        {
+          "title": "Eventual decay and one-step nonexpansion are different guarantees",
+          "statement": "Use dimensionless real coordinates and $u^{\\prime}=Au$, where $A=\\begin{pmatrix}-a&b\\\\0&-a\\end{pmatrix}$, $a>0$, $b\\ge0$. Every exact solution tends to zero. Exact Euclidean norms are nonincreasing for every initial state precisely when $b\\le2a$. Euler iterates tend to zero for every initial state precisely when $0<h<2/a$. Its Euclidean norm is nonincreasing in every step for every state precisely when $b<2a$ and $0<h\\le(2a-b)/a^2$.",
+          "equationTex": "\\begin{gathered}E=\\tfrac12(x^2+y^2),\\quad E^{\\prime}=-a(x^2+y^2)+bxy,\\\\ B=I+hA=\\begin{pmatrix}1-ah&bh\\\\0&1-ah\\end{pmatrix},\\quad h>0.\\end{gathered}",
+          "proof": [
+            "Successive integrating factors give $y(t)=e^{-at}y_0$ and $x(t)=e^{-at}(x_0+bty_0)$. Both approach zero as $t\\to\\infty$ for every fixed initial state. Differentiate $E$: $E^{\\prime}=-a(x^2+y^2)+bxy$. Since $2xy\\le x^2+y^2$ and $b\\ge0$, $b\\le2a$ makes this derivative nonpositive at every state. If $b>2a$, choosing the initial state $(1,1)$ gives $E^{\\prime}(0)=b-2a>0$. This proves the exact all-initial-state criterion, not just the behavior of one selected trajectory.",
+            "Write $q=1-ah$ and $c=bh$. For $q\\ne0$, repeated Euler multiplication gives $B^n=\\begin{pmatrix}q^n&ncq^{n-1}\\\\0&q^n\\end{pmatrix}$. If $|q|<1$, both entries tend to zero; when $q=0$, $B^2=0$. Conversely, the initial vector $(1,0)$ retains magnitude $|q|^n$, so all-state decay fails if $|q|\\ge1$. Hence the asymptotic interval is exactly $0<h<2/a$.",
+            "To check every possible one-step input, define $\\|B\\|_2=\\max_{\\|v\\|_2=1}\\|Bv\\|_2$. The largest eigenvalue of the symmetric matrix $B^TB$ is $(2q^2+c^2+c\\sqrt{c^2+4q^2})/2$; this follows from its trace $2q^2+c^2$ and determinant $q^4$. Taking its square root gives $\\|B\\|_2=(\\sqrt{c^2+4q^2}+c)/2$. For $c\\ge0$, $\\|B\\|_2\\le1$ is equivalent to $q^2+c\\le1$: one direction follows by squaring $\\sqrt{c^2+4q^2}\\le2-c$, and the reverse is valid because $q^2+c\\le1$ also ensures $c\\le1$. Substituting $q,c$ gives $a^2h\\le2a-b$, the claimed sharper bound.",
+            "At $b=0,h=2/a$, Euler is $B=-I$: it is nonexpansive but does not approach zero for nonzero data. At $b=2a$, exact norms never increase, but no positive Euler step is nonexpansive. For the unit vector $v=(1,1)/\\sqrt2$, $\\|Bv\\|_2^2=1+a^2h^2>1$. These endpoints keep one-step nonexpansion distinct from asymptotic decay. The criteria concern the stated norm, not accuracy at a specified time."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "transient-growth",
+        "title": "Transfer: which kind of stability does the evidence establish?",
+        "introduction": "These two optional tasks extend the lesson beyond scalar decay. Make your own attempt before consulting hints or solutions. State the norm and time horizon in every conclusion.",
+        "tasks": [
+          {
+            "title": "A changed coupling with an exact benchmark",
+            "question": "Use dimensionless $x^{\\prime}=-2x+10y$, $y^{\\prime}=-2y$, $(x(0),y(0))=(0,1)$. Derive the exact state and show that its Euclidean norm exceeds its initial norm at $t=1/2$. For Euler with $h=1/2$, compute the first two states, both amplification eigenvalues, and the error vector at $t=1/2$. Does eventual numerical decay establish either norm decrease at every step or accuracy?",
+            "hint": "Solve $y$ first and multiply $x^{\\prime}+2x=10e^{-2t}$ by $e^{2t}$. Euler uses both old coordinates. Compare $U_1$ with $u(1/2)$, not with $u(1)$.",
+            "solution": "The exact solution is $u(t)=e^{-2t}(10t,1)$. Its initial norm is one, while $u(1/2)=e^{-1}(5,1)$ has norm $\\sqrt{26}/e>1$. For instance, $e<3$ and $\\sqrt{26}>5$ give a strict comparison. Euler at $h=1/2$ has $B=\\begin{pmatrix}0&5\\\\0&0\\end{pmatrix}$, so $U_1=(5,0)$ and $U_2=(0,0)$; both eigenvalues are zero. The error at $t=1/2$ is $(5-5/e,-1/e)$, whose norm is $\\sqrt{25(1-1/e)^2+e^{-2}}$. At $t=1$ the exact state is $e^{-2}(10,1)$ and is still nonzero. The exact transient is real behavior of this equation; Euler adds a large discrepancy and false extinction. Eventual numerical decay establishes neither one-step norm decrease nor finite-time accuracy."
+          },
+          {
+            "title": "Continuous energy decrease can fail after discretization",
+            "question": "For dimensionless $x^{\\prime}=-x+2y$, $y^{\\prime}=-y$, prove that every exact Euclidean norm is nonincreasing. Starting instead from $v=(1,1)/\\sqrt2$, show that for every step size $h>0$, the first Euler step from $v$ increases its norm. Give Euler's asymptotic-decay interval. Finally change the coupling from $2$ to $1$: find the all-state nonexpansion interval, and exhibit an initial vector showing why $h=3/2$ is asymptotically decaying but not nonexpansive. Explain what must be checked before calling a method stable.",
+            "hint": "At coupling $2$, use $E^{\\prime}=-(x-y)^2$ and calculate $Bv$ directly. For coupling $1$, the theorem gives $h\\le1$. At $h=3/2$, try $(0,1)$.",
+            "solution": "At coupling $2$, $E^{\\prime}=-(x-y)^2\\le0$ for every exact state. For $v=(1,1)/\\sqrt2$, Euler gives $Bv=(1+h,1-h)/\\sqrt2$, so $\\|Bv\\|_2^2=1+h^2>1$ for every $h>0$. Nevertheless all Euler states tend to zero for $0<h<2$. When the coupling is $1$, the exact all-state Euler nonexpansion interval is $0<h\\le1$, while the asymptotic-decay interval remains $0<h<2$. At $h=3/2$, $B(0,1)=(3/2,-1/2)$ has norm $\\sqrt{5/2}>1$, so nonexpansion fails even though both eigenvalues are $-1/2$ and all iterates eventually decay. Specify the equation, method, step, norm, and whether the claim concerns a single step, the long run, or a finite-time error tolerance."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Systems and the phase plane",
+      "paragraphs": [
+        "A scalar rule extends to a vector state by applying every stage to the entire vector. For a mass on a spring without damping, write $x'=v$ and $v'=-\\omega^2x$, where $x$ is displacement in metres, $v$ is velocity in metres per second and $\\omega$ has units of inverse seconds. The state $(x,v)$ is a point in a phase plane. A trajectory there shows the relation between displacement and velocity rather than either variable against time. Its axes have different units; an apparent angle or circular shape depends on the chosen scaling.",
+        "For a physical time step $h$, Euler updates $x_{n+1}=x_n+hv_n$ and $v_{n+1}=v_n-h\\omega^2x_n$. Both expressions must use the old state. Updating $x$ first and then using that new $x$ to update $v$ defines a different method. With $E_n=m(v_n^2+\\omega^2x_n^2)/2$, expanding squares gives $E_{n+1}=(1+\\omega^2h^2)E_n$. The exact energy is constant, but Euler creates an outward spiral when plotting $v/\\omega$ against displacement. This warns that a short-time accurate solver may misrepresent long-time dynamics.",
+        "For general $\\omega$, the conserved energy is $E=m(v^2+\\omega^2x^2)/2$, with units of joules. Record its drift along with the trajectory. Damping should reduce the appropriate energy; forcing may increase it. An invariant check is meaningful only after deriving the invariant from the model. RK4 usually reduces drift on short fixed intervals as $h$ decreases, but it does not exactly conserve this energy and is not automatically suitable for arbitrarily long simulations.",
+        "Expand the two old-state Euler updates above: $(v-h\\omega^2x)^2+\\omega^2(x+hv)^2=(1+\\omega^2h^2)(v^2+\\omega^2x^2)$ because the cross terms cancel. Thus $E_N=(1+\\omega^2h^2)^NE_0$. For $m,\\omega>0$, fixed $h>0$ and nonzero initial state, energy grows with every step; for a fixed final time $T=Nh$ and $h\\to0$, the factor approaches one. This is a numerical energy calculation, not a statement that the mass moves in a physical circle.",
+        "A phase-plane plot uses $x$ on one axis and $v$ on the other. The exact undamped oscillator traces a circle after appropriate scaling; Euler points spiral outward because of artificial energy growth. The mass itself moves along one spatial coordinate $x$, not around the phase-plane circle. Distinguishing a state-space trajectory from a physical path prevents a common interpretation error. A velocity-versus-position plot adds information about timing and energy that a displacement-versus-time graph alone may hide.",
+        "An invariant is a quantity known to be constant along exact solutions. For $y^{\\prime}=-y$ and $A^{\\prime}=y$ with $y(0)=1$, $A(0)=0$, the sum $y+A$ has derivative zero and remains one. The exact solution is $y=e^{-t}$, $A=1-e^{-t}$. A numerical method can check its drift in $y+A$ in addition to comparing each component with the exact solution. Some methods preserve a linear invariant exactly because their stages sum to zero; others may lose it through implementation errors or inconsistent updates.",
+        "A dissipative system has an inequality rather than a strict invariant. For a damped oscillator without forcing, energy must not increase. A numerical curve can violate that inequality if the step is too large or the method is unsuitable. Checking physical bounds, positivity, mass balance, and energy trends gives independent diagnostics. These checks are especially valuable when no exact solution is known, though satisfying them does not prove small error in every state variable.",
+        "For a vector ODE, Jacobian eigenvalues near an equilibrium suggest time scales. A large negative real part corresponds to fast decay; a small negative real part to slow decay; imaginary parts to oscillation. An explicit solver may have to resolve the fast mode for stability even when the quantity of interest is dominated by slow motion. A phase-plane picture can reveal qualitative behavior, but numerical step selection should use quantitative stability and error evidence.",
+        "The oscillator also illustrates long-time versus fixed-time claims. First-order convergence says Euler approaches the exact solution on any fixed finite interval as $h\\to0$ under the usual hypotheses. It does not say that one chosen $h$ follows the exact closed orbit forever. In fact, for $m,\\omega>0$ and nonzero initial state, the physical energy $E_N=(1+\\omega^2h^2)^NE_0$ grows with every step at fixed $h>0$. A numerical method suitable for a short forecast may be unsuitable for many oscillation periods. A capstone should state its time horizon alongside its tolerance and any physical invariants it intends to preserve."
+      ],
+      "formula": "Spring system: (x′,v′) = (v,−ω²x); undamped energy E = m(v²+ω²x²)/2.",
+      "formulaTex": "\\begin{gathered}(x^{\\prime},v^{\\prime})=(v,-\\omega^2x),\\qquad m,\\omega>0,\\\\ E=\\frac m2(v^2+\\omega^2x^2)=\\text{constant}\\quad\\text{(undamped)},\\\\ [x]=\\mathrm m,\\quad[v]=\\mathrm{m\\,s^{-1}},\\quad[m]=\\mathrm{kg},\\\\ [\\omega]=\\mathrm{s^{-1}},\\quad[E]=\\mathrm J.\\end{gathered}"
+    },
+    {
+      "title": "Step-size evidence and a reproducible capstone",
+      "paragraphs": [
+        "Run a step-size study at a common final time $T$, choosing $N$, $2N$ and $4N$ steps so every run ends at $T$ exactly in its mathematical grid. If an exact solution is available, compare endpoint errors and preferably the largest error over all grid points. For error behaving like $Ch^p$, the ratio $\\operatorname{error}(h)/\\operatorname{error}(h/2)$ approaches $2^p$. A ratio near $16$ supports fourth-order behavior but is experimental evidence, not a proof. A single endpoint can have accidental cancellation; a whole trajectory gives a stronger check.",
+        "Without an exact solution, compare successive endpoint approximations. Let $y_h(T)$ denote the endpoint approximation at the same final time $T$ using step size $h$. In the asymptotic regime, $|y_h(T)-y_{h/2}(T)|/(2^p-1)$ estimates the error in the finer result. This Richardson estimate assumes a leading error term with a stable coefficient, adequate smoothness and negligible rounding. Agreement may be misleading if all runs share a wrong initial condition, omit a force, or miss an event. Use a known special case and an independent invariant whenever possible.",
+        "A motion capstone can model a falling object with drag: $x^{\\prime}=v$ and $v^{\\prime}=-g-cv|v|/m$ when upward is positive. State initial height, mass, drag units and the valid time interval. Compare $c=0$ with $x(t)=x_0+v_0t-gt^2/2$, then investigate drag. If the object reaches the ground between samples, the crossing time needs interpolation or a smaller step; reporting the first negative height as an exact impact time conceals a discretization error.",
+        "An optimization capstone can study the continuous gradient flow $q^{\\prime}=-\\nabla F(q)$ for a dimensionless objective and scaled artificial time. Along a differentiable trajectory, $dF/dt=-\\|\\nabla F\\|^2\\leq0$. Euler becomes gradient descent, $q_{n+1}=q_n-h\\nabla F(q_n)$, but large $h$ can increase $F$. Compare the continuous monotonicity statement with computed objective values, and test a quadratic with a known minimizer before exploring a nonlinear landscape. Reaching a small gradient does not alone certify a global minimum.",
+        "An accumulation capstone can add $A^{\\prime}=r(t,y)$, $A(0)=0$ to any state model and integrate both simultaneously. If $r$ is a flow in litres per minute, $A$ is accumulated litres. Compare a case with a known integral and explain whether $r$ may change sign. A publishable investigation should include the question, equations and assumptions, parameter values and units, initial data, interval, exact update formulas, editable code, step-size table, checks and a conclusion limited by the evidence. Save the actual source and output together; a screenshot alone cannot reproduce a computation.",
+        "A capstone should pose a mathematical question before producing plots. For a falling object, one might ask how drag changes impact time and maximum speed. Specify upward-positive coordinates, the ground at $x=0$, initial height and velocity, $g$, mass, and drag coefficient with units. Then choose a numerical method, locate the event $x=0$, and compare the zero-drag run with its exact parabola. A plot without a stated question or benchmark is difficult to evaluate.",
+        "Use one reproducible step-study record: state $f$, initial data and units, interval and event rule; choose $N,2N,4N$ on the same final time $T$; record method, step formula, values, invariant checks and error or successive differences in a table. Change one input at a time. The falling-body benchmark above tests the zero-drag formula, while the accumulation and gradient-flow cases below test separate invariants. Save source and output together so the reported result can be repeated.",
+        "An accumulation state $A^{\\prime}=r(t,y)$ can be solved jointly with $y$. For $y^{\\prime}=-y$ and $r=y$, the exact $A=1-e^{-t}$ gives a benchmark and the invariant $y+A=1$. If $A$ represents total discharged volume, its units are volume while $r$ has volume/time units. A common coding error is to update $A$ using a newly updated $y$ while updating $y$ with the old value; that creates a mixed-stage method. A simultaneous vector update avoids the mismatch.",
+        "Gradient flow $q^{\\prime}=-\\nabla F(q)$ has $dF/dt=-\\|\\nabla F\\|^2$ along exact differentiable trajectories. For $F=(x^2+4y^2)/2$, this predicts nonincreasing objective and different time scales in $x$ and $y$. Euler's discrete gradient descent needs a sufficiently small step to preserve that decrease. A continuous dissipation identity is not an automatic guarantee for a discrete algorithm. The capstone can compare exact flow, Euler updates, and a more accurate integrator while reporting objective values and step restrictions.",
+        "A capstone conclusion should separate established facts from observed behavior. An exact benchmark proves a numerical error at sampled times; a theorem may establish a stability interval for a test equation; a grid refinement only suggests an error rate under assumptions. If a physical model's parameters came from data, uncertainty in those parameters can dominate numerical error. Report both sources when possible. A graph with smooth curves and many points is not a substitute for model validation, error analysis, and explicit acceptance criteria.",
+        "When an exact solution is unavailable, a capstone can use several complementary checks: step refinement at fixed final time, a higher-order reference method, conservation or dissipation laws, and bounds implied by the model. Agreement among methods is finite evidence consistent with convergence under the smoothness and stability hypotheses, but it does not prove convergence: methods can share a modeling error or all miss a sharp event. Record the implementation and parameter choices so another reader can reproduce the result. A good numerical conclusion states what is supported by a theorem, what is observed in computation, and what remains an assumption about the physical model.",
+        "For a dimensionless stress test, use $y^{\\prime}=g_m(t)=\\sin^2(m\\pi t)$, $y(0)=0$, on $0\\le t\\le1$, with positive integer $m$. The independent exact solution is $y(t)=t/2-\\sin(2m\\pi t)/(4m\\pi)$, so $y(1)=1/2$. Here Heun averages the two endpoint rates of each step because the forcing does not depend on the state.",
+        "On $K$ equal steps, Heun gives $Y_K=K^{-1}\\sum_{j=0}^{K-1}\\sin^2(m\\pi j/K)$. Set $\\theta=2m\\pi/K$. If $K\\mid m$, every sampled rate vanishes, so $Y_K=0$. Otherwise $\\sin(\\theta/2)\\ne0$. Multiply $S=\\sum_{j=0}^{K-1}\\cos(j\\theta)$ by $2\\sin(\\theta/2)$ and use $2\\sin(\\theta/2)\\cos(j\\theta)=\\sin((j+1/2)\\theta)-\\sin((j-1/2)\\theta)$. The sum telescopes to $\\sin((K-1/2)\\theta)+\\sin(\\theta/2)=0$, since $K\\theta=2m\\pi$. Thus $S=0$; $\\sin^2u=(1-\\cos2u)/2$ gives $Y_K=1/2$. These are exact arithmetic certificates, applied separately to $K=N,2N,4N$.",
+        "Endpoint agreement does not determine the path. To inspect displayed Heun states, join adjacent grid states by straight segments and call the resulting function $L_K(t)$; this is a display convention, not a Heun dense-output formula. At $t_*=1/(4m)$, compare $L_K(t_*)$ with the independent value $y(t_*)=1/(8m)-1/(4m\\pi)>0$. Locate the containing grid panel for each $K$ before interpolating. A nonzero gap is a point witness, not a global error bound.",
+        "Start Figure 28.4 with $m=16,N=4$, predict the three endpoints, then change the base grid to $N=5$ and switch from forcing to trajectory. The changed endpoints are all $1/2$, yet the joined paths have a nonzero interior gap at the displayed probe. Record the exact divisibility certificates, rounded stage values, and reference separately. When successive endpoint differences vanish, their observed-order ratio is undefined; a zero Richardson estimate is not an error certificate without its asymptotic assumptions."
+      ]
+    },
+    {
+      "title": "Stable is not the same as accurate: Euler on fast decay",
+      "paragraphs": [
+        "Consider $y'=-10y$ with $y(0)=1$ and time in seconds. The exact solution is $y(t)=e^{-10t}$: it stays positive and decreases to zero. Forward Euler with step $h$ uses $y_{n+1}=y_n-10hy_n=(1-10h)y_n$, hence $y_n=(1-10h)^n$ at $t_n=nh$. The multiplier gives a complete diagnostic of this linear numerical recurrence without relying on a smooth-looking plot.",
+        "Apply the Lesson 3 multiplier table to this time-scaled case: $a=10\\,\\mathrm{s}^{-1}$ gives magnitude decay for $0<h<0.2\\,\\mathrm{s}$, strictly positive iterates for $0<h<0.1\\,\\mathrm{s}$, zero after one step at $h=0.1\\,\\mathrm{s}$, alternating decay for $0.1<h<0.2\\,\\mathrm{s}$, and neutral alternation at $h=0.2\\,\\mathrm{s}$. At $h=0.3\\,\\mathrm{s}$ the multiplier is $-2$ and magnitude doubles. These endpoint distinctions are exact consequences of the update rule, not empirical properties of a plotted trace.",
+        "Even a stable, positive sequence can have a large error. At $h=0.05\\,\\mathrm{s}$ and $t=0.1\\,\\mathrm{s}$, Euler takes two steps and gives $(1-0.5)^2=0.25$, whereas the exact value $e^{-1}\\approx0.367879$. The absolute error is about $0.117879$. The method is stable and has the right sign and monotonicity, yet it is too coarse for many accuracy requirements. Halving $h$ and comparing at the same physical time is a useful convergence experiment, but a finite comparison does not replace an error bound.",
+        "A reproducible numerical report should state the equation and units, initial condition, method, step size, time grid, comparison quantity, and acceptance tolerance. It should check model invariants such as positivity and decay separately from numerical error. A higher-order method can reduce error at a given $h$, but each method has its own stability region; order alone does not guarantee reliability on a fast-decay problem.",
+        "For $a=10\\,\\mathrm{s}^{-1}$ and $h=0.25\\,\\mathrm{s}$, Euler's multiplier is $1-2.5=-1.5$. Starting at one, after four steps at $t=1\\,\\mathrm{s}$ the value is $(-1.5)^4=5.0625$, while the exact value $e^{-10}$ is about $0.0000454$. The numerical output has the wrong magnitude and oscillates in sign between steps. This extreme discrepancy is not due to tiny floating-point rounding; it is the exact algebraic behavior of the chosen update rule.",
+        "At $h=0.1\\,\\mathrm{s}$, Euler's multiplier is zero and its first step gives $y_1=0$, whereas exact $y(0.1)=e^{-1}\\approx0.367879$. The sequence is magnitude-stable and nonnegative from then on, but the early-time error is large. Calling it “positive” requires care: it is nonnegative, not strictly positive like the exact solution. This example shows why stability, positivity, and accuracy should be reported as separate properties rather than collapsed into one verdict.",
+        "The same stable-positive case sharpens with resolution. At $h=0.05\\,\\mathrm{s}$ two steps give $0.25$ at $t=0.1\\,\\mathrm{s}$; at $h=0.025\\,\\mathrm{s}$ four steps give $0.75^4=0.31640625$, closer to $e^{-1}\\approx0.36787944$. The second value improves but still has error about $0.05147319$. This two-resolution comparison is finite evidence consistent with the convergence result developed in Lesson 2; a tolerance requires an actual bound or a clearly conditional refinement estimate.",
+        "Implicit Euler on the same decay equation has multiplier $1/(1+10h)$. At $h=0.3\\,\\mathrm{s}$ it gives $1/4$ per step, positive and decaying, while forward Euler's multiplier $-2$ grows. But the implicit value after one $0.3$-second step, $0.25$, differs substantially from exact $e^{-3}\\approx0.0498$. Unconditional decay stability does not mean large steps are accurate. This side-by-side comparison reinforces the need to choose both method and resolution for the requested quantity.",
+        "A final report should state whether values are mathematical approximations or results of a particular finite-precision implementation. Roundoff can dominate at extremely small $h$ after many steps, and a solver may use adaptive tolerances rather than one fixed $h$. For this simple test equation, exact formulas provide a reference for every computed grid point, so one can measure maximum error across the interval, not just endpoint error. Such a benchmark is an appropriate way to validate a code laboratory before using it on a model without a closed-form solution."
+      ],
+      "formula": "Euler: y_n=(1−10h)^n; magnitude stability needs 0<h<0.2, while strictly positive iterates need 0<h<0.1.",
+      "formulaTex": "\\begin{gathered}y^{\\prime}=-10y,\\quad y(0)=1,\\quad t_n=nh,\\quad y_n=(1-10h)^n,\\\\ |y_n|\\to0\\iff0<h<0.2\\,\\mathrm s,\\\\ y_n>0\\text{ for all }n\\iff0<h<0.1\\,\\mathrm s.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "One step of three methods",
+      "problem": "For $y^{\\prime}=-y$, $y(0)=1$, calculate one step of length $h=0.2$ and compare with $y(0.2)$.",
+      "steps": [
+        "Euler gives $1+0.2(-1)=0.8$. Heun predicts $0.8$ and averages slopes $-1$ and $-0.8$, giving $1-0.18=0.82$.",
+        "For RK4, $k_1=-1$, $k_2=-0.9$, $k_3=-0.91$ and $k_4=-0.818$. The weighted slope sum is $-5.438$, giving $1-0.2(5.438)/6=0.8187333333\\ldots$.",
+        "The exact value is $e^{-0.2}\\approx0.8187307531$. Absolute errors are about $0.01873075$, $0.001269247$ and $0.00000258026$."
+      ],
+      "answer": "RK4 is most accurate for this step; this calculation compares one-step errors and does not establish global order."
+    },
+    {
+      "title": "A stable decay that changes sign",
+      "problem": "Use Euler on $y^{\\prime}=-4y$, $y(0)=1$ with $h=0.4$. Interpret the first three steps.",
+      "steps": [
+        "The amplification factor is $1-4(0.4)=-0.6$. The states at times $0.4$, $0.8$ and $1.2$ are $-0.6$, $0.36$ and $-0.216$.",
+        "Since $|-0.6|<1$, the computed sequence decays in magnitude. However, the exact $e^{-4t}$ stays positive.",
+        "For nonnegative updates from a positive state, require $1-4h\\ge0$, so $h\\le0.25$. Equality sends the state to zero immediately and still gives poor accuracy."
+      ],
+      "answer": "$h=0.4$ is asymptotically stable but fails positivity and accuracy; stability is only one criterion."
+    },
+    {
+      "title": "One Euler and Heun step",
+      "problem": "Apply Euler and Heun with $h=0.1$ to $y^{\\prime}=t+y$, $y(0)=1$.",
+      "steps": [
+        "Initial slope is $f(0,1)=1$, so Euler predicts $p=1.1$.",
+        "Predicted-end slope is $f(0.1,1.1)=1.2$.",
+        "Heun averages slopes: $1+0.1(1+1.2)/2=1.11$."
+      ],
+      "answer": "Euler gives $1.1$; Heun gives $1.11$."
+    },
+    {
+      "title": "Three numerical properties differ",
+      "problem": "For $y^{\\prime}=-10y$, $y_0=1$, classify forward Euler at $h=0.1$ after one step.",
+      "steps": [
+        "The multiplier is $1-10h=0$, so the numerical value becomes zero.",
+        "Its magnitude does not grow and it is nonnegative, but exact $y(0.1)=e^{-1}>0$.",
+        "The absolute first-step error is $e^{-1}\\approx0.367879$."
+      ],
+      "answer": "Magnitude-stable and nonnegative, but inaccurate and not strictly positive."
+    },
+    {
+      "title": "Energy drift of Euler’s oscillator",
+      "problem": "For the dimensionless oscillator $x^{\\prime}=v$, $v^{\\prime}=-x$ with dimensionless step $h$, show Euler multiplies normalized energy $(x^2+v^2)/2$ by $1+h^2$, and state when this is a strict increase.",
+      "steps": [
+        "Write $x_{\\mathrm{new}}=x+hv$ and $v_{\\mathrm{new}}=v-hx$.",
+        "Expand both squares; cross terms $2hxv$ and $-2hxv$ cancel.",
+        "The remaining terms equal $(1+h^2)(x^2+v^2)$."
+      ],
+      "answer": "After $N$ dimensionless steps the normalized energy factor is $(1+h^2)^N$. The increase is strict for $h\\ne0$ and $(x,v)\\ne(0,0)$; zero energy remains zero."
+    },
+    {
+      "title": "Implicit and explicit decay",
+      "problem": "For $y^{\\prime}=-10y$ with $y_0=1$ and $h=0.3$, compare one forward and one implicit Euler step.",
+      "steps": [
+        "Forward Euler multiplier is $1-3=-2$, so $y_1=-2$.",
+        "Implicit Euler solves $y_1=1-3y_1$, giving $y_1=1/4$.",
+        "Exact $y(0.3)=e^{-3}\\approx0.0498$, so implicit stability does not imply close accuracy."
+      ],
+      "answer": "Forward gives $-2$; implicit gives $0.25$; exact is about $0.0498$."
+    },
+    {
+      "title": "An accumulation invariant",
+      "problem": "Solve $y^{\\prime}=-y$, $A^{\\prime}=y$ with $y(0)=1$, $A(0)=0$ and identify an invariant.",
+      "steps": [
+        "The decay solution is $y=e^{-t}$.",
+        "Integrating $A^{\\prime}=e^{-t}$ gives $A=1-e^{-t}$.",
+        "Differentiate $y+A$ to get $-y+y=0$."
+      ],
+      "answer": "$y=e^{-t}$, $A=1-e^{-t}$, and $y+A=1$."
+    },
+    {
+      "title": "Richardson estimate at fixed time",
+      "problem": "A second-order method gives values at the same fixed endpoint time $1.240,1.210,1.2025$ for $h,h/2,h/4$. Estimate fine-grid error.",
+      "steps": [
+        "The differences $0.030$ and $0.0075$ have ratio four, consistent with leading second-order error.",
+        "If $Y_s=Y+Cs^2+o(s^2)$, then $Y_{h/2}-Y_{h/4}\\approx3(Y_{h/4}-Y)$. Thus the finest signed error is approximately $0.0075/3=0.0025$.",
+        "Subtracting it from $1.2025$ gives $Y\\approx1.2000$. This assumes the grids are in the leading-error regime with negligible rounding; it is an estimate, not a rigorous bound."
+      ],
+      "answer": "Estimated finest error $0.0025$ and extrapolated value $1.2000$."
+    }
+  ],
+  "misconceptions": [
+    "“A smooth plot proves the answer is accurate.” Sampling and line drawing can hide substantial error; compare steps, special cases and invariants.",
+    "“Fourth order means four correct decimal places.” Under the usual smoothness and stability assumptions on a fixed interval, fourth order means global error $O(h^4)$ as $h\\to0$, not four correct decimal places."
+  ],
+  "lab": {
+    "title": "Compare integrators on an equation with known solution",
+    "description": "Solve $y'=-ay$, $y(0)=1$ in scaled dimensionless units. Plot the exact trajectory and each method’s trajectory on its coarsest grid. Print endpoint errors and rate-evaluation counts as the step count doubles through four grids. Change a, T, or baseN to explore stability and order.",
+    "code": "// Adjustable positive decay rate, final time and initial step count.\nconst a = 1, T = 2, baseN = 10;\nif (!(Number.isFinite(a) && a > 0 && Number.isFinite(T) && T > 0 && Number.isInteger(baseN) && baseN >= 1 && baseN <= 200)) throw new Error('Use finite positive a, T and integer baseN from 1 to 200.');\nif (T/(8*baseN) === 0) throw new Error('Finest-grid step is below machine resolution.');\nfunction step(name, t, y, h) {\n  const factor = -(a*h);\n  const k1 = factor*y;\n  if (name === 'Euler') return y+k1;\n  if (name === 'Heun') return y+(k1+factor*(y+k1))/2;\n  const k2 = factor*(y+k1/2);\n  const k3 = factor*(y+k2/2);\n  const k4 = factor*(y+k3);\n  return y+(k1+2*k2+2*k3+k4)/6;\n}\nconst exact = [];\nfor (let i=0; i<=200; i++) exact.push([T*(i/200),i === 0 ? 1 : Math.exp(-(a*T)*(i/200))]);\nplot(exact,'Exact: time versus state');\nfor (const name of ['Euler','Heun','RK4']) {\n  let previousError = null;\n  for (let level=0; level<4; level++) {\n    const n = baseN*2**level, h=T/n;\n    let y=1;\n    const points=[[0,y]];\n    for (let i=0; i<n; i++) {\n      y=step(name,i*h,y,h);\n      if (!Number.isFinite(y)) throw new Error('Nonfinite state: reduce a or the step size.');\n      if (level===0) points.push([(i+1)*h,y]);\n    }\n    const error=Math.abs(y-Math.exp(-a*T));\n    const ratio=previousError===null || error===0 ? 'unavailable' : previousError/error;\n    const evaluations=n*(name==='Euler'?1:name==='Heun'?2:4);\n    console.log(name,'N',n,'h',h,'endpoint',y,'absolute error',error,'previous/current error',ratio,'rate evaluations',evaluations);\n    previousError=error;\n    if (level===0) plot(points,name+': time versus state');\n  }\n}",
+    "tasks": [
+      "Before running, predict the endpoint ordering and approximate error-reduction factors for all three methods. Use $0<ah<1$ and the Euler update to justify your prediction about Euler’s signed error.",
+      "Double baseN and compare error ratios with 2, 4 and 16. Compare methods at similar evaluation counts, not just identical step counts.",
+      "Set a = 12 with T = 2 and baseN = 10. Explain the Euler and Heun coarse-grid growth using $ah=2.4$, then double baseN and distinguish magnitude stability from positivity and accuracy.",
+      "Explain why this exact-solution experiment cannot validate a drag model’s assumptions or certify accuracy at an unsampled impact event."
+    ],
+    "expected": "For default a = 1, T = 2, and baseN = 10, the coarsest grid has $N=10$ and exact endpoint $e^{-2}\\approx0.1353352832$; Euler gives approximately 0.1073741824, Heun 0.1374480313, and RK4 0.1353395484. With refinement, endpoint-error ratios approach 2, 4, and 16, respectively. Four finite plots are produced."
+  },
+  "exercises": [
+    {
+      "question": "Apply Euler and Heun for one step of length $0.1$ to $y^{\\prime}=t+y$, $y(0)=1$.",
+      "hint": "Evaluate the second slope at the predicted new time and state.",
+      "solution": "Initially $f(0,1)=1$, so Euler gives $y_1=1+0.1(1)=1.1$. The predicted endpoint slope is $f(0.1,1.1)=1.2$. Heun averages the two slopes, giving $y_1=1+0.1(1+1.2)/2=1.11$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Apply one Euler step $h=0.1$ to $y^{\\prime}=t+y$ with $y(0)=1$.",
+      "hint": "Use the initial slope in Euler's update.",
+      "solution": "Euler gives $y_1=y_0+hf(t_0,y_0)$. With $f(0,1)=1$ and $h=0.1$, $y_1=1+0.1(1)=1.1$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Apply one Heun step of length $h=0.1$ to $y^{\\prime}=t+y$ with $y(0)=1$.",
+      "hint": "Predict with Euler, then evaluate the endpoint slope.",
+      "solution": "The predicted state is $1.1$ at time $0.1$, so the two slopes are $f(0,1)=1$ and $f(0.1,1.1)=1.2$. Heun gives $y_1=1+0.1(1+1.2)/2=1.11$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why must a step study reach the same final time in every run?",
+      "hint": "Separate time evolution from numerical error.",
+      "solution": "A refinement study compares approximations to the same exact state $y(T)$. If runs end at different times $T_i$, their differences include real evolution as well as numerical error. Choose grids that reach a common $T$, or interpolate consistently.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "If $x$ and $v$ form a state, may Euler update $v$ using the just-updated $x$?",
+      "hint": "Check which state supplies the stage slope.",
+      "solution": "Standard forward Euler evaluates every component's derivative from the old state. Updating $v$ with the new $x$ creates a different sequential scheme and can change its accuracy or stability.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Write the RK4 amplification polynomial $R(z)$ for $y^{\\prime}=\\lambda y$.",
+      "hint": "Use the four-stage classical RK4 expansion.",
+      "solution": "For $z=h\\lambda$, classical RK4 has amplification $R(z)=1+z+z^2/2+z^3/6+z^4/24$. This is the fourth-degree Taylor polynomial of $e^z$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "What error ratio is expected when $h$ halves for a fourth-order method in its asymptotic regime?",
+      "hint": "Use the leading error term $Ch^4$.",
+      "solution": "When global error is asymptotically $Ch^4$, halving $h$ changes it to $Ch^4/16$. Therefore the coarse-to-fine error ratio approaches $16$, assuming the leading term dominates.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "How many $f$ evaluations per fixed step do Euler, Heun, and classical RK4 use?",
+      "hint": "Count derivative evaluations at each method's stages.",
+      "solution": "Euler evaluates $f$ once per step; explicit Heun evaluates an initial and predicted-endpoint slope, twice; classical RK4 evaluates four slopes. These fixed-step counts exclude adaptive retries and special reuse.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why is classical RK4 not stable for arbitrarily large negative real $h\\lambda$ when applied to $y^{\\prime}=\\lambda y$?",
+      "hint": "Examine the amplification polynomial for large negative arguments.",
+      "solution": "Classical RK4 has $R(z)=1+z+z^2/2+z^3/6+z^4/24$. As $z\\to-\\infty$, its positive fourth-degree term dominates and $|R(z)|\\to\\infty$. Stability needs $|R(z)|<1$, so it cannot hold for arbitrarily large negative $h\\lambda$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "For $y^{\\prime}=-10y$, determine the Euler step range for asymptotic stability and the smaller range preserving nonnegativity.",
+      "hint": "Analyze the multiplier $1-10h$.",
+      "solution": "Euler gives $y_{n+1}=(1-10h)y_n$. Magnitude decay needs $|1-10h|<1$, or $0<h<0.2$. Nonnegative iterates from nonnegative data need $1-10h\\ge0$, so $0<h\\le0.1$. Strict positivity requires $h<0.1$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-4y$, $y(0)=1$, determine whether Euler with $h=0.3$ is magnitude-stable and whether it preserves positivity.",
+      "hint": "Compute the Euler multiplier and inspect its sign.",
+      "solution": "Here $1-4h=1-1.2=-0.2$. Since its magnitude is below one, iterates decay in magnitude; since it is negative, they alternate sign. The exact solution $e^{-4t}$ remains positive.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-10y$, find Euler magnitude-stability interval.",
+      "hint": "Require the recurrence multiplier to have magnitude below one.",
+      "solution": "The multiplier is $1-10h$. Solving $|1-10h|<1$ gives the magnitude-stability interval $0<h<0.2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-10y$ with a positive initial value, find the Euler step interval that preserves strictly positive decay.",
+      "hint": "Require the recurrence multiplier to lie strictly between zero and one.",
+      "solution": "Strictly positive decay requires $0<1-10h<1$. Solving both inequalities gives $0<h<0.1$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the implicit Euler multiplier for $y^{\\prime}=-ay$.",
+      "hint": "Solve the implicit update for the new state.",
+      "solution": "Implicit Euler satisfies $y_{n+1}=y_n-ahy_{n+1}$, so $(1+ah)y_{n+1}=y_n$. Its multiplier is $1/(1+ah)$, assuming $1+ah\\ne0$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "At $ah=1$, is Euler strictly positive, nonnegative, and magnitude-stable?",
+      "hint": "Evaluate the multiplier at $ah=1$.",
+      "solution": "The forward Euler multiplier is $1-ah=0$. Thus the next state is nonnegative and magnitude-stable but is not strictly positive for positive initial data.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Prove the stated Euler energy growth for $x^{\\prime}=v$, $v^{\\prime}=-x$, and explain what happens over $N$ steps.",
+      "hint": "Expand both updated squares and cancel cross terms.",
+      "solution": "Euler gives $x_{n+1}=x_n+hv_n$ and $v_{n+1}=v_n-hx_n$. Expansion yields $x_{n+1}^2+v_{n+1}^2=(1+h^2)(x_n^2+v_n^2)$. After $N$ steps the factor is $(1+h^2)^N$, growing for fixed $h>0$ and nonzero state; at fixed $T=Nh$ it tends to one as $h\\to0$.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Design checks for an accumulation model $y^{\\prime}=-y$, $A^{\\prime}=y$, $y(0)=1$ and $A(0)=0$. Find exact values and an invariant.",
+      "hint": "Differentiate the sum and use the exact decay solution.",
+      "solution": "Exact states are $y(t)=e^{-t}$ and $A(t)=1-e^{-t}$, so $y+A=1$. Compare both numerical components with these at a common $T$, tabulate errors under halving, and monitor $y+A-1$. Shared Runge–Kutta stages preserve this linear invariant up to rounding, so a small residual alone cannot certify state accuracy.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For dimensionless $x^{\\prime}=v$, $v^{\\prime}=-x$ and dimensionless step $h$, show Euler multiplies the normalized energy $(x^2+v^2)/2$ by $1+h^2$.",
+      "hint": "Expand the two new-state squares.",
+      "solution": "Euler updates are $x_{n+1}=x_n+hv_n$ and $v_{n+1}=v_n-hx_n$. Their squared sum is $(x_n+hv_n)^2+(v_n-hx_n)^2=(1+h^2)(x_n^2+v_n^2)$ because mixed terms cancel. Thus each step multiplies normalized energy by $1+h^2$; for $h\\ne0$, energy increases when the state is nonzero and stays zero at the zero state.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Find exact $y$ and $A$ for $y^{\\prime}=-y$, $A^{\\prime}=y$, $y_0=1$, $A_0=0$.",
+      "hint": "Integrate the decay equation, then the accumulation equation.",
+      "solution": "The first equation gives $y=e^{-t}$ from $y(0)=1$. Then $A^{\\prime}=e^{-t}$ with $A(0)=0$ gives $A=1-e^{-t}$. Their sum is $y+A=1$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-y$, $A^{\\prime}=y$, $y(0)=1$, and $A(0)=0$, what invariant does the coupled model preserve?",
+      "hint": "Differentiate the proposed invariant.",
+      "solution": "Since $y^{\\prime}=-y$ and $A^{\\prime}=y$, $\\frac{d}{dt}(y+A)=0$. The initial sum is $1+0=1$, so $y(t)+A(t)=1$ for all times of the exact solution.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A second-order method gives endpoint values $1.240$, $1.210$ and $1.2025$ at steps $h$, $h/2$ and $h/4$. Estimate the finest error and an extrapolated limit.",
+      "hint": "Compare successive differences, then use the second-order factor.",
+      "solution": "Differences are $1.240-1.210=0.030$ and $1.210-1.2025=0.0075$, ratio $4$. Estimated finest error is $0.0075/(2^2-1)=0.0025$; Richardson extrapolation gives $1.2025+(1.2025-1.210)/3=1.2000$. These are asymptotic estimates, not certified bounds.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "List the information needed to reproduce a falling-object numerical run.",
+      "hint": "Include model, units, initial state, method, grid, and ground event rule.",
+      "solution": "State the falling-object equations, parameters and units; initial time, height and velocity; integration interval; numerical update formula or identifiable solver implementation; fixed grid or adaptive error tolerances and step-control settings; ground-crossing detection and interpolation rule; and recorded output times and values. Keep the implementation and parameter values with the results so another reader can repeat the run.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does $\\frac{dF}{dt}=-\\|\\nabla F\\|^2$ for exact gradient flow guarantee every Euler step decreases $F$?",
+      "hint": "A finite Euler step can cross a valley.",
+      "solution": "No. The identity $dF/dt=-\\|\\nabla F\\|^2\\le0$ concerns exact gradient flow. Euler moves a finite distance $-h\\nabla F$ and can overshoot to a larger value of $F$. A discrete decrease needs an appropriate step-size condition.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A second-order method gives endpoint values $1.240$, $1.210$, and $1.2025$ at step sizes $h$, $h/2$, and $h/4$. Estimate the finest-grid error.",
+      "hint": "Use the last difference divided by $2^2-1$.",
+      "solution": "The last difference is $1.210-1.2025=0.0075$. Assuming second-order asymptotics, estimated fine-grid error is $0.0075/3=0.0025$, giving extrapolated value $1.2025-0.0025=1.2000$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use forward Euler with $h=0.25$ for $y^{\\prime}=-10y$, $y(0)=1$. Find $y_4$ at $t=1$ and compare its behavior with the exact solution.",
+      "hint": "Compute the recurrence multiplier before taking four steps.",
+      "solution": "The multiplier is $1-10(0.25)=-1.5$, so $y_4=(-1.5)^4=5.0625$ at $t=1$. The exact value is $e^{-10}\\approx0.0000454$. Euler alternates sign and grows in magnitude, showing instability.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "At $h=0.1$, Euler sends $y_1$ to zero for $y^{\\prime}=-10y$, $y_0=1$. Is the method magnitude-stable and strictly positive? Compute its absolute error at $t=0.1$.",
+      "hint": "Compare the zero multiplier with the exact exponential.",
+      "solution": "At $h=0.1$, multiplier $1-10h=0$, so $y_1=0$: the sequence is magnitude-stable and nonnegative but not strictly positive. Exact $y(0.1)=e^{-1}\\approx0.367879$, making the one-step absolute error about $0.367879$.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $y^{\\prime}=-10y$, $h=0.25$, $y_0=1$, find $y_4$.",
+      "hint": "Multiply by the Euler factor four times.",
+      "solution": "For $h=0.25$, the factor is $1-10h=-1.5$. Thus $y_4=(-1.5)^4y_0=5.0625$, an unstable growth from the initial value one.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-10y$ with $y(0)=1$ and Euler step $h=0.1$, find the first numerical value and the exact value at the same time.",
+      "hint": "Compare one Euler step with exact decay at the same time.",
+      "solution": "Euler uses multiplier $1-10(0.1)=0$, so $y_1=0$. At $t=0.1$, the exact value is $e^{-1}\\approx0.367879$, showing a substantial one-step error.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y^{\\prime}=-10y$, $y(0)=1$, take one implicit Euler step of size $h=0.3$. Is its positive, decaying result enough to establish accuracy? Compare with the exact value at $t=0.3$.",
+      "hint": "Compare the implicit multiplier with the exact one.",
+      "solution": "For $y^{\\prime}=-10y$ and $h=0.3$, implicit Euler gives multiplier $1/(1+3)=0.25$, while exact decay gives $e^{-3}\\approx0.0498$. The step is positive and decaying but has a large amplitude error.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "question": "How can an exact test equation validate a lab beyond one endpoint?",
+      "hint": "Compare across the grid, not only at the endpoint.",
+      "solution": "Use an exact solution $y(t_i)$ at every grid time $t_i$ to compute $\\max_i|y_i-y(t_i)|$. Check positivity or other model invariants and repeat under step refinement at the same final time. This catches transient errors that one endpoint can hide.",
+      "lesson": 6,
+      "type": "Challenge"
+    }
+  ],
+  "summary": [
+    "A solver approximates rate accumulation; its order requires smoothness and controls error scaling on fixed intervals.",
+    "Stability, positivity, accuracy and invariant preservation are separate checks.",
+    "A reproducible capstone joins a justified model, explicit numerical method, refinement evidence and a conclusion with stated limits."
+  ],
+  "next": "Return to chapter 13 for physical accumulation, chapter 22 for optimization, or chapter 27 for model construction. Develop one capstone into a report another reader can reproduce, then seek deeper study of adaptive and implicit methods. For a full L2 treatment with existence proofs, exact methods, boundary spectra and linear systems, continue to [ODE: A First Course](/books/ode-first-course/).",
+  "readingLinks": [
+    {
+      "resourceId": "library:book-ode-first-course",
+      "label": "Ordinary Differential Equations: A First Course — the full treatment"
+    }
+  ]
+}

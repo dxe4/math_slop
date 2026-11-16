@@ -1,0 +1,396 @@
+{
+ "levels": [
+  {
+   "id": "L0",
+   "title": "School foundations"
+  },
+  {
+   "id": "L1",
+   "title": "Pre-university"
+  },
+  {
+   "id": "L2",
+   "title": "Year 1"
+  },
+  {
+   "id": "L3",
+   "title": "Years 2–3"
+  },
+  {
+   "id": "L4",
+   "title": "Year 4 / Master’s"
+  },
+  {
+   "id": "L5",
+   "title": "Graduate and research"
+  }
+ ],
+ "statuses": [
+  {
+   "id": "outline",
+   "title": "Outline"
+  },
+  {
+   "id": "draft",
+   "title": "Draft"
+  },
+  {
+   "id": "reviewed",
+   "title": "Reviewed"
+  }
+ ],
+ "branches": [
+  {
+   "id": "foundations",
+   "title": "Foundations and logic",
+   "tone": "purple",
+   "blurb": "The language, rules and limits of mathematical reasoning.",
+   "fields": [
+    {
+     "id": "foundations",
+     "title": "Foundations",
+     "summary": "Arithmetic, algebra and the language of mathematics.",
+     "glyph": "1+1",
+     "wiki": "https://en.wikipedia.org/wiki/Elementary_algebra",
+     "mathworld": "https://mathworld.wolfram.com/topics/FoundationsofMathematics.html"
+    },
+    {
+     "id": "logic-set-theory",
+     "title": "Logic and set theory",
+     "summary": "Reasoning, sets and mathematical foundations.",
+     "glyph": "∀x",
+     "wiki": "https://en.wikipedia.org/wiki/Mathematical_logic",
+     "mathworld": "https://mathworld.wolfram.com/topics/FoundationsofMathematics.html"
+    },
+    {
+     "id": "category-theory",
+     "title": "Category theory",
+     "summary": "Structures and maps between them.",
+     "glyph": "f∘g",
+     "wiki": "https://en.wikipedia.org/wiki/Category_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/FoundationsofMathematics.html"
+    },
+    {
+     "id": "computability-complexity",
+     "title": "Computability and complexity",
+     "summary": "Algorithms, computation and their limits.",
+     "glyph": "λ",
+     "wiki": "https://en.wikipedia.org/wiki/Theory_of_computation",
+     "mathworld": "https://mathworld.wolfram.com/topics/FoundationsofMathematics.html"
+    },
+    {
+     "id": "history-of-mathematics",
+     "title": "History of mathematics",
+     "summary": "The development of mathematical ideas.",
+     "glyph": "π",
+     "wiki": "https://en.wikipedia.org/wiki/History_of_mathematics",
+     "mathworld": "https://mathworld.wolfram.com/topics/HistoryandTerminology.html"
+    },
+    {
+     "id": "mathematics-education",
+     "title": "Mathematics education",
+     "summary": "Teaching and learning mathematics.",
+     "glyph": "?!",
+     "wiki": "https://en.wikipedia.org/wiki/Mathematics_education",
+     "mathworld": "https://mathworld.wolfram.com/topics/HistoryandTerminology.html"
+    }
+   ]
+  },
+  {
+   "id": "algebra",
+   "title": "Algebra and number",
+   "tone": "blue",
+   "blurb": "Structure: numbers, symmetries, vectors and equations.",
+   "fields": [
+    {
+     "id": "linear-algebra",
+     "title": "Linear algebra",
+     "summary": "Vectors, matrices and linear maps.",
+     "glyph": "Ax",
+     "wiki": "https://en.wikipedia.org/wiki/Linear_algebra",
+     "mathworld": "https://mathworld.wolfram.com/topics/Algebra.html"
+    },
+    {
+     "id": "abstract-algebra",
+     "title": "Abstract algebra",
+     "summary": "Groups, rings and algebraic structures.",
+     "glyph": "G",
+     "wiki": "https://en.wikipedia.org/wiki/Abstract_algebra",
+     "mathworld": "https://mathworld.wolfram.com/topics/Algebra.html"
+    },
+    {
+     "id": "number-theory",
+     "title": "Number theory",
+     "summary": "Integers, divisibility and arithmetic structures.",
+     "glyph": "ℤ",
+     "wiki": "https://en.wikipedia.org/wiki/Number_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/NumberTheory.html"
+    },
+    {
+     "id": "commutative-algebra-algebraic-geometry",
+     "title": "Commutative algebra and algebraic geometry",
+     "summary": "Rings and spaces defined by polynomial equations.",
+     "glyph": "V(f)",
+     "wiki": "https://en.wikipedia.org/wiki/Algebraic_geometry",
+     "mathworld": "https://mathworld.wolfram.com/topics/Algebra.html"
+    },
+    {
+     "id": "cryptography",
+     "title": "Cryptography",
+     "summary": "Mathematical methods for secure communication.",
+     "glyph": "mod",
+     "wiki": "https://en.wikipedia.org/wiki/Cryptography",
+     "mathworld": "https://mathworld.wolfram.com/topics/NumberTheory.html"
+    }
+   ]
+  },
+  {
+   "id": "analysis",
+   "title": "Analysis",
+   "tone": "teal",
+   "blurb": "Limits, change and the infinite, made precise.",
+   "fields": [
+    {
+     "id": "calculus",
+     "title": "Calculus",
+     "summary": "Change, accumulation and approximation.",
+     "glyph": "∫",
+     "wiki": "https://en.wikipedia.org/wiki/Calculus",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "real-analysis",
+     "title": "Real analysis",
+     "summary": "Limits, continuity and rigorous calculus.",
+     "glyph": "ℝ",
+     "wiki": "https://en.wikipedia.org/wiki/Real_analysis",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "complex-analysis",
+     "title": "Complex analysis",
+     "summary": "Functions of a complex variable.",
+     "glyph": "ℂ",
+     "wiki": "https://en.wikipedia.org/wiki/Complex_analysis",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "measure-integration",
+     "title": "Measure and integration",
+     "summary": "Measure spaces and integration.",
+     "glyph": "μ",
+     "wiki": "https://en.wikipedia.org/wiki/Measure_(mathematics)",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "functional-analysis",
+     "title": "Functional analysis",
+     "summary": "Infinite-dimensional spaces and operators.",
+     "glyph": "‖f‖",
+     "wiki": "https://en.wikipedia.org/wiki/Functional_analysis",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "fourier-harmonic-analysis",
+     "title": "Fourier and harmonic analysis",
+     "summary": "Frequency, transforms and harmonic structure.",
+     "glyph": "f̂",
+     "wiki": "https://en.wikipedia.org/wiki/Harmonic_analysis",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    }
+   ]
+  },
+  {
+   "id": "dynamics",
+   "title": "Equations and dynamics",
+   "tone": "orange",
+   "blurb": "How quantities evolve, and the laws that govern them.",
+   "fields": [
+    {
+     "id": "ode",
+     "title": "Ordinary differential equations",
+     "summary": "Equations involving derivatives in one variable.",
+     "glyph": "y′",
+     "wiki": "https://en.wikipedia.org/wiki/Ordinary_differential_equation",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "pde",
+     "title": "Partial differential equations",
+     "summary": "Equations involving derivatives in several variables.",
+     "glyph": "∂",
+     "wiki": "https://en.wikipedia.org/wiki/Partial_differential_equation",
+     "mathworld": "https://mathworld.wolfram.com/topics/CalculusandAnalysis.html"
+    },
+    {
+     "id": "dynamical-systems",
+     "title": "Dynamical systems",
+     "summary": "How mathematical systems evolve.",
+     "glyph": "xₙ₊₁",
+     "wiki": "https://en.wikipedia.org/wiki/Dynamical_system",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    },
+    {
+     "id": "mathematical-physics",
+     "title": "Mathematical physics",
+     "summary": "Mathematical structures in physical models.",
+     "glyph": "ħ",
+     "wiki": "https://en.wikipedia.org/wiki/Mathematical_physics",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    }
+   ]
+  },
+  {
+   "id": "geometry",
+   "title": "Geometry and topology",
+   "tone": "pink",
+   "blurb": "Shape, space, curvature and what survives deformation.",
+   "fields": [
+    {
+     "id": "geometry",
+     "title": "Geometry",
+     "summary": "Shapes, spaces and their properties.",
+     "glyph": "△",
+     "wiki": "https://en.wikipedia.org/wiki/Geometry",
+     "mathworld": "https://mathworld.wolfram.com/topics/Geometry.html"
+    },
+    {
+     "id": "differential-geometry",
+     "title": "Differential geometry",
+     "summary": "Smooth spaces, curvature and geometry.",
+     "glyph": "κ",
+     "wiki": "https://en.wikipedia.org/wiki/Differential_geometry",
+     "mathworld": "https://mathworld.wolfram.com/topics/Geometry.html"
+    },
+    {
+     "id": "topology",
+     "title": "Topology",
+     "summary": "Continuity and qualitative properties of spaces.",
+     "glyph": "≅",
+     "wiki": "https://en.wikipedia.org/wiki/Topology",
+     "mathworld": "https://mathworld.wolfram.com/topics/Topology.html"
+    },
+    {
+     "id": "algebraic-topology",
+     "title": "Algebraic topology",
+     "summary": "Algebraic tools for studying spaces.",
+     "glyph": "π₁",
+     "wiki": "https://en.wikipedia.org/wiki/Algebraic_topology",
+     "mathworld": "https://mathworld.wolfram.com/topics/Topology.html"
+    }
+   ]
+  },
+  {
+   "id": "discrete",
+   "title": "Discrete mathematics",
+   "tone": "gold",
+   "blurb": "Counting, networks, games and information.",
+   "fields": [
+    {
+     "id": "discrete-combinatorics",
+     "title": "Discrete mathematics and combinatorics",
+     "summary": "Counting and finite structures.",
+     "glyph": "n!",
+     "wiki": "https://en.wikipedia.org/wiki/Combinatorics",
+     "mathworld": "https://mathworld.wolfram.com/topics/DiscreteMathematics.html"
+    },
+    {
+     "id": "graph-theory",
+     "title": "Graph theory",
+     "summary": "Networks, graphs and their properties.",
+     "glyph": "K₅",
+     "wiki": "https://en.wikipedia.org/wiki/Graph_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/DiscreteMathematics.html"
+    },
+    {
+     "id": "game-theory",
+     "title": "Game theory",
+     "summary": "Strategic decisions and interactions.",
+     "glyph": "♟",
+     "wiki": "https://en.wikipedia.org/wiki/Game_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    },
+    {
+     "id": "information-coding-theory",
+     "title": "Information and coding theory",
+     "summary": "Information, communication and codes.",
+     "glyph": "H",
+     "wiki": "https://en.wikipedia.org/wiki/Information_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    }
+   ]
+  },
+  {
+   "id": "chance",
+   "title": "Probability and statistics",
+   "tone": "green",
+   "blurb": "Uncertainty, randomness and learning from data.",
+   "fields": [
+    {
+     "id": "probability",
+     "title": "Probability",
+     "summary": "Mathematical models of uncertainty.",
+     "glyph": "ℙ",
+     "wiki": "https://en.wikipedia.org/wiki/Probability_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    },
+    {
+     "id": "stochastic-processes",
+     "title": "Stochastic processes",
+     "summary": "Random systems evolving over time.",
+     "glyph": "Bₜ",
+     "wiki": "https://en.wikipedia.org/wiki/Stochastic_process",
+     "mathworld": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    },
+    {
+     "id": "statistics",
+     "title": "Statistics",
+     "summary": "Inference and learning from data.",
+     "glyph": "x̄",
+     "wiki": "https://en.wikipedia.org/wiki/Statistics",
+     "mathworld": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    },
+    {
+     "id": "bayesian-computational-statistics",
+     "title": "Bayesian and computational statistics",
+     "summary": "Bayesian inference and computational methods.",
+     "glyph": "θ|x",
+     "wiki": "https://en.wikipedia.org/wiki/Bayesian_statistics",
+     "mathworld": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    }
+   ]
+  },
+  {
+   "id": "computation",
+   "title": "Computation and optimisation",
+   "tone": "red",
+   "blurb": "Algorithms that approximate, optimise and learn.",
+   "fields": [
+    {
+     "id": "numerical-analysis",
+     "title": "Numerical analysis",
+     "summary": "Approximation and numerical computation.",
+     "glyph": "≈",
+     "wiki": "https://en.wikipedia.org/wiki/Numerical_analysis",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    },
+    {
+     "id": "optimisation",
+     "title": "Optimisation",
+     "summary": "Finding best values subject to constraints.",
+     "glyph": "∇",
+     "wiki": "https://en.wikipedia.org/wiki/Mathematical_optimization",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    },
+    {
+     "id": "machine-learning-mathematics",
+     "title": "Mathematics of machine learning",
+     "summary": "Mathematical foundations of learning algorithms.",
+     "glyph": "σ(x)",
+     "wiki": "https://en.wikipedia.org/wiki/Computational_learning_theory",
+     "mathworld": "https://mathworld.wolfram.com/topics/AppliedMathematics.html"
+    }
+   ]
+  }
+ ]
+}

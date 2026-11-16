@@ -1,0 +1,1656 @@
+{
+ "labs": [
+  {
+   "id": "complex-maps",
+   "title": "Complex Maps as Living Grids",
+   "eulerId": "library:visual-lab-complex-maps",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-complex-maps",
+   "fields": [
+    "calculus",
+    "real-analysis",
+    "complex-analysis"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "An implementation-ready visual laboratory for domain coloring and grid deformation under complex functions.",
+   "minutes": 150
+  },
+  {
+   "id": "eigenvectors",
+   "title": "Eigenvectors Under Repeated Motion",
+   "eulerId": "library:visual-lab-eigenvectors",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-eigenvectors",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Edit a real 2×2 map and coordinate basis; compare AP=PB and two vector paths alongside eigenlines and iteration.",
+   "minutes": 120
+  },
+  {
+   "id": "domain-coloring",
+   "title": "Complex Functions in Colour",
+   "eulerId": "library:visual-lab-domain-coloring",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-domain-coloring",
+   "fields": [
+    "complex-analysis"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Read magnitude and argument at once while exploring zeros, poles, and conformal maps in a runnable WebGL experiment.",
+   "minutes": 35
+  },
+  {
+   "id": "fourier-synthesis",
+   "title": "Fourier Synthesis Studio",
+   "eulerId": "library:visual-lab-fourier-synthesis",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-fourier-synthesis",
+   "fields": [
+    "fourier-harmonic-analysis"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Build periodic waves from rotating harmonics and investigate convergence, spectral decay, and Gibbs ringing.",
+   "minutes": 40
+  },
+  {
+   "id": "vector-fields",
+   "title": "Vector Fields and Flow Lines",
+   "eulerId": "library:visual-lab-vector-fields",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-vector-fields",
+   "fields": [
+    "ode",
+    "dynamical-systems"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Seed numerical trajectories in differential equations and compare centres, saddles, nonlinear oscillators, and phase portraits.",
+   "minutes": 45
+  },
+  {
+   "id": "logistic-map",
+   "title": "The Road to Chaos",
+   "eulerId": "library:visual-lab-logistic-map",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-logistic-map",
+   "fields": [
+    "dynamical-systems"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Connect iteration, cobweb diagrams, bifurcation cascades, and sensitive dependence in the logistic map.",
+   "minutes": 40
+  },
+  {
+   "id": "parametric-surfaces",
+   "title": "Surface Curvature Studio",
+   "eulerId": "library:visual-lab-parametric-surfaces",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-parametric-surfaces",
+   "fields": [
+    "differential-geometry"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Orbit sphere, torus, saddle, and Möbius meshes while connecting parametrization, surface normals, Gaussian curvature, and topology.",
+   "minutes": 55
+  },
+  {
+   "id": "cellular-automata",
+   "title": "Cellular Automata Rule Forge",
+   "eulerId": "library:visual-lab-cellular-automata",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-cellular-automata",
+   "fields": [
+    "computability-complexity",
+    "information-coding-theory",
+    "cryptography"
+   ],
+   "level": "L1",
+   "status": "reviewed",
+   "summary": "Program an eight-bit local rule, edit its seed, and audit the global pattern generation by generation through Canvas and exact tables.",
+   "minutes": 55
+  },
+  {
+   "id": "function-transformations",
+   "title": "Function Transformation Observatory",
+   "eulerId": "library:visual-lab-function-transformations",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-function-transformations",
+   "fields": [
+    "foundations"
+   ],
+   "level": "L1",
+   "status": "reviewed",
+   "summary": "Transform quadratic, absolute-value, reciprocal, and exponential parent rules while auditing roots, domains, holes, asymptotes, and exact table values.",
+   "minutes": 120
+  },
+  {
+   "id": "markov-coupling",
+   "title": "Markov Mixing & Coupling Observatory",
+   "eulerId": "library:visual-lab-markov-coupling",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-markov-coupling",
+   "fields": [
+    "stochastic-processes",
+    "probability"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Edit a two-state transition law and compare exact spectral contraction with reproducible maximal-coupling paths through accessible Canvas and numerical tables.",
+   "minutes": 95
+  },
+  {
+   "id": "finite-algebra-tables",
+   "title": "Finite Algebra Table Laboratory",
+   "eulerId": "library:visual-lab-finite-algebra-tables",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-finite-algebra-tables",
+   "fields": [
+    "abstract-algebra"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Operate exact Cayley tables, compare element orders, partition cosets, and test when a quotient group is well-defined.",
+   "minutes": 75
+  },
+  {
+   "id": "simplicial-homology",
+   "title": "Simplicial Homology Workbench",
+   "eulerId": "library:visual-lab-simplicial-homology",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-simplicial-homology",
+   "fields": [
+    "algebraic-topology",
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Build exact finite complexes, inspect simplices and boundary ranks over F2, and cross-check Betti numbers with Euler characteristic through accessible Canvas and tables.",
+   "minutes": 95
+  },
+  {
+   "id": "finite-model-logic",
+   "title": "Finite-Model Quantifier Workshop",
+   "eulerId": "library:visual-lab-finite-model-logic",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-finite-model-logic",
+   "fields": [
+    "logic-set-theory"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Edit a finite universe, unary predicates, and a binary relation; evaluate quantified sentences exactly; and inspect witnesses, counterexamples, quantifier order, and complete semantic tables.",
+   "minutes": 130
+  },
+  {
+   "id": "regularization-kernel-learning",
+   "title": "Regularization & Kernel Learning Observatory",
+   "eulerId": "library:visual-lab-regularization-kernel-learning",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-regularization-kernel-learning",
+   "fields": [
+    "machine-learning-mathematics",
+    "statistics"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Fit deterministic train-only polynomial or RBF-kernel models, expose singular boundaries, and inspect residuals, MSE, penalized objectives, effective degrees of freedom, and shift through accessible Canvas and exact tables.",
+   "minutes": 120
+  },
+  {
+   "id": "stress-tensor",
+   "title": "Stress Tensor & Mohr Circle Laboratory",
+   "eulerId": "library:visual-lab-stress-tensor",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-stress-tensor",
+   "fields": [
+    "mathematical-physics"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Rotate a symmetric plane stress, resolve traction with explicit signs and MPa units, and connect principal stresses and tensor invariants to an accessible Mohr-circle Canvas and exact tables.",
+   "minutes": 105
+  },
+  {
+   "id": "number-theory-cryptography",
+   "title": "Modular Arithmetic, RSA, and Elliptic Curves Workbench",
+   "eulerId": "library:visual-lab-number-theory-cryptography",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-number-theory-cryptography",
+   "fields": [
+    "number-theory"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Solve generalized CRT systems, audit every toy RSA exponentiation step, and enumerate nonsingular elliptic-curve groups over tiny prime fields through static SVG and exact tables.",
+   "minutes": 145
+  },
+  {
+   "id": "conics-curved-geometry",
+   "title": "Conics & Curved Geometry Observatory",
+   "eulerId": "library:visual-lab-conics-curved-geometry",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-conics-curved-geometry",
+   "fields": [
+    "geometry"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Verify focus/directrix ellipses, a parabola, and hyperbolas from unsquared distances, then compare exact spherical, Euclidean, and Poincare-disk triangle lengths, angles, excess, defect, and normalized area through accessible Canvas and tables.",
+   "minutes": 125
+  },
+  {
+   "id": "kaplan-meier",
+   "title": "Kaplan–Meier Risk-Set Laboratory",
+   "eulerId": "library:visual-lab-kaplan-meier",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-kaplan-meier",
+   "fields": [
+    "statistics"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Audit exact product-limit fractions, event-censor ties, restricted mean, median survival, and pointwise Greenwood log-log uncertainty through static Canvas and a complete numerical table.",
+   "minutes": 100
+  },
+  {
+   "id": "linear-dynamics-audit",
+   "title": "Flow, Feedback, and Invariant-Measure Audit",
+   "eulerId": "library:visual-lab-linear-dynamics-audit",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-linear-dynamics-audit",
+   "fields": [
+    "ode",
+    "pde",
+    "dynamical-systems"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Form exact rational closed-loop stability, controllability, and observability audits, then separately test RK4 trajectories, step-halving discrepancies, invariant drift, and finite-time averages through static Canvas and complete tables.",
+   "minutes": 130
+  },
+  {
+   "id": "decision-systems",
+   "title": "Decision Systems Laboratory: Flow, Queues, and Portfolio Trade-offs",
+   "eulerId": "library:visual-lab-decision-systems",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-decision-systems",
+   "fields": [
+    "optimisation",
+    "graph-theory",
+    "stochastic-processes"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Compute exact integer max-flow/min-cut certificates, expose the M/M/1 stability boundary, and audit hypothetical two-asset moment trade-offs through labeled native controls, typed failures, and complete tables.",
+   "minutes": 150
+  },
+  {
+   "id": "automata-verification",
+   "title": "Automata and Verification Proof Studio",
+   "eulerId": "library:visual-lab-automata-verification",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-automata-verification",
+   "fields": [
+    "computability-complexity"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Trace deterministic machines, prove or refute language equivalence with a shortest distinguishing word, and exhaust finite transition systems for exact safety proofs or counterexample traces.",
+   "minutes": 150
+  },
+  {
+   "id": "shape-operator-surfaces",
+   "title": "Shape Operator and Minimal-Surface Laboratory",
+   "eulerId": "library:visual-lab-shape-operator-surfaces",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-shape-operator-surfaces",
+   "fields": [
+    "differential-geometry"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Interrogate first and second fundamental forms, principal curvatures, Gaussian and mean curvature, Euler normal curvature, and area on five WebGL surfaces.",
+   "minutes": 90
+  },
+  {
+   "id": "calculus-geometry",
+   "title": "Calculus Geometry: Tangents, Sums, and Accumulation",
+   "eulerId": "library:visual-lab-calculus-geometry",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-calculus-geometry",
+   "fields": [
+    "calculus"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Link secants, derivatives, local linearization, signed Riemann sums, convergence errors, and Fundamental-Theorem accumulation in four synchronized views.",
+   "minutes": 90
+  },
+  {
+   "id": "bayesian-inference",
+   "title": "Bayesian Inference Laboratory: Updating and Prediction",
+   "eulerId": "library:visual-lab-bayesian-inference",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-bayesian-inference",
+   "fields": [
+    "bayesian-computational-statistics",
+    "probability"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Update conjugate models sequentially, compare prior and posterior predictives, inspect credible intervals, and audit model checks and interval interpretations.",
+   "minutes": 100
+  },
+  {
+   "id": "complex-residues",
+   "title": "Contours, Winding, and Residues Laboratory",
+   "eulerId": "library:visual-lab-complex-residues",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-complex-residues",
+   "fields": [
+    "complex-analysis"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Deform oriented contours, audit winding numbers, compare residue predictions with refined quadrature, and inspect poles, zeros, and an essential singularity.",
+   "minutes": 100
+  },
+  {
+   "id": "discrete-independence-extremal",
+   "title": "Independence and Extremal Structures Explorer",
+   "eulerId": "library:visual-lab-discrete-independence-extremal",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-discrete-independence-extremal",
+   "fields": [
+    "discrete-combinatorics",
+    "graph-theory"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Enumerate bounded graph and matroid independence systems exactly, expose exchange witnesses, compare greedy with exhaustive optimum, and table rank, circuits, closure, dual bases, and extremal graph data.",
+   "minutes": 85
+  },
+  {
+   "id": "numerical-error-approximation",
+   "title": "Numerical Error & Approximation Laboratory",
+   "eulerId": "library:visual-lab-numerical-error-approximation",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-numerical-error-approximation",
+   "fields": [
+    "numerical-analysis"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "A deterministic, bounded interpolation and adaptive-quadrature instrument comparing node geometry, sampled error, Lebesgue amplification, refinement, and exact text or table evidence.",
+   "minutes": 90
+  },
+  {
+   "id": "parameter-systems",
+   "title": "Parameters, Rank, and Complete Solution Sets",
+   "eulerId": "library:visual-lab-parameter-systems",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-parameter-systems",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Predict exceptional parameter cases, then inspect exact ranks, kernel bases, affine fibers, and incompatibility certificates in a two- and three-equation investigation.",
+   "minutes": 90
+  },
+  {
+   "id": "linear-information",
+   "title": "What Can the Measurements Determine?",
+   "eulerId": "library:visual-lab-linear-information",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-linear-information",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Test whether a target ignores every invisible input direction, construct exact collisions when recovery fails, and transfer kernel containment to dependent generator assignments.",
+   "minutes": 90
+  },
+  {
+   "id": "rank-factorization",
+   "title": "Keep the Original Columns: Rank Factorization",
+   "eulerId": "library:visual-lab-rank-factorization",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-rank-factorization",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Build exact A=CR from an output basis, distinguish original columns from reduced columns, and prove why the factors share a kernel and need a minimal intermediate dimension.",
+   "minutes": 90
+  },
+  {
+   "id": "dual-coordinates",
+   "title": "Pull a Measurement Backward: Dual Coordinates",
+   "eulerId": "library:visual-lab-dual-coordinates",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-dual-coordinates",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Construct dual bases, preserve scalar evaluation through independent oblique coordinate systems, and derive the rectangular transpose map by pulling measurements backward.",
+   "minutes": 90
+  },
+  {
+   "id": "foundations-powers-roots-scale",
+   "title": "Powers, Roots, and Scale Explorer",
+   "eulerId": "library:visual-lab-foundations-powers-roots-scale",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-foundations-powers-roots-scale",
+   "fields": [
+    "foundations"
+   ],
+   "level": "L0",
+   "status": "outline",
+   "summary": "An exact static instrument for integer-power ladders, certified integer-root brackets, and rational length, area, and volume scale factors, with complete tables and domain boundaries.",
+   "minutes": 45
+  },
+  {
+   "id": "metric-projection",
+   "title": "Transport the Metric Before Projecting",
+   "eulerId": "library:visual-lab-metric-projection",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-metric-projection",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Distinguish preserving physical geometry through a coordinate change from replacing the metric, then certify exact projectors and transfer to sampled polynomial approximation.",
+   "minutes": 90
+  },
+  {
+   "id": "integer-image",
+   "title": "Full Rank, but Which Integer Outputs?",
+   "eulerId": "library:visual-lab-integer-image",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-integer-image",
+   "fields": [
+    "linear-algebra",
+    "abstract-algebra",
+    "category-theory"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Separate field rank from integer image, then construct an onto integer map whose supplied columns contain no basis of its image and describe every fiber exactly.",
+   "minutes": 90
+  },
+  {
+   "id": "quantity-division",
+   "title": "What Does This Quotient Measure?",
+   "eulerId": "library:visual-lab-quantity-division",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-quantity-division",
+   "fields": [
+    "foundations"
+   ],
+   "level": "L0",
+   "status": "outline",
+   "summary": "Choose the unknown and its unit in a fraction question, separate exact portion-equivalents from complete portions and remaining liquid, and compare once-only with repeated loss.",
+   "minutes": 100
+  },
+  {
+   "id": "polynomial-projectors",
+   "title": "Why Eigenvalue Values Are Not Enough",
+   "eulerId": "library:visual-lab-polynomial-projectors",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-polynomial-projectors",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "Build primary-space projections from repeated-root polynomial conditions, expose eigenvector tests that conceal failure, and transfer the proof to reflection and second differences on polynomial space.",
+   "minutes": 90
+  },
+  {
+   "id": "mathematics-education-quantity-evidence",
+   "title": "Quantity, Arrangement, and Evidence Laboratory",
+   "eulerId": "library:visual-lab-mathematics-education-quantity-evidence",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-mathematics-education-quantity-evidence",
+   "fields": [
+    "mathematics-education"
+   ],
+   "level": "L1",
+   "status": "reviewed",
+   "summary": "An exact bounded instrument separating cardinality from display span through complete one-to-one pairing, identity-preserving rearrangement, part-whole decompositions, and tens-and-ones forms with full table alternatives.",
+   "minutes": 55
+  },
+  {
+   "id": "tensor-relations",
+   "title": "Can These Pure Values Extend Linearly?",
+   "eulerId": "library:visual-lab-tensor-relations",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-tensor-relations",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Rewrite a tensor, audit whether proposed pure values admit a linear extension, and distinguish a tensor from its polynomial image through exact coefficient calculations and changed tasks.",
+   "minutes": 90
+  },
+  {
+   "id": "exact-randomization",
+   "title": "Exact Randomization: All Six Assignments",
+   "eulerId": "library:visual-lab-exact-randomization",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-exact-randomization",
+   "fields": [
+    "statistics",
+    "probability"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Enumerate every two-treated assignment for four fixed outcomes, compare inclusive one- and two-sided tails, and see how ties constrain exact p-values.",
+   "minutes": 35
+  },
+  {
+   "id": "ideal-quotients",
+   "title": "Ideals and quotient residues",
+   "eulerId": "library:visual-lab-ideal-quotients",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-ideal-quotients",
+   "fields": [
+    "commutative-algebra-algebraic-geometry"
+   ],
+   "level": "L4",
+   "status": "reviewed",
+   "summary": "How many cosets does the ideal generated by a have in Z/nZ?",
+   "minutes": 15
+  },
+  {
+   "id": "simple-functions",
+   "title": "Approximate from below and above",
+   "eulerId": "library:visual-lab-simple-functions",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-simple-functions",
+   "fields": [
+    "measure-integration"
+   ],
+   "level": "L4",
+   "status": "reviewed",
+   "summary": "How do dyadic simple functions squeeze the integral of x on [0,1]?",
+   "minutes": 15
+  },
+  {
+   "id": "hilbert-projections",
+   "title": "Nearest points and perpendicular error",
+   "eulerId": "library:visual-lab-hilbert-projections",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-hilbert-projections",
+   "fields": [
+    "functional-analysis"
+   ],
+   "level": "L4",
+   "status": "reviewed",
+   "summary": "Which multiple of (1,k) is nearest to (a,b)?",
+   "minutes": 15
+  },
+  {
+   "id": "heat-mode-decay",
+   "title": "Heat modes lose amplitude at different rates",
+   "eulerId": "library:visual-lab-heat-mode-decay",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-heat-mode-decay",
+   "fields": [
+    "pde"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "How does mode number change diffusion decay with zero endpoint values?",
+   "minutes": 15
+  },
+  {
+   "id": "commuting-squares",
+   "title": "Two paths through a diagram",
+   "eulerId": "library:visual-lab-commuting-squares",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-commuting-squares",
+   "fields": [
+    "category-theory"
+   ],
+   "level": "L4",
+   "status": "reviewed",
+   "summary": "Do four module maps give the same composite on every residue?",
+   "minutes": 15
+  },
+  {
+   "id": "perfect-secrecy",
+   "title": "A ciphertext and a posterior",
+   "eulerId": "library:visual-lab-perfect-secrecy",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-perfect-secrecy",
+   "fields": [
+    "cryptography"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "When does a two-bit ciphertext leave every message prior unchanged?",
+   "minutes": 15
+  },
+  {
+   "id": "polygon-pi-bounds",
+   "title": "Polygon doubling and circle bounds",
+   "eulerId": "library:visual-lab-polygon-pi-bounds",
+   "collection": "atlas",
+   "url": "apps/atlas/index.html#/labs?lab=visual-lab-polygon-pi-bounds",
+   "fields": [
+    "history-of-mathematics"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "How does polygon doubling narrow circle-perimeter bounds?",
+   "minutes": 15
+  },
+  {
+   "id": "bayesian-explorer",
+   "title": "Bayesian updating explorer",
+   "eulerId": "bayesian:explorer",
+   "collection": "bayesian",
+   "url": "apps/bayesian/explorer.html",
+   "fields": [
+    "bayesian-computational-statistics",
+    "probability"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Change observations and compare prior, likelihood and posterior in the existing browser explorer."
+  },
+  {
+   "id": "workshop-conditions",
+   "title": "Conditions and reversible reasoning",
+   "eulerId": "conditions:index.html",
+   "collection": "conditions",
+   "fields": [
+    "logic-set-theory",
+    "foundations"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "url": "apps/conditions/index.html",
+   "kind": "workshop",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/conditions/conditions-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/conditions/conditions-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "workshop-witnesses",
+   "title": "Does this answer have a witness?",
+   "eulerId": "conditions:witnesses/index.html",
+   "collection": "conditions",
+   "fields": [
+    "logic-set-theory",
+    "foundations"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "url": "apps/conditions/witnesses/index.html",
+   "kind": "workshop",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/conditions/witnesses-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/conditions/witnesses-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "workshop-damping",
+   "title": "Damping, limits, and differentiation",
+   "eulerId": "conditions:damping/index.html",
+   "collection": "conditions",
+   "fields": [
+    "calculus",
+    "ode"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "url": "apps/conditions/damping/index.html",
+   "kind": "workshop",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/conditions/damping-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/conditions/damping-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "uh-counterexample-hunt",
+   "title": "Conjecture stress test",
+   "eulerId": "explorations:lab:counterexample-hunt",
+   "collection": "explorations",
+   "fields": [
+    "foundations",
+    "logic-set-theory"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "A single counterexample refutes a universal claim; passing finite cases does not prove it.",
+   "url": "apps/unhurried/labs/counterexample-hunt/index.html"
+  },
+  {
+   "id": "uh-induction-builder",
+   "title": "Base and step builder",
+   "eulerId": "explorations:lab:induction-builder",
+   "collection": "explorations",
+   "fields": [
+    "foundations",
+    "logic-set-theory"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "The induction hypothesis is available only at earlier indices.",
+   "url": "apps/unhurried/labs/induction-builder/index.html"
+  },
+  {
+   "id": "uh-quantifier-scope-grid",
+   "title": "Quantifier order grid",
+   "eulerId": "explorations:lab:quantifier-scope-grid",
+   "collection": "explorations",
+   "fields": [
+    "logic-set-theory"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Truth follows the selected finite relation and current quantifier scopes.",
+   "url": "apps/unhurried/labs/quantifier-scope-grid/index.html"
+  },
+  {
+   "id": "uh-diagonal-sequence",
+   "title": "The missed binary sequence",
+   "eulerId": "explorations:lab:diagonal-sequence",
+   "collection": "explorations",
+   "fields": [
+    "logic-set-theory"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Constructed nth bit differs from nth listed sequence bit.",
+   "url": "apps/unhurried/labs/diagonal-sequence/index.html"
+  },
+  {
+   "id": "uh-euclidean-tiles",
+   "title": "Euclid in rectangles",
+   "eulerId": "explorations:lab:euclidean-tiles",
+   "collection": "explorations",
+   "fields": [
+    "number-theory",
+    "cryptography"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "The set of common divisors is unchanged by (a,b)→(b,a mod b).",
+   "url": "apps/unhurried/labs/euclidean-tiles/index.html"
+  },
+  {
+   "id": "uh-residue-orbits",
+   "title": "Clock orbits and inverses",
+   "eulerId": "explorations:lab:residue-orbits",
+   "collection": "explorations",
+   "fields": [
+    "number-theory",
+    "cryptography"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Multiplication permutes residues exactly when gcd(a,m)=1.",
+   "url": "apps/unhurried/labs/residue-orbits/index.html"
+  },
+  {
+   "id": "uh-counting-choice-tree",
+   "title": "Choice tree and overcount",
+   "eulerId": "explorations:lab:counting-choice-tree",
+   "collection": "explorations",
+   "fields": [
+    "discrete-combinatorics"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Each ordered path represents one sequence; unordered groups have k! labelings only for distinct picks.",
+   "url": "apps/unhurried/labs/counting-choice-tree/index.html"
+  },
+  {
+   "id": "uh-inclusion-exclusion-sets",
+   "title": "Overlap ledger",
+   "eulerId": "explorations:lab:inclusion-exclusion-sets",
+   "collection": "explorations",
+   "fields": [
+    "discrete-combinatorics"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Each element contributes exactly one to the union total.",
+   "url": "apps/unhurried/labs/inclusion-exclusion-sets/index.html"
+  },
+  {
+   "id": "uh-degree-route-lab",
+   "title": "Edge degrees and routes",
+   "eulerId": "explorations:lab:degree-route-lab",
+   "collection": "explorations",
+   "fields": [
+    "graph-theory"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For simple graphs sum degrees=2E; Euler criterion requires connected nonisolated part.",
+   "url": "apps/unhurried/labs/degree-route-lab/index.html"
+  },
+  {
+   "id": "uh-bfs-layer-explorer",
+   "title": "Shortest path layers",
+   "eulerId": "explorations:lab:bfs-layer-explorer",
+   "collection": "explorations",
+   "fields": [
+    "graph-theory"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "First discovery gives shortest edge-count distance in an unweighted graph.",
+   "url": "apps/unhurried/labs/bfs-layer-explorer/index.html"
+  },
+  {
+   "id": "uh-automaton-builder",
+   "title": "Finite state machine workshop",
+   "eulerId": "explorations:lab:automaton-builder",
+   "collection": "explorations",
+   "fields": [
+    "computability-complexity"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "At each symbol, exactly one transition determines the next DFA state.",
+   "url": "apps/unhurried/labs/automaton-builder/index.html"
+  },
+  {
+   "id": "uh-growth-comparator",
+   "title": "Growth and thresholds",
+   "eulerId": "explorations:lab:growth-comparator",
+   "collection": "explorations",
+   "fields": [
+    "computability-complexity"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "A displayed finite range cannot establish an asymptotic bound.",
+   "url": "apps/unhurried/labs/growth-comparator/index.html"
+  },
+  {
+   "id": "uh-lab-calc-secant",
+   "title": "From secant to tangent",
+   "eulerId": "explorations:lab:lab-calc-secant",
+   "collection": "explorations",
+   "fields": [
+    "calculus"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For x², secant slope is 2a+h; at |x| origin opposite sides approach ±1.",
+   "url": "apps/unhurried/labs/lab-calc-secant/index.html"
+  },
+  {
+   "id": "uh-lab-calc-sums",
+   "title": "Area between two honest bounds",
+   "eulerId": "explorations:lab:lab-calc-sums",
+   "collection": "explorations",
+   "fields": [
+    "calculus"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For increasing chosen functions, lower≤integral≤upper and uniform gap tends to zero.",
+   "url": "apps/unhurried/labs/lab-calc-sums/index.html"
+  },
+  {
+   "id": "uh-lab-multi-gradient",
+   "title": "A direction finder on a landscape",
+   "eulerId": "explorations:lab:lab-multi-gradient",
+   "collection": "explorations",
+   "fields": [
+    "calculus"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Directional derivative equals gradient dot unit direction.",
+   "url": "apps/unhurried/labs/lab-multi-gradient/index.html"
+  },
+  {
+   "id": "uh-lab-multi-circulation",
+   "title": "A hole inside the loop",
+   "eulerId": "explorations:lab:lab-multi-circulation",
+   "collection": "explorations",
+   "fields": [
+    "calculus"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Gradient-field circulation is zero; admissible vortex circles give 0 or signed 2π by winding.",
+   "url": "apps/unhurried/labs/lab-multi-circulation/index.html"
+  },
+  {
+   "id": "uh-lab-real-tolerance",
+   "title": "Choose a delta that keeps the promise",
+   "eulerId": "explorations:lab:lab-real-tolerance",
+   "collection": "explorations",
+   "fields": [
+    "real-analysis"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For f=2x, delta≤epsilon/2 is sufficient for the strict implication.",
+   "url": "apps/unhurried/labs/lab-real-tolerance/index.html"
+  },
+  {
+   "id": "uh-lab-real-convergence",
+   "title": "A shrinking spike with stubborn area",
+   "eulerId": "explorations:lab:lab-real-convergence",
+   "collection": "explorations",
+   "fields": [
+    "real-analysis"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Spike integrals stay 1 while the sequence tends pointwise to 0; no single integrable dominator exists.",
+   "url": "apps/unhurried/labs/lab-real-convergence/index.html"
+  },
+  {
+   "id": "uh-lab-complex-multiply",
+   "title": "Turn and stretch with one number",
+   "eulerId": "explorations:lab:lab-complex-multiply",
+   "collection": "explorations",
+   "fields": [
+    "complex-analysis"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "|zw|=|z||w| and nonzero arguments add modulo 2π.",
+   "url": "apps/unhurried/labs/lab-complex-multiply/index.html"
+  },
+  {
+   "id": "uh-lab-complex-contour",
+   "title": "What a loop encloses",
+   "eulerId": "explorations:lab:lab-complex-contour",
+   "collection": "explorations",
+   "fields": [
+    "complex-analysis"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "For contours avoiding poles, integral equals 2πi times oriented sum of enclosed residues.",
+   "url": "apps/unhurried/labs/lab-complex-contour/index.html"
+  },
+  {
+   "id": "uh-lab-ode-field",
+   "title": "Exact curves and an approximate walk",
+   "eulerId": "explorations:lab:lab-ode-field",
+   "collection": "explorations",
+   "fields": [
+    "ode",
+    "dynamical-systems"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For y'=−ky the exact positive solution remains positive and decays.",
+   "url": "apps/unhurried/labs/lab-ode-field/index.html"
+  },
+  {
+   "id": "uh-lab-ode-bifurcation",
+   "title": "Watch two equilibria meet",
+   "eulerId": "explorations:lab:lab-ode-bifurcation",
+   "collection": "explorations",
+   "fields": [
+    "ode",
+    "dynamical-systems"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "For x'=μ−x²: two equilibria for μ>0, one nonhyperbolic for μ=0, none for μ<0.",
+   "url": "apps/unhurried/labs/lab-ode-bifurcation/index.html"
+  },
+  {
+   "id": "uh-lab-num-root",
+   "title": "A fast guess and a guaranteed bracket",
+   "eulerId": "explorations:lab:lab-num-root",
+   "collection": "explorations",
+   "fields": [
+    "numerical-analysis"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Bisection retains a root under validated continuity and reliable signs.",
+   "url": "apps/unhurried/labs/lab-num-root/index.html"
+  },
+  {
+   "id": "uh-lab-num-step-error",
+   "title": "The step-size sweet spot",
+   "eulerId": "explorations:lab:lab-num-step-error",
+   "collection": "explorations",
+   "fields": [
+    "numerical-analysis"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Exact truncation decreases with h while finite-precision roundoff can grow as h shrinks.",
+   "url": "apps/unhurried/labs/lab-num-step-error/index.html"
+  },
+  {
+   "id": "uh-lab-opt-descent",
+   "title": "When downhill steps overshoot",
+   "eulerId": "explorations:lab:lab-opt-descent",
+   "collection": "explorations",
+   "fields": [
+    "optimisation"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For positive quadratic Hessian Q, 0<α<2/λmax(Q) ensures convergence.",
+   "url": "apps/unhurried/labs/lab-opt-descent/index.html"
+  },
+  {
+   "id": "uh-lab-opt-certificate",
+   "title": "A lower bound and a feasible answer",
+   "eulerId": "explorations:lab:lab-opt-certificate",
+   "collection": "explorations",
+   "fields": [
+    "optimisation"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "summary": "Weak duality orders any feasible primal and dual objective values.",
+   "url": "apps/unhurried/labs/lab-opt-certificate/index.html"
+  },
+  {
+   "id": "uh-ga-lab-matrix-grid",
+   "title": "Matrix grid studio",
+   "eulerId": "explorations:lab:ga-lab-matrix-grid",
+   "collection": "explorations",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For every vector v=x e1+y e2, Av=x Ae1+y Ae2; area scale equals |det A|.",
+   "url": "apps/unhurried/labs/ga-lab-matrix-grid/index.html"
+  },
+  {
+   "id": "uh-ga-lab-eigen-ellipse",
+   "title": "Eigenlines and ellipse",
+   "eulerId": "explorations:lab:ga-lab-eigen-ellipse",
+   "collection": "explorations",
+   "fields": [
+    "linear-algebra"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "For real A, squared singular values equal eigenvalues of AᵀA.",
+   "url": "apps/unhurried/labs/ga-lab-eigen-ellipse/index.html"
+  },
+  {
+   "id": "uh-ga-lab-compass",
+   "title": "Compass construction bench",
+   "eulerId": "explorations:lab:ga-lab-compass",
+   "collection": "explorations",
+   "fields": [
+    "geometry"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "The bisector construction relies on equal radii and SSS congruence.",
+   "url": "apps/unhurried/labs/ga-lab-compass/index.html"
+  },
+  {
+   "id": "uh-ga-lab-hyperbolic-triangle",
+   "title": "Three triangle models",
+   "eulerId": "explorations:lab:ga-lab-hyperbolic-triangle",
+   "collection": "explorations",
+   "fields": [
+    "geometry"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Euclidean sum π; sphere octant example 3π/2; hyperbolic curvature −1 area equals defect.",
+   "url": "apps/unhurried/labs/ga-lab-hyperbolic-triangle/index.html"
+  },
+  {
+   "id": "uh-ga-lab-open-sets",
+   "title": "Epsilon-neighborhood tester",
+   "eulerId": "explorations:lab:ga-lab-open-sets",
+   "collection": "explorations",
+   "fields": [
+    "topology"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "An open set in R gives each of its points some contained epsilon interval.",
+   "url": "apps/unhurried/labs/ga-lab-open-sets/index.html"
+  },
+  {
+   "id": "uh-ga-lab-euler",
+   "title": "Triangulation counter",
+   "eulerId": "explorations:lab:ga-lab-euler",
+   "collection": "explorations",
+   "fields": [
+    "topology"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For a closed triangulated surface, allowed subdivision preserves V−E+F.",
+   "url": "apps/unhurried/labs/ga-lab-euler/index.html"
+  },
+  {
+   "id": "uh-ga-lab-square-symmetry",
+   "title": "Square symmetry composer",
+   "eulerId": "explorations:lab:ga-lab-square-symmetry",
+   "collection": "explorations",
+   "fields": [
+    "abstract-algebra"
+   ],
+   "level": "L1",
+   "status": "reviewed",
+   "summary": "Composition of square symmetries stays in D4; associative law comes from function composition.",
+   "url": "apps/unhurried/labs/ga-lab-square-symmetry/index.html"
+  },
+  {
+   "id": "uh-ga-lab-modular",
+   "title": "Modular arithmetic workbench",
+   "eulerId": "explorations:lab:ga-lab-modular",
+   "collection": "explorations",
+   "fields": [
+    "abstract-algebra"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "A nonzero residue is invertible mod n exactly when gcd(a,n)=1.",
+   "url": "apps/unhurried/labs/ga-lab-modular/index.html"
+  },
+  {
+   "id": "uh-ga-lab-curvature",
+   "title": "Curve curvature microscope",
+   "eulerId": "explorations:lab:ga-lab-curvature",
+   "collection": "explorations",
+   "fields": [
+    "differential-geometry"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "For regular C² curves, signed curvature is det(γ′,γ″)/||γ′||³ and is unchanged by orientation-preserving reparameterization.",
+   "url": "apps/unhurried/labs/ga-lab-curvature/index.html"
+  },
+  {
+   "id": "uh-ga-lab-sphere-metric",
+   "title": "Sphere path measurer",
+   "eulerId": "explorations:lab:ga-lab-sphere-metric",
+   "collection": "explorations",
+   "fields": [
+    "differential-geometry"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "For sphere radius R, great-circle arc length is R times central angle for the shorter arc.",
+   "url": "apps/unhurried/labs/ga-lab-sphere-metric/index.html"
+  },
+  {
+   "id": "uh-ga-lab-polynomial-loci",
+   "title": "Polynomial zero-set explorer",
+   "eulerId": "explorations:lab:ga-lab-polynomial-loci",
+   "collection": "explorations",
+   "fields": [
+    "commutative-algebra-algebraic-geometry"
+   ],
+   "level": "L1",
+   "status": "reviewed",
+   "summary": "Displayed real points satisfy F=0 to stated numerical tolerance; exact named examples use symbolic substitution.",
+   "url": "apps/unhurried/labs/ga-lab-polynomial-loci/index.html"
+  },
+  {
+   "id": "uh-ga-lab-projective-intersection",
+   "title": "Line and conic intersections",
+   "eulerId": "explorations:lab:ga-lab-projective-intersection",
+   "collection": "explorations",
+   "fields": [
+    "commutative-algebra-algebraic-geometry"
+   ],
+   "level": "L3",
+   "status": "reviewed",
+   "summary": "Line and conic have total intersection multiplicity two over complex projective plane if no component is shared.",
+   "url": "apps/unhurried/labs/ga-lab-projective-intersection/index.html"
+  },
+  {
+   "id": "uh-ga-lab-commuting",
+   "title": "Commuting diagram checker",
+   "eulerId": "explorations:lab:ga-lab-commuting",
+   "collection": "explorations",
+   "fields": [
+    "category-theory"
+   ],
+   "level": "L1",
+   "status": "reviewed",
+   "summary": "A finite-set square commutes iff the two composites agree on every input element.",
+   "url": "apps/unhurried/labs/ga-lab-commuting/index.html"
+  },
+  {
+   "id": "uh-ga-lab-pullback",
+   "title": "Pullback matching table",
+   "eulerId": "explorations:lab:ga-lab-pullback",
+   "collection": "explorations",
+   "fields": [
+    "category-theory"
+   ],
+   "level": "L2",
+   "status": "reviewed",
+   "summary": "The Set pullback contains exactly compatible pairs and each compatible cone has a unique mediator.",
+   "url": "apps/unhurried/labs/ga-lab-pullback/index.html"
+  },
+  {
+   "id": "uh-probability-condition-reveal",
+   "title": "Reveal the denominator",
+   "eulerId": "explorations:lab:probability-condition-reveal",
+   "collection": "explorations",
+   "fields": [
+    "probability"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Posterior probabilities sum to 1; empirical frequencies approach values only with enough independent draws",
+   "url": "apps/unhurried/labs/probability-condition-reveal/index.html"
+  },
+  {
+   "id": "uh-probability-distribution-builder",
+   "title": "Build a fair or lopsided game",
+   "eulerId": "explorations:lab:probability-distribution-builder",
+   "collection": "explorations",
+   "fields": [
+    "probability"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Probabilities sum to 1; exact mean is unchanged by trial count",
+   "url": "apps/unhurried/labs/probability-distribution-builder/index.html"
+  },
+  {
+   "id": "uh-statistics-inference-coverage-factory",
+   "title": "Watch interval coverage",
+   "eulerId": "explorations:lab:statistics-inference-coverage-factory",
+   "collection": "explorations",
+   "fields": [
+    "statistics"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Coverage claim concerns the method under its sampling assumptions",
+   "url": "apps/unhurried/labs/statistics-inference-coverage-factory/index.html"
+  },
+  {
+   "id": "uh-statistics-inference-null-tail",
+   "title": "Explore null tails and selection",
+   "eulerId": "explorations:lab:statistics-inference-null-tail",
+   "collection": "explorations",
+   "fields": [
+    "statistics"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Exact null distribution normalized to 1",
+   "url": "apps/unhurried/labs/statistics-inference-null-tail/index.html"
+  },
+  {
+   "id": "uh-stochastic-processes-walk-edges",
+   "title": "Walk until an edge",
+   "eulerId": "explorations:lab:stochastic-processes-walk-edges",
+   "collection": "explorations",
+   "fields": [
+    "stochastic-processes"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Absorbing states remain absorbing; probabilities total 1",
+   "url": "apps/unhurried/labs/stochastic-processes-walk-edges/index.html"
+  },
+  {
+   "id": "uh-stochastic-processes-mood-chain",
+   "title": "Playlist mood chain",
+   "eulerId": "explorations:lab:stochastic-processes-mood-chain",
+   "collection": "explorations",
+   "fields": [
+    "stochastic-processes"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Every transition row sums to 1; distribution stays normalized",
+   "url": "apps/unhurried/labs/stochastic-processes-mood-chain/index.html"
+  },
+  {
+   "id": "uh-information-theory-entropy-mixer",
+   "title": "Mix an alphabet",
+   "eulerId": "explorations:lab:information-theory-entropy-mixer",
+   "collection": "explorations",
+   "fields": [
+    "information-coding-theory"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Probabilities sum to 1; H(X,Y)=H(X)+H(Y|X)",
+   "url": "apps/unhurried/labs/information-theory-entropy-mixer/index.html"
+  },
+  {
+   "id": "uh-information-theory-code-tree",
+   "title": "Code a tiny alphabet",
+   "eulerId": "explorations:lab:information-theory-code-tree",
+   "collection": "explorations",
+   "fields": [
+    "information-coding-theory"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "No leaf code is prefix of another; Kraft sum <= 1",
+   "url": "apps/unhurried/labs/information-theory-code-tree/index.html"
+  },
+  {
+   "id": "uh-game-social-choice-best-response",
+   "title": "Follow the best-response arrows",
+   "eulerId": "explorations:lab:game-social-choice-best-response",
+   "collection": "explorations",
+   "fields": [
+    "game-theory"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Marked pure equilibria pass every unilateral deviation check",
+   "url": "apps/unhurried/labs/game-social-choice-best-response/index.html"
+  },
+  {
+   "id": "uh-game-social-choice-ballot-rules",
+   "title": "Count the same ballots three ways",
+   "eulerId": "explorations:lab:game-social-choice-ballot-rules",
+   "collection": "explorations",
+   "fields": [
+    "game-theory"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "Every ballot ranks each option once; totals reconcile with voter count",
+   "url": "apps/unhurried/labs/game-social-choice-ballot-rules/index.html"
+  },
+  {
+   "id": "uh-mathematical-modelling-beats-lab",
+   "title": "Two tones and a beat envelope",
+   "eulerId": "explorations:lab:mathematical-modelling-beats-lab",
+   "collection": "explorations",
+   "fields": [
+    "mathematical-physics"
+   ],
+   "level": "L1",
+   "status": "outline",
+   "summary": "For equal-amplitude sinusoidal tones, algebraic superposition identity holds",
+   "url": "apps/unhurried/labs/mathematical-modelling-beats-lab/index.html"
+  },
+  {
+   "id": "uh-mathematical-modelling-model-stress",
+   "title": "Stress-test a toy network model",
+   "eulerId": "explorations:lab:mathematical-modelling-model-stress",
+   "collection": "explorations",
+   "fields": [
+    "graph-theory",
+    "dynamical-systems"
+   ],
+   "level": "L2",
+   "status": "outline",
+   "summary": "Node count bounded by graph size; fixed seed reproduces a run",
+   "url": "apps/unhurried/labs/mathematical-modelling-model-stress/index.html"
+  },
+  {
+   "id": "lecture-homotopy",
+   "title": "When does a loop remember a hole?",
+   "eulerId": "lectures:homotopy.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/homotopy.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/homotopy-instructor.pdf"
+    },
+    {
+     "label": "Lecture handout (PDF)",
+     "file": "pdfs/lectures/homotopy-lecture.pdf"
+    },
+    {
+     "label": "Teaching route: baseline handout (PDF)",
+     "file": "pdfs/lectures/teaching-homotopy-route/baseline.pdf"
+    },
+    {
+     "label": "Teaching route: immediate handout (PDF)",
+     "file": "pdfs/lectures/teaching-homotopy-route/immediate.pdf"
+    },
+    {
+     "label": "Teaching route: delayed handout (PDF)",
+     "file": "pdfs/lectures/teaching-homotopy-route/delayed.pdf"
+    },
+    {
+     "label": "Teaching route: instructor arguments (PDF)",
+     "file": "pdfs/lectures/teaching-homotopy-route/instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-loops-and-words",
+   "title": "Loops, words, and the torus",
+   "eulerId": "lectures:loops-and-words.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/loops-and-words.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/loops-and-words-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/loops-and-words-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-lift-return-roots",
+   "title": "Lift, return, choose a root",
+   "eulerId": "lectures:lift-return-roots.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/lift-return-roots.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/lift-return-roots-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/lift-return-roots-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-circle-maps",
+   "title": "Degree belongs to a map",
+   "eulerId": "lectures:circle-maps.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/circle-maps.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/degree-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/degree-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-proof-pathways",
+   "title": "Proof pathways",
+   "eulerId": "lectures:proof-pathways.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/proof-pathways.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/proof-pathways-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/proof-pathways-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-cellular-words",
+   "title": "A matrix forgets word order",
+   "eulerId": "lectures:cellular-words.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/cellular-words.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/cellular-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/cellular-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-covering-graphs",
+   "title": "Three sheets, how many symmetries?",
+   "eulerId": "lectures:covering-graphs.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/covering-graphs.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/covers-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/covers-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-relations-and-covers",
+   "title": "A disk must lift from every sheet",
+   "eulerId": "lectures:relations-and-covers.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/relations-and-covers.html",
+   "kind": "lecture",
+   "downloads": [
+    {
+     "label": "Learner handout (PDF)",
+     "file": "pdfs/lectures/relations-learner.pdf"
+    },
+    {
+     "label": "Instructor handout (PDF)",
+     "file": "pdfs/lectures/relations-instructor.pdf"
+    }
+   ]
+  },
+  {
+   "id": "lecture-graph-maps-and-homotopy",
+   "title": "Graph maps and homotopy",
+   "eulerId": "lectures:graph-maps-and-homotopy.html",
+   "collection": "lectures",
+   "fields": [
+    "topology",
+    "algebraic-topology"
+   ],
+   "level": "L3",
+   "status": "outline",
+   "url": "apps/lectures/graph-maps-and-homotopy.html",
+   "kind": "lecture"
+  }
+ ]
+}

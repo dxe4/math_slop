@@ -1,0 +1,605 @@
+{
+  "id": "20",
+  "title": "Functions of several variables",
+  "subtitle": "How can one output depend on a whole position, and what does approaching that position mean?",
+  "prerequisites": [
+    "Functions, domains, and continuity from chapters 1 and 4.",
+    "Single-variable derivatives and differentiation rules from chapters 5–6.",
+    "Coordinates, vectors, and distance from chapter 19."
+  ],
+  "objectives": [
+    "Describe domains, graphs, and level sets of functions of two or three variables.",
+    "Disprove limits using conflicting paths and prove limits using bounds that hold in every direction.",
+    "Compute and interpret partial and higher partial derivatives, including units.",
+    "State sufficient hypotheses for equality of mixed partial derivatives.",
+    "Classify translated axis-aligned standard quadrics using domains and actual traces.",
+    "Reconstruct and test a proposed surface from measured slices under stated family assumptions."
+  ],
+  "sections": [
+    {
+      "title": "One output, several independent inputs",
+      "paragraphs": [
+        "A temperature map assigns a number to every permitted position on a plate. Write $T(x,y)$ for temperature at the point with coordinates $(x,y)$. The ordered pair is one input location, though its two coordinates can vary independently. A scalar function of two variables is a rule $f:D\\to\\mathbb R$, where $D$ is a subset of $\\mathbb R^2$. A function of three variables might describe temperature throughout a solid. Its values are still numbers; it is different from a vector-valued function whose output has several components.",
+        "Find the domain before drawing or differentiating. For $f(x,y)=\\sqrt{9-x^2-y^2}$, the radicand must be nonnegative, so $D$ is the closed disk $x^2+y^2\\le 9$. Its boundary circle is included. For $g(x,y)=\\ln(y-x^2)$, the logarithm requires $y>x^2$, an open region above a parabola; the parabola itself is excluded. For a quotient, exclude every zero of the denominator, even if simplification later suggests an extension. A physical model can impose further restrictions: negative concentrations might be algebraically allowed but physically meaningless.",
+        "An interior point has some entire small disk around it inside $D$. A boundary point has arbitrarily nearby points both in $D$ and outside $D$. This distinction matters for limits and derivatives: an ordinary two-sided partial derivative needs coordinate perturbations on both sides. At the edge of a physical plate only a one-sided rate may be available unless the model extends beyond the plate. Closed means containing all boundary points, whereas bounded means fitting inside a disk of finite radius; these are separate properties.",
+        "Coordinate units belong to the model. If $x$ and $y$ are lengths in metres, a dimensionless expression such as $9-x^2-y^2$ needs appropriate coefficients or explicitly nondimensional coordinates. In geometric examples here we use dimensionless coordinates unless units are stated. A temperature model later includes coefficients with the units necessary to make every term a temperature.",
+        "The domain is a set of input points, not a list of separate allowed $x$-values and $y$-values. For $\\ln(4-x^2-y^2)/\\sqrt{y-x}$, the logarithm requires $x^2+y^2<4$ and the denominator requires $y-x>0$. The domain is the intersection of the open disk of radius two with the half-plane above $y=x$. Neither circular boundary nor line $y=x$ is included. Listing $-2<x<2$ and $-2<y<2$ would be necessary but far from sufficient; many pairs in that square violate one or both coupled conditions.",
+        "A level curve is a subset of the domain. For $f(x,y)=\\sqrt{9-x^2-y^2}$, the value $c$ can range only from zero to three. If $0\\le c\\le3$, solving $f=c$ gives $x^2+y^2=9-c^2$, a circle for $0\\le c<3$ and a single point at $c=3$. The $c=0$ level is the boundary circle of the domain, which is included because the square root permits zero. If the domain were physically restricted to an open plate, that boundary level might be absent even though the algebraic formula still makes sense there. State the domain before classifying contours.",
+        "An input can have different status relative to a domain: interior, boundary, exterior, or isolated. On the closed disk $x^2+y^2\\le9$, the center is interior and a point with radius three is boundary; outside points are not eligible inputs. For a domain formed by a curve alone, no point has a full two-dimensional disk around it, so ordinary open-domain partial-derivative theorems need reconsideration. This geometric classification guides which limits, directional changes, and optimization conditions are meaningful. A plotted border is not enough; inclusion follows from the defining inequalities.",
+        "A physical domain may be smaller than the mathematical domain of a formula. If a temperature model is fitted only on a metal plate, extrapolating it beyond the plate may be algebraically possible but empirically unsupported. A boundary derivative might be computed from the formula's extension, but the plate provides observations only from its own side. Distinguish a formula's natural domain, the region where a model is trusted, and the region over which a theorem is applied. These sets can differ, and conclusions should name the one being used."
+      ],
+      "formula": "Distance from (x,y) to (a,b): r = √((x − a)² + (y − b)²).",
+      "formulaTex": "r=\\sqrt{(x-a)^2+(y-b)^2}"
+    },
+    {
+      "title": "Graphs, slices, and level sets",
+      "paragraphs": [
+        "The graph of $z=f(x,y)$ consists of triples $(x,y,f(x,y))$ in three-dimensional space. The domain lies in the input plane; the graph sits above or below it. Holding $y=b$ gives a vertical slice $z=f(x,b)$. Holding $x=a$ gives another slice. These one-variable graphs are useful windows into a surface, but a few slices cannot determine every feature between them.",
+        "A level set fixes the output instead: $f(x,y)=c$. For $f(x,y)=x^2+y^2$, positive levels are circles of radius $\\sqrt c$, level zero is a single point, and negative levels are empty. The graph is an upward-opening paraboloid. For $f(x,y)=x^2-y^2$, positive levels are hyperbolas opening along the $x$ direction, negative levels open along the $y$ direction, and level zero consists of the intersecting lines $y=x$ and $y=-x$. Its graph is a saddle, rising along one coordinate axis and falling along the other.",
+        "A contour map labels several level sets in the input plane. Closely spaced contours for equal output increments suggest rapid variation across them; movement along a contour keeps the output constant. This interpretation depends on the coordinate scale and on using equal contour increments. Unevenly chosen contour values can make a gently varying region look steep. Contours also need not be smooth curves: the saddle’s zero level has a crossing, and the paraboloid’s zero level is a point.",
+        "For a function $f(x,y,z)$, a level set $f=c$ usually forms a surface in ordinary three-dimensional space. For example $x^2+y^2+z^2=c$ is a sphere when $c>0$. The full graph would require four coordinates, so slices and level surfaces become especially valuable. Always say whether a displayed surface is a graph of a two-variable function or a level set of a three-variable function.",
+        "Slices and contours answer different questions. For $f(x,y)=x^2+y^2$, the slice $y=0$ gives $z=x^2$, a parabola; the slice $x=0$ is the same shape in the other vertical plane. The level $f=1$ gives a circle in the input plane. A vertical slice shows how output changes along one chosen line, while a contour shows where output stays fixed as both inputs vary. Neither representation alone captures the full surface, but together they can reveal symmetry and distinguish a bowl from a saddle.",
+        "Contours carry a local rate interpretation when the function is differentiable and its gradient is nonzero. Closely spaced equal-value contours often indicate a large gradient magnitude in the direction perpendicular to them. However, plotting with unequal x and y scales distorts apparent distances, and choosing uneven contour increments distorts the rate cue. A map should label contour values, axis scales, and units. Near a critical point, contours may change topology or collapse to a point, so a simple spacing rule may become unreliable without derivative analysis.",
+        "For the saddle $f=x^2-y^2$, the zero contour consists of both diagonals $y=x$ and $y=-x$. Along $y=0$ the surface rises as $x^2$, while along $x=0$ it falls as $-y^2$. This proves the origin is neither a local maximum nor a local minimum without needing a perspective rendering. A few slices chosen along meaningful directions can therefore be decisive, even though arbitrary slices are not enough to prove every possible property. The positive and negative contour families show how the same output level can have disconnected branches.",
+        "When $f$ has three inputs, a two-dimensional contour is replaced by a level surface. For $x^2+y^2+z^2=c>0$, the set is a sphere of radius $\\sqrt c$; for $c=0$ it is one point; for $c<0$ it is empty. A slice at fixed $z=z_0$ is a circle only when $c-z_0^2>0$. These descriptions have different dimensions: the graph of a three-input scalar field would live in four dimensions, but its level surfaces live in ordinary space. Specify which construction a visualization shows so the reader does not mistake a level set for a graph."
+      ],
+      "formula": "Graph: {(x,y,z): (x,y) ∈ D and z = f(x,y)}. Level set at c: {(x,y) ∈ D: f(x,y) = c}.",
+      "formulaTex": "\\begin{aligned}\\text{graph}(f)&=\\{(x,y,z):(x,y)\\in D,\\ z=f(x,y)\\},\\\\ \\text{level}_c(f)&=\\{(x,y)\\in D:f(x,y)=c\\}.\\end{aligned}"
+    },
+    {
+      "title": "Limits must survive every approach",
+      "paragraphs": [
+        "In one variable a point can be approached from the left or right. In a plane there are infinitely many straight and curved approaches. The statement $f(x,y)\\to L$ as $(x,y)\\to(a,b)$ means that all allowed inputs sufficiently close to $(a,b)$, except the point itself, give outputs close to $L$. Formally, for every $\\varepsilon>0$ there is $\\delta>0$ such that $(x,y)\\in D$ and $0<\\sqrt{(x-a)^2+(y-b)^2}<\\delta$ imply $|f(x,y)-L|<\\varepsilon$. The point must be an accumulation point of $D$, so there really are domain points approaching it.",
+        "A path is a convenient way to select some of those inputs. If two paths approaching the same point produce different output limits, the full limit does not exist. For $xy/(x^2+y^2)$ at the origin, the $x$ axis gives zero while $y=x$ gives $1/2$. No single $L$ can match both. But agreement along two paths, or even every straight line, does not prove existence: curves may still expose different behavior. A numerical sample of paths can discover an obstruction; it cannot exhaust the definition.",
+        "A straight-path check can miss a multivariable limit failure. The rational function $q(x,y)=x^2y/(x^4+y^2)$ has value zero on both axes. On a fixed nonhorizontal, nonvertical line $y=mx$ with $m\\ne0$, $q(t,mt)=mt/(t^2+m^2)\\to0$; the horizontal and vertical axes give zero directly. Yet $q(t,t^2)=1/2$ for $t\\ne0$. Lesson 6 develops the balancing-scale reason and the whole curved-path family. Here the contrast establishes the decision rule: two paths with different limits disprove a full limit, while even many agreeing paths cannot prove one.",
+        "To prove a limit, seek a bound depending only on distance. For $p(x,y)=x^2y/(x^2+y^2)$, define $r=\\sqrt{x^2+y^2}$. Since $x^2/(x^2+y^2)\\le1$, we have $|p(x,y)|\\le|y|\\le r$. Choosing $\\delta=\\varepsilon$ proves $p\\to0$. This argument controls every point of the punctured disk at once, including curved paths. Algebraic limit laws also apply when their component limits exist; a quotient law needs a nonzero limiting denominator.",
+        "To disprove a proposed two-variable limit, one contradictory path is enough if another path gives a different limit. To prove a limit, paths are generally insufficient because infinitely many untested approaches remain. The epsilon–delta definition demands one $\\delta$ that works for every eligible point in the punctured disk. This quantifier order is the conceptual difference: “for each chosen path there is a scale” does not imply “there is one scale for all directions and curves.” The radial bound $|p(x,y)|\\le r$ supplies the latter and is why it proves the full limit.",
+        "Polar coordinates can help when the transformed expression has a bound uniform in angle. If $f(r\\cos\\theta,r\\sin\\theta)=r g(\\theta)$ and $|g(\\theta)|\\le M$ for all $\\theta$, then $|f|\\le Mr\\to0$; choose $\\delta=\\varepsilon/M$ when $M>0$. If $g$ depends on $r$ in a way that grows as $\\theta$ changes with $r$, fixing $\\theta$ before sending $r\\to0$ can hide trouble. For $q=x^2y/(x^4+y^2)$, the dangerous balance $y\\approx x^2$ corresponds to an angle that approaches zero with radius for $x>0$, or approaches $\\pi$ for $x<0$, rather than one fixed ray. A polar rewrite is a tool, not an automatic proof.",
+        "The elementary inequality $2|xy|\\le x^2+y^2$ provides many useful bounds. It follows from $(|x|-|y|)^2\\ge0$. Hence $|xy|/(x^2+y^2)\\le1/2$ away from the origin, but that bound does not tend to zero; indeed $xy/(x^2+y^2)$ has different limits along $y=x$ and $y=-x$. Multiplying the numerator by additional powers of $x$ or $y$ may yield a shrinking radial bound. For $x^3y/(x^2+y^2)$, two additional factors of $x$ give absolute value at most $x^2/2\\le r^2/2$ by $|xy|/(x^2+y^2)\\le1/2$, proving limit zero.",
+        "Boundedness also cannot prove a limit: the same $q$ satisfies $|q|\\le1/2$ by $2|x^2y|\\le x^4+y^2$, while its values on $y=x^2$ stay $1/2$. The next investigation derives its other cluster values and explains why a fixed-resolution grid can miss the narrowing ridge.",
+        "The epsilon–delta definition also specifies which points are tested. A limit at a point asks about domain points arbitrarily close to that point but excludes the point itself. Changing the function value at the center cannot alter an existing limit. If a domain has no other points approaching a candidate location, a two-variable limit there is not meaningful in the usual accumulation-point setting. On a restricted domain, the allowed approaches may cover only part of a disk, such as the upper half-plane; the same quantifier then ranges over all nearby domain points, not over points where the function is undefined.",
+        "For a proposed limit $L$, write the target inequality $|f(x,y)-L|<\\varepsilon$ before searching for $\\delta$. A useful estimate replaces the complicated expression by a function of $r=\\sqrt{(x-a)^2+(y-b)^2}$ that tends to zero. If $|f-L|\\le Cr^2$ for domain points with $0<r<r_0$, choosing $\\delta=\\min(r_0,\\sqrt{\\varepsilon/C})$ works when $C>0$; if $C=0$, choose $\\delta=r_0$. The explicit choice makes the proof auditable. A graph or table of values can suggest $L$, but no finite sample can establish the universal bound required by the definition.",
+        "A multivariable limit can exist even when different paths have different formulas or rates of approach. For $f(x,y)=x^2y/(x^2+y^2)$ away from zero, the $x$-axis gives zero while the diagonal $y=x$ gives $x/2$; both tend to zero. These path calculations are consistent with the limit but do not prove it. The global estimate $|f|\\le|y|\\le r$ does. Conversely, two paths with distinct limiting values prove failure immediately because one value of $L$ cannot satisfy both. This asymmetry is useful when choosing between a path counterexample and a uniform estimate."
+      ],
+      "formula": "Different path limits disprove a limit. A bound |f(x,y) − L| ≤ C rᵅ with C > 0 and α > 0 proves it as r → 0.",
+      "theorems": [
+        {
+          "title": "A radial estimate proves every path at once",
+          "statement": "If $(a,b)$ is an accumulation point of the domain $D$ and $|f(x,y)-L|\\le C r^\\alpha$ for domain points with $0<r=\\sqrt{(x-a)^2+(y-b)^2}<r_0$, where $r_0>0$, $C\\ge0$, and $\\alpha>0$, then $f(x,y)\\to L$ as $(x,y)\\to(a,b)$.",
+          "proof": [
+            "Take any $\\varepsilon>0$. If $C=0$, the error is already zero in the punctured neighborhood. Otherwise choose $\\delta$ smaller than $r_0$ and than $(\\varepsilon/C)^{1/\\alpha}$. For every domain point with $0<r<\\delta$, the assumed inequality gives $|f(x,y)-L|\\le Cr^\\alpha<C\\delta^\\alpha\\le\\varepsilon$. This is the full multivariable $\\varepsilon$–$\\delta$ proof: the same $\\delta$ handles every direction, every straight approach, and every curved approach. No path has been singled out.",
+            "For $p(x,y)=x^2y/(x^2+y^2)$ away from the origin, with $p(0,0)=0$, let $r^2=x^2+y^2$. Because $x^2\\le r^2$ and $|y|\\le r$, we have $|p(x,y)|\\le|y|\\le r$. The theorem applies with $C=1$ and $\\alpha=1$, so $p$ tends to zero and is continuous at the origin. This one inequality is more decisive than a finite graph or a list of path calculations.",
+            "The bound must actually shrink to zero. For $q(x,y)=x^2y/(x^4+y^2)$, the inequality $|q|\\le1/2$ establishes boundedness but has no positive power of $r$. Along $y=x^2$ the values remain $1/2$. This contrast shows why checking paths is excellent for disproving a proposed limit, while a uniform estimate is the natural tool for proving one."
+          ],
+          "equationTex": "|f(x,y)-L|\\le Cr^\\alpha,\\quad r=\\sqrt{(x-a)^2+(y-b)^2}\\to0"
+        }
+      ],
+      "formulaTex": "\\begin{gathered}(a,b)\\text{ is an accumulation point of }D,\\quad r=\\sqrt{(x-a)^2+(y-b)^2},\\\\ C>0,\\ \\alpha>0,\\ r_0>0,\\quad |f(x,y)-L|\\le Cr^\\alpha\\quad\\text{for }(x,y)\\in D,\\ 0<r<r_0\\\\ \\Longrightarrow\\lim_{(x,y)\\to(a,b)}f(x,y)=L.\\end{gathered}"
+    },
+    {
+      "title": "Continuity and coordinate rates",
+      "paragraphs": [
+        "A function $f:D\\to\\mathbb R$ is continuous at $p\\in D$ if, for every $\\varepsilon>0$, some $\\delta>0$ makes $|f(q)-f(p)|<\\varepsilon$ for every $q\\in D$ with $\\|q-p\\|<\\delta$. At an accumulation point of $D$, this is equivalent to the limit of $f(q)$ within $D$ equalling $f(p)$. At an isolated domain point, continuity holds automatically. Polynomials are continuous everywhere, and quotients of continuous functions are continuous where their denominators are nonzero. Compositions preserve continuity where defined. The function $p$ from the preceding section becomes continuous at the origin if we define $p(0,0)=0$. The function $q$ cannot be made continuous there by assigning any single value because its limit does not exist.",
+        "The partial derivative $f_x(a,b)$ varies $x$ while holding $y$ exactly equal to $b$. It is the derivative of the slice $x\\mapsto f(x,b)$. Similarly $f_y$ varies $y$ with $x$ fixed. Compute partial derivatives using familiar rules, treating other independent coordinates as constants. If $f(x,y)=x^2e^y+\\sin(xy)$, then $f_x=2xe^y+y\\cos(xy)$ and $f_y=x^2e^y+x\\cos(xy)$. The product $xy$ inside the sine is a reminder that a variable held constant can still multiply the variable being differentiated.",
+        "A partial derivative measures a controlled comparison, not automatically a rate along a moving path. In a temperature field, $T_x$ has units degrees Celsius per metre when $x$ is measured in metres. It describes change per displacement in the $x$ direction with $y$ fixed. If a sensor moves so that both coordinates change with time, both influences matter; chapter 21 develops the chain rule for that motion. A partial derivative does not itself include the sensor’s speed.",
+        "Existence of both partial derivatives at a point does not guarantee continuity there. Extend $q$ above by $q(0,0)=0$. Along each coordinate axis $q$ is identically zero, so both partial derivatives at the origin exist and equal zero. Along $y=x^2$ the values stay $1/2$, so $q$ is discontinuous. Partial derivatives inspect only two slices. A genuinely accurate linear model in all directions requires the stronger concept of differentiability, introduced in the next chapter.",
+        "Partial derivatives are defined by one-variable limits on coordinate slices. For $f_x(a,b)$, hold $y=b$ exactly and take $[f(a+h,b)-f(a,b)]/h$ as $h\\to0$ through permitted inputs. For $f_y$, hold $x=a$. This makes their units transparent: output per $x$-unit and output per $y$-unit can differ. If $x$ is metres and $y$ is seconds, $f_x$ and $f_y$ have different units and cannot be added without multiplying by rates of change of $x$ and $y$. The chain rule in chapter 21 supplies exactly those factors.",
+        "A partial derivative may exist on a domain boundary as a one-sided quantity, but standard open-neighborhood theorems do not automatically apply there. For $f(x,y)=\\sqrt{9-x^2-y^2}$, the boundary circle belongs to the domain, yet moving outward is not permitted and the radial derivative can become unbounded from inside. The formula $f_x=-x/\\sqrt{9-x^2-y^2}$ applies only at interior points with positive radicand. Evaluating it at the boundary by writing a zero denominator is not a derivative value. State the region where a symbolic derivative formula is valid.",
+        "The $q$ example exposes why two partials are not enough for continuity. On both coordinate axes $q$ is zero, so difference quotients along those axes at the origin are zero. Along $y=x^2$, $q$ is one-half near the origin. A hypothetical linear approximation from partials would predict almost no change, but actual nearby values remain separated from zero. Differentiability is a uniform first-order approximation across all small displacement vectors, and it implies continuity. Coordinatewise behavior is only a pair of one-dimensional tests.",
+        "A controlled coordinate change can be useful in experiments. If a temperature field is $T(x,y)$, moving from $(a,b)$ to $(a+h,b)$ measures an $x$-direction change with $y$ fixed; moving to $(a,b+k)$ measures a $y$-direction change. A diagonal move to $(a+h,b+k)$ combines both influences and cannot be attributed to one partial alone. Sampling each axis separately may identify local sensitivities, but inferring a diagonal prediction needs a differentiability assumption. This is the conceptual bridge from partial derivatives to the gradient and total differential."
+      ],
+      "formula": "f_x(a,b) = lim[h→0] (f(a + h,b) − f(a,b))/h; f_y(a,b) = lim[k→0] (f(a,b + k) − f(a,b))/k.",
+      "formulaTex": "\\begin{aligned}f_x(a,b)&=\\lim_{h\\to0}\\frac{f(a+h,b)-f(a,b)}{h},\\\\ f_y(a,b)&=\\lim_{k\\to0}\\frac{f(a,b+k)-f(a,b)}{k}.\\end{aligned}"
+    },
+    {
+      "title": "Higher partial derivatives and the order of differentiation",
+      "paragraphs": [
+        "Differentiate a partial derivative again to obtain a higher partial. We use $f_{xy}$ to mean $(f_x)_y$: first differentiate with respect to $x$, then with respect to $y$. Thus $f_{xx}$ measures how the $x$-slope changes as $x$ varies, while $f_{xy}$ measures how that same slope changes as $y$ varies. If $f$ is temperature with both coordinates in metres, these second derivatives have units degrees Celsius per square metre. When coordinates represent different quantities, the mixed derivative has output units divided by the product of those input units.",
+        "For $f(x,y)=x^2y^3$, direct calculation gives $f_x=2xy^3$, $f_{xx}=2y^3$, and $f_{xy}=6xy^2$. Starting in the other order gives $f_y=3x^2y^2$ and $f_{yx}=6xy^2$. Agreement is not accidental for this polynomial. Clairaut’s theorem supplies a sufficient condition: if both mixed second partial derivatives exist and are continuous throughout an open neighborhood of $(a,b)$, then $f_{xy}(a,b)=f_{yx}(a,b)$. In particular, a function with continuous second partial derivatives on an open region has interchangeable mixed second derivatives there.",
+        "Proof sketch: form the rectangular difference $f(a+h,b+k)-f(a+h,b)-f(a,b+k)+f(a,b)$, then divide by $hk$. Applying the one-variable mean value theorem in each coordinate expresses this quotient as a mixed derivative at a nearby point. Reversing the order gives the other mixed derivative at another nearby point. Their continuity lets both expressions converge to the corresponding values at $(a,b)$, forcing equality. The neighborhood and continuity hypotheses make this passage to the limit legitimate.",
+        "The hypotheses are sufficient, not necessary; failure of a hypothesis means the theorem gives no conclusion. Unequal mixed partials are possible. For $f(x,y)=xy(x^2-y^2)/(x^2+y^2)$ away from the origin and $f(0,0)=0$, the definition gives $f_x(0,y)=-y$ and $f_y(x,0)=x$. Therefore $f_{xy}(0,0)=-1$ but $f_{yx}(0,0)=1$. Checking the derivatives on the axes avoids applying quotient formulas where their denominator vanishes. There is no contradiction: continuity of both mixed partials in a neighborhood is absent.",
+        "The notation $f_{xy}$ varies across books, so define the order once. Here $f_{xy}=(f_x)_y$. For a polynomial such as $x^2y^3$, all derivatives are continuous everywhere, and equality $f_{xy}=f_{yx}$ follows from Clairaut's theorem. Explicit calculation is still a useful check: $f_{xy}=f_{yx}=6xy^2$. In an application, the mixed derivative describes how one directional sensitivity changes when the other input moves. It is not simply “the rate of $f$ in two directions at once”; it is a second-order interaction with units divided by both input units.",
+        "Continuity of mixed partials in an open neighborhood is sufficient for equality, but equality at one point can happen without that full hypothesis. A theorem's sufficient conditions should not be read as necessary conditions. Conversely, existence of $f_{xy}$ and $f_{yx}$ at a point alone does not force equality, as the provided counterexample shows. To apply the theorem, identify a neighborhood on which the relevant derivatives are defined and continuous. A quotient formula valid away from a singular point cannot establish continuity at that point by itself.",
+        "The rectangular difference used in the proof, $\\Delta=f(a+h,b+k)-f(a+h,b)-f(a,b+k)+f(a,b)$, measures an interaction that remains after subtracting separate $x$-only and $y$-only changes. For $f(x,y)=xy$ at the origin, $\\Delta=hk$, so $\\Delta/(hk)=1$. For $f(x,y)=x^2+y^2$, $\\Delta=0$, reflecting no mixed interaction. Applying one-dimensional mean value arguments in both orders connects this finite difference to $f_{xy}$ and $f_{yx}$. This concrete quantity helps explain the theorem more clearly than memorizing an equality of subscript symbols.",
+        "In numerical data, mixed partials are especially sensitive to noise because they involve four nearby values and division by $hk$. Making $h$ and $k$ very small reduces truncation error for a smooth exact formula but can amplify measurement error or floating-point cancellation. A symmetric stencil and repeated scales can diagnose sensitivity, yet they do not verify Clairaut's hypotheses. The mathematical theorem concerns an underlying smooth function, not a finite grid of samples. State whether a mixed derivative is derived analytically or estimated from data."
+      ]
+    },
+    {
+      "title": "A family of paths that exposes a hidden limit failure",
+      "paragraphs": [
+        "A failed multivariable limit need not involve unbounded output. Consider $q(x,y)=x^2y/(x^4+y^2)$, defined away from the origin. Put $a=x^2$ and $b=y$. The elementary inequality $2|ab|\\le a^2+b^2$ gives $|q(x,y)|\\le1/2$ everywhere in its domain. Therefore the function remains bounded near the origin. Boundedness by itself says nothing about whether nearby values settle toward one number; $q$ will provide a sharp example of the difference.",
+        "Take a family of curved paths $y=cx^2$ for fixed real $c$. At a point $(x,cx^2)$ with $x\\ne0$, substitution and cancellation give $q(x,cx^2)=c/(1+c^2)$. This output does not change as $x\\to0$. Choosing $c=0$ gives limit $0$, $c=1$ gives $1/2$, and $c=-1$ gives $-1/2$. These paths all reach the same origin, so no two-variable limit can exist. Varying $c$ fills a whole interval of path values, but two distinct values already suffice to disprove the full limit.",
+        "Why might a preliminary test miss the problem? Along a nonvertical straight line $y=mx$ with fixed $m\\ne0$, $q(x,mx)=mx/(x^2+m^2)\\to0$. Along the $x$-axis and $y$-axis, $q$ is also zero. Thus every straight-line approach reports zero, a remarkably persuasive but false suggestion. The troublesome curves satisfy $y$ on the same scale as $x^2$, which balances the two denominator terms $x^4$ and $y^2$. Searching for paths that balance competing powers is a useful diagnostic technique for rational expressions in several variables.",
+        "Polar coordinates do not automatically solve this problem. A fixed polar angle describes a straight ray, so checking each fixed $\\theta$ reproduces the misleading line evidence. The parameter $\\theta$ may vary with the radius as the input approaches the origin, and the definition permits that. A successful proof of a limit needs a bound uniform in direction, such as $|p(x,y)|\\le r$ for the different function $p=x^2y/(x^2+y^2)$. The bound for $q$ is only $|q|\\le1/2$, which does not tend to zero and cannot establish convergence.",
+        "This example also shows why a finite-resolution surface plot or grid is not a proof. The positive ridge along $y=x^2$ becomes narrower relative to ordinary rectangular sampling near the origin. A display can help discover the balancing scale, but only the explicit path calculation establishes failure. Conversely, an explicit radial bound establishes a limit for every eligible path, including those never drawn.",
+        "The path family is discovered by balancing powers, not by guessing a picture. To keep both denominator terms $x^4$ and $y^2$ of the same order, set $y=cx^2$; then numerator $x^2y$ is also order $x^4$ and cancellation leaves $c/(1+c^2)$. On a fixed line $y=mx$ with $m\\ne0$, the denominator is order $x^2$ but the numerator is order $x^3$, so the ratio tends to zero. For $m=0$, the horizontal-axis value is identically zero. This balance explains why fixed rays and fixed polar angles miss the ridge. An angle may vary with distance, and the limit definition permits it.",
+        "The values $c/(1+c^2)$ have maximum $1/2$ at $c=1$ and minimum $-1/2$ at $c=-1$. This agrees with the global bound $|q|\\le1/2$ from $2|ab|\\le a^2+b^2$ with $a=x^2,b=y$. The path family therefore reaches the full range of extreme near-origin values permitted by that inequality. Showing just $c=0$ and $c=1$ already disproves the limit; the broader family explains the geometry of the failure. A bounded function can have many different cluster values at one point.",
+        "A numerical investigation should plot both paths against distance to the origin or against a common parameter approaching zero. Showing them at one finite scale may conceal the distinction if the straight-line value has not yet become small. Along $y=x$, $q=x/(1+x^2)$ tends to zero; along $y=x^2$ it remains exactly one-half for every nonzero $x$. These symbolic expressions establish the limiting contrast. The visual readout can then illustrate a proved result rather than asking the graph to carry the proof by itself.",
+        "There is also a positive lesson in this failure example. To prove a different rational function tends to zero, search for a numerator factor left over after bounding the denominator. For $p=x^2y/(x^2+y^2)$, the factor $x^2/(x^2+y^2)$ is at most one, leaving $|y|\\le r$. That leftover distance factor tends to zero uniformly over all paths. The difference between $p$ and $q$ is the balance of denominator powers, not merely the number of variables. An inequality with a vanishing radial factor is the desired certificate."
+      ],
+      "formula": "q(x,cx²)=c/(1+c²) for x≠0; the paths c=0, 1, and −1 give different approach limits.",
+      "formulaTex": "\\begin{gathered}q(x,cx^2)=\\frac{c}{1+c^2}\\quad(x\\ne0),\\\\ \\lim_{x\\to0}q(x,0)=0,\\quad\\lim_{x\\to0}q(x,x^2)=\\frac12,\\quad\\lim_{x\\to0}q(x,-x^2)=-\\frac12.\\end{gathered}"
+    },
+    {
+      "title": "A surface equation and its traces",
+      "paragraphs": [
+        "An equation in three coordinates selects points; it need not give one height for each horizontal input. For translated axis-aligned standard quadrics with positive scales write $X=x-h$, $Y=y-j$, $Z=z-k$, $q=X^2/a^2+Y^2/b^2$ and $w=Z/c$. A horizontal trace is the intersection with the actual world plane $z=z_0$, so $Z=z_0-k$; it is not a shadow in the $xy$-plane. This classification does not cover arbitrary cross terms or rotated axes.",
+        "The ellipsoid $q+w^2=1$ has trace $q=1-w^2$. For $|Z|>c$ it is empty, for $|Z|=c$ a point, and for $|Z|<c$ an ellipse with semiaxes $a\\sqrt{1-w^2}$ and $b\\sqrt{1-w^2}$. Nonnegativity bounds the whole surface by $|X|\\le a$, $|Y|\\le b$, $|Z|\\le c$. Holding $Y=0$ instead gives the vertical ellipse $X^2/a^2+Z^2/c^2=1$.",
+        "Solving for height gives $z=k\\pm c\\sqrt{1-q}$ on $q\\le1$. Interior horizontal inputs have two heights, so the full ellipsoid is a relation rather than one graph $z=f(x,y)$. The upper sign alone is a graph; the signs meet on the boundary $q=1$. A finite image suggests shape, while these inequalities establish the complete bounded set.",
+        "The three scales $a,b,c$ are positive so that signs come only from the equation, not from arbitrary scale labels. Translation replaces each coordinate by its displacement from the center, and a horizontal world plane $z=z_0$ fixes $Z=z_0-k$. This is why a control labelled by world height must subtract the translated center before applying a trace formula. If the center is $(1,-2,3)$ and the chosen plane is $z=5$, the relevant normalized height for $c=4$ is $w=(5-3)/4=1/2$, not five.",
+        "At that translated example, the ellipsoid $(x-1)^2/9+(y+2)^2/4+(z-3)^2/16=1$ gives $q=3/4$ at $z=5$, with semiaxes $3\\sqrt3/2$ and $\\sqrt3$. At $z=7$ it has only the top point $(1,-2,7)$, and at $z=8$ the right side is negative, so no real point remains. The changing size is an algebraic consequence of $q=1-w^2$. A shaded projection of the ellipsoid onto the horizontal plane would instead include its whole base disk and must not be confused with any one of these traces.",
+        "A vertical trace checks a different pair of coordinates. Holding $Y=0$ in the ellipsoid gives $X^2/a^2+Z^2/c^2=1$ in that specific vertical plane; holding $X=0$ gives another ellipse with semiaxes $b,c$. These sections establish all three axis extents and help recover a proposed center and scale under the stated standard-family assumption. They do not make the full surface a height function. Over an interior base point both $k+c\\sqrt{1-q}$ and $k-c\\sqrt{1-q}$ satisfy the same equation, while at the rim they agree. The distinction between full relation and one graph branch is structural.",
+        "Finite data should be interpreted with an explicit family assumption. Several different surfaces can share a central ellipse, so a single horizontal trace does not classify a relation. The ellipsoid and the one-sheet hyperboloid with matching horizontal denominators both have $q=1$ at $Z=0$, but at $Z=2c$ the ellipsoid has no points and the one-sheet model has $q=5$. Comparing those actual planes distinguishes their signs. A visual snapshot may display a few sampled rings; substitution into the defining equation is the test that applies to every point and every allowed height.",
+        "The following world-plane table applies $q=1-w^2$ to the translated ellipsoid. Each row gives an exact intersection rather than a shaded projection; a finite set of such rows does not uniquely reconstruct an unrestricted surface."
+      ],
+      "formula": "For X=x−h, Y=y−j, Z=z−k and a,b,c>0, an ellipsoid has X²/a²+Y²/b²+Z²/c²=1. At world height z₀, its trace has X²/a²+Y²/b²=1−(z₀−k)²/c².",
+      "formulaTex": "\\begin{gathered}X=x-h,\\ Y=y-j,\\ Z=z-k,\\quad a,b,c>0,\\\\q=X^2/a^2+Y^2/b^2,\\quad q+Z^2/c^2=1,\\\\z=z_0:\\quad q=1-(z_0-k)^2/c^2.\\end{gathered}",
+      "comparisonTable": {
+        "caption": "Translated ellipsoid traces, center (1,-2,3), scales a=3, b=2, c=4",
+        "headers": [
+          "World plane",
+          "Normalized w",
+          "Trace",
+          "World center and semiaxes"
+        ],
+        "rows": [
+          [
+            "$z=5$",
+            "$1/2$",
+            "Ellipse",
+            "Center $(1,-2,5)$; $3\\sqrt3/2,\\sqrt3$"
+          ],
+          [
+            "$z=7$",
+            "$1$",
+            "One point",
+            "$(1,-2,7)$"
+          ],
+          [
+            "$z=8$",
+            "$5/4$",
+            "Empty",
+            "No real points"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Signs distinguish hyperboloids and cones",
+      "paragraphs": [
+        "For $q-w^2=1$, every horizontal trace is the ellipse $q=1+w^2$. Its semiaxes are smallest at $Z=0$ and grow in both directions. The continuous parametrization $(h+a\\sqrt{1+w^2}\\cos\\theta,j+b\\sqrt{1+w^2}\\sin\\theta,k+cw)$ for $0\\le\\theta<2\\pi$ and $w\\in\\mathbb R$ covers a connected one-sheet hyperboloid. Holding $Y=0$ gives a vertical hyperbola.",
+        "For $w^2-q=1$, the trace is $q=w^2-1$: empty for $|Z|<c$, a point at $Z=\\pm c$, and an ellipse beyond. Height is $z=k\\pm c\\sqrt{1+q}$, two disconnected graphs separated by an empty slab. Drawing a tiny ellipse in that slab would contradict the equation.",
+        "The cone $q=w^2$ has a point at $Z=0$ and ellipses with semiaxes $a|w|,b|w|$ at other heights. It includes both signs of $Z$; in the vertical plane $Y=0$ its trace is the crossing lines $X/a=\\pm Z/c$. The height formulas for the one-sheet surface are $k\\pm c\\sqrt{q-1}$ on $q\\ge1$, meeting along the waist; for the cone they are $k\\pm c\\sqrt q$, meeting only at the vertex. Multiplying $a,b,c$ by one positive factor leaves the cone equation unchanged, so traces determine only their ratios without a scale convention.",
+        "The one-sheet and two-sheet equations differ by which squared term has the positive sign relative to the constant one. In $q-w^2=1$, fixing any real $w$ leaves $q>0$, and varying $w$ continuously through zero keeps occupied rings connected. In $w^2-q=1$, the inequality $w^2\\ge1$ forces a vacant slab. A perspective picture can hide the gap behind one lobe, but the inequality cannot. At $|w|=1$ the trace is a single point, not a very small ellipse, because both horizontal squared terms must be zero exactly.",
+        "The cone's right side is zero rather than one, making it homogeneous. At every nonzero height, $q=w^2$ gives an ellipse whose semiaxes grow linearly with $|w|$; changing the sign of $w$ leaves the same ellipse shape on the opposite nappe. The vertical plane $Y=0$ yields the two straight generator lines $X/a=\\pm Z/c$. This line pair distinguishes the cone from the two-sheet hyperboloid, whose corresponding vertical trace is a hyperbola. At the apex the surface is singular, so a regular-level tangent-plane formula needs separate analysis.",
+        "Solving for height reveals different branch domains. For the one-sheet surface, $z=k\\pm c\\sqrt{q-1}$ exists only where $q\\ge1$, and the branches join along the waist ellipse $q=1$; it is connected despite requiring two height expressions. For the two-sheet surface, $z=k\\pm c\\sqrt{1+q}$ exists for every horizontal pair, but the two outputs never meet. The cone has $z=k\\pm c\\sqrt q$ and the signs meet only at the central point. Stating both domains and joining sets prevents the phrase “two formulas” from being mistaken for “two connected sheets.”",
+        "The cone also illustrates a parameter-identification limit. Replacing $(a,b,c)$ by $(\\lambda a,\\lambda b,\\lambda c)$ divides both sides of $X^2/a^2+Y^2/b^2=Z^2/c^2$ by $\\lambda^2$, leaving the same locus. Even a complete set of exact traces therefore identifies only ratios such as $a/c$ and $b/c$, unless a convention fixes one scale. This is not a numerical uncertainty caused by a blurry display; it is an exact redundancy in the equation. For unbounded hyperboloids and cones, every rendered mesh also uses a finite parameter window that should be disclosed beside the picture.",
+        "For the three centered families, the exact trace and branch-domain rows below settle cases that a clipped mesh can make ambiguous. Here $q=X^2/a^2+Y^2/b^2\\ge0$ and $w=(z-k)/c$, with positive scales."
+      ],
+      "formula": "Put q=X²/a²+Y²/b² and w=Z/c. One sheet: q=1+w²; two sheets: q=w²−1; cone: q=w². A negative trace value is empty.",
+      "formulaTex": "\\begin{array}{c|c}\\text{family}&\\text{horizontal trace}\\\\\\hline\\text{one sheet}&q=1+w^2\\\\\\text{two sheets}&q=w^2-1\\\\\\text{cone}&q=w^2\\end{array}\\quad w=(z_0-k)/c.",
+      "comparisonTable": {
+        "caption": "Hyperboloid and cone traces and height branches",
+        "headers": [
+          "Surface",
+          "Horizontal trace at world z=k+cw",
+          "Height branches and joining set"
+        ],
+        "rows": [
+          [
+            "One sheet: $q-w^2=1$",
+            "Ellipse $q=1+w^2$ for every real $w$",
+            "$z=k\\pm c\\sqrt{q-1}$ for $q\\ge1$; meet at $q=1$"
+          ],
+          [
+            "Two sheets: $w^2-q=1$",
+            "Empty if $|w|<1$; point if $|w|=1$; ellipse if $|w|>1$",
+            "$z=k\\pm c\\sqrt{1+q}$ for all $q\\ge0$; never meet"
+          ],
+          [
+            "Cone: $q=w^2$",
+            "Point if $w=0$; ellipse otherwise",
+            "$z=k\\pm c\\sqrt q$ for all $q\\ge0$; meet only at $q=0$"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Paraboloids and reconstructing a surface",
+      "paragraphs": [
+        "The elliptic paraboloid $Z=cq$ is one global height graph. Since $c>0$, horizontal planes below $k$ are empty, the plane at $k$ gives the vertex, and planes above give ellipses. Its vertical traces are parabolas. If coordinates measure length, the scale $c$ supplies height units while $q$ is dimensionless.",
+        "The saddle $Z=c(X^2/a^2-Y^2/b^2)$ is also a global graph. Put $s=(z_0-k)/c$. For $s>0$, the horizontal hyperbola opens in $X$; for $s<0$ it opens in $Y$; at $s=0$ the trace is the crossing lines $Y=\\pm(b/a)X$. Its central vertical traces open up along $Y=0$ and down along $X=0$, proving opposite signs arbitrarily near the vertex.",
+        "To reconstruct a proposed standard surface, record each actual plane, trace type, center, orientation and intercepts, then substitute those heights into its proposed equation. Two ellipses alone do not identify an unrestricted surface: another relation can agree on both planes yet differ between them. Parameter recovery needs a stated family and axis assumptions. A display of an unbounded surface is necessarily clipped to a finite window and cannot establish global extent by itself.",
+        "The two paraboloids both give a unique height for every horizontal input, yet their traces have sharply different behavior. For the bowl, the height above the vertex is $cq\\ge0$; an ellipse appears only at positive levels and grows with the square root of height. For the saddle, the two horizontal squared terms compete, so its height can be positive, zero or negative arbitrarily near the center. This shows why being a graph $z=f(x,y)$ does not determine whether horizontal traces are closed, open, crossed lines or empty.",
+        "For the saddle, the central crossing lines come directly from factoring $X^2/a^2-Y^2/b^2=0$ as $(X/a-Y/b)(X/a+Y/b)=0$. Above the center, the $X$ intercepts are $\\pm a\\sqrt{s}$ when $s>0$; below, the $Y$ intercepts are $\\pm b\\sqrt{-s}$ when $s<0$. The sign of the level swaps the direction in which the hyperbola opens. Checking these intercepts in world coordinates after adding the center prevents a plotted branch from being reflected or attached to the wrong plane.",
+        "A vertical cut through the saddle gives a complementary explanation. At $Y=0$, $Z=cX^2/a^2$ bends upward; at $X=0$, $Z=-cY^2/b^2$ bends downward. Both curves pass through the same vertex and have horizontal tangent there, but lie on opposite sides nearby. For the bowl both corresponding vertical cuts open upward. These exact equations support the geometric words “saddle” and “bowl” even if a projected mesh happens to obscure one direction. A coordinate table should therefore report the chosen world plane and representative triples from every visible branch.",
+        "A reconstruction from slices is conditional. Suppose a one-sheet standard form is assumed and its center ellipse has semiaxes $2,3$ while a plane four units above the center has semiaxes $2\\sqrt2,3\\sqrt2$. Then $1+16/c^2=2$, yielding $c=4$ under that family hypothesis. Without it, adding a term that vanishes at both sampled heights can preserve both measured traces and alter the surface between them. Finitely many slices are evidence for a model, not proof of a unique unrestricted relation. The viewer's finite clipping adds another separate limit: it never proves that an unbounded equation stops at the screen edge.",
+        "The world-plane table below uses $s=(z_0-k)/c$ and positive scales. It records exact trace types for both global height graphs; the display still clips unbounded branches, and finitely many observed slices do not identify an unrestricted surface."
+      ],
+      "formula": "Elliptic paraboloid: Z/c=X²/a²+Y²/b². Hyperbolic paraboloid: Z/c=X²/a²−Y²/b². Substitute the actual world plane z=z₀ before naming a trace.",
+      "formulaTex": "\\begin{gathered}Z=c(X^2/a^2+Y^2/b^2)\\Rightarrow q=(z_0-k)/c,\\\\Z=c(X^2/a^2-Y^2/b^2)\\Rightarrow X^2/a^2-Y^2/b^2=(z_0-k)/c.\\end{gathered}",
+      "comparisonTable": {
+        "caption": "Paraboloid traces in the actual world plane z=z0",
+        "headers": [
+          "Surface",
+          "s<0",
+          "s=0",
+          "s>0"
+        ],
+        "rows": [
+          [
+            "Bowl: $Z=cq$",
+            "Empty",
+            "Vertex $(h,j,k)$",
+            "Ellipse $q=s$"
+          ],
+          [
+            "Saddle: $Z=c(X^2/a^2-Y^2/b^2)$",
+            "Hyperbola opening in $Y$",
+            "Crossing lines $Y=\\pm(b/a)X$",
+            "Hyperbola opening in $X$"
+          ]
+        ]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "title": "Read a temperature map and estimate a controlled change",
+      "problem": "A plate has $T(x,y)=20\\,{}^\\circ\\mathrm C+(2\\,{}^\\circ\\mathrm{C/m^2})x^2+(1\\,{}^\\circ\\mathrm{C/m^2})y^2$, with $x,y$ in metres. Describe the $26\\,{}^\\circ\\mathrm C$ contour and the coordinate rates at $(1\\,\\mathrm m,2\\,\\mathrm m)$. Then, with $y=2\\,\\mathrm m$ fixed, estimate and calculate exactly the temperature change as $x$ increases from $1\\,\\mathrm m$ to $1.01\\,\\mathrm m$.",
+      "steps": [
+        "Subtract $20\\,{}^\\circ\\mathrm C$ from the level equation and divide by the stated units: $2x^2+y^2=6$ when coordinate numbers are expressed in metres. This is an ellipse with intercepts $x=\\pm\\sqrt3\\,\\mathrm m$ and $y=\\pm\\sqrt6\\,\\mathrm m$. The point $(1,2)$ lies on it because $2+4=6$.",
+        "Differentiating with the other coordinate fixed gives $T_x=(4\\,{}^\\circ\\mathrm{C/m^2})x$ and $T_y=(2\\,{}^\\circ\\mathrm{C/m^2})y$. At the point both equal $4\\,{}^\\circ\\mathrm{C/m}$. Equal coordinate rates at this point do not make every contour circular.",
+        "For an $x$ displacement of $0.01\\,\\mathrm m$ with $y$ unchanged, the first-order estimate is $4(0.01)=0.04\\,{}^\\circ\\mathrm C$. Direct substitution gives $2((1.01)^2-1)=0.0402\\,{}^\\circ\\mathrm C$. The difference, $0.0002\\,{}^\\circ\\mathrm C$, is the quadratic term discarded by the estimate."
+      ],
+      "answer": "The contour is an ellipse; both coordinate rates are $4\\,{}^\\circ\\mathrm{C/m}$. A $0.01\\,\\mathrm m$ $x$ displacement raises temperature by exactly $0.0402\\,{}^\\circ\\mathrm C$ under this model. The first-order estimate is $+0.04\\,{}^\\circ\\mathrm C$; the exact change is $+0.0402\\,{}^\\circ\\mathrm C$."
+    },
+    {
+      "title": "Two fractions, two different conclusions",
+      "problem": "Determine whether $p=x^2y/(x^2+y^2)$ and $q=x^2y/(x^4+y^2)$ have limits at the origin.",
+      "steps": [
+        "Both fractions are defined at every point except $(0,0)$, so paths in a punctured neighborhood are allowed. Substitution gives $0/0$ and determines neither limit.",
+        "For $p$, $|p|\\le|y|\\le r$. Given $\\varepsilon>0$, choose $\\delta=\\varepsilon$; then $0<r<\\delta$ implies $|p|<\\varepsilon$. This is a full limit proof.",
+        "For $q$, $y=0$ gives $q=0$. Taking $x=t$ and $y=t^2$ gives $q=t^4/(2t^4)=1/2$ for every $t\\ne0$. Both paths approach the origin but their values approach different constants."
+      ],
+      "answer": "$p$ tends to zero and has a continuous extension with value zero. $q$ has no limit and no continuous extension at the origin."
+    },
+    {
+      "title": "An intersected domain, not separate ranges",
+      "problem": "Find the domain of $h(x,y)=\\ln(4-x^2-y^2)/\\sqrt{y-x}$.",
+      "steps": [
+        "The logarithm requires $4-x^2-y^2>0$, giving the open disk $x^2+y^2<4$.",
+        "The square-root denominator requires $y-x>0$; equality would make the denominator zero.",
+        "Intersect the conditions. Neither boundary circle nor the line $y=x$ belongs to the domain."
+      ],
+      "answer": "$D=\\{(x,y):x^2+y^2<4\\text{ and }y>x\\}$."
+    },
+    {
+      "title": "Levels of an upper hemisphere",
+      "problem": "For $f(x,y)=\\sqrt{9-x^2-y^2}$, describe its domain and level sets $f=c$.",
+      "steps": [
+        "The radicand condition gives closed disk $x^2+y^2\\le9$.",
+        "The output ranges from $0$ on the boundary to $3$ at the origin.",
+        "For $0\\le c\\le3$, squaring gives $x^2+y^2=9-c^2$; outside that $c$ range no level exists."
+      ],
+      "answer": "Levels are circles for $0\\le c<3$, a point at $c=3$, and empty otherwise."
+    },
+    {
+      "title": "A saddle from two decisive slices",
+      "problem": "Classify the origin of $f(x,y)=x^2-y^2$ as a local maximum, minimum, or neither.",
+      "steps": [
+        "Along $y=0$, $f(x,0)=x^2>0$ for nonzero $x$ near zero.",
+        "Along $x=0$, $f(0,y)=-y^2<0$ for nonzero $y$ near zero.",
+        "Every neighborhood contains values above and below $f(0,0)=0$."
+      ],
+      "answer": "The origin is a saddle point, neither local maximum nor local minimum."
+    },
+    {
+      "title": "One radial bound controls all paths",
+      "problem": "Prove $p(x,y)=x^3y/(x^2+y^2)$ tends to zero at the origin.",
+      "steps": [
+        "For nonzero $(x,y)$, $2|xy|\\le x^2+y^2$, so $|xy|/(x^2+y^2)\\le1/2$.",
+        "Then $|p|=x^2|xy|/(x^2+y^2)\\le x^2/2\\le r^2/2$, where $r=\\sqrt{x^2+y^2}$.",
+        "Given $\\varepsilon>0$, choose $\\delta=\\sqrt{2\\varepsilon}$; $r<\\delta$ implies $|p|<\\varepsilon$ for every path."
+      ],
+      "answer": "The limit is zero, certified by $|p|\\le r^2/2$."
+    },
+    {
+      "title": "Two partials can miss discontinuity",
+      "problem": "Extend $q=x^2y/(x^4+y^2)$ by $q(0,0)=0$. Find its coordinate partials at zero and test continuity.",
+      "steps": [
+        "On $y=0$ and $x=0$, $q$ is identically zero, so both defining partial-derivative quotients at zero are zero.",
+        "Axis tests inspect only two approaches. To balance the denominator terms $x^4$ and $y^2$, try $y=x^2$; their equal sizes can leave a nonzero ratio.",
+        "Along $y=x^2$, $q=1/2$ for every nonzero $x$.",
+        "Since nearby values on that path do not approach $q(0,0)$, $q$ is discontinuous despite both partials existing."
+      ],
+      "answer": "$q_x(0,0)=q_y(0,0)=0$, but $q$ is not continuous at the origin."
+    },
+    {
+      "title": "Mixed partials need hypotheses",
+      "problem": "For $f(x,y)=x^2y^3$, compute $f_{xy}$ and $f_{yx}$ and state why they agree.",
+      "steps": [
+        "Differentiate $f_x=2xy^3$ with respect to $y$ to get $f_{xy}=6xy^2$.",
+        "Differentiate $f_y=3x^2y^2$ with respect to $x$ to get $f_{yx}=6xy^2$.",
+        "All second partials of this polynomial are continuous on an open neighborhood of every point, so Clairaut's sufficient hypothesis holds."
+      ],
+      "answer": "Both mixed partials equal $6xy^2$ everywhere."
+    },
+    {
+      "title": "A translated ellipsoid has two heights",
+      "problem": "Classify $(x-1)^2/9+(y+2)^2/4+(z-3)^2/16=1$ and its traces at $z=3,5,7,8$.",
+      "steps": [
+        "Set $X=x-1,Y=y+2,Z=z-3$. This is an ellipsoid centered at $(1,-2,3)$ with semiaxes $3,2,4$.",
+        "At $z=3$, trace semiaxes are $3,2$; at $z=5$, $q=3/4$, so they are $3\\sqrt3/2,\\sqrt3$.",
+        "At $z=7$ only $(1,-2,7)$ remains; at $z=8$ the horizontal sum would be negative. Solving for height gives $z=3\\pm4\\sqrt{1-q}$ for $q\\le1$."
+      ],
+      "answer": "The traces are ellipse, ellipse, point and empty, respectively; the full surface has two height branches."
+    },
+    {
+      "title": "Similar ellipses, different hyperboloids",
+      "problem": "Compare $X^2/4+Y^2/9-Z^2/16=1$ and $Z^2/16-X^2/4-Y^2/9=1$.",
+      "steps": [
+        "The first gives $q=1+Z^2/16$ at every height: one sheet with semiaxes $2,3$ at zero and $5/2,15/4$ at $Z=3$.",
+        "The second gives $q=Z^2/16-1$: empty for $|Z|<4$, tip points at $\\pm4$, and semiaxes $3/2,9/4$ at $Z=5$.",
+        "Their central vertical traces are $X^2/4-Z^2/16=1$ and $Z^2/16-X^2/4=1$, confirming the opposite opening directions."
+      ],
+      "answer": "They are one-sheet and two-sheet hyperboloids; both are unbounded."
+    },
+    {
+      "title": "A translated cone has two nappes",
+      "problem": "Analyze $(x-1)^2/4+(y+1)^2/9=(z-2)^2/16$.",
+      "steps": [
+        "At $z=2$, nonnegativity forces vertex $(1,-1,2)$.",
+        "At $z=6$ and $z=-2$, the traces both have semiaxes $2,3$, so both nappes occur.",
+        "In $y=-1$, the lines are $X=\\pm Z/2$. Height branches $z=2\\pm4\\sqrt{X^2/4+Y^2/9}$ meet only at the vertex."
+      ],
+      "answer": "This is an unbounded elliptic cone with two nappes and a point trace at its vertex."
+    },
+    {
+      "title": "A bowl and a saddle can both be graphs",
+      "problem": "Compare $z=2(X^2/9+Y^2/4)$ with $z=2(X^2/9-Y^2/4)$.",
+      "steps": [
+        "Both give one $z$ per pair $(X,Y)$. The bowl has an ellipse at $z=2$, a point at zero, and no trace at $-2$.",
+        "The saddle has an $X$-opening hyperbola at $2$, $Y$-opening hyperbola at $-2$, and lines $Y=\\pm(2/3)X$ at zero.",
+        "Along $Y=0$ its height is positive off the origin; along $X=0$ it is negative. These opposite vertical traces prove the saddle behavior."
+      ],
+      "answer": "The first is an elliptic paraboloid; the second is a hyperbolic paraboloid. Both are unbounded graphs."
+    }
+  ],
+  "misconceptions": [
+    "“Agreement along the coordinate axes proves a limit.” Axes inspect only two paths; for $q(x,y)=\\frac{x^2y}{x^4+y^2}$ away from the origin, the limit along every straight line through the origin is zero, while $q(x,x^2)=\\frac12$ for $x\\ne0$.",
+    "“A partial derivative follows the actual motion of an object.” It holds the other coordinates fixed; motion changing several coordinates requires a chain rule.",
+    "“Mixed partial derivatives always commute.” Continuous mixed partials on a neighborhood guarantee equality; existence at the point alone does not."
+  ],
+  "lab": {
+    "title": "Straight paths can miss the obstruction",
+    "description": "Compare $q(x,y)=\\frac{x^2y}{x^4+y^2}$ along straight and parabolic paths. The horizontal plot coordinate is $n$, with $t=10^{-n}$, so moving right approaches the origin. Coordinates and outputs are dimensionless. A third plot checks $|p|/r\\le1$ along a parabolic path for $p(x,y)=\\frac{x^2y}{x^2+y^2}$, where $r=\\sqrt{x^2+y^2}$; the lesson proves $p\\to0$ for all paths.",
+    "code": "// Change slope and bend to select approach paths. Keep them finite.\nconst slope = 1;\nconst bend = 1;\nif (!Number.isFinite(slope) || !Number.isFinite(bend)) throw new Error('Use finite path parameters.');\nconst line = [], parabola = [], bounded = [];\nfor (let n = 1; n <= 8; n++) {\n  const t = 10 ** (-n);\n  // Algebraically simplified values avoid unnecessarily tiny powers.\n  const lineValue = slope === 0 ? 0 : Math.abs(slope) <= t ? (slope / t) / (1 + (slope / t) ** 2) : (t / slope) / (1 + (t / slope) ** 2);\n  const curveValue = Math.abs(bend) > 1 ? (1 / bend) / (1 + (1 / bend) ** 2) : bend / (1 + bend*bend);\n  const z = Math.abs(bend) * t;\n  const ratio = z > 1 ? (1 / z) ** 2 / (1 + (1 / z) ** 2) ** 1.5 : z / (1 + z*z) ** 1.5;\n  if (![lineValue, curveValue, ratio].every(Number.isFinite)) throw new Error('Path value overflows; reduce parameters.');\n  line.push([n,lineValue]);\n  parabola.push([n,curveValue]);\n  bounded.push([n,ratio]);\n  console.log('n, t, q(line), q(parabola), |p|/radius:', n,t,lineValue,curveValue,ratio);\n}\nplot(line,'q(t, slope*t); horizontal coordinate n = -log10(t)');\nplot(parabola,'q(t, bend*t*t); horizontal coordinate n');\nplot(bounded,'|p(t, bend*t*t)| / distance; horizontal coordinate n');",
+    "tasks": [
+      "Predict which q values approach zero when slope = bend = 1, and which remain constant, before running.",
+      "Set bend = -1, then bend = 0 and bend = 2. Explain the resulting constant values using $b/(1+b^2)$, where $b$ is the value assigned to bend. Why can bend = 0 hide the failure?",
+      "Set slope to 0.001 and inspect the early values as well as the eventual trend. Explain why a finite window can mislead about a limiting value.",
+      "Explain why the plotted ratio $|p|/r\\le1$ at eight sampled points supports the bound for $p$ but cannot replace its proof. What underflow or overflow problems could appear if the exponent range or parameter magnitudes were made extreme?"
+    ],
+    "expected": "At default settings $q(t,t)=\\frac{t}{t^2+1}$ is 0.09900990099009901 for n = 1 and approximately $10^{-8}$ for n = 8. On the parabola $q(t,t^2)=\\frac12$ for all eight samples. The ratio $|p(t,t^2)|/\\sqrt{t^2+t^4}=t/(1+t^2)^{3/2}$ is below 1 and is approximately 0.09851853368415735 at n = 1."
+  },
+  "exercises": [
+    {
+      "question": "Find the domain of $\\ln(4 - x^2 - y^2)/\\sqrt{y - x}$, including all boundary restrictions.",
+      "hint": "Intersect the strict conditions for the logarithm and denominator.",
+      "solution": "The logarithm needs $4-x^2-y^2>0$, or $x^2+y^2<4$. The denominator $\\sqrt{y-x}$ must be real and nonzero, so $y>x$. Their intersection is the open disk above the line $y=x$; neither boundary is included.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the domain of $\\sqrt{9-x^2-y^2}$.",
+      "hint": "Require the radicand to be nonnegative.",
+      "solution": "The square root is real exactly when $9-x^2-y^2\\ge0$. Thus the domain is the closed disk $x^2+y^2\\le9$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the domain of $\\ln(y-x^2)$.",
+      "hint": "The logarithm requires a strictly positive argument.",
+      "solution": "The logarithm requires $y-x^2>0$, giving the open region $y>x^2$ with its parabolic boundary excluded.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the domain of $\\frac{\\ln(4-x^2-y^2)}{\\sqrt{y-x}}$.",
+      "hint": "Intersect the strict inequalities from both components.",
+      "solution": "The logarithm requires $x^2+y^2<4$, and the denominator requires $y-x>0$. The domain is the intersection $\\{(x,y):x^2+y^2<4,\\ y>x\\}$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Is $(3,0)$ interior or boundary for $\\sqrt{9-x^2-y^2}$?",
+      "hint": "Check whether $(3,0)$ lies on $x^2+y^2=9$.",
+      "solution": "The domain is $x^2+y^2\\le9$. At $(3,0)$, equality holds, so the point belongs to the domain. Every neighborhood also contains points with $x^2+y^2>9$, making it a boundary point, not an interior point.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Describe the graph and all possible level sets of $f(x,y) = 4 - x^2 - y^2$.",
+      "hint": "Solve $f(x,y)=c$ and separate $c<4$, $c=4$, and $c>4$.",
+      "solution": "The graph $z=4-x^2-y^2$ is a downward-opening paraboloid with vertex $(0,0,4)$. A level $c<4$ is the circle $x^2+y^2=4-c$; $c=4$ is the origin, and $c>4$ is empty. Thus the range is $(-\\infty,4]$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Describe $f=1$ for $f(x,y)=x^2+y^2$.",
+      "hint": "Solve $x^2+y^2=1$ in the input plane.",
+      "solution": "The equation $f(x,y)=1$ is $x^2+y^2=1$, the unit circle in the input plane.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Describe all levels of $f(x,y)=4-x^2-y^2$.",
+      "hint": "Rearrange to $x^2+y^2=4-c$.",
+      "solution": "For $c<4$, $x^2+y^2=4-c$ is a circle of radius $\\sqrt{4-c}$. At $c=4$ the level is the origin; for $c>4$ it is empty.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is the origin a saddle for $x^2-y^2$?",
+      "hint": "Compare slices along $y=0$ and $x=0$.",
+      "solution": "Along $y=0$, $x^2-y^2=x^2>0$ away from the origin. Along $x=0$, it equals $-y^2<0$. Values of both signs occur arbitrarily nearby, so the origin is a saddle.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(x,y,z)=x^2+y^2+z^2$, what is level $c=9$?",
+      "hint": "Recognize $x^2+y^2+z^2=9$.",
+      "solution": "The level equation is $x^2+y^2+z^2=9$, a sphere of radius $3$ centered at the origin.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove that $xy$ tends to zero as $(x,y)$ tends to the origin, using an explicit $\\delta$.",
+      "hint": "Use $2|xy|\\le x^2+y^2$ and choose $\\delta$ from the resulting bound.",
+      "solution": "Let $r=\\sqrt{x^2+y^2}$. Since $2|xy|\\le r^2$, choose $\\delta=\\sqrt{2\\varepsilon}$ for $\\varepsilon>0$. Then $0<r<\\delta$ implies $|xy|\\le r^2/2<\\varepsilon$, proving the limit.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove that $\\frac{x^3y}{x^2+y^2}$ tends to zero at the origin using one bound for all paths.",
+      "hint": "Use $2|xy|\\le x^2+y^2$ to bound the quotient by a power of the radius.",
+      "solution": "For $r^2=x^2+y^2>0$, $|x^3y/(x^2+y^2)|=x^2|xy|/r^2\\le x^2/2\\le r^2/2$. Given $\\varepsilon>0$, choose $\\delta=\\sqrt{2\\varepsilon}$; then $0<r<\\delta$ forces the quotient below $\\varepsilon$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove that $\\frac{x^2y}{x^2+y^2}$ tends to zero at the origin with an explicit $\\delta$ for a given $\\varepsilon$.",
+      "hint": "Bound the quotient by $|y|\\le r$.",
+      "solution": "For $r=\\sqrt{x^2+y^2}>0$, $|x^2y/(x^2+y^2)|\\le|y|\\le r$. Given $\\varepsilon>0$, choose $\\delta=\\varepsilon$; then $0<r<\\delta$ makes the quotient smaller than $\\varepsilon$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Show $xy\\to0$ as $(x,y)\\to(0,0)$ using one inequality.",
+      "hint": "Use $2|xy|\\le x^2+y^2$.",
+      "solution": "With $r=\\sqrt{x^2+y^2}$, $2|xy|\\le r^2$ gives $|xy|\\le r^2/2$. For $\\varepsilon>0$, choose $\\delta=\\sqrt{2\\varepsilon}$. Then $0<r<\\delta$ implies $|xy|<\\varepsilon$, uniformly over all approaches.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Show $\\frac{x^3y}{x^2+y^2}\\to0$ at origin.",
+      "hint": "Bound $|xy|/(x^2+y^2)$ by $1/2$.",
+      "solution": "For $r^2=x^2+y^2>0$, $|x^3y/(x^2+y^2)|=x^2|xy|/r^2\\le x^2/2\\le r^2/2$ because $2|xy|\\le r^2$. As $r\\to0$, the squeeze theorem gives limit $0$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "For $q=\\frac{x^2y}{x^4+y^2}$, find the value along $y=x^2$.",
+      "hint": "Substitute $y=x^2$ before canceling powers.",
+      "solution": "Along $y=x^2$ with $x\\ne0$, $q=x^4/(x^4+x^4)=1/2$. The origin itself remains undefined.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $q(x,y)=x^2y/(x^4+y^2)$, find the limit along $y=x$ as $(x,y)\\to(0,0)$.",
+      "hint": "Set $x=y=t$ and simplify.",
+      "solution": "Along $x=y=t\\ne0$, $q(t,t)=t^3/(t^4+t^2)=t/(1+t^2)\\to0$. This differs from the curved-path value $1/2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $q(x,y)=x^2y/(x^4+y^2)$ away from the origin and $q(0,0)=0$. Calculate its two partial derivatives at the origin and decide whether it is continuous there.",
+      "hint": "Use coordinate axes for partials, then test the path $y=x^2$ for continuity.",
+      "solution": "On either coordinate axis, $q(h,0)=q(0,k)=0$, so both defining difference quotients vanish and $q_x(0,0)=q_y(0,0)=0$. But $q(t,t^2)=1/2$ for $t\\ne0$, so $q$ is not continuous at the origin.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $T(x,y)=20\\,{}^\\circ\\mathrm C+(2\\,{}^\\circ\\mathrm{C/m^2})x^2+(1\\,{}^\\circ\\mathrm{C/m^2})y^2$, with $x,y$ in metres. At $(1\\,\\mathrm m,2\\,\\mathrm m)$, estimate the change when $y$ increases by $0.02\\,\\mathrm m$ while $x$ stays fixed, then check it directly.",
+      "hint": "Estimate with $T_y\\,\\Delta y$; keep the squared term for the exact change.",
+      "solution": "At the point, $T_y=(2\\,{}^\\circ\\mathrm{C/m^2})(2\\,\\mathrm m)=4\\,{}^\\circ\\mathrm{C/m}$. The linear estimate is $(4\\,{}^\\circ\\mathrm{C/m})(0.02\\,\\mathrm m)=0.08\\,{}^\\circ\\mathrm C$. With $x$ fixed, the exact change is $(1\\,{}^\\circ\\mathrm{C/m^2})[(2.02\\,\\mathrm m)^2-(2\\,\\mathrm m)^2]=0.0804\\,{}^\\circ\\mathrm C$. The omitted quadratic term is $0.0004\\,{}^\\circ\\mathrm C$.",
+      "lesson": 4,
+      "type": "Modeling"
+    },
+    {
+      "question": "Find $f_x$ and $f_y$ for $f=x^2e^y+\\sin(xy)$.",
+      "hint": "Hold the other coordinate constant in each partial derivative.",
+      "solution": "Holding $y$ fixed gives $f_x=2xe^y+y\\cos(xy)$. Holding $x$ fixed gives $f_y=x^2e^y+x\\cos(xy)$. The sine terms use the chain rule.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $q(x,y)=x^2y/(x^4+y^2)$ away from the origin and $q(0,0)=0$. What are $q_x(0,0)$ and $q_y(0,0)$?",
+      "hint": "Evaluate the defining quotients along the coordinate axes.",
+      "solution": "Both partials are $0$, because $q$ is identically zero on each coordinate axis; each defining difference quotient is therefore zero.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $q(x,y)=x^2y/(x^4+y^2)$ away from the origin and $q(0,0)=0$. Do its two zero partial derivatives at the origin guarantee continuity there?",
+      "hint": "Check the path $y=x^2$.",
+      "solution": "No. Along $y=x^2$, $q(x,x^2)=1/2$ for $x\\ne0$, which does not approach the assigned value $q(0,0)=0$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "If $T_x$ is $^\\circ\\mathrm C/\\mathrm m$ and a sensor moves only in $y$, does $T_x$ give its time rate?",
+      "hint": "Along this path, $dx/dt=0$; consider the other partial and velocity.",
+      "solution": "No. $T_x$ measures temperature change per unit $x$ with $y$ fixed. If the sensor follows $(x_0,y(t))$, $y(t)$ is differentiable, and the slice $y\\mapsto T(x_0,y)$ is differentiable at $y(t)$, then $dx/dt=0$ and $dT/dt=T_y(x_0,y(t))\\,dy/dt$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(x,y) = e^{xy}$, compute $f_x$, $f_y$, $f_{xy}$, and $f_{yx}$, and justify equality of the mixed partials.",
+      "hint": "Differentiate each first partial with the product rule.",
+      "solution": "The first partials are $f_x=ye^{xy}$ and $f_y=xe^{xy}$. Product and chain rules give $f_{xy}=e^{xy}+xye^{xy}=f_{yx}$. Both mixed partials are continuous everywhere, satisfying Clairaut’s hypothesis.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f=x^2y^3$, compute $f_{xy}$.",
+      "hint": "Find $f_x$, then differentiate with respect to $y$.",
+      "solution": "Hold $y$ fixed first, giving $f_x=2xy^3$. Then differentiate this expression with respect to $y$ to obtain $f_{xy}=6xy^2$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x,y)=x^2y^3$, compute $f_{yx}$, using $f_{yx}=(f_y)_x$.",
+      "hint": "Find $f_y$, then differentiate with respect to $x$.",
+      "solution": "Hold $x$ fixed first, giving $f_y=3x^2y^2$. Then differentiate this expression with respect to $x$ to obtain $f_{yx}=6xy^2$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "State a sufficient hypothesis for $f_{xy}=f_{yx}$ at a point.",
+      "hint": "Use continuity of the mixed partials on an open neighborhood.",
+      "solution": "If both mixed second partials exist and are continuous on an open neighborhood of the point, Clairaut’s theorem gives $f_{xy}=f_{yx}$ there.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What is the rectangular mixed difference for $f(x,y)=xy$ at origin with steps $h,k$?",
+      "hint": "Evaluate the four corners of the rectangle.",
+      "solution": "The mixed difference is $f(h,k)-f(h,0)-f(0,k)+f(0,0)=hk$. Dividing by $hk$ for nonzero steps gives $1$, isolating the bilinear interaction.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $q(x,y)=x^2y/(x^4+y^2)$, compare approach values along $y=2x^2$ and $y=x^3$.",
+      "hint": "Substitute $y=2x^2$ and $y=x^3$ separately.",
+      "solution": "Along $y=2x^2$ with $x\\ne0$, $q=2x^4/(x^4+4x^4)=2/5$. Along $y=x^3$, $q=x^5/(x^4+x^6)=x/(1+x^2)\\to0$. Distinct path limits rule out a two-variable limit.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $q(x,y)=x^2y/(x^4+y^2)$ along $y=cx^2$, find the path value and use two $c$ values to classify the limit at the origin.",
+      "hint": "Balance the $x^4$ and $y^2$ terms with $y=cx^2$.",
+      "solution": "For $y=cx^2$ and $x\\ne0$, $q=cx^4/(x^4+c^2x^4)=c/(1+c^2)$. Taking $c=0$ gives $0$, while $c=1$ gives $1/2$, so the two-variable limit does not exist.",
+      "lesson": 6,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "Domains specify allowed approaches; graphs and level sets display different aspects of the same scalar function.",
+    "Conflicting paths disprove a limit; a distance bound can prove it uniformly over all paths.",
+    "Partial derivatives describe coordinate slices and alone do not guarantee continuity or differentiability.",
+    "Continuous mixed second partials on an open neighborhood guarantee equality of their two orders."
+  ],
+  "next": "Chapter 21 assembles coordinate rates into a total derivative, explains when a tangent plane predicts changes in every direction, and relates gradients to level sets."
+}

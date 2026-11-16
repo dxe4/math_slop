@@ -1,0 +1,1 @@
+var e={key:`$schema`,array:!1,value:`./schema/catalog.schema.json`};export{e as default};

@@ -1,0 +1,11 @@
+# Beijing Multi-Site Air Quality: attribution and license
+
+Chen, S. (2017). *Beijing Multi-Site Air Quality* [Dataset]. UCI Machine Learning Repository. DOI: [10.24432/C5RK5G](https://doi.org/10.24432/C5RK5G).
+
+The [official UCI record](https://archive.ics.uci.edu/dataset/501/beijing+multi+site+air+quality+data) identifies Song Chen as creator and distributes the data under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/); the [legal code](https://creativecommons.org/licenses/by/4.0/legalcode.en) governs reuse. Acquisition records preserve the retrieved source and license evidence, retrieval time, URLs, response metadata and SHA-256 commitments.
+
+The Beijing Municipal Environmental Monitoring Center supplied the air-quality measurements. Weather from the China Meteorological Administration was matched to the nearest weather station. The source spans March 2013–February 2017 at twelve monitoring sites and uses `NA` for missing values. Associated study: Zhang, Guo, Dong, He, Xu and Chen (2017), *Cautionary tales on air-quality improvement in Beijing*, Proceedings of the Royal Society A.
+
+Course modifications select calendar 2016 and aggregate PM2.5 and wind over paired available hours. All 366 calendar dates per site remain present. Flags identify at least 18 paired hours (base) and exactly 24 (sensitivity); these are teaching analysis rules, not environmental standards. The model uses a declared log concentration transform and training-only wind standardization. These adaptations and the analysis do not imply endorsement by the creator, agencies, UCI or Creative Commons. License terms apply to these data, not automatically to the entire course. The source is provided without warranties under its license.
+
+The complete adapted CSV was quarantined during model development and released after the declared evaluation boundary. The included frozen offline table contains all 4,392 station-days; the earlier quarantine records the pre-release evaluation boundary, not a current access restriction. Internal acquisition evidence lives at `plans/expansion_implementation/case/acquisition_manifest.json`; raw archives are not publication assets.

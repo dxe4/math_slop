@@ -1,0 +1,4152 @@
+{
+  "topics": [
+    {
+      "id": "single-variable-calculus",
+      "title": "Single-variable calculus",
+      "summary": "Change, accumulation and approximation, one variable at a time.",
+      "entryPrerequisites": [
+        "Algebra with fractions",
+        "Graphs of functions"
+      ]
+    },
+    {
+      "id": "multivariable-vector-calculus",
+      "title": "Multivariable and vector calculus",
+      "summary": "Landscapes, flows, coordinates and the relationship between boundaries and interiors.",
+      "entryPrerequisites": [
+        "Single-variable derivatives and integrals",
+        "Vectors and dot products"
+      ]
+    },
+    {
+      "id": "real-analysis",
+      "title": "Real analysis and the measure gateway",
+      "summary": "Make limits precise, find the hypotheses that matter, and meet a broader idea of integration.",
+      "entryPrerequisites": [
+        "Algebra and inequalities",
+        "Elementary functions",
+        "Basic proof language for deeper entries"
+      ]
+    },
+    {
+      "id": "complex-analysis",
+      "title": "Complex analysis",
+      "summary": "Rotation and stretching lead to unexpectedly rigid functions and useful contour integrals.",
+      "entryPrerequisites": [
+        "Plane coordinates",
+        "Algebra",
+        "Trigonometry"
+      ]
+    },
+    {
+      "id": "differential-equations-dynamics",
+      "title": "Differential equations and dynamical systems",
+      "summary": "Understand evolving systems through solutions, phase portraits and stability.",
+      "entryPrerequisites": [
+        "Derivatives",
+        "Exponentials",
+        "Graphs"
+      ]
+    },
+    {
+      "id": "numerical-analysis",
+      "title": "Numerical analysis",
+      "summary": "Find useful approximate answers while tracking error, sensitivity and stability.",
+      "entryPrerequisites": [
+        "Algebra",
+        "Functions",
+        "Basic calculus for bridge entries"
+      ]
+    },
+    {
+      "id": "optimization",
+      "title": "Optimization",
+      "summary": "Find good choices and learn when local reasoning can certify a global answer.",
+      "entryPrerequisites": [
+        "Algebra",
+        "Graphs",
+        "Derivatives for bridge entries"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "calc-speed-at-an-instant",
+      "title": "A rate at an instant",
+      "topic": "single-variable-calculus",
+      "level": "L1",
+      "hook": "A journey has an average velocity, but what could a rate at one instant mean?",
+      "outcome": "Compute secant slopes for f(x)=x² and derive its signed instantaneous rate; distinguish velocity from speed.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "explorations:refresher:fractions",
+        "explorations:refresher:algebra"
+      ],
+      "formula": "f'(a)=lim_{h→0}(f(a+h)-f(a))/h",
+      "visual": "Secant lines approaching a tangent with a numerical slope table.",
+      "proof": "Prove the derivative of x² by cancellation and an explicit limit estimate; negative slopes are signed rates, while physical speed is absolute velocity.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Functions",
+          "Fractions"
+        ],
+        "editionPrerequisites": [
+          "Coordinates",
+          "Slope",
+          "Elementary algebra"
+        ],
+        "rationale": "The body introduces functions and secant slope, but uses coordinate pairs, division and algebraic expansion.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Coordinates",
+        "Fractions",
+        "Elementary algebra"
+      ],
+      "tags": [
+        "difference-quotients",
+        "tangent-lines",
+        "instantaneous-rates"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-corner-without-tangent",
+      "title": "A corner that defeats the derivative",
+      "topic": "single-variable-calculus",
+      "level": "L1",
+      "hook": "Zooming in does not always produce a straight line.",
+      "outcome": "Use one-sided difference quotients to explain why |x| has no derivative at zero.",
+      "prerequisites": [
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "lim_{h→0+}|h|/h=1; lim_{h→0-}|h|/h=-1",
+      "visual": "Two independently controlled secants at a corner.",
+      "proof": "Prove nonexistence from unequal one-sided limits; do not equate continuity with differentiability.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Absolute value",
+          "Slope"
+        ],
+        "editionPrerequisites": [
+          "Absolute value",
+          "Secant slope"
+        ],
+        "rationale": "The capsule introduces secant slope and the two-sided derivative; the entry preparation is absolute value and ordinary slope.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Absolute value",
+        "Slope"
+      ],
+      "tags": [
+        "one-sided-derivatives",
+        "absolute-value",
+        "continuity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-chain-rule-lenses",
+      "title": "The chain rule as two magnifying lenses",
+      "topic": "single-variable-calculus",
+      "level": "L2",
+      "hook": "Two gentle changes can combine into a surprisingly large one.",
+      "outcome": "Differentiate a composition and interpret units in the result.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "explorations:refresher:functions"
+      ],
+      "formula": "(f∘g)'(x)=f'(g(x))g'(x)",
+      "visual": "Two linked local linear maps and a composed graph.",
+      "proof": "Derive with first-order remainders assuming both derivatives exist; avoid a proof that divides by a possibly zero increment.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Derivative",
+          "Function composition"
+        ],
+        "editionPrerequisites": [
+          "Derivatives",
+          "Composition of functions"
+        ],
+        "rationale": "These are equivalent phrasings of the two prerequisites actually used; local remainder notation is introduced in the body.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Composition of functions"
+      ],
+      "tags": [
+        "chain-rule",
+        "function-composition",
+        "local-linear-approximation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-area-accumulates",
+      "title": "Area that grows while you watch",
+      "topic": "single-variable-calculus",
+      "level": "L1",
+      "hook": "A graph of speed can tell the story of distance.",
+      "outcome": "Build lower and upper sums for a nonnegative increasing function.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:area-pythagorean-theorem",
+        "explorations:refresher:algebra",
+        "library:book-algebra-and-functions:functions-domain-graphs"
+      ],
+      "formula": "L_n≤∫_a^b f(x)dx≤U_n",
+      "visual": "Rectangles with an explicit upper-minus-lower gap.",
+      "proof": "Prove bounds for increasing continuous examples; signed area and general integrability get separate definitions.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Rectangle area",
+          "Graphs"
+        ],
+        "editionPrerequisites": [
+          "Rectangle area",
+          "Elementary algebra",
+          "Positive integers"
+        ],
+        "rationale": "Rectangle sums use graph heights, integer indexing and algebra; summation notation, induction and the limiting argument are explained.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Rectangle area",
+        "Elementary algebra",
+        "Positive integers",
+        "Graphs"
+      ],
+      "tags": [
+        "riemann-sums",
+        "upper-and-lower-bounds",
+        "finite-sums"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-fundamental-bridge",
+      "title": "Why accumulation undoes differentiation",
+      "topic": "single-variable-calculus",
+      "level": "L2",
+      "hook": "The two main inventions of calculus turn out to be partners.",
+      "outcome": "Explain why the derivative of accumulated continuous input equals its current value.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "explorations:calc-area-accumulates"
+      ],
+      "formula": "F(x)=∫_a^x f(t)dt ⇒ F'(x)=f(x)",
+      "visual": "An added thin strip alongside its average height.",
+      "proof": "Prove using continuity and integral bounds; state continuity at the evaluation point and distinguish the two fundamental theorems.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivative",
+        "Definite integral"
+      ],
+      "tags": [
+        "fundamental-theorem-of-calculus",
+        "accumulation-functions",
+        "signed-integrals"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-mean-value-promise",
+      "title": "The average speed you must have reached",
+      "topic": "single-variable-calculus",
+      "level": "L2",
+      "hook": "An average rate secretly promises an instantaneous rate somewhere.",
+      "outcome": "Apply the mean value theorem and identify failed hypotheses.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "calculus:04",
+        "calculus:08"
+      ],
+      "formula": "f'(c)=(f(b)-f(a))/(b-a)",
+      "visual": "A secant shifted until tangent; endpoint and corner counterexamples.",
+      "proof": "Prove from Rolle's theorem with its extremum lemma stated; require continuity on [a,b] and differentiability on (a,b).",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Derivative",
+          "Continuity"
+        ],
+        "editionPrerequisites": [
+          "Derivative",
+          "Continuity",
+          "Closed-interval extrema"
+        ],
+        "rationale": "The proof invokes the extreme-value theorem without proving it from completeness.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivative",
+        "Continuity",
+        "Closed-interval extrema"
+      ],
+      "tags": [
+        "mean-value-theorem",
+        "average-rates",
+        "rolle-theorem"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-substitution-accounting",
+      "title": "Substitution is a change of ruler",
+      "topic": "single-variable-calculus",
+      "level": "L2",
+      "hook": "Changing coordinates changes the size of every tiny interval.",
+      "outcome": "Perform a definite substitution with consistent limits and orientation.",
+      "prerequisites": [
+        "explorations:calc-chain-rule-lenses",
+        "explorations:calc-area-accumulates",
+        "explorations:calc-fundamental-bridge"
+      ],
+      "formula": "∫_a^b f(g(t))g'(t)dt=∫_{g(a)}^{g(b)}f(u)du",
+      "visual": "A stretched number line and matching signed strips.",
+      "proof": "Derive from the fundamental theorem under continuous f and continuously differentiable g; distinguish from an invertible coordinate formula.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Chain rule",
+          "Definite integral"
+        ],
+        "editionPrerequisites": [
+          "Chain rule",
+          "Fundamental theorem"
+        ],
+        "rationale": "The proof uses the chain rule and both fundamental-theorem directions for signed definite integrals.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Chain rule",
+        "Definite integral",
+        "Fundamental theorem"
+      ],
+      "tags": [
+        "integration-by-substitution",
+        "change-of-variables",
+        "oriented-intervals"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-infinite-area",
+      "title": "An infinite journey with finite area",
+      "topic": "single-variable-calculus",
+      "level": "L2",
+      "hook": "A region can go on forever without having infinite area.",
+      "outcome": "Classify ∫₁∞ x^(-p)dx and separate improper limits from ordinary integrals.",
+      "prerequisites": [
+        "calculus:12",
+        "calculus:04"
+      ],
+      "formula": "∫_1^∞ x^{-p}dx=1/(p-1), p>1",
+      "visual": "Tail rectangles and the accumulating area as cutoff grows.",
+      "proof": "Compute truncated integrals and take limits; no inference from a finite plotting window.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Power integrals",
+          "Limits"
+        ],
+        "editionPrerequisites": [
+          "Power antiderivatives",
+          "Limits"
+        ],
+        "rationale": "The calculation evaluates power antiderivatives before taking an improper limit; the logarithmic case is supplied in the capsule.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Power antiderivatives",
+        "Limits"
+      ],
+      "tags": [
+        "improper-integrals",
+        "power-integrals",
+        "tail-bounds"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-taylor-with-receipt",
+      "title": "A polynomial approximation with an error receipt",
+      "topic": "single-variable-calculus",
+      "level": "L3",
+      "hook": "A calculator can replace a curve with a polynomial, but how trustworthy is it?",
+      "outcome": "Bound the error in a local sine approximation.",
+      "prerequisites": [
+        "calculus:06",
+        "explorations:refresher:counting",
+        "explorations:calc-fundamental-bridge",
+        "calculus:12"
+      ],
+      "formula": "|R_n(x)|≤M|x-a|^{n+1}/(n+1)!",
+      "visual": "Approximation, residual and a separate certified error envelope.",
+      "proof": "State Taylor's theorem with derivative hypotheses; prove an integral-remainder special case, defer general variants.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Higher derivatives",
+          "Factorials"
+        ],
+        "editionPrerequisites": [
+          "Higher derivatives",
+          "Factorials",
+          "Fundamental theorem"
+        ],
+        "rationale": "The integral-remainder induction invokes the fundamental theorem and integrates by parts; neither method is derived here.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Higher derivatives",
+        "Factorials",
+        "Fundamental theorem",
+        "Integration by parts"
+      ],
+      "tags": [
+        "taylor-polynomials",
+        "integral-remainders",
+        "approximation-error"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "calc-smooth-not-series",
+      "title": "A smooth function its Taylor series misses",
+      "topic": "single-variable-calculus",
+      "level": "L3",
+      "hook": "Knowing every derivative at a point can still miss the function nearby.",
+      "outcome": "Distinguish smooth from analytic using the flat exponential example.",
+      "prerequisites": [
+        "calculus:04",
+        "calculus:06",
+        "explorations:calc-taylor-with-receipt"
+      ],
+      "formula": "f(x)=exp(-1/x²) (x≠0), f(0)=0; f^(n)(0)=0",
+      "visual": "Function and zero Taylor polynomial with a logarithmic-scale inset.",
+      "proof": "Prove exponential decay dominates powers and outline induction for all derivatives; infinite Taylor equality needs its own convergence argument.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Limits",
+          "Repeated differentiation",
+          "Taylor series"
+        ],
+        "editionPrerequisites": [
+          "Repeated differentiation",
+          "Limits",
+          "Taylor coefficients"
+        ],
+        "rationale": "The body distinguishes a Taylor series from its function, explains smoothness and proves the exponential-dominance estimate; coefficient notation and repeated differentiation remain preparation.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Limits",
+        "Repeated differentiation",
+        "Taylor coefficients"
+      ],
+      "tags": [
+        "smooth-functions",
+        "analytic-functions",
+        "flat-functions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-contour-walk",
+      "title": "Reading a landscape without seeing the mountain",
+      "topic": "multivariable-vector-calculus",
+      "level": "L1",
+      "hook": "A few contour lines can reveal steepness and direction.",
+      "outcome": "Interpret level sets and compare directional changes on a quadratic landscape.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "library:book-algebra-and-functions:functions-domain-graphs"
+      ],
+      "formula": "f(x,y)=x²+2y²; f(x,y)=c",
+      "visual": "Contour map paired with a keyboard-selected height table.",
+      "proof": "Calculate exact level sets; contour spacing depends on chosen levels and is not itself a derivative.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Coordinates",
+        "Graphs"
+      ],
+      "tags": [
+        "level-sets",
+        "contour-maps",
+        "finite-differences"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-gradient-compass",
+      "title": "A compass that points uphill",
+      "topic": "multivariable-vector-calculus",
+      "level": "L2",
+      "hook": "One arrow summarizes every first-order directional change.",
+      "outcome": "Calculate the gradient and find steepest ascent among unit directions.",
+      "prerequisites": [
+        "calculus:20",
+        "explorations:ga-la-dot-product"
+      ],
+      "formula": "D_u f=∇f·u, ||u||=1",
+      "visual": "Contour map with a rotatable unit arrow and derivative readout.",
+      "proof": "Prove steepest ascent using Cauchy–Schwarz; assume differentiability, not merely existence of partials.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Partial derivatives",
+        "Dot product"
+      ],
+      "tags": [
+        "gradients",
+        "directional-derivatives",
+        "steepest-ascent"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-partials-not-enough",
+      "title": "Partial derivatives can miss a cliff",
+      "topic": "multivariable-vector-calculus",
+      "level": "L3",
+      "hook": "Checking only east and north can hide what happens diagonally.",
+      "outcome": "Exhibit existing partials at a point without continuity there.",
+      "prerequisites": [
+        "calculus:20"
+      ],
+      "formula": "f(x,y)=xy/(x²+y²), f(0,0)=0",
+      "visual": "Axis and diagonal approaches with exact value tables.",
+      "proof": "Prove axis limits differ from diagonal limits; distinguish partials, directional derivatives and total differentiability.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Limits in two variables",
+        "Partial derivatives"
+      ],
+      "tags": [
+        "partial-derivatives",
+        "total-differentiability",
+        "path-dependent-limits"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-jacobian-area",
+      "title": "Why polar coordinates need an extra r",
+      "topic": "multivariable-vector-calculus",
+      "level": "L2",
+      "hook": "Equal steps on a polar grid do not enclose equal areas.",
+      "outcome": "Derive the polar area factor and use it in a disk integral.",
+      "prerequisites": [
+        "explorations:ga-la-determinant",
+        "calculus:23",
+        "library:book-precalculus:sine-cosine-tangent"
+      ],
+      "formula": "dx dy=|det DΦ(r,θ)|dr dθ=r dr dθ",
+      "visual": "Polar cells and local parallelogram area.",
+      "proof": "Compute determinant and an annular-sector limit; state change-of-variables hypotheses and handle origin as an exceptional point.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Determinants",
+        "Double integrals",
+        "Trigonometry"
+      ],
+      "tags": [
+        "polar-coordinates",
+        "jacobian-determinants",
+        "area-elements"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-order-of-integration",
+      "title": "The same region, two ways to slice",
+      "topic": "multivariable-vector-calculus",
+      "level": "L2",
+      "hook": "A difficult integral can become simple when its slices turn sideways.",
+      "outcome": "Reverse integration order on a triangular region.",
+      "prerequisites": [
+        "explorations:calc-area-accumulates",
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems"
+      ],
+      "formula": "∫_0^1∫_x^1 f(x,y)dy dx=∫_0^1∫_0^y f(x,y)dx dy",
+      "visual": "Horizontal and vertical slices with synchronized bounds.",
+      "proof": "Justify for continuous f on a compact triangle; conditional improper integrals require additional care.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Definite integrals",
+        "Inequalities"
+      ],
+      "tags": [
+        "iterated-integrals",
+        "integration-regions",
+        "fubini-theorem"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-work-along-path",
+      "title": "Does a round trip cost any work?",
+      "topic": "multivariable-vector-calculus",
+      "level": "L2",
+      "hook": "Two routes between the same places can have different totals.",
+      "outcome": "Compute a line integral and recognize a gradient field example.",
+      "prerequisites": [
+        "library:book-precalculus:parametric-polar-curves",
+        "explorations:ga-la-dot-product",
+        "calculus:12"
+      ],
+      "formula": "∫_C F·dr=∫_a^b F(r(t))·r'(t)dt",
+      "visual": "Two selectable paths through a vector field.",
+      "proof": "Derive parameter formula and prove endpoint rule for F=∇φ; do not infer global conservativity from zero curl alone.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Parametric curves",
+        "Dot product",
+        "Integration"
+      ],
+      "tags": [
+        "line-integrals",
+        "scalar-potentials",
+        "path-independence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-hole-in-curl",
+      "title": "The hole that curl cannot see",
+      "topic": "multivariable-vector-calculus",
+      "level": "L3",
+      "hook": "A field can have zero curl everywhere it exists and still do work around a loop.",
+      "outcome": "Use a punctured-plane field to test a missing domain hypothesis.",
+      "prerequisites": [
+        "explorations:multi-work-along-path",
+        "calculus:20"
+      ],
+      "formula": "F=(-y/(x²+y²),x/(x²+y²)); ∮_{|r|=1}F·dr=2π",
+      "visual": "Loops enclosing or avoiding the excluded origin.",
+      "proof": "Compute zero scalar curl and nonzero circulation explicitly; state simply connected domain sufficiency.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Line integrals",
+        "Partial derivatives"
+      ],
+      "tags": [
+        "curl",
+        "circulation",
+        "simply-connected-domains"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-green-cancellation",
+      "title": "A boundary remembers the whole interior",
+      "topic": "multivariable-vector-calculus",
+      "level": "L2",
+      "hook": "Interior edges cancel, leaving a theorem on the outside.",
+      "outcome": "Explain and verify Green's theorem on a rectangle.",
+      "prerequisites": [
+        "calculus:23",
+        "explorations:multi-work-along-path",
+        "calculus:20"
+      ],
+      "formula": "∮_∂D P dx+Q dy=∬_D(Q_x-P_y)dA",
+      "visual": "Tiled region with opposite interior-edge contributions.",
+      "proof": "Prove rectangular case using the fundamental theorem; state smoothness and orientation and defer general-region proof.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Double integrals",
+        "Line integrals",
+        "Partial derivatives"
+      ],
+      "tags": [
+        "green-theorem",
+        "boundary-orientation",
+        "edge-cancellation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-divergence-flux",
+      "title": "Count the flow through a box",
+      "topic": "multivariable-vector-calculus",
+      "level": "L2",
+      "hook": "Tiny sources inside a region determine its net outward flow.",
+      "outcome": "Compute divergence and compare volume and boundary totals for a simple field.",
+      "prerequisites": [
+        "calculus:23",
+        "calculus:19"
+      ],
+      "formula": "∯_∂V F·n dS=∭_V div F dV",
+      "visual": "Box faces with signed flux and interior source totals.",
+      "proof": "Prove rectangular-box case for C¹ fields; curved boundaries and general theorem stated.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Triple integrals",
+        "Surface normals"
+      ],
+      "tags": [
+        "divergence-theorem",
+        "outward-flux",
+        "closed-surfaces"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "multi-stokes-orientation",
+      "title": "The same circulation from different surfaces",
+      "topic": "multivariable-vector-calculus",
+      "level": "L3",
+      "hook": "A loop can be spanned by different surfaces yet give the same answer.",
+      "outcome": "Check Stokes' theorem for a planar disk and explain orientation.",
+      "prerequisites": [
+        "calculus:26",
+        "calculus:19"
+      ],
+      "formula": "∮_∂S F·dr=∬_S(curl F)·n dS",
+      "visual": "Disk and dome sharing a boundary with linked orientation arrows.",
+      "proof": "Work a smooth-field example exactly; state oriented-surface and boundary regularity assumptions, defer full proof.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "calculus"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Curl",
+        "Surface integrals",
+        "Cross product"
+      ],
+      "tags": [
+        "stokes-theorem",
+        "surface-orientation",
+        "curl-flux"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-limit-challenge",
+      "title": "How close is close enough?",
+      "topic": "real-analysis",
+      "level": "L1",
+      "hook": "Turn approaching a value into a promise you can test.",
+      "outcome": "Choose a delta that guarantees an epsilon tolerance for f(x)=2x at x=1, then translate the idea to sequence tails.",
+      "prerequisites": [
+        "explorations:refresher:fractions",
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems"
+      ],
+      "formula": "0<|x−1|<δ ⇒ |2x−2|<ε; choose δ=ε/2",
+      "visual": "Input delta interval linked to an output epsilon band, with exact endpoint bounds.",
+      "proof": "Prove the epsilon-delta claim algebraically; explain quantifier order and give 1/n as an optional epsilon-N comparison. A finite plot cannot certify all inputs.",
+      "sources": [
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Inequalities",
+          "Absolute value",
+          "Functions"
+        ],
+        "editionPrerequisites": [
+          "Positive integers",
+          "Fractions",
+          "Inequalities"
+        ],
+        "rationale": "The body proves sequence convergence of 1/n and explains sequence notation, absolute distance and quantifiers; general function preparation is unnecessary.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Positive integers",
+        "Fractions",
+        "Inequalities"
+      ],
+      "tags": [
+        "sequence-limits",
+        "epsilon-arguments",
+        "quantifier-order"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-rational-gap",
+      "title": "The missing number in the rationals",
+      "topic": "real-analysis",
+      "level": "L2",
+      "hook": "A perfectly sensible sequence can approach a number its universe lacks.",
+      "outcome": "Explain completeness through rational approximations to √2.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem",
+        "library:book-introduction-to-proof:contrapositive-contradiction"
+      ],
+      "formula": "sup{x∈Q:x²<2,x≥0} is not rational",
+      "visual": "Nested rational brackets for √2.",
+      "proof": "Prove irrationality and explain real least-upper-bound axiom; constructing the reals is deferred.",
+      "sources": [
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Sequences",
+        "Proof by contradiction"
+      ],
+      "tags": [
+        "real-completeness",
+        "irrational-numbers",
+        "least-upper-bounds"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-compactness-subsequence",
+      "title": "A sequence cannot escape a closed box",
+      "topic": "real-analysis",
+      "level": "L3",
+      "hook": "Infinitely many points in a bounded interval must cluster somewhere.",
+      "outcome": "Construct a convergent subsequence by nested intervals.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem",
+        "library:book-proof-safe-real-analysis:quantifiers-completeness",
+        "explorations:induction-dominoes"
+      ],
+      "formula": "Every bounded real sequence has a convergent subsequence.",
+      "visual": "Successive bisections retaining infinitely many points.",
+      "proof": "Prove Bolzano–Weierstrass in R; distinguish boundedness from convergence of the whole sequence.",
+      "sources": [
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Sequences",
+        "Completeness",
+        "Induction"
+      ],
+      "tags": [
+        "bolzano-weierstrass",
+        "convergent-subsequences",
+        "nested-intervals"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-continuity-uniform",
+      "title": "One tolerance for the whole interval",
+      "topic": "real-analysis",
+      "level": "L2",
+      "hook": "Local control and a single global guarantee are different promises.",
+      "outcome": "Compare continuity and uniform continuity for x² on bounded and unbounded domains.",
+      "prerequisites": [
+        "calculus:04"
+      ],
+      "formula": "∀ε>0 ∃δ>0 ∀x,y∈D: |x-y|<δ ⇒ |f(x)-f(y)|<ε",
+      "visual": "Paired moving points with shared tolerance.",
+      "proof": "Prove bounded-interval Lipschitz bound and unbounded-domain failure; compactness theorem stated separately.",
+      "sources": [
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Epsilon-delta limits"
+      ],
+      "tags": [
+        "uniform-continuity",
+        "lipschitz-bounds",
+        "epsilon-delta"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-riemann-discontinuity",
+      "title": "When rectangle sums refuse to agree",
+      "topic": "real-analysis",
+      "level": "L2",
+      "hook": "Dense zeroes and ones make every rectangle uncertain.",
+      "outcome": "Show the rational-indicator function is not Riemann integrable.",
+      "prerequisites": [
+        "explorations:calc-area-accumulates",
+        "explorations:real-countable-zero"
+      ],
+      "formula": "1_Q(x)=1 if x∈Q, otherwise 0; U(P)=1,L(P)=0 on [0,1]",
+      "visual": "Symbolic rational/irrational samples with lower/upper sums.",
+      "proof": "Prove using density; warn that plotted finite samples cannot show both dense sets faithfully.",
+      "sources": [
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Upper and lower sums",
+        "Rational density"
+      ],
+      "tags": [
+        "darboux-sums",
+        "dirichlet-function",
+        "dense-sets"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-uniform-limit",
+      "title": "A limit can change the shape of a theorem",
+      "topic": "real-analysis",
+      "level": "L3",
+      "hook": "Continuous curves may converge to a discontinuous function.",
+      "outcome": "Distinguish pointwise and uniform convergence with x^n on [0,1].",
+      "prerequisites": [
+        "calculus:04"
+      ],
+      "formula": "sup_{x∈[0,1]}|f_n(x)-f(x)| does not tend to 0",
+      "visual": "Curves plus supremum-error panel.",
+      "proof": "Prove pointwise limit and failure of uniform convergence; prove uniform limits preserve continuity.",
+      "sources": [
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Function limits",
+        "Continuity"
+      ],
+      "tags": [
+        "uniform-convergence",
+        "pointwise-convergence",
+        "continuity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-countable-zero",
+      "title": "Infinitely many points can have zero length",
+      "topic": "real-analysis",
+      "level": "L2",
+      "hook": "The rationals fill every interval yet occupy no length.",
+      "outcome": "Cover a countable set with intervals of arbitrarily small total length.",
+      "prerequisites": [
+        "library:book-introduction-to-proof:cardinality",
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem"
+      ],
+      "formula": "Σ_{n≥1} ε/2^n=ε",
+      "visual": "Numbered interval covers and their total length budget.",
+      "proof": "Prove outer measure zero for countable sets; zero measure does not imply countability.",
+      "sources": [
+        "https://measure.axler.net/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Countability",
+        "Geometric series"
+      ],
+      "tags": [
+        "countable-sets",
+        "outer-measure",
+        "null-sets"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-cantor-length",
+      "title": "An uncountable set with no length",
+      "topic": "real-analysis",
+      "level": "L3",
+      "hook": "Removing open middle thirds leaves more points than any list can hold.",
+      "outcome": "Compute remaining stage lengths and explain Cantor-set uncountability.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem",
+        "explorations:countable-diagonal",
+        "explorations:refresher:sets"
+      ],
+      "formula": "m(C_n)=(2/3)^n; m(C)=0",
+      "visual": "Finite Cantor stages with interval count and remaining length.",
+      "proof": "Prove measure-zero cover and inject binary sequences via ternary digits; avoid ambiguous expansion shortcuts.",
+      "sources": [
+        "https://measure.axler.net/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Geometric series",
+        "Countability",
+        "Nested sets"
+      ],
+      "tags": [
+        "cantor-set",
+        "uncountability",
+        "outer-measure"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-lebesgue-layer-cake",
+      "title": "Integrating by sorting heights",
+      "topic": "real-analysis",
+      "level": "L4",
+      "hook": "An integral can collect points by value rather than by position.",
+      "outcome": "Integrate simple functions and understand the nonnegative Lebesgue integral definition.",
+      "prerequisites": [
+        "library:book-proof-safe-real-analysis:outer-measure-and-measurability",
+        "library:book-proof-safe-real-analysis:quantifiers-completeness"
+      ],
+      "formula": "∫f dμ=sup{∫s dμ: 0≤s≤f, s simple}",
+      "visual": "Value bins over a measurable step function.",
+      "proof": "Define sigma-algebra, measurability and simple integrals locally; assume Lebesgue measure construction rather than claiming to prove it.",
+      "sources": [
+        "https://measure.axler.net/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Measurable sets",
+        "Suprema",
+        "Countable additivity"
+      ],
+      "tags": [
+        "simple-functions",
+        "lebesgue-integrals",
+        "height-distributions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "real-dominated-convergence",
+      "title": "When may a limit pass through an integral?",
+      "topic": "real-analysis",
+      "level": "L4",
+      "hook": "Pointwise shrinking can hide a persistent area spike.",
+      "outcome": "Check dominated convergence assumptions and expose a counterexample.",
+      "prerequisites": [
+        "library:book-proof-safe-real-analysis:lebesgue-integration",
+        "library:book-proof-safe-real-analysis:outer-measure-and-measurability"
+      ],
+      "formula": "|f_n|≤g∈L¹ and f_n→f a.e. ⇒ ∫f_n→∫f",
+      "visual": "Moving/shrinking spike contrasted with integrable domination.",
+      "proof": "State theorem precisely, prove a bounded finite-measure special case only with supporting lemma; full theorem proof deferred.",
+      "sources": [
+        "https://measure.axler.net/"
+      ],
+      "catalogFields": [
+        "real-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Lebesgue integral",
+        "Almost everywhere convergence"
+      ],
+      "tags": [
+        "dominated-convergence",
+        "integrable-envelopes",
+        "almost-everywhere-convergence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-multiplication-turns",
+      "title": "Multiplication that turns the plane",
+      "topic": "complex-analysis",
+      "level": "L1",
+      "hook": "A number can describe a turn as well as a size.",
+      "outcome": "Multiply complex numbers using angle and magnitude.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "explorations:refresher:algebra",
+        "library:book-euclidean-geometry-trigonometry:area-pythagorean-theorem",
+        "library:book-precalculus:trigonometric-identities"
+      ],
+      "formula": "re^{iθ} se^{iφ}=rs e^{i(θ+φ)}",
+      "visual": "Original and multiplied vectors.",
+      "proof": "Prove via trigonometric addition; introduce Euler notation without assuming its analytic construction.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Coordinates",
+          "Trigonometry"
+        ],
+        "editionPrerequisites": [
+          "Coordinates",
+          "Distributive multiplication",
+          "Pythagorean distance"
+        ],
+        "rationale": "Coordinate multiplication and lengths use algebra and Pythagoras; the angle-addition identities are invoked without proof.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Coordinates",
+        "Distributive multiplication",
+        "Pythagorean distance",
+        "Trigonometry"
+      ],
+      "tags": [
+        "complex-multiplication",
+        "polar-form",
+        "rotations"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-square-grid",
+      "title": "What squaring does to a square grid",
+      "topic": "complex-analysis",
+      "level": "L1",
+      "hook": "A familiar polynomial folds a plane in an unfamiliar way.",
+      "outcome": "Track modulus and argument under z² and identify two-to-one behavior.",
+      "prerequisites": [
+        "explorations:complex-multiplication-turns",
+        "explorations:refresher:coordinates",
+        "library:book-precalculus:sine-cosine-tangent"
+      ],
+      "formula": "(re^{iθ})²=r²e^{2iθ}",
+      "visual": "Input grid and mapped curves with paired points.",
+      "proof": "Derive mapping algebraically; angle preservation excludes the critical point zero.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Complex multiplication"
+        ],
+        "editionPrerequisites": [
+          "Complex multiplication",
+          "Plane coordinates",
+          "Basic trigonometry"
+        ],
+        "rationale": "The square-map calculation uses coordinates and the polar multiplication rule recalled in its capsule.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Complex multiplication",
+        "Plane coordinates",
+        "Basic trigonometry"
+      ],
+      "tags": [
+        "complex-squaring",
+        "conformal-maps",
+        "branch-points"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-derivative-directions",
+      "title": "A derivative must agree from every direction",
+      "topic": "complex-analysis",
+      "level": "L2",
+      "hook": "Complex differentiation demands much more than two real partial derivatives.",
+      "outcome": "Test z² and conjugation using directional difference quotients.",
+      "prerequisites": [
+        "library:book-precalculus:complex-numbers-polar-form",
+        "explorations:calc-speed-at-an-instant",
+        "calculus:20"
+      ],
+      "formula": "f'(z)=lim_{h→0}(f(z+h)-f(z))/h",
+      "visual": "Difference quotient as h approaches at selectable angles.",
+      "proof": "Prove examples directly; finitely many approach directions cannot establish a general complex limit.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Real derivatives",
+          "Complex arithmetic"
+        ],
+        "editionPrerequisites": [
+          "Complex arithmetic",
+          "Real difference quotients",
+          "Limits in the plane"
+        ],
+        "rationale": "The proof compares difference quotients over every complex approach and uses modulus estimates; directional checks alone are not sufficient.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Complex arithmetic",
+        "Real difference quotients",
+        "Limits in the plane"
+      ],
+      "tags": [
+        "complex-differentiability",
+        "difference-quotients",
+        "complex-conjugation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-cauchy-riemann",
+      "title": "Two equations behind rigid behavior",
+      "topic": "complex-analysis",
+      "level": "L2",
+      "hook": "A local rotation-and-stretch map has constrained coordinates.",
+      "outcome": "Derive Cauchy–Riemann equations and test simple functions.",
+      "prerequisites": [
+        "explorations:complex-derivative-directions",
+        "calculus:20",
+        "calculus:21"
+      ],
+      "formula": "u_x=v_y; u_y=-v_x",
+      "visual": "Local grid vectors and component derivative table.",
+      "proof": "Necessity derived; sufficiency stated with continuous first partials near the point, not bare equalities.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Partial derivatives",
+          "Complex derivative"
+        ],
+        "editionPrerequisites": [
+          "Complex derivative",
+          "Real partial derivatives",
+          "Total differentiability"
+        ],
+        "rationale": "Necessity uses directional partials and sufficiency uses the total-differentiability expansion under continuous-partial assumptions.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Complex derivative",
+        "Real partial derivatives",
+        "Total differentiability"
+      ],
+      "tags": [
+        "cauchy-riemann-equations",
+        "real-differentiability",
+        "holomorphic-functions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-logarithm-cut",
+      "title": "Why the logarithm needs a cut",
+      "topic": "complex-analysis",
+      "level": "L2",
+      "hook": "Walking once around zero changes an angle by a full turn.",
+      "outcome": "Choose a logarithm branch and explain its excluded ray.",
+      "prerequisites": [
+        "library:book-precalculus:complex-numbers-polar-form",
+        "explorations:refresher:powers",
+        "calculus:04"
+      ],
+      "formula": "log z=ln|z|+i Arg z",
+      "visual": "Loop tracking unwrapped angle and principal branch jump.",
+      "proof": "Prove branch inconsistency around a full circle; no global continuous log on C\\{0}.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Complex polar form",
+          "Continuity"
+        ],
+        "editionPrerequisites": [
+          "Polar form",
+          "Real logarithms",
+          "Continuity"
+        ],
+        "rationale": "The branch construction needs a continuous choice of argument and the real logarithm; the exponential notation is explained.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Complex polar form",
+        "Real logarithms",
+        "Continuity"
+      ],
+      "tags": [
+        "complex-logarithms",
+        "branch-cuts",
+        "continuous-arguments"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-contour-one-over-z",
+      "title": "A loop that counts turns",
+      "topic": "complex-analysis",
+      "level": "L2",
+      "hook": "Integrating 1/z detects whether a path circles a missing point.",
+      "outcome": "Compute a circle integral and interpret orientation.",
+      "prerequisites": [
+        "library:book-precalculus:parametric-polar-curves",
+        "library:book-functions-equations-proof:complex-functions",
+        "calculus:12"
+      ],
+      "formula": "∮_{|z|=r} dz/z=2πi",
+      "visual": "Circular path and cumulative complex integral.",
+      "proof": "Calculate parametrically; general winding-number theorem stated with closed-curve and avoidance assumptions.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Parametric integrals",
+          "Complex exponential"
+        ],
+        "editionPrerequisites": [
+          "Parametrized curves",
+          "Complex exponential notation",
+          "Real integration"
+        ],
+        "rationale": "The contour-integral definition is supplied and the circle is evaluated through real parameter integration.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Parametrized curves",
+        "Complex exponential notation",
+        "Real integration"
+      ],
+      "tags": [
+        "contour-integrals",
+        "winding-numbers",
+        "path-orientation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-cauchy-reconstruction",
+      "title": "The boundary knows every interior value",
+      "topic": "complex-analysis",
+      "level": "L3",
+      "hook": "A contour of values determines a holomorphic function inside.",
+      "outcome": "Apply Cauchy's integral formula on a disk.",
+      "prerequisites": [
+        "explorations:complex-contour-one-over-z",
+        "explorations:complex-derivative-directions"
+      ],
+      "formula": "f(a)=(1/(2πi))∮ f(z)/(z-a) dz",
+      "visual": "Boundary samples and reconstructed value for a polynomial.",
+      "proof": "State theorem for a positively oriented circle with f holomorphic on a neighborhood of its closed disk; derive examples, defer general proof.",
+      "sources": [
+        "https://www.jirka.org/ca/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Contour integrals",
+          "Holomorphic functions"
+        ],
+        "editionPrerequisites": [
+          "Contour integrals",
+          "Holomorphic functions",
+          "Closed disks"
+        ],
+        "rationale": "The disk-case Cauchy formula is stated with its neighborhood condition; its calculation assumes contour integration and holomorphy.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Contour integrals",
+        "Holomorphic functions",
+        "Closed disks"
+      ],
+      "tags": [
+        "cauchy-integral-formula",
+        "boundary-values",
+        "holomorphic-functions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-residue-shortcut",
+      "title": "A real integral solved by a complex detour",
+      "topic": "complex-analysis",
+      "level": "L3",
+      "hook": "A semicircle can simplify an integral along the real line.",
+      "outcome": "Evaluate ∫R 1/(1+x²)dx using one residue and an arc bound.",
+      "prerequisites": [
+        "explorations:complex-contour-one-over-z",
+        "calculus:14"
+      ],
+      "formula": "∮ f(z)dz=2πi Σ Res(f,a_k)",
+      "visual": "Real segment, upper arc, pole and vanishing arc bound.",
+      "proof": "State residue theorem and prove this example's arc tends to zero; never drop an arc without an estimate.",
+      "sources": [
+        "https://www.jirka.org/ca/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Contour integrals",
+          "Simple poles",
+          "Improper integrals"
+        ],
+        "editionPrerequisites": [
+          "Contour integrals",
+          "Simple poles",
+          "Improper real integrals"
+        ],
+        "rationale": "The residue and arc estimate connect a contour integral with two separately convergent real tails.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Contour integrals",
+        "Simple poles",
+        "Improper real integrals"
+      ],
+      "tags": [
+        "residue-theorem",
+        "simple-poles",
+        "arc-estimates"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-maximum-principle",
+      "title": "Why the biggest value lives on the edge",
+      "topic": "complex-analysis",
+      "level": "L3",
+      "hook": "A holomorphic function cannot form an isolated interior peak in magnitude.",
+      "outcome": "Use the maximum-modulus principle on a disk.",
+      "prerequisites": [
+        "explorations:complex-cauchy-reconstruction",
+        "calculus:04",
+        "explorations:ga-top-compactness",
+        "explorations:ga-geo-triangle-inequality",
+        "library:book-functions-equations-proof:analytic-continuation"
+      ],
+      "formula": "max_{|z|≤R}|f(z)|=max_{|z|=R}|f(z)|",
+      "visual": "Modulus contours with boundary/interior comparison.",
+      "proof": "Prove a local mean-value consequence and state full principle; apply only when holomorphic inside and continuous on closed disk.",
+      "sources": [
+        "https://www.jirka.org/ca/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Cauchy formula",
+          "Continuity",
+          "Compactness"
+        ],
+        "editionPrerequisites": [
+          "Cauchy's integral formula",
+          "Continuity on compact disks",
+          "Triangle inequality"
+        ],
+        "rationale": "Compactness supplies an attained maximum, the Cauchy mean-value formula and triangle equality give local constancy, and the identity theorem is invoked for global constancy.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Cauchy formula",
+        "Continuity",
+        "Compactness",
+        "Triangle inequality",
+        "Identity theorem"
+      ],
+      "tags": [
+        "maximum-modulus-principle",
+        "mean-value-property",
+        "holomorphic-functions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "complex-power-series-radius",
+      "title": "A distant singularity limits a local series",
+      "topic": "complex-analysis",
+      "level": "L3",
+      "hook": "A series around zero can sense a singularity it never reaches.",
+      "outcome": "Find radii of convergence for geometric and rational examples.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem",
+        "library:book-precalculus:complex-numbers-polar-form",
+        "calculus:17"
+      ],
+      "formula": "1/(1-z)=Σ_{n≥0}z^n for |z|<1",
+      "visual": "Disk of convergence with singularities and partial-sum error.",
+      "proof": "Prove geometric series and selected expansions; general nearest-singularity principle needs analytic-continuation qualifications.",
+      "sources": [
+        "https://www.jirka.org/ca/"
+      ],
+      "catalogFields": [
+        "complex-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Power series",
+          "Complex modulus"
+        ],
+        "editionPrerequisites": [
+          "Geometric sums",
+          "Complex modulus",
+          "Power-series notation"
+        ],
+        "rationale": "Finite geometric sums prove the worked radii and tail bounds; general Cauchy coefficient theory is optional continuation.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Geometric sums",
+        "Complex modulus",
+        "Power-series notation"
+      ],
+      "tags": [
+        "power-series",
+        "convergence-radius",
+        "complex-singularities"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-cooling-cup",
+      "title": "The mathematics of a cooling cup",
+      "topic": "differential-equations-dynamics",
+      "level": "L2",
+      "hook": "A simple rule predicts a whole temperature curve.",
+      "outcome": "Solve a constant-ambient cooling model and interpret its time scale.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "library:book-algebra-and-functions:exponential-functions"
+      ],
+      "formula": "T'=−k(T−T_a); T=T_a+(T_0−T_a)e^{−kt}",
+      "visual": "Temperature curve with ambient asymptote.",
+      "proof": "Verify solution and initial value; model assumptions exclude changing ambient temperature and phase changes.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Exponentials"
+      ],
+      "tags": [
+        "ode",
+        "dynamical-systems",
+        "newton-cooling",
+        "exponential-decay"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-direction-field",
+      "title": "Read a differential equation without solving it",
+      "topic": "differential-equations-dynamics",
+      "level": "L1",
+      "hook": "Tiny slope marks reveal possible futures.",
+      "outcome": "Sketch solutions and identify an equilibrium from y'=1−y.",
+      "prerequisites": [
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "y'=1−y",
+      "visual": "Static slope field with optional stepped trajectory.",
+      "proof": "Use sign analysis and verify exact solutions; sketching is qualitative evidence, not existence proof.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Slope",
+        "Coordinates"
+      ],
+      "tags": [
+        "direction-fields",
+        "equilibria",
+        "euler-steps"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-logistic-growth",
+      "title": "Growth that runs out of room",
+      "topic": "differential-equations-dynamics",
+      "level": "L2",
+      "hook": "Unchecked exponential growth becomes an S-curve when resources matter.",
+      "outcome": "Analyze logistic equilibria, stability and inflection.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "library:book-ode-first-course:separable-linear-first-order"
+      ],
+      "formula": "P'=rP(1−P/K), r,K>0",
+      "visual": "Population curves and phase line.",
+      "proof": "Derive positive solution and stability by signs; carry capacity is a model parameter, not a universal ecological law.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Separation of variables"
+      ],
+      "tags": [
+        "logistic-equation",
+        "carrying-capacity",
+        "separation-of-variables"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-uniqueness-fails",
+      "title": "One starting point, several futures",
+      "topic": "differential-equations-dynamics",
+      "level": "L3",
+      "hook": "A continuous rule need not select a unique trajectory.",
+      "outcome": "Construct delayed solutions of y'=2√|y| at y(0)=0.",
+      "prerequisites": [
+        "library:book-ode-first-course:models-direction-fields",
+        "library:book-algebra-and-functions:functions-domain-graphs"
+      ],
+      "formula": "y(t)=0 (t≤a), y(t)=(t−a)² (t≥a), a≥0",
+      "visual": "Multiple exact trajectories through the origin.",
+      "proof": "Verify differentiability and equation at join; state local Lipschitz sufficient condition and defer general existence proof.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/",
+        "https://www.jirka.org/ra/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Differential equations",
+        "Piecewise functions"
+      ],
+      "tags": [
+        "initial-value-problems",
+        "nonuniqueness",
+        "local-lipschitz-conditions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-damped-spring",
+      "title": "Three ways a spring can settle",
+      "topic": "differential-equations-dynamics",
+      "level": "L2",
+      "hook": "Changing one damping parameter alters the character of motion.",
+      "outcome": "Classify underdamped, critical and overdamped linear oscillators.",
+      "prerequisites": [
+        "calculus:06",
+        "library:book-algebra-and-functions:quadratic-equations",
+        "library:book-precalculus:complex-numbers-polar-form"
+      ],
+      "formula": "mx''+cx'+kx=0; c²−4mk",
+      "visual": "Displacement and phase portrait with discriminant label.",
+      "proof": "Solve characteristic equation for positive m,k and c≥0; ideal linear spring assumptions stated.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Second derivatives",
+        "Quadratic equations",
+        "Complex numbers"
+      ],
+      "tags": [
+        "damped-oscillators",
+        "characteristic-roots",
+        "mechanical-energy"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-resonance-energy",
+      "title": "When a small push keeps adding up",
+      "topic": "differential-equations-dynamics",
+      "level": "L2",
+      "hook": "A well-timed repeated push can produce a large response.",
+      "outcome": "Distinguish undamped resonance from a finite damped frequency response.",
+      "prerequisites": [
+        "library:book-precalculus:sine-cosine-tangent",
+        "library:book-ode-first-course:second-order-linear-equations"
+      ],
+      "formula": "x''+ω₀²x=F cos(ω₀t)",
+      "visual": "Forcing and response with an amplitude envelope.",
+      "proof": "Derive resonant particular solution; do not imply damping leaves unbounded response.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Sinusoidal functions",
+        "Linear ODEs"
+      ],
+      "tags": [
+        "resonance",
+        "periodic-forcing",
+        "energy-balance"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-phase-portrait-eigen",
+      "title": "Eigenvalues draw a phase portrait",
+      "topic": "differential-equations-dynamics",
+      "level": "L2",
+      "hook": "A matrix can predict spirals, saddles and straight approaches.",
+      "outcome": "Classify representative planar linear systems.",
+      "prerequisites": [
+        "explorations:refresher:vectors",
+        "explorations:ga-la-eigenvectors",
+        "library:book-algebra-and-functions:exponential-functions"
+      ],
+      "formula": "x'=Ax; x(t)=e^{tA}x(0)",
+      "visual": "Phase plane with eigenvectors and trajectories.",
+      "proof": "Prove diagonalizable examples; defective matrices and nonlinear extrapolation require further arguments.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Matrices",
+        "Eigenvalues",
+        "Exponentials"
+      ],
+      "tags": [
+        "phase-portraits",
+        "eigenvalue-stability",
+        "linear-systems"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-linearization-boundary",
+      "title": "Where a local approximation stops deciding",
+      "topic": "differential-equations-dynamics",
+      "level": "L3",
+      "hook": "A zero eigenvalue can hide opposite kinds of stability.",
+      "outcome": "Compare x'=−x³ and x'=x³ and explain inconclusive linearization.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "library:book-ode-first-course:phase-lines-equilibria"
+      ],
+      "formula": "f'(0)=0 for f(x)=±x³",
+      "visual": "Matched linearization with contrasting nonlinear phase lines.",
+      "proof": "Prove scalar stability from signs; state hyperbolic linearization principle without full proof.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-353j-nonlinear-dynamics-i-chaos-fall-2012/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Equilibria",
+        "Phase lines"
+      ],
+      "tags": [
+        "nonhyperbolic-equilibria",
+        "nonlinear-stability",
+        "finite-time-blow-up"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-bifurcation-fold",
+      "title": "A tiny parameter change can erase equilibrium",
+      "topic": "differential-equations-dynamics",
+      "level": "L2",
+      "hook": "Two resting states can collide and disappear.",
+      "outcome": "Find equilibria and stability in a saddle-node normal form.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:quadratic-equations",
+        "explorations:refresher:derivatives"
+      ],
+      "formula": "x'=μ−x²",
+      "visual": "Parameter-equilibrium diagram with stable and unstable branches.",
+      "proof": "Derive branches and stability for the scalar model; generic bifurcation theory deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-353j-nonlinear-dynamics-i-chaos-fall-2012/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Quadratics",
+        "Derivative signs"
+      ],
+      "tags": [
+        "ode",
+        "dynamical-systems",
+        "saddle-node-bifurcations",
+        "phase-lines"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ode-logistic-map-chaos",
+      "title": "Simple repetition, complicated futures",
+      "topic": "differential-equations-dynamics",
+      "level": "L3",
+      "hook": "Repeatedly applying one quadratic can resist long-term prediction.",
+      "outcome": "Analyze fixed-point stability and separate numerical chaos evidence from proof.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "explorations:refresher:derivatives",
+        "explorations:refresher:powers"
+      ],
+      "formula": "x_{n+1}=r x_n(1−x_n); |f'(x*)|<1 gives local attraction",
+      "visual": "Cobweb and finite bifurcation samples.",
+      "proof": "Prove fixed-point stability in stated parameter ranges; period-doubling universality and chaos claims remain referenced results.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-353j-nonlinear-dynamics-i-chaos-fall-2012/"
+      ],
+      "catalogFields": [
+        "ode",
+        "dynamical-systems"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Iteration",
+        "Derivatives",
+        "Logarithms"
+      ],
+      "tags": [
+        "logistic-map",
+        "fixed-point-stability",
+        "discrete-dynamics"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-floating-point",
+      "title": "Why a computer loses a tiny number",
+      "topic": "numerical-analysis",
+      "level": "L1",
+      "hook": "Adding a small quantity to a large one can change nothing.",
+      "outcome": "Explain finite precision using a small decimal floating-point model.",
+      "prerequisites": [],
+      "formula": "fl(a+b) may equal a even when b≠0",
+      "visual": "Toy precision selector and exact/rounded arithmetic table.",
+      "proof": "Prove toy-model examples; distinguish the model from binary IEEE arithmetic and avoid universal relative error at underflow.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Scientific notation",
+        "Rounding"
+      ],
+      "tags": [
+        "floating-point-arithmetic",
+        "rounding-error",
+        "significant-digits"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-cancellation",
+      "title": "Two equal formulas, unequal answers",
+      "topic": "numerical-analysis",
+      "level": "L1",
+      "hook": "Algebraically identical expressions can behave differently on a machine.",
+      "outcome": "Rationalize √(1+x)−1 to reduce cancellation.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:surds-indices",
+        "explorations:refresher:algebra"
+      ],
+      "formula": "√(1+x)−1=x/(√(1+x)+1)",
+      "visual": "Relative-error comparison against a high-accuracy reference.",
+      "proof": "Prove identity on x≥−1 and analyze small positive x; reference accuracy must be specified.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Square roots",
+        "Algebra"
+      ],
+      "tags": [
+        "catastrophic-cancellation",
+        "rationalization",
+        "finite-precision"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-condition-versus-algorithm",
+      "title": "A bad problem or a bad algorithm?",
+      "topic": "numerical-analysis",
+      "level": "L2",
+      "hook": "An accurate calculation cannot repair data that determine the answer weakly.",
+      "outcome": "Distinguish conditioning from computational stability with scalar examples.",
+      "prerequisites": [
+        "explorations:refresher:derivatives"
+      ],
+      "formula": "κ_f(x)=|x f'(x)/f(x)| when defined",
+      "visual": "Input perturbations and resulting output ranges.",
+      "proof": "Derive first-order relative sensitivity away from zero; finite perturbation bounds are separate.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Relative error"
+      ],
+      "tags": [
+        "condition-numbers",
+        "backward-stability",
+        "input-uncertainty"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-bisection-guarantee",
+      "title": "A root you can trap",
+      "topic": "numerical-analysis",
+      "level": "L1",
+      "hook": "Repeated halving turns uncertainty into a certified interval.",
+      "outcome": "Run bisection and choose iterations for a requested bracket width.",
+      "prerequisites": [
+        "library:book-precalculus:limits-rates-preview"
+      ],
+      "formula": "b_n−a_n=(b_0−a_0)/2^n",
+      "visual": "Bracket history and sign table.",
+      "proof": "Prove bracket invariant using intermediate value theorem; continuity and reliable signs are necessary.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Continuity",
+        "Signs"
+      ],
+      "tags": [
+        "bisection",
+        "root-brackets",
+        "intermediate-value-theorem"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-newton-leaps",
+      "title": "Newton's method can leap the wrong way",
+      "topic": "numerical-analysis",
+      "level": "L2",
+      "hook": "A fast root finder can converge beautifully or fail spectacularly.",
+      "outcome": "Compute Newton steps and diagnose a cycle or zero derivative.",
+      "prerequisites": [
+        "explorations:calc-speed-at-an-instant"
+      ],
+      "formula": "x_{n+1}=x_n−f(x_n)/f'(x_n)",
+      "visual": "Tangent steps and residual table with bisection comparison.",
+      "proof": "Derive iteration and local quadratic error under a simple-root smoothness hypothesis; no global guarantee.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Tangents"
+      ],
+      "tags": [
+        "newton-root-finding",
+        "quadratic-convergence",
+        "iteration-cycles"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-derivative-step",
+      "title": "Why a smaller step can give a worse derivative",
+      "topic": "numerical-analysis",
+      "level": "L2",
+      "hook": "Approximation and rounding pull a computation in opposite directions.",
+      "outcome": "Balance truncation and roundoff in a finite difference.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "calculus:17"
+      ],
+      "formula": "error≈C₁h+C₂u/h for forward differences",
+      "visual": "Error-versus-step plot with model envelope.",
+      "proof": "Derive truncation term and discuss rounding model assumptions; constants and noisy data alter optimal h.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivative",
+        "Taylor expansion"
+      ],
+      "tags": [
+        "finite-differences",
+        "truncation-error",
+        "step-size-selection"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-quadrature-error",
+      "title": "Counting area with a known error",
+      "topic": "numerical-analysis",
+      "level": "L2",
+      "hook": "Rectangles improve when curvature is taken seriously.",
+      "outcome": "Apply composite trapezoidal quadrature with a certified smooth-function bound.",
+      "prerequisites": [
+        "explorations:calc-area-accumulates",
+        "calculus:06"
+      ],
+      "formula": "|E_T|≤(b−a)h² max|f''|/12",
+      "visual": "Trapezoids, true area and error bound.",
+      "proof": "State/prove single-panel remainder and sum bounds for C² functions; singular integrands need different methods.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Definite integrals",
+        "Second derivatives"
+      ],
+      "tags": [
+        "trapezoidal-rule",
+        "quadrature-error",
+        "curvature-bounds"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-runge-interpolation",
+      "title": "More points can make an interpolant worse",
+      "topic": "numerical-analysis",
+      "level": "L3",
+      "hook": "High-degree polynomial fitting can oscillate near the edges.",
+      "outcome": "Compare equally spaced and Chebyshev nodes on Runge's function.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:polynomials-factor-theorem",
+        "library:book-numerical-mathematics-error-algorithms:interpolation-splines-least-squares"
+      ],
+      "formula": "f(x)=1/(1+25x²); x_j=cos(jπ/n)",
+      "visual": "Node distribution and endpoint errors.",
+      "proof": "Demonstrate failure and explain node geometry; finite plots are not proof of asymptotic convergence.",
+      "sources": [
+        "https://people.maths.ox.ac.uk/trefethen/ATAP/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Polynomials",
+        "Interpolation",
+        "Maximum norm"
+      ],
+      "tags": [
+        "polynomial-interpolation",
+        "node-placement",
+        "lebesgue-constants",
+        "data-error-amplification"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-euler-stability",
+      "title": "A decaying equation with an exploding computation",
+      "topic": "numerical-analysis",
+      "level": "L2",
+      "hook": "The numerical solution can grow while the exact solution shrinks.",
+      "outcome": "Derive Euler's stability restriction on a decay equation.",
+      "prerequisites": [
+        "library:book-ode-first-course:models-direction-fields",
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem"
+      ],
+      "formula": "y'=−λy; y_{n+1}=(1−hλ)y_n; |1−hλ|<1",
+      "visual": "Exact decay and numerical points across step sizes.",
+      "proof": "Prove scalar stability for λ>0; convergence, accuracy and stability are distinct.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "ODEs",
+        "Geometric sequences"
+      ],
+      "tags": [
+        "explicit-euler",
+        "absolute-stability",
+        "decay-equations"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "num-least-squares-qr",
+      "title": "Fit a line without squaring the trouble",
+      "topic": "numerical-analysis",
+      "level": "L3",
+      "hook": "Two least-squares methods can amplify errors differently.",
+      "outcome": "Form a small least-squares problem and explain the numerical appeal of QR.",
+      "prerequisites": [
+        "explorations:refresher:vectors",
+        "library:book-linear-algebra-structure-proofs:inner-products-orthogonal-decomposition",
+        "explorations:ga-la-least-squares"
+      ],
+      "formula": "A=QR; Rx=Qᵀb; κ₂(AᵀA)=κ₂(A)²",
+      "visual": "Nearly dependent columns with residual and coefficient sensitivity.",
+      "proof": "Derive full-column-rank QR reduction and condition identity; QR does not fix intrinsic ill-conditioning.",
+      "sources": [
+        "https://fncbook.com/"
+      ],
+      "catalogFields": [
+        "numerical-analysis"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Matrices",
+        "Orthogonality",
+        "Least squares"
+      ],
+      "tags": [
+        "qr-factorization",
+        "least-squares",
+        "normal-equations"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-best-box",
+      "title": "The best box from a sheet of card",
+      "topic": "optimization",
+      "level": "L2",
+      "hook": "A familiar craft problem hides an optimization model.",
+      "outcome": "Form a volume function, identify its feasible interval and compare candidates.",
+      "prerequisites": [
+        "explorations:refresher:algebra",
+        "library:book-algebra-and-functions:functions-domain-graphs"
+      ],
+      "formula": "V(x)=x(L−2x)(W−2x), 0≤x≤min(L,W)/2",
+      "visual": "Cut-out sheet and volume graph with endpoints.",
+      "proof": "Derive model and use derivative for a square sheet; physical thickness and waste are intentionally omitted.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/",
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Algebra",
+        "Graphs"
+      ],
+      "tags": [
+        "constrained-maximization",
+        "geometric-modelling",
+        "derivative-signs"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-local-global",
+      "title": "A valley is not always the deepest valley",
+      "topic": "optimization",
+      "level": "L1",
+      "hook": "Stopping downhill does not certify the best destination.",
+      "outcome": "Distinguish local minima, global minima and stationary points.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "library:book-algebra-and-functions:functions-domain-graphs"
+      ],
+      "formula": "f'(x*)=0 is necessary for an interior differentiable local minimum",
+      "visual": "Multi-valley graph with candidate points.",
+      "proof": "Give explicit polynomial examples; endpoints and nondifferentiable minima need separate checks.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "Functions",
+        "Graphs"
+      ],
+      "tags": [
+        "local-minima",
+        "global-minima",
+        "stationary-points"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-convex-bowl",
+      "title": "The special promise of a convex bowl",
+      "topic": "optimization",
+      "level": "L2",
+      "hook": "Some landscapes let a local answer settle a global question.",
+      "outcome": "Check convexity and prove every local minimum is global.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems",
+        "library:book-precalculus:vectors-plane"
+      ],
+      "formula": "f(tx+(1−t)y)≤t f(x)+(1−t)f(y), 0≤t≤1",
+      "visual": "Chord versus graph with movable endpoints.",
+      "proof": "Prove local-to-global theorem on a convex domain; strict convexity gives at most one minimizer, not existence.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Inequalities",
+        "Line segments"
+      ],
+      "tags": [
+        "convex-functions",
+        "strict-convexity",
+        "global-optimality"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-gradient-descent",
+      "title": "How long should a downhill step be?",
+      "topic": "optimization",
+      "level": "L3",
+      "hook": "Stepping downhill too far can send you uphill.",
+      "outcome": "Analyze gradient descent on a positive quadratic.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "explorations:refresher:vectors",
+        "library:book-algebra-and-functions:quadratic-functions"
+      ],
+      "formula": "x_{k+1}=x_k−α∇f(x_k)",
+      "visual": "Contour map and iteration path with objective table.",
+      "proof": "For a positive-definite quadratic with Hessian Q, prove e_{k+1}=(I−αQ)e_k and contraction factor max_i|1−αλ_i|<1 when 0<α<2/λmax. This is geometric convergence of iterates, not quadratic convergence; state the general smooth descent lemma separately.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Derivatives",
+        "Vectors",
+        "Quadratics"
+      ],
+      "tags": [
+        "gradient-descent",
+        "quadratic-objectives",
+        "step-size-selection",
+        "minimum-norm-selection"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-constraints-multipliers",
+      "title": "An optimum pressed against a fence",
+      "topic": "optimization",
+      "level": "L2",
+      "hook": "At a constrained optimum, the best direction may be forbidden.",
+      "outcome": "Solve a regular equality-constrained problem with multipliers.",
+      "prerequisites": [
+        "explorations:multi-gradient-compass",
+        "calculus:06"
+      ],
+      "formula": "∇f(x*)=λ∇g(x*), g(x*)=0",
+      "visual": "Level sets touching a constraint.",
+      "proof": "Derive tangent-space condition when ∇g≠0; multiplier solutions are candidates, not automatic minima.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Gradients",
+        "Implicit curves"
+      ],
+      "tags": [
+        "lagrange-multipliers",
+        "equality-constraints",
+        "constraint-regularity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-linear-program-corners",
+      "title": "Why the best mix often sits at a corner",
+      "topic": "optimization",
+      "level": "L2",
+      "hook": "A resource-allocation picture turns into a geometric theorem.",
+      "outcome": "Solve a bounded two-variable linear program and identify multiple optima.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems",
+        "library:book-algebra-and-functions:straight-lines-linear-models"
+      ],
+      "formula": "min cᵀx subject to Ax≤b",
+      "visual": "Feasible polygon with moving objective line.",
+      "proof": "Prove optimum occurs at some vertex for a nonempty bounded polytope; unbounded sets and absent vertices require qualifications.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Linear inequalities",
+        "Lines"
+      ],
+      "tags": [
+        "linear-programming",
+        "vertex-optima",
+        "feasible-polygons"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-dual-bound",
+      "title": "A second problem certifies the first",
+      "topic": "optimization",
+      "level": "L3",
+      "hook": "You can prove a candidate is nearly optimal without knowing the exact optimum.",
+      "outcome": "Construct a Lagrangian lower bound and compute a duality gap.",
+      "prerequisites": [
+        "explorations:opt-constraints-multipliers",
+        "library:book-proof-safe-real-analysis:quantifiers-completeness"
+      ],
+      "formula": "g(λ)=inf_x L(x,λ)≤p*, λ≥0 for inequality multipliers",
+      "visual": "Primal candidate and dual bound narrowing a gap.",
+      "proof": "Prove weak duality; strong duality requires additional assumptions and is not universal.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Constrained optimization",
+        "Infima"
+      ],
+      "tags": [
+        "lagrangian-duality",
+        "weak-duality",
+        "optimality-gaps"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-kkt-complementarity",
+      "title": "Constraints that matter and constraints that rest",
+      "topic": "optimization",
+      "level": "L3",
+      "hook": "A constraint can be present without determining the optimum.",
+      "outcome": "Check KKT conditions for a simple convex constrained problem.",
+      "prerequisites": [
+        "explorations:multi-gradient-compass",
+        "explorations:opt-convex-bowl",
+        "explorations:opt-dual-bound"
+      ],
+      "formula": "λ_i≥0, f_i(x)≤0, λ_i f_i(x)=0; ∇_x L=0",
+      "visual": "Active constraints and multipliers with residuals.",
+      "proof": "State primal/dual feasibility, stationarity and complementarity; convexity gives sufficiency, constraint qualifications govern necessity.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Gradients",
+        "Convexity",
+        "Lagrangian duality"
+      ],
+      "tags": [
+        "kkt-conditions",
+        "complementary-slackness",
+        "active-constraints"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-nonsmooth-absolute",
+      "title": "A minimum with no derivative",
+      "topic": "optimization",
+      "level": "L2",
+      "hook": "The sharp point of absolute value still has a useful notion of slope.",
+      "outcome": "Find subgradients and explain why a median minimizes absolute deviations.",
+      "prerequisites": [
+        "explorations:opt-convex-bowl"
+      ],
+      "formula": "g∈∂f(x) iff f(y)≥f(x)+g(y−x) for all y",
+      "visual": "Supporting lines at a corner and absolute-loss graph.",
+      "proof": "Prove ∂|x|(0)=[−1,1] and median characterization; ties can yield an interval of minimizers.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Convexity",
+        "Absolute value",
+        "Sorting"
+      ],
+      "tags": [
+        "convex-subgradients",
+        "absolute-loss",
+        "medians"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "opt-newton-minimization",
+      "title": "Use curvature to choose a better step",
+      "topic": "optimization",
+      "level": "L3",
+      "hook": "A narrow valley defeats equal steps but offers information in its curvature.",
+      "outcome": "Derive Newton's optimization step and identify failure outside convex neighborhoods.",
+      "prerequisites": [
+        "explorations:multi-gradient-compass",
+        "calculus:22",
+        "explorations:ga-la-systems"
+      ],
+      "formula": "H_f(x_k)p_k=−∇f(x_k); x_{k+1}=x_k+p_k",
+      "visual": "Quadratic local model and actual objective along a step.",
+      "proof": "Derive from second-order model; positive-definite Hessian and step control matter, global convergence is not promised.",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/"
+      ],
+      "catalogFields": [
+        "optimisation"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Gradients",
+        "Hessian",
+        "Linear systems"
+      ],
+      "tags": [
+        "newton-optimization",
+        "positive-definite-hessians",
+        "quadratic-models"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "courses": [
+    {
+      "id": "single-variable-calculus-primer",
+      "title": "A first taste of change and accumulation",
+      "topic": "single-variable-calculus",
+      "prerequisites": [
+        "Algebra with fractions",
+        "Graphs of functions"
+      ],
+      "outcomes": [
+        "Read slopes and accumulated area",
+        "Explain the fundamental theorem for a continuous input; integration techniques remain outside scope"
+      ],
+      "modules": [
+        {
+          "title": "Rates and corners",
+          "articleIds": [
+            "calc-speed-at-an-instant"
+          ]
+        },
+        {
+          "title": "Accumulation",
+          "articleIds": [
+            "calc-corner-without-tangent"
+          ]
+        },
+        {
+          "title": "The bridge",
+          "articleIds": [
+            "calc-area-accumulates",
+            "calc-fundamental-bridge"
+          ]
+        }
+      ],
+      "capstone": "Tell the story of a piecewise smooth journey using a position graph and a velocity-area calculation.",
+      "assessment": "Four untimed checks with worked feedback: secant, corner, sum bounds and fundamental-theorem interpretation.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 12
+      },
+      "retained": true,
+      "seriesId": "unhurried-single-variable-calculus"
+    },
+    {
+      "id": "single-variable-calculus-accelerated",
+      "title": "Calculus reconnection for rusty graduates",
+      "topic": "single-variable-calculus",
+      "prerequisites": [
+        "Algebra with fractions",
+        "Graphs of functions",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Recover chain-rule and substitution fluency",
+        "Use error bounds and improper-integral limits in selected problems; not a full calculus sequence"
+      ],
+      "modules": [
+        {
+          "title": "Derivative tools",
+          "articleIds": [
+            "calc-speed-at-an-instant",
+            "calc-chain-rule-lenses"
+          ]
+        },
+        {
+          "title": "Integral tools",
+          "articleIds": [
+            "calc-fundamental-bridge",
+            "calc-mean-value-promise"
+          ]
+        },
+        {
+          "title": "Approximation",
+          "articleIds": [
+            "calc-substitution-accounting",
+            "calc-infinite-area",
+            "calc-taylor-with-receipt"
+          ]
+        }
+      ],
+      "capstone": "Estimate a smooth integral two ways and submit a justified error budget.",
+      "assessment": "Optional diagnostic routes around familiar material; eight mixed transfer problems and a capstone rubric.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 24
+      },
+      "retained": true,
+      "seriesId": "unhurried-single-variable-calculus"
+    },
+    {
+      "id": "single-variable-calculus-deep",
+      "title": "Why one-variable calculus works: selected proofs",
+      "topic": "single-variable-calculus",
+      "prerequisites": [
+        "Function composition and inverse functions",
+        "Algebraic inequalities and absolute value",
+        "Derivatives, definite integrals and elementary limits",
+        "Writing elementary proofs with quantifiers"
+      ],
+      "outcomes": [
+        "Write limit-based proofs and use hypotheses explicitly",
+        "Distinguish smoothness, analyticity and asymptotic approximation; measure theory excluded"
+      ],
+      "modules": [
+        {
+          "title": "Limits and derivatives",
+          "articleIds": [
+            "calc-speed-at-an-instant",
+            "calc-corner-without-tangent"
+          ]
+        },
+        {
+          "title": "Integral reasoning",
+          "articleIds": [
+            "calc-fundamental-bridge",
+            "calc-mean-value-promise"
+          ]
+        },
+        {
+          "title": "Approximation and counterexamples",
+          "articleIds": [
+            "calc-infinite-area",
+            "calc-taylor-with-receipt",
+            "calc-smooth-not-series"
+          ]
+        }
+      ],
+      "capstone": "Write a proof dossier comparing a polynomial, |x| and the flat exponential function.",
+      "assessment": "Twelve original proof tasks with staged hints, counterexample checks and model arguments; no claim of automated proof certification.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 65
+      },
+      "retained": true,
+      "seriesId": "unhurried-single-variable-calculus"
+    },
+    {
+      "id": "multivariable-vector-calculus-primer",
+      "title": "Reading landscapes and flows",
+      "topic": "multivariable-vector-calculus",
+      "prerequisites": [
+        "Single-variable derivatives and integrals",
+        "Vectors and dot products"
+      ],
+      "outcomes": [
+        "Interpret contours, gradients and work",
+        "Explain why coordinate changes alter area; vector integral theorems are outside this primer"
+      ],
+      "modules": [
+        {
+          "title": "Landscapes",
+          "articleIds": [
+            "multi-contour-walk"
+          ]
+        },
+        {
+          "title": "Local change",
+          "articleIds": [
+            "multi-gradient-compass"
+          ]
+        },
+        {
+          "title": "Coordinates and paths",
+          "articleIds": [
+            "multi-jacobian-area",
+            "multi-work-along-path"
+          ]
+        }
+      ],
+      "capstone": "Compare two routes across a height field using slope and work calculations.",
+      "assessment": "Six short calculation-and-explanation tasks plus a route comparison rubric.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 14
+      },
+      "retained": true,
+      "seriesId": "unhurried-multivariable-vector-calculus"
+    },
+    {
+      "id": "multivariable-vector-calculus-accelerated",
+      "title": "A vector calculus refresher",
+      "topic": "multivariable-vector-calculus",
+      "prerequisites": [
+        "Single-variable derivatives and integrals",
+        "Vectors and dot products",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Recover coordinate, line and flux integrals",
+        "Choose a suitable vector theorem and check orientation; general proofs excluded"
+      ],
+      "modules": [
+        {
+          "title": "Differential tools",
+          "articleIds": [
+            "multi-contour-walk",
+            "multi-gradient-compass"
+          ]
+        },
+        {
+          "title": "Integral setup",
+          "articleIds": [
+            "multi-jacobian-area",
+            "multi-order-of-integration",
+            "multi-work-along-path"
+          ]
+        },
+        {
+          "title": "Boundary theorems",
+          "articleIds": [
+            "multi-green-cancellation",
+            "multi-divergence-flux",
+            "multi-stokes-orientation"
+          ]
+        }
+      ],
+      "capstone": "Compute one circulation and one flux in two independent ways.",
+      "assessment": "Diagnostic with optional refreshers; ten mixed setup problems, including deliberate sign and domain traps.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 30
+      },
+      "retained": true,
+      "seriesId": "unhurried-multivariable-vector-calculus"
+    },
+    {
+      "id": "multivariable-vector-calculus-deep",
+      "title": "Domains and hypotheses in vector calculus",
+      "topic": "multivariable-vector-calculus",
+      "prerequisites": [
+        "One-variable limit and integral proofs",
+        "Vectors, dot/cross products and determinants",
+        "Partial derivatives and parametrized curves",
+        "Double and triple integral setup",
+        "Writing proofs and constructing counterexamples"
+      ],
+      "outcomes": [
+        "Distinguish partial derivatives from total differentiability",
+        "Prove rectangular theorem cases and analyze topology obstructions; differential forms and general Stokes proof excluded"
+      ],
+      "modules": [
+        {
+          "title": "Differentiability",
+          "articleIds": [
+            "multi-gradient-compass",
+            "multi-partials-not-enough"
+          ]
+        },
+        {
+          "title": "Domains and circulation",
+          "articleIds": [
+            "multi-jacobian-area",
+            "multi-work-along-path",
+            "multi-hole-in-curl"
+          ]
+        },
+        {
+          "title": "Boundary-to-interior proofs",
+          "articleIds": [
+            "multi-green-cancellation",
+            "multi-divergence-flux",
+            "multi-stokes-orientation"
+          ]
+        }
+      ],
+      "capstone": "Audit a proposed zero-curl-implies-conservative argument and supply a correct domain-aware version.",
+      "assessment": "Ten proof or counterexample exercises and a theorem-assumption checklist reviewed against worked solutions.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 75
+      },
+      "retained": true,
+      "seriesId": "unhurried-multivariable-vector-calculus"
+    },
+    {
+      "id": "real-analysis-primer",
+      "title": "Making limits precise",
+      "topic": "real-analysis",
+      "prerequisites": [
+        "Algebra and inequalities",
+        "Elementary functions",
+        "Basic proof language for deeper entries"
+      ],
+      "outcomes": [
+        "Use epsilon-delta language in concrete examples",
+        "Recognize completeness and integration obstacles; no claim of a proof-course replacement"
+      ],
+      "modules": [
+        {
+          "title": "Quantified promises",
+          "articleIds": [
+            "real-limit-challenge"
+          ]
+        },
+        {
+          "title": "Completeness",
+          "articleIds": [
+            "real-rational-gap"
+          ]
+        },
+        {
+          "title": "Continuity and sums",
+          "articleIds": [
+            "real-continuity-uniform",
+            "real-riemann-discontinuity"
+          ]
+        }
+      ],
+      "capstone": "Build a gallery of three correct limit proofs and two failed arguments with repairs.",
+      "assessment": "Six scaffolded proofs with quantifier-order feedback and optional algebra refreshers.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-real-analysis"
+    },
+    {
+      "id": "real-analysis-accelerated",
+      "title": "Real analysis reconnection and a measure preview",
+      "topic": "real-analysis",
+      "prerequisites": [
+        "Algebra and inequalities",
+        "Elementary functions",
+        "Basic proof language for deeper entries",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Recall core real-line limit and convergence arguments",
+        "Read simple Lebesgue integrals and check convergence-theorem assumptions; measure construction excluded"
+      ],
+      "modules": [
+        {
+          "title": "Sequences and compactness",
+          "articleIds": [
+            "real-limit-challenge",
+            "real-rational-gap",
+            "real-compactness-subsequence"
+          ]
+        },
+        {
+          "title": "Functions and convergence",
+          "articleIds": [
+            "real-continuity-uniform",
+            "real-riemann-discontinuity",
+            "real-uniform-limit"
+          ]
+        },
+        {
+          "title": "Measure gateway",
+          "articleIds": [
+            "real-countable-zero",
+            "real-lebesgue-layer-cake",
+            "real-dominated-convergence"
+          ]
+        }
+      ],
+      "capstone": "Compare Riemann and Lebesgue treatment of the rational-indicator function and one spike sequence.",
+      "assessment": "Prerequisite proof diagnostic; twelve mixed proof audits and example classifications.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 35
+      },
+      "retained": true,
+      "seriesId": "unhurried-real-analysis"
+    },
+    {
+      "id": "real-analysis-deep",
+      "title": "Real-line proofs with a measured gateway",
+      "topic": "real-analysis",
+      "prerequisites": [
+        "Sets, functions and countability",
+        "Quantifiers, induction and contradiction",
+        "Absolute-value inequalities and geometric series",
+        "Elementary calculus and sequence limits"
+      ],
+      "outcomes": [
+        "Prove selected completeness, compactness and uniform-convergence results",
+        "Use countable null covers and simple integrals; full measure construction, Lp theory and full dominated-convergence proof are follow-on study"
+      ],
+      "modules": [
+        {
+          "title": "Real-line foundations",
+          "articleIds": [
+            "real-limit-challenge",
+            "real-rational-gap",
+            "real-compactness-subsequence"
+          ]
+        },
+        {
+          "title": "Continuity and integration",
+          "articleIds": [
+            "real-continuity-uniform",
+            "real-riemann-discontinuity",
+            "real-uniform-limit"
+          ]
+        },
+        {
+          "title": "Null sets and Lebesgue gateway",
+          "articleIds": [
+            "real-countable-zero",
+            "real-cantor-length",
+            "real-lebesgue-layer-cake",
+            "real-dominated-convergence"
+          ]
+        }
+      ],
+      "capstone": "Write a linked counterexample collection showing why each hypothesis in three convergence statements matters.",
+      "assessment": "Eighteen proof tasks with hints, a cumulative proof portfolio and explicit self-review rubric; 95 hours is an estimate, not a mastery guarantee.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 95
+      },
+      "retained": true,
+      "seriesId": "unhurried-real-analysis"
+    },
+    {
+      "id": "complex-analysis-primer",
+      "title": "A geometric first look at complex functions",
+      "topic": "complex-analysis",
+      "prerequisites": [
+        "Plane coordinates",
+        "Algebra",
+        "Trigonometry"
+      ],
+      "outcomes": [
+        "Interpret complex multiplication and squaring geometrically",
+        "Explain why directional agreement and branch choice matter; contour theorems excluded"
+      ],
+      "modules": [
+        {
+          "title": "Turns and scales",
+          "articleIds": [
+            "complex-multiplication-turns"
+          ]
+        },
+        {
+          "title": "Mapping grids",
+          "articleIds": [
+            "complex-square-grid"
+          ]
+        },
+        {
+          "title": "Derivatives and branches",
+          "articleIds": [
+            "complex-derivative-directions",
+            "complex-logarithm-cut"
+          ]
+        }
+      ],
+      "capstone": "Create a narrated map of z² and a logarithm branch using selected points.",
+      "assessment": "Six numerical and conceptual tasks with algebraic answer keys.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 12
+      },
+      "retained": true,
+      "seriesId": "unhurried-complex-analysis"
+    },
+    {
+      "id": "complex-analysis-accelerated",
+      "title": "Complex methods reconnected",
+      "topic": "complex-analysis",
+      "prerequisites": [
+        "Plane coordinates",
+        "Algebra",
+        "Trigonometry",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Compute selected contour integrals and residues",
+        "Track branches, singularities and convergence disks; not a graduate analysis course"
+      ],
+      "modules": [
+        {
+          "title": "Holomorphic functions",
+          "articleIds": [
+            "complex-multiplication-turns",
+            "complex-derivative-directions"
+          ]
+        },
+        {
+          "title": "Contours",
+          "articleIds": [
+            "complex-cauchy-riemann",
+            "complex-logarithm-cut",
+            "complex-contour-one-over-z"
+          ]
+        },
+        {
+          "title": "Residues and expansions",
+          "articleIds": [
+            "complex-cauchy-reconstruction",
+            "complex-residue-shortcut",
+            "complex-power-series-radius"
+          ]
+        }
+      ],
+      "capstone": "Evaluate one real integral by a contour with a fully justified arc estimate.",
+      "assessment": "Ten computations plus three hypothesis audits and an optional real-analysis refresher.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 32
+      },
+      "retained": true,
+      "seriesId": "unhurried-complex-analysis"
+    },
+    {
+      "id": "complex-analysis-deep",
+      "title": "From holomorphic functions to selected contour theorems",
+      "topic": "complex-analysis",
+      "prerequisites": [
+        "Real-line continuity, compactness and uniform convergence",
+        "Riemann integration and parametrized curve integrals",
+        "Partial derivatives and total differentiability in two variables",
+        "Complex arithmetic and power-series convergence",
+        "Writing epsilon-based proofs"
+      ],
+      "outcomes": [
+        "Develop selected Cauchy-theory arguments with explicit domains",
+        "Connect holomorphy, series and maximum modulus; Riemann mapping and general analytic continuation excluded"
+      ],
+      "modules": [
+        {
+          "title": "Local structure",
+          "articleIds": [
+            "complex-derivative-directions",
+            "complex-cauchy-riemann"
+          ]
+        },
+        {
+          "title": "Cauchy theory",
+          "articleIds": [
+            "complex-logarithm-cut",
+            "complex-contour-one-over-z",
+            "complex-cauchy-reconstruction"
+          ]
+        },
+        {
+          "title": "Consequences and singularities",
+          "articleIds": [
+            "complex-residue-shortcut",
+            "complex-maximum-principle",
+            "complex-power-series-radius"
+          ]
+        }
+      ],
+      "capstone": "Prove a disk-case result from Cauchy's formula and produce a counterexample when a hypothesis is removed.",
+      "assessment": "Twelve original proof exercises plus a theorem-dependency map; connective lessons must supply Cauchy-theorem proof before claiming a proved route.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 80
+      },
+      "retained": true,
+      "seriesId": "unhurried-complex-analysis"
+    },
+    {
+      "id": "differential-equations-dynamics-primer",
+      "title": "A first look at evolving systems",
+      "topic": "differential-equations-dynamics",
+      "prerequisites": [
+        "Derivatives",
+        "Exponentials",
+        "Graphs"
+      ],
+      "outcomes": [
+        "Solve and interpret cooling and logistic examples",
+        "Read slope and phase pictures; no general ODE theory"
+      ],
+      "modules": [
+        {
+          "title": "Rules and solutions",
+          "articleIds": [
+            "ode-cooling-cup"
+          ]
+        },
+        {
+          "title": "Equilibria",
+          "articleIds": [
+            "ode-direction-field"
+          ]
+        },
+        {
+          "title": "Oscillation",
+          "articleIds": [
+            "ode-logistic-growth",
+            "ode-damped-spring"
+          ]
+        }
+      ],
+      "capstone": "Compare cooling and population models, including the assumptions that would invalidate each.",
+      "assessment": "Six model-to-equation tasks and a prediction explanation without a timer.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 14
+      },
+      "retained": true,
+      "seriesId": "unhurried-differential-equations-dynamics"
+    },
+    {
+      "id": "differential-equations-dynamics-accelerated",
+      "title": "Differential equations and local dynamics refresher",
+      "topic": "differential-equations-dynamics",
+      "prerequisites": [
+        "Derivatives",
+        "Exponentials",
+        "Graphs",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Recover selected scalar and linear-system techniques",
+        "Analyze local stability and a scalar bifurcation; Laplace transforms and PDEs excluded"
+      ],
+      "modules": [
+        {
+          "title": "Scalar equations",
+          "articleIds": [
+            "ode-cooling-cup",
+            "ode-logistic-growth"
+          ]
+        },
+        {
+          "title": "Linear oscillation and systems",
+          "articleIds": [
+            "ode-damped-spring",
+            "ode-resonance-energy"
+          ]
+        },
+        {
+          "title": "Nonlinear local behavior",
+          "articleIds": [
+            "ode-phase-portrait-eigen",
+            "ode-linearization-boundary",
+            "ode-bifurcation-fold"
+          ]
+        }
+      ],
+      "capstone": "Analyze a damped oscillator and a scalar bifurcation with exact and numerical checks.",
+      "assessment": "Ten worked problems including one misleading linearization and one numerical artifact.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 30
+      },
+      "retained": true,
+      "seriesId": "unhurried-differential-equations-dynamics"
+    },
+    {
+      "id": "differential-equations-dynamics-deep",
+      "title": "Existence, uniqueness and selected dynamical systems",
+      "topic": "differential-equations-dynamics",
+      "prerequisites": [
+        "Single-variable derivative and integral proofs",
+        "Uniform convergence and completeness of real numbers",
+        "Matrices, eigenvalues and planar linear systems",
+        "Metric-space and contraction vocabulary supplied in opening connective lessons"
+      ],
+      "outcomes": [
+        "Understand a local existence-and-uniqueness proof through additional contraction-method lessons",
+        "Prove selected stability results and distinguish simulation from chaos proof; global dynamics and PDE theory excluded"
+      ],
+      "modules": [
+        {
+          "title": "Existence and uniqueness",
+          "articleIds": [
+            "ode-direction-field",
+            "ode-uniqueness-fails"
+          ]
+        },
+        {
+          "title": "Planar and scalar stability",
+          "articleIds": [
+            "ode-phase-portrait-eigen",
+            "ode-linearization-boundary"
+          ]
+        },
+        {
+          "title": "Iteration and bifurcation",
+          "articleIds": [
+            "ode-bifurcation-fold",
+            "ode-logistic-map-chaos"
+          ]
+        }
+      ],
+      "capstone": "Construct a model where uniqueness fails, then verify a corrected model's local Lipschitz assumptions.",
+      "assessment": "Twelve proof and modeling tasks; course-specific contraction and complete-function-space material is required before the capstone.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 75
+      },
+      "retained": true,
+      "seriesId": "unhurried-differential-equations-dynamics"
+    },
+    {
+      "id": "numerical-analysis-primer",
+      "title": "Trusting an approximate answer",
+      "topic": "numerical-analysis",
+      "prerequisites": [
+        "Algebra",
+        "Functions",
+        "Basic calculus for bridge entries"
+      ],
+      "outcomes": [
+        "Distinguish rounding, residual and bracket error",
+        "Choose a safer formula or root-finding method; no coding required"
+      ],
+      "modules": [
+        {
+          "title": "Finite arithmetic",
+          "articleIds": [
+            "num-floating-point"
+          ]
+        },
+        {
+          "title": "Stable formulas",
+          "articleIds": [
+            "num-cancellation"
+          ]
+        },
+        {
+          "title": "Root finding",
+          "articleIds": [
+            "num-bisection-guarantee",
+            "num-newton-leaps"
+          ]
+        }
+      ],
+      "capstone": "Find a root with a reported bracket and compare it with an unguarded Newton run.",
+      "assessment": "Six calculator-optional experiments with exact symbolic checks and a results-report rubric.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 12
+      },
+      "retained": true,
+      "seriesId": "unhurried-numerical-analysis"
+    },
+    {
+      "id": "numerical-analysis-accelerated",
+      "title": "Numerical methods with error awareness",
+      "topic": "numerical-analysis",
+      "prerequisites": [
+        "Algebra",
+        "Functions",
+        "Basic calculus for bridge entries",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Diagnose conditioning and stability separately",
+        "Apply selected root, quadrature, ODE and least-squares methods; no survey of every numerical field"
+      ],
+      "modules": [
+        {
+          "title": "Error and sensitivity",
+          "articleIds": [
+            "num-floating-point",
+            "num-cancellation",
+            "num-condition-versus-algorithm"
+          ]
+        },
+        {
+          "title": "Roots and quadrature",
+          "articleIds": [
+            "num-bisection-guarantee",
+            "num-newton-leaps",
+            "num-derivative-step"
+          ]
+        },
+        {
+          "title": "ODEs and least squares",
+          "articleIds": [
+            "num-quadrature-error",
+            "num-euler-stability",
+            "num-least-squares-qr"
+          ]
+        }
+      ],
+      "capstone": "Produce an error budget for an ODE or quadrature computation using step refinement and an independent check.",
+      "assessment": "Ten small computations and an optional language-neutral algorithm exercise; no package installation needed.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 30
+      },
+      "retained": true,
+      "seriesId": "unhurried-numerical-analysis"
+    },
+    {
+      "id": "numerical-analysis-deep",
+      "title": "Selected numerical convergence and stability proofs",
+      "topic": "numerical-analysis",
+      "prerequisites": [
+        "Taylor expansion with remainder bounds",
+        "Vector norms, matrices, eigenvalues and orthogonality",
+        "Elementary ODEs and integration",
+        "Proofs using inequalities and limits",
+        "Reading elementary pseudocode; programming optional"
+      ],
+      "outcomes": [
+        "Prove selected convergence and error bounds",
+        "Explain interpolation-node and linear-algebra stability choices; large-scale solvers and numerical PDEs excluded"
+      ],
+      "modules": [
+        {
+          "title": "Error models",
+          "articleIds": [
+            "num-cancellation",
+            "num-condition-versus-algorithm",
+            "num-bisection-guarantee"
+          ]
+        },
+        {
+          "title": "Convergence and approximation",
+          "articleIds": [
+            "num-newton-leaps",
+            "num-derivative-step",
+            "num-quadrature-error"
+          ]
+        },
+        {
+          "title": "Dynamical and algebraic stability",
+          "articleIds": [
+            "num-runge-interpolation",
+            "num-euler-stability",
+            "num-least-squares-qr"
+          ]
+        }
+      ],
+      "capstone": "Compare a provable bound with observed errors and explain their gap on a chosen smooth problem.",
+      "assessment": "Twelve derivations plus reproducible tables; empirical rates must not be labeled proofs.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 75
+      },
+      "retained": true,
+      "seriesId": "unhurried-numerical-analysis"
+    },
+    {
+      "id": "optimization-primer",
+      "title": "Thinking clearly about a best choice",
+      "topic": "optimization",
+      "prerequisites": [
+        "Algebra",
+        "Graphs",
+        "Derivatives for bridge entries"
+      ],
+      "outcomes": [
+        "Separate objective, feasible set and candidate optimum",
+        "Recognize convexity's local-to-global promise; advanced algorithms excluded"
+      ],
+      "modules": [
+        {
+          "title": "Model a choice",
+          "articleIds": [
+            "opt-best-box"
+          ]
+        },
+        {
+          "title": "Candidates and guarantees",
+          "articleIds": [
+            "opt-local-global"
+          ]
+        },
+        {
+          "title": "Geometry",
+          "articleIds": [
+            "opt-convex-bowl",
+            "opt-linear-program-corners"
+          ]
+        }
+      ],
+      "capstone": "Build and solve a two-variable resource-allocation toy model with an explicit feasible region.",
+      "assessment": "Six modeling and counterexample tasks, with sensitivity questions and worked solutions.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 12
+      },
+      "retained": true,
+      "seriesId": "unhurried-optimization"
+    },
+    {
+      "id": "optimization-accelerated",
+      "title": "Smooth and convex optimization refresher",
+      "topic": "optimization",
+      "prerequisites": [
+        "Algebra",
+        "Graphs",
+        "Derivatives for bridge entries",
+        "Prior study of this subject; diagnostic identifies gaps"
+      ],
+      "outcomes": [
+        "Use gradients and constraints with correct hypotheses",
+        "Check simple convex certificates and dual bounds; not a general nonconvex solver course"
+      ],
+      "modules": [
+        {
+          "title": "Geometry and descent",
+          "articleIds": [
+            "opt-local-global",
+            "opt-convex-bowl"
+          ]
+        },
+        {
+          "title": "Constraints",
+          "articleIds": [
+            "opt-gradient-descent",
+            "opt-constraints-multipliers",
+            "opt-linear-program-corners"
+          ]
+        },
+        {
+          "title": "Certificates",
+          "articleIds": [
+            "opt-dual-bound",
+            "opt-kkt-complementarity",
+            "opt-nonsmooth-absolute"
+          ]
+        }
+      ],
+      "capstone": "Solve a small constrained convex problem and present primal feasibility, dual feasibility and objective gap.",
+      "assessment": "Ten computations and three faulty-certificate repairs; optional linear-algebra diagnostic.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 30
+      },
+      "retained": true,
+      "seriesId": "unhurried-optimization"
+    },
+    {
+      "id": "optimization-deep",
+      "title": "Convex optimality and selected algorithm proofs",
+      "topic": "optimization",
+      "prerequisites": [
+        "Multivariable differentiation, gradients and Hessians",
+        "Linear systems, eigenvalues and positive-definite matrices",
+        "Convex sets and functions at an introductory level",
+        "Writing proofs with inequalities and infima"
+      ],
+      "outcomes": [
+        "Prove weak duality and selected convex optimality results",
+        "Analyze simple descent and Newton models; strong duality is studied under explicit conditions, advanced conic methods excluded"
+      ],
+      "modules": [
+        {
+          "title": "Convex structure",
+          "articleIds": [
+            "opt-convex-bowl",
+            "opt-gradient-descent"
+          ]
+        },
+        {
+          "title": "Duality and optimality",
+          "articleIds": [
+            "opt-constraints-multipliers",
+            "opt-dual-bound"
+          ]
+        },
+        {
+          "title": "Algorithm guarantees",
+          "articleIds": [
+            "opt-kkt-complementarity",
+            "opt-nonsmooth-absolute",
+            "opt-newton-minimization"
+          ]
+        }
+      ],
+      "capstone": "Create a certificate for a convex toy problem and contrast it with an unsupported nonconvex stationary point.",
+      "assessment": "Twelve proof tasks and a capstone certificate audit; connective lessons supply supporting separation or constraint-qualification results where invoked.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 80
+      },
+      "retained": true,
+      "seriesId": "unhurried-optimization"
+    }
+  ],
+  "labs": [
+    {
+      "id": "lab-calc-secant",
+      "title": "From secant to tangent",
+      "topic": "single-variable-calculus",
+      "articleIds": [
+        "calc-speed-at-an-instant",
+        "calc-corner-without-tangent"
+      ],
+      "controls": [
+        "Function: x² or |x|",
+        "Base point",
+        "Positive or negative h, excluding zero"
+      ],
+      "readout": "Difference quotient, exact derivative when defined, signed h and error.",
+      "invariant": "For x², secant slope is 2a+h; at |x| origin opposite sides approach ±1.",
+      "pitfalls": "Never substitute h=0; tiny h incurs cancellation. A finite animation does not prove a limit.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "lab-calc-sums",
+      "title": "Area between two honest bounds",
+      "topic": "single-variable-calculus",
+      "articleIds": [
+        "calc-area-accumulates",
+        "calc-fundamental-bridge"
+      ],
+      "controls": [
+        "Function: x or x² on [0,1]",
+        "Partition count",
+        "Lower, upper or both sums"
+      ],
+      "readout": "Exact lower sum, upper sum, gap and integral.",
+      "invariant": "For increasing chosen functions, lower≤integral≤upper and uniform gap tends to zero.",
+      "pitfalls": "Do not extend endpoint rules to nonmonotone functions without per-cell extrema.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "lab-multi-gradient",
+      "title": "A direction finder on a landscape",
+      "topic": "multivariable-vector-calculus",
+      "articleIds": [
+        "multi-contour-walk",
+        "multi-gradient-compass"
+      ],
+      "controls": [
+        "Point coordinates",
+        "Unit direction angle",
+        "Quadratic coefficients restricted positive"
+      ],
+      "readout": "Gradient components, directional derivative and predicted versus actual height change.",
+      "invariant": "Directional derivative equals gradient dot unit direction.",
+      "pitfalls": "A large finite step need not follow the linear prediction; normalized directions are essential.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-multi-circulation",
+      "title": "A hole inside the loop",
+      "topic": "multivariable-vector-calculus",
+      "articleIds": [
+        "multi-work-along-path",
+        "multi-hole-in-curl"
+      ],
+      "controls": [
+        "Field: gradient or punctured-plane vortex",
+        "Circle center and radius",
+        "Orientation"
+      ],
+      "readout": "Analytic circulation where available, numerical estimate and whether path hits singularity.",
+      "invariant": "Gradient-field circulation is zero; admissible vortex circles give 0 or signed 2π by winding.",
+      "pitfalls": "Refuse paths through the origin; zero numerical curl cannot certify a potential on a holed domain.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-real-tolerance",
+      "title": "Choose a delta that keeps the promise",
+      "topic": "real-analysis",
+      "articleIds": [
+        "real-limit-challenge",
+        "real-continuity-uniform"
+      ],
+      "controls": [
+        "Epsilon > 0",
+        "Delta > 0",
+        "Base point",
+        "Function: 2x or x² with bounded local window"
+      ],
+      "readout": "Symbolic sufficient delta, chosen bound and whether the bound certifies the epsilon target.",
+      "invariant": "For f=2x, delta≤epsilon/2 is sufficient for the strict implication.",
+      "pitfalls": "Sampled points alone cannot certify all x; distinguish sufficient bounds from necessary values.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "lab-real-convergence",
+      "title": "A shrinking spike with stubborn area",
+      "topic": "real-analysis",
+      "articleIds": [
+        "real-uniform-limit",
+        "real-dominated-convergence"
+      ],
+      "controls": [
+        "Sequence: x^n or n·1_(0,1/n) on [0,1]",
+        "Positive integer n",
+        "Probe x"
+      ],
+      "readout": "Pointwise value, exact integral and supremum behavior.",
+      "invariant": "Spike integrals stay 1 while the sequence tends pointwise to 0; no single integrable dominator exists.",
+      "pitfalls": "Raster sampling can miss a spike completely; never approximate integral solely from displayed pixels.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Include exact symbolic integrals so narrow spikes remain interpretable.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-complex-multiply",
+      "title": "Turn and stretch with one number",
+      "topic": "complex-analysis",
+      "articleIds": [
+        "complex-multiplication-turns",
+        "complex-square-grid"
+      ],
+      "controls": [
+        "Input real and imaginary components",
+        "Multiplier magnitude",
+        "Multiplier angle"
+      ],
+      "readout": "Product components, lengths and angle addition modulo 2π.",
+      "invariant": "|zw|=|z||w| and nonzero arguments add modulo 2π.",
+      "pitfalls": "Zero has no defined argument; colors must not carry the only information.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Describe the turn in words and show both Cartesian components.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "lab-complex-contour",
+      "title": "What a loop encloses",
+      "topic": "complex-analysis",
+      "articleIds": [
+        "complex-contour-one-over-z",
+        "complex-residue-shortcut"
+      ],
+      "controls": [
+        "Circular contour center and radius",
+        "Orientation",
+        "Integrand: 1/z or 1/(1+z²)"
+      ],
+      "readout": "Enclosed poles, residues, analytic integral and quadrature comparison.",
+      "invariant": "For contours avoiding poles, integral equals 2πi times oriented sum of enclosed residues.",
+      "pitfalls": "Disable pole-on-contour states and flag near-singular quadrature error; complex-valued integral needs two numerical components.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P2",
+      "status": "published"
+    },
+    {
+      "id": "lab-ode-field",
+      "title": "Exact curves and an approximate walk",
+      "topic": "differential-equations-dynamics",
+      "articleIds": [
+        "ode-direction-field",
+        "ode-cooling-cup"
+      ],
+      "controls": [
+        "Initial value",
+        "Positive rate k",
+        "Time step",
+        "Exact or Euler overlay"
+      ],
+      "readout": "Exact solution, Euler iterate and absolute error at each time.",
+      "invariant": "For y'=−ky the exact positive solution remains positive and decays.",
+      "pitfalls": "Euler may oscillate or explode for large steps; label solver artifacts and keep physical/model units visible.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-ode-bifurcation",
+      "title": "Watch two equilibria meet",
+      "topic": "differential-equations-dynamics",
+      "articleIds": [
+        "ode-bifurcation-fold",
+        "ode-linearization-boundary"
+      ],
+      "controls": [
+        "Parameter μ",
+        "Initial value",
+        "Time horizon"
+      ],
+      "readout": "Equilibria, derivative signs and stability with phase arrows.",
+      "invariant": "For x'=μ−x²: two equilibria for μ>0, one nonhyperbolic for μ=0, none for μ<0.",
+      "pitfalls": "Trajectories may blow up in finite time; stop before numerical overflow and explain model-domain limits.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P2",
+      "status": "published"
+    },
+    {
+      "id": "lab-num-root",
+      "title": "A fast guess and a guaranteed bracket",
+      "topic": "numerical-analysis",
+      "articleIds": [
+        "num-bisection-guarantee",
+        "num-newton-leaps"
+      ],
+      "controls": [
+        "Preset continuous function",
+        "Valid sign-changing bracket",
+        "Initial Newton guess",
+        "Iteration count"
+      ],
+      "readout": "Bisection bracket width, Newton iterates, residual and reference error where known.",
+      "invariant": "Bisection retains a root under validated continuity and reliable signs.",
+      "pitfalls": "Small residual may not mean small root error; guard zero derivatives and report failure explicitly.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-num-step-error",
+      "title": "The step-size sweet spot",
+      "topic": "numerical-analysis",
+      "articleIds": [
+        "num-derivative-step",
+        "num-cancellation"
+      ],
+      "controls": [
+        "Function preset with known derivative",
+        "Evaluation point",
+        "Logarithmic step h",
+        "Toy precision or native arithmetic"
+      ],
+      "readout": "Finite difference, derivative reference, absolute error and model terms.",
+      "invariant": "Exact truncation decreases with h while finite-precision roundoff can grow as h shrinks.",
+      "pitfalls": "Zero rounded difference and underflow must be visible; plot is empirical unless a rigorous bound is separately supplied.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-opt-descent",
+      "title": "When downhill steps overshoot",
+      "topic": "optimization",
+      "articleIds": [
+        "opt-gradient-descent",
+        "opt-local-global"
+      ],
+      "controls": [
+        "Positive quadratic eigenvalues",
+        "Initial point",
+        "Step size",
+        "Iteration count"
+      ],
+      "readout": "Objective, gradient norm, iterates and theoretical step-size interval.",
+      "invariant": "For positive quadratic Hessian Q, 0<α<2/λmax(Q) ensures convergence.",
+      "pitfalls": "Gradient norm and function value need separate scales; do not extrapolate quadratic guarantee to arbitrary nonconvex functions.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "lab-opt-certificate",
+      "title": "A lower bound and a feasible answer",
+      "topic": "optimization",
+      "articleIds": [
+        "opt-linear-program-corners",
+        "opt-dual-bound",
+        "opt-kkt-complementarity"
+      ],
+      "controls": [
+        "Two-variable bounded LP preset",
+        "Primal candidate",
+        "Nonnegative dual multipliers"
+      ],
+      "readout": "Constraint residuals, feasible objective, dual bound and gap only when feasible.",
+      "invariant": "Weak duality orders any feasible primal and dual objective values.",
+      "pitfalls": "Never label infeasible points as certificates; tolerance must be stated and exact rational presets offered.",
+      "accessibleFallback": "Every control has a labeled keyboard-operable numeric/select input; provide a step button, reset, text explanation and downloadable or copyable value table. No required animation; honor reduced motion. Show the same invariant and calculations in a static worked example.",
+      "priority": "P2",
+      "status": "published"
+    }
+  ]
+}

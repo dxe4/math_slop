@@ -1,0 +1,191 @@
+[
+  {
+    "id": "U12-SET-A",
+    "family": "zero-set-geometry",
+    "variant": "A",
+    "title": "An ellipsoid and two crossing planes",
+    "preparation": [
+      {
+        "chapterId": "21",
+        "lesson": 1,
+        "problems": [2]
+      },
+      {
+        "chapterId": "21",
+        "lesson": 6,
+        "problems": [34, 35, 37]
+      }
+    ],
+    "prompt": "At P=(1,0,0), compare the zero sets of H(x,y,z)=(x²+2y²+z²−1)² and K(x,y,z)=(x−1)y. For each, calculate the defining gradient at P, identify the actual zero set near P, and decide whether that set is a smooth two-dimensional surface with a tangent plane there. Give the plane and unit normals when they exist. Choose a justification that establishes the geometry rather than drawing a conclusion from a zero gradient alone.",
+    "hypotheses": "Both defining functions have domain R³ and are smooth everywhere. Smooth surface means a C¹ embedded two-dimensional surface on an open neighborhood of P. Tangent vectors must be velocities of actual differentiable curves in the zero set. Any local square-root representation must specify its branch and domain.",
+    "solution": "Put G=x²+2y²+z²−1. Since ∇H=2G∇G and G(P)=0, ∇H(P)=0. Also ∇K=(y,x−1,0), so ∇K(P)=0. These equal gradient values do not classify the sets. H=0 is exactly the ellipsoid G=0. Near P, restrict to x>0 and s=2y²+z²<1. Its actual local graph is x=sqrt(1−s); the negative square-root branch lies away from P. For ρ=sqrt(y²+z²)>0, rationalization gives x−1=−s/(1+sqrt(1−s)), hence |x−1|/ρ≤2ρ→0. Thus the graph is differentiable at P with tangent plane x=1 and unit normals ±(1,0,0). It is smooth on the stated local domain. Independently, ∇G(P)=(2,0,0) supplies a regular defining formula for the same set. By contrast, K=0 is the union of the planes x=1 and y=0. The curves P+t(1,0,0), P+t(0,1,0), and P+t(0,0,1) all lie in this union and have three independent velocities at P. No two-dimensional tangent plane can contain them all. Consequently this union is not a smooth surface at P and has no single tangent plane there. The geometric conclusions follow from the actual graph and actual on-set curves, not from the two vanished gradients.",
+    "criteria": [
+      "Calculates both defining gradients at P as zero and states that this alone gives no geometric classification.",
+      "Identifies H=0 as the ellipsoid, chooses the positive local square-root branch, and supplies a valid first-order residual bound.",
+      "Obtains tangent plane x=1 and unit normals ±(1,0,0), with the local domain or an equivalent regular defining formula checked.",
+      "Identifies K=0 as two crossing planes and exhibits three independent realized tangent velocities to rule out a single tangent plane."
+    ],
+    "boundary": "Public model for voluntary comparison. The ellipsoid argument is local near its positive-x point; it does not select the positive branch globally. The crossing-plane conclusion concerns the complete union, rather than either individual plane. The model supplies no unseen-work, verified-delay, grading, or mastery evidence.",
+    "changedFrom": "Replaces the packet's powered paraboloid and cone with a compact squared ellipsoid at a nonzero point and a reducible union of crossing planes. The learner must check a square-root branch and distinguish the full union from its individually smooth components."
+  },
+  {
+    "id": "U12-SET-B",
+    "family": "zero-set-geometry",
+    "variant": "B",
+    "title": "A first-order plane need not make a smooth surface",
+    "preparation": [
+      {
+        "chapterId": "21",
+        "lesson": 1,
+        "problems": [2, 4]
+      },
+      {
+        "chapterId": "21",
+        "lesson": 6,
+        "problems": [35, 37]
+      }
+    ],
+    "prompt": "Compare S₁={(x,y,z):(x−yz)²=0} and S₂={(x,y,z):x²−y²z²=0} at the origin. Decide separately whether each set is a C¹ surface on some neighborhood of the origin and whether it has a unique first-order secant plane there. Here a first-order secant plane is a two-dimensional plane T through the origin satisfying dist(p,T)/||p||→0 for every nonzero on-set p tending to the origin. Calculate the defining gradients, identify any such plane, and justify both decisions. Explain why the two questions need not have the same answer.",
+    "hypotheses": "Both defining functions are smooth on R³. A C¹ surface means an embedded two-dimensional surface on an open neighborhood. The explicitly defined first-order secant-plane condition is weaker and must not be treated as a definition of a smooth surface. Norm and distance are Euclidean.",
+    "solution": "For H=(x−yz)², ∇H=2(x−yz)(1,−z,−y), so ∇H(0)=0. For K=x²−y²z², ∇K=(2x,−2yz²,−2y²z), also zero at the origin. S₁ is exactly the smooth graph x=yz. Its derivative at zero is zero, and its tangent plane is x=0. S₂ is the union of the graphs x=yz and x=−yz. On either set, |x|=|yz|≤(y²+z²)/2≤||p||²/2. Therefore dist(p,{x=0})/||p||=|x|/||p||≤||p||/2→0. Both sets contain the entire y-axis and z-axis. A plane satisfying the stated limit must contain each of their directions, because its normalized distance along either axis is constant. Thus x=0 is the unique first-order secant plane for both sets. Nevertheless, S₂ is not a C¹ surface on any neighborhood of the origin. Every such neighborhood contains Q=(0,a,0) with a≠0. Three curves in S₂ through Q are (0,a+t,0), (at,a,t), and (−at,a,t). Their velocities are (0,1,0), (a,0,1), and (−a,0,1), which are independent when a≠0. Hence no two-dimensional tangent plane exists at Q. A C¹ surface near the origin would have tangent planes at all sufficiently nearby points, contradicting these arbitrarily close crossings. S₁ is smooth near zero; S₂ has a unique first-order secant plane at zero but fails the local surface condition. Vanishing gradients settle neither issue.",
+    "criteria": [
+      "Calculates the two defining gradients and identifies S₁ as one graph and S₂ as the union of two graphs.",
+      "Proves the uniform bound |x|≤||p||²/2 and uses the two coordinate-axis directions to establish uniqueness of the first-order secant plane x=0.",
+      "Establishes that S₁ is a smooth surface with tangent plane x=0.",
+      "Uses arbitrarily close points Q=(0,a,0) and three independent realized velocities to prove that S₂ is not a C¹ surface on any neighborhood, while preserving its separately established secant-plane conclusion."
+    ],
+    "boundary": "Public model for voluntary comparison. The first-order secant-plane criterion is explicitly weaker than being a C¹ surface. The answer must retain this distinction; the result for S₂ must not be reported as a smooth tangent-plane theorem. No unseen-work, verified-delay, grading, or mastery claim follows.",
+    "changedFrom": "Replaces the packet's smooth-versus-cone dichotomy with two sets having the same unique first-order secant plane at the test point. Nearby transverse crossings distinguish the singular union from the smooth graph, demonstrating why first-order flatness alone does not establish a local surface."
+  },
+  {
+    "id": "U12-VEC-A",
+    "family": "vector-boundary-audit",
+    "variant": "A",
+    "title": "A punctured cylinder has four boundary pieces",
+    "preparation": [
+      {
+        "chapterId": "25",
+        "lesson": 2,
+        "problems": [6, 9]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 1,
+        "problems": [4, 6]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 5,
+        "problems": [36, 37]
+      }
+    ],
+    "prompt": "Let ρ=sqrt(x²+y²) and F=(x/ρ²−y/2, y/ρ²+x/2, z), defined where ρ>0. Find its flux through the complete outward boundary of Ω={1≤ρ≤2, 0≤z≤3}, and its circulation around C(t)=(2cos t,2sin t,3), 0≤t≤2π. State a calculation plan before integrating. For the circulation, assess the upward flat disk D={z=3,ρ≤2}, the outward upper cap S={ρ²+(z−3)²=4,z≥3}, and the upward annulus A={z=3,1≤ρ≤2} as possible interiors. List every induced boundary component of each eligible surface and calculate the requested circulation directly as well. Finally replace the inner cylinder radius by a with 0<a<2: does shrinking a to zero remove every boundary contribution or make the field regular on the full cylinder?",
+    "hypotheses": "F has domain R³ minus the entire z-axis and is smooth on that open domain. Ω includes its inner wall and both annular caps. Shell-outward orientation points away from Ω on every component. C is counterclockwise viewed from +z; upward surface orientation must induce that traversal on its outer boundary. The cap S is the curved hemisphere alone.",
+    "solution": "The excluded set is the whole z-axis. Away from it, div F=1 and curl F=(0,0,1): the radial planar part has zero divergence and curl, the rotational part contributes unit z-curl, and the last component contributes unit divergence. The complete boundary of Ω has outer wall ρ=2 with normal +eρ, inner wall ρ=1 with normal −eρ, top annulus z=3 with normal +k, and bottom annulus z=0 with normal −k. Directly, the radial part gives outer-wall flux (1/2)(2π·2·3)=6π and inner-wall flux −1(2π·1·3)=−6π. The rotational part is tangent to both walls. Top flux is 3·π(4−1)=9π; bottom flux is zero. Total flux is 9π. The divergence theorem is also eligible on Ω, since a neighborhood of this closed solid avoids the axis; its volume is 3π·3=9π. On C, the radial contribution to F·C′ cancels and the rotational contribution is 2, so circulation is ∫₀²π2 dt=4π. The flat disk contains (0,0,3), where F is undefined. The curved cap contains (0,0,5), also excluded. Neither supports the proposed curl-to-boundary calculation. A avoids the axis and is eligible, but its complete upward-oriented boundary contains C counterclockwise and the radius-one inner circle clockwise. The inner circulation is −π, so the complete annular circulation is 4π−π=3π, agreeing with the flux of curl F through A. This value is not the outer-only circulation. With inner radius a, the inner-wall flux remains −6π, while the total flux is 3π(4−a²), tending to 12π. The inner annular circulation is −πa² and tends to zero, whereas the inner-wall flux does not. At a=0 the field is still undefined along the axis; a limiting calculation does not supply ordinary regularity on the full cylinder.",
+    "criteria": [
+      "Identifies the excluded z-axis, computes div F=1 and curl F=k, and checks regularity on the entire proposed solid or surface.",
+      "Lists all four shell boundary pieces with their outward normals and obtains direct component fluxes 6π, −6π, 9π, and 0, totaling 9π.",
+      "Obtains direct circulation 4π, rejects both axis-intersecting spanning surfaces, and explains the eligible annulus's complete boundary and total circulation 3π.",
+      "Treats 0<a<2 correctly, including persistent inner-wall flux −6π, vanishing inner-loop circulation, the total-flux limit 12π, and the surviving axis singularity at a=0."
+    ],
+    "boundary": "Public model for voluntary comparison. Wall flux, cap flux, and circulation are different measurements with different orientation rules. The shrinking-hole limit concerns integrals for positive a and does not make the original field defined on the axis. No unseen-work, verified-delay, grading, or mastery claim follows.",
+    "changedFrom": "Replaces the angular vortex and spherical inverse-square examples with a radial line singularity combined with smooth rotation and axial flow. A cylindrical shell has four essential boundary components, both proposed spanning caps fail, and shrinking the hole makes inner circulation vanish while its wall flux persists."
+  },
+  {
+    "id": "U12-VEC-B",
+    "family": "vector-boundary-audit",
+    "variant": "B",
+    "title": "An elliptic cap clears a point singularity",
+    "preparation": [
+      {
+        "chapterId": "25",
+        "lesson": 4,
+        "problems": [22, 23]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 3,
+        "problems": [15]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 4,
+        "problems": [17, 21]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 5,
+        "problems": [38]
+      }
+    ],
+    "prompt": "Write v=(x,y,z), r=||v||, and let F=v/r²+(-y,x,0) on R³ minus the origin. Find the flux through the complete outward boundary of Ω={1≤r≤3}. Also find circulation around C(t)=(2cos t,sin t,0), 0≤t≤2π. Choose and justify methods before computing, including an independent direct calculation of each requested boundary integral. For circulation, assess the upward elliptic disk D={z=0,x²/4+y²≤1} and the upward cap Σ={z=1−x²/4−y²,x²/4+y²≤1}. Explain whether replacing Ω by the ball r≤3 permits an ordinary boundary identity. Finally determine what happens to the inner boundary contribution when its radius a>0 tends to zero.",
+    "hypotheses": "The point v=0 is excluded; the expression v/r² is used only for r>0. The complete shell boundary contains the radius-three sphere with radial outward normal and the radius-one sphere with normal toward the origin. C travels counterclockwise viewed from +z. Both proposed spanning surfaces have the same elliptic boundary; an upward normal induces the prescribed traversal.",
+    "solution": "On the stated domain, v/r²=∇log r. Thus curl F=(0,0,2), and direct differentiation gives div F=1/r². On a sphere of radius R>0, the rotational part is perpendicular to the radial normal, and the radial part has normal component 1/R. Its radially outward flux is therefore (1/R)4πR²=4πR. Shell-outward flux is consequently 12π on the outer sphere and −4π on the inner sphere, totaling 8π. The divergence theorem is eligible on the closed shell and gives ∫₁³(1/r²)4πr² dr=8π. It is not eligible as an ordinary theorem on the full ball because F is undefined at its center. For the ellipse, put q(t)=4cos²t+sin²t. The radial part of F(C)·C′ equals −3sin t cos t/q(t)=(1/2)(log q(t))′, while the rotational part equals 2. Since q(0)=q(2π)=4, direct circulation is 0+∫₀²π2 dt=4π. The flat disk D contains the excluded origin and is ineligible. The curved cap is eligible: let s=x²/4+y², so 0≤s≤1 and z=1−s. On Σ, r²=x²+y²+(1−s)²≥s+(1−s)²=(s−1/2)²+3/4≥3/4. The entire cap therefore stays a positive distance from the singularity. Its upward vector area element is (x/2,2y,1) dxdy. Dotting with curl F=(0,0,2) gives 2 dxdy; the projected ellipse has area 2π, yielding curl flux 4π with the prescribed boundary orientation. Eligibility here concerns a neighborhood of the surface, not regularity throughout a volume between it and an ineligible disk. With inner radius a, the inner flux is −4πa and total shell flux is 12π−4πa, tending to 12π. This limit and the direct outer-sphere calculation agree. They do not retroactively validate an ordinary divergence-theorem invocation on the singular ball.",
+    "criteria": [
+      "Identifies the excluded origin, derives div F=1/r² and curl F=2k, and lists both shell boundary components with compatible outward normals.",
+      "Calculates direct outer and inner fluxes 12π and −4π, obtains total 8π, and distinguishes the valid shell from the ineligible full ball.",
+      "Parameterizes the ellipse correctly, integrates its logarithmic radial contribution and constant rotational contribution, and obtains circulation 4π.",
+      "Rejects the flat disk, proves the entire curved cap avoids the singularity, checks its induced orientation and curl flux 4π, and explains the shrinking inner flux −4πa without claiming restored regularity."
+    ],
+    "boundary": "Public model for voluntary comparison. The field has a point singularity and nonzero divergence and curl on its domain. A valid replacement surface need not repair an invalid volume calculation. The limit a↓0 is a separate limiting argument. No unseen-work, verified-delay, grading, or mastery claim follows.",
+    "changedFrom": "Changes the singular radial field from inverse-square magnitude to inverse-distance magnitude, adds a smooth rotational component, uses an elliptic boundary and a paraboloid cap, and makes both requested integrals nonzero. Its shrinking inner flux vanishes, unlike the inverse-square shell and the line-singularity form."
+  },
+  {
+    "id": "U12-DIF-A",
+    "family": "differentiability",
+    "variant": "A",
+    "title": "A shrinking strip defeats every fixed direction",
+    "preparation": [
+      {
+        "chapterId": "21",
+        "lesson": 1,
+        "problems": [2, 4]
+      },
+      {
+        "chapterId": "21",
+        "lesson": 5,
+        "problems": [24]
+      }
+    ],
+    "prompt": "Define f on R² by f(x,y)=x when x>0 and x²≤y≤2x², and f(x,y)=0 otherwise. At the origin, determine continuity, the two coordinate partial derivatives, and every fixed two-sided directional derivative. Decide whether one linear first-order rule approximates f for all small displacements, and justify your conclusion using the error divided by Euclidean distance. Explain why the straight-line calculations do or do not settle that last question.",
+    "hypotheses": "The domain is all of R², f(0,0)=0, and distance means r=sqrt(x²+y²). Directional derivatives use real t tending to zero from both signs with a fixed vector u. Both strip boundaries are included in the nonzero branch.",
+    "solution": "Everywhere |f(x,y)|≤|x|≤r, so f tends to zero at the origin and is continuous there. Both coordinate-axis restrictions are identically zero. Thus f_x(0,0)=f_y(0,0)=0, and any total derivative would have to be L(h,k)=0. Now fix u=(a,b). If a=0 or b=0, f(ta,tb)=0 for every t. If ab≠0, membership in the nonzero strip would require ta>0 and 1≤b/(a²t)≤2. For 0<|t|<|b|/(2a²), the absolute value of b/(a²t) exceeds 2, so membership is impossible. Hence f(tu)/t is eventually zero for every fixed u, from both signs: every fixed directional derivative equals zero. Nevertheless, take x=s>0 and y=3s²/2. This path lies strictly inside the strip, f(s,3s²/2)=s, and its distance from the origin is s sqrt(1+9s²/4). Consequently |f−L|/r=1/sqrt(1+9s²/4), which tends to 1 rather than zero. No total derivative exists. The direction of this path varies with s; fixed-direction limits do not provide one common scale controlling all directions.",
+    "criteria": [
+      "Proves continuity using the bound |f(x,y)|≤sqrt(x²+y²), and computes both coordinate partials as zero.",
+      "Identifies L(h,k)=0 as the only possible derivative and correctly treats both signs in every fixed directional limit.",
+      "Uses a valid on-strip curved approach and calculates a nonzero limit of the absolute residual divided by full Euclidean distance.",
+      "Concludes that f is not differentiable and explains why even agreement of all fixed directional derivatives is insufficient."
+    ],
+    "boundary": "Public model for voluntary comparison. The function is continuous at the origin but has jumps across its strip walls away from the origin. The failure witness uses the strict strip interior, so it does not depend on the convention at the walls. No unseen-work, verified-delay, grading, or mastery claim follows.",
+    "changedFrom": "Replaces the packet's homogeneous rational diagonal example and the chapter's rational curved-path examples with a piecewise shrinking strip. All fixed two-sided directional derivatives agree with the candidate linear map, while a moving direction gives a normalized error tending to 1."
+  },
+  {
+    "id": "U12-DIF-B",
+    "family": "differentiability",
+    "variant": "B",
+    "title": "A first-order rule survives oscillating slopes",
+    "preparation": [
+      {
+        "chapterId": "21",
+        "lesson": 1,
+        "problems": [2]
+      },
+      {
+        "chapterId": "21",
+        "lesson": 5,
+        "problems": [26, 30]
+      }
+    ],
+    "prompt": "Let g(0,0)=0 and g(x,y)=(x²+y²) sin(1/(x²+y²)) at every other point of R². Determine its coordinate partial derivatives at the origin and decide whether one linear first-order rule works there for every small displacement. Supply a bound that controls all directions simultaneously. Also calculate g_x(x,0) for x≠0 and examine its behavior near zero; explain what that behavior changes about your first-order conclusion.",
+    "hypotheses": "The domain is all of R². The oscillating expression is used only when x²+y²>0. Differentiability is tested at the interior point (0,0) using Euclidean distance and a linear map on R².",
+    "solution": "On the x-axis, [g(h,0)−g(0,0)]/h=h sin(1/h²), which tends to zero; the y-axis calculation is identical. Both coordinate partials are zero, so the only possible derivative is L(h,k)=0. For r=sqrt(h²+k²)>0, |g(h,k)−g(0,0)−L(h,k)|/r=r|sin(1/r²)|≤r. This bound tends to zero uniformly over every direction and every curved approach. Explicitly, for any epsilon>0, choosing delta=epsilon makes the normalized error less than epsilon whenever 0<r<delta. Therefore g is differentiable at the origin with derivative zero and tangent plane z=0. Away from the origin ordinary differentiation is valid. On y=0, g_x(x,0)=2x sin(1/x²)−(2/x) cos(1/x²). Along x_n=1/sqrt(2πn), n≥1, the sine is zero and the cosine is one, so g_x(x_n,0)=−2/x_n tends to negative infinity. Thus the partial derivative is not continuous at the origin and is unbounded arbitrarily nearby. This does not contradict differentiability: the full residual estimate already proves the required first-order approximation, while continuity of nearby partial derivatives is a sufficient condition rather than a necessary one.",
+    "criteria": [
+      "Computes both origin partial derivatives by their defining quotients and identifies the candidate derivative L=0.",
+      "Establishes the uniform estimate |g(h,k)|/sqrt(h²+k²)≤sqrt(h²+k²) for every nonzero displacement.",
+      "Concludes differentiability with derivative zero and gives a valid epsilon–delta interpretation of the residual bound.",
+      "Derives g_x(x,0), supplies an exact sequence witnessing its unbounded behavior, and explains why this does not overturn the differentiability proof."
+    ],
+    "boundary": "Public model for voluntary comparison. The claim concerns differentiability at the origin; g is smooth away from it, while its first partials fail continuity at the origin. The bound concerns first-order residual size, not nearby derivative size. No unseen-work, verified-delay, grading, or mastery claim follows.",
+    "changedFrom": "Changes the decision to a positive differentiability result supported by a uniform residual estimate, despite unbounded nearby slopes. It uses radial oscillation rather than the packet's rational failure or the chapter's smooth quadratic success examples."
+  }
+]

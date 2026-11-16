@@ -1,0 +1,195 @@
+[
+  {
+    "id": "U12-CIR-A",
+    "family": "circulation",
+    "variant": "A",
+    "title": "A singular field on an annulus: individual loops and the complete boundary",
+    "preparation": [
+      {
+        "chapterId": "25",
+        "lesson": 5,
+        "problems": [
+          24,
+          29
+        ]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 1,
+        "problems": [
+          4,
+          6
+        ]
+      }
+    ],
+    "prompt": "Let r²=x²+y² and F=(-y/r²-y, x/r²+x), defined for r>0. Let A={1≤r≤2}. Calculate circulation around the radius-2 circle traversed clockwise. Then specify every component of the positively oriented boundary of A and calculate each contribution directly by parametrization. Check their sum using Green’s theorem on A. Explain why applying Green’s theorem to the full radius-2 disk would be invalid, and why an integral around its outer circle alone is not the integral around ∂A.",
+    "hypotheses": "Coordinates and field values are dimensionless. Each circle is traversed once. The field is continuously differentiable on R² minus the origin. Green’s theorem requires a continuously differentiable field on an open neighborhood of the chosen region and its entire boundary. Positive annular boundary orientation is outer counterclockwise and inner clockwise.",
+    "solution": "For the counterclockwise parametrization r_R(t)=(R cos t,R sin t), 0≤t≤2π, F(r_R(t))·r_R′(t)=1+R². Thus a counterclockwise circle contributes 2π(1+R²), and reversal negates it. The requested clockwise radius-2 circulation is -10π. The positive boundary of A consists of the radius-2 circle counterclockwise, contributing 10π, and the radius-1 circle clockwise, contributing -4π. Their sum is 6π. The angular part of F has scalar curl zero for r>0; (-y,x) has scalar curl 2. Green’s theorem is valid on A and gives 2·area(A)=2π(4-1)=6π. The full disk contains the excluded origin, so the field lacks the required regularity there. The outer circle alone omits a genuine boundary component of A.",
+    "criteria": [
+      "Identifies the excluded origin and correctly distinguishes the valid annular region from the invalid full-disk theorem invocation.",
+      "States both positive boundary components with outer counterclockwise and inner clockwise orientation.",
+      "Derives the circle integrand 1+R² and obtains -10π for the requested clockwise outer traversal, 10π for the positive outer component, and -4π for the positive inner component.",
+      "Obtains total circulation 6π from both component addition and the valid Green calculation with scalar curl 2."
+    ],
+    "boundary": "Public self-study comparison; attempting before reading the key is voluntary. This form has no unseen status or enforced delay. Its conclusions concern the specified traversals and region; the invalid disk invocation does not invalidate the direct line integral.",
+    "changedFrom": "Changes the review packet’s single shifted zero-curl vortex and counterclockwise disk boundary into a singular-plus-smooth field, a clockwise requested loop, and a valid multiply connected Green calculation requiring two boundary components."
+  },
+  {
+    "id": "U12-CIR-B",
+    "family": "circulation",
+    "variant": "B",
+    "title": "Two opposite vortices: zero circulation without a global potential",
+    "preparation": [
+      {
+        "chapterId": "25",
+        "lesson": 5,
+        "problems": [
+          25,
+          29,
+          30
+        ]
+      },
+      {
+        "chapterId": "26",
+        "lesson": 1,
+        "problems": [
+          4,
+          6
+        ]
+      }
+    ],
+    "prompt": "For a=(a₁,a₂), define V_a(x,y)=(-(y-a₂)/((x-a₁)²+(y-a₂)²), (x-a₁)/((x-a₁)²+(y-a₂)²)). Take a=(-1,0), b=(1,0), and F=V_a-V_b on R² minus {a,b}. Let C be the radius-3 origin-centered circle traversed counterclockwise. Someone claims that zero curl gives zero circulation by Green’s theorem on the full disk, and therefore F has a global potential. Audit both claims. Compute the circulation by removing radius-1/2 disks around a and b, listing the complete positive boundary and calculating the two small-loop contributions. Also state what reversing C changes.",
+    "hypotheses": "All coordinates are dimensionless. All circles are traversed once. The two radius-1/2 closed disks are disjoint and lie strictly inside the radius-3 disk. F is continuously differentiable away from a and b and has scalar curl zero there. Use Green’s theorem only on regions with an open neighborhood avoiding the relevant field’s excluded points.",
+    "solution": "The full-disk Green invocation fails because both a and b are inside that disk. Let D be the radius-3 closed disk with the interiors of the two radius-1/2 disks removed. Its positive boundary is C counterclockwise together with both small circles clockwise, and F is smooth on a neighborhood of D. On a small counterclockwise circle around a, parametrization gives circulation 2π for V_a. V_b is smooth on the entire small disk and has zero curl, so its contribution is zero by a valid Green calculation. Thus F has circulation 2π there. Similarly its circulation around the small counterclockwise circle around b is -2π. The clockwise hole contributions are therefore -2π and +2π. Green on D gives ∮C F·dr-2π+2π=0, hence ∮C F·dr=0. Reversal negates this zero and still gives zero. The correct outer value comes from cancellation of two nonzero circulations, not from validity of Green on the full disk. A global potential on R² minus {a,b} is impossible because the small loop around a has circulation 2π.",
+    "criteria": [
+      "Rejects Green on the unpunctured disk by identifying both excluded points, while accepting it on the twice-punctured region.",
+      "Lists the outer counterclockwise and two inner clockwise boundary components and obtains the small counterclockwise circulations 2π and -2π with justified calculations.",
+      "Uses the complete boundary equation to obtain zero outer circulation and correctly states that reversing the outer traversal still gives zero.",
+      "Rejects the global-potential conclusion using the nonzero circulation around one puncture, rather than treating one zero loop as evidence of path independence."
+    ],
+    "boundary": "Public voluntary comparison, without unseen status or enforced delay. Zero on the selected outer loop does not establish zero on all loops. This key gives mathematical destinations and calculations, not observed learner behavior.",
+    "changedFrom": "Replaces the packet’s one enclosed vortex and nonzero answer with two excluded points of opposite circulation. The transfer is cancellation versus a global potential, together with a complete three-component boundary."
+  },
+  {
+    "id": "U12-NUM-A",
+    "family": "numerical",
+    "variant": "A",
+    "title": "Weighted oscillatory forcing: three identical wrong Heun endpoints",
+    "preparation": [
+      {
+        "chapterId": "28",
+        "lesson": 1,
+        "problems": [
+          33
+        ]
+      },
+      {
+        "chapterId": "28",
+        "lesson": 5,
+        "problems": [
+          37,
+          38,
+          39
+        ]
+      }
+    ],
+    "prompt": "Consider y′=t cos(24πt), y(0)=0, on 0≤t≤1, with dimensionless variables. Use explicit Heun on K=3,6,12 equal steps. Without numerical code, identify both stage rates, derive the grid states and endpoint for each K, and obtain an independent exact solution by integration. Audit the claim that matching endpoints and a zero second-order Richardson estimate certify accuracy. For the displayed path, explicitly define L_K to join adjacent Heun states by straight segments. At t*=1/48, calculate each L_K(t*) and compare it with the exact y(t*). State precisely what the interior comparison establishes.",
+    "hypotheses": "For each K, h=1/K and t_j=j/K, with the same initial condition and final time. Explicit Heun uses k₁=f(t_j,Y_j), p=Y_j+hk₁, k₂=f(t_j+h,p), Y_{j+1}=Y_j+h(k₁+k₂)/2. Calculations use exact arithmetic. The forcing is independent of y. L_K is a specified display interpolation, not a Heun dense-output formula.",
+    "solution": "For K=3,6,12, 12/K is an integer, so cos(24πj/K)=cos(2π(12/K)j)=1 at every grid node. Thus k₁=t_j and k₂=t_j+h, irrespective of the predicted state. Heun gives Y_{j+1}=Y_j+ht_j+h²/2, hence Y_j=t_j²/2 by induction. Every endpoint is 1/2. Independent integration gives y(t)=t sin(24πt)/(24π)+(cos(24πt)-1)/(576π²), which satisfies the differential equation and y(0)=0. Therefore y(1)=0 and every endpoint error is 1/2. Both successive endpoint differences vanish. Their ratio is 0/0, so the observed order is undefined. The nominal second-order Richardson estimate |Y_12-Y_6|/3 is zero, but its asymptotic assumptions have not been established on these grids and it is contradicted by the exact error. The probe t*=1/48 lies in the first panel for all three grids. Since Y_1=h²/2, L_K(t*)=t*h/2=1/(96K), giving 1/288, 1/576 and 1/1152. The exact probe is y(t*)=(π-2)/(1152π²). Because π>2, 0<y(t*)<1/(1152π)<1/1152≤L_K(t*) for every chosen K. Thus each displayed path has a strict error at this point. This is a point witness, not a global path-error bound.",
+    "criteria": [
+      "Writes the explicit Heun stages and proves that both stage rates equal the corresponding node times for all three grids.",
+      "Derives Y_j=t_j²/2 and the endpoint triple (1/2,1/2,1/2), then verifies the independent exact solution and endpoint-error triple (1/2,1/2,1/2).",
+      "Identifies the observed-order ratio as undefined 0/0 and explains why a zero Richardson estimate fails as an accuracy certificate here.",
+      "Locates the first interpolation panel, obtains the three exact probe values and a strict discrepancy from the exact reference, and limits the conclusion to a point witness."
+    ],
+    "boundary": "Public voluntary comparison without unseen status or enforced delay. Exact trigonometric sampling is assumed; finite-precision cosine values are a separate implementation issue. Smoothness and Heun’s asymptotic order do not certify these particular coarse grids. No numerical run is claimed.",
+    "changedFrom": "Changes the packet’s unweighted nonnegative oscillatory forcing into a time-weighted sign-changing forcing. All sampled rates are nonzero except at the initial node, and the misleading numerical trajectory follows a quadratic grid law rather than remaining zero."
+  },
+  {
+    "id": "U12-NUM-B",
+    "family": "numerical",
+    "variant": "B",
+    "title": "An exact final return can conceal an incorrect interior path",
+    "preparation": [
+      {
+        "chapterId": "28",
+        "lesson": 1,
+        "problems": [
+          33
+        ]
+      },
+      {
+        "chapterId": "28",
+        "lesson": 5,
+        "problems": [
+          38,
+          39
+        ]
+      }
+    ],
+    "prompt": "Consider y′=sin(2πt), y(0)=0, on 0≤t≤1. Apply explicit Heun with K=1,2,4 equal steps using exact arithmetic. List all sampled rates and grid states, and derive an independent exact solution. A report says: 'All three final values agree with the exact final value, so the displayed paths are accurate; zero refinement differences demonstrate second order.' Audit the statement. Define L_K as the straight-line join of adjacent grid states and compare all three displays with the exact solution at t=1/4. Distinguish final-value accuracy, an observed order, and accuracy of the path.",
+    "hypotheses": "Variables are dimensionless, all grids have the same exact final time 1, and Y_0=0. Explicit Heun averages the start and predicted-end rates; state independence makes these the two endpoint samples of the forcing. The displayed L_K is piecewise linear and has no claimed dense-output accuracy.",
+    "solution": "For K=1 the node rates are (0,0), giving states (0,0). For K=2 the rates are (0,0,0), giving states (0,0,0). For K=4 the rates are (0,1,0,-1,0). With h=1/4, Heun gives states (0,1/8,1/4,1/8,0). Thus all three endpoints are zero. Independent integration gives y(t)=(1-cos(2πt))/(2π), so y(1)=0 and all three endpoint errors are indeed zero. Both endpoint refinement differences vanish, making the observed-order ratio 0/0 and the observed order undefined. These data do not demonstrate second order. At t=1/4 the exact value is 1/(2π). The first two straight-line displays are zero, while L_4(1/4)=1/8. Since π<4, 1/(2π)>1/8, so every displayed path is wrong at that point. The exact differences are 1/(2π), 1/(2π), and (4-π)/(8π), respectively. Correct final return results from cancellation of positive and negative forcing over the full interval; it does not certify the interior states or their linear joins. These point discrepancies refute exact path agreement but do not provide a global error bound.",
+    "criteria": [
+      "Gives the exact node-rate lists and the three correct Heun state lists, including the nonzero intermediate states for K=4.",
+      "Derives or verifies y(t)=(1-cos(2πt))/(2π) and correctly accepts that all three final values have zero endpoint error.",
+      "Rejects the claimed observed order because the successive-difference ratio is 0/0, while distinguishing this from Heun’s separately established asymptotic order.",
+      "Computes L_1(1/4)=L_2(1/4)=0 and L_4(1/4)=1/8, proves all differ from 1/(2π), and states the limited pointwise conclusion."
+    ],
+    "boundary": "Public comparison is voluntary and carries no unseen or enforced-delay claim. The task concerns exact arithmetic and an explicit display convention. Endpoint correctness and this interior witness do not constitute a global error certificate or observed learner evidence.",
+    "changedFrom": "Changes the packet’s accumulated nonnegative forcing to signed forcing with an exact final return. The refined grid samples nonzero rates and all final values are correct, so the failure concerns inference from endpoint cancellation to the interior path."
+  },
+  {
+    "id": "U12-NAV-A",
+    "family": "navigation",
+    "variant": "A",
+    "title": "Recover the cancellation repair and preserve a radical function’s domain",
+    "preparation": [
+      {
+        "chapterId": "02",
+        "lesson": 1,
+        "problems": [
+          1
+        ]
+      }
+    ],
+    "prompt": "Start from the native Study routes & diagnostic page. Use this supplied repair scenario: the diagnostic item 'Simplify (x²-1)/(x-1) for x≠1' needs repair, but a copied note sends you to Lesson 02.2. Identify the diagnostic’s intended repair label, the correct named lesson, and that lesson’s first linked written problem, giving their exact destinations. Attempt the written problem before choosing whether to open its public feedback. Then solve this changed checkpoint: H(x)=(sqrt(x+2)-2)/(x-2). State its full real domain, rationalize it, decide whether x=-2 and x=2 are permitted, and distinguish H from the continuous extension suggested by its simplified formula. Explain how you would recover from the wrong lesson and what mathematical work comes next.",
+    "hypotheses": "Use real principal square roots. The diagnostic gap and wrong note are supplied scenarios, not claims about an existing learner record. The native reader is mounted at /calculus/. A function’s original domain remains part of its identity after algebraic simplification. Comparison with the public key is voluntary.",
+    "solution": "The starting destination is /calculus/#guide. The cancellation diagnostic’s repair label is 'Review cancellation with restrictions', whose destination is /calculus/#chapter/02/lesson/1. The lesson is 'Factoring changes the view, not the allowed inputs'. Its first linked checkpoint is Problem 02.1, 'Simplify (x²+3x)/(x²-9) and state every excluded input', at /calculus/#chapter/02/practice/1/problem/1. Its answer is x/(x-3) with both x=-3 and x=3 excluded; cancellation does not fill the hole at -3. The copied Lesson 02.2 destination, /calculus/#chapter/02/lesson/2, concerns 'Powers and logarithms are inverse languages' and does not match the required cancellation repair. Recover by returning to /calculus/#guide and selecting the intended repair, or by opening the exact Lesson 02.1 destination. For the changed checkpoint, sqrt(x+2) requires x≥-2 and the original denominator requires x≠2. Thus dom(H)=[-2,2)∪(2,∞). Multiplication by the conjugate gives H(x)=1/(sqrt(x+2)+2) on that domain. The conjugate is strictly positive there. At x=-2 the original expression is defined and equals 1/2. At x=2 the original expression is undefined, although the simplified expression equals 1/4. The simplified formula on all x≥-2 defines a continuous extension with a newly assigned value at 2; it does not change H automatically. The next mathematical step is to retry Problem 02.1 and the changed domain argument without support, explaining the retained exclusions rather than merely recording arrival at a page.",
+    "criteria": [
+      "Gives /calculus/#guide, the exact cancellation repair label, the correct Lesson 02.1 title and destination, and Problem 02.1 with its exact practice destination.",
+      "Recognizes Lesson 02.2 as the wrong mathematical repair and describes a concrete return to the diagnostic or direct recovery to the correct lesson, without claiming observed navigation or storage results.",
+      "Solves the linked written problem as x/(x-3) with both original exclusions x≠-3,3 retained.",
+      "Derives the changed domain and rationalized formula, permits -2 with value 1/2, excludes 2 from H, and identifies 1/4 as the value of a separate continuous extension."
+    ],
+    "boundary": "This is a public navigation and mathematical-repair task. Attempting before feedback is voluntary; no unseen status, enforced delay, observed clicks, recovered drafts or storage success is claimed. The supplied scenario does not require resetting a learner’s diagnostic.",
+    "changedFrom": "Makes the packet’s generic diagnostic-to-lesson journey concrete, adds recovery from a mathematically wrong lesson, and transfers polynomial cancellation to radical rationalization with an allowed domain endpoint and a separate removable hole."
+  },
+  {
+    "id": "U12-NAV-B",
+    "family": "navigation",
+    "variant": "B",
+    "title": "Repair an identity misconception and recover a misfiled written-problem link",
+    "preparation": [
+      {
+        "chapterId": "02",
+        "lesson": 4,
+        "problems": [
+          16,
+          19
+        ]
+      }
+    ],
+    "prompt": "Begin at the native Study routes & diagnostic page using this supplied scenario: the diagnostic question 'Which identity is correct?' needs repair. Find its intended repair label and named lesson, then identify that lesson’s first linked written checkpoint. A copied problem address says /calculus/#chapter/02/practice/5/problem/16. Explain why that address misidentifies the practice set and give the correct destination. Attempt the written checkpoint, then solve the changed problem: on [-π,π], for exactly which θ is (1-cos²θ)/sinθ=sinθ a valid equality? Explain why the treatment of zero-sine angles differs between the linked written equation and this changed equation. State the next repair step.",
+    "hypotheses": "Angles are in radians. The original expressions determine the allowed inputs before simplification. The diagnostic gap and copied link are supplied scenarios rather than observed learner results. Canonical native practice sets contain four consecutive problem numbers. Public feedback comparison is voluntary.",
+    "solution": "Start at /calculus/#guide. The diagnostic repair label is 'Review identities and their conditions', pointing to /calculus/#chapter/02/lesson/4. The named lesson is 'Identities are equalities with conditions'. Its first linked checkpoint is Problem 02.16, 'Solve 2sin²θ=sinθ on 0≤θ<2π', whose correct destination is /calculus/#chapter/02/practice/4/problem/16. Practice set 4 contains Problems 13–16; set 5 contains Problems 17–20, so the supplied set-5/problem-16 address is inconsistent. Recover by returning to /calculus/#chapter/02/lesson/4 and following its Problem 16 feedback link, or by using the correct set-4 destination. Factoring the written equation gives sinθ(2sinθ-1)=0, so its complete answer is {0,π/6,5π/6,π}. Dividing by sinθ would improperly lose the valid solutions 0 and π. For the changed equation, however, the quotient originally requires sinθ≠0. On [-π,π], this excludes -π,0,π. On every remaining input, 1-cos²θ=sin²θ and division by the nonzero sine gives the stated equality. The complete answer is therefore (-π,0)∪(0,π). Those three excluded angles cannot be restored by the simplified right-hand side: unlike the linked written equation, the original changed expression was undefined there. A useful next repair is Problem 02.19, 'Where is 1+tan²θ=sec²θ valid?', at /calculus/#chapter/02/practice/5/problem/19; its condition is cosθ≠0. Explain each original denominator before comparing with feedback.",
+    "criteria": [
+      "Identifies the exact identity-repair label, Lesson 02.4 title and destination, and the starting diagnostic destination /calculus/#guide.",
+      "Names Problem 02.16, gives its valid set-4 destination, explains the set mismatch in the copied address, and supplies a concrete recovery route without asserting observed browser behavior.",
+      "Solves Problem 02.16 with all four solutions and explains why dividing by sine would lose two valid roots.",
+      "Gives the changed answer (-π,0)∪(0,π), justifies all exclusions from the original quotient, contrasts them with lost roots, and names the valid Problem 02.19 next-step destination and condition."
+    ],
+    "boundary": "Public voluntary comparison without unseen status or enforced delay. The key specifies source-valid destinations and mathematical checkpoints; it records no actual clicks, diagnostic changes, saved work or successful recovery operation.",
+    "changedFrom": "Turns the packet’s generic navigation task into an identity repair with a concrete practice-set mismatch. The changed mathematics distinguishes division that loses existing roots from simplification of a quotient whose zero-denominator inputs were never allowed."
+  }
+]

@@ -1,0 +1,436 @@
+{
+  "id": "25",
+  "title": "Vector fields and line integrals",
+  "subtitle": "When does the work of a force depend on the route, and when do endpoints tell the whole story?",
+  "prerequisites": [
+    "Chapter 19: vectors, dot products, and parametrized curves.",
+    "Chapter 21: gradients and the multivariable chain rule.",
+    "Chapters 10–12 and 23: definite integrals and multivariable domains."
+  ],
+  "objectives": [
+    "Distinguish scalar line integrals from oriented work integrals and compute both from a parametrization.",
+    "Construct potential functions and use the fundamental theorem for line integrals.",
+    "Test path independence while checking smoothness and the topology of the field’s domain.",
+    "Compare exact work calculations with numerical integration along different paths."
+  ],
+  "sections": [
+    {
+      "title": "A field assigns a vector to each location",
+      "paragraphs": [
+        "A vector field $F$ on a domain $D$ assigns a vector $F(p)$ to every point $p$ in $D$. In the plane write $F(x,y)=(P(x,y),Q(x,y))$; in space add a third component $R$. A velocity field describes how fluid would move at each location at a fixed time. A force field describes the force experienced by an object at each location. A drawn arrow is a sample, not a trajectory: to follow the motion one would need to solve a differential equation involving the field.",
+        "Consider $\\mathbf F(x,y)=(-y,x)$. At $(1,0)$ the arrow points upward, while at $(0,1)$ it points left. The field is tangent to circles centered at the origin, with magnitude equal to the radius. By comparison, $\\mathbf G(x,y)=(x,y)$ points outward. These pictures suggest rotation and expansion, but our goal is to measure what a field does along a chosen curve. A field can be perfectly well defined even when the curve we choose does not follow its arrows.",
+        "A parametrized curve $\\mathbf r(t)$, $a\\le t\\le b$, specifies both a geometric route and its traversal. For the usual parameter integrals, assume a continuous route made of finitely many $C^1$ pieces; its speed may vanish at isolated parameter values, where the original formulas still make sense. Regularity ($\\mathbf r^{\\prime}\\ne\\mathbf0$) is needed when defining a unit tangent, not for integrating a continuous field along a piecewise $C^1$ route. Split at corners. The field must be defined at every point of the route, including endpoints; singular endpoints require separate improper-integral analysis.",
+        "Keep units attached to the model. If coordinates measure metres and $\\mathbf F$ measures newtons, force dotted with displacement measures joules. If $\\mathbf F$ is instead a fluid velocity in metres per second, its circulation has units square metres per second. The same mathematical integral can therefore represent different physical quantities. A field formula by itself does not determine its interpretation.",
+        "A field diagram samples infinitely many arrows at finitely many locations. Arrow length and direction can reveal local flow, but the drawing scale matters: a plotted arrow that has been normalized no longer shows magnitude. For $\\mathbf F=(-y,x)$, arrows tangent to circles have length $r$, so the field grows with distance from the origin. For the angular field $\\mathbf F=(-y/r^2,x/r^2)$, arrows are also tangent but have length $1/r$ and grow near the excluded origin. Similar-looking arrow directions can therefore represent very different work or circulation.",
+        "A curve parametrization must specify orientation. The segment from $A$ to $B$ can be written $\\mathbf r(t)=A+t(B-A)$, $0\\le t\\le1$, while $\\mathbf r(1-t)$ traverses it backward. Its derivative is a velocity vector: speed is $\\lVert\\mathbf r^{\\prime}(t)\\rVert$, and displacement over $dt$ is approximately $\\mathbf r^{\\prime}(t)\\,dt$. Scalar line integrals use speed because they measure physical length. Work integrals use the signed velocity vector because force can assist or oppose motion. These definitions explain reversal behavior without memorizing separate sign rules.",
+        "A piecewise smooth route can have corners. Integrate on each smooth piece and add the results; the corner itself has zero arc length and contributes nothing directly. For a route from $(0,0)$ to $(1,1)$ that first follows the $x$-axis then the vertical line $x=1$, use two parametrizations or one carefully defined piecewise map. A field need only be defined on the route and a suitable neighborhood for ordinary smooth calculations. Whether a potential exists on the entire surrounding domain is a separate question.",
+        "The domain of a vector field is part of its definition. The formula $(-y/r^2,x/r^2)$ is not defined at the origin, so a path through $(0,0)$ cannot be used in its line integral without a separate limiting or regularization rule. A path that approaches but never reaches the origin may still have a divergent integral if the field grows too strongly. Always check that the route lies in the field's domain before substituting a parametrization. This parallels checking the domain before integrating a scalar function.",
+        "The field’s interpretation supplies the units: force in newtons dotted with displacement in metres gives work in joules; a fluid velocity in metres per second gives circulation in $\\mathrm{m}^2/\\mathrm{s}$; linear mass density in kilograms per metre integrated against $ds$ gives kilograms. The formula alone does not choose the physical model. Check this interpretation before using a field diagram or reporting a numerical integral.",
+        "The dot product of $\\mathbf F$ with the unit tangent $\\mathbf T=\\mathbf r^{\\prime}/\\lVert\\mathbf r^{\\prime}\\rVert$ gives the tangential component of the field. Thus $\\mathbf F\\cdot d\\mathbf r=(\\mathbf F\\cdot\\mathbf T)\\,ds$ on a regular curve. This identity unifies the geometric picture with the parameter formula and shows why normal components do not contribute to work. It also explains why a long path with a strong field can still have zero work if the field is everywhere perpendicular to its tangent. At a stationary parameter value where $\\mathbf r^{\\prime}=\\mathbf 0$, use the original parameter formula or split into regular pieces."
+      ]
+    },
+    {
+      "title": "Two different ways to accumulate along a curve",
+      "paragraphs": [
+        "A scalar line integral accumulates a scalar quantity against arc length. For a wire with linear mass density $\\rho$, divide the wire into short pieces: density times piece length approximates each piece’s mass. Passing to a limit gives $\\int_C\\rho\\,ds=\\int_a^b\\rho(\\mathbf r(t))\\lvert\\mathbf r'(t)\\rvert\\,dt$. The speed factor converts parameter increments into physical length. A nonnegative density produces nonnegative mass, irrespective of which endpoint we start from.",
+        "For work, each short displacement contributes approximately $\\mathbf F\\cdot\\Delta\\mathbf r$. Only the component of force parallel to displacement contributes. The limiting vector line integral is $\\int_C\\mathbf F\\cdot d\\mathbf r=\\int_a^b\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)\\,dt$. In the plane this is also written $\\int_C(P\\,dx+Q\\,dy)$. This notation means one combined integral along the specified route, not two unrelated integrals with arbitrary bounds. The velocity vector retains directional information that its magnitude would discard.",
+        "Reversing a traversal changes the sign of the work integral, because every displacement reverses. It leaves a scalar arc-length integral unchanged, provided the same curve is covered the same number of times. More generally, an admissible increasing piecewise $C^1$ change of parameter that maps the new interval's endpoints to the old endpoints and covers the same route preserves both integrals: the chain rule transforms $\\mathbf r'$ and the speed uses its magnitude. A decreasing change reverses vector work but preserves scalar accumulation. Running twice around a circle doubles either integral; geometric appearance alone does not record traversal multiplicity. If you speed up without changing the route or direction, the instantaneous work rate changes but the total work does not.",
+        "For a closed curve the work integral is called circulation and is written $\\oint_C\\mathbf F\\cdot d\\mathbf r$. Positive circulation refers to the chosen orientation; it is not an absolute property independent of that choice. Zero circulation does not mean the field vanishes on the curve. Positive and negative contributions may cancel, or the field may be perpendicular to the tangent everywhere. Likewise, a zero total work value need not mean no force was exerted.",
+        "For the segment $\\mathbf r(t)=(t,t)$, $0\\le t\\le1$, and scalar density $f=x+y$, speed is $\\sqrt2$ and $f(\\mathbf r(t))=2t$. The scalar line integral is $\\int_0^1 2t\\sqrt2\\,dt=\\sqrt2$. Reversing the traversal preserves the physical wire and its mass; the parameter substitution reverses both time order and derivative sign inside the speed, leaving the value unchanged. Replacing $ds$ by $dx$ or $dy$ would be wrong unless the route and integrand were transformed accordingly.",
+        "For $\\mathbf F=(-y,x)$ around the unit circle counterclockwise, use $\\mathbf r(t)=(\\cos t,\\sin t)$, $0\\le t\\le2\\pi$. Then $\\mathbf F(\\mathbf r(t))=(-\\sin t,\\cos t)=\\mathbf r^{\\prime}(t)$, so $\\mathbf F\\cdot\\mathbf r^{\\prime}=1$ and circulation is $2\\pi$. Traversing clockwise changes the result to $-2\\pi$. This computation also has a geometric reading: the field is tangent to the circle and points with its counterclockwise motion. If the same circle is traversed twice, circulation doubles because multiplicity is part of the parametrized route.",
+        "A scalar line integral of one over a curve is its arc length. On a circle of radius $R$, $\\mathbf r(t)=(R\\cos t,R\\sin t)$ has speed $R$, giving length $2\\pi R$. A vector line integral of a constant field $\\mathbf F=(a,b)$ around any closed curve is zero, because it equals $\\mathbf F\\cdot(\\mathbf r(b)-\\mathbf r(a))$. The two integrals use the same route but accumulate different things. These simple cases are valuable checks before trusting a more complicated substitution.",
+        "To tell a true reparametrization from a changed route, compare endpoints, orientation, and multiplicity. An increasing reparametrization that covers the same route once leaves both integrals unchanged; a decreasing one reverses the vector integral but not the scalar integral. Retracing a piece adds its scalar contribution a second time and cancels its vector contribution only when the return follows that same piece backward. The two-piece calculation below is a useful check: for $\\mathbf F=(y,0)$, travel from $(0,0)$ to $(1,0)$ and then to $(1,1)$. Both segments have zero work, while the reversed order through $(0,1)$ gives work $1$ along its upper horizontal segment. The equal endpoints alone do not imply path independence.",
+        "For a planar field $\\mathbf F=(P,Q)$, work is $\\int_C(P\\,dx+Q\\,dy)$ along the route. This notation is shorthand for $\\int_a^b[P(\\mathbf r(t))x^{\\prime}(t)+Q(\\mathbf r(t))y^{\\prime}(t)]\\,dt$. It does not mean that $dx$ and $dy$ are independent free choices during a specified traversal. If $x$ stays constant on one segment, $dx=0$ there; if $y$ stays constant, $dy=0$. Splitting a polygonal route into horizontal and vertical segments can therefore simplify the calculation substantially.",
+        "A signed vector integral may vanish for cancellation even when the field does work on some parts of the path. For $\\mathbf F=(x,0)$ around a closed rectangular route, positive $x$-directed work on one horizontal edge cancels negative work on the opposite edge. This is consistent with the potential $\\phi=x^2/2$. By contrast, zero work on a single chosen loop does not establish a potential; the loop may simply miss an obstruction or have symmetric cancellation. Path independence is a global claim over all eligible routes.",
+        "For a route that doubles back, a scalar integral counts the revisited piece again because the wire traversal has covered that length twice. Whether this is appropriate depends on the model: a physical wire is usually represented once, while a moving sensor can revisit the same track. A vector work integral over a piece followed immediately by its reverse cancels, because the displacement changes sign while the field at each location is unchanged. This exact cancellation is a strong parameterization check. It also shows why a drawn geometric trace alone is insufficient input for a line-integral problem; orientation and multiplicity must be specified."
+      ],
+      "formula": "Scalar: ∫C f ds = ∫aᵇ f(r(t)) |r′(t)| dt. Vector: ∫C F · dr = ∫aᵇ F(r(t)) · r′(t) dt.",
+      "formulaTex": "\\begin{aligned}\\int_C f\\,ds&=\\int_a^b f(\\mathbf r(t))\\,|\\mathbf r^{\\prime}(t)|\\,dt,\\\\ \\int_C\\mathbf F\\cdot d\\mathbf r&=\\int_a^b\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)\\,dt.\\end{aligned}"
+    },
+    {
+      "title": "Potentials turn a route integral into an endpoint difference",
+      "paragraphs": [
+        "A field is conservative on $D$ if there is a single-valued differentiable scalar function $\\phi$ on $D$ with $F=\\nabla\\phi$. The function $\\phi$ is a potential. Assume $\\phi$ is continuously differentiable on an open set containing a piecewise smooth curve. The chain rule gives $d[\\phi(\\mathbf r(t))]/dt=\\nabla\\phi(\\mathbf r(t))\\cdot\\mathbf r'(t)$ on each smooth piece. Integrating and adding the pieces makes all intermediate endpoint terms cancel. This proves the fundamental theorem for line integrals, rather than merely suggesting it numerically.",
+        "The result is $\\int_C\\nabla\\phi\\cdot d\\mathbf r=\\phi(B)-\\phi(A)$, where $A$ and $B$ are the initial and final points. Consequently all allowed routes between the same endpoints have equal integrals: this is path independence. Every closed route in a conservative field has zero circulation. In mechanics potential energy $U$ is commonly defined using $\\mathbf F=-\\nabla U$, so work equals $U(A)-U(B)$. The sign convention for energy should not be confused with our mathematical convention $\\mathbf F=\\nabla\\phi$.",
+        "On an open path-connected domain, a continuous field with path-independent integrals has a potential. Here is the proof idea. Fix a base point $A$ and define $\\phi(p)$ as the integral from $A$ to $p$. Path independence makes this a well-defined number. For a short coordinate segment near $p$, the difference $\\phi(p+h\\mathbf e_i)-\\phi(p)$ is the integral of the corresponding field component along that segment. Dividing by $h$ and using continuity gives $\\partial\\phi/\\partial x_i=F_i$. Openness provides room for these short segments.",
+        "The zero-closed-integral condition is equivalent to path independence: follow one route forward and a second route backward to form a closed traversal. Their difference is that closed integral. On a disconnected domain discuss each path-connected component separately, since there may be no route between two selected points. Potentials on a connected open domain differ only by a constant; on different components, each component may have its own constant. Endpoint formulas never authorize crossing a gap where the field is undefined.",
+        "Use the theorem and proof below as the complete chain-rule calculation. It holds on every allowed piece of a path and telescopes at their joining endpoints; it does not require a straight route. Finding a potential remains a separate task. For example, $\\phi=x^2+y^2$ for $\\mathbf F=(2x,2y)$ makes work from $(0,0)$ to $(2,3)$ equal $13$ even on a long detour.",
+        "For $\\mathbf F=(2x,2y)$, $\\phi=x^2+y^2$ works on all of $\\mathbb R^2$. Work from $(0,0)$ to $(2,3)$ is 13 for every piecewise smooth path. The value $13$ is independent of a detour's length; it is a difference of endpoint potential values. This can seem counterintuitive if work is confused with scalar path length. Along a detour, positive and negative tangential contributions cancel in exactly the way required by the chain rule.",
+        "A potential is determined only up to a constant on each connected component of the domain. If $\\nabla\\phi=\\nabla\\psi$ on a path-connected region, then $\\nabla(\\phi-\\psi)=\\mathbf0$, so $\\phi-\\psi$ is constant there. Adding a constant does not affect endpoint differences. On a disconnected domain, independent constants may be chosen on different components, and paths cannot connect the components without leaving the domain. State the connected region on which a proposed potential is defined.",
+        "The equivalence between zero closed integrals and path independence assumes that the paths being compared lie in the domain and can be joined into a closed route there. If the domain is open and path connected, any two points can be connected by piecewise smooth curves under ordinary conditions. A field on a disconnected region may be conservative separately on each component, but there is no line integral between endpoints in different components. Domain geometry is not a technical footnote; it determines which comparisons are meaningful.",
+        "Mechanics often writes a conservative force as $\\mathbf F=-\\nabla U$ for potential energy $U$. The chapter’s mathematical potential obeys $\\mathbf F=\\nabla\\phi$, so $\\phi=-U$ and work is $U(A)-U(B)=\\phi(B)-\\phi(A)$. State which potential convention is in use before interpreting the sign of work.",
+        "A local potential may exist even when a global potential does not. On a small disk avoiding the origin, the angular field can be written as the gradient of a continuously chosen angle. Moving that disk around the origin and trying to join the angle branches produces a $2\\pi$ mismatch. This distinction foreshadows the role of topology in Green's and Stokes' theorems. A derivative identity valid pointwise cannot automatically be integrated into one global scalar function on a domain with nontrivial loops.",
+        "The potential theorem can simplify a difficult-looking parametrization. Suppose a smooth route from $(1,0)$ to $(0,1)$ winds several times and $\\mathbf F=(2x,2y)$. Direct substitution into $\\int_C\\mathbf F\\cdot d\\mathbf r$ may involve long trigonometric expressions, but $\\phi=x^2+y^2$ has value one at both endpoints, so work is zero. This does not mean the field vanishes along the route. It means the total positive and negative tangential contributions cancel. If an independently computed parameter integral gives a nonzero result, inspect endpoint values, derivative signs, and whether the route actually finishes where claimed."
+      ],
+      "formula": "F = ∇φ implies ∫A→B F · dr = φ(B) − φ(A), and ∮C F · dr = 0.",
+      "formulaTex": "\\begin{gathered}\\mathbf F=\\nabla\\phi\\quad(\\phi\\in C^1(D),\\ C\\subset D\\text{ piecewise smooth}),\\\\ \\int_{C:A\\to B}\\mathbf F\\cdot d\\mathbf r=\\phi(B)-\\phi(A),\\\\ \\oint_{\\Gamma}\\mathbf F\\cdot d\\mathbf r=0\\quad(\\Gamma\\subset D\\text{ closed}).\\end{gathered}",
+      "theorems": [
+        {
+          "title": "The fundamental theorem for line integrals",
+          "statement": "If a continuous vector field $\\mathbf F$ is the gradient of a differentiable potential $\\phi$ on a region containing a piecewise smooth path from $A$ to $B$, its work along the path is $\\phi(B)-\\phi(A)$.",
+          "equationTex": "\\int_C\\nabla\\phi\\cdot d\\mathbf r=\\phi(B)-\\phi(A)",
+          "proof": [
+            "Parameterize the path as $\\mathbf r(t)$ from $A=\\mathbf r(a)$ to $B=\\mathbf r(b)$. On each smooth piece, the multivariable chain rule gives $d[\\phi(\\mathbf r(t))]/dt=\\nabla\\phi(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)$. Integrate this ordinary derivative in time. Endpoint terms from adjacent pieces cancel, leaving $\\phi(B)-\\phi(A)$. This is why the work does not depend on bends in the chosen route when one potential is valid along the whole route.",
+            "For a closed path $A=B$, the difference is zero. Conversely, on a suitable connected open domain, path independence lets us define $\\phi(P)$ as the integral from a fixed base point to $P$. Compare nearby endpoints joined by a short straight segment; continuity of the field makes the coordinate difference quotients of $\\phi$ equal the corresponding field components. This constructs a potential. Domain conditions matter because a field on a punctured plane can have zero local curl and yet nonzero circulation around the missing point.",
+            "The theorem concerns the vector line integral $\\int_C\\mathbf F\\cdot d\\mathbf r$. A scalar line integral $\\int_C f\\,ds$ accumulates nonnegative arc length when $f\\ge0$ and is generally sensitive to path length. Do not transfer the endpoint rule to the scalar case merely because both symbols contain an integral over a curve."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Finding potentials and checking the domain",
+      "paragraphs": [
+        "To find a planar potential for $F=(P,Q)$, integrate $P$ with respect to $x$ while holding $y$ fixed. Write $\\phi(x,y)=\\int P(x,y)\\,dx+g(y)$, because the integration constant may depend on $y$. Differentiate this candidate with respect to $y$ and match $Q$. If the required $g'$ depends on $x$, the candidate cannot work on an open region. In three variables the first integration leaves a function of two variables, and both remaining components must be checked. Always differentiate the final answer to verify every component.",
+        "For a field with continuously differentiable components on an open planar domain, conservativeness implies $P_y=Q_x$. Indeed a potential then has continuous second partial derivatives, and equality of mixed partials applies. The converse needs a domain condition: if the open domain is simply connected, meaning every closed loop can be continuously contracted to a point within it, then $P_y=Q_x$ is sufficient for conservativeness. Convex domains, such as the whole plane or an open disk, satisfy this condition. A punctured plane does not.",
+        "The standard obstruction is $\\mathbf F(x,y)=(-y/(x^2+y^2),x/(x^2+y^2))$ on the plane with the origin removed. Direct differentiation gives $P_y=Q_x=(y^2-x^2)/(x^2+y^2)^2$ everywhere in its domain. Yet on $\\mathbf r(t)=(\\cos t,\\sin t)$, $0\\le t\\le2\\pi$, the dot product $\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)$ is 1, so circulation is $2\\pi$. There is no global single-valued potential. Locally the field is the gradient of a chosen angle, but angle increases by $2\\pi$ after one full turn and cannot return to its starting value as a single-valued potential must.",
+        "A hole permits this obstruction but does not force it: $(x,y)$ remains the gradient of $(x^2+y^2)/2$ even on a punctured plane. Thus neither a picture of a hole nor the mixed-partial test alone settles every problem. Establish a potential, invoke a sufficient theorem with its hypotheses, or disprove conservativeness by one nonzero closed integral. Checking two routes numerically is useful evidence and can reveal a counterexample, but agreement on two routes cannot establish agreement on all routes.",
+        "To find a potential for $\\mathbf F=(y,x)$, integrate $P=y$ in $x$ to get $\\phi=xy+g(y)$. Then $\\phi_y=x+g^{\\prime}(y)$ must equal $Q=x$, so $g^{\\prime}=0$ and $\\phi=xy+C$. Omitting $g(y)$ would happen to work here but is not a valid general method. For $\\mathbf F=(2xy+x,x^2+2y)$, integrating $P$ gives $\\phi=x^2y+x^2/2+g(y)$; matching $Q$ gives $g^{\\prime}(y)=2y$ and $g=y^2+C$. The “constant of integration” depends on every variable held fixed during partial integration.",
+        "A mixed-partial check is necessary for a $C^2$ potential but can fail to establish one globally. Use the angular field developed in the next lesson as the decisive comparison: its cross partials agree off the origin, yet its integral around a circle enclosing the origin is $2\\pi$. On a simply connected subregion avoiding the origin, a single angle branch can serve as a local potential. The domain, not the algebraic equality alone, determines which conclusion is licensed.",
+        "Sometimes direct construction is easier than any topological theorem. The radial field $\\mathbf H=(x/r^2,y/r^2)$ on the punctured plane has potential $\\ln r$, because $\\nabla\\ln\\sqrt{x^2+y^2}=(x/r^2,y/r^2)$. Thus a hole does not itself prevent conservativeness. Work along any path from $A$ to $B$ avoiding the origin equals $\\ln|B|-\\ln|A|$. On a closed circle $r=R$, the field is normal to the tangent, so its circulation is visibly zero.",
+        "A local curl calculation can disprove conservativeness quickly. If $P_y\\ne Q_x$ at an interior point of a smooth field, no $C^2$ potential exists on a neighborhood of that point. But equality everywhere is only a candidate test until the domain is handled. One can prove global conservativeness by constructing a potential or invoking a theorem whose hypotheses match the domain. Conversely, one nonzero closed integral is enough to disprove path independence. This asymmetry mirrors the path tests used for multivariable limits.",
+        "The angular field has different behavior on different domains. On $x>0$, the function $\\phi=\\arctan(y/x)$ is single-valued and differentiable, so the field is conservative there. On the entire punctured plane, no continuous single-valued angle wraps around the origin, and circulation around a full circle is $2\\pi$. The formula for $\\mathbf F$ is unchanged; restricting the domain changes which loops are permitted. A correct answer must state the domain alongside any potential or counterexample.",
+        "When solving for a potential, differentiate the final expression in every coordinate and compare with the original field. Integration can introduce a missing factor or sign that only this full check reveals. For a three-dimensional field, one may integrate the first component in $x$, then use the $y$ and $z$ components to determine functions of the remaining variables. A potential on one connected component does not automatically extend across a singular surface. Domain and derivative verification complete the construction.",
+        "In three dimensions, equality of planar cross partials is replaced by the vector curl condition $\\nabla\\times\\mathbf F=\\mathbf0$ for a sufficiently smooth gradient field. As in the plane, a zero curl is a local necessary condition. A simply connected domain under standard regularity hypotheses supports a converse potential theorem, while a domain with holes may require global loop checks. To construct a candidate in practice, integrate one component and use the others to determine functions of the remaining variables. Differentiating the completed potential checks all three components and the domain where it is valid."
+      ]
+    },
+    {
+      "title": "A curl-free field with nonzero circulation",
+      "paragraphs": [
+        "Define $F(x,y)=(-y/(x^2+y^2),x/(x^2+y^2))$ on the plane with the origin removed. The field turns around the missing origin and has magnitude $1/r$ at radius $r$. Its scalar curl $\\partial Q/\\partial x-\\partial P/\\partial y$ is zero at every point of its domain. It is tempting to conclude that every closed-path integral is zero, but the domain has a hole and the familiar simply connected hypothesis is absent.",
+        "Take the counterclockwise circle $C_R$ given by $\\mathbf r(t)=(R\\cos t,R\\sin t)$, $0\\le t\\le2\\pi$, with $R>0$. Along it, $\\mathbf F(\\mathbf r(t))=(-\\sin t/R,\\cos t/R)$, while $\\mathbf r^{\\prime}(t)=(-R\\sin t,R\\cos t)$. Their dot product is $\\sin^2t+\\cos^2t=1$. Therefore $\\oint_{C_R}\\mathbf F\\cdot d\\mathbf r=\\int_0^{2\\pi}1\\,dt=2\\pi$, independent of $R$. Reversing the circle gives $-2\\pi$. Traversing it twice gives $4\\pi$. These values come from orientation and winding, not from the circle’s size.",
+        "There is no contradiction with Green’s theorem. The disk bounded by $C_R$ contains the origin, where $\\mathbf F$ is undefined, so the field is not continuously differentiable on a neighborhood of the closed disk. If a simple closed curve bounds a region that avoids the origin, Green’s theorem does apply there and its circulation is zero. The issue is global topology: a loop surrounding the missing point cannot be continuously shrunk to a point while staying inside the field’s domain.",
+        "Locally the field behaves like the gradient of an angle, but a single-valued continuous angle cannot be chosen around a full loop without a jump of $2\\pi$. Thus there is no global potential on the punctured plane. Checking zero curl is a local calculation; proving a global potential requires the right domain conditions or an explicit potential valid throughout the domain. A pair of path integrals with different values can disprove path independence, just as a pair of approach paths can disprove a multivariable limit.",
+        "In physical terms, this field resembles idealized circulation around a concentrated vortex. The singularity is an idealization; a real flow model needs a core description. The mathematical lesson is to inspect the domain before applying a theorem to a region it does not cover.",
+        "The value $2\\pi$ was calculated above for one counterclockwise turn. Reversing the path changes its sign; shifting a closed circle to a disk that excludes the origin gives zero by Green’s theorem or a local angle potential. These are different routes in different admissible regions, so a finite comparison of two loops cannot establish a global potential. For the present punctured plane, the winding argument below gives the stronger all-loop statement.",
+        "A clockwise traversal of the same circle has circulation $-2\\pi$. More generally, a loop that winds $n$ times counterclockwise around the origin has circulation $2\\pi n$ when it avoids the origin and is suitably piecewise smooth. This integer is the winding number. A loop that does not enclose the origin in its winding sense has zero circulation, even if it looks curved or complicated. The field measures global winding, not merely local bending of the route.",
+        "For a piecewise smooth loop avoiding the origin, write its position as $(x(t),y(t))$. On a short piece with a continuous angle $\\theta$, the angular field satisfies $\\mathbf F(\\mathbf r)\\cdot\\mathbf r^{\\prime}=(xy^{\\prime}-yx^{\\prime})/(x^2+y^2)=\\theta^{\\prime}$. Choose adjacent angle branches to agree at each join. The total angle change on the closed loop is $2\\pi n$, where $n$ is its signed winding number, so the circulation is $2\\pi n$.",
+        "The circle of radius $1/2$ centered at $(2,0)$ lies entirely in $x>0$, where $\\phi=\\arctan(y/x)$ is a valid potential. Its closed integral is therefore zero. Direct parametrization would be longer and would obscure the reason. This comparison with an origin-centered loop shows that “closed curve” alone is not enough to predict the angular field's circulation. The curve's relationship to the excluded point matters.",
+        "Green's theorem would compare circulation around a simple closed curve with the double integral of curl over its interior, provided the field is $C^1$ on an open neighborhood of the closed interior. For an origin-centered circle, that hypothesis fails because $\\mathbf F$ is undefined at the center. If an inner circle is removed, the resulting annulus has both outer and inner boundaries; their opposite orientations make the total circulation zero, matching zero curl over the annular region. This resolves the apparent paradox without assigning an ordinary field value at the singularity.",
+        "A numerical line integral should track orientation and parameter step. If a sampled polygon approximates an origin-centered circle, summing $\\mathbf F$ at segment midpoints dotted with each displacement approaches $2\\pi$ as the polygon is refined. Reversing the vertex order changes the sign. A coarse polygon may yield a value close to $2\\pi$, but the exact conclusion comes from the symbolic calculation or a rigorous error estimate. A plot of arrows alone cannot determine the precise circulation.",
+        "The broader lesson is to separate local derivatives from global integrals. Curl at a point describes infinitesimal rotation where the field is defined. Circulation around a large loop can also detect inaccessible singularities inside that loop. In a simply connected regular domain, local curl information can often be promoted to a global potential statement; around a hole, extra loop information is needed. Chapter 26 makes this relationship precise through boundary theorems and their orientation rules.",
+        "An annulus gives a precise orientation audit for the angular field. Let its outer circle have radius $b$ and its inner circle radius $a$, with $0<a<b$. The positively oriented annular boundary traverses the outer circle counterclockwise and the inner circle clockwise. Their circulations are $2\\pi$ and $-2\\pi$, so the total is zero, matching the integral of zero curl over the annulus. Applying Green's theorem only to the outer circle would incorrectly fill the hole with a region where the field is undefined. The inner boundary is an essential part of the theorem's boundary, not an optional correction term. This orientation rule extends to every interior boundary component of a multiply connected planar region."
+      ],
+      "formula": "For C_R counterclockwise around the origin, ∮_{C_R}F·dr=2π although curl F=0 wherever F is defined.",
+      "formulaTex": "\\begin{gathered}\\mathbf F(x,y)=\\left(\\frac{-y}{x^2+y^2},\\frac{x}{x^2+y^2}\\right),\\quad (x,y)\\ne(0,0),\\\\ C_R(t)=(R\\cos t,R\\sin t),\\quad R>0,\\ 0\\le t\\le2\\pi,\\\\ \\operatorname{curl}\\mathbf F=0\\text{ on its domain},\\qquad \\oint_{C_R}\\mathbf F\\cdot d\\mathbf r=2\\pi\\quad(C_R\\text{ counterclockwise}).\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Mass and work on the same wire",
+      "problem": "On the upper semicircle of radius $2\\ \\mathrm m$, traversed from $(2,0)$ to $(-2,0)$, find mass for constant density $3\\ \\mathrm{kg/m}$ and work for $\\mathbf F(x,y)=(-ky,kx)$, where $k=1\\ \\mathrm{N/m}$.",
+      "steps": [
+        "Use $\\mathbf r(t)=(2\\cos t,2\\sin t)$, $0\\le t\\le\\pi$. Its derivative is $(-2\\sin t,2\\cos t)$, and its speed is $2\\ \\mathrm m$ per unit parameter.",
+        "Mass is $\\int_0^\\pi3\\cdot2\\,dt=6\\pi\\ \\mathrm{kg}$, using scalar density and arc length.",
+        "Along the curve $\\mathbf F=(-2\\sin t,2\\cos t)\\ \\mathrm N$. Dotting with $\\mathbf r^{\\prime}$ gives $4$ joules per unit parameter, so work is $\\int_0^\\pi4\\,dt=4\\pi\\ \\mathrm J$.",
+        "Reversing the route changes $\\mathbf r^{\\prime}$ relative to the force and gives $-4\\pi\\ \\mathrm J$, while mass remains $6\\pi\\ \\mathrm{kg}$."
+      ],
+      "answer": "Mass $=6\\pi\\ \\mathrm{kg}$; work in the stated orientation $=4\\pi\\ \\mathrm J$."
+    },
+    {
+      "title": "Constructing and verifying a potential",
+      "problem": "For $\\mathbf F(x,y)=(2xy+3,x^2+2y)$ on all of $\\mathbb R^2$, calculate work from $(0,0)$ to $(1,2)$. Coordinates and field values are dimensionless.",
+      "steps": [
+        "The domain is open and simply connected, and $P_y=2x=Q_x$. The sufficient criterion therefore applies.",
+        "Integrating $P$ with respect to $x$ gives $\\phi=x^2y+3x+g(y)$. Matching $\\phi_y=x^2+g^{\\prime}(y)$ to $Q$ yields $g^{\\prime}(y)=2y$, so choose $g(y)=y^2$.",
+        "Check $\\nabla\\phi=(2xy+3,x^2+2y)$, then evaluate $\\phi(1,2)-\\phi(0,0)=2+3+4=9$.",
+        "For a direct cross-check, use $\\mathbf r(t)=(t,2t)$, $0\\le t\\le1$. The work integrand is $6t^2+8t+3$; integrating gives $2+4+3=9$."
+      ],
+      "answer": "Every piecewise smooth route in $\\mathbb R^2$ with these oriented endpoints has work $9$."
+    },
+    {
+      "title": "Scalar mass does not change with direction",
+      "problem": "Compute $\\int_C(x+y)\\,ds$ on the segment from $(0,0)$ to $(1,1)$, then reverse $C$.",
+      "steps": [
+        "Parametrize $\\mathbf r(t)=(t,t)$, $0\\le t\\le1$, with speed $\\sqrt2$.",
+        "The scalar integrand becomes $2t\\sqrt2$; integrate to obtain $\\sqrt2$.",
+        "Reversal changes $\\mathbf r^{\\prime}$ sign but not its magnitude, so the same wire gives the same integral."
+      ],
+      "answer": "Both orientations give $\\sqrt2$."
+    },
+    {
+      "title": "A circulating field",
+      "problem": "Compute $\\oint_C(-y,x)\\cdot d\\mathbf r$ on the unit circle counterclockwise and clockwise.",
+      "steps": [
+        "For $\\mathbf r(t)=(\\cos t,\\sin t)$, the field equals $\\mathbf r^{\\prime}(t)$.",
+        "The dot product is one, so integration over $0\\le t\\le2\\pi$ gives $2\\pi$.",
+        "Clockwise traversal reverses every displacement and the sign."
+      ],
+      "answer": "Counterclockwise circulation is $2\\pi$; clockwise is $-2\\pi$."
+    },
+    {
+      "title": "A three-dimensional potential",
+      "problem": "Find a potential for $\\mathbf F=(yz,xz,xy)$ and work from $(1,1,1)$ to $(2,3,4)$.",
+      "steps": [
+        "Integrate the $x$ component $yz$ to obtain $xyz$ plus a function of $y,z$.",
+        "Differentiating $xyz$ gives the remaining components, so the extra function is constant on $\\mathbb R^3$.",
+        "Evaluate $\\phi(2,3,4)-\\phi(1,1,1)=24-1$."
+      ],
+      "answer": "$\\phi=xyz+C$ and work is $23$."
+    },
+    {
+      "title": "A potential on a punctured domain",
+      "problem": "Find a potential for $\\mathbf H=(x/r^2,y/r^2)$ on $\\mathbb R^2$ without the origin.",
+      "steps": [
+        "Set $r=\\sqrt{x^2+y^2}$ and differentiate $\\ln r$.",
+        "Its $x$ and $y$ partials are $x/r^2$ and $y/r^2$.",
+        "The function $\\ln r$ is single-valued throughout the punctured plane."
+      ],
+      "answer": "$\\mathbf H=\\nabla\\ln r$, so every closed work integral is zero."
+    },
+    {
+      "title": "The angular field on a half-plane",
+      "problem": "Show $\\mathbf F=(-y/r^2,x/r^2)$ has a potential on $x>0$, where $r^2=x^2+y^2$.",
+      "steps": [
+        "On $x>0$ define $\\phi=\\arctan(y/x)$, a continuous single-valued angle.",
+        "Differentiate: $\\phi_x=-y/r^2$ and $\\phi_y=x/r^2$.",
+        "The derivative check holds throughout the half-plane."
+      ],
+      "answer": "The field is conservative on $x>0$ with potential $\\arctan(y/x)$."
+    },
+    {
+      "title": "Circulation distinguishes two loops",
+      "problem": "Compare the angular field $\\mathbf F=(-y/r^2,x/r^2)$, where $r^2=x^2+y^2$, around a radius-$R$ circle centered at zero with a radius-$1/2$ circle centered at $(2,0)$. Orient both counterclockwise and assume $R>0$.",
+      "steps": [
+        "On the first counterclockwise circle, $\\mathbf F\\cdot\\mathbf r^{\\prime}=1$, so the integral is $2\\pi$.",
+        "The second circle lies in $x>0$, where an angle potential exists.",
+        "The second closed integral is therefore zero."
+      ],
+      "answer": "The two circulations are $2\\pi$ and $0$, respectively."
+    }
+  ],
+  "misconceptions": [
+    "“A line integral always uses speed.” Scalar integration against $ds$ uses speed; work pairs force with the oriented tangent $\\mathbf r^{\\prime}(t)$ in a dot product, which records orientation.",
+    "“Equal mixed partials prove conservativeness everywhere.” They suffice on a suitable simply connected open domain; the angular field on a punctured plane has equal mixed partials and nonzero circulation."
+  ],
+  "lab": {
+    "title": "Compare work along two paths",
+    "description": "Compare the straight route $(t,t)$ and curved route $(t,t^2)$ from $(0,0)$ to $(1,1)$ in $\\mathbf F=(2xy,x^2+\\alpha x)$. All quantities are dimensionless. The editable JavaScript parameter alpha represents $\\alpha$; nonzero $\\alpha$ makes the field nonconservative. Midpoint integration prints a convergence table and plots work versus the number of panels.",
+    "code": "// Change alpha to 0 for a conservative field; use baseN >= 2.\nconst alpha = 1;\nconst baseN = 10;\nif (!Number.isFinite(alpha) || !Number.isInteger(baseN) || baseN < 2 || baseN > 1000) {\n  throw new Error('Use finite alpha and integer baseN from 2 to 1000.');\n}\nfunction work(n, curved) {\n  let total = 0;\n  for (let i = 0; i < n; i++) {\n    const t = (i + 0.5) / n;\n    const x = t, y = curved ? t*t : t;\n    const dx = 1, dy = curved ? 2*t : 1;\n    const P = 2*x*y, Q = x*x + alpha*x;\n    total += P/n + (Q/n)*dy;\n  }\n  return total;\n}\nconst straight = [], curved = [];\nconst exactStraight = 1 + alpha/2;\nconst exactCurved = 1 + (2/3)*alpha;\nconsole.log('n | straight work | curved work | curved minus straight');\nfor (let k = 0; k < 6; k++) {\n  const n = baseN * 2**k;\n  const a = work(n, false), b = work(n, true);\n  straight.push([n, a]); curved.push([n, b]);\n  console.log(n, a.toFixed(9), b.toFixed(9), (b-a).toFixed(9));\n}\nplot(straight, 'Straight path: panels n versus work');\nplot(curved, 'Curved path: panels n versus work');\nconsole.log('Exact straight, curved, difference:', exactStraight, exactCurved, alpha/6);\n",
+    "tasks": [
+      "Before running, predict whether work agrees when alpha = 0 and when alpha = 1. Explain using $P_y$ and $Q_x$.",
+      "Set alpha = 0 and double baseN. Explain why unequal approximations at finite $n$ can converge to the same exact work.",
+      "Set alpha = -2. Derive both exact integrals and predict the sign of curved work minus straight work.",
+      "Explain why agreement on these two paths would not by itself prove a field conservative, and identify the independent theorem available when alpha = 0."
+    ],
+    "expected": "For alpha = 1, exact work is $3/2$ on the straight path and $5/3$ on the curved path; their difference is $1/6$. At $n=10$ the approximations are 1.4975 and 1.66. At $n=320$ they are approximately 1.499997559 and 1.666660156. Midpoint errors decrease by a factor of four when $n$ doubles. These are quadrature errors, not a failure of the endpoint theorem."
+  },
+  "exercises": [
+    {
+      "question": "Find $\\mathbf F(1,0)$ and $|\\mathbf F(1,0)|$ for $\\mathbf F=(-y,x)$.",
+      "hint": "Substitute the given coordinates into the field.",
+      "solution": "Substitution gives $\\mathbf F(1,0)=\\langle0,1\\rangle$ and $|\\mathbf F(1,0)|=\\sqrt{0^2+1^2}=1$. The vector points in the positive $y$ direction.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "What changes when a curve parametrization reverses orientation?",
+      "hint": "Compare the oriented tangent with its magnitude.",
+      "solution": "Reversing traversal negates the oriented tangent but preserves its speed. Hence vector work $\\int_C\\mathbf F\\cdot d\\mathbf r$ changes sign, while arc length and scalar integrals $\\int_Cg\\,ds$ remain unchanged.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Can the angular field be integrated along a path through the origin?",
+      "hint": "Check whether the field is defined at the origin.",
+      "solution": "The angular field has denominator $x^2+y^2$, which vanishes at the origin. A path through that point has no ordinary line integral of this field.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What are units of $\\int \\mathbf F\\cdot d\\mathbf r$ when $\\mathbf F$ is force in newtons and position is metres?",
+      "hint": "Multiply force units by displacement units.",
+      "solution": "The dot product $\\mathbf F\\cdot d\\mathbf r$ has units newtons times metres, or joules. Thus the work integral is measured in joules; its sign reflects assistance or opposition to the oriented motion.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find $\\int_C(x+y)\\,ds$ on the segment from $(0,0)$ to $(1,1)$. What changes if orientation reverses?",
+      "hint": "Parametrize the segment by $\\mathbf r(t)=\\langle t,t\\rangle$.",
+      "solution": "For $0\\le t\\le1$, $x+y=2t$ and $ds=\\sqrt2\\,dt$. Thus $\\int_C(x+y)\\,ds=\\int_0^12\\sqrt2t\\,dt=\\sqrt2$. Reversal preserves this scalar integral.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Compute circulation of $\\mathbf F=(-y,x)$ on the unit circle once clockwise.",
+      "hint": "Parametrize counterclockwise, then reverse the sign.",
+      "solution": "With $\\mathbf r(t)=\\langle\\cos t,\\sin t\\rangle$, both field and tangent are $\\langle-\\sin t,\\cos t\\rangle$. Their dot product is $1$, so counterclockwise circulation is $2\\pi$ and clockwise circulation is $-2\\pi$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_C(x+y)\\,ds$ on $\\mathbf r(t)=(t,t)$, $0\\le t\\le 1$.",
+      "hint": "Compute the speed of the given parametrization.",
+      "solution": "Here $x+y=2t$ and $ds=|\\mathbf r^{\\prime}(t)|dt=\\sqrt2\\,dt$. Hence $\\int_C(x+y)\\,ds=\\int_0^12\\sqrt2t\\,dt=\\sqrt2$. The parameter interval covers the diagonal segment exactly once.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the length of a circle of radius $R>0$ by a scalar line integral.",
+      "hint": "Integrate the constant speed over one revolution.",
+      "solution": "Use $\\mathbf r(t)=\\langle R\\cos t,R\\sin t\\rangle$, $0\\le t\\le2\\pi$. Its speed is $R$, so $\\int_C1\\,ds=\\int_0^{2\\pi}R\\,dt=2\\pi R$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\oint_C(-y,x)\\cdot d\\mathbf r$ on the unit circle counterclockwise. What is the work when the same circle is traversed clockwise?",
+      "hint": "Parametrize the unit circle counterclockwise.",
+      "solution": "For $\\mathbf r(t)=\\langle\\cos t,\\sin t\\rangle$, $\\mathbf F(\\mathbf r(t))=\\mathbf r^{\\prime}(t)$ and $|\\mathbf r^{\\prime}(t)|^2=1$. Thus $\\oint_C\\mathbf F\\cdot d\\mathbf r=\\int_0^{2\\pi}1\\,dt=2\\pi$. Reversing the traversal negates oriented work, giving $-2\\pi$ clockwise.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "What happens to vector work if a closed loop is traversed twice?",
+      "hint": "Use additivity under repeated traversal.",
+      "solution": "If one oriented traversal has integral $I$, two identical traversals have $I+I=2I$. Reversing both traversals gives $-2I$; the geometric trace alone does not set the work.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find a potential for $\\mathbf F=(yz,xz,xy)$ on $\\mathbb R^3$ and calculate work from $(1,1,1)$ to $(2,3,4)$.",
+      "hint": "Integrate the first component with respect to $x$ and match the others.",
+      "solution": "Integrating $\\phi_x=yz$ gives $\\phi=xyz+g(y,z)$. Matching $\\phi_y=xz$ and $\\phi_z=xy$ makes $g$ constant. Choose $\\phi=xyz$; then work is $\\phi(2,3,4)-\\phi(1,1,1)=24-1=23$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\mathbf F_\\alpha(x,y)=(2xy,x^2+\\alpha x)$ on $\\mathbb R^2$, derive the exact work along $\\mathbf r_1(t)=(t,t)$ and $\\mathbf r_2(t)=(t,t^2)$, $0\\le t\\le1$, from $(0,0)$ to $(1,1)$. For which real $\\alpha$ is the field conservative on $\\mathbb R^2$?",
+      "hint": "Use each path's own $dy/dt$ in the work integral.",
+      "solution": "The straight-path integrand is $3t^2+\\alpha t$, giving $1+\\alpha/2$. The curved-path integrand is $4t^3+2\\alpha t^2$, giving $1+2\\alpha/3$. Their difference is $\\alpha/6$, so $\\alpha\\ne0$ disproves path independence. At $\\alpha=0$, $\\phi=x^2y$ is a global potential.",
+      "lesson": 3,
+      "type": "Challenge"
+    },
+    {
+      "question": "Why must every closed integral vanish if work is path independent? Is zero work on one circle sufficient?",
+      "hint": "Compare a closed route with its reversal.",
+      "solution": "Path independence gives the same work $I$ for a closed route and its reverse, but reversal gives $-I$. Hence $I=0$. One circle is insufficient: another admissible closed route might have nonzero work.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find $\\int_C (2x,2y)\\cdot d\\mathbf r$ from $(0,0)$ to $(2,3)$, for any piecewise smooth path.",
+      "hint": "Find a potential defined across the plane.",
+      "solution": "Since $\\mathbf F=\\nabla\\phi$ with $\\phi=x^2+y^2$, the work is $\\phi(2,3)-\\phi(0,0)=4+9=13$, independent of the piecewise smooth path.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\mathbf F=(2x,2y)$, find work from $(0,0)$ to $(2,3)$.",
+      "hint": "Use the potential $\\phi=x^2+y^2$.",
+      "solution": "The field is $\\nabla\\phi$, so the endpoint theorem gives work $\\phi(2,3)-\\phi(0,0)=2^2+3^2=13$ on any allowed path.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Derive the fundamental theorem for line integrals from the chain rule.",
+      "hint": "Differentiate the potential along a parametrized curve.",
+      "solution": "Let $\\phi$ be continuously differentiable on an open set containing the piecewise smooth path $C$, with initial point $A$ and final point $B$. On each smooth parameter interval, the chain rule gives $\\frac{d}{dt}\\phi(\\mathbf r(t))=\\nabla\\phi(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)$. Integrate on each interval and add. Terms at intermediate endpoints cancel, leaving $\\int_C\\nabla\\phi\\cdot d\\mathbf r=\\phi(B)-\\phi(A)$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "If $\\mathbf F=-\\nabla U$, what is work from $A$ to $B$?",
+      "hint": "Use the potential $\\phi=-U$.",
+      "solution": "Since $\\mathbf F=-\\nabla U=\\nabla\\phi$, work from $A$ to $B$ is $\\phi(B)-\\phi(A)=U(A)-U(B)$. Positive conservative-force work corresponds to decreasing potential energy.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Can two potentials on a connected open domain differ by a nonconstant function?",
+      "hint": "Subtract the two gradients.",
+      "solution": "If $\\nabla\\phi_1=\\nabla\\phi_2$, then $\\nabla(\\phi_1-\\phi_2)=0$. A differentiable function with zero gradient on a connected domain is constant, so the potentials differ only by a constant.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does the angular field $(-y/(x^2+y^2),x/(x^2+y^2))$ have a potential on the half-plane $x>0$?",
+      "hint": "Try the angle $\\arctan(y/x)$ on $x>0$.",
+      "solution": "The function $\\phi=\\arctan(y/x)$ is single-valued on $x>0$. Its derivatives are $\\phi_x=-y/(x^2+y^2)$ and $\\phi_y=x/(x^2+y^2)$, so $\\nabla\\phi$ is the angular field there.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Find a potential for $\\mathbf F=(y,x)$.",
+      "hint": "Integrate the first component with respect to $x$.",
+      "solution": "Since $\\phi_x=y$, write $\\phi=xy+g(y)$. Matching $\\phi_y=x$ gives $g^{\\prime}(y)=0$, so $\\phi=xy+C$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find a potential for $\\mathbf F=(2xy+x,x^2+2y)$.",
+      "hint": "Integrate the $x$ component, then match the $y$ component.",
+      "solution": "Integration gives $\\phi=x^2y+x^2/2+g(y)$. The condition $\\phi_y=x^2+2y$ gives $g(y)=y^2+C$, hence $\\phi=x^2y+x^2/2+y^2+C$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $r=\\sqrt{x^2+y^2}$. Show $\\mathbf H=(x/r^2,y/r^2)$ is conservative on $\\mathbb R^2\\setminus\\{(0,0)\\}$.",
+      "hint": "Differentiate $\\ln r$ on the punctured plane.",
+      "solution": "On $r=\\sqrt{x^2+y^2}>0$, set $\\phi=\\ln r=\\frac12\\ln(x^2+y^2)$. Then $\\phi_x=x/r^2$ and $\\phi_y=y/r^2$, so $\\nabla\\phi=\\mathbf H$ globally on the punctured plane.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "On $\\mathbb R^2\\setminus\\{(0,0)\\}$, let $(P,Q)=(-y/(x^2+y^2),x/(x^2+y^2))$. Check $P_y=Q_x$ and the counterclockwise circulation around the unit circle. Does the derivative equality prove a global potential?",
+      "hint": "Recall circulation of the angular field around the origin.",
+      "solution": "Writing $r^2=x^2+y^2>0$ gives $P_y=(y^2-x^2)/r^4=Q_x$. On $(x,y)=(\\cos t,\\sin t)$, $0\\le t\\le2\\pi$, the field is $(-\\sin t,\\cos t)$ and the tangent is the same vector. Its circulation is $\\int_0^{2\\pi}1\\,dt=2\\pi$. A global potential would make every closed-path integral zero, so equality of these partials on the punctured plane is insufficient.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $r^2=x^2+y^2$. Compute circulation of $\\mathbf F=(-y/r^2,x/r^2)$ around a clockwise circle of radius $3$ centered at the origin.",
+      "hint": "Reverse the standard counterclockwise parameterization.",
+      "solution": "The counterclockwise integral is $2\\pi$ at every positive radius because the integrand is one over a full turn. Reversal changes its sign, giving $-2\\pi$ at radius $3$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $\\mathbf F(x,y)=(-y/(x^2+y^2),x/(x^2+y^2))$, and let $C$ be the counterclockwise circle of radius $1/2$ centered at $(2,0)$. Find its circulation.",
+      "hint": "Show the disk lies in $x>0$, where the field has an angle potential.",
+      "solution": "The disk has $x\\ge3/2>0$. On $x>0$, $\\phi(x,y)=\\arctan(y/x)$ satisfies $\\nabla\\phi=\\mathbf F$. The endpoint theorem gives $\\oint_C\\mathbf F\\cdot d\\mathbf r=0$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Find counterclockwise circulation of the angular field on any origin-centered circle.",
+      "hint": "Parametrize an origin-centered circle of radius $R>0$.",
+      "solution": "With $\\mathbf r(t)=\\langle R\\cos t,R\\sin t\\rangle$, the angular field satisfies $\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)=1$. Integrating $0\\le t\\le2\\pi$ gives circulation $2\\pi$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\mathbf F(x,y)=(-y/(x^2+y^2),x/(x^2+y^2))$, find its clockwise circulation on a circle of radius $3$ centered at the origin.",
+      "hint": "Reverse the counterclockwise traversal.",
+      "solution": "The counterclockwise circulation is $2\\pi$ for any positive radius. Reversing the orientation negates it, so the clockwise circulation is $-2\\pi$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is circulation of the angular field around a circle centered at $(2,0)$ of radius $1/2$ zero?",
+      "hint": "The loop lies entirely in $x>0$; look for a potential there.",
+      "solution": "On $x>0$, $\\phi=\\arctan(y/x)$ is a potential for the angular field. The endpoint theorem gives zero work around this closed circle.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Why does Green’s theorem not imply zero angular circulation around the origin?",
+      "hint": "Inspect the disk interior, not just its boundary.",
+      "solution": "The angular field is undefined at the origin enclosed by the circle. Green's theorem requires the field to be smooth on a neighborhood of the full disk, so it cannot be applied there.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What is the circulation of $\\mathbf F(x,y)=(-y/(x^2+y^2),x/(x^2+y^2))$ around a piecewise smooth closed loop that avoids the origin and has winding number $2$ about it?",
+      "hint": "Follow a continuous angle along the loop and find its total change.",
+      "solution": "Write the loop as $(x(t),y(t))$ and follow a continuous angle $\\theta(t)$ along it. On each smooth piece, $\\theta^{\\prime}(t)=(xy^{\\prime}-yx^{\\prime})/(x^2+y^2)=\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)$. Winding number $2$ means $\\theta(b)-\\theta(a)=4\\pi$, so the circulation is $4\\pi$.",
+      "lesson": 5,
+      "type": "Challenge"
+    }
+  ],
+  "summary": [
+    "Scalar line integrals accumulate against length; work integrals accumulate tangential field contributions with orientation.",
+    "A verified potential makes work an endpoint difference and forces all closed integrals to vanish.",
+    "Derivative tests require domain hypotheses; excluded points can obstruct a global potential.",
+    "Path comparisons and refinement studies test calculations, while definitions and theorems establish universal claims."
+  ],
+  "next": "Chapter 26 relates circulation around boundaries to derivatives over regions, then extends the same boundary principle to surfaces and volumes."
+}

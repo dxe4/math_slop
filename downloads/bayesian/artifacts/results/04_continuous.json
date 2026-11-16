@@ -1,0 +1,8 @@
+{
+  "gamma_shape": 14,
+  "gamma_rate": 5.0,
+  "rate_mean": 2.8,
+  "normal_mean": 11.600000000000001,
+  "normal_sd": 0.8944271909999159,
+  "normal_predictive_sd": 2.1908902300206643
+}

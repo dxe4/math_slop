@@ -1,0 +1,486 @@
+{
+  "id": "06",
+  "title": "Differentiation techniques",
+  "subtitle": "How can a small collection of derivative rules handle products, compositions, inverses, and curves defined by equations?",
+  "prerequisites": [
+    "Chapter 02: powers, logarithms, radians, and trigonometric identities.",
+    "Chapter 04: continuity and limits.",
+    "Chapter 05: derivatives as limits and tangent slopes; Chapter 03 for the optional JavaScript lab."
+  ],
+  "objectives": [
+    "Differentiate sums, products, quotients, and nested compositions while preserving their domains.",
+    "Use exponential, logarithmic, trigonometric, and inverse trigonometric derivatives with correct hypotheses.",
+    "Find derivatives from implicit equations and by logarithmic differentiation.",
+    "Compare a symbolic derivative with numerical evidence and explain why agreement is not a proof.",
+    "Differentiate hyperbolic functions and their inverses with their domain and branch conditions."
+  ],
+  "sections": [
+    {
+      "title": "Read the structure before calculating",
+      "paragraphs": [
+        "The limit definition from Chapter 05 explains what a derivative means. Applying that definition afresh to every expression would hide the structure of a calculation beneath repeated algebra. Differentiation rules package arguments about limits so we can reuse them. Before calculating, identify the outermost operation: is the function a sum, a product, a quotient, or one function applied to another? Then record where the original expression is defined. A simplified derivative does not silently enlarge that domain.",
+        "If $u$ and $v$ are differentiable at $x$ and $c$ is constant, then $(u+v)^{\\prime}=u^{\\prime}+v^{\\prime}$ and $(cu)^{\\prime}=cu^{\\prime}$. Constants have derivative zero. The power rule gives $(x^n)^{\\prime}=nx^{n-1}$ for positive integers $n$ on the whole real line; negative integer powers require $x\\ne0$. For an arbitrary real exponent $r$, the rule $(x^r)^{\\prime}=rx^{r-1}$ is valid for $x>0$. Some rational powers have additional real domain, which must be checked separately. In particular, $x^{1/3}$ is defined at zero but has no finite derivative there.",
+        "The product rule is $(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime}$. It accounts for change in each factor while retaining the other factor. Here is a proof sketch: add and subtract $u(x+h)v(x)$ in the numerator of the product difference quotient. The result is $u(x+h)\\frac{v(x+h)-v(x)}{h}+v(x)\\frac{u(x+h)-u(x)}{h}$. Differentiability implies continuity, so the first unchanged factor tends to $u(x)$, and the limit gives the rule. Multiplying the two derivatives would instead describe an entirely different expression.",
+        "For $v(x)\\ne0$, the quotient rule is $\\left(\\frac uv\\right)^{\\prime}=\\frac{u^{\\prime}v-uv^{\\prime}}{v^2}$. One way to remember the sign is to differentiate the identity $u=(u/v)v$ using the product rule and solve for $(u/v)^{\\prime}$. This argument applies where the quotient is differentiable; its differentiability also follows by the reciprocal limit rule. For instance, differentiating $x/(x+1)$ gives $\\frac{(x+1)-x}{(x+1)^2}=\\frac{1}{(x+1)^2}$, with $x\\ne-1$. The derivative formula has the same excluded point as the original function.",
+        "For three differentiable factors, the product rule applied twice gives $(uvw)^{\\prime}=u^{\\prime}vw+uv^{\\prime}w+uvw^{\\prime}$. Each term differentiates exactly one factor and leaves the others unchanged. This is easier to check than expanding a complicated product first. For $(x^2+1)e^{3x}\\cos x$, a correct derivative has three contributions: changing the polynomial, changing the exponential, and changing the cosine. Omitting any one can still produce a plausible-looking expression. Check a proposed rule at a simple input or against a difference quotient before trusting a long symbolic result.",
+        "The quotient rule can be derived from the reciprocal derivative. If $v(a)\\ne0$, then $1/v$ is defined near $a$ and $(1/v)^{\\prime}=-v^{\\prime}/v^2$. Apply the product rule to $u(1/v)$ to obtain $(u/v)^{\\prime}=u^{\\prime}/v-uv^{\\prime}/v^2$. This derivation makes the squared denominator and minus sign less arbitrary. It also explains why cancellation before differentiation can be useful: $(x^2-1)/(x-1)$ equals $x+1$ only where $x\\ne1$, so its derivative is one on that punctured domain, not automatically at the missing point.",
+        "Choose the least complicated valid route through an expression. For $(x^2+1)(x^3-2)$, expanding first is possible but obscures the two-factor structure; for $(x^2-1)/(x-1)$, factoring first is much shorter. Neither choice changes the underlying derivative as long as every algebraic identity is used on the correct domain. A good final answer gives the original domain, an unsimplified rule application that exposes the method, and then a simplified form when it helps interpretation. This habit makes sign and domain errors easier to find.",
+        "Differentiation is local. A quotient can be differentiable at an input even if its displayed factors behave awkwardly elsewhere; conversely, a simplified derivative expression can be finite at a point excluded from the original function. For example, $f(x)=x/x$ is the constant one on the domain $x\\ne0$. Its derivative is zero at every point of that domain, but $f^{\\prime}(0)$ is meaningless until a value and a new function domain are specified. Extend $f(0)=1$ and the derivative at zero becomes zero; extend it to another value and continuity, hence differentiability, fails.",
+        "The reciprocal rule also has a direct limit proof worth seeing once. At a point $a$ with $v(a)\\ne0$, continuity of $v$ supplies a neighborhood in which $v(a+h)\\ne0$. For nonzero $h$ there, the quotient for $1/v$ is $\\frac{1/v(a+h)-1/v(a)}{h}=-\\frac{v(a+h)-v(a)}{h\\,v(a+h)v(a)}$. The difference quotient $\\frac{v(a+h)-v(a)}{h}$ tends to $v^{\\prime}(a)$ and the denominator factors tend to $v(a)^2$. Hence $(1/v)^{\\prime}(a)=-v^{\\prime}(a)/v(a)^2$. Applying the product rule to $u(1/v)$ proves the quotient rule without memorizing a sign pattern. The continuity step is what licenses every nearby denominator and cannot be skipped merely because the final formula looks familiar. A symbolic system may simplify the result, but it does not change the original expression's domain.",
+        "Units can expose a wrong product rule before any algebra is simplified. If $u$ is a displacement in metres and $v$ is a force in newtons, their product has energy units of joules. Both terms $u^{\\prime}v$ and $uv^{\\prime}$ have joules per second when the input is time, as the derivative must. The tempting but false product $u^{\\prime}v^{\\prime}$ has joules per second squared. This check cannot prove a formula, but it is an effective independent test of a symbolic calculation in a physical model."
+      ],
+      "formula": "(uv)′ = u′v + uv′;   (u/v)′ = (u′v − uv′)/v², provided v ≠ 0.",
+      "formulaTex": "(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime},\\qquad\\left(\\frac uv\\right)^{\\prime}=\\frac{u^{\\prime}v-uv^{\\prime}}{v^2},\\quad v\\ne0",
+      "theorems": [
+        {
+          "title": "The product and quotient rules come from one limit",
+          "statement": "If $u$ and $v$ are differentiable at $a$, then $(uv)^{\\prime}(a)=u^{\\prime}(a)v(a)+u(a)v^{\\prime}(a)$. If $v(a)\\ne0$, the quotient is differentiable and has the usual quotient rule.",
+          "equationTex": "(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime},\\qquad \\left(\\frac{u}{v}\\right)^{\\prime}=\\frac{u^{\\prime}v-uv^{\\prime}}{v^2}",
+          "proof": [
+            "Add and subtract the cross term $u(a+h)v(a)$ in the product difference. After dividing by $h\\ne0$, the quotient becomes $u(a+h)[v(a+h)-v(a)]/h+v(a)[u(a+h)-u(a)]/h$. Differentiability implies continuity, so $u(a+h)\\to u(a)$. The two difference quotients tend to $v^{\\prime}(a)$ and $u^{\\prime}(a)$ respectively. The limit is $u(a)v^{\\prime}(a)+v(a)u^{\\prime}(a)$. This proof shows why two terms appear; differentiating each factor and multiplying the derivatives would be wrong.",
+            "For the reciprocal, assume $v(a)\\ne0$. Continuity keeps $v(a+h)$ nonzero for small $h$. Algebra gives $[1/v(a+h)-1/v(a)]/h=-[v(a+h)-v(a)]/[h v(a+h)v(a)]$. Its limit is $-v^{\\prime}(a)/v(a)^2$. Apply the product rule to $u(1/v)$ to obtain the quotient formula. The nonzero denominator is a theorem hypothesis, not a detail to check only after differentiating.",
+            "At points where $v=0$, the quotient may be undefined even if a simplified expression has a removable extension. Simplify and define the intended function and domain before claiming a derivative at such a point. The limit proofs apply to the actual function near the point."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Compositions, exponentials, and logarithms",
+      "paragraphs": [
+        "Suppose $g$ is differentiable at $x$ and $f$ is differentiable at $g(x)$. The chain rule says that the derivative of $f(g(x))$ is $f^{\\prime}(g(x))g^{\\prime}(x)$. Think of $g$ as converting an input change into an intermediate change, and $f$ as converting that intermediate change into an output change. The corresponding rates multiply. This interpretation also checks units: if the intermediate variable has units $U$, then $(\\text{output}/U)(U/\\text{input})$ has the required output/input units. The familiar notation $dy/dx=(dy/du)(du/dx)$ expresses this theorem, rather than permission to cancel arbitrary symbols.",
+        "For $(3x^2+1)^5$, the outer function raises its input to the fifth power and the inner function is $3x^2+1$. The derivative is $5(3x^2+1)^4\\cdot6x$. Differentiating a nest with several layers repeats this procedure from outside inward, leaving each inner expression in place until its own derivative is taken. A useful proof idea writes $f(b+k)=f(b)+f^{\\prime}(b)k+r(k)$, where $r(k)/k\\to0$ as $k\\to0$, then substitutes $k=g(x+h)-g(x)$. This also handles increments where $k$ is zero; a naive division by $k$ would not.",
+        "The natural exponential satisfies $(e^x)^{\\prime}=e^x$, so $(e^u)^{\\prime}=e^uu^{\\prime}$. For a fixed base $a>0$, $a^x=e^{x\\ln a}$, giving $(a^x)^{\\prime}=a^x\\ln a$, including the constant case $a=1$. The natural logarithm has derivative $1/x$ on $x>0$. Consequently, $(\\ln u)^{\\prime}=u^{\\prime}/u$ when $u>0$, and $(\\ln|u|)^{\\prime}=u^{\\prime}/u$ on any interval where $u$ is differentiable and nonzero. A logarithm with base $a>0$, $a\\ne1$ has derivative $1/(x\\ln a)$, for $x>0$.",
+        "These are real-variable formulas. Writing $\\ln|u|$ does not make a zero of $u$ permissible, and differentiating $\\ln(x^2)$ gives $2/x$ only for $x\\ne0$. In a physical model, logarithm and exponential inputs should be dimensionless: $\\ln(t/t_0)$ is meaningful for positive times $t$ and a fixed reference time $t_0$. Its derivative with respect to $t$ is $1/t$, with units inverse time. An expression like $e^{-kt}$ needs $k$ in inverse-time units so that $kt$ is dimensionless.",
+        "The chain rule is best read as a dependency graph. In $y=\\exp(-kt^2)$, time changes $t^2$, that changes $-kt^2$, and the exponential changes the output. Differentiating from the outside gives $dy/dt=\\exp(-kt^2)(-2kt)$. If $t$ has seconds and the exponent must be dimensionless, $k$ has units $\\mathrm{s}^{-2}$; the derivative then has output units per second. A symbolic answer with a missing inner factor would fail both the dependency story and often the units check.",
+        "For a deeper nest such as $\\sin(\\sqrt{1+x^2})$, name intermediate values $u=1+x^2$ and $v=\\sqrt u$. Then $dy/dx=\\cos(v)\\,[1/(2\\sqrt u)]\\,(2x)=x\\cos(\\sqrt{1+x^2})/\\sqrt{1+x^2}$. Here $u\\ge1$, so no square-root denominator vanishes and the derivative exists for every real $x$. Writing intermediate names can prevent a common error: differentiating only the outside sine or only the inner square without following every link in the composition.",
+        "The logarithm of an absolute value extends the useful derivative identity to negative nonzero inputs. On an interval where $u(x)<0$, $\\ln|u(x)|=\\ln(-u(x))$, whose derivative is $\\frac{-u^{\\prime}(x)}{-u(x)}=\\frac{u^{\\prime}(x)}{u(x)}$. The same formula holds where $u>0$. It is not valid across a zero of $u$, because the logarithm itself is undefined there. For example, $(\\ln|x-1|)^{\\prime}=1/(x-1)$ on the two intervals $(-\\infty,1)$ and $(1,\\infty)$, with no claim at one.",
+        "Variable bases and variable exponents need more than the ordinary power rule. If $u(x)>0$, define $u(x)^{v(x)}=\\exp(v(x)\\ln u(x))$. The chain and product rules then give $(u^v)^{\\prime}=u^v[v^{\\prime}\\ln u+vu^{\\prime}/u]$. For $u=x^2+1$ and $v=x$, this is valid on the entire real line because the base is always positive. For $u=x$ and $v=\\sin x$, the real-valued expression is naturally restricted to $x>0$. State these domain choices before differentiating; algebra cannot rescue an undefined real power.",
+        "The chain rule can be proved without dividing by an intermediate increment that might equal zero. At $b=g(a)$, differentiability of $f$ means $f(b+k)=f(b)+[f^{\\prime}(b)+\\eta(k)]k$, where $\\eta(k)\\to0$ and we may define $\\eta(0)=0$. Put $k=g(a+h)-g(a)$. As $h\\to0$, continuity of $g$ makes $k\\to0$, while differentiability gives $k/h\\to g^{\\prime}(a)$. Divide the displayed change in $f$ by $h$: it becomes $[f^{\\prime}(b)+\\eta(k)](k/h)$, which tends to $f^{\\prime}(b)g^{\\prime}(a)$. If $g(a+h)=g(a)$ for some increments, this expression remains meaningful because it never divides by $k$. The proof shows that composition multiplies local linear rates, including cases with locally flat inner behavior.",
+        "A second derivative of a composition needs another product rule as well as another chain rule. From $y=f(g(x))$ we first have $y^{\\prime}=f^{\\prime}(g(x))g^{\\prime}(x)$. Differentiating that product yields $y^{\\prime\\prime}=f^{\\prime\\prime}(g(x))[g^{\\prime}(x)]^2+f^{\\prime}(g(x))g^{\\prime\\prime}(x)$ when the required derivatives exist. The square on $g^{\\prime}$ is not a typographical accident: one inner rate comes from the first derivative and another from differentiating the outer derivative. For $y=\\sin(x^2)$, the first derivative is $2x\\cos(x^2)$ and the second is $2\\cos(x^2)-4x^2\\sin(x^2)$. At $x=0$, this gives $y^{\\prime}(0)=0$ and $y^{\\prime\\prime}(0)=2$, consistent with the local approximation $\\sin(x^2)\\approx x^2$. If a calculation produces only the first term, it has forgotten that the original inner-rate factor itself changes."
+      ],
+      "formula": "(f ∘ g)′(x) = f′(g(x))g′(x);   (eᵘ)′ = eᵘu′;   (ln|u|)′ = u′/u for u ≠ 0.",
+      "formulaTex": "\\begin{gathered}\\text{For }g\\text{ differentiable at }x\\text{ and }f\\text{ differentiable at }g(x):\\\\ (f\\circ g)^{\\prime}(x)=f^{\\prime}(g(x))g^{\\prime}(x),\\\\ (e^{u})^{\\prime}=e^{u}u^{\\prime},\\qquad (\\ln|u|)^{\\prime}=\\frac{u^{\\prime}}{u}\\quad(u\\ne0).\\end{gathered}"
+    },
+    {
+      "title": "Trigonometric derivatives and inverse functions",
+      "paragraphs": [
+        "Angles must be measured in radians for the basic formulas $(\\sin x)^{\\prime}=\\cos x$ and $(\\cos x)^{\\prime}=-\\sin x$. They follow from the addition identities and the limits $\\sin h/h\\to1$ and $(\\cos h-1)/h\\to0$. Define $\\tan x=\\sin x/\\cos x$ and $\\sec x=1/\\cos x$ where $\\cos x\\ne0$; define $\\cot x=\\cos x/\\sin x$ and $\\csc x=1/\\sin x$ where $\\sin x\\ne0$. The quotient rule now gives $(\\tan x)^{\\prime}=\\sec^2x$ and $(\\cot x)^{\\prime}=-\\csc^2x$ on their respective domains. Reciprocal differentiation gives $(\\sec x)^{\\prime}=\\sec x\\tan x$ and $(\\csc x)^{\\prime}=-\\csc x\\cot x$ on those same respective domains. If a numerical angle $d$ is in degrees, $\\sin(\\pi d/180)$ has derivative $(\\pi/180)\\cos(\\pi d/180)$ with respect to $d$.",
+        "An inverse function reverses the input and output of a one-to-one function. Let $f$ be continuously differentiable near $a$, with $f^{\\prime}(a)\\ne0$. On a sufficiently small interval about $a$, $f$ has a differentiable inverse $g$ near $b=f(a)$, and $g^{\\prime}(b)=1/f^{\\prime}(a)$. To understand the formula, differentiate $f(g(y))=y$: the chain rule gives $f^{\\prime}(g(y))g^{\\prime}(y)=1$. Why an inverse exists here uses one interval-wide step: continuity of $f^{\\prime}$ keeps its nonzero sign on a smaller interval, and the mean value theorem, proved in Chapter 07 Lesson 2 and revisited in Chapter 08, makes $f$ strictly monotone there. This is an explicit preview of that theorem; the identity alone does not establish existence. Reflecting a tangent in the line $y=x$ exchanges its rise and run.",
+        "The inverse sine $\\arcsin$ has values in $[-\\pi/2,\\pi/2]$ and input domain $[-1,1]$. If $y=\\arcsin x$, then $\\sin y=x$ and $\\cos y\\cdot y^{\\prime}=1$. On the interior, $\\cos y$ is positive, so $\\cos y=\\sqrt{1-x^2}$ and $(\\arcsin x)^{\\prime}=1/\\sqrt{1-x^2}$. The derivative is finite only for $-1<x<1$; the endpoint slopes diverge. Similarly, $\\arccos$ takes values in $[0,\\pi]$ and has derivative $-1/\\sqrt{1-x^2}$ on that open interval. The chosen branches determine the signs.",
+        "For $y=\\arctan x$, the range $(-\\pi/2,\\pi/2)$ makes tangent one-to-one. Differentiating $\\tan y=x$ gives $\\sec^2y\\cdot y^{\\prime}=1$, hence $(\\arctan x)^{\\prime}=1/(1+x^2)$ for every real $x$. Under the usual $\\operatorname{arcsec}$ range $[0,\\pi]$ excluding $\\pi/2$, $(\\operatorname{arcsec}x)^{\\prime}=1/(|x|\\sqrt{x^2-1})$ for $|x|>1$; under the $\\operatorname{arccsc}$ range $[-\\pi/2,\\pi/2]$ excluding zero, the derivative is its negative. For $\\operatorname{arccot}$ with range $(0,\\pi)$, the derivative is $-1/(1+x^2)$. Always specify branches when these less common inverse functions appear.",
+        "The radian factor can be derived by changing units. If $d$ is a number of degrees, the corresponding radian angle is $\\theta=\\pi d/180$. Therefore $d[\\sin(\\pi d/180)]/dd=(\\pi/180)\\cos(\\pi d/180)$. The familiar derivative of sine is cosine only when the numerical input is a radian measure. This is not a cosmetic convention: the derivative records output change per input unit, so changing degrees to radians changes its numerical value by the conversion factor. The same check applies to trigonometric models of angular motion.",
+        "Inverse differentiation must be applied at the correct corresponding points. If $f(1)=3$ and $f^{\\prime}(1)=5$ for a locally invertible function, then $(f^{-1})^{\\prime}(3)=1/5$, not $(f^{-1})^{\\prime}(1)=1/5$. The inverse swaps input and output. The reciprocal formula also requires the original derivative to be nonzero at the point. For $f(x)=x^3$ at zero, the inverse is the real cube root, which exists as a function, but has no finite derivative at zero. One-to-one behavior alone does not guarantee a finite inverse slope.",
+        "For inverse sine, the branch $[-\\pi/2,\\pi/2]$ ensures $\\cos y\\ge0$. In the open interior it is strictly positive, allowing $\\cos y=\\sqrt{1-\\sin^2 y}$ and the derivative $1/\\sqrt{1-x^2}$. At $x=\\pm1$ that denominator vanishes; one-sided difference quotients become unbounded rather than producing a finite endpoint derivative. By contrast, $\\arctan x$ has derivative $1/(1+x^2)$ for every real input, since its tangent branch has no finite endpoint of the input domain. Writing the domain beside each inverse formula prevents a rule from being applied at a branch boundary.",
+        "Trigonometric products combine several rules. For $y=e^{-2t}\\cos(3t)$, the product rule gives one contribution from decay and one from oscillation: $y^{\\prime}=e^{-2t}[-2\\cos(3t)-3\\sin(3t)]$. The negative signs have different origins: decay has derivative $-2e^{-2t}$ and cosine has derivative $-\\sin(3t)$ times inner rate three. A proposed derivative can be checked at $t=0$: the original function initially equals one and its rate is $-2$, matching the displayed formula.",
+        "The reciprocal slope formula for an inverse can also be read from difference quotients. Let $b=f(a)$ and $g=f^{-1}$ on a suitable local interval. For nearby $y\\ne b$, write $x=g(y)$; then $\\frac{g(y)-g(b)}{y-b}=\\frac{x-a}{f(x)-f(a)}$, the reciprocal of the original quotient. As $y\\to b$, local continuity of the inverse makes $x\\to a$. If $f^{\\prime}(a)\\ne0$, the reciprocal tends to $1/f^{\\prime}(a)$. Continuity of $f^{\\prime}$ and $f^{\\prime}(a)\\ne0$ keep its sign fixed on a smaller interval. The mean value theorem developed in Chapter 8 then makes $f$ strictly monotone there, giving a continuous local inverse before the reciprocal quotient is used. That supporting fact is why a zero derivative or a branch choice cannot be ignored. At an endpoint, a one-sided version may apply, but it is not the ordinary interior theorem.",
+        "The two basic trigonometric limits have a geometric explanation in radians. For a small positive angle $h$ inside the first quadrant, comparing a unit-circle sector with its inscribed and circumscribed triangles gives $\\sin h<h<\\tan h$. Rearranging yields $\\cos h<\\sin h/h<1$. Because $0\\le\\sin h\\le h$, the identity $1-\\cos h=\\sin^2h/(1+\\cos h)$ gives $0\\le1-\\cos h\\le h^2$. Thus $\\cos h\\to1$ independently, and the squeeze theorem proves $\\sin h/h\\to1$ from the right; symmetry gives the same left limit. Also $(\\cos h-1)/h=-\\sin^2h/[h(1+\\cos h)]$, whose magnitude tends to zero because one sine factor divided by $h$ stays bounded while the other tends to zero. These limits establish the derivatives of sine and cosine from the difference quotient and addition formulas. The sector comparison uses radians: if the angle number were degrees, the arc length would carry a factor $\\pi/180$ and the numerical derivative would change accordingly."
+      ],
+      "formula": "(f⁻¹)′(b) = 1/f′(a), b = f(a);   (arcsin x)′ = 1/√(1 − x²);   (arctan x)′ = 1/(1 + x²).",
+      "formulaTex": "\\begin{gathered}f\\in C^1\\text{ near }a,\\quad f^{\\prime}(a)\\ne0,\\quad b=f(a)\\\\ \\Longrightarrow\\quad(f^{-1})^{\\prime}(b)=\\frac{1}{f^{\\prime}(a)},\\\\ (\\arcsin x)^{\\prime}=\\frac{1}{\\sqrt{1-x^2}}\\quad(-1<x<1),\\\\ (\\arctan x)^{\\prime}=\\frac{1}{1+x^2}\\quad(x\\in\\mathbb R).\\end{gathered}"
+    },
+    {
+      "title": "Implicit and logarithmic differentiation",
+      "paragraphs": [
+        "An equation can describe a curve without selecting a single function $y$ of $x$. Implicit differentiation asks what derivative any differentiable local branch $y(x)$ must have. Treat each occurrence of $y$ as a function of $x$ and apply the chain rule. For $x^2+y^2=25$, differentiation gives $2x+2y y^{\\prime}=0$, so $y^{\\prime}=-x/y$ wherever $y\\ne0$. At $(3,4)$ the slope is $-3/4$. At $(5,0)$, division by $y$ is impossible and the circle has a vertical tangent, which is not a finite derivative $dy/dx$.",
+        "A useful local guarantee is the implicit-function theorem: if $F(x,y)$ has continuous first partial derivatives near a point where $F=0$ and $F_y\\ne0$, then the equation determines a differentiable $y(x)$ nearby, with $y^{\\prime}=-F_x/F_y$. Here $F_x$ means differentiate in $x$ while holding $y$ fixed, and similarly for $F_y$; Chapter 20 develops these operations. If $F_y=0$, the guarantee fails, but one cannot conclude that no derivative exists. For example, $F=(y-x)^3$ has both partial derivatives zero along its zero set, while that zero set is simply $y=x$.",
+        "Logarithmic differentiation is especially effective for products of many factors or powers with variable exponents. For $y=x^x$ on $x>0$, take logarithms to obtain $\\ln y=x\\ln x$. Differentiation gives $y^{\\prime}/y=\\ln x+1$, hence $y^{\\prime}=x^x(\\ln x+1)$. The ordinary power rule treats its exponent as constant and therefore cannot be applied directly to $x^x$. More generally, for a positive differentiable base $u$ and differentiable exponent $v$, $u^v=e^{v\\ln u}$, and its derivative is $u^v[v^{\\prime}\\ln u+vu^{\\prime}/u]$.",
+        "For a nonzero product, $\\ln|y|$ allows logarithmic differentiation even when the product is negative. However, taking logarithms temporarily excludes zeros of its factors. Check such points separately using the original expression or another derivative rule. Finally, symbolic work and numerical work have different roles. A central difference $[f(x+h)-f(x-h)]/(2h)$ approximates a derivative for small nonzero $h$, provided both sample points are in the domain. If $f$ has a continuous third derivative near $x$, its truncation error is bounded by a constant times $h^2$ for sufficiently small $h$, but rounding and subtraction of nearly equal values eventually spoil improvement. The lab makes both effects visible.",
+        "An implicit curve may have several branches through the same coordinate. Consider $x^2+y^2=25$. Away from the left and right extremes, both $y=\\sqrt{25-x^2}$ and $y=-\\sqrt{25-x^2}$ satisfy it. The formula $y^{\\prime}=-x/y$ gives different slopes on the two branches because their $y$ values have opposite signs. To state a tangent line, specify the actual point, not merely its $x$ coordinate. A derivative of a relation is a statement about a chosen local branch that is differentiable as a function of the chosen input.",
+        "For $F(x,y)=x^2+xy+y^2-7$, implicit differentiation yields $2x+y+(x+2y)y^{\\prime}=0$. At the point $(1,2)$, which lies on the curve, $F_y=x+2y=5\\ne0$, so a differentiable local $y(x)$ exists and its slope is $-(2x+y)/(x+2y)=-4/5$. Checking that the point satisfies $F=0$ before evaluating the formula is essential: a slope computed at an off-curve point would not describe this relation. The nonzero denominator here also verifies the local graph condition.",
+        "Logarithmic differentiation can shorten long positive products. If $y=(x^2+1)^x$ for real $x$, then $\\ln y=x\\ln(x^2+1)$ and $y^{\\prime}/y=\\ln(x^2+1)+2x^2/(x^2+1)$. Multiply by $y$ to obtain the derivative. Every step is valid because $x^2+1>0$, so $y>0$ and its logarithm exists. If a product can be negative, use $\\ln|y|$ only on intervals where it does not vanish, then check zeros separately. The logarithm changes the algebraic workload, not the domain of the original function.",
+        "A numerical derivative can test a symbolic result but cannot certify it by itself. For a smooth function the central quotient $[f(a+h)-f(a-h)]/(2h)$ often approaches the derivative faster than a forward quotient as $h$ shrinks, yet both eventually suffer floating-point cancellation. For $f(x)=x^2$, the central quotient simplifies exactly to $2a$ for every nonzero $h$ in exact arithmetic; a computer may still show small rounding discrepancies. Compare several step sizes and an analytic identity rather than selecting the one decimal value that happens to match an expected answer.",
+        "A zero in a factor requires returning to the original product after logarithmic differentiation. For $y=x(x+1)$, $\\ln|y|$ is undefined at $x=0$ and $x=-1$, so the logarithmic calculation applies only on intervals avoiding those points. Direct product differentiation gives $y^{\\prime}=2x+1$ and therefore $y^{\\prime}(0)=1$ and $y^{\\prime}(-1)=-1$. The derivative values exist even though the temporary logarithm does not. This illustrates a general rule about transformations used during a solution: an auxiliary expression can have a narrower domain than the original problem. Solve on that narrower domain, then examine the excluded original-domain points separately instead of silently discarding them.",
+        "The radius-1 circle obeys the same local rule as the radius-5 circle above: $y^{\\prime}=-x/y$ where $y\\ne0$, with horizontal slope at $(0,1)$ and a vertical tangent at $(1,0)$. Lesson 5 compares these graph coordinates with geometric and parametric tangents. First verify that a proposed point is on the actual relation; a formal slope at an off-curve point has no geometric meaning. A zero denominator sends us back to the relation and its branch geometry, not to automatic cancellation."
+      ],
+      "formula": "y = u(x)^v(x), u > 0 ⇒ y′ = uᵛ[v′ ln u + v u′/u].",
+      "formulaTex": "\\begin{gathered}u,v\\text{ differentiable},\\quad u(x)>0,\\quad y=u(x)^{v(x)},\\\\ y^{\\prime}=u^{v}\\left(v^{\\prime}\\ln u+v\\frac{u^{\\prime}}{u}\\right).\\end{gathered}"
+    },
+    {
+      "title": "Implicit differentiation and the edge of a graph",
+      "paragraphs": [
+        "The circle $x^2+y^2=25$ is a relation, not a single global function $y(x)$: most $x$-values between $-5$ and $5$ have an upper and a lower $y$-value. On the upper semicircle $y>0$, one may write $y=\\sqrt{25-x^2}$. Differentiating the relation is often cleaner than differentiating this radical. If $y$ depends differentiably on $x$, the chain rule gives $2x+2y y^{\\prime}=0$, so $y^{\\prime}=-x/y$ wherever $y\\ne0$.",
+        "At the upper point $(3,4)$, $y^{\\prime}=-3/4$. The tangent line is $y-4=-(3/4)(x-3)$. Its radius vector $(3,4)$ has slope $4/3$, and the tangent direction is perpendicular to it because $(3,4)\\cdot(4,-3)=0$. This geometric check catches a sign or reciprocal error in the derivative.",
+        "At $(5,0)$, the formula $-x/y$ is undefined. That is not an algebraic inconvenience to cancel away: the circle has a vertical tangent there and the upper branch fails to be differentiable as a graph $y(x)$ at the endpoint. It can instead be described locally as $x=\\sqrt{25-y^2}$, which has $dx/dy=-y/x=0$ at $(5,0)$. The same curve can be a smooth geometric path while one chosen graph coordinate fails.",
+        "Implicit differentiation presumes a differentiable local branch. For a relation $F(x,y)=0$, the usual formula $y^{\\prime}=-F_x/F_y$ requires $F_y\\ne0$ near the point. If that condition fails, inspect the geometry or solve for a different coordinate; do not treat an infinite slope as an ordinary finite derivative.",
+        "The zero set $y^2=x^3$ illustrates a singular point more subtle than the circle's vertical tangent. At the origin, both partial derivatives of $F(x,y)=y^2-x^3$ vanish, so the usual implicit-function condition supplies no graph guarantee. For $x\\ge0$ there are two branches $y=\\pm x^{3/2}$ meeting at the origin with the same horizontal one-sided tangent. The relation is not one single-valued $y(x)$ near zero. A smooth parametrization $x=t^2$, $y=t^3$ traces both branches, but its velocity is zero at $t=0$, so even regular-curve arguments need care there.",
+        "A failed sufficient hypothesis is not a negative conclusion. The relation $(y-x)^3=0$ has $F_y=0$ all along its zero set, yet the zero set is simply the differentiable line $y=x$. Solving the relation directly reveals the branch. Conversely, $x^2+y^2=0$ has only the isolated real point $(0,0)$ and no nearby nontrivial curve through it. When the implicit denominator vanishes, investigate the actual set with factoring, signs, alternative coordinates, or parametrization; do not label every case 'vertical tangent.'",
+        "A geometric tangent line and a derivative $dy/dx$ are related but distinct descriptions. At $(5,0)$ on the circle, the geometric tangent is the vertical line $x=5$. There is no finite slope of $y$ as a function of $x$, but $x$ can locally be described as a differentiable function of $y$ and has $dx/dy=0$ there. Rotating which coordinate is treated as input can turn a failed graph description into a useful one. This distinction becomes central for parametric curves and surfaces later in the book.",
+        "Before presenting an implicit derivative, perform four checks: the candidate point satisfies the relation; the chosen local branch is identified; the denominator in the derivative formula is nonzero or its failure is examined; and the final tangent matches an independent geometric feature when one is available. On a circle, the radius should be perpendicular to the tangent. On a graph with a known sign or symmetry, the slope should be compatible with that behavior. These checks are particularly valuable because implicit algebra can hide a missing chain-rule factor on $y$.",
+        "A parametrization gives an independent view of the circle's endpoint. Write $\\mathbf r(t)=(5\\cos t,5\\sin t)$. At $t=0$ the point is $(5,0)$ and the velocity vector is $\\mathbf r^{\\prime}(0)=(0,5)$, a nonzero vertical tangent direction. The curve is smooth as a path there even though $dy/dx$ is not finite. At a general point $(x,y)$ on the circle, the radius vector $(x,y)$ is perpendicular to the tangent vector $(-y,x)$ because their dot product is zero. Where $y\\ne0$, that tangent has slope $x/(-y)=-x/y$, agreeing with implicit differentiation. At $(5,0)$ its horizontal component is zero, which explains the failed graph slope without treating the point as a corner. Parametric curves later develop this distinction systematically.",
+        "An implicit derivative describes a local branch only where the equation actually defines one. For $F(x,y)=x^2+y^2-1=0$, the formula $y^{\\prime}=-F_x/F_y=-x/y$ applies when $y\\ne0$. At $(1,0)$ the circle still has a tangent, but it is vertical, so $y$ cannot be represented there as a differentiable function of $x$. At $(0,1)$ the same formula gives slope zero. Always check that a proposed point satisfies the original equation before substituting it into a derivative formula; a formal slope at an off-curve point has no geometric meaning for that level set."
+      ],
+      "formula": "x²+y²=25 gives y′=−x/y where y≠0; at (5,0) use a vertical tangent.",
+      "formulaTex": "\\begin{aligned}x^2+y^2&=25,\\qquad y^{\\prime}=-\\frac{x}{y}\\quad(y\\ne0),\\\\ (x,y)&=(5,0):\\qquad \\text{vertical tangent }x=5.\\end{aligned}"
+    },
+    {
+      "title": "Derivatives of hyperbolic functions and their inverses",
+      "paragraphs": [
+        "Differentiating the exponential definitions gives $(\\sinh t)'=\\cosh t$ and $(\\cosh t)'=\\sinh t$. The quotient rule and $\\cosh^2t-\\sinh^2t=1$ give $(\\tanh t)'=1/\\cosh^2t=1-\\tanh^2t>0$. The strict inequality is consistent with, but does not replace, the endpoint analysis of its range.",
+        "For $y=\\operatorname{arsinh}x$, differentiate $x=\\sinh y$ to get $1=\\cosh y\\,y'$. Since $\\cosh y=\\sqrt{1+x^2}>0$, the derivative is $1/\\sqrt{1+x^2}$ for every real $x$. For $y=\\operatorname{arcosh}x$ on its nonnegative branch, $x>1$ implies $\\sinh y=\\sqrt{x^2-1}>0$, so $y'=1/\\sqrt{x^2-1}$. At $x=1$ there is no finite derivative.",
+        "For a differentiable inner function $u$, multiply the outer derivative by $u'$. The $\\operatorname{arcosh}(u)$ formula requires $u>1$ at the point, whereas $u=1$ only guarantees the composition is defined. Branches can create a corner: $\\operatorname{arcosh}(\\cosh x)=|x|$ has one-sided slopes $-1$ and $1$ at zero.",
+        "The derivative formulas can be checked against parity before applying any chain rule. Because $\\sinh$ is odd, its derivative $\\cosh$ is even; because $\\cosh$ is even, its derivative $\\sinh$ is odd. At zero these give $(\\sinh)'(0)=1$ and $(\\cosh)'(0)=0$, consistent with the curves' local shapes. The positive derivative of $\\tanh$ does not make its image all of $\\mathbb R$; its horizontal limits still constrain the output to $(-1,1)$. Keeping derivative information and range information separate is essential when inverting a function.",
+        "Implicit differentiation is valid only where the relevant forward derivative is nonzero. For $\\operatorname{arsinh}$, $\\cosh y$ is always positive, so there is no exceptional real input. For $\\operatorname{arcosh}$, $\\sinh y=0$ at the branch endpoint $y=0$, corresponding to $x=1$. The inverse itself has a value there, but the forward graph has a horizontal tangent and the inverse has an unbounded one-sided slope. The formula with $\\sqrt{x^2-1}$ must therefore be reported for $x>1$, not silently extended by continuity to the endpoint. To prove the endpoint slope directly, put $u=\\operatorname{arcosh}(1+h)$ for $h>0$. Then $h=2\\sinh^2(u/2)$ and $u\\to0^+$ as $h\\to0^+$. Since $\\sinh v/v\\to1$ from its derivative at zero, the actual right difference quotient is $u/h=(2/u)((u/2)/\\sinh(u/2))^2\\to+\\infty$. This proves the absence of a finite endpoint derivative without inferring it merely from off-point slopes.",
+        "Composition requires checking the inner range before differentiating. If $g(x)=\\operatorname{arcosh}(u(x))$, the real expression is defined where $u(x)\\ge1$, and the standard chain-rule formula applies where $u(x)>1$ and $u$ is differentiable. At points with $u=1$, examine the composition itself. For $u=1+x^2$, a square root of $x^2(x^2+2)$ becomes $|x|\\sqrt{x^2+2}$, not $x\\sqrt{x^2+2}$. The resulting opposite one-sided slopes prove a corner at zero despite the smooth inner polynomial. More directly, the identity $\\operatorname{arcosh}(1+x^2)=2\\operatorname{arsinh}(|x|/\\sqrt2)$ follows from $\\cosh(2u)=1+2\\sinh^2u$ with $u\\ge0$. Since $\\operatorname{arsinh}v/v\\to1$ as $v\\to0$, the actual right and left difference quotients tend to $\\sqrt2$ and $-\\sqrt2$, respectively. This is also a return point for Chapter 05 Lesson 4: product and chain rules now justify its off-zero derivative, while its at-zero derivative still comes from a point difference quotient.",
+        "Branch selection can simplify a difficult derivative into a familiar one. Since $\\cosh x=\\cosh|x|$ and $\\operatorname{arcosh}$ returns the nonnegative input that produces a given hyperbolic cosine, $\\operatorname{arcosh}(\\cosh x)=|x|$. On each open half-line its derivative is constant, while at zero the left and right difference quotients disagree. Applying the formal inverse formula at zero would divide by zero and conceal the branch change. When an inverse is composed with its original function, always confirm which restricted branch is actually inverted before simplifying.",
+        "A numerical derivative check can catch an algebraic sign error without replacing the proof. Near zero, $\\operatorname{arcosh}(1+x^2)$ rises on both sides, so a derivative formula that is positive for negative $x$ would contradict the graph and the branch analysis. The absolute value in the denominator supplies the correct sign; the unequal one-sided limits establish the exact failure at zero. After this lesson, the five existing Lesson 6 depth problems give independent practice with branches and inverse endpoints; the numbered canonical bank has no Lesson 6 item. Keep the original problem numbers when returning to them."
+      ],
+      "formula": "(sinh x)'=cosh x; (cosh x)'=sinh x; (tanh x)'=1/cosh²x. (arsinh x)'=1/√(1+x²) on R; (arcosh x)'=1/√(x²−1) for x>1.",
+      "formulaTex": "\\begin{gathered}(\\sinh x)'=\\cosh x,\\quad(\\cosh x)'=\\sinh x,\\quad(\\tanh x)'=\\cosh^{-2}x,\\\\(\\operatorname{arsinh}x)'=(1+x^2)^{-1/2}\\ (x\\in\\mathbb R),\\quad(\\operatorname{arcosh}x)'=(x^2-1)^{-1/2}\\ (x>1).\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A quotient containing a composition",
+      "problem": "Differentiate $f(x)=e^{2x}\\sin x/(1+x^2)$, and find its slope at $x=0$.",
+      "steps": [
+        "The denominator is positive for every real $x$, so the original function is defined and differentiable everywhere. Set $u=e^{2x}\\sin x$ and $v=1+x^2$.",
+        "The product and chain rules give $u^{\\prime}=e^{2x}(2\\sin x+\\cos x)$, while $v^{\\prime}=2x$.",
+        "Apply the quotient rule and factor the common exponential: $f^{\\prime}(x)=e^{2x}[(2\\sin x+\\cos x)(1+x^2)-2x\\sin x]/(1+x^2)^2$.",
+        "At zero, $\\sin0=0$, $\\cos0=1$, and $e^0=1$, so $f^{\\prime}(0)=1$. A central difference there with $h=0.001$ is approximately $1.00000083333$, which cross-checks the calculation without proving it."
+      ],
+      "answer": "$f^{\\prime}(x)=e^{2x}[(2\\sin x+\\cos x)(1+x^2)-2x\\sin x]/(1+x^2)^2$; $f^{\\prime}(0)=1$."
+    },
+    {
+      "title": "A branch selected by an implicit equation",
+      "problem": "Find the tangent slope to $x^2+xy+y^2=7$ at $(1,2)$.",
+      "steps": [
+        "The point lies on the curve because $1+2+4=7$. Differentiate every term with respect to $x$: $2x+y+xy^{\\prime}+2yy^{\\prime}=0$.",
+        "Collect the derivative terms: $(x+2y)y^{\\prime}=-(2x+y)$. Thus $y^{\\prime}=-(2x+y)/(x+2y)$ wherever the denominator is nonzero.",
+        "At $(1,2)$, $x+2y=5$, so a differentiable local branch exists and its slope is $-4/5$. Since $y-2\\approx(-4/5)(x-1)$, the tangent line is $y=2-(4/5)(x-1)$."
+      ],
+      "answer": "The slope is $-4/5$ and the tangent line is $y=2-(4/5)(x-1)$."
+    },
+    {
+      "title": "A varying exponent with a varying base",
+      "problem": "Differentiate $y=(1+x^2)^{\\sin x}$.",
+      "steps": [
+        "The base is strictly positive for all real $x$, so $y$ is positive and taking $\\ln y$ is valid everywhere.",
+        "Write $\\ln y=\\sin x\\cdot\\ln(1+x^2)$. The product and chain rules give $y^{\\prime}/y=\\cos x\\ln(1+x^2)+\\sin x\\cdot2x/(1+x^2)$.",
+        "Multiply by the original $y$. At $x=0$ both terms in brackets vanish, so $y^{\\prime}(0)=0$ even though $y(0)=1$."
+      ],
+      "answer": "$y^{\\prime}=(1+x^2)^{\\sin x}[\\cos x\\ln(1+x^2)+2x\\sin x/(1+x^2)]$."
+    },
+    {
+      "title": "Three factors, three changing contributions",
+      "problem": "Differentiate $(x^2+1)e^{3x}\\cos x$ and identify which factor produces each term.",
+      "steps": [
+        "Name $u=x^2+1$, $v=e^{3x}$, $w=\\cos x$.",
+        "The derivatives are $u^{\\prime}=2x$, $v^{\\prime}=3e^{3x}$, and $w^{\\prime}=-\\sin x$.",
+        "Apply $(uvw)^{\\prime}=u^{\\prime}vw+uv^{\\prime}w+uvw^{\\prime}$.",
+        "The contributions are $u^{\\prime}vw=2xe^{3x}\\cos x$ from $x^2+1$, $uv^{\\prime}w=3(x^2+1)e^{3x}\\cos x$ from $e^{3x}$, and $uvw^{\\prime}=-(x^2+1)e^{3x}\\sin x$ from $\\cos x$. Factor only after all three are present."
+      ],
+      "answer": "$e^{3x}[2x\\cos x+3(x^2+1)\\cos x-(x^2+1)\\sin x]$, for every real $x$. The $2x\\cos x$, $3(x^2+1)\\cos x$, and $-(x^2+1)\\sin x$ terms come from differentiating $x^2+1$, $e^{3x}$, and $\\cos x$, respectively."
+    },
+    {
+      "title": "A quotient keeps its excluded input",
+      "problem": "Differentiate $x/(x+2)$, simplify, and state the domain of both the function and derivative.",
+      "steps": [
+        "The original function requires $x\\ne-2$.",
+        "Set $u=x$ and $v=x+2$. The quotient rule gives $[1\\cdot(x+2)-x\\cdot1]/(x+2)^2$.",
+        "The numerator simplifies to $2$.",
+        "The simplified derivative still excludes $x=-2$ because the original function is undefined there."
+      ],
+      "answer": "$f^{\\prime}(x)=2/(x+2)^2$ on $(-\\infty,-2)\\cup(-2,\\infty)$."
+    },
+    {
+      "title": "Tracing a nested chain",
+      "problem": "Differentiate $\\sin(\\sqrt{1+x^2})$ and determine where its derivative exists.",
+      "steps": [
+        "Take outer derivative $\\cos(\\sqrt{1+x^2})$ while leaving the inner expression in place.",
+        "Differentiate the square-root layer: $1/[2\\sqrt{1+x^2}]$.",
+        "Differentiate $1+x^2$ to obtain $2x$ and multiply all factors.",
+        "Since $1+x^2\\ge1$, the denominator is nonzero for every real $x$."
+      ],
+      "answer": "$x\\cos(\\sqrt{1+x^2})/\\sqrt{1+x^2}$, defined for all real $x$."
+    },
+    {
+      "title": "An inverse derivative at the matching output",
+      "problem": "Let $f(x)=x^3+2x$. Find the derivative of its inverse at $y=3$.",
+      "steps": [
+        "Solve $f(a)=3$; $a=1$ works because $1^3+2\\cdot1=3$.",
+        "The derivative is $f^{\\prime}(x)=3x^2+2$, so $f^{\\prime}(1)=5$.",
+        "Because $f^{\\prime}(x)>0$ everywhere, $f$ is one-to-one and its inverse exists globally.",
+        "The inverse-function rule at the corresponding output gives $(f^{-1})^{\\prime}(3)=1/5$."
+      ],
+      "answer": "$(f^{-1})^{\\prime}(3)=1/5$; the derivative is evaluated at the output $3$, not at $1$."
+    },
+    {
+      "title": "An implicit tangent with a verified point",
+      "problem": "Find the tangent to $x^2+xy+y^2=7$ at $(1,2)$.",
+      "steps": [
+        "Check $1^2+1\\cdot2+2^2=7$, so the point lies on the curve.",
+        "Differentiate: $2x+y+xy^{\\prime}+2yy^{\\prime}=0$.",
+        "Solve $y^{\\prime}=-(2x+y)/(x+2y)$, whose denominator equals $5$ at the point.",
+        "Substitute $(1,2)$ to obtain slope $-4/5$."
+      ],
+      "answer": "The tangent is $y-2=-(4/5)(x-1)$."
+    },
+    {
+      "title": "A changing base and exponent",
+      "problem": "Differentiate $y=(x^2+1)^x$ for all real $x$.",
+      "steps": [
+        "The positive base permits $\\ln y=x\\ln(x^2+1)$ for every real $x$.",
+        "Differentiate: $y^{\\prime}/y=\\ln(x^2+1)+x\\cdot2x/(x^2+1)$.",
+        "Multiply by $y=(x^2+1)^x$.",
+        "At $x=0$ the result is zero, consistent with a direct local expansion near base $1$."
+      ],
+      "answer": "$y^{\\prime}=(x^2+1)^x[\\ln(x^2+1)+2x^2/(x^2+1)]$ on all of $\\mathbb{R}$."
+    },
+    {
+      "title": "A composed hyperbolic rate",
+      "problem": "Differentiate $\\tanh(x^2-1)$.",
+      "steps": [
+        "Let $u=x^2-1$, so $u'=2x$.",
+        "The outer quotient-derived rate is $1/\\cosh^2u$.",
+        "The chain rule gives $2x/\\cosh^2(x^2-1)$ on all of $\\mathbb R$."
+      ],
+      "answer": "The rate is $2x/\\cosh^2(x^2-1)$, including zero at $x=0$."
+    },
+    {
+      "title": "A branch corner",
+      "problem": "Is $g(x)=\\operatorname{arcosh}(1+x^2)$ differentiable at zero?",
+      "steps": [
+        "The real domain is every $x$, and $g(0)=\\operatorname{arcosh}(1)=0$. For $x\\ne0$, the chain rule gives $g^{\\prime}(x)=2x/\\sqrt{x^2(x^2+2)}=2\\operatorname{sgn}(x)/\\sqrt{x^2+2}$.",
+        "At the point itself, use $g(h)=2\\operatorname{arsinh}(|h|/\\sqrt2)$, where the inverse branch is nonnegative. Thus $[g(h)-g(0)]/h=(2/\\sqrt2)(|h|/h)\\,[\\operatorname{arsinh}(|h|/\\sqrt2)/(|h|/\\sqrt2)]$ for $h\\ne0$.",
+        "Since $\\operatorname{arsinh}v/v\\to1$ as $v\\to0$, this quotient tends to $+\\sqrt2$ from the right and $-\\sqrt2$ from the left. They disagree, so $g^{\\prime}(0)$ does not exist. The nearby derivative limits agree with this conclusion but do not establish it by themselves.",
+        "The inverse derivative formula requires its input to exceed $1$ and cannot be applied at the endpoint input $1$; the direct quotient handles that point."
+      ],
+      "answer": "The function is defined at zero but is not differentiable there."
+    }
+  ],
+  "misconceptions": [
+    "“The derivative of a product is the product of the derivatives.” For $x\\cdot x$, multiplying derivatives gives 1, whereas the derivative of $x^2$ is $2x$; both changing factors must contribute.",
+    "“An inverse function and a reciprocal are the same.” $\\arcsin x$ is the inverse of sine restricted to $[-\\pi/2,\\pi/2]$, with domain $[-1,1]$; $\\csc x=1/\\sin x$ where $\\sin x\\ne0$. Their derivatives also differ where defined.",
+    "“A central difference always detects differentiability.” For $f(x)=|x|$ at zero, every symmetric difference $\\frac{f(h)-f(-h)}{2h}$ equals zero for $h\\ne0$, although the left and right derivatives are −1 and 1."
+  ],
+  "lab": {
+    "title": "Compare symbolic derivatives with central differences",
+    "description": "Choose a function family and evaluation point, then inspect derivative curves and a table of errors as the step shrinks. The numerical inputs and outputs here are dimensionless. The default family is the mixed exponential quotient from the first example.",
+    "code": "// Change family to 'mixed', 'log', or 'corner'; adjust x0 and curveStep.\nconst family = 'mixed';\nconst x0 = 0;\nconst curveStep = 0.001;\nconst definitions = {\n  mixed: {f: x => Math.exp(2*x)*Math.sin(x)/(1+x*x),\n    d: x => Math.exp(2*x)*((2*Math.sin(x)+Math.cos(x))/(1+x*x)-2*x*Math.sin(x)/(1+x*x)**2)},\n  log: {f: x => Math.log(x), d: x => 1/x},\n  corner: {f: x => Math.abs(x), d: x => x === 0 ? NaN : Math.sign(x)}\n};\nif (!definitions[family]) throw new Error('Unknown family');\nif (!Number.isFinite(x0) || !(curveStep > 0) || !Number.isFinite(curveStep)) throw new Error('Use a finite x0 and positive finite step');\nif (family === 'log' && x0 <= 0) throw new Error('Log family requires x0 > 0 for a real derivative.');\nconst {f, d} = definitions[family];\nconst central = (x, h) => (f(x+h)-f(x-h))/(2*h);\nconst exact = d(x0);\nif (family === 'mixed' && !Number.isFinite(exact)) throw new Error('Mixed derivative exceeds representable range at x0.');\nif (family === 'mixed' && exact === 0 && x0 !== 0 && Math.exp(2*x0) === 0) throw new Error('Mixed derivative underflows at x0; choose a less negative x0.');\nconsole.log('family, x0, symbolic derivative:', family, x0, exact);\nconsole.log('h | central difference | absolute error');\nfor (let k = 1; k <= 14; k++) {\n  const h = 10**(-k);\n  if (!Number.isFinite(f(x0+h)) || !Number.isFinite(f(x0-h))) {\n    console.log(h, 'sample outside domain');\n    continue;\n  }\n  const estimate = central(x0, h);\n  console.log(h, estimate, Number.isFinite(exact) ? Math.abs(estimate-exact) : 'derivative undefined');\n}\nconst symbolic = [];\nconst numeric = [];\nfor (let i = 0; i <= 200; i++) {\n  const x = x0 - 0.5 + i/200;\n  const a = d(x);\n  const b = central(x, curveStep);\n  if (Number.isFinite(f(x)) && Number.isFinite(a)) symbolic.push([x, a]);\n  if (Number.isFinite(b)) numeric.push([x, b]);\n}\nif (symbolic.length < 2 || new Set(symbolic.map(p => p[0])).size < 2) throw new Error('Symbolic curve has fewer than two distinct x samples.');\nif (numeric.length < 2 || new Set(numeric.map(p => p[0])).size < 2) throw new Error('curveStep leaves fewer than two distinct x samples on the numerical curve.');\nplot(symbolic, 'Symbolic derivative: horizontal x, vertical slope');\nplot(numeric, 'Central difference: horizontal x, vertical approximate slope');\nconsole.log('Plots join samples; a line across a missing point does not establish continuity.');",
+    "tasks": [
+      "Predict the default slope at zero by hand, then compare it with the table. For the larger $h$ rows, how does the leading truncation error scale when $h$ is divided by ten?",
+      "Set x0 = 1 in the mixed family. Find the smallest observed error and explain why the last row need not be the most accurate.",
+      "Choose the log family with x0 = 0.05. Explain the rejected $h$ row in the console and the omitted nonpositive inputs in the derivative plots. Why must both arguments $x_0-h$ and $x_0+h$ of a central difference lie in the logarithm’s domain?",
+      "Choose the corner family at x0 = 0. Compare its zero central differences with the one-sided slopes of $|x|$. Explain why the plot and table cannot certify differentiability."
+    ],
+    "expected": "With the defaults, the symbolic derivative is exactly $1$. Central differences are approximately $1.00828464774$ at $h=0.1$ and $1.00000083333$ at $h=0.001$; the leading truncation error decreases approximately quadratically before rounding matters. Both default plots have 201 finite samples. With family = 'corner' and x0 = 0, the symmetric estimate is $0$ for every listed $h$, while the derivative at zero is undefined; the symbolic plot omits zero and has 200 samples."
+  },
+  "exercises": [
+    {
+      "question": "Differentiate $(x^2+1)(x^3-2)$, showing the product rule before simplifying.",
+      "hint": "Differentiate one factor at a time.",
+      "solution": "The product rule gives $2x(x^3-2)+(x^2+1)3x^2$. Expanding yields $5x^4+3x^2-4x$. Both the polynomial and its derivative are defined for every real $x$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Derive the derivative of $\\frac{x^2+1}{x-1}$ for $x\\ne1$ and simplify it.",
+      "hint": "Use the quotient rule with $u=x^2+1$ and $v=x-1$.",
+      "solution": "The quotient rule gives $\\frac{2x(x-1)-(x^2+1)}{(x-1)^2}=\\frac{x^2-2x-1}{(x-1)^2}$ for $x\\ne1$. The original function is undefined at $x=1$, so no derivative is asserted there.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $(x^2+3)(x^3-1)$ using the product rule before simplifying.",
+      "hint": "Differentiate one factor at a time.",
+      "solution": "The product rule gives $2x(x^3-1)+3x^2(x^2+3)$. Expanding yields $5x^4+9x^2-2x$. The unsimplified form shows both factor derivatives.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $\\frac{x}{x+2}$, and state the excluded input.",
+      "hint": "Use the quotient rule with $u=x$ and $v=x+2$.",
+      "solution": "The quotient rule gives $\\frac{(x+2)-x}{(x+2)^2}=\\frac2{(x+2)^2}$. The original function and its derivative both require $x\\ne-2$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the derivative of $\\frac{1}{x^2}$ and state its real domain.",
+      "hint": "Write the function as $x^{-2}$ for $x\\ne0$.",
+      "solution": "The power rule gives $-2x^{-3}=-2/x^3$ for $x\\ne0$. The original expression is undefined at zero, so its derivative has no value there.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $y=(x-1)(x+2)(x^2+1)$, find $y^{\\prime}$ at $x=1$ without expanding the full product.",
+      "hint": "At a zero of one factor, most product-rule terms vanish.",
+      "solution": "In the three-factor product rule, the terms that retain $x-1$ vanish at $x=1$. Differentiating that factor leaves $1(1+2)(1^2+1)=6$, so $y^{\\prime}(1)=6$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $\\ln(1+x^2)/(1+x)$, and state its domain.",
+      "hint": "The logarithm’s input is always positive, but the quotient has a restriction.",
+      "solution": "The domain is $x\\ne-1$ because $1+x^2>0$ for all real $x$. With $u^{\\prime}=2x/(1+x^2)$ and $v^{\\prime}=1$, the quotient rule gives $\\frac{2x(1+x)/(1+x^2)-\\ln(1+x^2)}{(1+x)^2}$ for $x\\ne-1$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x>0$, differentiate $x^{1/x}$ and find where its derivative is zero.",
+      "hint": "Take logarithms and differentiate $(\\ln x)/x$.",
+      "solution": "For $x>0$, set $y=x^{1/x}$. Then $\\ln y=(\\ln x)/x$, so $y^{\\prime}/y=(1-\\ln x)/x^2$. Hence $y^{\\prime}=x^{1/x}(1-\\ln x)/x^2$. The other factors are positive, so the derivative vanishes exactly at $\\ln x=1$, or $x=e$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $\\sin(3x^2)$ and identify both chain-rule factors.",
+      "hint": "The outside derivative is cosine; the inside derivative is $6x$.",
+      "solution": "By the chain rule, $\\frac{d}{dx}\\sin(3x^2)=\\cos(3x^2)\\cdot6x$. The factor $6x$ comes from differentiating the angle $3x^2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the derivative and domain of $\\ln(1+x^2)$.",
+      "hint": "The logarithm's input is always at least one.",
+      "solution": "Since $1+x^2>0$ for every real $x$, the function has domain $\\mathbb R$. The chain rule gives derivative $2x/(1+x^2)$, also defined everywhere.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $\\ln|x-1|$ and describe its domain.",
+      "hint": "The absolute-value logarithm rule needs a nonzero inside.",
+      "solution": "The derivative of $\\ln|x-1|$ is $1/(x-1)$ on $(-\\infty,1)\\cup(1,\\infty)$. At $x=1$ the logarithm argument is zero, so the function and derivative are undefined.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $x^x$ as a real function, and find where its derivative is zero.",
+      "hint": "Take logarithms on the positive domain.",
+      "solution": "On the positive domain $x>0$, logarithmic differentiation gives $y^{\\prime}=x^x(\\ln x+1)$. Since $x^x>0$, the derivative vanishes exactly when $\\ln x=-1$, or $x=e^{-1}$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $(x^2+1)^x$ and give the full real domain.",
+      "hint": "Write $y=\\exp[x\\ln(x^2+1)]$.",
+      "solution": "The base $x^2+1$ is positive for every real $x$, so the domain is $\\mathbb R$. Logarithmic differentiation gives $\\frac{d}{dx}(x^2+1)^x=(x^2+1)^x\\left[\\ln(x^2+1)+\\frac{2x^2}{x^2+1}\\right]$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $\\ln(x^2)$ and explain why the result cannot be assigned at zero.",
+      "hint": "The logarithm argument is positive only for $x\\ne0$.",
+      "solution": "For $x\\ne0$, the chain rule gives $\\frac{d}{dx}\\ln(x^2)=\\frac{2x}{x^2}=2/x$. At $x=0$ the logarithm is undefined, so no derivative can be assigned there.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the derivative of $\\arcsin(2x)$, including all domain and endpoint restrictions.",
+      "hint": "Separate where the function exists from where its derivative is finite.",
+      "solution": "The function exists where $|2x|\\le1$, so its domain is $[-1/2,1/2]$. The chain rule gives derivative $2/\\sqrt{1-4x^2}$ on $(-1/2,1/2)$. At the endpoints the one-sided quotient is unbounded, so there is no finite endpoint derivative.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "A quantity obeys $Q(t)=Q_0e^{-kt}\\cos(\\omega t)$, with $Q_0$ measured in coulombs and $t$ in seconds. Find $Q^{\\prime}$ and its units.",
+      "hint": "Use the product rule and require dimensionless function inputs.",
+      "solution": "Dimensionless arguments require $k$ and $\\omega$ to have inverse-second units, with $\\omega$ in radians per second. The product and chain rules give $Q^{\\prime}(t)=Q_0e^{-kt}[-k\\cos(\\omega t)-\\omega\\sin(\\omega t)]$. Each bracketed term has inverse-second units, so the derivative has units coulombs per second.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(x)=x^3$. Explain why the reciprocal inverse-derivative formula fails at zero, even though $f$ is one-to-one.",
+      "hint": "Examine the difference quotient of the cube-root inverse.",
+      "solution": "The inverse is $g(y)=y^{1/3}$, but $f^{\\prime}(0)=0$ violates the reciprocal formula’s nonzero-derivative condition. For $h\\ne0$, $[g(h)-g(0)]/h=1/|h|^{2/3}\\to+\\infty$. Thus $g$ has no finite derivative at zero even though $f$ is one-to-one.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Differentiate $e^{-2t}\\cos(3t)$, assuming $t$ is in seconds and $2$ and $3$ have inverse-second units.",
+      "hint": "Apply product and chain rules separately.",
+      "solution": "The product and chain rules give $\\frac{d}{dt}[e^{-2t}\\cos(3t)]=e^{-2t}[-2\\cos(3t)-3\\sin(3t)]$. With the coefficients measured in inverse seconds, the arguments are dimensionless; if the output is dimensionless, the derivative has inverse-second units.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the derivative of $\\tan x$ and state where the original function is defined.",
+      "hint": "Write $\\tan x=\\sin x/\\cos x$.",
+      "solution": "The quotient rule gives $\\frac{\\cos^2x+\\sin^2x}{\\cos^2x}=\\sec^2x$. This holds where $\\cos x\\ne0$, namely $x\\ne\\pi/2+k\\pi$ for every integer $k$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "If $d$ is measured in degrees, differentiate $\\sin(\\pi d/180)$ with respect to $d$.",
+      "hint": "Convert degrees to radians inside the sine before applying the chain rule.",
+      "solution": "The chain rule gives $\\frac{d}{dd}\\sin(\\pi d/180)=(\\pi/180)\\cos(\\pi d/180)$ per degree. The factor $\\pi/180$ converts a change in degrees to a change in radians.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Differentiate $\\arcsin(3x)$ and state its derivative domain and function domain.",
+      "hint": "Apply the inverse-sine derivative and an inner factor three.",
+      "solution": "The function domain follows from $|3x|\\le1$: it is $[-1/3,1/3]$. On the interior $(-1/3,1/3)$, the chain rule gives derivative $3/\\sqrt{1-9x^2}$. The endpoint quotients are unbounded, so finite derivatives do not exist there.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $\\arctan(2x)$ for real $x$.",
+      "hint": "Use $u=2x$ and $u^{\\prime}=2$.",
+      "solution": "With $u=2x$, the chain rule gives $\\frac{d}{dx}\\arctan(2x)=\\frac{u^{\\prime}}{1+u^2}=\\frac2{1+4x^2}$. The denominator is positive for every real $x$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x)=x^3+2x$, find $(f^{-1})^{\\prime}(3)$.",
+      "hint": "Find $a$ with $f(a)=3$ before applying the inverse formula.",
+      "solution": "Since $f(1)=3$ and $f^{\\prime}(1)=3(1)^2+2=5$, the inverse-derivative formula gives $(f^{-1})^{\\prime}(3)=1/5$. Because $f^{\\prime}(x)=3x^2+2>0$ everywhere, the inverse is well defined.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $xy=1$ implicitly and state where the graph derivative exists.",
+      "hint": "Apply the product rule to $x\\,y(x)$.",
+      "solution": "Implicit differentiation gives $y+xy^{\\prime}=0$, so $y^{\\prime}=-y/x=-1/x^2$ using $y=1/x$. The relation has $x\\ne0$, and the derivative exists on both branches.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Implicitly differentiate $x^2+xy+y^2=7$ and find the slope at $(1,2)$.",
+      "hint": "Differentiate $xy$ as $y+xy^{\\prime}$ and verify the point.",
+      "solution": "Differentiation gives $2x+y+(x+2y)y^{\\prime}=0$, hence $y^{\\prime}=-(2x+y)/(x+2y)$ where $x+2y\\ne0$. At $(1,2)$, $1+2+4=7$ and the denominator is $5$, so the slope is $-4/5$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x>0$, differentiate $x^{\\sin x}$.",
+      "hint": "Take logarithms: $\\ln y=(\\sin x)\\ln x$.",
+      "solution": "For $x>0$, logarithmic differentiation gives $y^{\\prime}/y=(\\cos x)\\ln x+(\\sin x)/x$. Thus $y^{\\prime}=x^{\\sin x}[\\cos x\\ln x+(\\sin x)/x]$. The positive domain makes the real logarithm valid.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove that the central difference $\\frac{f(a+h)-f(a-h)}{2h}$ equals $f^{\\prime}(a)$ exactly for every quadratic $f$ and every $h\\ne0$.",
+      "hint": "Write $f(x)=Ax^2+Bx+C$ and expand at $a\\pm h$.",
+      "solution": "For $f(x)=Ax^2+Bx+C$, the difference $f(a+h)-f(a-h)$ is $A[(a+h)^2-(a-h)^2]+2Bh=4Aah+2Bh$. Dividing by $2h$ for $h\\ne0$ gives $2Aa+B=f^{\\prime}(a)$ exactly. Floating-point evaluation may differ slightly because of rounding.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the tangent line to $x^2+y^2=25$ at $(-3,4)$.",
+      "hint": "Use $y^{\\prime}=-x/y$ and point-slope form.",
+      "solution": "From $x^2+y^2=25$, implicit differentiation gives $y^{\\prime}=-x/y$ where $y\\ne0$. At $(-3,4)$ the slope is $3/4$, so the tangent is $y-4=\\frac34(x+3)$. The radius is perpendicular to this line.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the tangent line to $x^2+y^2=25$ at $(3,4)$.",
+      "hint": "Differentiate the relation where $y\\ne0$.",
+      "solution": "Implicit differentiation gives $2x+2yy^{\\prime}=0$, hence $y^{\\prime}=-x/y$. At $(3,4)$ the slope is $-3/4$, so the tangent is $y-4=-\\frac34(x-3)$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $F(x,y)=y^2-x^3$. At $(0,0)$ on the relation $F(x,y)=0$, explain why the implicit-derivative formula $-\\frac{F_x}{F_y}$ is unavailable and describe the real local branches.",
+      "hint": "Factor the relation for $x\\ge0$ instead of dividing by a zero partial derivative.",
+      "solution": "With $F=y^2-x^3$, $F_y=2y=0$ at the origin, so the formula $-F_x/F_y$ is unavailable. For $x\\ge0$ the real branches are $y=\\pm x^{3/2}$, each with a horizontal one-sided tangent at zero. The full relation is not a single-valued $y(x)$ near the origin.",
+      "lesson": 5,
+      "type": "Interpretation"
+    }
+  ],
+  "summary": [
+    "Choose rules from the expression’s structure and keep the original domain restrictions.",
+    "The chain rule combines local rates; inverse and implicit formulas require hypotheses that justify solving locally.",
+    "Logarithmic differentiation handles variable exponents, while numerical differences offer checks with both domain and precision limitations."
+  ],
+  "next": "Chapter 07 uses these derivatives to connect related rates, build local linear approximations, and measure sensitivity to uncertain inputs."
+}

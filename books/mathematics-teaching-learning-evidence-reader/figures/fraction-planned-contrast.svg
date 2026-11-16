@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Two-stage fraction comparison planned contrast</title>
+  <desc id="desc">At left, equal bars show one half longer than one third. At right, equal bars show three quarters and four fifths; the unfilled gaps to one are one quarter and one fifth, so four fifths is greater. The second comparison detects overgeneralizing a denominator shortcut.</desc>
+  <rect width="900" height="430" rx="18" fill="#0f172a"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="450" y="34" text-anchor="middle" fill="#f8fafc" font-size="21" font-weight="700">A planned contrast tests the reason, not only the answer</text>
+    <text x="225" y="72" text-anchor="middle" fill="#bfdbfe" font-size="18" font-weight="700">Unit fractions, same whole</text>
+    <rect x="70" y="100" width="310" height="54" fill="#172554" stroke="#e2e8f0" stroke-width="3"/>
+    <rect x="70" y="100" width="155" height="54" fill="#38bdf8"/>
+    <path d="M225 100V154" stroke="#e2e8f0" stroke-width="3"/>
+    <text x="147.5" y="135" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">1/2</text>
+    <rect x="70" y="184" width="310" height="54" fill="#172554" stroke="#e2e8f0" stroke-width="3"/>
+    <rect x="70" y="184" width="103.33" height="54" fill="#a78bfa"/>
+    <path d="M173.33 184V238M276.66 184V238" stroke="#e2e8f0" stroke-width="3"/>
+    <text x="121" y="219" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">1/3</text>
+    <text x="225" y="275" text-anchor="middle" fill="#a7f3d0" font-size="18">1/2 &gt; 1/3</text>
+    <text x="675" y="72" text-anchor="middle" fill="#bfdbfe" font-size="18" font-weight="700">Non-unit transfer</text>
+    <rect x="520" y="100" width="310" height="54" fill="#172554" stroke="#e2e8f0" stroke-width="3"/>
+    <rect x="520" y="100" width="232.5" height="54" fill="#38bdf8"/>
+    <g stroke="#e2e8f0" stroke-width="3"><path d="M597.5 100V154M675 100V154M752.5 100V154"/></g>
+    <text x="636" y="135" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">3/4</text>
+    <text x="791" y="135" text-anchor="middle" fill="#f8fafc" font-size="15">gap 1/4</text>
+    <rect x="520" y="184" width="310" height="54" fill="#172554" stroke="#e2e8f0" stroke-width="3"/>
+    <rect x="520" y="184" width="248" height="54" fill="#a78bfa"/>
+    <g stroke="#e2e8f0" stroke-width="3"><path d="M582 184V238M644 184V238M706 184V238M768 184V238"/></g>
+    <text x="644" y="219" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="700">4/5</text>
+    <text x="799" y="219" text-anchor="middle" fill="#f8fafc" font-size="15">gap 1/5</text>
+    <text x="675" y="275" text-anchor="middle" fill="#a7f3d0" font-size="18">1/5 &lt; 1/4, so 4/5 &gt; 3/4</text>
+    <path d="M450 82V300" stroke="#64748b" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="450" y="342" text-anchor="middle" fill="#f8fafc" font-size="17">A rule about unit fractions must not be applied blindly when numerators differ.</text>
+    <text x="450" y="375" text-anchor="middle" fill="#cbd5e1" font-size="15">All four bars represent the same whole length.</text>
+  </g>
+</svg>

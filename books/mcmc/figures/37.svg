@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Partial pooling depends on information per group</title><desc id="desc">Normal–normal example: posterior group means shrink toward the population mean μ = 0.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Partial pooling depends on information per group</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Normal–normal example: posterior group means shrink toward the population mean μ = 0.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Known σ²=τ²=1: E[θⱼ|ȳⱼ]=[nⱼ/(nⱼ+1)]ȳⱼ. Small groups shrink more; this is not a causal identification argument.</text>
+<line x1="230.00" y1="415.00" x2="800.00" y2="415.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="230.00" y1="415.00" x2="230.00" y2="145.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="515.00" y="450.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">group effect</text>
+<text x="230.00" y="130.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="start">group</text>
+<line x1="260.00" y1="140.00" x2="260.00" y2="415.00" stroke="#dce2e7" stroke-width="1"/>
+<text x="260.00" y="438.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">-2</text>
+<line x1="385.00" y1="140.00" x2="385.00" y2="415.00" stroke="#dce2e7" stroke-width="1"/>
+<text x="385.00" y="438.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">-1</text>
+<line x1="510.00" y1="140.00" x2="510.00" y2="415.00" stroke="#dce2e7" stroke-width="1"/>
+<text x="510.00" y="438.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">0</text>
+<line x1="635.00" y1="140.00" x2="635.00" y2="415.00" stroke="#dce2e7" stroke-width="1"/>
+<text x="635.00" y="438.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">1</text>
+<line x1="760.00" y1="140.00" x2="760.00" y2="415.00" stroke="#dce2e7" stroke-width="1"/>
+<text x="760.00" y="438.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="middle">2</text>
+<text x="65.00" y="180.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">n = 1</text>
+<line x1="285.00" y1="175.00" x2="397.50" y2="175.00" stroke="#bb5b27" stroke-width="4"/>
+<circle cx="285.00" cy="175.00" r="8" fill="#ffffff" stroke="#bb5b27" stroke-width="2"/>
+<circle cx="397.50" cy="175.00" r="7" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<text x="65.00" y="246.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">n = 2</text>
+<line x1="735.00" y1="241.00" x2="660.00" y2="241.00" stroke="#bb5b27" stroke-width="4"/>
+<circle cx="735.00" cy="241.00" r="8" fill="#ffffff" stroke="#bb5b27" stroke-width="2"/>
+<circle cx="660.00" cy="241.00" r="7" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<text x="65.00" y="312.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">n = 5</text>
+<line x1="322.50" y1="307.00" x2="353.75" y2="307.00" stroke="#bb5b27" stroke-width="4"/>
+<circle cx="322.50" cy="307.00" r="8" fill="#ffffff" stroke="#bb5b27" stroke-width="2"/>
+<circle cx="353.75" cy="307.00" r="7" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<text x="65.00" y="378.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">n = 20</text>
+<line x1="697.50" y1="373.00" x2="688.57" y2="373.00" stroke="#bb5b27" stroke-width="4"/>
+<circle cx="697.50" cy="373.00" r="8" fill="#ffffff" stroke="#bb5b27" stroke-width="2"/>
+<circle cx="688.57" cy="373.00" r="7" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<text x="820.00" y="195.00" font-family="system-ui,sans-serif" font-size="14" fill="#bb5b27" font-weight="400" text-anchor="start">○ group mean</text>
+<text x="820.00" y="235.00" font-family="system-ui,sans-serif" font-size="14" fill="#275c91" font-weight="400" text-anchor="start">● posterior</text>
+<text x="835.00" y="256.00" font-family="system-ui,sans-serif" font-size="14" fill="#275c91" font-weight="400" text-anchor="start">mean</text>
+</svg>

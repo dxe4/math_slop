@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "datasets": [
+    {
+      "id": "waiting",
+      "path": "data/waiting.csv",
+      "kind": "synthetic",
+      "source_url": null,
+      "source_version": "bc813eca4f3b1653b600733f6b5e5e2fae230b4e19f117fabd465f668c0b1b8d",
+      "retrieved_at": null,
+      "license": "original synthetic course data",
+      "license_url": null,
+      "citation": "Original Bayesian Inference course synthetic teaching data; see local generator.",
+      "sha256": "3bc60b426b22e2f9c074ccf06803eaf2da769ae7630fec7d1c39baa06e773ae7",
+      "rows": 268,
+      "columns": [
+        {
+          "name": "centre",
+          "description": "Fictional service centre, integer 0–7",
+          "units": "dimensionless",
+          "missing_values": []
+        },
+        {
+          "name": "load_z",
+          "description": "Defined workload index, not sample-standardised",
+          "units": "dimensionless",
+          "missing_values": []
+        },
+        {
+          "name": "wait_minutes",
+          "description": "Visit waiting time",
+          "units": "minutes",
+          "missing_values": []
+        }
+      ],
+      "transformations": [
+        "Generated and formatted by the recorded generator; no subsequent editing"
+      ],
+      "exclusions": [],
+      "generator": "data/generate.py",
+      "seed": 20260926,
+      "limitations": [
+        "Fictional simulation; no inference about real people, organisations or instruments."
+      ]
+    },
+    {
+      "id": "completion",
+      "path": "data/completion.csv",
+      "kind": "synthetic",
+      "source_url": null,
+      "source_version": "bc813eca4f3b1653b600733f6b5e5e2fae230b4e19f117fabd465f668c0b1b8d",
+      "retrieved_at": null,
+      "license": "original synthetic course data",
+      "license_url": null,
+      "citation": "Original Bayesian Inference course synthetic teaching data; see local generator.",
+      "sha256": "5bdb2605065ef8d4bae29e7f512b994df2aa84b1b5c980285578b7d2045d3024",
+      "rows": 160,
+      "columns": [
+        {
+          "name": "support_z",
+          "description": "Defined support index, not sample-standardised",
+          "units": "dimensionless",
+          "missing_values": []
+        },
+        {
+          "name": "completed",
+          "description": "Completion indicator, 0 or 1",
+          "units": "dimensionless",
+          "missing_values": []
+        }
+      ],
+      "transformations": [
+        "Generated and formatted by the recorded generator; no subsequent editing"
+      ],
+      "exclusions": [],
+      "generator": "data/generate.py",
+      "seed": 20260926,
+      "limitations": [
+        "Fictional simulation; no inference about real people, organisations or instruments."
+      ]
+    },
+    {
+      "id": "experiment",
+      "path": "data/experiment.csv",
+      "kind": "synthetic",
+      "source_url": null,
+      "source_version": "bc813eca4f3b1653b600733f6b5e5e2fae230b4e19f117fabd465f668c0b1b8d",
+      "retrieved_at": null,
+      "license": "original synthetic course data",
+      "license_url": null,
+      "citation": "Original Bayesian Inference course synthetic teaching data; see local generator.",
+      "sha256": "f2b3795f219f877c92dedc96f7465516d7599768810097097bfd4488529eccb8",
+      "rows": 16,
+      "columns": [
+        {
+          "name": "centre",
+          "description": "Fictional service centre, integer 0–7",
+          "units": "dimensionless",
+          "missing_values": []
+        },
+        {
+          "name": "arm",
+          "description": "Randomised arm: 0=A, 1=B",
+          "units": "dimensionless",
+          "missing_values": []
+        },
+        {
+          "name": "trials",
+          "description": "Training users",
+          "units": "count",
+          "missing_values": []
+        },
+        {
+          "name": "successes",
+          "description": "Training completions",
+          "units": "count",
+          "missing_values": []
+        },
+        {
+          "name": "holdout_trials",
+          "description": "Validation users",
+          "units": "count",
+          "missing_values": []
+        },
+        {
+          "name": "holdout_successes",
+          "description": "Validation completions",
+          "units": "count",
+          "missing_values": []
+        }
+      ],
+      "transformations": [
+        "Generated and formatted by the recorded generator; no subsequent editing"
+      ],
+      "exclusions": [],
+      "generator": "data/generate.py",
+      "seed": 20260926,
+      "limitations": [
+        "Fictional simulation; no inference about real people, organisations or instruments."
+      ]
+    },
+    {
+      "id": "penguins",
+      "path": "data/penguins.csv",
+      "kind": "public",
+      "source_url": "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/8957207b78d6ccd1b4654a9dd9c9041b657478ab/inst/extdata/penguins.csv",
+      "source_version": "8957207b78d6ccd1b4654a9dd9c9041b657478ab",
+      "retrieved_at": "2026-09-26",
+      "license": "CC0-1.0",
+      "license_url": "https://allisonhorst.github.io/palmerpenguins/LICENSE.html",
+      "citation": "Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. doi:10.5281/zenodo.3960218. Original observations: Gorman KB, Williams TD, Fraser WR (2014), PLoS ONE 9(3):e90081, doi:10.1371/journal.pone.0090081; Palmer Station Antarctica LTER and K. Gorman.",
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "rows": 344,
+      "columns": [
+        {
+          "name": "species",
+          "description": "Adelie, Chinstrap or Gentoo",
+          "units": "category",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "island",
+          "description": "Biscoe, Dream or Torgersen",
+          "units": "category",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "bill_length_mm",
+          "description": "Measured bill length",
+          "units": "mm",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "bill_depth_mm",
+          "description": "Measured bill depth",
+          "units": "mm",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "flipper_length_mm",
+          "description": "Measured flipper length",
+          "units": "mm",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "body_mass_g",
+          "description": "Measured body mass",
+          "units": "g",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "sex",
+          "description": "female or male as recorded",
+          "units": "category",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "year",
+          "description": "Study year 2007, 2008 or 2009",
+          "units": "calendar year",
+          "missing_values": [
+            "NA"
+          ]
+        }
+      ],
+      "transformations": [],
+      "exclusions": [],
+      "generator": null,
+      "seed": null,
+      "limitations": [
+        "Adult sampled penguins near Palmer Station; not a random sample of all penguins.",
+        "Simplified table lacks nest identifiers; independence is approximate.",
+        "Missing entries are preserved as NA; integer/decimal storage is not an instrument-error model."
+      ],
+      "license_file": "data/PENGUINS_LICENSE.md",
+      "license_sha256": "8e2c443dd9aea6fcd6c293dbf66935bd5ef502fc0ca9b466c773cf9316d5e04c",
+      "license_source_url": "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/8957207b78d6ccd1b4654a9dd9c9041b657478ab/LICENSE.md",
+      "maintainer_license_statement": "https://allisonhorst.github.io/palmerpenguins/#license",
+      "additional_use_guidance": "The maintainer asks researchers planning publication to contact Kristen Gorman and follow LTER data-use guidance. This local teaching redistribution preserves that request; no contact or external publication was made.",
+      "original_data_dois": [
+        "10.6073/pasta/98b16d7d563f265cb52372c8ca99e60f",
+        "10.6073/pasta/7fca67fb28d56ee2ffa3d9370ebda689",
+        "10.6073/pasta/c14dfcfada8ea13a17536e73eb6fbe9e"
+      ]
+    },
+    {
+      "id": "sensor_forecasting",
+      "path": "data/sensor_forecasting.csv",
+      "kind": "synthetic",
+      "source_url": null,
+      "source_version": "5769316d4999a2087e0f3aafe7b86f501689f8388950dc471ee00ef9741e6fdb",
+      "retrieved_at": null,
+      "license": "original synthetic course data",
+      "license_url": null,
+      "citation": "Original Bayesian Inference course synthetic teaching data; see local generator.",
+      "sha256": "c515e89a959b6922d484f7ddf0fd0ce40f1ca7db3bb93753b9abb00e6cbf2e21",
+      "rows": 120,
+      "columns": [
+        {
+          "name": "time_index",
+          "description": "Ordered integer 0–119; equal one-minute intervals",
+          "units": "minutes from start",
+          "missing_values": []
+        },
+        {
+          "name": "reading",
+          "description": "Synthetic sensor observation",
+          "units": "fictional instrument units",
+          "missing_values": []
+        }
+      ],
+      "transformations": [
+        "Generated and formatted by the recorded generator; no subsequent editing"
+      ],
+      "exclusions": [],
+      "generator": "data/generate_sensor_forecasting.py",
+      "seed": 20260927,
+      "limitations": [
+        "Fictional simulation; no inference about real people, organisations or instruments."
+      ]
+    },
+    {
+      "id": "beijing_2016_daily",
+      "path": "data/beijing_2016_daily.csv",
+      "kind": "real",
+      "source_url": "https://archive.ics.uci.edu/dataset/501/beijing+multi+site+air+quality+data",
+      "source_version": "b04da438b2f331ac0ffd45aebdfec0d20d2367feb5f6948c4b1f7ce1191e33c4",
+      "retrieved_at": "2026-09-26T22:02:40.590796+00:00",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "citation": "Chen, S. (2017). Beijing Multi-Site Air Quality [Dataset]. UCI Machine Learning Repository. DOI 10.24432/C5RK5G. Air quality: Beijing Municipal Environmental Monitoring Center; weather: China Meteorological Administration.",
+      "sha256": "5db35bec396349bfebf21d13dec43947e24a20924246701b2f1d0b3ca762831d",
+      "rows": 4392,
+      "columns": [
+        {
+          "name": "station",
+          "description": "Exact UCI monitoring-site name; twelve values.",
+          "units": "identifier",
+          "missing_values": []
+        },
+        {
+          "name": "date",
+          "description": "Every 2016 calendar date; no timezone conversion assumed.",
+          "units": "recorded calendar date",
+          "missing_values": []
+        },
+        {
+          "name": "n_hours",
+          "description": "Number of source hourly rows on this date.",
+          "units": "hours",
+          "missing_values": []
+        },
+        {
+          "name": "n_pm25",
+          "description": "Hours with nonmissing finite PM2.5, including zero if recorded.",
+          "units": "hours",
+          "missing_values": []
+        },
+        {
+          "name": "n_wspm",
+          "description": "Hours with nonmissing finite wind speed, including calm zero.",
+          "units": "hours",
+          "missing_values": []
+        },
+        {
+          "name": "n_pair",
+          "description": "Hours with both PM2.5 and wind present; same hours for both daily means.",
+          "units": "hours",
+          "missing_values": []
+        },
+        {
+          "name": "pm25_ug_m3",
+          "description": "Arithmetic mean of source PM2.5 over paired hours, NA if none; no offset or clipping.",
+          "units": "micrograms per cubic metre",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "wspm_m_s",
+          "description": "Arithmetic mean of source WSPM over the same paired hours, NA if none.",
+          "units": "metres per second",
+          "missing_values": [
+            "NA"
+          ]
+        },
+        {
+          "name": "eligible_18",
+          "description": "One if n_pair >= 18; frozen base eligibility, not an environmental standard.",
+          "units": "indicator 0/1",
+          "missing_values": []
+        },
+        {
+          "name": "eligible_24",
+          "description": "One if n_pair == 24; completeness sensitivity, not an environmental standard.",
+          "units": "indicator 0/1",
+          "missing_values": []
+        },
+        {
+          "name": "split",
+          "description": "Identifier-hash selection made before pollutant inspection; Dongsi/Guanyuan final, other ten training.",
+          "units": "training/final",
+          "missing_values": []
+        }
+      ],
+      "transformations": [
+        "Select source year 2016, retain 366 dates at each of twelve sites.",
+        "Aggregate both variables over paired finite hours; retain missing and ineligible rows.",
+        "Freeze base and alternative completeness at >=18 and ==24 paired hours.",
+        "Keep zero as an observation; negative/unexplained nonfinite source values fail acquisition.",
+        "Model transforms are separate: log concentration/reference unit 1 ug/m3 and base-training population-SD wind standardization."
+      ],
+      "exclusions": [
+        "No dropped calendar/site rows.",
+        "Ineligible rows are retained with flags and do not contribute to the corresponding fit/score."
+      ],
+      "generator": "data/acquire_beijing.py",
+      "seed": null,
+      "limitations": [
+        "Nearest-station weather can be shared across monitoring sites.",
+        "Available-hour means need not equal complete-day exposures; missingness may be informative.",
+        "Target is historical conditional prediction, not forecasting, causality or exposure.",
+        "Source recorded calendar preserved; timezone conversion not established."
+      ]
+    }
+  ]
+}

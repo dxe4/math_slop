@@ -1,0 +1,439 @@
+{
+  "id": "05",
+  "title": "Derivatives from first principles",
+  "subtitle": "How can a rate at one instant emerge from measurements over an interval?",
+  "prerequisites": [
+    "Functions, domains, and coordinate graphs from chapters 1–2.",
+    "Limits, one-sided limits, and continuity from chapter 4.",
+    "Basic JavaScript and floating-point limitations from chapter 3 for the optional lab."
+  ],
+  "objectives": [
+    "Calculate average rates and derive instantaneous rates using limits.",
+    "Construct a tangent line and interpret its slope with units.",
+    "Prove that differentiability implies continuity and diagnose corners, cusps, and endpoint cases.",
+    "Interpret first and higher derivatives in a motion model."
+  ],
+  "sections": [
+    {
+      "title": "From a journey to an average rate",
+      "paragraphs": [
+        "A position measurement answers where an object is. Two position measurements also tell us something about how it moves. If $s(t)$ is position along a straight track, the change between times $a$ and $a+h$ is $s(a+h)-s(a)$. Dividing by the elapsed time $h$ gives an average velocity. For example, a cyclist who moves from the 12-metre mark to the 24-metre mark between $2$ and $5$ seconds has average velocity $(24-12)/(5-2)=4$ metres per second. The calculation does not say that the cyclist maintained that velocity throughout the interval.",
+        "The same construction works whenever one quantity depends on another. A change in tank volume divided by elapsed time gives an average filling rate; a temperature change divided by a height change gives an average temperature gradient. If the input unit is $U$ and the output unit is $V$, every difference quotient has unit $V/U$. A negative rate means the output decreases as the input increases. Its meaning depends on the chosen direction and coordinate system, not on whether the situation is desirable.",
+        "On the graph $y=f(x)$, the quotient $\\frac{f(a+h)-f(a)}{h}$ is the slope of the secant line through $(a,f(a))$ and $(a+h,f(a+h))$. We require $h\\ne0$ and both inputs to lie in the domain. A negative $h$ selects a point to the left. It reverses both the input difference and the order of the output difference, preserving the correct slope. Comparing positive and negative $h$ will become essential when deciding whether a single instantaneous rate exists.",
+        "An average rate belongs to an interval, not to either endpoint alone. Consider $s(t)=t^2$ metres for $t\\ge0$. Over $[1,2]$ its average velocity is $\\frac{4-1}{2-1}=3$ m/s; over $[1,1.1]$ it is $\\frac{1.21-1}{0.1}=2.1$ m/s. Shortening the interval toward $t=1$ makes the rate approach $2$ m/s. These numbers are exact consequences of the given model. If the positions came from noisy measurements, dividing by an extremely short time could magnify measurement error; a smaller interval is not automatically a better physical estimate. Keep the mathematical limit separate from the accuracy of an instrument. Problem 1 also asks for the instantaneous rate at the same time. First complete its average-rate part; return to its second part after Lesson 2 defines and derives that limit.",
+        "There are two common ways to shorten an interval. A forward quotient uses $[a,a+h]$ with $h>0$, while a backward quotient uses $[a+h,a]$ with $h<0$ in the formula $\\frac{f(a+h)-f(a)}{h}$. Both describe a slope relative to the fixed base point $a$. If their limits disagree, the graph has no single tangent slope there. If the model is defined only for times after launch, however, a backward quotient at the launch time is unavailable; its absence is a domain fact, not evidence of a corner. Always draw or state the allowed input set before taking a limit.",
+        "Average velocity is signed displacement divided by time. Average speed is total distance traveled divided by time, and they need not agree. A runner who goes 100 m east and then 100 m west in 40 s has average velocity zero along an east-positive axis but average speed $\\frac{200}{40}=5$ m/s. The distinction persists for instantaneous quantities: velocity is a signed derivative of position; speed is its absolute value. In higher dimensions, velocity becomes a vector and speed its magnitude. This chapter stays on a line so the difference can be seen without vector notation."
+      ],
+      "formula": "Average rate from a to a + h = [f(a + h) − f(a)]/h, with h ≠ 0.",
+      "formulaTex": "\\text{average rate}=\\frac{f(a+h)-f(a)}{h},\\qquad h\\ne0"
+    },
+    {
+      "title": "The derivative is a limit, not a zero-width quotient",
+      "paragraphs": [
+        "Fix an interior point $a$ of the domain, with $f$ defined throughout some open interval around $a$. The derivative $f^{\\prime}(a)$ is the finite limit of the difference quotient as $h$ approaches zero. The word finite is part of the usual definition in this book. Positive and negative increments must approach the same real number. The equivalent notation $\\lim_{x\\to a}[f(x)-f(a)]/(x-a)$ emphasizes that the nearby input $x$ approaches $a$ while the base point stays fixed.",
+        "The quotient at $h=0$ is undefined. We never obtain a derivative by dividing zero by zero. Instead, algebra may produce a simpler expression equal to the quotient for every sufficiently small nonzero $h$. That expression can have a limit even though the original quotient is undefined at zero. This is exactly the removable-gap reasoning developed in chapter 4. A sequence of decimal calculations suggests an answer; an identity followed by a valid limit establishes it.",
+        "There are two related tasks. Computing $f^{\\prime}(a)$ finds one number at one point. Computing $f^{\\prime}(x)$ finds a new function whose domain consists of the points where the original function is differentiable. A function may exist at more points than its derivative does. At a boundary of a domain, such as $t=0$ for a motion starting at time zero, only a right-hand quotient may be available. We call its finite limit a right derivative and state that convention explicitly; it is not a two-sided derivative.",
+        "A useful direct calculation is $f(x)=x^2$. For $h\\ne0$, $\\frac{(a+h)^2-a^2}{h}=\\frac{2ah+h^2}{h}=2a+h$. The limit is $2a$, so $f^{\\prime}(a)=2a$ at every real $a$. The difference between this secant slope and the derivative is exactly $h$. This identity predicts how the lab should behave before any code is run and supplies a mathematical check independent of the plot.",
+        "To differentiate a reciprocal directly, assume $a\\ne0$ and restrict $h$ so $a+h\\ne0$. Then $\\frac{1/(a+h)-1/a}{h}=-\\frac{1}{a(a+h)}$ for every nonzero permitted $h$. The limit is $-1/a^2$. The restriction on $h$ is not decoration: the original function does not exist at zero, and a derivative can be considered only where the base input belongs to its domain. The same direct method works for many rational expressions after combining fractions. The algebraic identity must be valid on a punctured neighborhood; substituting $h=0$ into the original quotient remains invalid.",
+        "For $f(x)=\\sqrt{x}$ at $a>0$, rationalize before taking the limit: $\\frac{\\sqrt{a+h}-\\sqrt a}{h}=\\frac{1}{\\sqrt{a+h}+\\sqrt a}$ when $h\\ne0$ and $a+h\\ge0$. The derivative is $\\frac{1}{2\\sqrt a}$. At the endpoint $a=0$, the right quotient is $1/\\sqrt h$ and grows without bound as $h\\downarrow0$, so there is no finite right derivative. The graph can still have a vertical right-hand tangent. Notice that the formula $1/(2\\sqrt a)$ already signals trouble as $a$ approaches zero, but that signal does not replace checking the endpoint definition.",
+        "A derivative formula is always paired with a domain statement. The derivative of $1/x$ is $-1/x^2$ on $(-\\infty,0)\\cup(0,\\infty)$; writing it at $x=0$ would describe a point outside the original function's domain. For $\\sqrt{x}$ the ordinary two-sided derivative exists on $(0,\\infty)$; a right derivative at zero may be discussed separately. When a problem asks for $f^{\\prime}(x)$, report both the rule and its valid inputs. When it asks for $f^{\\prime}(a)$, verify that this particular $a$ is an interior point or make the one-sided convention explicit.",
+        "A difference quotient has two jobs that should be kept separate. For each nonzero $h$, $[f(a+h)-f(a)]/h$ is the slope of an ordinary secant through two distinct graph points. The derivative is the limiting value of those slopes, provided the same finite limit is reached from positive and negative $h$ whenever both sides belong to the domain. Substituting $h=0$ into the quotient is never the calculation: its denominator would vanish. For $f(x)=|x|$ at $a=0$, positive $h$ gives quotient $1$ and negative $h$ gives $-1$; both secants are perfectly defined, but their slopes do not approach one common number. At an endpoint of a restricted domain, only one-sided secants may be available. Such a one-sided rate can be useful in a model, yet it should not silently be called a two-sided derivative on an open interval. Distinguishing these cases prevents a graph that merely looks smooth at one viewing scale from being treated as a proof of differentiability."
+      ],
+      "formula": "f′(a) = lim as h → 0 of [f(a + h) − f(a)]/h, provided the limit exists and is finite.",
+      "theorems": [
+        {
+          "title": "The positive-integer power rule starts at the limit",
+          "statement": "Positive integer powers have a derivative at every real input. The rule follows from one finite binomial expansion, including at the center zero.",
+          "proof": [
+            "First handle $n=1$ directly: $((a+h)-a)/h=1$ for every $h\\ne0$. For $n\\ge2$, the finite binomial theorem expands $(a+h)^n$ as $a^n+na^{n-1}h$ plus terms containing $h^2$ or higher powers. Subtract $a^n$ and divide by $h$. The difference quotient becomes $na^{n-1}+\\sum_{k=2}^{n}\\binom{n}{k}a^{n-k}h^{k-1}$. Every term in the sum tends to zero as $h\\to0$, leaving $na^{n-1}$. This proof works at $a=0$ too; no cancellation of $a$ is used.",
+            "The derivative of a constant is zero because its difference quotient is identically zero. The sum and constant-multiple limit laws from Chapter 4 then give a polynomial rule: for $p(x)=\\sum_{k=0}^{N}c_kx^k$, we obtain $p^{\\prime}(x)=\\sum_{k=1}^{N}kc_kx^{k-1}$. This is a consequence of finitely many limit arguments. It does not yet prove the same-looking rule for an infinite power series, where exchanging a limit with an infinite sum needs extra work.",
+            "The result also quantifies local approximation. For $x^3$ at $a$, the exact secant slope is $3a^2+3ah+h^2$, so its difference from the derivative $3a^2$ is $3ah+h^2$. At $a=0$ the slope error is $h^2$; at $a\\ne0$ the leading error is proportional to $h$. A graph can show the trend, but the identity explains its rate and both sides of the approach."
+          ],
+          "equationTex": "\\frac{d}{dx}x^n=nx^{n-1}\\ (n\\ge2),\\qquad \\frac{d}{dx}x=1"
+        }
+      ],
+      "formulaTex": "f^{\\prime}(a)=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}"
+    },
+    {
+      "title": "Tangents express local linear behavior",
+      "paragraphs": [
+        "Once the limiting slope exists, there is a unique line through $(a,f(a))$ with that slope. Its equation is $y=f(a)+f^{\\prime}(a)(x-a)$. We call this the tangent line. This definition does not require the line to touch the curve at only one point or to stay on one side. For $f(x)=x^3$, the difference quotient at zero is $h^2$, so the tangent is $y=0$; the curve crosses it.",
+        "The limit definition gives a stronger interpretation than a drawing. Write $f(a+h)=f(a)+f^{\\prime}(a)h+r(h)$. For nonzero $h$, $r(h)/h$ is exactly the difference quotient minus $f^{\\prime}(a)$, and therefore tends to zero. Thus the error in the tangent approximation becomes small compared with the input displacement. Simply saying that the absolute error tends to zero would be weaker: continuity alone would make the constant approximation $f(a)$ have that property.",
+        "For $f(x)=x^2$ at $a=2$, the tangent is $y=4+4(x-2)$. At $x=2.1$ this predicts $4.4$, while the actual value is $4.41$. The error is $0.01=(0.1)^2$. At $x=2.01$ the error is $0.0001$. The approximation concerns nearby inputs; at $x=10$ the same line predicts $36$ instead of $100$. A tangent is a local model, and differentiability by itself does not specify a useful approximation radius.",
+        "The tangent line is the only linear function $L(x)=f(a)+m(x-a)$ whose error is negligible compared with $|x-a|$ as $x\\to a$, provided $f$ is differentiable there. Indeed, $\\frac{f(x)-L(x)}{x-a}$ tends to $f^{\\prime}(a)-m$; it tends to zero exactly when $m=f^{\\prime}(a)$. This gives a precise reason to choose the derivative as the local slope. A line drawn by eye may look close but fail this relative-error test. The condition says nothing about how large an interval is safe for a chosen numerical tolerance; that requires additional information such as a bound on a second derivative.",
+        "For $f(x)=1/x$ near $a=1$, the tangent model is $L(x)=2-x$. Direct subtraction gives $\\frac1x-(2-x)=\\frac{(x-1)^2}{x}$ for $x>0$. Thus the error is positive and quadratic near one, while the model becomes unreliable near the forbidden input zero. On $[0.9,1.1]$, the exact error is at most $\\frac{(0.1)^2}{0.9}=\\frac1{90}$. This bound uses the stated interval, not a picture. It also shows that a tangent can systematically underestimate a curve, although that behavior is not part of the definition of tangent.",
+        "A symmetric secant alone cannot establish a tangent. For $f(x)=|x|$ at zero, the centered quotient $\\frac{f(h)-f(-h)}{2h}$ equals zero for every $h\\ne0$. That apparent slope comes from cancellation across the corner. The ordinary right difference quotient is $1$, while the left quotient is $-1$, so no two-sided derivative exists. Numerical software that samples only symmetric pairs can therefore report a stable-looking zero at a point where the derivative is undefined. Check the one-sided behavior before interpreting a computed slope.",
+        "A horizontal tangent means $f^{\\prime}(a)=0$, not that the function is locally constant or has an extremum. The function $x^3$ has a horizontal tangent at zero and rises through it. The function $x^2$ has a horizontal tangent at zero and a local minimum. Later, signs of the derivative on either side will distinguish these cases. For now, use the approximation $f(a+h)=f(a)+o(h)$ when $f^{\\prime}(a)=0$: the first-order change vanishes, but smaller-order terms may still determine the shape."
+      ],
+      "formula": "Tangent: y = f(a) + f′(a)(x − a). Error: r(h)/h → 0 as h → 0.",
+      "formulaTex": "\\begin{aligned}y&=f(a)+f^{\\prime}(a)(x-a),\\\\ f(a+h)&=f(a)+f^{\\prime}(a)h+r(h),\\qquad \\lim_{h\\to0}\\frac{r(h)}{h}=0.\\end{aligned}"
+    },
+    {
+      "title": "Continuity is necessary but not sufficient",
+      "paragraphs": [
+        "Theorem: if $f$ is defined on an open interval containing $a$ and is differentiable at $a$, then $f$ is continuous at $a$. Proof: for $h\\ne0$, factor $f(a+h)-f(a)$ as $h$ times $[f(a+h)-f(a)]/h$. The first factor tends to zero and the second tends to the finite number $f^{\\prime}(a)$. The product limit is zero. Hence $f(a+h)$ tends to $f(a)$, which is continuity. The same argument proves the corresponding one-sided statement at an endpoint.",
+        "The converse fails. For $f(x)=|x|$ at zero, the quotient is $|h|/h$. It equals $1$ for $h>0$ and $-1$ for $h<0$. The graph is continuous but has a corner: the two finite one-sided slopes disagree. No choice of value for $f^{\\prime}(0)$ can repair that disagreement. Away from zero each branch is a line and is differentiable.",
+        "A cusp provides another failure. For $f(x)=|x|^{2/3}$, the quotient at zero is $\\operatorname{sgn}(h)|h|^{-1/3}$. From the left it tends to negative infinity; from the right it tends to positive infinity. Neither is a finite derivative. By contrast, the real cube-root function has quotient $1/|h|^{2/3}$, which tends to positive infinity from both sides. Its graph has a vertical tangent at zero, but it still has no finite derivative there. A vertical tangent is a geometric description, not an ordinary value of $f^{\\prime}$.",
+        "Discontinuities automatically rule out differentiability by the theorem. Yet corners, cusps, and vertical tangents show that eliminating discontinuities is only a first check. A smooth-looking computer drawing also cannot certify differentiability: a narrow corner may be hidden between sample points. The definition concerns every sufficiently small allowed increment, not merely the increments a screen can display.",
+        "A practical piecewise-function test has two stages. First compare the values and one-sided limits to establish continuity. Then compute the left and right difference-quotient limits at the join. For $f(x)=x^2$ when $x\\le1$ and $f(x)=mx+b$ when $x>1$, continuity requires $m+b=1$. The left slope at one is $2$, while the right slope is $m$. Differentiability therefore requires $m=2$ and $b=-1$. Matching only the slopes while leaving a jump would be insufficient, because the derivative quotient uses the actual value $f(1)$.",
+        "A function can be differentiable at a point even when its derivative behaves badly nearby. Define $f(0)=0$ and $f(x)=x^2\\sin(1/x)$ for $x\\ne0$. At zero, $[f(h)-f(0)]/h=h\\sin(1/h)$ and its absolute value is at most $|h|$, so the squeeze theorem gives $f^{\\prime}(0)=0$. This argument uses only the derivative definition and the boundedness of sine. To decide whether $f^{\\prime}$ is continuous, one also needs its values at nonzero $x$. The worked example later in this chapter displays the calculation with product and chain rules; treat that step as an optional return after Chapter 6 Lessons 1–3. There it gives $f^{\\prime}(x)=2x\\sin(1/x)-\\cos(1/x)$ for $x\\ne0$. At $x_n=1/(2\\pi n)$, $f^{\\prime}(x_n)=-1$, while at $y_n=1/((2n+1)\\pi)$ it equals $1$; both sequences approach zero. Hence the derivative does not approach $f^{\\prime}(0)=0$. The definition at zero controls only the first-order error $f(h)-f(0)-f^{\\prime}(0)h=h^2\\sin(1/h)$, whose ratio to $|h|$ tends to zero; it places no continuity condition on slopes at nearby points. Existence of a derivative at one point does not ensure continuity of the derivative there.",
+        "The related function $g(0)=0$, $g(x)=x\\sin(1/x)$ for $x\\ne0$ is continuous at zero because $|g(x)|\\le|x|$. Yet its quotient $g(h)/h=\\sin(1/h)$ has no limit. This pair separates three ideas that a graph can blur: continuity of $g$, differentiability of $f$, and continuity of $f^{\\prime}$. The oscillations become arbitrarily rapid near zero, so any finite pixel display can miss them. A proof uses inequalities or two sequences with different limiting quotient values."
+      ]
+    },
+    {
+      "title": "Higher derivatives measure changes in rates",
+      "paragraphs": [
+        "If $f^{\\prime}$ is itself differentiable, its derivative is the second derivative $f^{\\prime\\prime}$. Repeating the construction gives third and higher derivatives where the required limits exist. These are successive derivatives, not powers: $f^{\\prime\\prime}$ does not mean $(f^{\\prime})^2$. If $f$ has output units $V$ and input units $U$, the second derivative has units $V/U^2$ and the third has units $V/U^3$.",
+        "For position $s(t)$, velocity is $s^{\\prime}(t)$ and acceleration is $s^{\\prime\\prime}(t)$. Speed is $|s^{\\prime}(t)|$, so acceleration is not simply “how fast the object is moving.” A negative acceleration can increase speed when velocity is already negative. In the model $s(t)=3t^2+2t$, with position in metres and time in seconds, first principles give velocity $6t+2$ metres per second; differentiating that linear function by its difference quotient gives acceleration $6$ metres per second squared. The coefficients carry the units needed to make both terms positions.",
+        "Higher differentiability is an additional requirement. For $f(x)=x|x|$, the quotient at zero is $|h|$ and tends to zero. The derivative is $2x$ for $x>0$, $-2x$ for $x<0$, and zero at zero; together these say $f^{\\prime}(x)=2|x|$. That derivative has a corner, so $f^{\\prime\\prime}(0)$ does not exist. Being differentiable once does not guarantee being differentiable twice.",
+        "Velocity and acceleration answer different local questions. For differentiable velocity $v(t)\\ne0$, speed is $|v(t)|$ and its derivative is $\\operatorname{sgn}(v(t))a(t)$, where $a=v^{\\prime}$. Thus positive acceleration increases speed while moving in the positive direction, but decreases speed while moving in the negative direction. At an instant with $v=0$, this sign formula cannot be used; speed may have a corner. For example, $s(t)=t^2$ has $v(t)=2t$ and $|v(t)|=2|t|$, which is not differentiable at zero even though position and acceleration are smooth there.",
+        "The third derivative of position, when it exists, is sometimes called jerk. It measures how acceleration changes per unit time and has units of length/time cubed. A constant-acceleration quadratic position model has zero jerk. The polynomial $s(t)=t^3-6t^2+9t$ has $v=3t^2-12t+9$, $a=6t-12$, and constant jerk $6$. These are successive derivatives: each must be interpreted with its own units and domain. A derivative of order three is useful when abrupt changes of acceleration matter, but measuring it from sampled positions is especially sensitive to noise.",
+        "Acceleration alone does not determine a unique trajectory. If two position functions have the same second derivative on an interval, their difference has zero second derivative and is therefore a linear function $At+B$. Chapter 8 develops the mean value theorem: apply it to the first derivative to show that a zero second derivative makes that derivative constant on the interval, then apply it again to obtain $At+B$. The constants represent differences in initial velocity and initial position. For instance, $s_1(t)=3t^2$ and $s_2(t)=3t^2+4t+7$ share acceleration $6$ but follow different paths. A motion problem must give enough initial data, such as position and velocity at one time, before a unique position prediction is possible.",
+        "A constant acceleration tells us how velocity changes, not whether speed is increasing at every moment. With $s(t)=s_0+v_0t-\\tfrac12gt^2$ and $g>0$, acceleration is always $-g$. Before the apex, velocity $v_0-gt$ is positive and speed decreases at rate $g$. After the apex, velocity is negative and speed increases at rate $g$ under the idealized model. At the apex the speed function is $|v_0-gt|$, which has a corner: its left rate is $-g$ and right rate is $+g$. Position and velocity remain differentiable there. This is a useful warning against casually differentiating an absolute value at a zero crossing. The time of the apex follows from velocity being zero, while the fact that it is a maximum follows from the sign change from positive to negative. A numerical table with samples on both sides can suggest that pattern, but the derived velocity rule establishes it for the entire modeled interval.",
+        "Average speed over an interval can remain positive even when instantaneous speed vanishes at one interior time. In the ideal launch model, the ball pauses at the apex for an instant, but it covers positive distance both before and after. Zero velocity at a single time contributes no duration to the average; it does not erase the surrounding journey."
+      ]
+    },
+    {
+      "title": "A complete motion model from first principles",
+      "paragraphs": [
+        "A ball is thrown upward from ground level with vertical position $s(t)=20t-5t^2$ metres for $0\\le t\\le4$ seconds. This simple model assumes constant downward acceleration and no air resistance. Its coefficients carry units: $20$ is an initial speed in m/s and $5$ multiplies $t^2$ with units m/s². The allowed time interval begins at launch and ends when the ball returns to the ground. Outside that interval the same quadratic is a mathematical expression, but it no longer describes this flight.",
+        "Derive velocity without borrowing a memorized power rule. For $h\\ne0$ with $t+h$ still in the flight interval, $\\frac{s(t+h)-s(t)}{h}=\\frac{20h-5(2th+h^2)}{h}=20-10t-5h$. Its limit as $h\\to0$ is $v(t)=20-10t$ m/s at interior times. At $t=0$ the right derivative is $20$ m/s; at $t=4$ the left derivative is $-20$ m/s. Those one-sided values describe launch and landing within the modeled domain, while the usual two-sided derivative requires an extension.",
+        "Velocity is positive until $t=2$, zero at $t=2$, and negative after. The ball therefore rises to $s(2)=40-20=20$ m, then descends. Its displacement from launch to landing is $s(4)-s(0)=0$, but total distance traveled is 20 m up plus 20 m down, or 40 m. Average velocity over the four seconds is zero. These three quantities answer different questions, even though all are derived from the same position function.",
+        "A second difference quotient gives acceleration: $\\frac{v(t+h)-v(t)}{h}=-10$ m/s² for nonzero $h$, so $a(t)=-10$ m/s² throughout the interior. At $t=3$, velocity is $-10$ m/s while acceleration is also negative; speed is increasing because the ball is moving downward faster. This checks the sign interpretation without treating negative acceleration as a synonym for slowing down.",
+        "The model can be challenged. Air drag makes the downward and upward halves asymmetric, and a launch from a platform changes the initial height. A measured trajectory may fit the quadratic only over a restricted interval. Differentiation describes the consequences of the model; it does not validate its assumptions. Compare measured positions against the predicted 20 m apex and 4 s flight before using its derivative for decisions.",
+        "The flight calculation can be written with parameters rather than only the numbers 20 and 5. With upward-positive position $s(t)=s_0+v_0t-\\tfrac12gt^2$ and $g>0$, the velocity is $v_0-gt$. For $v_0>0$ the apex occurs at $t_{\\mathrm{top}}=v_0/g$ and has height $s_0+v_0^2/(2g)$. These formulas follow by taking the derivative and substituting the turning time. Their units check: $v_0/g$ has units of time, while $v_0^2/g$ has units of length. If $v_0\\le0$, the model has no future upward apex; the algebraic stationary time is nonpositive.",
+        "Suppose $v_0>0$ and launch speed is uncertain by an amount $\\Delta v_0$ with $v_0+\\Delta v_0>0$, while $g$ is treated as fixed. The apex-time change is exactly $\\Delta v_0/g$. The height change is $\\frac{(v_0+\\Delta v_0)^2-v_0^2}{2g}=\\frac{v_0\\Delta v_0}{g}+\\frac{(\\Delta v_0)^2}{2g}$. The first term is the tangent prediction, and the second is its exact remainder. This is a clean example of why a derivative is useful but not magically exact for finite changes. If uncertainty in $g$ is also important, that input must be varied separately; treating a measured constant as exact is an assumption.",
+        "A useful model check compares predicted times and heights with measurements that were not used to choose the parameters. One launch position and one later height cannot usually distinguish an initial-speed error from an acceleration error. Measurements at several separated times carry more information, though sensor noise still limits conclusions. A code lab can plot candidate trajectories, but matching a handful of points does not prove constant acceleration or the absence of drag. Report the interval, coordinate convention, units, and uncertainty before using the derived rates outside a classroom calculation."
+      ],
+      "formula": "For s(t)=20t−5t² on 0≤t≤4, v(t)=20−10t and a(t)=−10 for 0<t<4; endpoint rates are one-sided.",
+      "formulaTex": "\\begin{gathered}0\\le t\\le4\\quad(t\\text{ in seconds}),\\qquad s(t)=20t-5t^2\\quad(s\\text{ in metres}),\\\\ v(t)=20-10t\\quad(v\\text{ in m/s}),\\qquad a(t)=-10\\quad(a\\text{ in m/s}^2,\\ 0<t<4),\\\\ v(0^+)=20\\,\\mathrm{m/s},\\qquad v(4^-)=-20\\,\\mathrm{m/s}.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A derivative with a restricted domain",
+      "problem": "Derive the derivative of $f(x)=1/x$ at an arbitrary nonzero $a$, then find its tangent at $a=2$. Treat $x$ and $y$ as dimensionless.",
+      "steps": [
+        "Choose $|h|<|a|/2$, with $h\\ne0$, so $a+h$ remains nonzero and all fractions are defined.",
+        "Combine fractions before dividing: $[1/(a+h)-1/a]/h=[-h/(a(a+h))]/h=-1/[a(a+h)]$.",
+        "As $h\\to0$ the denominator tends to $a^2\\ne0$. The quotient therefore tends to $-1/a^2$.",
+        "At $a=2$ the point is $(2,1/2)$ and the slope is $-1/4$. Insert these into the point-slope equation."
+      ],
+      "answer": "$f^{\\prime}(a)=-1/a^2$ for $a\\ne0$, and the tangent at $2$ is $y=1/2-(x-2)/4$. No derivative at zero is possible because $f$ is not defined there."
+    },
+    {
+      "title": "Velocity from position data and an exact model",
+      "problem": "A cart has $s(t)=3t^2+2t$ metres for $t\\ge0$, with $t$ measured in seconds. Find its average velocity from $t=2$ to $t=2.5$, instantaneous velocity at $2$, and acceleration.",
+      "steps": [
+        "Compute $s(2)=16$ and $s(2.5)=23.75$. Average velocity is $(23.75-16)/0.5=15.5\\,\\mathrm{m/s}$.",
+        "At a positive time $t$, expand $[s(t+h)-s(t)]/h=[6th+3h^2+2h]/h=6t+3h+2$.",
+        "Taking $h\\to0$ gives $v(t)=6t+2$, so $v(2)=14\\,\\mathrm{m/s}$. For $h=0.01$ the average is $14.03\\,\\mathrm{m/s}$, a numerical cross-check of the approach.",
+        "The quotient $[v(t+h)-v(t)]/h$ equals $6$ for every nonzero allowed $h$, so acceleration is $6\\,\\mathrm{m/s}^2$."
+      ],
+      "answer": "The interval average is $15.5\\,\\mathrm{m/s}$, the instantaneous velocity is $14\\,\\mathrm{m/s}$, and acceleration is $6\\,\\mathrm{m/s}^2$. At the model boundary $t=0$, the corresponding derivatives are right derivatives."
+    },
+    {
+      "title": "A reciprocal derivative with a domain check",
+      "problem": "Starting from the limit definition, find the derivative of $f(x)=1/x$ at $a=2$ and write its tangent line.",
+      "steps": [
+        "For $h\\ne0$ with $2+h\\ne0$, the quotient is $[1/(2+h)-1/2]/h=-1/[2(2+h)]$.",
+        "As $h\\to0$, this expression tends to $-1/4$. The base point $2$ lies inside the domain $x\\ne0$.",
+        "The graph passes through $(2,1/2)$, so its tangent is $y=1/2-(x-2)/4$.",
+        "A nearby check at $x=2.1$ gives tangent value $0.475$ and actual value $1/2.1\\approx0.47619$."
+      ],
+      "answer": "$f^{\\prime}(2)=-1/4$; tangent $y=1/2-(x-2)/4$, valid as a local model near $x=2$."
+    },
+    {
+      "title": "Rationalizing a square-root quotient",
+      "problem": "Derive the derivative of $\\sqrt x$ at $a=9$ without using a memorized power rule.",
+      "steps": [
+        "Write $[\\sqrt{9+h}-3]/h$, where $h\\ne0$ and $9+h\\ge0$.",
+        "Multiply numerator and denominator by $\\sqrt{9+h}+3$. The quotient becomes $1/[\\sqrt{9+h}+3]$.",
+        "The denominator tends to $6$, so the derivative is $1/6$.",
+        "The tangent through $(9,3)$ is $y=3+(x-9)/6$, and the slope has units of output per input unit."
+      ],
+      "answer": "The derivative at $9$ is $1/6$; the tangent line is $y=3+(x-9)/6$."
+    },
+    {
+      "title": "Making a piecewise rule smooth at a join",
+      "problem": "Choose $m$ and $b$ so $f(x)=x^2$ for $x\\le1$ and $f(x)=mx+b$ for $x>1$ is differentiable at $x=1$.",
+      "steps": [
+        "The defined value is $f(1)=1$. Continuity requires the right limit $m+b$ to equal $1$.",
+        "The left difference quotient is $[(1+h)^2-1]/h=2+h$ for $h<0$, approaching $2$.",
+        "The right quotient is $[m(1+h)+b-1]/h$. After continuity makes its constant numerator zero, this quotient is $m$.",
+        "Equating one-sided slopes gives $m=2$; then continuity gives $b=-1$."
+      ],
+      "answer": "$m=2$ and $b=-1$. Both branches then have value $1$ and slope $2$ at the join."
+    },
+    {
+      "title": "A derivative without a continuous derivative",
+      "problem": "Let $f(0)=0$ and $f(x)=x^2\\sin(1/x)$ for $x\\ne0$. Decide whether $f^{\\prime}(0)$ exists and whether $f^{\\prime}$ is continuous there.",
+      "steps": [
+        "The quotient at zero is $f(h)/h=h\\sin(1/h)$, whose magnitude is at most $|h|$.",
+        "The squeeze theorem gives $f^{\\prime}(0)=0$.",
+        "For $x\\ne0$, differentiation gives $f^{\\prime}(x)=2x\\sin(1/x)-\\cos(1/x)$.",
+        "The cosine term has no limit as $x\\to0$, so $f^{\\prime}$ does not approach $f^{\\prime}(0)$."
+      ],
+      "answer": "$f$ is differentiable at $0$ with $f^{\\prime}(0)=0$, but $f^{\\prime}$ is discontinuous there."
+    },
+    {
+      "title": "When acceleration and speed point in different directions",
+      "problem": "For $s(t)=t^2-6t$ on $0\\le t\\le5$, find when the particle stops, its displacement, and its total distance.",
+      "steps": [
+        "The velocity is $v(t)=2t-6$, so it is zero at $t=3$ and changes from negative to positive.",
+        "Here $a(t)=v^{\\prime}(t)=2$. For $0<t<3$, velocity is negative while acceleration is positive, so $|v(t)|=6-2t$ decreases. For $3<t<5$, both are positive, so $|v(t)|=2t-6$ increases.",
+        "Positions are $s(0)=0$, $s(3)=-9$, and $s(5)=-5$.",
+        "Displacement is $s(5)-s(0)=-5$.",
+        "Distance is $|s(3)-s(0)|+|s(5)-s(3)|=9+4=13$."
+      ],
+      "answer": "It stops and reverses at $t=3$; displacement is $-5$ units and distance traveled is $13$ units."
+    },
+    {
+      "title": "An exact error bound for a tangent model",
+      "problem": "Use the tangent to $1/x$ at $x=1$ to estimate $1/1.05$, and give a rigorous error bound on $[1,1.05]$.",
+      "steps": [
+        "The derivative at $1$ is $-1$, so $L(x)=1-(x-1)=2-x$ and $L(1.05)=0.95$.",
+        "Algebra gives $1/x-L(x)=(x-1)^2/x$.",
+        "On $[1,1.05]$, this nonnegative error is at most $(0.05)^2/1=0.0025$.",
+        "The exact value is about $0.952381$, consistent with the bound and the model underestimating it."
+      ],
+      "answer": "Estimate $0.95$, with absolute error at most $0.0025$ on the stated interval."
+    }
+  ],
+  "misconceptions": [
+    "“A tangent meets a graph only once.” The tangent to $y=x^3$ at zero crosses the graph there, and tangents can meet their curves again elsewhere; the defining property is the limiting slope.",
+    "“Continuity guarantees a derivative.” The continuous function $|x|$ has incompatible one-sided slopes at zero.",
+    "“Smaller $h$ always improves a computed derivative.” As $h$ shrinks, subtraction and rounding can outweigh the gain from reducing secant error; a printed zero quotient can signal numerical failure."
+  ],
+  "lab": {
+    "title": "Move secants toward a tangent",
+    "description": "For the dimensionless parabola $y=x^2$, choose the base point a and a nonzero increment h. The three plots show the curve, tangent, and selected secant over the same $x$-interval; the console table compares positive and negative increments. Before running, predict which secant slopes exceed the tangent slope $2a$.",
+    "code": "// Change a and h, then run again; h must be nonzero.\nconst a = 2;\nconst h = 0.5;\nif (!Number.isFinite(a) || Math.abs(a) > 100 || !Number.isFinite(h) || h === 0 || Math.abs(h) > 1) {\n  throw new Error('Use finite |a| <= 100 and 0 < |h| <= 1.');\n}\nconst f = x => x * x;\nconst slope = (f(a + h) - f(a)) / h;\nconst curve = [], tangent = [], secant = [];\nfor (let i = 0; i <= 200; i++) {\n  const x = a - 1 + i / 100;\n  curve.push([x, f(x)]);\n  tangent.push([x, f(a) + 2 * a * (x - a)]);\n  secant.push([x, f(a) + slope * (x - a)]);\n}\nplot(curve, 'y = x²; horizontal coordinate x');\nplot(tangent, 'tangent y; slope 2a');\nplot(secant, 'secant y; selected increment h');\nconsole.log('Selected h, computed secant slope, exact tangent slope:', h, slope, 2 * a);\nconsole.log('h | computed slope | algebraic slope 2a+h | absolute error from tangent');\nfor (const step of [0.5, -0.5, 0.1, -0.1, 0.01, -0.01, 1e-8, 1e-16]) {\n  const estimate = (f(a + step) - f(a)) / step;\n  console.log(step, estimate, 2 * a + step, Math.abs(estimate - 2 * a));\n}\n",
+    "tasks": [
+      "Predict the selected slope for a = 2, h = 0.5 using algebra, then compare it with the output and identify the two shared points of curve and secant.",
+      "Set h = -0.5, then h = 0.1 and h = -0.1. Explain why the selected secant slopes approach the tangent slope from opposite directions. Set a = 0 and repeat.",
+      "At the default a = 2, inspect the row labeled 1e-16. Explain why the computed quotient is $0$ although $f'(2)=4$. Why does the algebraic identity $\\frac{(a+h)^2-a^2}{h}=2a+h$ for $h\\ne0$ establish the derivative, while this finite-precision table cannot?",
+      "Replace the assignment const f = x => x * x; with const f = Math.abs; and set a = 0. Interpret only the computed-slope column of the quotient table: the built-in tangent line, logged tangent slope, algebraic-reference column, and error column still use formulas for $x^2$ and would need separate edits. Explain why the two one-sided slopes cannot define one tangent slope."
+    ],
+    "expected": "With the defaults a = 2 and h = 0.5, the computed secant slope is $4.5$ and the tangent slope is $4$. The row for $h=-0.5$ gives $3.5$; the rows for $h=\\pm0.01$ give approximately $4.01$ and $3.99$. Each of the three plots has 201 finite points. At the row labeled 1e-16, JavaScript’s floating-point evaluation of 2 + 1e-16 rounds to 2, so the computed quotient is $0$ and its absolute error from the derivative is $4$. This is floating-point failure, not a mathematical limit."
+  },
+  "exercises": [
+    {
+      "question": "For $s(t)=t^2$ metres, with $t\\ge0$ measured in seconds, compute average velocity on $[1,1+h]$ for $h>0$ and find the two-sided instantaneous velocity at $t=1$.",
+      "hint": "Expand $(1+h)^2$ before dividing by $h$.",
+      "solution": "For $h\\ne0$ with $1+h\\ge0$, the difference quotient is $[(1+h)^2-1]/h=2+h$ metres per second. For $h>0$, this is the average velocity on $[1,1+h]$. The same quotient formula holds for sufficiently small negative $h$, so both one-sided limits are $2$ metres per second. Thus $s^{\\prime}(1)=2$ metres per second.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "A runner moves 60 m east and then 60 m west in 30 s. Find average velocity and average speed.",
+      "hint": "Use signed displacement for velocity and total path length for speed.",
+      "solution": "Net displacement is $60-60=0$ metres, so average velocity is $0/30=0$ metres per second along an east-positive axis. Total distance is $60+60=120$ metres, so average speed is $120/30=4$ metres per second.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Use the definition to differentiate $f(x)=5x-7$ on the real line.",
+      "hint": "Expand $f(a+h)$ and subtract $f(a)$ before dividing.",
+      "solution": "The numerator is $[5(a+h)-7]-(5a-7)=5h$. For every $h\\ne0$ the difference quotient is $5$, so its limit is $f^{\\prime}(a)=5$ for every real $a$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Derive $f^{\\prime}(a)$ for $f(x)=x^3$ and write the tangent at $a=-1$.",
+      "hint": "Expand the cube; the quotient has three terms.",
+      "solution": "Expansion gives $f(a+h)-f(a)=3a^2h+3ah^2+h^3$. Dividing by $h\\ne0$ gives $3a^2+3ah+h^2\\to3a^2$. At $a=-1$, the slope is $3$ and $f(a)=-1$, so the tangent is $y=-1+3(x+1)=3x+2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x)=\\sqrt{x}$ on $[0,\\infty)$, derive the derivative at $a>0$. Is there a finite right derivative at zero?",
+      "hint": "For $a>0$, rationalize using $\\sqrt{a+h}+\\sqrt a$.",
+      "solution": "For $a>0$ and sufficiently small nonzero $h$, the quotient is $\\frac{\\sqrt{a+h}-\\sqrt a}{h}=\\frac1{\\sqrt{a+h}+\\sqrt a}\\to\\frac1{2\\sqrt a}$. At zero, the right quotient is $\\sqrt h/h=1/\\sqrt h\\to+\\infty$ as $h\\to0^+$, so there is no finite right derivative.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Show directly that the derivative of $x^2$ at $a=3$ meets any specified slope tolerance $\\varepsilon>0$.",
+      "hint": "The quotient error is $|h|$.",
+      "solution": "For $h\\ne0$, the difference quotient is $[(3+h)^2-9]/h=6+h$. Its error from $6$ is $|h|$. Given $\\varepsilon>0$, choose $\\delta=\\varepsilon$; then $0<|h|<\\delta$ makes the error less than $\\varepsilon$. Thus $f^{\\prime}(3)=6$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Use the binomial theorem to compute the derivative of $x^4$ at an arbitrary real $a$ from the difference quotient.",
+      "hint": "Expand $(a+h)^4$ before dividing by $h$.",
+      "solution": "For $h\\ne0$, $\\frac{(a+h)^4-a^4}{h}=4a^3+6a^2h+4ah^2+h^3$. The last three terms tend to zero as $h\\to0$, so the derivative is $4a^3$ for every real $a$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Use the limit definition to derive the derivative of $f(x)=1/x$ at any $a\\ne0$.",
+      "hint": "Combine the two fractions before dividing by $h$.",
+      "solution": "For $h\\ne0$ with $a+h\\ne0$, $\\frac{1/(a+h)-1/a}{h}=-\\frac1{a(a+h)}$. As $h\\to0$, this tends to $-1/a^2$ for $a\\ne0$. No derivative is assigned at $a=0$, where the original function is undefined.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Rationalize the difference quotient of $\\sqrt{x}$ at $a=4$ and find the tangent line.",
+      "hint": "Rationalize using $\\sqrt{4+h}+2$.",
+      "solution": "For $h\\ne0$, $\\frac{\\sqrt{4+h}-2}{h}=\\frac1{\\sqrt{4+h}+2}\\to1/4$. Since $f(4)=2$, the tangent line is $y=2+(x-4)/4$. The root is defined for sufficiently small $h$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Explain why $\\sqrt{x}$ on $[0,\\infty)$ has no finite right derivative at zero.",
+      "hint": "Write the one-sided quotient exactly.",
+      "solution": "For $h>0$, the right quotient is $\\frac{\\sqrt h-0}{h}=1/\\sqrt h\\to+\\infty$ as $h\\to0^+$. The graph has a vertical right-hand tangent, but no finite right derivative at zero.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f(x)=x^3$, find the tangent at zero and say whether the graph stays on one side of it.",
+      "hint": "The quotient at zero is $h^3/h$.",
+      "solution": "The quotient is $h^3/h=h^2\\to0$, so $f^{\\prime}(0)=0$ and the tangent is $y=0$. Yet $x^3<0$ for $x<0$ and $x^3>0$ for $x>0$, so the graph crosses that tangent; zero slope does not imply an extremum.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "At $a=1$, use $L(x)=2-x$ to approximate $1/x$ at $x=1.1$ and bound the error without rounding.",
+      "hint": "Subtract the line $L(x)$ from $1/x$ algebraically.",
+      "solution": "The tangent estimate is $L(1.1)=2-1.1=0.9$. The exact error is $1/1.1-0.9=(0.1)^2/1.1=1/110$. Since $1.1\\ge1$, it is at most $(0.1)^2=0.01$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Suppose a function is differentiable at $a$ with $f^{\\prime}(a)=m$. Prove that the error of the line $f(a)+m(x-a)$ is $o(|x-a|)$.",
+      "hint": "Rewrite the line error using the derivative quotient.",
+      "solution": "For $x\\ne a$, $\\frac{f(x)-f(a)-m(x-a)}{x-a}=\\frac{f(x)-f(a)}{x-a}-m\\to0$ by differentiability. Taking absolute values gives $|f(x)-f(a)-m(x-a)|/|x-a|\\to0$, exactly the claimed $o(|x-a|)$ error.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "A continuous function equals $2x$ for $x<0$ and $3x$ for $x\\ge0$. Does it have a derivative at zero?",
+      "hint": "Use $f(0)=0$ and compare quotients for positive and negative $h$.",
+      "solution": "Continuity holds because both branches tend to $0=f(0)$. The left difference quotient is $2$ and the right quotient is $3$, so the two-sided derivative at zero does not exist.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the one-sided derivative limits of $f(x)=|x-2|$ at $x=2$ and decide differentiability.",
+      "hint": "Set $h=x-2$ and compare $|h|/h$ by sign.",
+      "solution": "At $x=2$, the difference quotient is $|h|/h$. It equals $-1$ for $h<0$ and $1$ for $h>0$. The one-sided slopes differ, so $f$ is not differentiable at $2$, though it is continuous there.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Choose $m,b$ so $f(x)=x^2$ for $x\\le1$ and $f(x)=mx+b$ for $x>1$ is differentiable at $1$.",
+      "hint": "First match values; then match the one-sided slopes.",
+      "solution": "Continuity at $1$ requires $m+b=1$, since the left branch gives $f(1)=1$. The left derivative is $2$; after continuity, the right derivative is $m$. Matching slopes gives $m=2$, then $b=-1$.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Show from the definition that $f(0)=0$, $f(x)=x^2\\sin(1/x)$ for $x\\ne0$ is differentiable at zero.",
+      "hint": "Bound the magnitude of $f(h)/h$.",
+      "solution": "For $h\\ne0$, $f(h)/h=h\\sin(1/h)$ and $|h\\sin(1/h)|\\le|h|\\to0$. The squeeze theorem gives $f^{\\prime}(0)=0$. This does not imply continuity of $f^{\\prime}$ near zero.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Let $g(0)=0$ and $g(x)=x\\sin(1/x)$ for $x\\ne0$. Prove continuity at zero but failure of differentiability there.",
+      "hint": "Use one inequality for continuity and two sequences for the quotient.",
+      "solution": "Because $|g(x)|\\le|x|$, $g(x)\\to0=g(0)$, proving continuity. The derivative quotient is $\\sin(1/h)$. Along $h_n=1/(\\pi/2+2\\pi n)$ it equals $1$, while along $k_n=1/(3\\pi/2+2\\pi n)$ it equals $-1$. Thus no derivative limit exists.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "A height $H(t)$, measured in centimetres, has $H'(4)=-2$ and $H''(4)=0.5$, with $t$ in minutes. Interpret both numbers. Must height already be increasing at $t=4$?",
+      "hint": "Distinguish the value of a rate from the rate of change of that rate.",
+      "solution": "At $t=4$ minutes, $H^{\\prime}(4)=-2$ centimetres per minute means height is decreasing. The value $H^{\\prime\\prime}(4)=0.5$ centimetres per minute squared means that instantaneous velocity is increasing there. Height is not increasing at that instant, and these two derivative values do not determine when it might turn upward.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(x)=x|x|$, find $f^{\\prime}(0)$ and determine whether $f^{\\prime\\prime}(0)$ exists.",
+      "hint": "First find $f^{\\prime}(0)$, then compare one-sided slopes of $f^{\\prime}$.",
+      "solution": "At zero, $f(h)/h=|h|\\to0$, so $f^{\\prime}(0)=0$. For $x>0$, $f^{\\prime}(x)=2x$; for $x<0$, $f^{\\prime}(x)=-2x$. Thus $f^{\\prime}(x)=2|x|$, whose left and right derivatives at zero are $-2$ and $2$. Therefore $f^{\\prime\\prime}(0)$ does not exist.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "A particle has $v(t)=-3-2t$ for $t\\ge0$. At $t=1$, are its velocity, acceleration, and speed increasing or decreasing?",
+      "hint": "Differentiate $v$ and remember speed is $|v|$.",
+      "solution": "At $t=1$, velocity is $v(1)=-5$. Since $v^{\\prime}(t)=-2$ for every $t\\ge0$, velocity is decreasing and acceleration is constant; acceleration is neither strictly increasing nor strictly decreasing. Because $v(t)<0$ throughout the domain, speed is $|v(t)|=3+2t$ and is increasing at a rate of $2$ speed units per unit of time. No physical units were specified.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $s(t)=t^3-6t^2+9t$, find velocity, acceleration, and jerk, with units if $s$ is metres and $t$ is seconds.",
+      "hint": "Differentiate successively, not by squaring an earlier derivative.",
+      "solution": "Differentiating position gives velocity $v(t)=3t^2-12t+9$ metres per second. Differentiating again gives acceleration $a(t)=6t-12$ metres per second squared. Jerk is $a^{\\prime}(t)=6$ metres per second cubed.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Give two position functions with acceleration $6\\,\\mathrm{m}/\\mathrm{s}^2$ but different initial positions and velocities.",
+      "hint": "Add a linear function to one trajectory.",
+      "solution": "For example, $s_1(t)=3t^2$ and $s_2(t)=3t^2+4t+7$ both have second derivative $6$ metres per second squared. At $t=0$, their positions are $0$ and $7$ metres and their velocities are $0$ and $4$ metres per second. Acceleration does not fix the integration constants.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A position model gives $s^{\\prime}(2)=50\\,\\mathrm{cm}/\\mathrm{s}$. Express this velocity in metres per second and state the unit of $s^{\\prime\\prime}$.",
+      "hint": "Convert centimetres to metres; differentiating adds another inverse second.",
+      "solution": "The velocity $s^{\\prime}(2)=50$ centimetres per second equals $0.5$ metres per second because $100$ centimetres is $1$ metre. If $s$ is in centimetres and $t$ in seconds, $s^{\\prime\\prime}$ has units centimetres per second squared, or metres per second squared after conversion.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For a ball with height $s(t)=20t-5t^2$ metres, where $t$ is measured in seconds and $0\\le t\\le4$, find average velocity on $[0,2]$ and instantaneous velocity at $t=2$.",
+      "hint": "Use position change for the average; for the instant use $v(t)=20-10t$.",
+      "solution": "Positions are $s(0)=0$ and $s(2)=20$ metres, so average velocity on $[0,2]$ is $(20-0)/(2-0)=10$ metres per second. The instantaneous velocity is $v(2)=20-10(2)=0$ metres per second.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For a ball with height $s(t)=20t-5t^2$ metres, where $t$ is measured in seconds and $0\\le t\\le4$, find displacement and total distance on $[1,3]$.",
+      "hint": "Check whether velocity changes sign inside the interval.",
+      "solution": "Positions are $s(1)=15$, $s(2)=20$, and $s(3)=15$ metres. Displacement is $s(3)-s(1)=0$. The ball rises $5$ metres and falls $5$ metres, so total distance is $10$ metres.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $s(t)=t^2-6t$ on $[0,5]$, compute displacement and total distance.",
+      "hint": "Find where $v(t)=0$ and split the distance there.",
+      "solution": "Velocity $v(t)=2t-6$ changes sign at $t=3$. The positions are $s(0)=0$, $s(3)=-9$, and $s(5)=-5$. Displacement is $-5$, while total distance is $|-9-0|+|-5-(-9)|=13$ in the position units.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $s(t)=s_0+v_0t-gt^2/2$ with $v_0>0$ and $g>0$, derive apex time and height.",
+      "hint": "Set the derivative $v_0-gt$ to zero and substitute that time.",
+      "solution": "Velocity is $v(t)=v_0-gt$, so it vanishes at $t=v_0/g$. Substituting gives $s_{\\mathrm{top}}=s_0+v_0(v_0/g)-g(v_0/g)^2/2=s_0+v_0^2/(2g)$. Since acceleration is $-g<0$, this is the maximum on any flight interval containing that time.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $s(t)=s_0+v_0t-gt^2/2$ on $t\\ge0$, assume $v_0>0$ and $g>0$. Holding $s_0$ and $g$ fixed, change $v_0$ to $v_0+\\Delta v$, where $v_0+\\Delta v>0$. Find the exact change in apex height.",
+      "hint": "Subtract the two squared-speed height formulas.",
+      "solution": "The exact height change is $\\frac{(v_0+\\Delta v)^2-v_0^2}{2g}=\\frac{v_0\\Delta v}{g}+\\frac{(\\Delta v)^2}{2g}$. The first term is the linear prediction; the nonnegative second term is the finite-change correction.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "A velocity graph crosses zero from positive to negative at $t=4$. What can be concluded about position and speed near that time?",
+      "hint": "Interpret signs of velocity on each side, not only its value at the crossing.",
+      "solution": "With velocity positive just before $t=4$ and negative just after, position rises then falls, so it has a local maximum at $t=4$. Speed $|v|$ is zero there and need not be differentiable. The value $v(4)=0$ alone would not establish the maximum without the sign change.",
+      "lesson": 6,
+      "type": "Interpretation"
+    }
+  ],
+  "summary": [
+    "A derivative is a finite limit of secant slopes; its units are output units divided by input units.",
+    "The tangent line gives a local approximation whose error divided by the input increment tends to zero.",
+    "Differentiability implies continuity, but corners, cusps, and vertical tangents show that the converse fails.",
+    "Higher derivatives describe changes in rates and require additional differentiability."
+  ],
+  "next": "Chapter 6 builds differentiation rules from the definition, allowing complex derivatives to be calculated efficiently. Keep the difference quotient as the meaning behind those rules and as a check on their hypotheses."
+}

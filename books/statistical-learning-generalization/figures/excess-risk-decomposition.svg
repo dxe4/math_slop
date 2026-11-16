@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">Excess risk separates representation from learning within the class</title>
+  <desc id="desc">The total excess risk R of h hat minus R of h P splits exactly into approximation error R of h H minus R of h P and within-class excess R of h hat minus R of h H. On a uniform-convergence event, the within-class term is at most twice epsilon generalization plus epsilon optimization. The figure associates changing the class with approximation, more relevant data or tighter complexity control with generalization, and a better solver with optimization.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}.total{fill:#eff6ff;stroke:#1d4ed8;stroke-width:3}.approx{fill:#ecfdf5;stroke:#0f766e;stroke-width:3}.within{fill:#fff7ed;stroke:#c2410c;stroke-width:3}.bound{fill:#faf5ff;stroke:#7e22ce;stroke-width:3}.arrow{fill:none;stroke:#475569;stroke-width:3;marker-end:url(#arrow)}.title{fill:#172033;font:700 21px system-ui,sans-serif}.label{fill:#172033;font:700 18px system-ui,sans-serif}.formula{fill:#172033;font:18px system-ui,sans-serif}.note{fill:#334155;font:15px system-ui,sans-serif}
+    @media (prefers-color-scheme:dark){.bg{fill:#0f172a;stroke:#64748b}.total{fill:#172554;stroke:#93c5fd}.approx{fill:#064e3b;stroke:#6ee7b7}.within{fill:#431407;stroke:#fdba74}.bound{fill:#3b0764;stroke:#d8b4fe}.arrow{stroke:#cbd5e1}.title,.label,.formula{fill:#f8fafc}.note{fill:#cbd5e1}}
+  </style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
+  <rect class="bg" x="10" y="10" width="940" height="390" rx="18"/>
+  <text class="title" x="480" y="40" text-anchor="middle">Excess risk has two exact pieces and one useful upper bound</text>
+  <rect class="total" x="275" y="65" width="410" height="74" rx="12"/>
+  <text class="label" x="480" y="92" text-anchor="middle">total excess risk</text>
+  <text class="formula" x="480" y="120" text-anchor="middle">R(ĥ) − R(h_P)</text>
+  <path class="arrow" d="M420 140L260 188"/><path class="arrow" d="M540 140L700 188"/>
+  <text class="formula" x="480" y="174" text-anchor="middle">=</text>
+  <rect class="approx" x="55" y="190" width="350" height="105" rx="12"/>
+  <text class="label" x="230" y="218" text-anchor="middle">approximation error</text>
+  <text class="formula" x="230" y="246" text-anchor="middle">R(h_H) − R(h_P)</text>
+  <text class="note" x="230" y="275" text-anchor="middle">controlled by the represented class H</text>
+  <rect class="within" x="555" y="190" width="350" height="105" rx="12"/>
+  <text class="label" x="730" y="218" text-anchor="middle">within-class excess</text>
+  <text class="formula" x="730" y="246" text-anchor="middle">R(ĥ) − R(h_H)</text>
+  <text class="note" x="730" y="275" text-anchor="middle">selection from finite data plus optimization</text>
+  <path class="arrow" d="M730 296V325"/>
+  <rect class="bound" x="535" y="330" width="390" height="50" rx="12"/>
+  <text class="formula" x="730" y="361" text-anchor="middle">≤ 2 ε_gen + ε_opt  on the uniform event</text>
+  <text class="note" x="230" y="327" text-anchor="middle">change H to change this term</text>
+  <text class="note" x="230" y="352" text-anchor="middle">then re-audit estimation and optimization</text>
+</svg>

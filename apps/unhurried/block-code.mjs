@@ -1,0 +1,16 @@
+import {BLOCK_CODE_DEFAULTS,BLOCK_CODE_PRESETS,evaluateBlockCode} from './block-code-model.mjs';
+import {blockCodeOutput,blockCodeOracle,blockCodeSummary} from './block-code-markup.mjs';
+let nextId=0;
+export function mountBlockCode(host){
+  if(host.dataset.blockCodeMounted==='true')return;
+  const prefix=`block-code-live-${++nextId}`,el=(tag,text,className)=>{const e=document.createElement(tag);if(text)e.textContent=text;if(className)e.className=className;return e;};
+  const workshop=el('div','','block-code-workshop');workshop.append(el('p','Predict whether the fair source benefits from pairing, then compare a biased source. Pair framing and the iid letter model are fixed before constructing the dictionary. The separate exhaustive inspection below changes a candidate assignment, not the optimal code above.'));
+  const controls=el('fieldset','','block-code-controls');controls.append(el('legend','Choose a known iid letter source'));const label=el('label');label.append(el('span','Letter probabilities'));const fixture=el('select');fixture.dataset.blockCodeControl='fixture';for(const[id,f]of Object.entries(BLOCK_CODE_PRESETS))fixture.add(new Option(f.label,id));fixture.value=BLOCK_CODE_DEFAULTS.fixture;label.append(fixture);controls.append(label);
+  const actions=el('div','','block-code-actions'),output=el('div');output.dataset.blockCodeOutput='';
+  const extra=el('details','','block-code-oracle');extra.append(el('summary','Inspect the exhaustive four-leaf comparison'));
+  const caseLabel=el('label');caseLabel.append(el('span','Ordered tree and leaf assignment'));const candidate=el('input');candidate.type='range';candidate.min='0';candidate.max='119';candidate.step='1';candidate.value=String(BLOCK_CODE_DEFAULTS.caseIndex);candidate.id=`${prefix}-candidate`;candidate.dataset.blockCodeControl='caseIndex';const caseValue=el('output');caseValue.htmlFor=candidate.id;const oracle=el('div');oracle.dataset.blockCodeOracle='';caseLabel.append(candidate,caseValue);extra.append(caseLabel,oracle);
+  const status=el('p','','sr-only');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+  const update=(candidateOnly=false)=>{const m=evaluateBlockCode({fixture:fixture.value,caseIndex:Number(candidate.value)});if(!candidateOnly)output.innerHTML=blockCodeOutput(m,prefix);oracle.innerHTML=blockCodeOracle(m);caseValue.value=`${m.caseIndex+1} of 120`;candidate.setAttribute('aria-valuetext',`candidate ${m.caseIndex+1} of 120`);status.textContent=candidateOnly?`Candidate ${m.caseIndex+1}: weighted length ${m.candidate.numerator}/${m.denominator} bits per pair; optimum ${m.numerator}/${m.denominator}.`:blockCodeSummary(m);};
+  for(const[text,id]of [['Compare fair letters','fair'],['Restore worked source','threequarters']]){const button=el('button',text,'button secondary');button.type='button';button.addEventListener('click',()=>{fixture.value=id;candidate.value=String(BLOCK_CODE_DEFAULTS.caseIndex);update();});actions.append(button);}
+  fixture.addEventListener('change',()=>update());candidate.addEventListener('input',()=>update(true));workshop.append(controls,actions,output,extra,status);update();host.append(workshop);const fallback=host.querySelector('[data-block-code-fallback]');if(fallback)fallback.hidden=true;host.dataset.blockCodeMounted='true';
+}

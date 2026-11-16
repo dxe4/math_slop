@@ -1,0 +1,88 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Connect the slope of x², its accumulated area, and the rate at which that area grows, then investigate a filling tank."><meta name="theme-color" content="#f8f6ef"><title>Change and accumulation: a first taste of calculus · Maths, Unhurried</title><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../style.css"><script type="module" src="../../app.mjs"></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="header-inner"><a class="brand" href="../../index.html" aria-label="Maths, unhurried home"><span class="brand-mark" aria-hidden="true">∿</span><span>maths<span class="brand-comma">,</span> <em>unhurried</em></span></a><nav aria-label="Main navigation"><a href="../../tonight/index.html">Try an idea</a><a href="../../explore/index.html">Explore</a><a href="../../subjects/index.html">Subjects</a><a href="../index.html" aria-current="page">Series</a><a href="../../play/index.html">Playground</a><a href="../../notebook/index.html">My notebook</a></nav><a class="header-about" href="../../about/index.html">The idea <span aria-hidden="true">↗</span></a></div></header><main id="main"><header class="reading-width course-header"><a class="back-link" href="../index.html">← Series</a><div class="eyebrow">Short taster guide · 2 explorations</div><h1>Change and accumulation: a first taste of calculus</h1><p class="article-deck">Connect the slope of x², its accumulated area, and the rate at which that area grows, then investigate a filling tank.</p><p class="muted">About 30 minutes of reading and article exercises; guide practice and capstone take additional time</p><div class="outcome"><strong>Bring with you</strong><p>Substitute numbers into a formula · Expand a square or cube · Work with fractions</p><strong>Where this path takes you</strong><ul><li>Explain an instantaneous rate using a difference quotient</li><li>Compute and scale the area under x² using bounding sums</li><li>Justify A(t)=t³/3 and A′(t)=t² for t&gt;0</li><li>Distinguish accumulated amount, average rate, and instantaneous rate</li></ul></div></header><section class="reading-width course-resume" data-course-resume data-course="change-and-accumulation" data-articles="calc-speed-at-an-instant calc-area-accumulates" data-finish="#capstone" data-finish-label="Return to the capstone"><h2>Pick up this path</h2><p data-resume-text>Begin with the first exploration, or choose any module below.</p><a class="button secondary" data-resume-link href="../../articles/calc-speed-at-an-instant/index.html?course=change-and-accumulation">Start with A rate at an instant →</a><p class="small muted">Your next step follows the articles you mark explored in your local notebook. You can revisit any lesson whenever you like.</p><p data-resume-status role="status"></p></section><aside class="reading-width prerequisite-support" aria-label="Optional background reminders"><h2>A reminder before you begin</h2><p>Open a starting tool if it feels unfamiliar. The lesson explains its specific assumptions.</p><details class="prerequisite-refresher" data-refresher="algebra" id="reminder-algebra"><summary>Substitution and equations</summary><div class="refresher-body article-body"><p>A letter in a formula stands for a value. Substitution replaces that letter everywhere with a chosen number. Parentheses help keep a negative input together: if f(x)=x²+2x, then f(−3)=(−3)²+2(−3)=9−6=3. Squaring happens before adding.</p>
+<p><strong>Worked example.</strong> To solve 3x+5=20, subtract 5 from both sides and then divide both sides by 3. Applying the same operation to both sides preserves the equality; the divisor here is nonzero.</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>20</mn><mo>⇒</mo><mn>3</mn><mi>x</mi><mo>=</mo><mn>15</mn><mo>⇒</mo><mi>x</mi><mo>=</mo><mn>5</mn></mrow></math>
+<p>Substitute the answer back: 3×5+5=20. This checks the proposed value against the original equation. The distributive rule also lets you expand a bracket: 2(x+4)=2x+8.</p>
+<p><strong>Try one.</strong> Solve 2(x+4)=18 and check the result.</p>
+<details><summary>Worked answer</summary><p>Divide both sides by 2 to obtain x+4=9. Subtract 4 to get x=5. Checking gives 2(5+4)=2×9=18, as required.</p></details>
+<p><strong>Watch the sign.</strong> The values (−3)²=9 and −3²=−9 differ: the second expression applies the minus sign after squaring 3. Keep the parentheses when substituting negative values.</p>
+<p class="refresher-own-page"><a href="../../refresh/algebra/index.html">Read this reminder on its own →</a></p></div></details><details class="prerequisite-refresher" data-refresher="functions" id="reminder-functions"><summary>Functions and composition</summary><div class="refresher-body article-body"><p>A function assigns exactly one output to each allowed input. Its domain is the set of allowed inputs; its codomain is the declared set containing the outputs. Different inputs may share an output. For f(x)=x² on the real numbers, both 2 and −2 produce 4.</p>
+<p><strong>Worked example.</strong> Let f(x)=2x+1 and g(x)=x². The expression f(g(3)) first applies g to 3, producing 9, and then applies f to 9, producing 19. Composition writes this as (f∘g)(3).</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mn>9</mn><mo>)</mo><mo>=</mo><mn>19</mn></mrow></math>
+<p>For a composition to be defined, the output of the inside function must be an allowed input for the outside function. Here both functions accept every real number, so that condition holds.</p>
+<p><strong>Try one.</strong> Compute g(f(3)). Does changing the order preserve the result?</p>
+<details><summary>Worked answer</summary><p>First f(3)=7, then g(7)=49. This differs from f(g(3))=19. Composition generally depends on its order; the circle symbol names the operation, rather than promising that the two orders agree.</p></details>
+<p><strong>Watch the notation.</strong> In f(3), the parentheses name the input to f. They do not mean f multiplied by 3. Read the expression from the inside out.</p>
+<p class="refresher-own-page"><a href="../../refresh/functions/index.html">Read this reminder on its own →</a></p></div></details><details class="prerequisite-refresher" data-refresher="fractions" id="reminder-fractions"><summary>Fractions and percentages</summary><div class="refresher-body article-body"><p>A fraction a/b divides a by b; the denominator b must be nonzero. For positive fractions representing parts of a whole, the denominator tells you the size of each part and the numerator counts those parts. Changing both by the same nonzero factor keeps the value: 6/8 and 3/4 describe the same amount.</p>
+<p><strong>Worked example.</strong> To add 1/3 and 1/4, first describe both using twelfths. One third is four twelfths, and one quarter is three twelfths, giving seven twelfths altogether.</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>=</mo><mfrac><mn>4</mn><mn>12</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>12</mn></mfrac><mo>=</mo><mfrac><mn>7</mn><mn>12</mn></mfrac></mrow></math>
+<p>A percentage means a fraction out of one hundred. So 15% of 80 is (15/100)×80=12. When a quantity grows by 15%, multiply its old value by 1.15.</p>
+<p><strong>Try one.</strong> What is 3/4 of 28? What fraction of 28 remains?</p>
+<details><summary>Worked answer</summary><p>Divide 28 into four equal parts of 7, then take three: 3×7=21. The remaining amount is 7, which is 1/4 of 28. The two fractions add to one whole.</p></details>
+<p><strong>Watch the units.</strong> Adding numerators and denominators directly would give 1/3+1/4=2/7, which is false. Convert to equal-sized parts before adding.</p>
+<p class="refresher-own-page"><a href="../../refresh/fractions/index.html">Read this reminder on its own →</a></p></div></details></aside><article class="article-body reading-width course-body" data-course-id="change-and-accumulation"><section id="start">
+  <h2>Two ways to ask how much changes</h2>
+  <p>A quantity can change at a particular rate, and those changes can accumulate. This short course connects the two ideas for one carefully chosen family of examples. You will work with the curve y = x², find its instantaneous rate, compute its area, and then ask how quickly that area grows.</p>
+  <p>Allow about 85 minutes for both lessons, the connecting explanation, and practice. You can stop between any sections. This is a first taste of calculus, not a complete introduction: we will establish a particular relationship rather than prove the general fundamental theorem of calculus.</p>
+  <details>
+    <summary>Background recap: functions, intervals, and small changes</summary>
+    <p>A function assigns an output to an input: f(x) = x² assigns 9 to 3. The interval [a,b] includes both endpoints. A small change h moves an input from x to x+h; h can be negative. Average rate means change in output divided by change in input, with a nonzero denominator. In a limit, h approaches zero but is not replaced by zero inside that quotient. The lessons refresh coordinates, slopes, rectangle areas, and finite sums locally.</p>
+  </details>
+</section>
+
+<section id="lessons">
+  <h2>Read these two explorations</h2>
+  <ol>
+    <li><a href="../../articles/calc-speed-at-an-instant/index.html?course=change-and-accumulation">The rate of x² at an instant</a>. Follow the secant calculation until you can explain why the average rate from a to a+h is 2a+h. Its limit is 2a. Keep the distinction between the input a and its change h.</li>
+    <li><a href="../../articles/calc-area-accumulates/index.html?course=change-and-accumulation">Area under x², one rectangle at a time</a>. Follow the lower and upper sums on [0,1]. Both approach 1/3, trapping the area between them.</li>
+  </ol>
+  <p>The first lesson asks about a curve's local slope. The second adds many contributions across an interval. Before continuing, try explaining why neither a single secant nor a single rectangle sum is the final answer. The worked explanations remain available whenever useful.</p>
+</section>
+
+<section id="connect">
+  <h2>Make the area itself a function</h2>
+  <p>Let A(t) mean the area under x² from 0 to t, for t ≥ 0. Here t is the moving right endpoint; x is the position being covered. Thus A(1) = 1/3. These are two roles for variables, not two different curves.</p>
+  <p>For t &gt; 0, scale every horizontal coordinate of the unit-interval rectangles by t. The curve's heights scale by t² because (tx)² = t²x². Each rectangle area therefore scales by t³. Both bounding sums scale by that same factor, so their common limit does too. At t = 0 the area is zero. This proves:</p>
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>A</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mfrac><msup><mi>t</mi><mn>3</mn></msup><mn>3</mn></mfrac><mspace width="1em"/><mo>(</mo><mi>t</mi><mo>≥</mo><mn>0</mn><mo>)</mo></mrow></math>
+  <p>Now measure the rate of this new function. Expanding the cube and cancelling t³ gives, for h ≠ 0 and t+h ≥ 0:</p>
+  <p><strong>[A(t+h) − A(t)] / h = t² + th + h²/3.</strong></p>
+  <p>For fixed t &gt; 0, the last two terms approach zero as h approaches zero. Therefore A′(t) = t²: the accumulation's instantaneous rate equals the original curve's height. At t = 0 this reasoning gives a right-hand rate of zero, because our area function is defined only for nonnegative endpoints.</p>
+  <p>Notice the distinction: the derivative of t² is 2t, but the derivative of its accumulated area t³/3 is t². We have proved this example algebraically. A thin added strip supplies intuition, but a strip drawn with positive width is not by itself a proof.</p>
+</section>
+
+<section id="practice">
+  <h2>Mixed practice: change the height</h2>
+  <p>Let B(t) be the area under 2x² from 0 to t. Find B(2), its average rate of change between t = 1 and t = 2, and its instantaneous rate at t = 2. Explain why the last two answers differ.</p>
+  <details><summary>A hint</summary><p>Doubling every rectangle height doubles both bounding sums. Then apply the difference quotient to the resulting area function.</p></details>
+  <details>
+    <summary>Worked solution</summary>
+    <p>Doubling heights gives B(t) = 2t³/3. Thus B(2) = 16/3 and B(1) = 2/3. The average rate is (16/3 − 2/3)/(2 − 1) = 14/3.</p>
+    <p>Its difference quotient is twice the one above: 2t² + 2th + 2h²/3. Taking the limit gives B′(t) = 2t², so B′(2) = 8. The average describes the whole interval, during which the added area per unit width increases. The instantaneous rate describes its endpoint. Neither answer should replace the other.</p>
+  </details>
+</section>
+
+<section id="capstone">
+  <h2>Final investigation: filling a tank</h2>
+  <p>An empty tank receives water with inflow rate q(t) = 3t², where t is measured in hours and q in litres per hour. There is no outflow. Find the amount after two hours, the amount added during the second hour, and the instantaneous filling rate at two hours. Explain which answer is an area and which is a rate.</p>
+  <details>
+    <summary>Model answer</summary>
+    <p>Multiplying the x² rectangles by three gives accumulated volume V(t) = 3A(t) = t³ litres. Therefore V(2) = 8 litres. The second hour adds V(2) − V(1) = 8 − 1 = 7 litres. The inflow at two hours is q(2) = 12 litres per hour; the difference quotient of V also tends to 3t², confirming that rate.</p>
+    <p>The average over the first two hours is 8/2 = 4 litres per hour. Twelve litres per hour was not the rate throughout those hours, so multiplying 12 by 2 would overestimate the accumulated water.</p>
+  </details>
+  <h3>What each activity checks</h3>
+  <table>
+    <thead><tr><th>Outcome</th><th>Evidence to look for</th></tr></thead>
+    <tbody>
+      <tr><td>Explain a local rate</td><td>The first lesson and the B′(2) quotient distinguish a limit from an average.</td></tr>
+      <tr><td>Compute a simple area limit</td><td>The second lesson and scaling argument justify the accumulated amount.</td></tr>
+      <tr><td>Connect accumulation and rate</td><td>The tank answer separates litres from litres per hour and checks V′ = q.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Self-review rubric:</strong> a complete explanation has correct amounts, correct units, a reason for the cubic accumulation, and a clear distinction between average and instantaneous rate. If a calculation works but its meaning remains unclear, revisit the corresponding row. Hints and model answers are resources; marking the reading complete does not certify independent mastery.</p>
+</section>
+
+<section id="takeaway">
+  <h2>A place to stop, or one further question</h2>
+  <p>You have connected local slope and accumulated area in an example with an explicit proof. Optional extension: suppose the inflow stops abruptly at two hours. Volume then stays at eight litres. At that joining point its left-hand rate is 12 and its right-hand rate is zero, so a two-sided derivative does not exist. Accumulation does not guarantee differentiability everywhere without further hypotheses.</p>
+  <p>The exercises and connecting arguments here are original. Mathematical reference notes accompany the two linked lessons. This bounded pilot has not received external mathematical or learning-effectiveness review.</p>
+</section>
+<section class="quiet-panel"><h2>Your path, at your pace.</h2><p>Each lesson can stand on its own. Use “Mark as explored” on a lesson if you want to remember your place. Reading completion is your own note, not a test of mastery.</p><ol class="course-progress"><li><a href="../../articles/calc-speed-at-an-instant/index.html?course=change-and-accumulation">A rate at an instant</a><span data-progress-for="calc-speed-at-an-instant" class="progress-status"></span></li><li><a href="../../articles/calc-area-accumulates/index.html?course=change-and-accumulation">Area that grows while you watch</a><span data-progress-for="calc-area-accumulates" class="progress-status"></span></li></ol></section><p class="small muted">This is a bounded taster.</p></article></main><footer class="site-footer"><div><a class="brand" href="../../index.html" aria-label="Maths, unhurried home"><span class="brand-mark" aria-hidden="true">∿</span><span>maths<span class="brand-comma">,</span> <em>unhurried</em></span></a><p>For the joy of figuring things out.</p></div><div class="footer-links"><a href="../../tonight/index.html">Try an idea</a><a href="../../discover/index.html">Small discoveries</a><a href="../../start/index.html">Start here</a><a href="../../about/index.html">About this project</a><a data-report-link href="../../feedback/index.html?page=%2Fcourses%2Fchange-and-accumulation%2F">Report a problem</a><a href="../../roadmap/index.html">The bigger picture</a><a href="../../refresh/index.html">Refresh a tool</a><a href="../../glossary/index.html">Glossary</a><a href="../../notebook/index.html">Your local notebook</a><span>Library edition · September 2026</span></div></footer></body></html>

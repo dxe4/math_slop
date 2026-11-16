@@ -1,0 +1,27 @@
+# A circle is one moving point governed by two synchronized coordinates:
+# X(t) = center_x + radius*cos(t), Y(t) = center_y + radius*sin(t).
+# Angle t is in radians. Play one turn, then drag t through the quarter turns.
+# The teal and amber segments show the coordinate changes from the center.
+# Predict each segment's sign before t passes pi/2, pi, and 3*pi/2.
+# Change radius: the coordinates scale, but the angle and shape remain the same.
+# Change center_x or center_y: translation changes neither radius nor velocity.
+# Differentiate to obtain (-radius*sin(t),radius*cos(t)): the velocity is
+# perpendicular to the radius, and its length is the constant radius.
+# Equal coordinate scaling is essential: a mathematical circle must look round.
+scene "A moving circle point: sine, cosine, and radians";
+coordinates equal;
+domain -3.5 3.5;
+range -3.5 3.5;
+param radius = 1.5 from 0.3 to 2;
+param center_x = 0 from -1 to 1;
+param center_y = 0 from -1 to 1;
+param t = 0 from 0 to 6.283185307179586;
+animate t from 0 to 6.283185307179586 duration 8;
+parametric circle(x) = (center_x+radius*cos(x),center_y+radius*sin(x)) from 0 to 6.283185307179586 color blue;
+segment radial from (center_x,center_y) to (center_x+radius*cos(t),center_y+radius*sin(t)) color rose;
+segment horizontal from (center_x,center_y) to (center_x+radius*cos(t),center_y) color teal;
+segment vertical from (center_x+radius*cos(t),center_y) to (center_x+radius*cos(t),center_y+radius*sin(t)) color amber;
+segment velocityguide from (center_x+radius*cos(t),center_y+radius*sin(t)) to (center_x+radius*cos(t)-0.5*radius*sin(t),center_y+radius*sin(t)+0.5*radius*cos(t)) color violet;
+point center = (center_x,center_y) color white;
+point projection = (center_x+radius*cos(t),center_y) color teal;
+point moving = (center_x+radius*cos(t),center_y+radius*sin(t)) color rose;

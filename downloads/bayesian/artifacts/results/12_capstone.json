@@ -1,0 +1,71 @@
+{
+  "uniform": {
+    "uplift_mean": 0.08783944275327134,
+    "uplift_ci90": [
+      0.040946691353644954,
+      0.1345653339797287
+    ],
+    "prob_positive": 0.9989875,
+    "prob_profitable": 0.9916,
+    "expected_net_value": 3391.972137663567,
+    "mcse_net_value": 5.035449597423742,
+    "expected_loss_if_rollout": 4.074394092034717,
+    "expected_loss_if_keep": 3396.046531755602,
+    "evpi": 4.074394092034709,
+    "action": "rollout B",
+    "analytic_uplift_mean": 0.08790924283813503,
+    "analytic_uplift_sd": 0.028466857776079574,
+    "training_weighted_uplift_mean": 0.0809097372104985,
+    "net_value_at_cost_5000": -608.0278623364329,
+    "action_at_cost_5000": "keep A",
+    "holdout_log_score": -41.422940028671405,
+    "holdout_covered_of_16": 15,
+    "ppc_range_tail_by_arm": [
+      0.5584375,
+      0.6279375
+    ],
+    "prior_total_completion_fraction_ci90": [
+      0.37416666666666665,
+      0.625
+    ]
+  },
+  "regularised": {
+    "uplift_mean": 0.08023329574937804,
+    "uplift_ci90": [
+      0.034896500827296506,
+      0.12525407386138454
+    ],
+    "prob_positive": 0.998475,
+    "prob_profitable": 0.9862,
+    "expected_net_value": 3011.6647874689024,
+    "mcse_net_value": 4.8571773040597375,
+    "expected_loss_if_rollout": 6.442313447207489,
+    "expected_loss_if_keep": 3018.1071009161096,
+    "evpi": 6.442313447207198,
+    "action": "rollout B"
+  },
+  "low_completion": {
+    "uplift_mean": 0.08049122070328588,
+    "uplift_ci90": [
+      0.035529019150009576,
+      0.1254302690137981
+    ],
+    "prob_positive": 0.99855,
+    "prob_profitable": 0.9868875,
+    "expected_net_value": 3024.5610351642936,
+    "mcse_net_value": 4.823682287453861,
+    "expected_loss_if_rollout": 5.995778332044155,
+    "expected_loss_if_keep": 3030.556813496338,
+    "evpi": 5.99577833204421,
+    "action": "rollout B"
+  },
+  "pooled": {
+    "uplift_mean": 0.08293151378224672,
+    "uplift_ci90": [
+      0.03600492986567582,
+      0.12974831340516008
+    ],
+    "holdout_marginal_log_score_sum": -61.590290572549975,
+    "note": "Common arm rates; this assumption ignores centre heterogeneity."
+  }
+}

@@ -1,0 +1,352 @@
+/* Reader layout: a chapter is a sequence of pages, with one idea per page. */
+:root {
+  --paper: var(--euler-paper,#f7f4ec);
+  --ink: var(--euler-ink,#202e2b);
+  --accent: var(--euler-accent,#9e472f);
+  --line: var(--euler-rule,#d8ddd5);
+  --muted: var(--euler-muted,#53625d);
+  --page: var(--euler-surface,#fffefb);
+  --quiet: var(--euler-surface-soft,#edf3ed);
+}
+body { background: var(--paper); color: var(--ink); font: 16px/1.55 var(--euler-font-ui,system-ui, sans-serif); }
+button, input, textarea { font: inherit; }
+a { text-decoration-thickness: 1px; text-underline-offset: .18em; }
+:focus-visible { outline: 3px solid var(--euler-focus,#ad6142); outline-offset: 4px; }
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  min-height: 72px; padding: 15px clamp(20px, 3vw, 50px);
+  background: var(--euler-surface,#fffdf9f2); backdrop-filter: blur(10px);
+}
+.brand { font-size: 23px; letter-spacing: -.025em; }
+.layout { max-width: 1800px; grid-template-columns: 255px minmax(0, 1fr); }
+.layout > aside {
+  top: 72px; max-height: calc(100vh - 72px); padding: 26px 20px 40px;
+  background: var(--euler-surface-soft,#eff1e9); border-right: 1px solid var(--euler-rule,#d5dcd2);
+}
+.library-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 9px; }
+.library-heading label { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+#toggle-contents { display: none; }
+#search { font-size: 14px; padding: 11px 12px; border-color: var(--euler-control-rule,#cdd6cb); }
+#progress { margin: 13px 0 24px; }
+#contents h2 { margin-top: 22px; font: 700 var(--euler-text-sm,.9375rem)/1.4 var(--euler-font-ui,system-ui, sans-serif); letter-spacing: .1em; color: var(--euler-muted,#4c5a54); }
+#contents a { border-radius: var(--euler-radius-md,7px); min-height: 2.75rem; padding: 8px 10px; font-size: var(--euler-text-sm,.9375rem); line-height: 1.45; text-decoration: underline; }
+#contents a[aria-current="page"] { background: var(--euler-surface-soft,#dae7d9); color: var(--euler-ink,#203a32); font-weight: 700; }
+main { max-width: 1100px; padding: 50px clamp(28px, 5vw, 84px) 100px; }
+main.reading-mode { max-width: none; padding: 38px clamp(26px, 3.5vw, 62px) 100px; background: var(--page); }
+.reader-shell { display: grid; grid-template-columns: minmax(0, 710px) minmax(190px, 230px); gap: clamp(30px, 4vw, 68px); align-items: start; max-width: 1100px; margin: 0 auto; }
+.reader-article { min-width: 0; font-size: calc(16px * var(--reading-scale, 1)); }
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 38px; color: var(--euler-muted,#64736b); font: 12px/1.5 var(--euler-font-ui,system-ui, sans-serif); }
+.breadcrumbs a { color: var(--euler-accent,#426455); }
+.reader-settings { margin: -18px 0 27px; padding-bottom: 14px; border-bottom: 1px solid var(--euler-rule,#e6eae3); font: 13px/1.45 var(--euler-font-ui,system-ui, sans-serif); }
+.reader-settings summary { width: max-content; color: var(--euler-accent,#315d49); font-size: 13px; }
+.reading-settings-controls { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; margin-top: 15px; }
+.reading-size-controls, .reading-width-controls, .reading-theme-controls { display: flex; align-items: center; gap: 10px; }
+.reading-size-controls > span, .reading-width-controls label, .reading-theme-controls label { font-weight: 700; color: var(--euler-muted,#52645a); }
+.reading-size-controls button { min-width: 2.75rem; min-height: 2.75rem; padding: var(--euler-space-1,5px) var(--euler-space-2,8px); font-weight: 700; }
+.reading-size-controls output { min-width: 3.5em; text-align: center; font-variant-numeric: tabular-nums; }
+.reading-width-controls select, .reading-theme-controls select { min-height: 2.75rem; padding: var(--euler-space-2,7px) var(--euler-space-2,9px); border: 1px solid var(--euler-control-rule,#cbd6ca); border-radius: var(--euler-radius-sm,5px); background: var(--euler-surface,#fff); color: var(--ink); font: inherit; }
+.reader-article > .eyebrow { margin: 0 0 11px; font-size: 12px; letter-spacing: .11em; }
+.reader-article h1 { font: 400 clamp(37px, 4.1vw, 57px)/1.09 var(--euler-font-reading,Georgia, Cambria, serif); letter-spacing: -.035em; margin: 0 0 23px; text-wrap: balance; }
+.reader-article h1:focus { outline: none; }
+.reader-article h1:focus-visible { outline: none; box-shadow: inset 0 -3px var(--euler-focus,#ad6142); }
+.reader-article h2 { font: 400 28px/1.25 var(--euler-font-reading,Georgia, Cambria, serif); margin: 36px 0 14px; letter-spacing: -.015em; }
+.reader-article h3 { line-height: 1.35; }
+.reader-article .lead { font: 22px/1.5 var(--euler-font-reading,Georgia, Cambria, serif); color: var(--euler-muted,#4d5b56); max-width: 58ch; }
+.reader-article > p, .reader-article > section:not(.reading-prose) > p { max-width: 70ch; }
+.reading-prose { font: calc(19px * var(--reading-scale, 1))/1.73 var(--euler-font-reading,Georgia, Cambria, "Times New Roman", serif); letter-spacing: .005em; }
+.reading-prose p { margin: 0 0 1.5em; max-width: 68ch; overflow-wrap: normal; }
+.reading-prose p:first-child::first-letter { font-size: 1.12em; }
+.theorem-card { margin: 38px 0; padding: 25px 28px 18px; border: 1px solid var(--euler-rule,#d6dfd5); border-left: 4px solid var(--euler-accent,#58775e); border-radius: 0 9px 9px 0; background: var(--euler-surface-soft,#f8fbf6); }
+.theorem-card .eyebrow { margin: 0 0 6px; font: 750 var(--euler-text-sm,.9375rem)/1.4 var(--euler-font-ui,system-ui, sans-serif); }
+.theorem-card h2 { margin: 0 0 14px; font-size: 27px; }
+.theorem-card h3 { margin: 25px 0 12px; font: 700 13px/1.4 var(--euler-font-ui,system-ui, sans-serif); text-transform: uppercase; letter-spacing: .08em; color: var(--euler-accent,#4d6957); }
+.theorem-card .theorem-statement { padding: 15px 18px; margin: 0; border-radius: 6px; background: var(--euler-surface-soft,#eaf2e7); font-style: italic; }
+.theorem-card p { font-size: calc(18px * var(--reading-scale, 1)); line-height: 1.67; margin-bottom: 1.2em; }
+.inline-math { position: relative; display: inline-block; max-width: 100%; overflow-x: clip; white-space: nowrap; vertical-align: -.18em; }
+.inline-math.scrollable { overflow-x: auto; }
+.math-phrase { display:inline-flex; max-width:100%; align-items:baseline; }
+.math-phrase > .inline-math { min-width:0; }
+.math-punctuation { flex-shrink:0; }
+.typeset-equation { overflow-x: auto; padding: 11px 5px; font-size: 1.06em; }
+.theorem-card .typeset-equation { margin: 12px 0 4px; }
+.key-result .typeset-equation { padding: 3px 0 0; text-align: left; }
+.key-result .katex-display { margin: .3em 0; text-align: left; }
+.page-intro, .lesson-prompt { font: calc(18px * var(--reading-scale, 1))/1.58 var(--euler-font-reading,Georgia, Cambria, serif); color: var(--euler-muted,#4b5b54); margin: 0 0 26px; }
+.lesson-prompt { margin-top: 32px; padding: 18px 22px; background: var(--euler-surface-soft,#f5f1e8); border-left: 3px solid var(--euler-warning,#b98758); }
+.lesson-practice { margin: 42px 0 16px; padding: 20px 24px; border: 1px solid var(--euler-rule,#d9e3d8); border-radius: 8px; background: var(--euler-surface-soft,#f8faf6); }
+.lesson-checkpoint { margin: 46px 0 20px; padding: 22px 25px; border: 1px solid var(--line); border-left: 4px solid var(--euler-accent,#6b9278); border-radius: 8px; background: var(--quiet); }
+.reader-article .lesson-checkpoint h2 { margin: 4px 0 12px; font-size: 26px; }
+.lesson-checkpoint .eyebrow { margin: 0; }
+.lesson-checkpoint-question { margin: 0 0 10px; font: 20px/1.55 var(--euler-font-reading,Georgia, Cambria, serif); }
+.lesson-checkpoint > .muted { margin: 0; line-height: 1.5; }
+.lesson-checkpoint .attempt-workspace { margin: 18px 0 14px; }
+.lesson-checkpoint > .secondary-link { display: inline-block; font-weight: 750; }
+@media(max-width:620px){.lesson-checkpoint{padding:17px 18px}.lesson-checkpoint-question{font-size:18px}}
+@media print{.lesson-checkpoint{display:none!important}}
+.lesson-practice h2 { margin: 0 0 7px; font-size: 23px; }
+.lesson-practice p { margin: 0 0 13px; color: var(--euler-muted,#53635a); }
+.lesson-practice a { display: block; width: fit-content; padding: 5px 0; color: var(--euler-accent,#2d6048); font-weight: 700; }
+.key-result { margin: 36px 0 10px; padding: 20px 24px 24px; background: var(--euler-surface-soft,#edf3e8); border-left: 4px solid var(--euler-accent,#5f8069); border-radius: 0 9px 9px 0; }
+.key-result > .eyebrow { margin: 0 0 8px; }
+.key-result .formula { margin: 0; padding: 0; border: 0; background: transparent; font: 21px/1.6 "Cambria Math", "STIX Two Math", Georgia, serif; }
+.chapter-outline { position: sticky; top: 96px; max-height: calc(100vh - 115px); overflow-y: auto; padding: 6px 4px 28px 18px; border-left: 1px solid var(--euler-rule,#dce2da); font: 13px/1.45 var(--euler-font-ui,system-ui, sans-serif); }
+.chapter-outline .outline-kicker { margin: 0 0 4px; color: var(--accent); font-size: var(--euler-text-sm,.9375rem); font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+.chapter-outline h2 { font: 19px/1.28 var(--euler-font-reading,Georgia, serif); margin: 0 0 18px; text-transform: none; letter-spacing: normal; }
+.chapter-outline h3 { margin: 19px 0 7px; color: var(--euler-muted,#68776d); font: 700 var(--euler-text-sm,.9375rem)/1.4 var(--euler-font-ui,system-ui, sans-serif); letter-spacing: .12em; text-transform: uppercase; }
+.chapter-outline a { display: block; min-height: 2.75rem; padding: 7px 10px; border-radius: var(--euler-radius-md,6px); color: var(--euler-accent,#3d5549); text-decoration: underline; overflow-wrap: anywhere; }
+.chapter-outline a:hover, .chapter-outline a[aria-current="page"] { background: var(--euler-surface-soft,#e6efe5); }
+.chapter-outline a[aria-current="page"] { font-weight: 750; color: var(--euler-ink,#263d32); box-shadow: inset 3px 0 var(--euler-accent,#66846d); }
+.compact-outline { display: none; }
+.reader-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0 38px; }
+.reader-page-tools { display:flex; flex-wrap:wrap; align-items:center; gap:9px 18px; margin:-9px 0 28px; font:13px/1.4 var(--euler-font-ui,system-ui,sans-serif); }
+.bookmark-page { padding:6px 10px; color:var(--euler-ink,#315d49); background:var(--euler-surface-soft,#f7faf4); }
+.complete-book-link, .glossary-link { color:var(--euler-accent,#49665a); }
+.primary-link, .secondary-link { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 17px; border-radius: 6px; font: 700 14px/1.4 var(--euler-font-ui,system-ui, sans-serif); text-decoration: none; }
+.primary-link { color: var(--euler-on-accent,white); background: var(--euler-accent,#234b3c); }
+.secondary-link { color: var(--euler-ink,#234b3c); background: var(--euler-surface-soft,#e7efe5); }
+.primary-link:hover { background: var(--euler-accent-hover,#35634e); }
+.secondary-link:hover { background: var(--euler-surface-soft,#d9e9d7); }
+.overview-prep { padding: 18px 22px; border: 1px solid var(--euler-rule,#dbe4d9); background: var(--euler-surface-soft,#f7faf4); border-radius: 9px; }
+.overview-prep h2 { margin-top: 0; }
+.overview-prep p { margin-bottom: 0; }
+.objective-list li { margin-block: .65em; overflow-wrap: anywhere; }
+.objective-practice { display:block; margin-top:.2em; font: 700 .82em/1.8 var(--euler-font-ui,system-ui, sans-serif); }
+.objective-practice-link { display: inline-block; white-space: nowrap; margin-inline: .12em; text-underline-offset: .2em; }
+.objective-practice-link:focus-visible { outline: 3px solid var(--euler-focus,var(--accent)); outline-offset: 3px; border-radius: 2px; }
+.lesson-map { margin-top: 48px; }
+.lesson-map ol { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; counter-reset: route; }
+.lesson-map li { margin: 0; }
+.lesson-map a { display: block; padding: 13px 15px; border: 1px solid var(--euler-rule,#dbe2d7); border-radius: 8px; background: var(--euler-surface,#fff); text-decoration: underline; font: 14px/1.4 var(--euler-font-ui,system-ui, sans-serif); }
+.lesson-map a:hover { border-color: var(--euler-control-rule,#8da992); background: var(--euler-surface-soft,#f2f8f0); }
+.page-turn { display: flex; justify-content: space-between; gap: 14px; margin: 66px 0 0; padding: 25px 0 0; border-top: 1px solid var(--euler-rule,#d8dfd6); }
+.page-turn-link { display: block; max-width: 48%; min-height: 44px; padding: 8px 0; color: var(--euler-accent,#2d5b47); font: 700 14px/1.4 var(--euler-font-ui,system-ui, sans-serif); text-decoration: underline; overflow-wrap: anywhere; }
+.page-turn-link.next { margin-left: auto; text-align: right; }
+.page-turn-link:hover { text-decoration: underline; }
+.reader-article .example, .reader-article .exercise { background: var(--euler-surface,#fff); border: 1px solid var(--euler-rule,#dce3d9); box-shadow: var(--euler-shadow,0 5px 18px #25433109); padding: 25px 28px; margin: 20px 0; }
+.reader-article .example h2, .reader-article .exercise h2 { margin: 0 0 15px; font-size: 25px; }
+.reader-article .exercise h2 { scroll-margin-top: 100px; }
+.reader-article .exercise h2:focus { outline: 3px solid var(--euler-focus,var(--accent)); outline-offset: 6px; }
+.example-answer { padding: 13px 17px; background: var(--euler-surface-soft,#edf3ea); border-radius: 6px; font-weight: 650; }
+.reader-article .example ol { padding-left: 23px; }
+.reader-article .example li { padding-left: 4px; margin: 13px 0; }
+.reader-article .exercise details { padding: 10px 0; border-top: 1px solid var(--euler-rule,#e2e8df); }
+.reader-article .exercise details:first-of-type { margin-top: 20px; }
+.reader-article .exercise summary { color: var(--euler-accent,#315c48); font-size: 15px; }
+.reader-article .exercise details p { margin: 13px 0 2px; }
+.reader-article .exploration { margin: 24px 0 0; padding: 24px; box-shadow: none; }
+.reader-article .exploration-layout { grid-template-columns: 1fr; }
+.reader-article .exploration-controls { grid-template-columns: repeat(auto-fit, minmax(165px,1fr)); }
+.reader-article .deep-dive { margin: 16px 0; padding: 22px 25px; }
+.reader-article .deep-dive h2 { margin-top: 0; }
+.reader-article .lab { margin: 24px 0; }
+.reader-article .lab h2 { margin-top: 0; }
+.reader-article textarea { min-height: 380px; }
+.reader-article .attempt-workspace textarea { min-height: 150px; height: 150px; }
+.next-chapter-note { margin: 30px 0; padding: 20px; background: var(--euler-surface-soft,#f5f1e8); }
+#mark-read { padding: 12px 18px; background: var(--euler-accent,#234b3c); color: var(--euler-on-accent,white); border: 0; }
+.source-link { color: var(--euler-accent,#456451); font-size: 14px; }
+.visually-hidden { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+#contents .search-result small { display:block; margin-top:3px; color:var(--muted); font-size:12px; font-weight:400; }
+#contents .search-result .search-snippet { display:block; margin-top:4px; color:var(--muted); font-size:13px; font-weight:400; line-height:1.45; }
+#contents .saved-page::before { content:'★'; margin-right:6px; color:var(--accent); }
+@media (min-width: 1221px) {
+  body[data-reader-width="narrow"] .reader-shell { grid-template-columns: minmax(0, 610px) 190px; gap: 35px; max-width: 1000px; }
+  body[data-reader-width="wide"] .reader-shell { grid-template-columns: minmax(0, 1fr) 190px; gap: 40px; max-width: 1220px; }
+  body[data-reader-width="wide"] .reading-prose p { max-width: 68ch; }
+}
+@media (max-width: 1220px) {
+  .layout { grid-template-columns: 215px minmax(0,1fr); }
+  .reader-shell { grid-template-columns: minmax(0, 1fr) 180px; gap: 28px; }
+  .reading-width-controls { display: none; }
+}
+@media (max-width: 1000px) {
+  .reader-shell { display: block; max-width: 730px; }
+  .chapter-outline { display: none; }
+  .compact-outline { display: block; margin: 0 0 25px; padding: 11px 15px; border: 1px solid var(--euler-rule,#dbe4d9); border-radius: 7px; background: var(--euler-surface-soft,#f6f9f4); font: 14px/1.4 var(--euler-font-ui,system-ui, sans-serif); }
+  .compact-outline summary { font-size: 14px; }
+  .compact-outline .outline-position, .compact-outline .outline-current { display: block; margin-left: 1.2em; }
+  .compact-outline .outline-position { font-weight: 700; }
+  .compact-outline .outline-current { margin-top: 3px; font-weight: 400; overflow-wrap: anywhere; }
+  .compact-outline nav { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px; margin-top: 12px; }
+  .compact-outline a { padding: 7px; text-decoration: underline; overflow-wrap: anywhere; }
+  .compact-outline a[aria-current="page"] { background: var(--euler-surface-soft,#dfebdb); font-weight: 750; border-radius: 4px; }
+}
+@media (max-width: 52rem) {
+  .layout { display: block; }
+  .layout > aside { position: static; max-height: none; padding: 8px 18px; border-right: 0; border-bottom: 1px solid var(--euler-rule,#d5dcd2); }
+  .library-heading { margin-bottom: 0; }
+  .library-heading label { display: none; }
+  .library-open .library-heading label { display: block; }
+  #toggle-contents { display: inline-flex; padding: 5px 10px; font-size: 12px; }
+  #search, #progress, #contents { display: none; }
+  .library-open #search, .library-open #progress, .library-open #contents { display: block; }
+  .library-open #contents { max-height: 47vh; overflow-y: auto; }
+  #progress { margin: 8px 0 0; }
+  .topbar { position: static; min-height: 59px; padding: 12px 18px; }
+  .topbar .brand { font-size: 20px; }
+  main.reading-mode { padding: 18px 20px 70px; }
+  .reader-article { overflow-x: clip; }
+  .breadcrumbs { margin-bottom: 12px; }
+  .reader-settings { margin-bottom: 14px; padding-bottom: 8px; }
+  .compact-outline { margin-bottom: 14px; padding: 8px 12px; }
+  .compact-outline .outline-current { display: none; }
+  .reader-article > .eyebrow { margin-bottom: 6px; }
+  .reader-article h1 { font-size: clamp(34px, 8vw, 45px); margin-bottom: 16px; }
+  .reader-page-tools { margin-bottom: 16px; }
+  .reading-prose { font-size: calc(18px * var(--reading-scale, 1)); line-height: 1.68; }
+  .reader-article h2 { font-size: 25px; }
+  .lesson-map ol, .compact-outline nav { grid-template-columns: 1fr; }
+  .reader-article .example, .reader-article .exercise, .reader-article .exploration, .reader-article .lab { padding: 18px; }
+  .reader-article .exploration { margin-inline: 0; }
+  .page-turn { flex-direction: column; gap: 6px; }
+  .page-turn-link, .page-turn-link.next { width: 100%; max-width: none; margin-left: 0; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+
+/* The dark palette preserves a light plotting canvas so axes and four curve colors remain distinguishable. */
+:root[data-theme="dark"] { color-scheme:dark; --paper:var(--euler-paper,#101612); --ink:var(--euler-ink,#e8efe9); --accent:var(--euler-accent,#f1a080); --line:var(--euler-rule,#435149); --muted:var(--euler-muted,#b4c0b8); --page:var(--euler-surface,#151c18); --quiet:var(--euler-surface-soft,#202a24); }
+:root[data-theme="dark"] .topbar { background:var(--euler-surface,#151c18f2); }
+:root[data-theme="dark"] .layout > aside { background:var(--euler-surface-soft,#18211c); border-color:var(--euler-rule,#3d4b43); }
+:root[data-theme="dark"] input, :root[data-theme="dark"] select, :root[data-theme="dark"] button { background:var(--euler-surface,#1d2822); color:var(--ink); border-color:var(--euler-control-rule,#536159); }
+:root[data-theme="dark"] .primary { background:var(--euler-accent,#1d2822); color:var(--euler-on-accent,var(--ink)); }
+:root[data-theme="dark"] .primary:hover { background:var(--euler-accent-hover,#1d2822); }
+:root[data-theme="dark"] .primary-link:hover { background:var(--euler-accent-hover,#396d54); }
+:root[data-theme="dark"] #contents a[aria-current="page"], :root[data-theme="dark"] .chapter-outline a[aria-current="page"], :root[data-theme="dark"] .compact-outline a[aria-current="page"] { background:var(--euler-surface-soft,#2a4033); color:var(--euler-ink,#eef8f0); }
+:root[data-theme="dark"] #contents h2 { color:var(--euler-muted,#bdc9c1); }
+:root[data-theme="dark"] .breadcrumbs, :root[data-theme="dark"] .breadcrumbs a, :root[data-theme="dark"] .reader-article .lead, :root[data-theme="dark"] .page-intro, :root[data-theme="dark"] .lesson-prompt, :root[data-theme="dark"] .lesson-practice p { color:var(--muted); }
+:root[data-theme="dark"] .reader-settings, :root[data-theme="dark"] .chapter-outline, :root[data-theme="dark"] .page-turn { border-color:var(--line); }
+:root[data-theme="dark"] .reader-settings summary, :root[data-theme="dark"] .reading-size-controls > span, :root[data-theme="dark"] .reading-width-controls label, :root[data-theme="dark"] .reading-theme-controls label, :root[data-theme="dark"] .chapter-outline a, :root[data-theme="dark"] .page-turn-link, :root[data-theme="dark"] .source-link, :root[data-theme="dark"] .complete-book-link, :root[data-theme="dark"] .glossary-link { color:var(--euler-muted,#a9d8bd); }
+:root[data-theme="dark"] .chapter-outline h3 { color:var(--euler-muted,#bdc9c1); }
+:root[data-theme="dark"] .lesson-practice a { color:var(--euler-accent,#b7e7ca); }
+:root[data-theme="dark"] .theorem-card, :root[data-theme="dark"] .lesson-practice, :root[data-theme="dark"] .overview-prep, :root[data-theme="dark"] .compact-outline { background:var(--euler-surface,#1b251f); border-color:var(--line); }
+:root[data-theme="dark"] .theorem-card .theorem-statement, :root[data-theme="dark"] .key-result, :root[data-theme="dark"] .example-answer { background:var(--euler-surface-soft,#213229); }
+:root[data-theme="dark"] .lesson-prompt, :root[data-theme="dark"] .next-chapter-note, :root[data-theme="dark"] .chapter-end { background:var(--euler-warning-soft,#2b2720); }
+:root[data-theme="dark"] .card, :root[data-theme="dark"] .lesson-map a, :root[data-theme="dark"] .example, :root[data-theme="dark"] .exercise, :root[data-theme="dark"] .lab, :root[data-theme="dark"] .exploration-controls, :root[data-theme="dark"] .deep-worked, :root[data-theme="dark"] .quiz-question, :root[data-theme="dark"] .quiz-option, :root[data-theme="dark"] .mastery-metric, :root[data-theme="dark"] .review-empty, :root[data-theme="dark"] .practice-builder, :root[data-theme="dark"] .training-plan-card { background:var(--euler-surface,#19211d); border-color:var(--line); }
+:root[data-theme="dark"] .exploration, :root[data-theme="dark"] .case-study, :root[data-theme="dark"] .diagnostic-result, :root[data-theme="dark"] .training-plan { background:var(--euler-surface-soft,#1d2a22); border-color:var(--line); }
+:root[data-theme="dark"] .progress-table thead th { background:var(--euler-surface-soft,#213229); }
+:root[data-theme="dark"] .progress-action { color:var(--euler-accent,#b7e7ca); }
+:root[data-theme="dark"] .exploration-readout, :root[data-theme="dark"] .deep-dive, :root[data-theme="dark"] .reference-table th, :root[data-theme="dark"] .route-table th { background:var(--euler-surface-soft,#242c25); }
+:root[data-theme="dark"] .exploration-data table, :root[data-theme="dark"] .exploration-data caption, :root[data-theme="dark"] .exploration-data th { color:var(--euler-ink,#203d38); }
+:root[data-theme="dark"] .primary-link, :root[data-theme="dark"] #mark-read { background:var(--euler-accent,#396d54); color:var(--euler-on-accent,white); }
+:root[data-theme="dark"] .secondary-link { background:var(--euler-surface-soft,#273a2e); color:var(--euler-accent,#ccebd7); }
+:root[data-theme="dark"] .bookmark-page { background:var(--euler-surface,#1b251f); color:var(--euler-accent,#b9dfc8); }
+:root[data-theme="dark"] .worked-solution>summary, :root[data-theme="dark"] .exercise details>summary { color:var(--euler-accent,#b7e7ca); }
+:root[data-theme="dark"] .practice-summary { background:var(--euler-surface-soft,#213229); }
+:root[data-theme="dark"] .recall-stage { background:var(--euler-warning-soft,#2b2720); }
+:root[data-theme="dark"] .problem-reflection { background:var(--euler-warning-soft,#2b2720); }
+:root[data-theme="dark"] .numeric-check { background:var(--euler-surface-soft,#1d2a22); border-color:var(--line); }
+:root[data-theme="dark"] .problem-outcome button[aria-pressed="true"] { background:var(--euler-surface-soft,#315240); border-color:var(--euler-accent,#79a789); }
+:root[data-theme="dark"] .problem-reflection button[aria-pressed="true"] { background:var(--euler-warning-soft,#5b3f30); border-color:var(--euler-warning,#c9916e); }
+:root[data-theme="dark"] .assessment-navigator button.answered { background:var(--euler-surface-soft,#2b4436); border-color:var(--euler-accent,#86af93); }
+
+@media (prefers-color-scheme:dark) {
+  :root[data-theme="auto"] { color-scheme:dark; --paper:var(--euler-paper,#101612); --ink:var(--euler-ink,#e8efe9); --accent:var(--euler-accent,#f1a080); --line:var(--euler-rule,#435149); --muted:var(--euler-muted,#b4c0b8); --page:var(--euler-surface,#151c18); --quiet:var(--euler-surface-soft,#202a24); }
+  :root[data-theme="auto"] .topbar { background:var(--euler-surface,#151c18f2); }
+  :root[data-theme="auto"] .layout > aside { background:var(--euler-surface-soft,#18211c); border-color:var(--euler-rule,#3d4b43); }
+  :root[data-theme="auto"] input, :root[data-theme="auto"] select, :root[data-theme="auto"] button { background:var(--euler-surface,#1d2822); color:var(--ink); border-color:var(--euler-control-rule,#536159); }
+  :root[data-theme="auto"] .primary { background:var(--euler-accent,#1d2822); color:var(--euler-on-accent,var(--ink)); }
+  :root[data-theme="auto"] .primary:hover { background:var(--euler-accent-hover,#1d2822); }
+  :root[data-theme="auto"] .primary-link:hover { background:var(--euler-accent-hover,#396d54); }
+  :root[data-theme="auto"] #contents a[aria-current="page"], :root[data-theme="auto"] .chapter-outline a[aria-current="page"], :root[data-theme="auto"] .compact-outline a[aria-current="page"] { background:var(--euler-surface-soft,#2a4033); color:var(--euler-ink,#eef8f0); }
+  :root[data-theme="auto"] #contents h2 { color:var(--euler-muted,#bdc9c1); }
+  :root[data-theme="auto"] .breadcrumbs, :root[data-theme="auto"] .breadcrumbs a, :root[data-theme="auto"] .reader-article .lead, :root[data-theme="auto"] .page-intro, :root[data-theme="auto"] .lesson-prompt, :root[data-theme="auto"] .lesson-practice p { color:var(--muted); }
+  :root[data-theme="auto"] .reader-settings, :root[data-theme="auto"] .chapter-outline, :root[data-theme="auto"] .page-turn { border-color:var(--line); }
+  :root[data-theme="auto"] .reader-settings summary, :root[data-theme="auto"] .reading-size-controls > span, :root[data-theme="auto"] .reading-width-controls label, :root[data-theme="auto"] .reading-theme-controls label, :root[data-theme="auto"] .chapter-outline a, :root[data-theme="auto"] .page-turn-link, :root[data-theme="auto"] .source-link, :root[data-theme="auto"] .complete-book-link, :root[data-theme="auto"] .glossary-link { color:var(--euler-muted,#a9d8bd); }
+  :root[data-theme="auto"] .chapter-outline h3 { color:var(--euler-muted,#bdc9c1); }
+  :root[data-theme="auto"] .lesson-practice a { color:var(--euler-accent,#b7e7ca); }
+  :root[data-theme="auto"] .theorem-card, :root[data-theme="auto"] .lesson-practice, :root[data-theme="auto"] .overview-prep, :root[data-theme="auto"] .compact-outline { background:var(--euler-surface,#1b251f); border-color:var(--line); }
+  :root[data-theme="auto"] .theorem-card .theorem-statement, :root[data-theme="auto"] .key-result, :root[data-theme="auto"] .example-answer { background:var(--euler-surface-soft,#213229); }
+  :root[data-theme="auto"] .lesson-prompt, :root[data-theme="auto"] .next-chapter-note, :root[data-theme="auto"] .chapter-end { background:var(--euler-warning-soft,#2b2720); }
+  :root[data-theme="auto"] .card, :root[data-theme="auto"] .lesson-map a, :root[data-theme="auto"] .example, :root[data-theme="auto"] .exercise, :root[data-theme="auto"] .lab, :root[data-theme="auto"] .exploration-controls, :root[data-theme="auto"] .deep-worked, :root[data-theme="auto"] .quiz-question, :root[data-theme="auto"] .quiz-option, :root[data-theme="auto"] .mastery-metric, :root[data-theme="auto"] .review-empty, :root[data-theme="auto"] .practice-builder, :root[data-theme="auto"] .training-plan-card { background:var(--euler-surface,#19211d); border-color:var(--line); }
+  :root[data-theme="auto"] .exploration, :root[data-theme="auto"] .case-study, :root[data-theme="auto"] .diagnostic-result, :root[data-theme="auto"] .training-plan { background:var(--euler-surface-soft,#1d2a22); border-color:var(--line); }
+  :root[data-theme="auto"] .progress-table thead th { background:var(--euler-surface-soft,#213229); }
+  :root[data-theme="auto"] .progress-action { color:var(--euler-accent,#b7e7ca); }
+  :root[data-theme="auto"] .exploration-readout, :root[data-theme="auto"] .deep-dive, :root[data-theme="auto"] .reference-table th, :root[data-theme="auto"] .route-table th { background:var(--euler-surface-soft,#242c25); }
+  :root[data-theme="auto"] .exploration-data table, :root[data-theme="auto"] .exploration-data caption, :root[data-theme="auto"] .exploration-data th { color:var(--euler-ink,#203d38); }
+  :root[data-theme="auto"] .primary-link, :root[data-theme="auto"] #mark-read { background:var(--euler-accent,#396d54); color:var(--euler-on-accent,white); }
+  :root[data-theme="auto"] .secondary-link { background:var(--euler-surface-soft,#273a2e); color:var(--euler-accent,#ccebd7); }
+  :root[data-theme="auto"] .bookmark-page { background:var(--euler-surface,#1b251f); color:var(--euler-accent,#b9dfc8); }
+  :root[data-theme="auto"] .worked-solution>summary, :root[data-theme="auto"] .exercise details>summary { color:var(--euler-accent,#b7e7ca); }
+  :root[data-theme="auto"] .practice-summary { background:var(--euler-surface-soft,#213229); }
+  :root[data-theme="auto"] .recall-stage { background:var(--euler-warning-soft,#2b2720); }
+  :root[data-theme="auto"] .problem-reflection { background:var(--euler-warning-soft,#2b2720); }
+  :root[data-theme="auto"] .numeric-check { background:var(--euler-surface-soft,#1d2a22); border-color:var(--line); }
+  :root[data-theme="auto"] .problem-outcome button[aria-pressed="true"] { background:var(--euler-surface-soft,#315240); border-color:var(--euler-accent,#79a789); }
+  :root[data-theme="auto"] .problem-reflection button[aria-pressed="true"] { background:var(--euler-warning-soft,#5b3f30); border-color:var(--euler-warning,#c9916e); }
+  :root[data-theme="auto"] .assessment-navigator button.answered { background:var(--euler-surface-soft,#2b4436); border-color:var(--euler-accent,#86af93); }
+}
+@media(max-width:700px){:root[data-theme="dark"] .progress-table tr{background:var(--euler-surface,#19211d);border-color:var(--line)}}
+@media(prefers-color-scheme:dark) and (max-width:700px){:root[data-theme="auto"] .progress-table tr{background:var(--euler-surface,#19211d);border-color:var(--line)}}
+.project-studio { max-width: min(100%, 52rem); margin-inline:auto; }
+.project-studio .project-chapters, .project-inputs, .project-stage, .project-comparison, .project-deliverables, .project-rubric, .project-links, .project-progress { margin:1.5rem 0; padding:1.2rem; border:1px solid var(--line); border-radius:.75rem; background:var(--page); }
+.project-stage h3, .project-studio h2 { margin-top:0; }
+.project-stage textarea { display:block; width:100%; max-width:100%; box-sizing:border-box; min-height:10rem; margin:.5rem 0; padding:.75rem; font:inherit; color:var(--ink); background:var(--paper); border:1px solid var(--euler-control-rule,var(--line)); border-radius:.4rem; resize:vertical; }
+.project-stage textarea:focus-visible, .project-rubric select:focus-visible { outline:3px solid var(--euler-focus,var(--accent)); outline-offset:2px; }
+.project-complete { display:block; margin-top:.8rem; }
+.project-evidence { font-weight:600; }
+.project-help { margin:.8rem 0; }
+.project-criterion { border-top:1px solid var(--line); padding:1rem 0; }
+.project-criterion label { display:block; font-weight:700; }
+.project-criterion select { max-width:100%; padding:.45rem; font:inherit; color:var(--ink); background:var(--paper); border:1px solid var(--euler-control-rule,var(--line)); }
+.project-status { padding:.7rem; border-left:3px solid var(--accent); }
+.project-character-count { display:block; color:var(--muted); }
+.project-studio .table-scroll { max-width:100%; }
+@media(max-width:700px){.project-studio .project-chapters,.project-inputs,.project-stage,.project-comparison,.project-deliverables,.project-rubric{padding:.9rem;}}
+@media print {
+  .math-phrase { display:inline-block; white-space:normal; }
+  .inline-math .katex-html > .base { display:inline-block; white-space:nowrap; }
+  .inline-math.math-flow-short-relation, .inline-math.math-flow-short-relation .katex { display:inline-block; white-space:nowrap; }
+  .project-studio details:not([open]) > :not(summary) { display:block !important; }
+  .reader-article .chapter-recall-comparison:not([open]) > :not(summary) { display:block !important; }
+  .reader-article .chapter-recall textarea, .reader-article .chapter-recall label, .reader-article .chapter-recall-status, .reader-article .chapter-recall > button { display:none !important; }
+  .project-stage textarea, .project-stage label, .project-stage .project-character-count, .project-rubric select, .project-status { display:none !important; }
+  :root[data-theme] { color-scheme:var(--euler-native-color-scheme,light); --paper:white; --ink:black; --line:#ccc; --page:white; --muted:#444; }
+  .topbar, .layout > aside, .chapter-outline, .compact-outline, .reader-settings, .page-turn, .reader-actions { display: none !important; }
+  main.reading-mode { padding: 0; }
+  .reader-shell { display: block; max-width: none; }
+  .reader-article { max-width: none; }
+  .reading-prose { font-size: 11pt; }
+  .reader-article .example, .reader-article .exercise { box-shadow: none; }
+}
+
+/* Keep study text responsive to the same reading preference as lessons. */
+@media screen {
+  #main { font-size: calc(16px * var(--reading-scale, 1)); }
+  .quiz-question > legend { font-size: calc(16px * var(--reading-scale, 1)); }
+  .quiz-option { font-size: calc(15px * var(--reading-scale, 1)); }
+  .quiz-feedback, .calibration-summary p { font-size: calc(14px * var(--reading-scale, 1)); }
+  .confidence-picker legend, .assessment-status, .assessment-builder-status { font-size: calc(13px * var(--reading-scale, 1)); }
+  .confidence-picker label { font-size: calc(12px * var(--reading-scale, 1)); }
+  .reference-table, .route-table { font-size: calc(14px * var(--reading-scale, 1)); }
+}
+@media screen and (max-width: 620px) {
+  .quiz-question > legend { font-size: calc(15px * var(--reading-scale, 1)); }
+}
+
+/* Euler supplies hosted type and spacing without replacing the reader's size
+   preference or changing the dimensions of mathematical instruments. */
+@media screen {
+  html[data-euler-hosted] .reader-article { font-size:calc(var(--euler-text-base,1rem) * var(--reading-scale,1)); }
+  html[data-euler-hosted] .reading-prose {
+    font-family:var(--euler-font-reading,Georgia,serif);
+    font-size:calc(var(--euler-text-reading,1.125rem) * var(--reading-scale,1));
+    line-height:var(--euler-leading-reading,1.7);
+  }
+  html[data-euler-hosted] .reader-article h1 {
+    font-size:var(--euler-h1);line-height:var(--euler-h1-leading);letter-spacing:var(--euler-h1-tracking);
+    margin-block:0 var(--euler-space-5,1.5rem);
+  }
+  html[data-euler-hosted] .reader-article h2 {
+    font-size:var(--euler-h2);line-height:var(--euler-h2-leading);letter-spacing:var(--euler-h2-tracking);
+    margin-block:var(--euler-space-6,2rem) var(--euler-space-3,.75rem);
+  }
+  html[data-euler-hosted] .reader-article h3 { font-size:var(--euler-h3);line-height:var(--euler-h3-leading); }
+  html[data-euler-hosted] :is(.breadcrumbs,.reader-settings,.reader-settings summary,.reader-page-tools,.chapter-outline,.reading-width-controls select,.reading-theme-controls select,.confidence-picker legend,.confidence-picker label,.assessment-status,.assessment-builder-status) {
+    font-family:var(--euler-font-ui,system-ui,sans-serif);
+    font-size:calc(var(--euler-text-sm,.9375rem) * var(--reading-scale,1));
+    line-height:var(--euler-leading-ui,1.5);
+  }
+  html[data-euler-hosted] :is(.reference-table,.route-table) { font-size:calc(var(--euler-text-sm,.9375rem) * var(--reading-scale,1)); }
+  html[data-euler-hosted] :is(.reader-settings summary,.primary-link,.secondary-link,.page-turn-link) { min-height:2.75rem; }
+  html[data-euler-hosted] .reader-settings { margin-block:0 var(--euler-space-5,1.5rem);padding-bottom:var(--euler-space-3,.75rem); }
+}

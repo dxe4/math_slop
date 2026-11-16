@@ -1,0 +1,567 @@
+{
+  "id": "19",
+  "title": "Vectors, space, and motion",
+  "subtitle": "How can a moving object turn and accelerate while its speed stays constant?",
+  "prerequisites": [
+    "[Single-variable Calculus chapters 04–17](/books/calculus-course/): limits, differentiation, integration, sequences and series.",
+    "[Parametric curves and motion, chapter 18](/calculus/#chapter/18): position, velocity and arc length.",
+    "L2 linear algebra: vectors, matrices and linear transformations; use [Lucent linear algebra](/books/lucent-linear-algebra/) for preparation."
+  ],
+  "objectives": [
+    "Calculate vector lengths, projections, dot products, and cross products with geometric interpretations.",
+    "Describe lines and planes and check intersections without losing exceptional cases.",
+    "Differentiate vector-valued motion and separate acceleration into changes of speed and direction.",
+    "Compute curvature under regularity assumptions and test a space-curve model numerically.",
+    "Calculate a space-curve tangent, speed and curvature from world coordinates and interpret projection limits."
+  ],
+  "sections": [
+    {
+      "title": "Vectors describe displacement",
+      "paragraphs": [
+        "This chapter opens the L2–L3 Multivariable and Vector Calculus book. Its route keeps chapters 19–26 in their original order, then adds differential forms in chapter 29 and implicit functions in chapter 30. Study the linked single-variable preparation before beginning; the new dimensions reuse those limit and accumulation ideas.",
+        "A point records a location; a vector records a displacement. If $P=(1,2,3)$ and $Q=(4,0,5)$, the displacement from $P$ to $Q$ is $Q-P=\\langle3,-2,2\\rangle$. The same vector can be drawn starting at any point. This freedom matters in mechanics: moving an arrow on a sketch does not change its length or direction. Position vectors depend on a chosen origin, while the displacement between two fixed points does not.",
+        "Vectors in two dimensions have two components and vectors in three dimensions have three. Add vectors component by component, corresponding to following one displacement with another. Multiplication by a positive scalar changes length, multiplication by a negative scalar also reverses direction, and multiplication by zero produces the zero vector. Standard basis vectors $\\mathbf i$, $\\mathbf j$, $\\mathbf k$ point along the positive coordinate axes, so $\\langle a,b,c\\rangle=a\\mathbf i+b\\mathbf j+c\\mathbf k$.",
+        "The Euclidean norm $|\\mathbf u|=\\sqrt{u_1^2+u_2^2+u_3^2}$ is a length, justified by two applications of the Pythagorean theorem. For nonzero $\\mathbf u$, the unit vector $\\mathbf u/|\\mathbf u|$ preserves direction and has length one. The zero vector has no direction and cannot be normalized. A displacement whose components are measured in metres has a norm in metres; its associated unit vector is dimensionless. These formulas presume perpendicular axes using the same length unit.",
+        "A vector-valued function $\\mathbf r(t)=\\langle x(t),y(t),z(t)\\rangle$ assigns a vector to each parameter value in a specified interval. When it describes position, its three components must exist at the same parameter value: its domain is their common domain. Its trace is a geometric curve, but the function also records order and timing. Two functions can trace the same curve at different speeds or in opposite directions. This extends the parametric viewpoint of chapter 18 without changing the underlying idea.",
+        "Vector addition encodes a path-independent net displacement. If a traveler moves $3\\,\\mathrm m$ east and then $4\\,\\mathrm m$ north, the resulting displacement vector is $\\langle3,4\\rangle\\,\\mathrm m$ with length $5\\,\\mathrm m$, while total distance walked is $7\\,\\mathrm m$. Reversing the two straight moves changes the route but not the displacement. In three dimensions the same componentwise rule applies. This distinction returns in vector-valued motion: $\\mathbf r(b)-\\mathbf r(a)$ depends only on endpoints, while $\\int_a^b|\\mathbf r^{\\prime}(t)|\\,dt$ measures the actual route and can be much larger.",
+        "The triangle inequality $|\\mathbf u+\\mathbf v|\\le|\\mathbf u|+|\\mathbf v|$ expresses that a direct displacement is no longer than following two segments. It can be proved by squaring and using $\\mathbf u\\cdot\\mathbf v\\le|\\mathbf u||\\mathbf v|$, a result justified by the dot-product angle formula or Cauchy–Schwarz. Equality holds when nonzero $\\mathbf u$ and $\\mathbf v$ point in the same direction. This inequality gives an immediate check on a computed resultant vector. It also explains why polygonal approximations to a curved path can underestimate its length: a chord is no longer than the broken route it replaces. The inequality is proved in the next lesson; this use is an optional forward link if reading in order.",
+        "A coordinate system should use compatible units on its axes. If horizontal coordinates are metres and vertical coordinates are feet, the raw norm $\\sqrt{x^2+y^2}$ mixes numbers with different scales and is not a physical distance until units are converted. Likewise a velocity vector can mix components only when they refer to the same time scale. The algebraic formulas assume an orthonormal basis; in oblique or curved coordinates the metric changes. For this introductory chapter, use perpendicular Cartesian axes and state units before interpreting a norm physically.",
+        "The zero vector is a special case in many geometric formulas. Its norm is zero, but it cannot define a direction, unit vector, angle, projection axis, or unique normal. An object at rest has zero velocity vector; it may nevertheless have nonzero acceleration and begin moving immediately. Software that normalizes a vector should check the norm before division. Mathematically, one can often handle a zero vector by returning to component equations rather than forcing a direction that is not defined.",
+        "Vector equations can be checked componentwise, but their geometric meaning can simplify reasoning. If $\\mathbf u+\\mathbf v=\\mathbf w$, then $\\mathbf v=\\mathbf w-\\mathbf u$ is the displacement needed after $\\mathbf u$ to reach $\\mathbf w$. If $\\mathbf u$ and $\\mathbf v$ are perpendicular, $|\\mathbf u+\\mathbf v|^2=|\\mathbf u|^2+|\\mathbf v|^2$; if they point in opposite directions, their lengths can cancel. The component calculation and the geometric picture should agree. In a physical trajectory, position vectors depend on the chosen origin, yet velocity and acceleration under a fixed translated origin do not, because differentiating removes that constant translation. This is another reason to distinguish locations from displacements."
+      ],
+      "formula": "|Q − P| = √((Q₁ − P₁)² + (Q₂ − P₂)² + (Q₃ − P₃)²)",
+      "formulaTex": "|Q-P|=\\sqrt{(Q_1-P_1)^2+(Q_2-P_2)^2+(Q_3-P_3)^2}"
+    },
+    {
+      "title": "Dot and cross products measure different geometry",
+      "paragraphs": [
+        "The dot product $u\\cdot v=u_1v_1+u_2v_2+u_3v_3$ produces a scalar. For nonzero vectors it also equals $|u||v|\\cos\\theta$, where $0\\le\\theta\\le\\pi$ is their angle. One justification expands $|u-v|^2$ in coordinates and compares it with the cosine rule for the triangle formed by the vectors. Thus a positive dot product indicates an acute angle, a negative one an obtuse angle, and zero indicates perpendicular directions. The zero vector has zero dot product with every vector, but no defined angle.",
+        "Projection turns this angle information into a displacement. For $\\mathbf v\\ne\\mathbf0$, the projection of $\\mathbf u$ onto the line directed by $\\mathbf v$ is $\\operatorname{proj}_{\\mathbf v}\\mathbf u=\\frac{\\mathbf u\\cdot\\mathbf v}{\\mathbf v\\cdot\\mathbf v}\\mathbf v$. Subtracting this projection from $\\mathbf u$ gives a remainder perpendicular to $\\mathbf v$; taking its dot product with $\\mathbf v$ proves the claim directly. The signed scalar component along $\\mathbf v$ is $(\\mathbf u\\cdot\\mathbf v)/|\\mathbf v|$, which can be negative. Distinguish this signed quantity from the nonnegative length of the vector projection.",
+        "In three dimensions, the cross product produces a vector perpendicular to both inputs. Its coordinate formula is $\\mathbf u\\times\\mathbf v=\\langle u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1\\rangle$. Its direction follows the right-hand rule in a right-handed coordinate system. Interchanging the inputs reverses it: $\\mathbf v\\times\\mathbf u=-\\mathbf u\\times\\mathbf v$. Its magnitude $|\\mathbf u||\\mathbf v|\\sin\\theta$ equals the area of their parallelogram, so the triangle they span has half this area.",
+        "The cross product vanishes when the vectors are parallel or one is zero. In that case it cannot supply a normal direction. For two planar vectors, embedding them as $\\langle u_1,u_2,0\\rangle$ and $\\langle v_1,v_2,0\\rangle$ gives cross product $\\langle0,0,u_1v_2-u_2v_1\\rangle$; the last component is signed area. A dot product of force in newtons with displacement in metres has units of joules. A cross product of two length vectors has units of square metres, even though its direction lives in space.",
+        "The dot product measures alignment. For $\\mathbf u=\\langle3,4,0\\rangle$ and $\\mathbf v=\\langle1,0,1\\rangle$, $\\mathbf u\\cdot\\mathbf v=3$, $|\\mathbf v|^2=2$, so $\\operatorname{proj}_{\\mathbf v}\\mathbf u=\\frac32\\langle1,0,1\\rangle=\\langle\\frac32,0,\\frac32\\rangle$. The remainder is $\\langle\\frac32,4,-\\frac32\\rangle$, whose dot product with $\\mathbf v$ is zero. This check verifies the projection algebra without a picture. If $\\mathbf v$ were zero, division by $|\\mathbf v|^2$ would fail because there is no line direction onto which to project.",
+        "The cross product's magnitude is the area of a parallelogram, so the triangle with sides $\\mathbf u$ and $\\mathbf v$ from a common point has area $|\\mathbf u\\times\\mathbf v|/2$. For $\\mathbf u=\\langle1,2,0\\rangle$ and $\\mathbf v=\\langle0,1,2\\rangle$, $\\mathbf u\\times\\mathbf v=\\langle4,-2,1\\rangle$ and its norm is $\\sqrt{21}$, giving triangle area $\\sqrt{21}/2$. Swapping $\\mathbf u$ and $\\mathbf v$ reverses the normal but leaves area unchanged. This distinction between oriented normal and nonnegative area will matter for surface integrals in chapter 26.",
+        "The dot and cross products answer different questions about the same pair of vectors. For unit vectors meeting at angle $\\theta$, the dot product is $\\cos\\theta$ and cross-product magnitude is $\\sin\\theta$. At $\\theta=0$ the dot product is one and cross magnitude zero; at $\\theta=\\pi/2$ they are zero and one respectively. The first measures the parallel component, the second the perpendicular span. Neither product is a generic substitute for the other. In physics, work uses force dotted with displacement, while torque uses a position vector crossed with force.",
+        "Cauchy–Schwarz $|\\mathbf u\\cdot\\mathbf v|\\le|\\mathbf u||\\mathbf v|$ can be proved by considering $|\\mathbf u-t\\mathbf v|^2\\ge0$ for all real $t$. When $\\mathbf v\\ne\\mathbf0$, choose $t=(\\mathbf u\\cdot\\mathbf v)/|\\mathbf v|^2$ to minimize the quadratic; the remaining nonnegative value yields the inequality. For $\\mathbf v\\ne\\mathbf0$, equality occurs exactly when $\\mathbf u$ is a scalar multiple of $\\mathbf v$; when $\\mathbf v=\\mathbf0$, equality holds for every $\\mathbf u$. This theorem ensures the angle formula has a cosine value between $-1$ and $1$ for nonzero vectors, and it underlies the triangle inequality. The proof illustrates how projection and norms fit together algebraically.",
+        "The right-hand rule depends on orientation of the coordinate system. In a standard right-handed Cartesian frame, $\\mathbf i\\times\\mathbf j=\\mathbf k$ and $\\mathbf j\\times\\mathbf i=-\\mathbf k$. A reflected coordinate frame would reverse the conventional cross-product direction, though the magnitude of spanned area remains the same. When an application uses torque or oriented flux, state the chosen axes and orientation. For an ordinary nonnegative triangle area, only $|\\mathbf u\\times\\mathbf v|$ matters. This distinction prepares the reader for oriented surfaces, where a normal direction is a deliberate choice rather than an automatic property of a patch."
+      ],
+      "formula": "proj_v u = (u·v / |v|²)v, provided v ≠ 0",
+      "formulaTex": "\\operatorname{proj}_{\\mathbf v}\\mathbf u=\\frac{\\mathbf u\\cdot\\mathbf v}{\\lVert\\mathbf v\\rVert^2}\\,\\mathbf v\\qquad(\\mathbf v\\ne\\mathbf 0)"
+    },
+    {
+      "title": "Lines, planes, and intersection checks",
+      "paragraphs": [
+        "A line through $P$ with nonzero direction $d$ consists of $r(\\lambda)=P+\\lambda d$ for all real $\\lambda$. Restricting $\\lambda$ to $[0,1]$ with $d=Q-P$ describes the segment from $P$ to $Q$, including its endpoints. Parametric equations remain valid when a component of $d$ is zero, whereas dividing to form symmetric equations then fails. A zero direction describes a point, not a line.",
+        "A plane through $P$ with nonzero normal $\\mathbf n$ consists of points $\\mathbf r$ satisfying $\\mathbf n\\cdot(\\mathbf r-P)=0$. Every displacement within the plane must be perpendicular to the normal. Equivalently, if nonparallel vectors $\\mathbf u$ and $\\mathbf v$ lie in the plane, write $\\mathbf r=P+s\\mathbf u+t\\mathbf v$ and choose $\\mathbf n=\\mathbf u\\times\\mathbf v$. Three noncollinear points determine such a plane: take two differences from one point. Three collinear points do not determine a unique plane because their cross product is zero.",
+        "To intersect a line $P+\\lambda\\mathbf d$ with a plane $\\mathbf n\\cdot\\mathbf r=c$, substitute and solve $\\lambda(\\mathbf n\\cdot\\mathbf d)=c-\\mathbf n\\cdot P$. If $\\mathbf n\\cdot\\mathbf d\\ne0$, there is exactly one intersection on the full line. If $\\mathbf n\\cdot\\mathbf d=0$, the line is parallel to the plane: it is entirely contained when $\\mathbf n\\cdot P=c$ and otherwise has no intersection. For a segment or ray, a computed parameter must also satisfy the parameter bounds.",
+        "The distance from $Q$ to the plane through $P$ is $|\\mathbf n\\cdot(Q-P)|/|\\mathbf n|$. This is the absolute value of the scalar projection onto the normal, so it measures perpendicular separation. In three dimensions, two nonparallel lines need not meet: they can be skew. Solving all three coordinate equations with two independent parameters checks an intersection; matching only the first two coordinates can create a false crossing in a planar picture.",
+        "Three noncollinear points determine a plane because two independent displacement vectors span it. For $P=(1,0,0)$, $Q=(0,1,0)$, $R=(0,0,1)$, take $\\mathbf u=Q-P=\\langle-1,1,0\\rangle$ and $\\mathbf v=R-P=\\langle-1,0,1\\rangle$. Their cross product is $\\langle1,1,1\\rangle$, giving plane $x+y+z=1$. Multiplying the normal and equation by any nonzero scalar gives the same plane. If $\\mathbf u\\times\\mathbf v=\\mathbf0$, the points are collinear or repeated, and this construction cannot pick a unique plane.",
+        "Intersecting a line with a plane is one scalar equation in the line parameter. For $\\mathbf r(\\lambda)=P+\\lambda\\mathbf d$ and $\\mathbf n\\cdot\\mathbf r=c$, solve $\\lambda=(c-\\mathbf n\\cdot P)/(\\mathbf n\\cdot\\mathbf d)$ when $\\mathbf n\\cdot\\mathbf d\\ne0$. With plane $x+y+z=1$ and line $\\lambda\\langle1,2,3\\rangle$, $\\lambda=1/6$ and intersection is $(1/6,1/3,1/2)$. Checking the coordinates gives sum one. If the line is restricted to a segment with $\\lambda\\in[0,1]$, the same solution is valid; a solution outside those bounds would lie only on its extension.",
+        "When $\\mathbf n\\cdot\\mathbf d=0$, do not divide. The line direction lies parallel to the plane, and the remaining condition $\\mathbf n\\cdot P=c$ decides whether every line point is in the plane or none is. For plane $x+y=1$, a line through $(0,0)$ with direction $(1,-1)$ misses it, while a line through $(1,0)$ with the same direction lies in it. These are different geometric outcomes of the same zero denominator. The visual investigation makes the distinction visible in a two-dimensional cross-section.",
+        "Skew lines are a specifically spatial possibility. The $x$-axis line $(s,0,0)$ and the parallel-to-$y$ line $(0,t,1)$ appear to cross at the origin in an $x$–$y$ projection, but their $z$-coordinates differ by one. Solving $(s,0,0)=(0,t,1)$ gives an impossible equation $0=1$. Thus they are neither parallel nor intersecting. When checking two 3D paths for collision, all three coordinate equations must hold at the same time; a planar plot or two-coordinate match is insufficient.",
+        "The plane distance formula is a projection theorem. Let $\\mathbf n$ be a nonzero normal and $Q$ any point. The signed scalar component of $Q-P$ along the unit normal $\\mathbf n/|\\mathbf n|$ is $\\mathbf n\\cdot(Q-P)/|\\mathbf n|$; its absolute value is the shortest distance to the plane through $P$. Moving $Q$ within a direction parallel to the plane leaves that value unchanged. Multiplying the plane equation and normal by $-1$ reverses the signed component but not the distance. If a computed distance is negative, the absolute value or interpretation has been mishandled.",
+        "In three dimensions, two lines can be parallel, intersect, or skew. To test intersection of $P+s\\mathbf u$ and $Q+t\\mathbf v$, solve three scalar coordinate equations simultaneously for the two unknown parameters $s$ and $t$. An overdetermined system may be inconsistent even if two coordinate equations agree. If both lines are restricted to segments, each successful parameter must additionally lie in its segment interval. A common computational mistake solves for $s$ and $t$ from the $x$ and $y$ equations and forgets to substitute into $z$. The resulting plotted crossing can be an artifact of projection, as the skew-line example shows."
+      ],
+      "formula": "Line: r = P + λd. Plane: n·(r − P) = 0. Require d ≠ 0 and n ≠ 0.",
+      "formulaTex": "\\begin{aligned}\\text{line:}\\quad&\\mathbf r=\\mathbf P+\\lambda\\mathbf d,\\quad\\lambda\\in\\mathbb R,\\ \\mathbf d\\ne\\mathbf0,\\\\ \\text{plane:}\\quad&\\mathbf n\\cdot(\\mathbf r-\\mathbf P)=0,\\quad\\mathbf n\\ne\\mathbf0.\\end{aligned}"
+    },
+    {
+      "title": "Velocity and acceleration are vector derivatives",
+      "paragraphs": [
+        "A vector limit exists exactly when each component limit exists. Accordingly, differentiate a vector function component by component: $v(t)=r^{\\prime}(t)$ and $a(t)=r^{\\prime\\prime}(t)$. When $v(t)\\ne\\mathbf 0$, its direction is the instantaneous direction of travel; velocity also gives the rate of displacement. At zero velocity it supplies no direction, although acceleration can exist. Speed is the scalar $|v(t)|$. If position is measured in metres and time in seconds, velocity components and speed have units m/s, while acceleration components have units m/s².",
+        "The distinction between acceleration and increasing speed is essential. On a circle, velocity can rotate while its magnitude stays fixed, producing nonzero acceleration. Conversely, a negative acceleration component along one coordinate axis need not mean that the object slows down. The relevant comparison is between acceleration and velocity, not between acceleration and an arbitrary positive coordinate direction.",
+        "For continuously differentiable $\\mathbf r$ on $[a,b]$, the distance traveled is $\\int_a^b|\\mathbf r^{\\prime}(t)|\\,dt$, while displacement is $\\mathbf r(b)-\\mathbf r(a)$. Componentwise integration gives that displacement as the integral of velocity. Endpoint derivatives can be interpreted one-sided when the motion is only defined on a closed interval. Corners or jumps in the prescribed path may prevent a velocity from existing; a plot joining samples does not repair that defect.",
+        "Where speed is nonzero, differentiate $\\mathbf v\\cdot\\mathbf v=|\\mathbf v|^2$ to obtain $\\frac{d}{dt}|\\mathbf v|=\\frac{\\mathbf v\\cdot\\mathbf a}{|\\mathbf v|}$. Thus $\\mathbf v\\cdot\\mathbf a>0$ means locally increasing speed, while $\\mathbf v\\cdot\\mathbf a<0$ means decreasing speed. At $\\mathbf v=\\mathbf0$ the quotient is undefined, even if the vector acceleration exists. For $\\mathbf r(t)=\\langle t^2,0,0\\rangle$, speed is $2|t|$ and has a corner at $t=0$ despite the smooth position function.",
+        "The vector derivative is a limit of displacement vectors divided by elapsed time. Componentwise differentiation is valid because a vector limit exists exactly when every component limit exists. For $\\mathbf r(t)=\\langle t,t^2,0\\rangle$, velocity is $\\langle1,2t,0\\rangle$ and speed is $\\sqrt{1+4t^2}$. At $t=0$ the velocity points along the positive $x$-axis with speed one, while acceleration is $\\langle0,2,0\\rangle$ and is perpendicular to velocity. The object is turning without instantaneously changing speed at that moment.",
+        "For $\\omega\\ne0$, a complete lap of $\\mathbf r(t)=\\langle R\\cos\\omega t,R\\sin\\omega t,0\\rangle$ returns to its starting point after time $2\\pi/|\\omega|$, so displacement is zero. Velocity magnitude is $R|\\omega|$, and traveled distance is $2\\pi R$. Acceleration is $-\\omega^2\\mathbf r(t)$, pointing inward with magnitude $R\\omega^2$. These results separate endpoint, speed, and curvature information. They also provide a direct benchmark for a numerical lab: a method that reports zero travel because the endpoints agree has confused displacement with distance.",
+        "The sign of $\\mathbf v\\cdot\\mathbf a$ determines the instantaneous change of speed only when $\\mathbf v\\ne\\mathbf0$. If $\\mathbf v\\cdot\\mathbf a=0$, speed has zero derivative at that instant but need not be globally constant. For $\\mathbf r(t)=\\langle t,t^2,0\\rangle$, $\\mathbf v\\cdot\\mathbf a=4t$, so at zero the speed derivative is zero while the speed increases for $t>0$. If $\\mathbf v=\\mathbf0$, the formula divides by zero; speed can have a corner even for a smooth position path, as $\\mathbf r(t)=\\langle t^2,0,0\\rangle$ shows. Examine one-sided behavior there instead.",
+        "The displacement integral $\\int_a^b\\mathbf v(t)\\,dt$ is vector-valued and integrates each component. By the fundamental theorem, it equals $\\mathbf r(b)-\\mathbf r(a)$ when $\\mathbf r$ is differentiable with suitable continuity. In contrast, integrating the scalar speed $|\\mathbf v|$ produces path length. The triangle inequality for integrals gives $|\\int_a^b\\mathbf v(t)\\,dt|\\le\\int_a^b|\\mathbf v(t)|\\,dt$, so displacement magnitude cannot exceed traveled distance. This inequality is a strong check on modeled motion, regardless of how complicated the path looks.",
+        "The velocity–acceleration relationship can be checked by differentiating kinetic energy per unit mass, $|\\mathbf v|^2/2$. Its derivative is $\\mathbf v\\cdot\\mathbf a$. When $\\mathbf v\\cdot\\mathbf a>0$, the speed is increasing at that instant if $\\mathbf v\\ne\\mathbf0$; when $\\mathbf v\\cdot\\mathbf a<0$, it is decreasing. A perpendicular acceleration has $\\mathbf v\\cdot\\mathbf a=0$ and changes direction without first-order change in speed. This dot-product viewpoint works in any number of Cartesian dimensions and avoids relying on the sign of one coordinate component. It also clarifies why a vehicle turning at constant speed still requires acceleration.",
+        "Average velocity over $[a,b]$ is $[\\mathbf r(b)-\\mathbf r(a)]/(b-a)$, a vector. Average speed is $\\bigl[\\int_a^b|\\mathbf r^{\\prime}(t)|\\,dt\\bigr]/(b-a)$, a nonnegative scalar. They can differ even in magnitude, because a route can bend or reverse. On a complete constant-speed circular lap, average velocity is zero while average speed equals the constant speed. Reporting one as the other would erase the path taken. Both quantities divide by elapsed time, but their numerators answer different geometric questions."
+      ],
+      "formula": "v = r′, a = r″, speed = |v|, and d|v|/dt = (v·a)/|v| when |v| > 0",
+      "formulaTex": "\\begin{gathered}\\mathbf v=\\mathbf r^{\\prime},\\qquad\\mathbf a=\\mathbf r^{\\prime\\prime},\\qquad\\text{speed}=\\lVert\\mathbf v\\rVert,\\\\ \\frac{d}{dt}\\lVert\\mathbf v\\rVert=\\frac{\\mathbf v\\cdot\\mathbf a}{\\lVert\\mathbf v\\rVert}\\quad(\\lVert\\mathbf v\\rVert>0).\\end{gathered}"
+    },
+    {
+      "title": "Curvature separates bending from timing",
+      "paragraphs": [
+        "Suppose $r$ is twice continuously differentiable and regular, meaning $r^{\\prime}(t)\\ne0$ throughout the interval under discussion. Its unit tangent is $T=r^{\\prime}/|r^{\\prime}|$. Arc length $s$ increases at rate $ds/dt=|r^{\\prime}|$. Curvature $\\kappa=|dT/ds|$ measures how rapidly the tangent changes per unit distance traveled. It has units of inverse length. This measures the bending of the curve rather than how quickly a particular traveler follows it.",
+        "Applying the chain rule gives $\\kappa=|\\mathbf T^{\\prime}|/|\\mathbf r^{\\prime}|$. An equivalent computational formula is $\\kappa=|\\mathbf r^{\\prime}\\times\\mathbf r^{\\prime\\prime}|/|\\mathbf r^{\\prime}|^3$. A derivation sketch differentiates $\\mathbf T=\\mathbf v/|\\mathbf v|$, removes the component of acceleration parallel to $\\mathbf v$, and uses $|\\mathbf v\\times\\mathbf a|^2=|\\mathbf v|^2|\\mathbf a|^2-(\\mathbf v\\cdot\\mathbf a)^2$. The hypotheses matter: neither quotient defines curvature directly at a stationary parameter value. A different regular parameter may sometimes describe the same geometric curve there.",
+        "When $\\kappa>0$, the principal unit normal is $\\mathbf N=\\mathbf T^{\\prime}/|\\mathbf T^{\\prime}|$. Differentiating $\\mathbf v=|\\mathbf v|\\mathbf T$ yields $\\mathbf a=a_T\\mathbf T+a_N\\mathbf N$, where $a_T=\\frac{d}{dt}|\\mathbf v|$ is signed and $a_N=\\kappa|\\mathbf v|^2$ is nonnegative. The tangential term changes speed; the normal term turns the motion. The perpendicularity $\\mathbf T\\cdot\\mathbf T^{\\prime}=0$ follows by differentiating $\\mathbf T\\cdot\\mathbf T=1$. Hence $|\\mathbf a|^2=a_T^2+a_N^2$, a useful independent check.",
+        "At a regular point with $\\kappa=0$, the normal acceleration magnitude is zero but the formula for $\\mathbf N$ is undefined. There is no need to invent a preferred normal for a straight line. A circle of radius $R$ has $\\kappa=1/R$, so traversing it at speed $V$ requires normal acceleration $V^2/R$. Doubling speed quadruples this acceleration even though the geometric curvature is unchanged. The space-curve example and lab apply the same distinction to a helix.",
+        "Curvature is independent of a regular change of timing. If a circle of radius $R$ is traversed twice as fast, velocity magnitude doubles and normal acceleration quadruples, but $\\kappa=1/R$ remains unchanged. The formula $|\\mathbf v\\times\\mathbf a|/|\\mathbf v|^3$ has exactly that invariance: under constant speed scaling, numerator and denominator both gain a cubic factor. More general monotone reparameterizations require chain-rule algebra but lead to the same geometric result. This is why curvature describes the path rather than the driver's speed.",
+        "For the helix $\\mathbf r(t)=\\langle R\\cos t,R\\sin t,ct\\rangle$ with $R>0$, speed is $\\sqrt{R^2+c^2}$, acceleration is $\\langle-R\\cos t,-R\\sin t,0\\rangle$, and $\\mathbf v\\cdot\\mathbf a=0$. Thus the speed is constant and all acceleration is normal. The cross-product formula gives $\\kappa=R/(R^2+c^2)$, smaller than the planar circle's $1/R$ when $c\\ne0$. Increasing vertical pitch makes the path bend less per unit traveled length even though its horizontal projection remains a circle. This example links three-dimensional motion to the geometric meaning of curvature.",
+        "At zero curvature, the principal normal $\\mathbf N=\\mathbf T^{\\prime}/|\\mathbf T^{\\prime}|$ is undefined because $\\mathbf T^{\\prime}=\\mathbf0$. A straight line has perfectly well-defined zero curvature but no distinguished side toward which it bends. The acceleration of a traveler on it can still be tangential if speed changes. On a circle, by contrast, curvature is positive and the inward normal is defined at every regular point. State regularity and $\\kappa>0$ before using the full tangential-normal frame; the scalar curvature formula alone can remain meaningful in more cases.",
+        "The decomposition $\\mathbf a=a_T\\mathbf T+a_N\\mathbf N$ gives a numerical check $|\\mathbf a|^2=a_T^2+a_N^2$ because $\\mathbf T$ and $\\mathbf N$ are perpendicular unit vectors. If a computed normal component exceeds $|\\mathbf a|$, some derivative or unit calculation is wrong. The tangential scalar $a_T$ can be negative when speed decreases, while $a_N=\\kappa|\\mathbf v|^2$ is nonnegative by its chosen normal orientation. At a time when speed is zero, this frame is not defined even though ordinary vector acceleration may be. Return to component derivatives at such a point.",
+        "For a regular path, curvature can be interpreted through the osculating circle: where $\\kappa>0$, its radius is $1/\\kappa$. A large $\\kappa$ means a tight turn, and a small $\\kappa$ means a gentle turn. The unit tangent changes by approximately $\\kappa\\Delta s$ over a short arc length $\\Delta s$. On a circle, this is exact in the infinitesimal limit because turning angle equals arc length divided by radius. A straight line has $\\kappa=0$ and formally infinite radius of curvature, but no unique finite center of curvature. This interpretation connects the derivative definition with a geometric object.",
+        "For an application, curvature also helps translate a speed limit into an acceleration limit. On a path of curvature $\\kappa$, the required normal acceleration is $\\kappa V^2$. If a machine tolerates at most $A$ units of normal acceleration and $\\kappa>0$, then speed must satisfy $V\\le\\sqrt{A/\\kappa}$ at that point. The bound tightens on sharper bends. This is a local idealized relation; real vehicles also face friction, banking, and control constraints. The formula follows from the geometric decomposition, not from treating curvature as an acceleration by itself."
+      ],
+      "formula": "κ = |v × a|/|v|³; a_T = (v·a)/|v|; a_N = |v × a|/|v| = κ|v|², for |v| > 0",
+      "formulaTex": "\\begin{aligned}\\kappa&=\\frac{\\lVert\\mathbf v\\times\\mathbf a\\rVert}{\\lVert\\mathbf v\\rVert^3},\\\\ a_T&=\\frac{\\mathbf v\\cdot\\mathbf a}{\\lVert\\mathbf v\\rVert},\\\\ a_N&=\\frac{\\lVert\\mathbf v\\times\\mathbf a\\rVert}{\\lVert\\mathbf v\\rVert}=\\kappa\\lVert\\mathbf v\\rVert^2,\\qquad\\lVert\\mathbf v\\rVert>0.\\end{aligned}",
+      "theorems": [
+        {
+          "title": "Curvature is the normal part of acceleration",
+          "statement": "For a regular space curve with velocity $\\mathbf v$ and acceleration $\\mathbf a$, curvature is $\\kappa=|\\mathbf v\\times\\mathbf a|/|\\mathbf v|^3$ where speed is nonzero.",
+          "equationTex": "\\kappa=\\frac{|\\mathbf v\\times\\mathbf a|}{|\\mathbf v|^3}=\\frac{a_N}{|\\mathbf v|^2}",
+          "proof": [
+            "Let speed be $s=|\\mathbf v|>0$ and unit tangent $\\mathbf T=\\mathbf v/s$. Differentiate $\\mathbf v=s\\mathbf T$ to get $\\mathbf a=s^{\\prime}\\mathbf T+s\\mathbf T^{\\prime}$. Because $|\\mathbf T|=1$, differentiating $\\mathbf T\\cdot\\mathbf T=1$ gives $\\mathbf T\\cdot\\mathbf T^{\\prime}=0$. Thus $s^{\\prime}\\mathbf T$ is tangential acceleration and $s\\mathbf T^{\\prime}$ is perpendicular to the path. Denote the magnitude of that normal component by $a_N=s|\\mathbf T^{\\prime}|$.",
+            "Arc length satisfies $d\\ell/dt=s$, so $|d\\mathbf T/d\\ell|=|\\mathbf T^{\\prime}|/s=a_N/s^2$. This is the geometric definition of curvature. Also $|\\mathbf v\\times\\mathbf a|=|s\\mathbf T\\times(s^{\\prime}\\mathbf T+s\\mathbf T^{\\prime})|=s^2|\\mathbf T^{\\prime}|=s a_N$. Divide by $s^3$ to obtain the cross-product formula.",
+            "The condition $s>0$ is essential: at a stopped point, the unit tangent and these quotients may be undefined even though position and acceleration exist. Curvature has units inverse length, while $a_N=\\kappa s^2$ has acceleration units. A change in speed alone is tangential and does not create geometric bending."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Separating tangential and inward acceleration",
+      "paragraphs": [
+        "A point moving on a circle of fixed radius $R$ can change its speed as well as its direction. Write its position as $r(t)=R(\\cos\\theta(t),\\sin\\theta(t))$. Differentiating gives velocity $r^{\\prime}(t)=R\\theta^{\\prime}(t)(-\\sin\\theta,\\cos\\theta)$, so speed is $R|\\theta^{\\prime}|$. A second differentiation separates acceleration into a tangential component $R\\theta^{\\prime\\prime}(-\\sin\\theta,\\cos\\theta)$ and an inward component $-R(\\theta^{\\prime})^2(\\cos\\theta,\\sin\\theta)$. These directions are perpendicular.",
+        "For $\\theta(t)=\\left(\\frac{t}{1\\,\\mathrm s}\\right)^2\\,\\mathrm{rad}$ and $R=3\\,\\mathrm m$, the numerical angular rate is $2t$ when time $t$ is entered in seconds, and $\\theta^{\\prime\\prime}=2\\,\\mathrm{rad/s^2}$. At $t=1\\,\\mathrm s$, $\\theta^{\\prime}=2\\,\\mathrm{rad/s}$. The tangential acceleration magnitude is $R|\\theta^{\\prime\\prime}|=6\\,\\mathrm{m/s^2}$, while the inward magnitude is $R(\\theta^{\\prime})^2=12\\,\\mathrm{m/s^2}$. Since the components are perpendicular, total magnitude is $\\sqrt{6^2+12^2}=6\\sqrt5\\,\\mathrm{m/s^2}$. Adding the magnitudes as $18\\,\\mathrm{m/s^2}$ would ignore vector direction.",
+        "The speed at $t=1\\,\\mathrm s$ is $R\\theta^{\\prime}=6\\,\\mathrm{m/s}$. The inward acceleration also equals $\\mathrm{speed}^2/R=36/3=12\\,\\mathrm{m/s^2}$, an independent check. At $t=0$ the speed and inward component are zero while the tangential acceleration is still $6\\,\\mathrm{m/s^2}$: the object starts from rest but immediately begins to accelerate along the tangent. Constant-radius motion does not imply constant speed.",
+        "The angle in these formulas is measured in radians; otherwise derivatives of sine and cosine introduce conversion factors. The radius and derivative units also check the outputs: $R\\theta^{\\prime\\prime}$ and $R(\\theta^{\\prime})^2$ both have length per time squared. Use the component decomposition before interpreting a curved trajectory from a plot.",
+        "For $\\theta(t)=t^2$ and $R=3$ in compatible units, $\\theta^{\\prime}=2t$ and $\\theta^{\\prime\\prime}=2$. The tangential acceleration magnitude stays $6$ while inward magnitude is $3(2t)^2=12t^2$. At $t=1$ they are $6$ and $12$; at $t=2$ they are $6$ and $48$. Speed is $6t$ for $t\\ge0$, so the inward formula $v^2/R$ gives $36t^2/3=12t^2$ independently. The geometric circle has the same curvature $1/3$ at all times. The changing inward acceleration comes entirely from changing speed.",
+        "At $t=0$ the angle law $\\theta=t^2$ has $\\theta^{\\prime}=0$, so velocity is zero and the unit tangent $\\mathbf v/|\\mathbf v|$ is undefined as a motion-derived vector. Yet the position curve is a smooth circle, and a regular angle parameter describes its tangent geometry. This is a useful example of the distinction between a stationary time parameter and a geometric singularity. The vector acceleration exists and equals a tangential vector of magnitude $6$ at that instant. Do not apply formulas that divide by speed at zero; compute derivatives directly.",
+        "The inward term always points toward the circle's center, regardless of whether angular motion is clockwise or counterclockwise, because it contains $(\\theta^{\\prime})^2$. Reversing $\\theta^{\\prime}$ reverses velocity's tangential direction but leaves the inward direction unchanged. The tangential acceleration term depends on $\\theta^{\\prime\\prime}$ and can either increase or decrease speed depending on the sign of $\\theta^{\\prime}$. Thus calling $\\theta^{\\prime\\prime}$ positive “speeding up” is unsafe when $\\theta^{\\prime}$ is negative. Compare $\\mathbf v\\cdot\\mathbf a$ or differentiate speed $R|\\theta^{\\prime}|$ instead.",
+        "A three-dimensional space curve may have both tangential and normal acceleration without lying in one fixed plane. The decomposition still uses the instantaneous tangent and principal normal when speed and curvature are nonzero. Torsion, introduced in more advanced differential geometry, describes how the osculating plane twists; it is not needed to compute speed, length, or curvature here. Keep the present formulas tied to their hypotheses and geometric roles before extending them to a larger moving frame.",
+        "The cross-product formula for curvature can be derived without memorizing a determinant. Decompose acceleration into a component parallel to velocity and one perpendicular to it. The cross product $\\mathbf v\\times\\mathbf a$ ignores the parallel component, and its magnitude equals $|\\mathbf v|$ times the normal acceleration magnitude. Since normal acceleration is $\\kappa|\\mathbf v|^2$, we get $|\\mathbf v\\times\\mathbf a|=\\kappa|\\mathbf v|^3$. Solving yields $\\kappa=|\\mathbf v\\times\\mathbf a|/|\\mathbf v|^3$. This derivation shows why the speed is cubed and why the formula fails at a stationary parameter value. It also checks units: acceleration divided by speed squared has inverse length.",
+        "At a stationary instant, acceleration alone does not determine the future route without more information about how it changes. For $\\mathbf r(t)=\\langle t^2,0\\rangle$, the object approaches the origin from the positive $x$ side, stops, then reverses direction; for $\\mathbf r(t)=\\langle t^2,t^3\\rangle$, it also stops but follows a cusp-shaped trace. Both have a nonzero $x$-acceleration at zero. Examining nearby position terms and one-sided velocity directions distinguishes them. This is why formulas built from the unit tangent are deliberately restricted to times with nonzero speed, even when component derivatives exist smoothly."
+      ],
+      "formula": "a=Rθ″ e_t−R(θ′)² e_r; at R=3 m, θ=t², t=1 s, |a|=6√5 m/s².",
+      "formulaTex": "\\begin{gathered}\\mathbf a=R\\theta^{\\prime\\prime}\\mathbf e_t-R(\\theta^{\\prime})^2\\mathbf e_r,\\\\ R=3\\,\\mathrm m,\\quad\\theta(t)=\\left(\\frac{t}{1\\,\\mathrm s}\\right)^2\\,\\mathrm{rad},\\\\ t=1\\,\\mathrm s:\\quad\\lVert\\mathbf a\\rVert=\\sqrt{(6\\,\\mathrm{m/s^2})^2+(12\\,\\mathrm{m/s^2})^2}=6\\sqrt5\\,\\mathrm{m/s^2}.\\end{gathered}"
+    },
+    {
+      "title": "A space curve has a world-coordinate tangent",
+      "paragraphs": [
+        "For a differentiable path $\\mathbf r(t)$, secant displacement divided by its parameter increment tends to $\\mathbf r'(t_0)$. When that velocity is nonzero, the tangent line is $\\mathbf r(t_0)+s\\mathbf r'(t_0)$ and the unit tangent is $\\mathbf r'(t_0)/\\|\\mathbf r'(t_0)\\|$. At zero velocity this construction supplies no direction without further analysis.",
+        "For the helix $\\mathbf r(t)=(R\\cos t,R\\sin t,ht)$, where $R>0$ and $t$ is dimensionless, velocity is $(-R\\sin t,R\\cos t,h)$ and speed is the constant $\\sqrt{R^2+h^2}$. Acceleration is $(-R\\cos t,-R\\sin t,0)$, orthogonal to velocity. The cross-product curvature formula gives $\\kappa=R/(R^2+h^2)$.",
+        "A top projection discards height: $t=0$ and $t=2\\pi$ appear at the same screen point even though their world heights differ by $2\\pi h$. Calculate tangent, distance and curvature from world triples. Orthographic rotation changes appearance and can make distinct points overlap on screen without making them intersect in space.",
+        "The tangent line formula uses a parameter $s$ that is independent of the path parameter $t$. The value $t_0$ selects a point and a velocity on the curve; varying $s$ traces the straight line through that point in the velocity direction. Normalizing velocity changes only its length, not the tangent line. At a stationary parameter value, division by speed is unavailable, and a tangent may require a separate limiting analysis. This qualification matters for cusps and pauses: a drawn stroke does not automatically identify a unique direction when the derivative vanishes.",
+        "For the specific helix $(2\\cos t,2\\sin t,t/2)$ at $t=\\pi/2$, direct calculation gives $P=(0,2,\\pi/4)$, velocity $(-2,0,1/2)$ and acceleration $(0,-2,0)$. The speed is $\\sqrt{17}/2$, so the unit tangent is $(-4,0,1)/\\sqrt{17}$. Their dot product is zero, consistent with constant speed. Using the cross product of velocity and acceleration gives curvature $8/17$; the same value follows from $R/(R^2+h^2)$ with $R=2,h=1/2$. These values live in three coordinates regardless of the view chosen.",
+        "There are two different meanings of pitch in common descriptions, so state the model before calculating. In $z=ht$, the vertical rise per full turn is $2\\pi h$. If a physical coil has radius $2$ metres and rises one metre per turn, its height law is instead $z=\\theta/(2\\pi)$ metres. At a quarter turn its world point is $(0,2,1/4)$ metres, and integrating its constant speed over $0\\le\\theta\\le2\\pi$ gives one-turn length $\\sqrt{16\\pi^2+1}$ metres. Treating $h=1$ in the first law would model a rise of $2\\pi$ metres per turn, not one metre.",
+        "Projection is useful for recognizing a shape but loses information. Looking down the $z$ axis sends $(2,0,0)$ and $(2,0,\\pi)$ to the same screen pair, although the points are separated by $\\pi$ in world height. Rotating the view can make that separation visible, yet projected lengths and angles still vary with orientation. A world-coordinate table and the derivative formulas supply the invariant measurements. When the spatial figure marks a tangent with a short arrow, its display multiplier changes the drawn arrow length only; the reported velocity and unit tangent are computed from the unscaled derivative.",
+        "The world-coordinate table checks the helix independently of a projection. Equal top-view pairs at two parameters need not mean the points meet in space; calculate tangent and length from the world triples. The figure draws a scaled tangent arrow, while the listed velocities are unscaled."
+      ],
+      "formula": "For r(t)=(R cos t,R sin t,ht), speed=√(R²+h²), unit tangent=r'/speed, and curvature=R/(R²+h²).",
+      "formulaTex": "\\mathbf r(t)=(R\\cos t,R\\sin t,ht),\\quad\\|\\mathbf r'\\|=\\sqrt{R^2+h^2},\\quad\\kappa=\\frac{R}{R^2+h^2}.",
+      "comparisonTable": {
+        "caption": "Helix world coordinates for r(t)=(2 cos t, 2 sin t, t/2)",
+        "headers": [
+          "Parameter",
+          "World point (x,y,z)",
+          "World velocity",
+          "Top view (x,y)"
+        ],
+        "rows": [
+          [
+            "$0$",
+            "$(2,0,0)$",
+            "$(0,2,1/2)$",
+            "$(2,0)$"
+          ],
+          [
+            "$\\pi/2$",
+            "$(0,2,\\pi/4)$",
+            "$(-2,0,1/2)$",
+            "$(0,2)$"
+          ],
+          [
+            "$2\\pi$",
+            "$(2,0,\\pi)$",
+            "$(0,2,1/2)$",
+            "$(2,0)$"
+          ]
+        ]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "title": "A plane, an intersection, and a distance",
+      "problem": "Find the plane through $P=(1,0,0)$, $Q=(0,1,0)$, and $R=(0,0,1)$. Intersect it with $\\mathbf r(\\lambda)=(0,0,0)+\\lambda\\langle1,2,3\\rangle$ and find the perpendicular distance from the origin to the plane. Coordinates are in metres and $\\lambda$ is dimensionless.",
+      "steps": [
+        "The spanning vectors $Q-P=\\langle-1,1,0\\rangle$ and $R-P=\\langle-1,0,1\\rangle$ have cross product $\\langle1,1,1\\rangle$, which is nonzero.",
+        "Using this normal gives $(x-1)+y+z=0$, or $x+y+z=1$, with coordinates expressed in metres.",
+        "Substitute $(x,y,z)=(\\lambda,2\\lambda,3\\lambda)$ to get $6\\lambda=1$. Thus $\\lambda=1/6$ and the point is $(1/6,1/3,1/2)$. The coordinates sum to one, checking the plane equation.",
+        "A unit normal is $(1,1,1)/\\sqrt3$. The plane gives the origin a signed normal offset $-1/\\sqrt3\\,\\mathrm m$, so the perpendicular distance is $1/\\sqrt3\\,\\mathrm m$. The closest plane point is $(1/3,1/3,1/3)\\,\\mathrm m$: it lies on the plane and its displacement from the origin is normal to it. It differs from the line-intersection point."
+      ],
+      "answer": "The plane is $x+y+z=1$; the intersection is $(1/6,1/3,1/2)\\,\\mathrm m$; the origin is $1/\\sqrt3\\,\\mathrm m$ from the plane."
+    },
+    {
+      "title": "Constant speed with nonzero acceleration",
+      "problem": "Analyze $\\mathbf r(t)=\\langle2\\cos t,2\\sin t,t\\rangle$ for $0\\le t\\le2\\pi$, where $t$ is the numerical time in seconds and coordinates are in metres. The angular rate is $1\\,\\mathrm{rad/s}$ and the vertical rate is $1\\,\\mathrm{m/s}$.",
+      "steps": [
+        "Differentiate: $\\mathbf v=\\langle-2\\sin t,2\\cos t,1\\rangle$ and $\\mathbf a=\\langle-2\\cos t,-2\\sin t,0\\rangle$. Speed is $\\sqrt{4\\sin^2t+4\\cos^2t+1}=\\sqrt5\\,\\mathrm{m/s}$.",
+        "Compute $\\mathbf v\\cdot\\mathbf a=0$, so $a_T=0$. Acceleration magnitude is $2\\,\\mathrm{m/s^2}$: all acceleration is normal.",
+        "The cross product is $\\langle2\\sin t,-2\\cos t,4\\rangle$, with magnitude $\\sqrt{20}$. Curvature is $\\sqrt{20}/(\\sqrt5)^3=2/5$ per metre, and $a_N=\\kappa|\\mathbf v|^2=2\\,\\mathrm{m/s^2}$.",
+        "The distance traveled is $2\\pi\\sqrt5\\approx14.04963\\,\\mathrm m$. Displacement is $\\langle0,0,2\\pi\\rangle\\,\\mathrm m$, with magnitude about $6.28319\\,\\mathrm m$. The longer traveled distance accounts for the circular motion as well as the rise."
+      ],
+      "answer": "Speed stays $\\sqrt5\\,\\mathrm{m/s}$ while acceleration has magnitude $2\\,\\mathrm{m/s^2}$. Curvature is $0.4\\,\\mathrm{m^{-1}}$, and the distance is $2\\pi\\sqrt5\\,\\mathrm m$."
+    },
+    {
+      "title": "A displacement is shorter than a two-leg route",
+      "problem": "A traveler moves $3\\,\\mathrm m$ east then $4\\,\\mathrm m$ north. Find net displacement and total distance.",
+      "steps": [
+        "Represent the legs by $\\mathbf u=\\langle3,0\\rangle$ and $\\mathbf v=\\langle0,4\\rangle$ metres.",
+        "Their sum is $\\langle3,4\\rangle\\,\\mathrm m$ with norm $\\sqrt{3^2+4^2}=5\\,\\mathrm m$.",
+        "The route length adds the two legs, $3+4=7\\,\\mathrm m$, exceeding the displacement magnitude."
+      ],
+      "answer": "Displacement $\\langle3,4\\rangle\\,\\mathrm m$, magnitude $5\\,\\mathrm m$; distance traveled $7\\,\\mathrm m$."
+    },
+    {
+      "title": "Projection separates parallel and perpendicular parts",
+      "problem": "Project $\\mathbf u=\\langle3,4,0\\rangle$ onto $\\mathbf v=\\langle1,0,1\\rangle$.",
+      "steps": [
+        "$\\mathbf u\\cdot\\mathbf v=3$ and $\\mathbf v\\cdot\\mathbf v=2$, so $\\operatorname{proj}_{\\mathbf v}\\mathbf u=(3/2)\\mathbf v=\\langle3/2,0,3/2\\rangle$.",
+        "The remainder is $\\mathbf u-\\operatorname{proj}_{\\mathbf v}\\mathbf u=\\langle3/2,4,-3/2\\rangle$.",
+        "Its dot product with $\\mathbf v$ is $3/2-3/2=0$, verifying perpendicularity."
+      ],
+      "answer": "Projection $\\langle3/2,0,3/2\\rangle$; perpendicular remainder $\\langle3/2,4,-3/2\\rangle$."
+    },
+    {
+      "title": "A cross product supplies a triangle area",
+      "problem": "Find the triangle area spanned by $\\mathbf u=\\langle1,2,0\\rangle$ and $\\mathbf v=\\langle0,1,2\\rangle$.",
+      "steps": [
+        "Compute $\\mathbf u\\times\\mathbf v=\\langle4,-2,1\\rangle$.",
+        "Its norm is $\\sqrt{16+4+1}=\\sqrt{21}$, the parallelogram area.",
+        "The triangle occupies half that area."
+      ],
+      "answer": "Area $\\sqrt{21}/2$ square units."
+    },
+    {
+      "title": "A zero denominator has two geometric meanings",
+      "problem": "For the line $x+y=1$ in the plane, classify lines with direction $\\mathbf d=\\langle1,-1\\rangle$ through $P=(0,0)$ and $Q=(1,0)$.",
+      "steps": [
+        "The line normal is $\\mathbf n=\\langle1,1\\rangle$ and $\\mathbf n\\cdot\\mathbf d=0$, so both lines are parallel to the given line.",
+        "For $P$, $\\mathbf n\\cdot P=0\\ne1$, so the line never meets the given line.",
+        "For $Q$, $\\mathbf n\\cdot Q=1$, so every point $Q+\\lambda\\mathbf d$ satisfies $x+y=1$ and the lines coincide."
+      ],
+      "answer": "The first line is disjoint from $x+y=1$; the second coincides with it."
+    },
+    {
+      "title": "A helix bends at constant speed",
+      "problem": "For $\\mathbf r(t)=\\langle2\\cos t,2\\sin t,t\\rangle$, find speed, curvature, and tangential acceleration.",
+      "steps": [
+        "Velocity is $\\langle-2\\sin t,2\\cos t,1\\rangle$ with speed $\\sqrt5$, constant.",
+        "Acceleration is $\\langle-2\\cos t,-2\\sin t,0\\rangle$ and $\\mathbf v\\cdot\\mathbf a=0$, so $a_T=0$.",
+        "For $R=2,c=1$, helix curvature is $R/(R^2+c^2)=2/5$; normal acceleration $\\kappa|\\mathbf v|^2=2$, matching $|\\mathbf a|$."
+      ],
+      "answer": "Speed $\\sqrt5$, curvature $2/5$, tangential acceleration $0$, normal magnitude $2$."
+    },
+    {
+      "title": "Acceleration at a pause on a circle",
+      "problem": "Let $\\mathbf r(t)=3(\\cos t^2,\\sin t^2)$ metres. Find velocity and acceleration at $t=0$ seconds.",
+      "steps": [
+        "Differentiate: $\\mathbf v=3\\cdot2t(-\\sin t^2,\\cos t^2)$, so $\\mathbf v(0)=0$.",
+        "Differentiate again or use angular components $\\theta^{\\prime}=2t$, $\\theta^{\\prime\\prime}=2$.",
+        "At $t=0$ the inward term $-R(\\theta^{\\prime})^2$ vanishes and tangential term has magnitude $R\\theta^{\\prime\\prime}=6\\,\\mathrm{m/s^2}$, directed upward at position $(3,0)$."
+      ],
+      "answer": "The point is instantaneously at rest with acceleration $(0,6)\\,\\mathrm{m/s^2}$."
+    },
+    {
+      "title": "A helix tangent in world coordinates",
+      "problem": "For $\\mathbf r(t)=(2\\cos t,2\\sin t,t/2)$, calculate point, velocity, unit tangent and curvature at $t=\\pi/2$.",
+      "steps": [
+        "Direct substitution gives $P=(0,2,\\pi/4)$ and $\\mathbf r'=(-2,0,1/2)$.",
+        "The speed is $\\sqrt{17}/2$, so $\\mathbf T=(-4,0,1)/\\sqrt{17}$ and the tangent line is $P+s(-2,0,1/2)$.",
+        "Here $R=2,h=1/2$, hence $\\kappa=2/(4+1/4)=8/17$. Acceleration $(0,-2,0)$ is orthogonal to velocity."
+      ],
+      "answer": "The world tangent is $(-4,0,1)/\\sqrt{17}$ and curvature is $8/17$."
+    }
+  ],
+  "misconceptions": [
+    "Constant speed means zero acceleration. A helix or circle can have constant speed while velocity changes direction, giving normal acceleration.",
+    "A crossing in a projection onto the $xy$-plane proves two space curves intersect. Their $z$-coordinates must agree too; projections discard information.",
+    "Curvature is the magnitude of acceleration. Curvature describes geometry and has inverse-length units; normal acceleration also depends on speed squared."
+  ],
+  "lab": {
+    "title": "Sample a space curve and its speed",
+    "description": "Sample a helix with radius R, angular rate omega, and vertical rate c. The plots show its $xy$ projection and speed against time, not a three-dimensional rendering. A printed table preserves height information. Compare polygonal distance with the exact length to investigate sampling error.",
+    "code": "// Adjust radius (m), angular rate (rad/s), rise rate (m/s), and sample count.\nconst R = 2, omega = 1, c = 1, duration = 2 * Math.PI, n = 120;\nif (![R, omega, c, duration, n].every(Number.isFinite) || R < 0 || duration <= 0 || !Number.isInteger(n) || n < 4 || n > 1500) {\n  throw new Error('Use finite parameters, R >= 0, duration > 0, and integer 4 <= n <= 1500.');\n}\nconst exactSpeed = Math.hypot(R * omega, c);\nif (R === 0 && c === 0 || omega === 0 && c === 0) throw new Error('Stationary curve: curvature needs nonzero speed.');\nif (exactSpeed === 0) throw new Error('Nonzero speed underflows machine resolution.');\nif (!Number.isFinite(exactSpeed)) throw new Error('Derived speed overflows; reduce parameters.');\nconst xy = [], speed = [];\nlet previous = null, polygonLength = 0;\nconsole.log('Table columns: t (s), x (m), y (m), z (m)');\nfor (let i = 0; i <= n; i++) {\n  const t = duration * (i / n);\n  const p = [R * Math.cos(omega * t), R * Math.sin(omega * t), c * t];\n  if (![t, ...p].every(Number.isFinite)) throw new Error('Derived coordinates overflow; reduce parameters.');\n  xy.push([p[0], p[1]]);\n  speed.push([t, Math.hypot(-R * omega * Math.sin(omega * t), R * omega * Math.cos(omega * t), c)]);\n  if (previous) polygonLength += Math.hypot(...p.map((value, j) => value - previous[j]));\n  if (!Number.isFinite(polygonLength) || !Number.isFinite(speed.at(-1)[1])) throw new Error('Derived length or speed overflows; reduce parameters.');\n  previous = p;\n  if (i === 0 || i === Math.floor(n / 2) || i === n) console.log(t, ...p);\n}\nconst exactLength = exactSpeed * duration;\nconst curvature = R === 0 || omega === 0 ? 0 : Math.exp(Math.log(R) + 2*Math.log(Math.abs(omega)) - 2*Math.log(exactSpeed));\nif (![exactLength, curvature, exactLength - polygonLength].every(Number.isFinite)) throw new Error('Derived length or curvature overflows; reduce parameters.');\nplot(xy, 'xy projection: x (m) versus y (m), z omitted');\nplot(speed, 'Speed (m/s) against time (s)');\nconsole.log('Exact speed (m/s):', exactSpeed);\nconsole.log('Curvature (1/m):', curvature);\nconsole.log('Polygon length (m):', polygonLength);\nconsole.log('Exact length (m):', exactLength);\nconsole.log('Length shortfall (m):', exactLength - polygonLength);",
+    "tasks": [
+      "Predict whether speed changes along the default helix and whether polygonal length exceeds or underestimates arc length. Explain before running.",
+      "Double n twice and compare length shortfalls. Explain why more chords capture bending better without treating observed convergence as proof.",
+      "Set c = 0 and then double omega. Compare the printed speed and curvature, and calculate normal acceleration $\\kappa v^2$ from them. Which of these quantities depends only on the circle's geometry?",
+      "Set R = 0 with c = 1 to obtain a regular straight line. Then set c = 0 as well and explain the explicit failure. Why does a projected crossing fail to establish a space-curve intersection?"
+    ],
+    "expected": "Default speed is $\\sqrt{5}\\approx2.2360679775\\,\\mathrm{m/s}$ and curvature is $0.4\\,\\mathrm{m}^{-1}$. Exact length is $2\\pi\\sqrt{5}\\approx14.0496294621\\,\\mathrm{m}$. The 120-chord length is about $14.04834559\\,\\mathrm{m}$, below the exact length by about $0.001284\\,\\mathrm{m}$. The start and end have the same $xy$ position but heights $0$ and $2\\pi\\,\\mathrm{m}$."
+  },
+  "exercises": [
+    {
+      "question": "Find displacement from $P=(1,2,3)$ to $Q=(4,0,5)$.",
+      "hint": "Subtract terminal and initial points: $Q-P$.",
+      "solution": "Subtract componentwise: $Q-P=\\langle4-1,0-2,5-3\\rangle=\\langle3,-2,2\\rangle$, directed from $P$ to $Q$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the norm of $\\langle3,-2,2\\rangle$.",
+      "hint": "Use $\\|\\mathbf v\\|=\\sqrt{v_1^2+v_2^2+v_3^2}$.",
+      "solution": "Square each coordinate, add the three squares, and take the square root. This gives $\\|\\langle3,-2,2\\rangle\\|=\\sqrt{3^2+(-2)^2+2^2}=\\sqrt{17}$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can the zero vector be normalized?",
+      "hint": "Check the norm before dividing by it.",
+      "solution": "No. The zero vector has norm $0$, so division by its norm is undefined and it has no unit direction.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A traveler goes $3\\,\\mathrm m$ east then $4\\,\\mathrm m$ north. Compare distance and displacement magnitude.",
+      "hint": "Add path lengths, then use Pythagoras for the displacement.",
+      "solution": "Traveled distance is $3+4=7\\,\\mathrm m$. The displacement is $\\langle3,4\\rangle\\,\\mathrm m$ with magnitude $\\sqrt{3^2+4^2}=5\\,\\mathrm m$.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the projection of $\\mathbf{u} = \\langle 3, 4, 0\\rangle$ onto $\\mathbf{v} = \\langle 1, 0, 1\\rangle$ and verify the perpendicular remainder.",
+      "hint": "Use $\\operatorname{proj}_{\\mathbf v}\\mathbf u=(\\mathbf u\\cdot\\mathbf v)/(\\mathbf v\\cdot\\mathbf v)\\,\\mathbf v$.",
+      "solution": "Here $\\mathbf u\\cdot\\mathbf v=3$ and $\\mathbf v\\cdot\\mathbf v=2$. Thus $\\operatorname{proj}_{\\mathbf v}\\mathbf u=\\langle3/2,0,3/2\\rangle$. The remainder $\\langle3/2,4,-3/2\\rangle$ dots with $\\mathbf v$ to give $3/2-3/2=0$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the area of the triangle with vertices $(0,0,0)$, $(1,2,0)$, and $(0,1,2)$.",
+      "hint": "Use half the norm of the cross product of two sides.",
+      "solution": "The side vectors are $\\mathbf u=\\langle1,2,0\\rangle$ and $\\mathbf v=\\langle0,1,2\\rangle$. Their cross product is $\\langle4,-2,1\\rangle$, with norm $\\sqrt{21}$, so triangle area is $\\sqrt{21}/2$ square coordinate units.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Compute $\\mathbf u\\cdot\\mathbf v$ for $\\mathbf u=\\langle3,4,0\\rangle$, $\\mathbf v=\\langle1,0,1\\rangle$.",
+      "hint": "Multiply corresponding components and add.",
+      "solution": "The dot product multiplies matching coordinates and sums the results: $\\mathbf u\\cdot\\mathbf v=3(1)+4(0)+0(1)=3$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Project $\\mathbf u=\\langle2,-1,3\\rangle$ onto $\\mathbf v=\\langle1,2,2\\rangle$ and verify that the remainder is perpendicular to $\\mathbf v$.",
+      "hint": "Project with $(\\mathbf u\\cdot\\mathbf v)/(\\mathbf v\\cdot\\mathbf v)$, then dot the remainder with $\\mathbf v$.",
+      "solution": "We have $\\mathbf u\\cdot\\mathbf v=6$ and $\\mathbf v\\cdot\\mathbf v=9$, so $\\operatorname{proj}_{\\mathbf v}\\mathbf u=\\frac23\\mathbf v=\\langle2/3,4/3,4/3\\rangle$. The remainder is $\\langle4/3,-7/3,5/3\\rangle$, whose dot product with $\\mathbf v$ is $4/3-14/3+10/3=0$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Compute $\\langle1,2,0\\rangle\\times\\langle0,1,2\\rangle$.",
+      "hint": "Use the coordinate cross-product formula.",
+      "solution": "The cross product is $\\langle1,2,0\\rangle\\times\\langle0,1,2\\rangle=\\langle4,-2,1\\rangle$. Its dot product with each input is $0$, as expected.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $\\mathbf u=\\langle1,2,0\\rangle$ and $\\mathbf v=\\langle0,1,2\\rangle$ be sides from a common vertex. Find the area of the triangle they span.",
+      "hint": "Compute $\\mathbf u\\times\\mathbf v$, then take half its norm.",
+      "solution": "Here $\\mathbf u\\times\\mathbf v=\\langle4,-2,1\\rangle$, whose norm is $\\sqrt{21}$. The triangle area is $\\sqrt{21}/2$ square coordinate units.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does the line $\\mathbf{r}(t) = \\langle t, 1 - t, 2\\rangle$ meet the plane $x + y = 3$? What changes for $x + y = 1$?",
+      "hint": "Substitute the line coordinates into each plane equation.",
+      "solution": "Every line point satisfies $x+y=t+(1-t)=1$. Thus the line misses $x+y=3$ but lies entirely in $x+y=1$. Its direction $\\langle1,-1,0\\rangle$ is perpendicular to the common normal $\\langle1,1,0\\rangle$.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the plane through $(1,0,0)$, $(0,1,0)$, $(0,0,1)$.",
+      "hint": "Use the three point differences to find a normal.",
+      "solution": "A normal to the plane is $\\langle1,1,1\\rangle$; each of the three given points satisfies $x+y+z=1$, which is the plane equation.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Intersect line $\\lambda\\langle1,2,3\\rangle$ with $x+y+z=1$.",
+      "hint": "Substitute the line into the plane to solve for $\\lambda$.",
+      "solution": "Substitution gives $\\lambda+2\\lambda+3\\lambda=1$, so $\\lambda=1/6$ and the intersection is $(1/6,1/3,1/2)$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does line $(t,-t,0)$ meet plane $x+y=1$?",
+      "hint": "Compute $x+y$ on the line.",
+      "solution": "On the line, $x+y=t-t=0$, whereas the plane requires $x+y=1$. Thus they are disjoint; the direction $(1,-1,0)$ is parallel to the plane.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find distance from origin to plane $x+y+z=1$.",
+      "hint": "Use $|\\mathbf n\\cdot(Q-P)|/\\|\\mathbf n\\|$.",
+      "solution": "For plane $x+y+z-1=0$, the normal is $\\langle1,1,1\\rangle$. Distance from the origin is $|0+0+0-1|/\\sqrt{1^2+1^2+1^2}=1/\\sqrt3$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\mathbf{r}(t)=\\langle t,t^2,0\\rangle$ find velocity and acceleration at $t=0$.",
+      "hint": "Differentiate each coordinate once for velocity and twice for acceleration.",
+      "solution": "Differentiating gives $\\mathbf v(t)=\\langle1,2t,0\\rangle$ and $\\mathbf a(t)=\\langle0,2,0\\rangle$. At $t=0$, they are $\\langle1,0,0\\rangle$ and $\\langle0,2,0\\rangle$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\mathbf r(t)=\\langle t,t^2,0\\rangle$, what is the instantaneous rate of change of speed at $t=0$, and does speed increase immediately afterward?",
+      "hint": "Differentiate the speed $\\sqrt{1+4t^2}$ at $t=0$.",
+      "solution": "Speed is $s(t)=\\sqrt{1+4t^2}$, so $s^{\\prime}(t)=4t/\\sqrt{1+4t^2}$ and $s^{\\prime}(0)=0$. Speed increases for $t>0$, but its instantaneous rate at zero is $0$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For radius $R=2$ and angular speed $\\omega=3$, find speed and inward acceleration.",
+      "hint": "Use speed $R|\\omega|$ and inward acceleration $R\\omega^2$.",
+      "solution": "Speed is $R|\\omega|=2(3)=6$ length units per time. Inward acceleration magnitude is $R\\omega^2=2(3^2)=18$ length units per time squared.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "If a path closes at its initial point, must its traveled distance be zero?",
+      "hint": "Distinguish displacement from $\\int\\|\\mathbf v\\|\\,dt$.",
+      "solution": "No. For a continuously differentiable path $\\mathbf r:[a,b]\\to\\mathbb R^n$ with $\\mathbf r(a)=\\mathbf r(b)$, displacement is $\\mathbf0$, while traveled distance is $\\int_a^b\\|\\mathbf r'(t)\\|\\,dt$. This distance is positive if the path is nonconstant.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $\\mathbf{r}(t) = \\langle t, t^2, 0\\rangle$, find speed, curvature, and tangential and normal acceleration at $t = 0$.",
+      "hint": "Find $\\mathbf v$ and $\\mathbf a$, then their dot and cross products.",
+      "solution": "Here $\\mathbf v=\\langle1,2t,0\\rangle$ and $\\mathbf a=\\langle0,2,0\\rangle$. At $0$, speed is $1$, $\\mathbf v\\cdot\\mathbf a=0$, and $\\|\\mathbf v\\times\\mathbf a\\|=2$. Hence $\\kappa=2$, $a_T=0$, and $a_N=2$: the path turns without an instantaneous speed change.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove that a differentiable unit vector function $\\mathbf T$ has derivative perpendicular to itself. What does this say about constant-speed acceleration?",
+      "hint": "Differentiate $\\mathbf T\\cdot\\mathbf T=1$.",
+      "solution": "Differentiating $\\mathbf T\\cdot\\mathbf T=1$ gives $2\\mathbf T\\cdot\\mathbf T'=0$. For constant positive speed $V$, $\\mathbf v=V\\mathbf T$ and $\\mathbf a=V\\mathbf T'$, so $\\mathbf v\\cdot\\mathbf a=0$. If the constant speed is zero, then $\\mathbf v=\\mathbf0$ throughout and $\\mathbf a=\\mathbf0$ wherever it exists, so the conclusion still holds.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Why can the default helix lab underestimate length even though it computes sample speeds from the analytic derivative? How can an extremely high angular rate defeat a coarse sample?",
+      "hint": "Compare sampled straight chords with the curved pieces between samples.",
+      "solution": "The lab evaluates speeds from an analytic derivative, up to floating-point rounding, but estimates length using straight chords, which are no longer than the curved pieces they replace. If the angle advances by a whole number of turns between samples, successive projected positions repeat; the chords can miss the circular travel. Sampling must resolve the angular motion to approximate length.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A path has speed $5\\,\\mathrm{m}/\\mathrm{s}$ and normal acceleration $10\\,\\mathrm{m}/\\mathrm{s}^2$ at an instant. Find curvature and radius of curvature.",
+      "hint": "Use $a_N=\\kappa s^2$ and radius $1/\\kappa$.",
+      "solution": "From $a_N=\\kappa s^2$, $\\kappa=10/5^2=0.4\\,\\mathrm{m^{-1}}$. The radius of curvature is $1/\\kappa=2.5\\,\\mathrm m$; tangential acceleration is irrelevant.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For helix $\\mathbf r(t)=\\langle2\\cos t,2\\sin t,t\\rangle$, find speed.",
+      "hint": "Differentiate the helix and take the velocity norm.",
+      "solution": "The derivative is $\\mathbf r^{\\prime}(t)=\\langle-2\\sin t,2\\cos t,1\\rangle$. Its norm is $\\sqrt{4\\sin^2t+4\\cos^2t+1}=\\sqrt5$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the helix $\\mathbf r(t)=\\langle2\\cos t,2\\sin t,t\\rangle$, find curvature.",
+      "hint": "Use $\\kappa=R/(R^2+c^2)$ for this helix.",
+      "solution": "For this helix, $R=2$ and vertical rise per radian is $c=1$. Thus $\\kappa=R/(R^2+c^2)=2/5$ in inverse length units.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For constant-speed motion, what is $\\mathbf v\\cdot\\mathbf a$?",
+      "hint": "Differentiate the constant quantity $\\mathbf v\\cdot\\mathbf v$.",
+      "solution": "Constant speed makes $\\|\\mathbf v\\|^2=\\mathbf v\\cdot\\mathbf v$ constant. Differentiating gives $0=2\\mathbf v\\cdot\\mathbf a$, hence $\\mathbf v\\cdot\\mathbf a=0$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "For uniform circular motion with $R=3\\,\\mathrm{m}$ and angular speed $2\\,\\mathrm{rad}/\\mathrm{s}$, find speed and inward acceleration.",
+      "hint": "Use $R\\omega$ and $R\\omega^2$, with radians dimensionless.",
+      "solution": "With $R=3\\,\\mathrm m$ and $\\omega=2\\,\\mathrm{rad/s}$, speed is $R\\omega=6\\,\\mathrm{m/s}$ and inward acceleration is $R\\omega^2=12\\,\\mathrm{m/s^2}$. Constant angular speed gives zero tangential acceleration.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R=3\\,\\mathrm m$ and $\\theta(t)=\\left(\\frac{t}{1\\,\\mathrm s}\\right)^2$ radians, find acceleration-component magnitudes at $t=2\\,\\mathrm s$.",
+      "hint": "Differentiate $(t/(1\\,\\mathrm s))^2\\,\\mathrm{rad}$ while retaining the time scale.",
+      "solution": "Writing $\\theta(t)=(t/(1\\,\\mathrm s))^2\\,\\mathrm{rad}$ gives $\\theta^{\\prime}(t)=2(t/(1\\,\\mathrm s))/(1\\,\\mathrm s)\\,\\mathrm{rad}$ and $\\theta^{\\prime\\prime}(t)=2/(1\\,\\mathrm s)^2\\,\\mathrm{rad}$. At $t=2\\,\\mathrm s$, these are $4\\,\\mathrm{rad/s}$ and $2\\,\\mathrm{rad/s^2}$. Thus $a_T=6\\,\\mathrm{m/s^2}$, $a_N=48\\,\\mathrm{m/s^2}$, and total magnitude $\\sqrt{6^2+48^2}=6\\sqrt{65}\\,\\mathrm{m/s^2}$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R=3\\,\\mathrm m$ and $\\theta(t)=\\left(\\frac{t}{1\\,\\mathrm s}\\right)^3$ radians, find tangential and inward acceleration magnitudes at $t=1\\,\\mathrm s$.",
+      "hint": "Differentiate the cubic angular law with its one-second scale, then use $R|\\theta^{\\prime\\prime}|$ and $R(\\theta^{\\prime})^2$.",
+      "solution": "At $t=1\\,\\mathrm s$, the cubic law gives $\\theta^{\\prime}=3\\,\\mathrm{rad/s}$ and $\\theta^{\\prime\\prime}=6\\,\\mathrm{rad/s^2}$. Thus the tangential magnitude is $R|\\theta^{\\prime\\prime}|=18\\,\\mathrm{m/s^2}$ and the inward magnitude is $R(\\theta^{\\prime})^2=27\\,\\mathrm{m/s^2}$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R=3\\,\\mathrm m$ and $\\theta(t)=(t/(1\\,\\mathrm s))^3$ radians, find tangential and inward acceleration magnitudes at $t=2\\,\\mathrm s$.",
+      "hint": "At $t=2\\,\\mathrm s$, compute $\\theta^{\\prime}$ and $\\theta^{\\prime\\prime}$ before the two magnitudes.",
+      "solution": "At $t=2\\,\\mathrm s$, $\\theta^{\\prime}=12\\,\\mathrm{rad/s}$ and $\\theta^{\\prime\\prime}=12\\,\\mathrm{rad/s^2}$. Hence the tangential magnitude is $3(12)=36\\,\\mathrm{m/s^2}$ and the inward magnitude is $3(12^2)=432\\,\\mathrm{m/s^2}$.",
+      "lesson": 6,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "Vector products translate angle, projection, perpendicularity, and area into coordinate calculations.",
+    "Regular vector-valued motion has velocity, speed, and acceleration; distance integrates speed.",
+    "Curvature measures bending per unit length, while tangential and normal acceleration separate changes of speed and direction."
+  ],
+  "next": "Chapter 20 changes the input as well as the output viewpoint: functions of several variables describe heights, temperatures, and other fields throughout a region. Vectors and planes will supply the geometry for gradients and tangent planes in chapter 21.",
+  "readingLinks": [
+    {
+      "resourceId": "calculus:04",
+      "label": "Prerequisite: single-variable calculus, Chapter 04"
+    },
+    {
+      "resourceId": "calculus:05",
+      "label": "Prerequisite: single-variable calculus, Chapter 05"
+    },
+    {
+      "resourceId": "calculus:06",
+      "label": "Prerequisite: single-variable calculus, Chapter 06"
+    },
+    {
+      "resourceId": "calculus:07",
+      "label": "Prerequisite: single-variable calculus, Chapter 07"
+    },
+    {
+      "resourceId": "calculus:08",
+      "label": "Prerequisite: single-variable calculus, Chapter 08"
+    },
+    {
+      "resourceId": "calculus:09",
+      "label": "Prerequisite: single-variable calculus, Chapter 09"
+    },
+    {
+      "resourceId": "calculus:10",
+      "label": "Prerequisite: single-variable calculus, Chapter 10"
+    },
+    {
+      "resourceId": "calculus:11",
+      "label": "Prerequisite: single-variable calculus, Chapter 11"
+    },
+    {
+      "resourceId": "calculus:12",
+      "label": "Prerequisite: single-variable calculus, Chapter 12"
+    },
+    {
+      "resourceId": "calculus:13",
+      "label": "Prerequisite: single-variable calculus, Chapter 13"
+    },
+    {
+      "resourceId": "calculus:14",
+      "label": "Prerequisite: single-variable calculus, Chapter 14"
+    },
+    {
+      "resourceId": "calculus:15",
+      "label": "Prerequisite: single-variable calculus, Chapter 15"
+    },
+    {
+      "resourceId": "calculus:16",
+      "label": "Prerequisite: single-variable calculus, Chapter 16"
+    },
+    {
+      "resourceId": "calculus:17",
+      "label": "Prerequisite: single-variable calculus, Chapter 17"
+    },
+    {
+      "resourceId": "lucent:linear-algebra",
+      "label": "Prerequisite: Linear algebra"
+    }
+  ]
+}

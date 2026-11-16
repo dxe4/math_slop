@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">State-space inference combines two directions</title><desc id="desc">Latent states propagate forward; smoothing uses future observations as well as the past.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">State-space inference combines two directions</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Latent states propagate forward; smoothing uses future observations as well as the past.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Joint density p(x₁) ∏ₜ₌₂ᵀ p(xₜ|xₜ₋₁) ∏ₜ₌₁ᵀ p(yₜ|xₜ). FFBS samples an entire latent path.</text>
+<circle cx="120.00" cy="210.00" r="34" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="120.00" y="216.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">x1</text>
+<circle cx="120.00" cy="360.00" r="30" fill="#d1e6e9" stroke="#167d8d" stroke-width="2"/>
+<text x="120.00" y="366.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">y1</text>
+<line x1="120.00" y1="246.00" x2="120.00" y2="325.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="158.00" y1="210.00" x2="256.00" y2="210.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="295.00" cy="210.00" r="34" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="295.00" y="216.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">x2</text>
+<circle cx="295.00" cy="360.00" r="30" fill="#d1e6e9" stroke="#167d8d" stroke-width="2"/>
+<text x="295.00" y="366.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">y2</text>
+<line x1="295.00" y1="246.00" x2="295.00" y2="325.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="333.00" y1="210.00" x2="431.00" y2="210.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="470.00" cy="210.00" r="34" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="470.00" y="216.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">x3</text>
+<circle cx="470.00" cy="360.00" r="30" fill="#d1e6e9" stroke="#167d8d" stroke-width="2"/>
+<text x="470.00" y="366.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">y3</text>
+<line x1="470.00" y1="246.00" x2="470.00" y2="325.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="508.00" y1="210.00" x2="606.00" y2="210.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="645.00" cy="210.00" r="34" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="645.00" y="216.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">x4</text>
+<circle cx="645.00" cy="360.00" r="30" fill="#d1e6e9" stroke="#167d8d" stroke-width="2"/>
+<text x="645.00" y="366.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">y4</text>
+<line x1="645.00" y1="246.00" x2="645.00" y2="325.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="683.00" y1="210.00" x2="781.00" y2="210.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="820.00" cy="210.00" r="34" fill="#ffffff" stroke="#275c91" stroke-width="2"/>
+<text x="820.00" y="216.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">x5</text>
+<circle cx="820.00" cy="360.00" r="30" fill="#d1e6e9" stroke="#167d8d" stroke-width="2"/>
+<text x="820.00" y="366.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">y5</text>
+<line x1="820.00" y1="246.00" x2="820.00" y2="325.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="90.00" y1="125.00" x2="850.00" y2="125.00" stroke="#167d8d" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="475.00" y="112.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">Forward filtering: summarize observations to time t</text>
+<line x1="850.00" y1="445.00" x2="90.00" y2="445.00" stroke="#bb5b27" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="475.00" y="432.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">Backward sampling: condition on the sampled next state</text>
+</svg>

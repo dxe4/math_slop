@@ -1,0 +1,456 @@
+{
+  "id": "04",
+  "title": "Limits and continuity",
+  "subtitle": "How can nearby values determine a reliable conclusion at a point where a formula fails?",
+  "prerequisites": [
+    "Functions, domains, intervals, and absolute value from chapter 1.",
+    "Factoring, rational expressions, and radians from chapter 2.",
+    "For the lab only: JavaScript functions, loops, and floating-point numbers from chapter 3."
+  ],
+  "objectives": [
+    "Distinguish a function value from one-sided and two-sided limits.",
+    "Evaluate limits using laws, algebra, and the squeeze theorem with their hypotheses.",
+    "Prove linear and nonlinear finite limits from the epsilon–delta definition by choosing a positive radius that works for every eligible nearby input.",
+    "Classify discontinuities and asymptotes and apply the intermediate value theorem."
+  ],
+  "sections": [
+    {
+      "title": "1. Approaching a point without arriving",
+      "paragraphs": [
+        "Suppose a sensor formula gives $f(x)=(x^2-1)/(x-1)$. At $x=1$ the denominator is zero, so the formula does not define a value. Nevertheless, at every other input it equals $x+1$. Inputs $0.9$ and $1.1$ give outputs $1.9$ and $2.1$; inputs $0.999$ and $1.001$ give $1.999$ and $2.001$. The nearby outputs suggest $2$. A limit describes this nearby behavior, independently of whether the function has a value at the target input.",
+        "We write $\\lim_{x\\to a}f(x)=L$ when values of $f(x)$ become arbitrarily close to $L$ whenever domain inputs $x$ are sufficiently close to $a$ but different from $a$. Throughout, an approach point must have domain inputs arbitrarily near it. Otherwise there is no meaningful approach to inspect. A limit is not a story about an input moving in time: it is a statement about every eligible input in a sufficiently small neighborhood. For the two-sided convention used here, domain inputs must approach $a$ from both sides before comparing left and right limits. For example, $\\sqrt{x}$ at $a=0$ has a right-hand approach but no domain inputs approaching from the left.",
+        "A left-hand limit, written $\\lim_{x\\to a^-}f(x)$, restricts inputs to $x<a$. A right-hand limit, written $\\lim_{x\\to a^+}f(x)$, restricts inputs to $x>a$. When the domain has nearby points on both sides, a finite two-sided limit exists exactly when both one-sided limits exist and agree. For the step function $j(x)=0$ when $x<0$ and $j(x)=1$ when $x\\ge0$, $\\lim_{x\\to0^-}j(x)=0$ and $\\lim_{x\\to0^+}j(x)=1$. Its two-sided limit does not exist, even though $j(0)$ is defined.",
+        "Domain restrictions matter. The function $\\sqrt{x}$ has only a right-hand approach at the endpoint zero of its domain $[0,\\infty)$. We describe its endpoint behavior by $\\lim_{x\\to0^+}\\sqrt{x}=0$. When discussing continuity on a closed interval, endpoint limits will always be taken from within the interval. Unless physical units are specified, the examples in this chapter use dimensionless inputs and outputs.",
+        "Changing the value at the target point never changes a limit. Define $g(x)=x+1$ for $x\\ne1$, but set $g(1)$ equal to any number, or leave it undefined. All punctured-neighborhood values are identical, so $\\lim_{x\\to1}g(x)=2$ in every version. Continuity asks the additional question whether the assigned value is also two. This separation matters when measured data contain a bad reading at one instant: a limiting trend may survive a single corrupted sample, while the record as a function is not continuous at that point. A limit concerns arbitrarily near inputs, not the isolated central value.",
+        "The requirement that eligible domain points approach the target avoids vacuous claims. If a function is defined only at the integers, there are no distinct domain points arbitrarily close to the integer $3$. Standard calculus therefore does not assign an ordinary limit there from this domain. In contrast, the domain $(0,\\infty)$ has points arbitrarily close to zero from the right, and a right-hand limit at zero is meaningful even though the function may be undefined at zero. At each endpoint or gap, state which approaches the domain actually supports.",
+        "There is a useful sequential test in the real line. If $f(x)\\to L$ as $x\\to a$, then every sequence of allowed inputs $x_n\\ne a$ with $x_n\\to a$ has $f(x_n)\\to L$. Conversely, if a finite limit fails, some fixed output tolerance is violated arbitrarily close to $a$; choose one violating input within $1/n$ for each $n$ to build a counterexample sequence. Thus two sequences with different output limits disprove a proposed limit. A single favorable sequence cannot prove one, because the definition must cover all nearby inputs."
+      ],
+      "formula": "Two-sided finite limit L ⇔ left-hand limit = L and right-hand limit = L (with both approaches available).",
+      "formulaTex": "\\substack{a\\text{ is approached by domain points}\\\\\\text{from both sides}}\\quad\\Longrightarrow\\quad\\left(\\lim_{x\\to a}f(x)=L\\iff\\lim_{x\\to a^-}f(x)=\\lim_{x\\to a^+}f(x)=L\\right)"
+    },
+    {
+      "title": "2. Laws, cancellation, and squeezing",
+      "paragraphs": [
+        "Limit laws let us assemble complicated conclusions from simpler ones. If $f(x)\\to L$ and $g(x)\\to M$ as $x\\to a$, where $L$ and $M$ are finite real numbers, then $f+g\\to L+M$, $f-g\\to L-M$, $cf\\to cL$ for a fixed constant $c$, and $fg\\to LM$. The quotient tends to $L/M$ provided $M\\ne0$. Polynomial limits can therefore be found by substitution; rational functions also permit substitution wherever their denominator is nonzero.",
+        "A quotient producing $0/0$ after substitution has not evaluated to zero, infinity, or any other answer. The quotient law simply does not apply. Different expressions with this same preliminary form have different limits: $x/x\\to1$, $x^2/x\\to0$, and $x/x^2$ has no finite two-sided limit as $x\\to0$. Algebra can reveal the nearby behavior. Factoring $(x^2-1)/(x-1)$ gives $x+1$ for $x\\ne1$, which is exactly the set of inputs relevant to the limit. Cancellation changes the domain if treated as a global identity, but preserves the limit at the hole.",
+        "The squeeze theorem handles functions whose values are difficult to track individually. Suppose $p(x)\\le f(x)\\le q(x)$ for all eligible $x$ sufficiently near $a$, with $x\\ne a$. If both $p(x)$ and $q(x)$ tend to the same finite number $L$, then $f(x)$ also tends to $L$. Indeed, once both bounds lie within any prescribed tolerance of $L$, the trapped value must lie there too. The inequalities must hold throughout a neighborhood, not merely at selected sample points.",
+        "For $x\\ne0$, the bound $-1\\le\\sin(1/x)\\le1$ implies $-x^2\\le x^2\\sin(1/x)\\le x^2$. Both outer functions tend to zero, so the middle function tends to zero despite oscillating more rapidly near zero. Trigonometric arguments here are dimensionless and measured in radians. The oscillation $\\sin(1/x)$ alone has no limit: inputs $1/(\\pi/2+2\\pi n)$ give value $1$, whereas inputs $1/(3\\pi/2+2\\pi n)$ give $-1$ as the positive integers $n$ grow. Shrinking amplitude, rather than shrinking oscillation frequency, makes the product converge.",
+        "Rationalization is another way to uncover a hidden limit. For $x\\ne0$ near zero, $(\\sqrt{1+x}-1)/x$ becomes $1/(\\sqrt{1+x}+1)$ after multiplying by the conjugate. The new expression tends to $1/2$ as $x\\to0$. We did not assert that the two formulas agree at zero; they agree on the punctured neighborhood relevant to the limit. Always check the square-root domain $1+x\\ge0$ and that the conjugate denominator is nonzero nearby. The same reasoning later becomes the derivative calculation for a square root.",
+        "A vanishing factor times a bounded factor tends to zero, even if the bounded factor has no limit. In symbols, if $u(x)\\to0$ and $|v(x)|\\le C$ near the target, then $|u(x)v(x)|\\le C|u(x)|\\to0$. Boundedness is essential: $x(1/x)=1$ for $x\\ne0$, so a zero-tending factor times an unbounded one need not tend to zero. Nor does the written form $0\\cdot\\infty$ identify a limit; $x^2(1/x)\\to0$ while $x(1/x^2)$ has no finite two-sided limit. Rewrite the actual function and check hypotheses.",
+        "Limit laws are local. They require functions to be defined on a common punctured neighborhood of the approach point, and the quotient law requires a nonzero denominator limit. If $g(x)\\to M\\ne0$, then $g(x)$ is nonzero for every sufficiently near eligible input: require $|g(x)-M|<|M|/2$. This establishes a neighborhood where division is legal. If the denominator limit is zero, further algebra, one-sided analysis, or an unbounded-limit argument is needed. A symbolic substitution that produces $0/0$ is a request for analysis, not a result."
+      ],
+      "formula": "p(x) ≤ f(x) ≤ q(x), p(x) → L, q(x) → L ⇒ f(x) → L.",
+      "theorems": [
+        {
+          "title": "Why the ordinary limit laws work",
+          "statement": "If $f(x)\\to L$ and $g(x)\\to M$ as $x\\to a$ within a common domain, then $f+g\\to L+M$ and $fg\\to LM$. If $M\\ne0$, $f/g\\to L/M$ wherever the quotient is defined near $a$.",
+          "proof": [
+            "For the sum, let $\\varepsilon>0$. The two limit definitions provide neighborhoods where $|f(x)-L|<\\varepsilon/2$ and $|g(x)-M|<\\varepsilon/2$. In their intersection, the triangle inequality gives $|(f+g)-(L+M)|\\le|f-L|+|g-M|<\\varepsilon$. The same $x$ must satisfy both estimates; using the smaller of the two $\\delta$ values achieves that. This is why a finite number of limits may be combined without changing the order of the quantifiers.",
+            "For the product, first use $g\\to M$ to make $|g(x)|\\le|M|+1$ on a punctured neighborhood. The identity $fg-LM=(f-L)g+L(g-M)$ then gives $|fg-LM|\\le(|M|+1)|f-L|+|L||g-M|$. Make the two terms smaller than $\\varepsilon/2$ by choosing sufficiently small neighborhoods. Local boundedness is the missing step in the casual statement that a small factor times “something” is small. We did not assume $f$ or $g$ is globally bounded.",
+            "For the quotient, $M\\ne0$ lets us require $|g(x)-M|<|M|/2$; then $|g(x)|>|M|/2$, so division is defined nearby. Moreover $|1/g-1/M|=|g-M|/(|gM|)\\le2|g-M|/|M|^2$, proving reciprocal convergence. Apply the product result to $f$ and $1/g$. If $M=0$, this protection disappears: $1/x$ near zero is an immediate counterexample. The limit laws are proofs about neighborhoods, not formal instructions to substitute a value into an undefined expression."
+          ],
+          "equationTex": "\\lim_{x\\to a}(f(x)+g(x))=L+M,\\qquad \\lim_{x\\to a}f(x)g(x)=LM"
+        }
+      ],
+      "formulaTex": "p(x)\\le f(x)\\le q(x),\\quad p(x),q(x)\\to L\\implies f(x)\\to L"
+    },
+    {
+      "title": "3. Turning closeness into a proof",
+      "paragraphs": [
+        "Graphs and tables help us propose a limit, but every finite display leaves unexamined inputs. The epsilon–delta definition expresses the guarantee a proof must supply. For every $\\varepsilon>0$, there must be a $\\delta>0$ such that every domain input satisfying $0<|x-a|<\\delta$ also satisfies $|f(x)-L|<\\varepsilon$. Epsilon is the requested output tolerance; delta is an input tolerance sufficient to meet it. The strict inequality $0<|x-a|$ deliberately excludes the point $a$.",
+        "The order of choices is essential. A challenger may request any positive $\\varepsilon$. We then choose $\\delta$, possibly depending on $\\varepsilon$, but before knowing which eligible $x$ will be tested. One lucky input is insufficient, and one fixed small tolerance does not establish the limit. If $x$ has units of seconds and $f(x)$ has units of metres, $\\delta$ is measured in seconds and $\\varepsilon$ in metres; the conversion between them reflects the function’s sensitivity.",
+        "For $f(x)=3x-2$ at $a=4$, the proposed limit is $10$. Calculate the exact output error: $|(3x-2)-10|=3|x-4|$. To make this less than $\\varepsilon$, it is enough to require $|x-4|<\\varepsilon/3$. Proof: given any $\\varepsilon>0$, choose $\\delta=\\varepsilon/3$. If $0<|x-4|<\\delta$, then $|f(x)-10|=3|x-4|<3\\delta=\\varepsilon$. This completes a proof for all positive tolerances, rather than a numerical check of a few cases.",
+        "A smaller positive delta would also work; there is usually no need to find the largest one. For a general nonconstant linear function $mx+b$, choose $\\delta=\\varepsilon/|m|$ to prove its limit at any $a$ is $ma+b$. If $m=0$, the output error is already zero, so any positive $\\delta$ works. This separate constant case prevents an invalid division by zero. Nonlinear proofs often require first restricting $|x-a|<1$ to control an extra factor; chapter 5 will use this kind of control when defining derivatives.",
+        "A nonlinear epsilon–delta proof often begins by restricting the neighborhood before choosing the final tolerance. To show $1/x\\to1$ at $x=1$, first require $|x-1|<1/2$; then $x>1/2$ and $|1/x-1|=|x-1|/|x|\\le2|x-1|$. Given $\\varepsilon>0$, choose $\\delta=\\min(1/2,\\varepsilon/2)$. Every allowed $x$ with $0<|x-1|<\\delta$ satisfies both the denominator bound and the requested output bound. This proof avoids trying to choose a $\\delta$ that depends on the unknown test input.",
+        "To disprove a proposed finite limit $L$, it is enough to find one positive $\\varepsilon_0$ such that every proposed $\\delta>0$ admits an eligible $x$ with $0<|x-a|<\\delta$ but $|f(x)-L|\\ge\\varepsilon_0$. For example, the right and left values of the step function near zero stay one unit apart. No single number can be within less than half a unit of both branches. Another route is to produce two approach sequences with different output limits. These are constructive failures of the universal claim, not merely statements that a graph looks jumpy.",
+        "Proofs should state the candidate limit before searching for delta. Algebra then expresses the output error in terms of the input distance. For a polynomial one often factors a difference; for a reciprocal one first bounds the denominator away from zero; for an oscillating function one bounds its amplitude. The final sentence must use the chosen delta for an arbitrary eligible input. A table of ten increasingly close inputs can help guess $L$ or detect an algebra mistake, but no finite table supplies the required universal guarantee.",
+        "The order of the quantifiers is the heart of a limit proof. In $\\lim_{x\\to a}f(x)=L$, an arbitrary positive output tolerance $\\varepsilon$ is announced first. We must then choose an input tolerance $\\delta>0$ that works for every allowed $x$ with $0<|x-a|<\\delta$. A choice of $\\delta$ may depend on $\\varepsilon$, on fixed constants in the function, and on the fixed point $a$; it cannot depend on the particular $x$ that arrives afterward. This explains why checking a long table of inputs is only evidence. The table picks finitely many $x$ values, while the proof must handle all sufficiently close inputs at once. It also explains why the value $f(a)$ is irrelevant to the limit: the punctured condition deliberately excludes $x=a$. When a bound contains a factor such as $|x+a|$, first keep $x$ in a simple neighborhood of $a$ so that factor has a uniform bound, and only then choose $\\delta$ to control $\\varepsilon$.",
+        "For $f(x)=1/x$ on $\\mathbb R\\setminus\\{0\\}$ near $2$, the output error is $|1/x-1/2|=|x-2|/(2|x|)$. The denominator moves with $x$, so first require $|x-2|<1$. Every input in that band has $x>1$, giving the uniform bound $1/(2|x|)<1/2$. Given $\\varepsilon>0$, choose $\\delta=\\min(1,2\\varepsilon)$ before an input is named. Then every eligible $x$ with $0<|x-2|<\\delta$ has output error $<|x-2|/2<\\delta/2\\le\\varepsilon$. Problem 04.38 asks you to build this proof and compare the sufficient radius with the greatest one. Figure 4.4 gives a separate $x^2$ view of how the output request and input choice interact.",
+        "The order is $\\forall\\varepsilon>0\\;\\exists\\delta>0\\;\\forall x\\in\\operatorname{dom}(f)$, followed by the punctured-input implication. If we choose $\\delta$ after seeing each $x$, we can make the antecedent false and claim success without controlling any output. Problem 04.39 exposes that trap for $1/x$ near zero. One failed proposed radius at a tolerance rejects that radius only; a failed limit needs one fixed positive output tolerance that defeats every positive radius. Keep those claims distinct when you write a counterexample."
+      ],
+      "formula": "For every ε > 0 there exists δ > 0: 0 < |x − a| < δ ⇒ |f(x) − L| < ε.",
+      "formulaTex": "\\begin{gathered}\\forall\\varepsilon>0\\;\\exists\\delta>0\\;\\forall x\\in\\operatorname{dom}(f):\\\\ 0<|x-a|<\\delta\\implies |f(x)-L|<\\varepsilon.\\end{gathered}"
+    },
+    {
+      "title": "4. Unbounded behavior and distant behavior",
+      "paragraphs": [
+        "An infinite limit describes unbounded growth, not convergence to a real number called infinity. The notation $\\lim_{x\\to a}f(x)=+\\infty$ means that for every threshold $M>0$, some $\\delta>0$ makes $f(x)>M$ whenever $0<|x-a|<\\delta$ within the domain. For $-\\infty$, require $f(x)<-M$ instead. One-sided versions restrict $x$ to the indicated side. These statements demand arbitrarily large magnitude, not merely an impressive value on a screen.",
+        "For $1/x^2$ as $x\\to0$, choose $\\delta=1/\\sqrt M$. Then $0<|x|<\\delta$ implies $1/x^2>M$, proving the limit is $+\\infty$. By contrast, $\\lim_{x\\to0^-}1/x=-\\infty$ and $\\lim_{x\\to0^+}1/x=+\\infty$. Its two-sided limit is neither $+\\infty$ nor $-\\infty$. A vertical line $x=a$ is a vertical asymptote when at least one one-sided limit there is $+\\infty$ or $-\\infty$. A missing value alone does not create an asymptote: the hole in $(x^2-1)/(x-1)$ has finite nearby behavior.",
+        "Limits at infinity ask a different question: what happens when inputs grow without bound? The statement $f(x)\\to L$ as $x\\to+\\infty$ means that every $\\varepsilon>0$ admits a threshold $R$ such that $x>R$ in the domain implies $|f(x)-L|<\\varepsilon$. If such a finite limit exists, $y=L$ is a horizontal asymptote in that direction. Dividing numerator and denominator by $x$ shows $(2x+1)/(x-3)=(2+1/x)/(1-3/x)\\to2$ as $x\\to+\\infty$, and also as $x\\to-\\infty$. Its denominator forbids $x=3$. A horizontal asymptote describes distant behavior; it does not forbid the graph from crossing that line elsewhere.",
+        "At a vertical pole, orientation matters. Near $x=3$, the function $1/(x-3)$ has $\\lim_{x\\to3^-}1/(x-3)=-\\infty$ and $\\lim_{x\\to3^+}1/(x-3)=+\\infty$. Its magnitude becomes arbitrarily large, but there is no two-sided $+\\infty$ or $-\\infty$ limit. For $1/(x-3)^2$, both one-sided values tend to $+\\infty$. The parity of the denominator power explains this sign difference. A rational function can also have a removable zero-over-zero hole rather than a pole, so factor before classifying a suspicious denominator zero.",
+        "For rational functions at infinity, divide numerator and denominator by the highest denominator power or compare leading degrees. If the numerator degree is smaller, the limit is zero; if equal, the limit is the ratio of leading coefficients. If the numerator degree is larger, there is no finite horizontal limit, though polynomial division may reveal a slant or curved asymptote. Sign and direction still matter: $\\sqrt{x^2+1}/x\\to1$ as $x\\to+\\infty$ but $\\sqrt{x^2+1}/x\\to-1$ as $x\\to-\\infty$, because $\\sqrt{x^2}=|x|$, not $x$ on the negative half-line.",
+        "Being unbounded is weaker than tending to infinity. For $x>0$, the function $g(x)=x(1+\\sin x)$ grows arbitrarily large along $x=\\pi/2+2\\pi n$ for nonnegative integers $n$, where $g(x)=2x$. Yet it returns to zero along $x=3\\pi/2+2\\pi n$. Both sequences of inputs tend to $+\\infty$, so no single threshold can force $g(x)>M$ for every later input, even when $M=1$. Nor does $g(x)$ approach a finite horizontal limit. This pair of sequences is a practical way to disprove a proposed distant limit: find two arbitrarily distant input families with incompatible output behavior. The function is continuous throughout its domain, so continuity alone cannot guarantee a limit at infinity.",
+        "The threshold definition keeps infinity honest. To prove $1/x^2\\to+\\infty$ as $x\\to0$, a requested height $M>0$ is met whenever $0<|x|<1/\\sqrt M$. To prove $1/x\\to0$ as $x\\to+\\infty$, a requested tolerance $\\varepsilon>0$ is met whenever $x>1/\\varepsilon$. These are different quantifier patterns: input distance from a finite point in the first, input size beyond a threshold in the second. Neither proof treats infinity as a real number that can be substituted into an algebraic expression."
+      ],
+      "formula": "1/x² → +∞ as x → 0; 1/x → 0 as x → +∞.",
+      "formulaTex": "\\begin{gathered}\\lim_{x\\to0}\\frac1{x^2}=+\\infty,\\\\ \\lim_{x\\to+\\infty}\\frac1x=0.\\end{gathered}"
+    },
+    {
+      "title": "5. Continuity and values that cannot be skipped",
+      "paragraphs": [
+        "A function is continuous at an interior point $a$ when $f(a)$ exists, the finite limit as $x\\to a$ exists, and that limit equals $f(a)$. Each condition matters. Defining the hole example to have value $7$ at $x=1$ leaves its limit equal to $2$ and creates a removable discontinuity. Redefining just that value to $2$ repairs it. A jump cannot be repaired by choosing a different value at its single break, because the one-sided limits disagree. Infinite discontinuities also cannot be repaired by inserting one finite value.",
+        "Polynomials are continuous everywhere, rational functions wherever their denominators do not vanish, and compositions of continuous functions are continuous wherever defined. The composition assertion requires the inner function to approach a point where the outer function is continuous. Continuity on $[a,b]$ means continuity at every interior point, right continuity at $a$, and left continuity at $b$. This convention matches an instrument observed over a finite time interval, where there may be no recorded earlier or later time.",
+        "The intermediate value theorem states that if $f$ is continuous on $[a,b]$, with $a<b$, then for every number $N$ between $f(a)$ and $f(b)$, there exists $c\\in[a,b]$ with $f(c)=N$. If $N$ lies strictly between the endpoint values, $c\\in(a,b)$. The theorem guarantees existence, not uniqueness or a formula for $c$. A continuous temperature record rising from 18 °C to 23 °C must pass through 20 °C, provided continuity is a justified model assumption; a sensor that rounds to whole degrees reports a different, discontinuous function.",
+        "As a mathematical application, $f(x)=x^3+x-1$ is continuous on $[0,1]$, and its endpoint values are $f(0)=-1$ and $f(1)=1$. Therefore it has a zero strictly between them. Computing $f(0.6)=-0.184$ and $f(0.7)=0.043$ narrows the guaranteed interval to $(0.6,0.7)$. The sign computations become conclusive because continuity supplies the theorem’s hypothesis. A jump from $-1$ to $1$ would have the same endpoint signs without any zero. Chapter 9 turns repeated interval narrowing into a numerical algorithm.",
+        "To locate the value rather than trust a drawing, assume first that $f(a)<N<f(b)$. Bisect $[a,b]$ repeatedly, retaining a closed half whose left endpoint has value at most $N$ and whose right endpoint has value at least $N$. If a midpoint already has value $N$, the claim is proved. Otherwise the retained intervals have length $(b-a)/2^n$ after $n$ bisections. The theorem below explains exactly how completeness gives their common point and how continuity forces its value. Finite bisection only brackets that point; it does not prove that the process reaches it in finitely many steps.",
+        "Existence is separate from uniqueness. The continuous function $x^3-x$ changes sign from $-6$ at $-2$ to $6$ at $2$, so the theorem guarantees at least one root. In fact it has three: $-1$, $0$, and $1$. Conversely, a function may have a root without a sign change, as $x^2$ does at zero. A sign change is a sufficient certificate for a continuous function, not a necessary condition for every root. Later, monotonicity can certify that a particular bracket contains at most one root.",
+        "Continuity is a model assumption when the function represents physical data. A water level can jump in a recorded table because the sensor rounds values or samples discretely, even when the underlying level varies continuously. Conversely, a valve may introduce a real abrupt change in a rate model. Before invoking the intermediate value theorem, identify the function to which it applies: the idealized physical quantity, the rounded readout, or a piecewise rule. Matching endpoint numbers alone cannot replace continuity on the whole closed interval."
+      ],
+      "formula": "Continuity at a: lim as x → a of f(x) = f(a).",
+      "formulaTex": "\\begin{gathered}a\\in\\operatorname{int}(\\operatorname{dom}f),\\\\ f\\text{ is continuous at }a\\iff\\lim_{x\\to a}f(x)=f(a).\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Why a continuous function cannot skip an intermediate value",
+          "statement": "If $a<b$, $f$ is continuous on $[a,b]$, and $N$ lies between $f(a)$ and $f(b)$, then some $c\\in[a,b]$ satisfies $f(c)=N$.",
+          "proof": [
+            "If $N$ equals an endpoint value, use that endpoint. Otherwise define $g=f$ when $f(a)<N<f(b)$, and $g=2N-f$ when $f(b)<N<f(a)$. In either case $g$ is continuous, $g(a)<N<g(b)$, and $g(c)=N$ exactly when $f(c)=N$. Set $I_0=[a,b]$. At each step bisect $I_n=[a_n,b_n]$ and retain a half with $g(a_{n+1})\\le N\\le g(b_{n+1})$. Equality at a midpoint already finishes the proof. The halves are closed and nested, and $b_n-a_n=(b-a)/2^n\\to0$.",
+            "Completeness of the real numbers means every nonempty set bounded above has a least upper bound. The left endpoints form a nondecreasing set bounded by $b$; let $c=\\sup\\{a_n:n\\ge0\\}$. For each fixed $n$, all later left endpoints lie in $[a_n,b_n]$, so $a_n\\le c\\le b_n$. Thus $c$ lies in every retained interval. Because their widths tend to zero, $0\\le c-a_n\\le b_n-a_n\\to0$ and $0\\le b_n-c\\le b_n-a_n\\to0$: both endpoint sequences approach the same real point. This is the nested-interval step supplied by completeness, not by a finite decimal approximation.",
+            "Continuity of $g$ at $c$ along the interval gives $g(a_n)\\to g(c)$ and $g(b_n)\\to g(c)$, using the appropriate one-sided continuity if $c$ is an endpoint. Since $g(a_n)\\le N\\le g(b_n)$ at every step, taking these limits gives $g(c)\\le N\\le g(c)$, hence $g(c)=N$ and therefore $f(c)=N$. For descending original endpoint data, $f(a_n)$ and $f(b_n)$ have the opposite bracket order; the transformed $g$ keeps the ascending one. The proof needs continuity throughout the closed interval; endpoint signs alone would permit a jump that skips $N$."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "An ε–δ proof with the constants exposed",
+      "paragraphs": [
+        "To prove $\\lim_{x\\to3}x^2=9$ from the definition, begin with the output error: $|x^2-9|=|x-3||x+3|$. The first factor is controlled directly by the input distance, but the second factor also changes with $x$. A claim such as “take $\\delta=\\varepsilon/|x+3|$” is not a valid fixed choice, because $\\delta$ must be selected before an arbitrary nearby $x$ is given. We need one bound for $|x+3|$ throughout a whole input neighborhood.",
+        "First require $|x-3|<1$. Then $2<x<4$, hence $5<x+3<7$. Therefore $|x^2-9|\\le7|x-3|$, including at $x=3$. Given any $\\varepsilon>0$, choose $\\delta=\\min(1,\\varepsilon/7)$. If $0<|x-3|<\\delta$, both requirements hold and $|x^2-9|<7\\delta\\le\\varepsilon$. The conclusion follows for every eligible $x$, not merely along sampled values or one side of $3$. The strict inequality remains valid even when $\\delta$ equals one of the two bounds. A smaller positive $\\delta$ also works; the proof seeks a fixed sufficient choice, not the largest possible one.",
+        "The same technique proves continuity of the square function at any real center $a$. If $|x-a|<1$, then $|x+a|=|(x-a)+2a|\\le|x-a|+2|a|<1+2|a|$. Thus $\\delta=\\min(1,\\varepsilon/(1+2|a|))$ works for $|x^2-a^2|<\\varepsilon$. The number 1 is a convenient local neighborhood, not a mysterious theorem constant; another fixed positive radius could be used with a corresponding bound.",
+        "A numerical plot can suggest that $x^2$ approaches $9$ near $3$, but it cannot express the order of quantifiers: every $\\varepsilon$ must have a $\\delta$ that works for every $x$ in the punctured neighborhood. Once the estimate is written, the proof is short and also reveals a local sensitivity bound. It does not require evaluating $x^2$ at $x=3$ to establish the limit, although the function value there happens to agree.",
+        "The same pattern clarifies units. If $x$ is time and $f(x)$ is position, $\\delta$ has time units and $\\varepsilon$ has length units; a coefficient such as the local bound on a derivative has units of length per time. Writing $\\delta=\\varepsilon/7$ without units is meaningful only when the function and variables are dimensionless or the constant 7 carries the corresponding conversion units. The neighborhood radius written as $1$ in $\\delta=\\min(1,\\varepsilon/7)$ also needs time units in that application. A mathematical proof may suppress units, but an application should not. A valid limit establishes arbitrarily fine local control; it does not claim that a finite-resolution measuring device can verify every tolerance.",
+        "A second proof pattern uses the triangle inequality directly. To show $|x|\\to|a|$ as $x\\to a$, use the reverse triangle inequality $||x|-|a||\\le|x-a|$. Given any output tolerance $\\varepsilon>0$, choose $\\delta=\\varepsilon$. Every eligible input within that delta has output error below $\\varepsilon$. This works at positive, negative, and zero centers without splitting into cases, and it proves continuity of absolute value everywhere. More generally, suppose there are fixed constants $\\rho>0$ and $0\\le K<\\infty$ such that $|f(x)-f(a)|\\le K|x-a|$ for every domain input with $|x-a|<\\rho$. Then $f$ has a limit equal to $f(a)$ there: choose $\\delta=\\min(\\rho,\\varepsilon/K)$ if $K>0$, or any $0<\\delta\\le\\rho$ if $K=0$. Such a local Lipschitz estimate is stronger than continuity because it gives an explicit linear response bound. The proof still depends on checking the inequality on a whole neighborhood, not merely at one plotted input. For a nonlinear function the best local constant may depend on the chosen neighborhood, which is why the earlier quadratic argument first confined $x$ near its center.",
+        "The limit and derivative questions are related but not interchangeable. The absolute-value function approaches zero at zero from both sides and is continuous there, yet its left and right slope limits differ. Conversely, a function can have a limit at a point where its displayed formula is undefined. Keep the output-closeness question separate from the quotient-of-changes question as you move to chapter 5.",
+        "When choosing $\\delta$, first isolate what depends on the arbitrary nearby input. For a product such as $|x-a||x+a|$, a preliminary restriction $|x-a|<1$ provides a fixed bound on the second factor; only then choose the remaining part of $\\delta$ from $\\varepsilon$. The chosen $\\delta$ may depend on $\\varepsilon$ and the fixed target $a$, but it may not depend on the particular $x$ selected afterward. To disprove a proposed limit, reverse the task: find one positive $\\varepsilon$ for which every positive $\\delta$ admits a domain point violating the required bound. Writing these quantifiers in order is more informative than a numerical table.",
+        "The local-bound method also works for $x^2$ near $2$: requiring $|x-2|<1$ gives $|x+2|<5$, so $\\delta=\\min(1,\\varepsilon/5)$ is sufficient. That proof answers whether we can guarantee a requested tolerance. A learner who chooses epsilon and delta independently faces another question: does this particular delta work for every input in its open band? In Figure 4.4, predict the answer before opening the comparison. A point exactly on an input-band boundary is excluded from the test.",
+        "A failed choice needs an input strictly inside the band whose output reaches or crosses the requested boundary. Finding one rejects that choice of delta; it does not reject the limit, because a smaller choice may work. After the investigation, derive the greatest valid symmetric radius and test the equality case in Problems 36 and 37."
+      ],
+      "formula": "Given ε>0, δ=min(1, ε/7) guarantees 0<|x−3|<δ ⇒ |x²−9|<ε.",
+      "formulaTex": "\\begin{gathered}\\varepsilon>0,\\qquad\\delta=\\min\\left\\{1,\\frac{\\varepsilon}{7}\\right\\},\\\\ 0<|x-3|<\\delta\\implies|x^2-9|<\\varepsilon.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Repairing a hole",
+      "problem": "For $x\\ne2$, let $r(x)=(x^2-4)/(x-2)$. Find its limit at $2$ and choose $r(2)$ to make the function continuous.",
+      "steps": [
+        "Factor $x^2-4=(x-2)(x+2)$. For every $x\\ne2$, cancellation gives $r(x)=x+2$.",
+        "The limit law for sums gives $\\lim_{x\\to2}(x+2)=4$. This applies from both sides.",
+        "Continuity requires the newly assigned value to equal the limit. At $x=1.99$ and $2.01$ the exact outputs are $3.99$ and $4.01$, providing a cross-check."
+      ],
+      "answer": "The limit is $4$, and the unique continuous extension has $r(2)=4$. The original quotient remains undefined at $2$."
+    },
+    {
+      "title": "A tolerance guarantee for a calibration rule",
+      "problem": "A position model is $s(t)=5t+2$ metres, with $t$ in seconds. Prove its limit at $t=3$ seconds is $17$ metres and guarantee an error below $0.02$ metres.",
+      "steps": [
+        "The slope is $5\\,\\mathrm{m/s}$. Thus $|s(t)-17|=5|t-3|$ with the appropriate units.",
+        "For any requested $\\varepsilon>0$ metres, choose $\\delta=\\varepsilon/(5\\,\\mathrm{m/s})$. Every eligible time within $\\delta$ of $3$ seconds has position error below $\\varepsilon$.",
+        "For $\\varepsilon=0.02$ metres, take $\\delta=0.004$ seconds. The input inequality must be strict to guarantee a strict output error."
+      ],
+      "answer": "The limit is $17\\,\\mathrm{m}$. Every $t$ satisfying $0<|t-3|<0.004$ seconds produces $|s(t)-17|<0.02$ metres."
+    },
+    {
+      "title": "Two one-sided limits decide a jump",
+      "problem": "For $f(x)=2+x$ when $x<0$ and $f(x)=3-x$ when $x\\ge0$, find its one-sided limits and decide whether changing $f(0)$ can make it continuous.",
+      "steps": [
+        "On the left branch, $2+x$ approaches $2$ as $x\\to0$ from negative inputs.",
+        "On the right branch, $3-x$ approaches $3$ as $x\\to0$ from positive inputs.",
+        "The two values differ, so the two-sided limit does not exist.",
+        "Assigning a new value at the single input zero leaves all nearby branch values unchanged."
+      ],
+      "answer": "Left limit $2$, right limit $3$; there is a jump and no choice of $f(0)$ repairs continuity."
+    },
+    {
+      "title": "Rationalization resolves a zero-over-zero form",
+      "problem": "Find $\\lim_{x\\to0}[\\sqrt{1+x}-1]/x$, including the domain restriction.",
+      "steps": [
+        "The square root requires $x\\ge-1$; this leaves eligible inputs on both sides of zero.",
+        "For $x\\ne0$, multiply by the conjugate to obtain $1/[\\sqrt{1+x}+1]$.",
+        "The denominator approaches $2$ and stays nonzero near zero.",
+        "Apply the quotient law to the simplified expression, which agrees with the original where the limit is tested."
+      ],
+      "answer": "The two-sided limit is $1/2$; the original expression remains undefined at $x=0$."
+    },
+    {
+      "title": "Squeezing oscillation without counting waves",
+      "problem": "Find $\\lim_{x\\to0}x^2\\cos(1/x)$, and explain why sampling is not a proof.",
+      "steps": [
+        "For every nonzero $x$, $-1\\le\\cos(1/x)\\le1$.",
+        "Multiplying by $x^2\\ge0$ gives $-x^2\\le x^2\\cos(1/x)\\le x^2$.",
+        "Both bounding functions approach zero, so the squeeze theorem gives the limit zero.",
+        "A finite set of samples cannot inspect all increasingly rapid oscillations."
+      ],
+      "answer": "The limit is zero; the amplitude bound proves it for every sufficiently near input."
+    },
+    {
+      "title": "An epsilon–delta certificate for a reciprocal",
+      "problem": "Prove directly that $1/x\\to1$ as $x\\to1$.",
+      "steps": [
+        "First impose $|x-1|<1/2$ so that $x>1/2$ and division remains safe.",
+        "Then $|1/x-1|=|x-1|/|x|\\le2|x-1|$.",
+        "For any $\\varepsilon>0$ choose $\\delta=\\min(1/2,\\varepsilon/2)$.",
+        "If $0<|x-1|<\\delta$, the output error is strictly below $\\varepsilon$."
+      ],
+      "answer": "The displayed delta works for every $\\varepsilon>0$ and every eligible input in its punctured neighborhood."
+    },
+    {
+      "title": "A vertical pole needs two directions",
+      "problem": "Classify the behavior of $1/(x-3)$ and $1/(x-3)^2$ as $x$ approaches $3$.",
+      "steps": [
+        "For $x<3$, $x-3$ is negative and tends to zero, so its reciprocal tends to $-\\infty$.",
+        "For $x>3$, the reciprocal tends to $+\\infty$.",
+        "Squaring the denominator makes both one-sided values positive and arbitrarily large.",
+        "Neither function has a finite limit at $3$; only the squared reciprocal has a two-sided $+\\infty$ limit."
+      ],
+      "answer": "Both have vertical asymptote $x=3$; the first has opposite one-sided infinite behavior, the second tends to $+\\infty$ from both sides."
+    },
+    {
+      "title": "The intermediate value theorem gives a bracket",
+      "problem": "Show that $f(x)=x^3-2$ has a root in $(1,2)$, then give the first two bisection brackets.",
+      "steps": [
+        "The polynomial is continuous on $[1,2]$, with $f(1)=-1$ and $f(2)=6$.",
+        "The intermediate value theorem gives at least one root in $(1,2)$.",
+        "At each midpoint, retain the half whose endpoint values have opposite signs. Continuity guarantees that a root remains in that half; this is the bisection invariant.",
+        "At midpoint $1.5$, $f=1.375>0$, so retain $[1,1.5]$.",
+        "At midpoint $1.25$, $f=-0.046875<0$, so retain $[1.25,1.5]$."
+      ],
+      "answer": "The first two retained brackets are $[1,1.5]$ and $[1.25,1.5]$. Each contains a root; the second has width $0.25$."
+    }
+  ],
+  "misconceptions": [
+    "“The limit equals the function value.” A limit ignores the target point; a function can have limit 2 there and assigned value 7. Equality is an additional continuity condition.",
+    "“A graph that looks connected proves continuity.” Finite resolution can hide holes, jumps, and rapid oscillations. A proof must control every sufficiently nearby input.",
+    "“Opposite signs guarantee a root.” They do so under the intermediate value theorem’s continuity hypothesis; a step function can skip zero."
+  ],
+  "lab": {
+    "title": "Inspect removable and jump discontinuities",
+    "description": "Compare two dimensionless functions near $x=1$. The removable example equals $x+1$ for $x\\ne1$ and takes the code value atPoint at $x=1$; that assigned point is reported in the console rather than plotted. The jump example equals $x+1$ for $x<1$ and adds the code value jump to $x+1$ for $x>1$; no value at $x=1$ is assigned. Separate plots prevent the renderer from drawing a false connection across the break. The console table reports distances $h$ and the four corresponding outputs.",
+    "code": "// Change these parameters, then predict the two one-sided limits.\nconst atPoint = 7;\nconst jump = 1;\nconst radius = 0.5;\nif (![atPoint, jump, radius].every(Number.isFinite) || radius <= 0) {\n  throw new Error('Use finite parameters and a positive radius.');\n}\nif (1 - radius / 100 >= 1 || 1 + radius / 100 <= 1 || !Number.isFinite(2 + jump)) throw new Error('Radius is below machine resolution or output overflows.');\nconst removableLeft = [], removableRight = [];\nconst jumpLeft = [], jumpRight = [];\nfor (let i = 1; i <= 100; i++) {\n  const h = radius * i / 100;\n  removableLeft.push([1-h, 2-h]);\n  removableRight.push([1+h, 2+h]);\n  jumpLeft.push([1-h, 2-h]);\n  jumpRight.push([1+h, 2+h+jump]);\n}\nif (![removableLeft, removableRight, jumpLeft, jumpRight].every(points => points.every(pair => pair.every(Number.isFinite)))) throw new Error('Plotted values overflow; reduce radius or jump.');\nif (new Set(jumpRight.map(p => p[1])).size === 1 || 2 + jump === jump) console.log('Machine-resolution notice: sampled right branch is constant or 2 + jump rounds to jump; mathematical right limit is 2 + jump.');\nplot(removableLeft, 'removable: left of x=1; x versus f(x)');\nplot(removableRight, 'removable: right of x=1; x versus f(x)');\nplot(jumpLeft, 'jump: left of x=1; x versus g(x)');\nplot(jumpRight, 'jump: right of x=1; x versus g(x)');\nconsole.log('Assigned removable value f(1) =', atPoint);\nconsole.log('h | f(1-h) | f(1+h) | g(1-h) | g(1+h)');\nfor (let k = 1; k <= 6; k++) {\n  const h = 10 ** (-k);\n  console.log(h, 2-h, 2+h, 2-h, 2+h+jump);\n}\nconsole.log('Predicted limits: f left/right = 2; g left = 2; g right =', 2+jump);",
+    "tasks": [
+      "Before running, predict whether changing atPoint can change either limit. State which value makes the removable example continuous.",
+      "Set jump = 0, then jump = -2. Explain which choices of jump give the jump example a two-sided limit at $x=1$, and why.",
+      "Reduce radius to 0.01. Why can a narrower graph strengthen a conjecture without proving it? Explain why the two sides were plotted separately.",
+      "Within the existing table loop, change k <= 6 to k <= 17. After the const h = 10 ** (-k); line, add const x = 1 + h; and console.log(k, (x*x - 1)/(x - 1), x + 1); on separate lines. Compare the new outputs and explain why rounding and division by zero eventually make the numerical evidence unreliable. Explain why a radius below machine resolution cannot produce distinct one-sided plot points."
+    ],
+    "expected": "At the default radius, four plots each contain 100 finite points strictly on their stated side of $x=1$. A radius too small to move the first samples away from $x=1$ is rejected; sampled values that overflow are also rejected. At $h=0.1$ the table gives $(1.9,2.1,1.9,3.1)$, up to floating-point rounding. At $h=10^{-6}$ it gives $(1.999999,2.000001,1.999999,3.000001)$. The removable limit is exactly $2$ despite $f(1)=7$. The jump limits are exactly $2$ and $3$, so its two-sided limit does not exist. With jump = 0 both jump limits are $2$; with jump = -2 they are $2$ and $0$. After the edit in task 4, the computed input rounds to $x=1$ at $k=16$ and $17$, so the direct quotient prints NaN while x + 1 prints 2."
+  },
+  "exercises": [
+    {
+      "question": "For $f(x)=(x^2-4)/(x-2)$ with $x\\ne2$, find its limit as $x\\to2$ and say whether $f$ is continuous there.",
+      "hint": "Factor the numerator, but retain the original domain.",
+      "solution": "For $x\\ne2$, factor and cancel to get $f(x)=x+2$, so $\\lim_{x\\to2}f(x)=4$. The original function has no value at $2$, so it is not continuous there. Defining $f(2)=4$ would make a continuous extension.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(x)=x+1$ for $x<0$ and $f(x)=2-x$ for $x\\ge0$. Find both one-sided limits at zero and the two-sided limit.",
+      "hint": "Use the appropriate branch on each side.",
+      "solution": "For $x<0$, $f(x)=x+1\\to1$ as $x\\to0^-$. For $x\\ge0$, $f(x)=2-x\\to2$ as $x\\to0^+$. The one-sided limits differ, so the two-sided limit does not exist; $f(0)=2$ agrees only with the right-hand limit.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Use two sequences to show that $\\sin(1/x)$ has no limit as $x\\to0$.",
+      "hint": "Choose inputs whose reciprocals have sine values $1$ and $-1$.",
+      "solution": "Let $x_n=1/(\\pi/2+2\\pi n)$ and $y_n=1/(3\\pi/2+2\\pi n)$. Both tend to $0$ through positive inputs, but $\\sin(1/x_n)=1$ and $\\sin(1/y_n)=-1$. A common limit cannot have both values.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Find $\\lim_{x\\to3}(x^2-9)/(x-3)$. Is the displayed function continuous at 3?",
+      "hint": "Factor the numerator, but retain the domain restriction.",
+      "solution": "For $x\\ne3$, $\\frac{x^2-9}{x-3}=x+3$, so the limit as $x\\to3$ is $6$. The displayed quotient is undefined at $3$ and therefore not continuous there. Assigning the value $6$ gives a continuous extension.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to0}x\\sin(1/x)$, with the function defined only for $x\\ne0$.",
+      "hint": "Bound the absolute value; multiplying by negative $x$ would reverse an inequality.",
+      "solution": "Because $|\\sin(1/x)|\\le1$, we have $-|x|\\le x\\sin(1/x)\\le|x|$ for $x\\ne0$. Both bounds tend to $0$, so the squeeze theorem gives $\\lim_{x\\to0}x\\sin(1/x)=0$. A function value at zero is unnecessary.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Let $D\\subseteq\\mathbb R$ have points arbitrarily close to $a$ from both sides, and let $f,g:D\\to\\mathbb R$. If $f(x)\\to2$ and $g(x)\\to-3$ as $x\\to a$ through $D$, prove from the limit definition that $f(x)+g(x)\\to-1$.",
+      "hint": "Split a requested output tolerance between the two errors.",
+      "solution": "Given $\\varepsilon>0$, the two limit definitions give $\\delta_1,\\delta_2>0$ such that $|f(x)-2|<\\varepsilon/2$ when $x\\in D$ and $0<|x-a|<\\delta_1$, and $|g(x)+3|<\\varepsilon/2$ when $x\\in D$ and $0<|x-a|<\\delta_2$. Choose $\\delta=\\min(\\delta_1,\\delta_2)$. For every $x\\in D$ with $0<|x-a|<\\delta$, $|(f(x)+g(x))-(-1)|\\le|f(x)-2|+|g(x)+3|<\\varepsilon$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to0}\\frac{\\sqrt{4+x}-2}{x}$.",
+      "hint": "Rationalize with $\\sqrt{4+x}+2$.",
+      "solution": "For $x\\ne0$ with $x\\ge-4$, rationalization gives $\\frac{\\sqrt{4+x}-2}{x}=\\frac1{\\sqrt{4+x}+2}$. The denominator tends to $4$, so the limit is $1/4$. The original quotient remains undefined at zero.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove that $x^2\\cos(1/x)$ tends to zero as $x\\to0$.",
+      "hint": "Use $|\\cos(1/x)|\\le1$.",
+      "solution": "For $x\\ne0$, $|x^2\\cos(1/x)|\\le x^2$. Given $\\varepsilon>0$, choosing $0<|x|<\\sqrt\\varepsilon$ makes the magnitude smaller than $\\varepsilon$. Thus the limit is $0$, despite the oscillating cosine factor.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Why does the rule 'a factor tends to zero, so the product tends to zero' fail for $x(1/x)$ as $x\\to0$?",
+      "hint": "Check whether the other factor is bounded.",
+      "solution": "For every $x\\ne0$, $x(1/x)=1$, so its limit is $1$. The factor $1/x$ is unbounded near zero; the bounded-factor argument does not apply. The expression $0\\cdot\\infty$ does not determine a limit.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $D\\subseteq\\mathbb R$ have points arbitrarily close to $a$ from both sides, and let $f,g:D\\to\\mathbb R$. If $f(x)\\to3$ and $g(x)\\to-2$ as $x\\to a$ through $D$, find the limit of $\\frac{2f(x)-g(x)}{g(x)}$.",
+      "hint": "Check the denominator limit before applying quotient laws.",
+      "solution": "The numerator tends to $2(3)-(-2)=8$ and the denominator to $-2\\ne0$. By quotient laws the limit is $8/(-2)=-4$. The nonzero denominator limit also ensures $g(x)\\ne0$ sufficiently near $a$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Give a complete epsilon–delta proof that $7-2x$ tends to $1$ as $x$ tends to $3$.",
+      "hint": "Express the output error as a multiple of $|x-3|$.",
+      "solution": "Given $\\varepsilon>0$, choose $\\delta=\\varepsilon/2$. For every $x$ with $0<|x-3|<\\delta$, $|(7-2x)-1|=2|x-3|<2\\delta=\\varepsilon$. This proves the limit.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove $\\lim_{x\\to1}\\frac1x=1$ with an explicit $\\delta(\\varepsilon)$.",
+      "hint": "Keep $x$ away from zero before bounding $|1/x-1|$.",
+      "solution": "Require $|x-1|<1/2$, which gives $x>1/2$ and hence $|1/x-1|=|x-1|/|x|<2|x-1|$. For any $\\varepsilon>0$, choose $\\delta=\\min(1/2,\\varepsilon/2)$. Then $0<|x-1|<\\delta$ makes the output error smaller than $\\varepsilon$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Give a complete $\\varepsilon$–$\\delta$ proof that $5x-1$ tends to $9$ as $x\\to2$.",
+      "hint": "Express the output error as a multiple of $|x-2|$.",
+      "solution": "Given $\\varepsilon>0$, choose $\\delta=\\varepsilon/5$. If $0<|x-2|<\\delta$, then $|(5x-1)-9|=5|x-2|<5\\delta=\\varepsilon$. This covers every eligible input.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove directly that $1/x$ tends to $1$ as $x\\to1$.",
+      "hint": "Keep $x$ above $1/2$ before bounding the quotient.",
+      "solution": "Given $\\varepsilon>0$, choose $\\delta=\\min(1/2,\\varepsilon/2)$. When $0<|x-1|<\\delta$, $x>1/2$ and $|1/x-1|=|x-1|/|x|<2|x-1|<\\varepsilon$. The fixed denominator bound makes $\\delta$ independent of the test input.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Disprove the claim $\\lim_{x\\to0}x^2=1$ by giving a fixed output tolerance.",
+      "hint": "Take $\\varepsilon_0=1/2$ and choose a small nonzero $x$ for any proposed $\\delta$.",
+      "solution": "Fix $\\varepsilon_0=1/2$. Given any $\\delta>0$, choose $0<x<\\min(\\delta,1/2)$. Then $x^2<1/4$, so $|x^2-1|>3/4>\\varepsilon_0$. No $\\delta$ meets the proposed limit; the true limit is $0$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the one-sided limits of $1/(x-2)$ at 2 and identify its vertical and horizontal asymptotes.",
+      "hint": "Track the denominator’s sign near 2 and its size far away.",
+      "solution": "As $x\\to2^-$, $x-2$ is negative and tends to zero, so $1/(x-2)\\to-\\infty$. From the right it tends to $+\\infty$. Thus $x=2$ is a vertical asymptote, with no two-sided infinite limit of one sign. As $x\\to\\pm\\infty$, the quotient tends to $0$, giving horizontal asymptote $y=0$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Use the threshold definition to prove that $1/x^2$ tends to $+\\infty$ as $x\\to0$.",
+      "hint": "Solve $1/x^2>M$ for $|x|$.",
+      "solution": "Given any $M>0$, choose $\\delta=1/\\sqrt M$. If $0<|x|<\\delta$, then $x^2<1/M$ and $1/x^2>M$. This proves $1/x^2\\to+\\infty$ as $x\\to0$ in the threshold sense.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the left and right infinite limits of $1/(x-3)$ at $x=3$.",
+      "hint": "Track the sign of $x-3$ before taking its reciprocal.",
+      "solution": "As $x\\to3^-$, $x-3$ is negative and tends to zero, so $1/(x-3)\\to-\\infty$. From the right, $1/(x-3)\\to+\\infty$. The two-sided limit does not exist.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find $\\lim_{x\\to+\\infty}\\frac{3x^2+1}{x^2-2}$.",
+      "hint": "Divide numerator and denominator by $x^2$.",
+      "solution": "Dividing by $x^2$ gives $\\frac{3+1/x^2}{1-2/x^2}$. As $x\\to+\\infty$, the numerator tends to $3$ and the denominator to $1$, so the limit is $3$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find both limits of $\\frac{\\sqrt{x^2+1}}{x}$ as $x\\to+\\infty$ and $x\\to-\\infty$.",
+      "hint": "Factor $|x|$ out of the square root.",
+      "solution": "The quotient equals $\\frac{|x|}{x}\\sqrt{1+1/x^2}$. The square-root factor tends to $1$. Since $|x|/x$ is $1$ for positive $x$ and $-1$ for negative $x$, the limits are $1$ as $x\\to+\\infty$ and $-1$ as $x\\to-\\infty$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $f(x)=\\frac{x^2-1}{x-1}$ have a vertical asymptote at $x=1$? State its nearby line.",
+      "hint": "Cancel only on the original punctured domain.",
+      "solution": "No. For $x\\ne1$, $f(x)=x+1\\to2$ as $x\\to1$, so there is no divergence. The graph lies on $y=x+1$ near $1$, with a removable hole at $(1,2)$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(x)=x+2$ for $x<0$ and $f(x)=2-x$ for $x\\ge0$. Find both limits at zero and decide continuity.",
+      "hint": "Use the branch on each side, then inspect $f(0)$.",
+      "solution": "From the left, $x+2\\to2$; from the right, $2-x\\to2$. Therefore $\\lim_{x\\to0}f(x)=2$. Since $f(0)=2$, the function is continuous at zero.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Prove that $x^3-2$ has a zero between 1 and 2. Does the intermediate value theorem alone prove it has only one?",
+      "hint": "Check continuity and signs before invoking the theorem.",
+      "solution": "The polynomial $f(x)=x^3-2$ is continuous on $[1,2]$, and $f(1)=-1<0<f(2)=6$. The intermediate value theorem gives a root in $(1,2)$. That theorem alone does not prove uniqueness; strict increase of $x^3$ supplies a separate uniqueness argument.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Define $f(x)=\\frac{x^2-9}{x-3}$ for $x\\ne3$. What value at 3 makes $f$ continuous?",
+      "hint": "Factor $x^2-9$.",
+      "solution": "For $x\\ne3$, $f(x)=x+3$, so $\\lim_{x\\to3}f(x)=6$. Defining $f(3)=6$ makes the value match the limit and removes the discontinuity.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Use the intermediate value theorem to show $x^3+x-1$ has a zero in $(0,1)$.",
+      "hint": "Check continuity and endpoint signs.",
+      "solution": "The polynomial $f(x)=x^3+x-1$ is continuous on $[0,1]$. Since $f(0)=-1<0<f(1)=1$, the intermediate value theorem supplies $c\\in(0,1)$ with $c^3+c-1=0$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Give a continuous function with a sign change across $[-2,2]$ but more than one zero there.",
+      "hint": "A factored cubic can have three simple roots.",
+      "solution": "Take $f(x)=x^3-x=x(x-1)(x+1)$. It is continuous, $f(-2)=-6<0<f(2)=6$, and its zeros in $[-2,2]$ are $-1,0,1$. A sign change guarantees existence, not uniqueness.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f(x)=x^3-2$ on $[1,2]$, perform two bisection steps and bound the midpoint error after them.",
+      "hint": "Evaluate $f(1.5)$ and $f(1.25)$, keeping the sign-change half.",
+      "solution": "At $1.5$, $f=1.375>0$, so retain $[1,1.5]$. At $1.25$, $f=-0.046875<0$, so retain $[1.25,1.5]$. This bracket has width $0.25$; its midpoint $1.375$ is within $0.125$ of the contained root.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Prove that $\\sqrt{x}$ is right-continuous at the endpoint $0$ on $[0,1]$. For each $\\varepsilon>0$, give a right-hand input bound that guarantees the output error is below $\\varepsilon$.",
+      "hint": "Use the one-sided epsilon definition at zero. What bound on $x$ makes $\\sqrt{x}<\\varepsilon$?",
+      "solution": "The value is $\\sqrt0=0$. As $x\\to0^+$, $\\sqrt x\\to0$; explicitly, for $\\varepsilon>0$, $0\\le x<\\varepsilon^2$ gives $|\\sqrt x-0|<\\varepsilon$. Thus the function is right-continuous at the endpoint $0$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove $\\lim_{x\\to2}x^2=4$ with an explicit $\\delta(\\varepsilon)$.",
+      "hint": "Bound $|x+2|$ after requiring $|x-2|<1$.",
+      "solution": "If $|x-2|<1$, then $1<x<3$ and $|x+2|<5$. Given $\\varepsilon>0$, choose $\\delta=\\min(1,\\varepsilon/5)$. Then $0<|x-2|<\\delta$ gives $|x^2-4|=|x-2||x+2|<5\\delta\\le\\varepsilon$.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove $\\lim_{x\\to-1}x^2=1$ with an explicit $\\delta(\\varepsilon)$.",
+      "hint": "Bound $|x-1|$ after requiring $|x+1|<1$.",
+      "solution": "If $|x+1|<1$, then $-2<x<0$ and $|x-1|<3$. Given $\\varepsilon>0$, choose $\\delta=\\min(1,\\varepsilon/3)$. For $0<|x+1|<\\delta$, $|x^2-1|=|x+1||x-1|<3\\delta\\le\\varepsilon$.",
+      "lesson": 6,
+      "type": "Proof"
+    }
+  ],
+  "summary": [
+    "Limits concern nearby inputs; continuity additionally requires agreement with the value at the point.",
+    "Limit laws and squeezing establish limits under explicit hypotheses; epsilon–delta proofs state the full tolerance guarantee.",
+    "Infinite limits describe unbounded outputs, whereas limits at infinity describe distant inputs.",
+    "Continuity on a closed interval guarantees intermediate values, providing the foundation for reliable root bracketing."
+  ],
+  "next": "Chapter 5 applies limits to average rates over shrinking intervals, defining derivatives and explaining why continuity is necessary but insufficient for differentiability."
+}

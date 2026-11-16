@@ -1,0 +1,17 @@
+# A scalar field assigns one number to each point. Its level sets join points
+# with the same value. Predict the nesting before changing either control.
+scene "Level sets of an anisotropic quadratic";
+domain -3 3;
+range -3 3;
+coordinates equal;
+
+param c = 1 from 0.2 to 4;
+param stretch = 2 from 0.5 to 4;
+
+scalar energy(x,y) = x^2 + stretch*y^2;
+contour energy level c color blue as selected_level;
+contour energy level 2*c color teal as outer_level;
+point witness = (sqrt(c),0) color rose;
+
+# The curves are a fixed-grid marching-squares approximation. Derive the
+# intercepts from x^2 + stretch*y^2 = c; do not infer them from pixels.

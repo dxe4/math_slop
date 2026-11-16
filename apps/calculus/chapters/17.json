@@ -1,0 +1,550 @@
+{
+  "id": "17",
+  "title": "Power series and Taylor models",
+  "subtitle": "How can a polynomial represent a function locally, and how can we certify its error?",
+  "prerequisites": [
+    "Chapters 5–6: higher derivatives and differentiation rules.",
+    "Chapter 11: integration and the fundamental theorem of calculus.",
+    "Chapters 15–16: series convergence, ratio tests, and alternating remainder estimates."
+  ],
+  "objectives": [
+    "Find a power series radius of convergence and test its endpoints separately.",
+    "Differentiate and integrate a power series on its open interval of convergence.",
+    "Construct Taylor polynomials about a chosen center and certify approximation errors.",
+    "Distinguish a smooth function from a function represented by its Taylor series.",
+    "Reindex differentiated power series and distinguish formal coefficient rules from convergent functions."
+  ],
+  "sections": [
+    {
+      "title": "A whole family of series",
+      "paragraphs": [
+        "A numerical series gives one number, when it converges. A power series gives a series for each input $x$: choose fixed coefficients $c_0,c_1,\\ldots$ and a center $a$, then consider $\\sum c_n(x-a)^n$. Its partial sums are polynomials. At $x=a$ every positive-power term vanishes, so the series always converges there to $c_0$. Away from the center, the factor $(x-a)^n$ may amplify or suppress the coefficients. The first task is therefore to find the inputs for which a sum exists.",
+        "There is a radius $R$, possibly zero or infinite, such that the series converges absolutely when $|x-a|<R$ and diverges when $|x-a|>R$. When $0<R<\\infty$, each endpoint $a-R$ and $a+R$ needs its own test; either, both, or neither may belong to the interval of convergence. The radius is a distance, while the interval records actual permitted real inputs. A ratio test that produces a limit of one at an endpoint has left that case undecided.",
+        "For example, $\\sum_{n=1}^{\\infty}x^n/n$ has successive absolute-term ratio $|x|n/(n+1)$, tending to $|x|$. Thus $R=1$. At $x=1$ the harmonic series diverges. At $x=-1$ the alternating harmonic series converges conditionally. Its interval is $[-1,1)$, even though the open interior is symmetric. Replacing $n$ by $n^2$ makes both endpoints converge; removing the denominator makes both diverge. Identical radii do not imply identical endpoint behavior.",
+        "A proof idea for the radius property comes from comparison with a geometric series. If the series converges at $b\\ne a$, its terms $c_n(b-a)^n$ are bounded in absolute value by some constant $M$. At a closer point $x$, the absolute terms are at most $M(|x-a|/|b-a|)^n$. That geometric majorant converges. Thus convergence at one distance forces absolute convergence at every smaller distance. This argument explains why disconnected islands of convergence cannot occur. Define $R$ as the supremum of distances $|x-a|$ at which the series converges, allowing $R=0$ or $R=\\infty$. Every distance below $R$ is below some convergent distance, so the comparison just proved gives absolute convergence there. No distance greater than $R$ can converge by the definition of supremum. At a finite boundary distance $R$, examine the two endpoints separately.",
+        "For a power series, three questions must be answered separately: where does it converge, what function does it sum to there, and how accurately does a finite polynomial approximate that function? The radius addresses the first question in the open interval. An algebraic identity such as the geometric sum may answer the second. A remainder or tail bound answers the third. A ratio test alone gives no expression for the sum and often says nothing at endpoints. Organizing solutions in this order prevents a polished radius calculation from being mistaken for a complete power-series analysis.",
+        "The endpoint tests are ordinary numerical-series problems. For $\\sum_{n=1}^{\\infty}(x-2)^n/(n3^n)$, the ratio test gives $|x-2|<3$. At $x=5$ the terms become $1/n$ and diverge; at $x=-1$ they become $(-1)^n/n$ and converge conditionally. The interval is $[-1,5)$, with center $2$ and radius $3$. At the conditional endpoint, absolute convergence fails, so rearrangement properties differ from those inside the open interval. The left and right endpoints need not behave symmetrically because signs can change.",
+        "The radius may be infinite, as for $\\sum_{n=0}^{\\infty}x^n/n!$, or zero, as for $\\sum_{n=0}^{\\infty}n!x^n$. In the first case the ratio of consecutive absolute terms tends to zero for every fixed $x$. In the second, for any nonzero $x$ the ratio is $(n+1)|x|\\to\\infty$, so the terms fail to approach zero. Both series converge at the center $x=0$. Thus “a power series converges near its center” requires care: a zero-radius series has no nontrivial neighborhood of convergence. A polynomial, by contrast, has only finitely many terms and is defined everywhere.",
+        "A radius is a real distance in the input variable's units. If a power series is written in $t-t_0$ with $t$ measured in seconds, $R$ is measured in seconds; saying only “radius $2$” hides the meaning of that interval. Rescaling time to milliseconds rescales the numerical radius, while the physical interval is the same. Coefficients carry compensating units so each term has the sum's units. This dimensional check is useful when a local model from measured data is transferred between unit systems.",
+        "The ratio and root tests can often find a radius from the coefficient growth, but an endpoint may still demand an alternating, comparison, or term test. For a series centered at $a$, substitute $x=a+R$ and $x=a-R$ into the actual term formula before classifying either side. A common shortcut writes an interval with both endpoints included merely because the ratio is at most one there. At equality the ratio test is inconclusive. Recording an open interval first and adding tested endpoints one at a time is a safer workflow, especially when one endpoint is conditional and the other divergent. That distinction should remain visible in both the prose and every plotted approximation."
+      ],
+      "formula": "Σₙ₌₀∞ cₙ(x − a)ⁿ: absolute convergence for |x − a| < R; divergence for |x − a| > R.",
+      "formulaTex": "\\begin{gathered}S(x)=\\sum_{n=0}^{\\infty}c_n(x-a)^n,\\\\ |x-a|<R\\ \\Longrightarrow\\ S(x)\\text{ converges absolutely},\\\\ |x-a|>R\\ \\Longrightarrow\\ S(x)\\text{ diverges}.\\end{gathered}"
+    },
+    {
+      "title": "Calculus inside the convergence interval",
+      "paragraphs": [
+        "Inside a positive radius $R$, a power series $S(x)=\\sum_{n=0}^{\\infty}c_n(x-a)^n$ can be differentiated and integrated term by term. First we prove those operations on each closed interval strictly inside the radius; then a separate reverse argument proves that both transformed series have the same open radius. None of this asserts endpoint membership or permits the same exchanges for an arbitrary pointwise-convergent sequence of functions.",
+        "Choose $0<r<\\rho<R$, write $I=[a-r,a+r]$ and $q=r/\\rho<1$. Convergence at $a+\\rho$ makes the terms $c_n\\rho^n$ bounded, so one $M$ satisfies $|c_n|\\rho^n\\le M$ for all $n$. For finite partial sums $S_N=\\sum_{n=0}^N c_n(x-a)^n$ and their polynomial derivatives $D_N=\\sum_{n=1}^N nc_n(x-a)^{n-1}$, every finite late block $N<n\\le K$ on $I$ is bounded by $M\\sum_{n=N+1}^Kq^n$ for $S_K-S_N$ and $(M/\\rho)\\sum_{n=N+1}^Knq^{n-1}$ for $D_K-D_N$. One $N$ therefore controls every $x\\in I$, unlike pointwise convergence where $N$ may depend on $x$.",
+        "The finite geometric identity gives $\\sum_{n=N+1}^{\\infty}q^n=q^{N+1}/(1-q)$. For the derivative majorant, multiply the finite sum $\\sum_{n=N+1}^K nq^{n-1}$ by $1-q$ and telescope; then let $K\\to\\infty$. The result is $q^N[(N+1)-Nq]/(1-q)^2$. No infinite-series differentiation is used to obtain it. Both bounds tend to zero because $0<q<1$. The real Cauchy criterion applied at each $x$ produces limits $S,D$, while the same finite-block bounds give the uniform remainders $\\sup_I|S-S_N|\\le A_N=Mq^{N+1}/(1-q)$ and $\\sup_I|D-D_N|\\le B_N=(M/\\rho)q^N[(N+1)-Nq]/(1-q)^2$.",
+        "The derivative limit $D$ is continuous. At any $x_0\\in I$ and $\\varepsilon>0$, choose one $N$ with $\\sup_I|D-D_N|<\\varepsilon/3$. Continuity of the polynomial $D_N$ supplies a neighborhood of $x_0$ where $|D_N(x)-D_N(x_0)|<\\varepsilon/3$. The triangle inequality then gives $|D(x)-D(x_0)|<\\varepsilon$. This is the local uniform-limit lemma needed before using the fundamental theorem; uniform convergence of functions, uniform continuity of one function, and a uniform Taylor-error certificate are distinct statements.",
+        "For each finite polynomial, the fundamental theorem gives $S_N(x)-c_0=\\int_a^xD_N(t)\\,dt$. The oriented integral error satisfies $|\\int_a^x(D-D_N)(t)\\,dt|\\le|x-a|B_N$, also when $x<a$ because reversing bounds only changes sign. Taking the two proved limits yields $S(x)-c_0=\\int_a^xD(t)\\,dt$. Since $D$ is continuous, the fundamental theorem now proves $S'(x)=D(x)$ at every interior point of $I$, including the center $S'(a)=c_1$. Given any $|x-a|<R$, choose a larger such $r$; the temporary endpoints of $I$ are not radius endpoints.",
+        "The same three-term uniform-limit argument used for $D$ shows that $S$, as the uniform limit of the continuous polynomials $S_N$, is continuous on every smaller closed interval $I$. By the Chapter 10 continuous-function result, $S$ is therefore Riemann integrable there. Likewise $|\\int_a^x(S-S_N)(t)\\,dt|\\le|x-a|A_N$. Integrating the finite polynomial and passing through this bounded error proves $\\int_a^xS(t)\\,dt=\\sum_{n=0}^{\\infty}c_n(x-a)^{n+1}/(n+1)$ for $|x-a|<R$. This is why the integral exchange is valid here. The spike investigation after this lesson shows a pointwise limit for which the integral exchange fails.",
+        "For example, on $|x|<1$ the finite geometric identity leads to $1/(1-x)=\\sum_{n=0}^{\\infty}x^n$. The proved interior theorem gives $1/(1-x)^2=\\sum_{n=1}^{\\infty}nx^{n-1}$ and $-\\ln(1-x)=\\sum_{n=0}^{\\infty}x^{n+1}/(n+1)$ there. The definite integral from zero fixes the constant. These identities hold uniformly on each smaller closed interval, not automatically at $x=\\pm1$. The logarithm's left endpoint has a separate finite proof. Integrate $1/(1-x)=\\sum_{k=0}^{N}x^k+x^{N+1}/(1-x)$ from $0$ to $-1$. On $[-1,0]$, $1-x\\ge1$, so the oriented remainder has magnitude at most $\\int_{-1}^0|x|^{N+1}\\,dx=1/(N+2)\\to0$. The polynomial integrals therefore approach $-\\ln 2$, identifying $\\sum_{n=1}^{\\infty}(-1)^n/n$; the alternating test separately proves convergence. At $x=1$ the integrated series is harmonic and diverges. Differentiating the conditionally convergent series at $-1$ would produce the divergent geometric endpoint terms $\\pm1$. Neither endpoint conclusion follows from the interior radius theorem alone.",
+        "These interior bounds show the derivative and integrated series have radius at least $R$ when $R>0$. If $R=\\infty$, every finite interior interval is covered, so their radii are infinite. For finite $R\\ge0$, suppose the derivative series has a larger radius. Choose $R<t<s$ with $s$ strictly inside that larger radius. Its terms at $a+s$ are bounded: $|nc_ns^{n-1}|\\le C$ for $n\\ge1$. Then $|c_n|t^n\\le Cs(t/s)^n/n\\le Cs(t/s)^n$, a convergent geometric majorant for the original series at $a+t$; the constant term is harmless. This contradicts the definition of $R$.",
+        "The integrated series also cannot have a larger radius when $R$ is finite. If it did, choose $R<t<s$ inside that radius. Bounded terms give $|c_ns^{n+1}/(n+1)|\\le C$, hence $|c_n|t^n\\le(C/s)(n+1)(t/s)^n$. Multiplying finite sums by $1-t/s$ and telescoping shows $\\sum(n+1)(t/s)^n$ converges; thus the original series would converge absolutely at $a+t$, again contradicting radius $R$. For $R=0$ only this reverse reasoning is needed: no nontrivial derivative identity is claimed around the center. These proofs establish equal open radii, not matching endpoint behavior."
+      ],
+      "formula": "f′(x) = Σₙ₌₁∞ n cₙ(x − a)ⁿ⁻¹; ∫ₐˣ f(t) dt = Σₙ₌₀∞ cₙ(x − a)ⁿ⁺¹/(n + 1), for |x − a| < R.",
+      "formulaTex": "\\begin{gathered}f(x)=\\sum_{n=0}^{\\infty}c_n(x-a)^n,\\quad |x-a|<R,\\\\ f^{\\prime}(x)=\\sum_{n=1}^{\\infty}n c_n(x-a)^{n-1},\\\\ \\int_a^x f(t)\\,dt=\\sum_{n=0}^{\\infty}\\frac{c_n(x-a)^{n+1}}{n+1}.\\end{gathered}"
+    },
+    {
+      "title": "Matching derivatives: Taylor and Maclaurin polynomials",
+      "paragraphs": [
+        "Linearization matched a function’s value and first derivative at a point. A Taylor polynomial of degree at most $N$ matches all derivatives through order $N$. To see why its coefficients are forced, write $P(x)=b_0+b_1(x-a)+\\cdots+b_N(x-a)^N$. Evaluating at $a$ leaves $b_0$. Differentiating once and evaluating leaves $b_1$; differentiating $k$ times leaves $k!b_k$. Hence $b_k=f^{(k)}(a)/k!$. This construction requires derivatives at the center, while error estimates require information between the center and the evaluation point.",
+        "The polynomial $T_N(x)=\\sum_{k=0}^{N}f^{(k)}(a)(x-a)^k/k!$ is called a Maclaurin polynomial when $a=0$. An infinite Taylor series uses the same coefficients for all $k$, provided all derivatives exist. Familiar Maclaurin expansions include $e^x=\\sum_{n=0}^{\\infty}x^n/n!$, $\\sin x=x-x^3/3!+x^5/5!-\\cdots$, and $\\cos x=1-x^2/2!+x^4/4!-\\cdots$. The trigonometric arguments must be in radians. These three identities hold for every real $x$, as remainder estimates can establish.",
+        "Moving the center changes the useful local model. For $e^x$ at $a$, every derivative equals $e^a$, so $T_N(x)=e^a\\sum_{k=0}^{N}(x-a)^k/k!$. Near $x=2$, centering at $2$ makes the displacement small; centering at zero may require more terms. A finite Taylor polynomial is defined for every real $x$ even when the infinite series has a finite radius. Its existence outside that radius does not promise accuracy there.",
+        "Units also constrain the formula. If $x$ measures time in seconds and $f$ measures position in meters, $f^{(k)}(a)$ has units $\\mathrm{m}/\\mathrm{s}^k$. Multiplication by $(x-a)^k$ restores meters in every term. An expression such as $e^x$ assumes $x$ is dimensionless; a physical exponential usually has a dimensionless argument such as $t/\\tau$, where $\\tau$ is a time scale.",
+        "Taylor coefficients are uniquely determined by derivative matching. For $f(x)=\\ln x$ about $a=1$, $f(1)=0$, $f^{\\prime}(1)=1$, and $f^{\\prime\\prime}(1)=-1$, so the quadratic polynomial is $(x-1)-(x-1)^2/2$. Its value and first two derivatives match $\\ln x$ at $x=1$. That local match does not by itself quantify the error at $x=0.9$ or $1.1$. A third-derivative bound on the interval supplies the certificate, illustrating the distinction between constructing a model and verifying where it is reliable.",
+        "For $\\sin x$ at zero, the even derivatives vanish and odd derivatives alternate $1,-1,1,\\ldots$, giving $x-x^3/3!+x^5/5!-\\cdots$. A degree-four Taylor polynomial is still $x-x^3/6$ because the $x^4$ coefficient is zero. The degree label reports the highest derivative matched, not necessarily the highest nonzero power present. An error estimate may exploit the first nonzero omitted term under an alternating-series argument for a suitable interval, or use a general Taylor derivative bound. State which theorem gives the claimed tolerance.",
+        "Center choice is a numerical design decision. Approximating $e^{2.1}$ with a degree-three Taylor polynomial centered at $2$ involves displacement $0.1$ and coefficients $e^2$, while centering at zero uses displacement $2.1$. The latter may need many more terms. If $e^2$ is itself only known approximately, its uncertainty enters every coefficient of the shifted model; a small Taylor remainder does not repair an inaccurate center value. A practical approximation combines model truncation with data or arithmetic error, rather than treating the polynomial formula as exact by default.",
+        "A Taylor polynomial is local even when it is algebraically defined everywhere. The quadratic model for $\\ln x$ at one is defined for negative $x$ as a polynomial, but $\\ln x$ is not real there. Evaluating the model at $x=-1$ cannot be called an approximation to a nonexistent real target. Similarly, a polynomial may remain finite near a singularity where the modeled function diverges. State the function domain, center, and requested interval before interpreting numerical error. Derivative matching at one point does not extend the original function's domain."
+      ],
+      "formula": "T_N(x) = Σₖ₌₀ᴺ [f⁽ᵏ⁾(a)/k!](x − a)ᵏ; R_N(x) = f(x) − T_N(x).",
+      "formulaTex": "\\begin{aligned}T_N(x)&=\\sum_{k=0}^{N}\\frac{f^{(k)}(a)}{k!}(x-a)^k,\\\\ R_N(x)&=f(x)-T_N(x).\\end{aligned}"
+    },
+    {
+      "title": "A certificate, not just a close-looking graph",
+      "paragraphs": [
+        "Suppose $f$ has $N+1$ continuous derivatives on an interval containing the center $a$ and the evaluation point $x$. Taylor’s theorem gives $R_N(x)=f^{(N+1)}(\\xi)(x-a)^{N+1}/(N+1)!$ for some $\\xi$ between $a$ and $x$. Usually $\\xi$ is unknown. If the absolute value of that derivative is at most $M$ throughout the connecting interval, replacing it by $M$ produces an explicit upper bound. A graph may suggest that the approximation is good; this inequality specifies how good it must be.",
+        "For a certificate on an entire closed interval $[L,U]$, with $a$ inside it, bound the derivative on $[L,U]$ and set $d=\\max(|L-a|,|U-a|)$. Then the same $Md^{N+1}/(N+1)!$ bounds every error there. If the center lies outside the requested interval, the derivative bound must cover the larger interval joining the center to every requested input. Forgetting that extra region can invalidate an otherwise plausible calculation.",
+        "A proof sketch uses repeated integration of the fundamental theorem of calculus. The remainder has integral form $R_N(x)=(1/N!)\\int_a^x f^{(N+1)}(t)(x-t)^N\\,dt$. Bounding the absolute derivative and integrating the absolute kernel gives the factorial estimate, including when $x<a$. The weighted mean value theorem for the integral then gives the Lagrange form above. This also explains why controlling a derivative between the points matters.",
+        "An upper bound need not be tight. A failure to meet a desired tolerance with this estimate does not prove the polynomial is inaccurate; a sharper derivative bound or an alternating-series estimate may succeed. Conversely, small sampled error cannot certify unsampled inputs. At high degrees, ordinary floating-point arithmetic can hide further mathematical improvement through rounding or cancellation, so the theorem bounds truncation error rather than every error in a computer implementation.",
+        "For $\\ln x$ about one on $[0.9,1.1]$, the third derivative is $f^{\\prime\\prime\\prime}(x)=2/x^3$. Its absolute maximum is at $x=0.9$, so $M=2/(0.9)^3$. The quadratic Taylor error satisfies $|R_2(x)|\\le M|x-1|^3/6\\le[2/(0.9)^3](0.1)^3/6\\approx0.0004573$ across the interval. The inequality is a certificate, not the actual error. Because $\\ln x$ is defined and smooth throughout $[0.9,1.1]$, the theorem's hypotheses hold. Extending the same bound to $x=0.5$ without recomputing $M$ and displacement would be invalid.",
+        "For $\\sin x$, a simple bound uses $|\\sin^{(k)}(x)|\\le1$ for every derivative order and real $x$. The degree-three Maclaurin polynomial is $x-x^3/6$, and Taylor's theorem with fourth derivative gives $|R_3(x)|\\le|x|^4/4!$. At $|x|\\le0.2$ this is at most $0.2^4/24\\approx0.00006667$. This bound is valid but not as sharp as exploiting the zero fourth-degree coefficient and bounding the fifth derivative, which gives $|x|^5/5!$ on that interval. State the degree and derivative order used; the sharper bound requires matching through degree four even though the displayed polynomial is unchanged.",
+        "A uniform estimate covers every input in a range, whereas a pointwise computation checks one input. Suppose a plot shows tiny error at $x=0$ and $x=\\pm0.5$. It cannot rule out a larger error between sampled points without an analytic bound. Taylor's theorem fills that gap by controlling a derivative on the entire connecting interval. The price is sometimes a conservative $M$. If $M$ is hard to bound sharply, interval arithmetic or a known alternating remainder may offer a different certificate. Choose a guarantee that matches the question's scope rather than offering a decimal from isolated samples.",
+        "The integral remainder form explains the factorial. For $x>a$, $|R_N(x)|\\le(M/N!)\\int_a^x(x-t)^N\\,dt=M(x-a)^{N+1}/(N+1)!$. For $x<a$, reverse orientation and bound absolute values to get the same expression with $|x-a|$. This proof shows why the derivative bound must cover every $t$ between $a$ and $x$. A bound only at the center, no matter how accurate, says nothing about what the derivative does in the rest of the interval.",
+        "A failed sufficient bound is inconclusive. In the $e^x$ case on $[-1/2,1/2]$, the degree-six bound exceeds $10^{-6}$ while the degree-seven bound falls below it. This proves degree seven is safe under that bound, not that degree six is mathematically insufficient or that seven is the minimal possible degree. To establish minimality one would need a lower bound on actual error somewhere in the interval. This logical distinction prevents a conservative theorem from being mistaken for an exact optimization result.",
+        "For $T_2(x)=(x-1)-(x-1)^2/2$ approximating $\\ln x$ at one, $f^{\\prime\\prime\\prime}(x)=2/x^3$. On $[1,6/5]$ the uniform maximum is $M=2$, and the farthest point is $1/5$ from the center. The Lagrange bound is $2(1/5)^3/6=1/375<1/300$, so it certifies that tolerance. On $[4/5,1]$ the maximum is $125/32$, giving $1/192>1/300$. That certificate is inconclusive: its upper bound cannot establish actual failure. Problem 17.36 asks for both decisions and their justification.",
+        "For $f(x)=1/(1-x)$ and $T_2=1+x+x^2$, $f^{\\prime\\prime\\prime}(0)=6$ is only the center value. On $[-1/2,1/2]$ the maximum of $6/(1-x)^4$ is $96$, and the valid uniform bound is $2$; at tolerance $1/6$ it remains inconclusive. Exact algebra supplies different evidence: $f(x)-T_2(x)=x^3/(1-x)$, so the actual error at $1/2$ is $1/4>1/6$. This endpoint refutes the target. On $[-1/2,0]$, $M=6$ is valid, its bound is $1/8<1/6$, and the exact maximum is $1/12$. Problem 17.37 separates an invalid center-only bound, a valid loose bound, and an actual witness.",
+        "Chapter 6 compares central differences at several step sizes. The proved Taylor remainder now gives a certificate from two imperfect readings. Suppose $f\\in C^3$ on an open interval containing the closed window $[x-H,x+H]$, with $H>0$ and $|f^{\\prime\\prime\\prime}|\\le M$ throughout that window. The locations are exact; the reported values are $y_\\pm=f(x\\pm h)+e_\\pm$, where $|e_\\pm|\\le\\eta$ and $0<h\\le H$. The theorem below bounds $D_h=(y_+-y_-)/(2h)$. If inputs have time units and outputs length units, $\\eta$ has length units, $M$ has length/time-cubed units, and both $\\eta/h$ and $Mh^2/6$ have the derivative's length/time units.",
+        "For a dimensionless example at $x=0$, take $M=1$, $\\eta=1/3000$, and $H=1/20$. Without the window constraint, the best step for this certificate would be $r=(3\\eta/M)^{1/3}=1/10$. That step is unavailable, so choose $h=H=1/20$. The certified radius is $B(H)=\\eta/H+MH^2/6=17/2400$. If the two reports are $y_\\pm=\\pm1/20$, then $D_H=1$ and the true derivative lies in $[2383/2400,2417/2400]$. This interval is a conditional guarantee, not a probability statement.",
+        "The radius is sharp for these fixed reports: the two cubics $f_\\pm(t)=(1\\pm17/2400)t\\mp t^3/6$ satisfy the full derivative bound and reading tolerances, while their derivatives at zero attain the two endpoints. A line through the reports has zero data residual, but the data do not distinguish it from these cubics. Halving the step to $1/40$ raises the radius to $43/3200$. Those step sizes describe alternative two-reading experiments; keeping and combining more readings changes the available information.",
+        "Smaller steps reduce the Taylor contribution while amplifying uncertainty in the reported values. This deterministic model permits errors of opposite signs and also a shared offset; it assumes no probability law. A known identical offset cancels in the difference, whereas a separate absolute tolerance at each reading permits a larger error. The derivative bound must be supplied on the whole window; two samples cannot establish it. The certificate treats subtraction and division as exact. Additional floating-point arithmetic errors, uncertain input locations, or an unjustified smoothness model require additional bounds."
+      ],
+      "formula": "|f(x) − T_N(x)| ≤ M |x − a|ᴺ⁺¹/(N + 1)! when |f⁽ᴺ⁺¹⁾| ≤ M along the interval from a to x.",
+      "theorems": [
+        {
+          "title": "The integral remainder gives a uniform Taylor bound",
+          "statement": "If $f$ has $N+1$ continuous derivatives on the interval from $a$ to $x$, then $f(x)$ equals its degree-$N$ Taylor polynomial at $a$ plus the integral remainder below.",
+          "proof": [
+            "The starting case $N=0$ is the fundamental theorem: $f(x)=f(a)+\\int_a^x f^{\\prime}(t)\\,dt$. Suppose the formula is known through degree $N-1$. Its remainder is $(1/(N-1)!)\\int_a^x f^{(N)}(t)(x-t)^{N-1}\\,dt$. Integrate by parts, treating $f^{(N)}$ as the part to differentiate and $-(x-t)^N/N$ as an antiderivative of $(x-t)^{N-1}$. The boundary at $t=x$ vanishes; the boundary at $t=a$ contributes $f^{(N)}(a)(x-a)^N/N!$. The remaining integral has $f^{(N+1)}$ and a factor $1/N!$, exactly the next-degree remainder. Induction proves the identity.",
+            "If $|f^{(N+1)}(t)|\\le M$ throughout the interval joining $a$ and $x$, take absolute values inside the remainder. Integrating $|x-t|^N$ across that interval gives $|x-a|^{N+1}/(N+1)$. Hence $|R_N(x)|\\le M|x-a|^{N+1}/(N+1)!$. On a whole target interval, use one $M$ and the largest distance to the center; the same proof then controls every target input. The orientation when $x<a$ changes the sign of the integral but not this absolute bound.",
+            "This derivation shows what the factorial does and where the derivative hypothesis is used. It bounds truncation error for a mathematical polynomial. A computer evaluation has additional rounding error, which the integral formula does not cover. The estimate can also be conservative: failure of this bound to meet a tolerance does not establish that the actual polynomial is inaccurate."
+          ],
+          "equationTex": "R_N(x)=\\frac1{N!}\\int_a^x f^{(N+1)}(t)(x-t)^N\\,dt"
+        },
+        {
+          "title": "A sharp central-difference certificate and its constrained step",
+          "statement": "Let $H>0$, $M\\ge0$ and $\\eta\\ge0$. Suppose $f\\in C^3$ on an open interval containing $[x-H,x+H]$ and $|f^{\\prime\\prime\\prime}(t)|\\le M$ on that closed window. For exact input locations, reports $y_\\pm=f(x\\pm h)+e_\\pm$ with $|e_\\pm|\\le\\eta$, and $0<h\\le H$, the central difference has the bound below in exact arithmetic. The radius is attained within this function/data class. When $M,\\eta>0$, the unique step minimizing this certificate is $h_*=\\min\\{H,(3\\eta/M)^{1/3}\\}$. This optimizes the declared two-reading central-difference certificate; it is no claim about all possible estimators.",
+          "proof": [
+            "Apply the degree-two Taylor bound separately at $x+h$ and $x-h$: $f(x\\pm h)=f(x)\\pm hf^{\\prime}(x)+h^2f^{\\prime\\prime}(x)/2+R_\\pm$, with $|R_\\pm|\\le Mh^3/6$. Subtract the two equations and divide by $2h$. The constant and quadratic terms cancel, leaving exact-data error at most $(|R_+|+|R_-|)/(2h)\\le Mh^2/6$. This uses the already proved remainder and never differentiates an unknown intermediate point.",
+            "The reading errors contribute $(e_+-e_-)/(2h)$, whose magnitude is at most $\\eta/h$. Adding the two contributions proves the bound. No independence or random cancellation is assumed. With unequal tolerances $|e_-|\\le\\eta_-$ and $|e_+|\\le\\eta_+$, the same proof replaces the noise term by $(\\eta_-+\\eta_+)/(2h)$.",
+            "To prove sharpness, fix any reports $y_\\pm=c\\pm dh$ and let $B=\\eta/h+Mh^2/6$. For each $s\\in\\{-1,1\\}$, define $f_s(x+t)=c+(d+sB)t-sMt^3/6$ on the whole real line. Its third derivative has magnitude $M$, and $f_s(x+h)-y_+=s\\eta$, while $f_s(x-h)-y_-=-s\\eta$. Both curves are admissible and $f_s^{\\prime}(x)=d+sB$. Thus neither endpoint can be excluded using these reports and assumptions.",
+            "For $M,\\eta>0$, differentiate $B(h)=\\eta/h+Mh^2/6$: $B^{\\prime}(h)=-\\eta/h^2+Mh/3$. It is negative for $h<r=(3\\eta/M)^{1/3}$ and positive for $h>r$. On the permitted interval $0<h\\le H$, this gives the unique minimizer $\\min(H,r)$, including equality at the closed boundary. At an unconstrained optimum, $\\eta/r=Mr^2/3$: the noise contribution is twice the Taylor contribution, not equal to it.",
+            "If $\\eta=0<M$, then $B(h)=Mh^2/6$ has infimum zero as $h\\downarrow0$, but no permitted positive step attains that certificate infimum. This does not assert nonzero actual error for every individual function. If $M=0<\\eta$, the certificate decreases with $h$ and is minimized at $H$. If $M=\\eta=0$, every permitted step gives the exact derivative. These cases must be handled separately rather than dividing by zero in the cube-root formula."
+          ],
+          "equationTex": "\\left|\\frac{y_+-y_-}{2h}-f^{\\prime}(x)\\right|\\le B(h)=\\frac{\\eta}{h}+\\frac{Mh^2}{6},\\qquad 0<h\\le H"
+        }
+      ],
+      "formulaTex": "|f(x)-T_N(x)|\\le\\frac{M|x-a|^{N+1}}{(N+1)!}",
+      "investigation": {
+        "id": "numerical-differentiation",
+        "title": "Choose a step and defend its uncertainty",
+        "introduction": "Use the theorem's smoothness, exact-location and exact-arithmetic assumptions in both dimensionless tasks at $x=0$. These optional written tasks are outside the numbered problem bank. Derive the guarantee before comparing a displayed derivative estimate with a plausible answer.",
+        "tasks": [
+          {
+            "title": "An interior optimum with changed data",
+            "question": "Suppose $M=3$, $\\eta=1/8000$ at each reading, and $H=1/10$. Choose the permitted step that minimizes the central-difference certificate and give its radius. At that step the reports are $y_\\pm=\\pm3h/2$. Find the sharp interval for $f^{\\prime}(0)$, construct two admissible cubics that attain its endpoints, and compare the radius after halving the chosen step. Does matching a line through the two reports certify that line's slope?",
+            "hint": "Differentiate the sum of the two error terms and check the window before inserting the reports. An attaining cubic can have third derivative $\\pm3$; its linear coefficient and the signs of its two data errors must be checked together.",
+            "solution": "Here $r=(3\\eta/M)^{1/3}=1/20<H$, so $h_*=1/20$. The noise contribution is $1/400$ and the Taylor contribution is $1/800$, giving $B(h_*)=3/800$. They are not equal at the optimum.\n\nThe reports give $D_{h_*}=3/2$, so $f^{\\prime}(0)\\in[1197/800,1203/800]$. The cubics $f_\\pm(t)=(3/2\\pm3/800)t\\mp t^3/2$ have $|f_\\pm^{\\prime\\prime\\prime}|=3$. At $+h_*$ their true values differ from the report by $\\pm1/8000$, and at $-h_*$ by $\\mp1/8000$. Their derivatives attain the endpoints.\n\nAt $h=1/40$, the radius is $1/200+1/3200=17/3200>3/800$. A zero-residual line fit still leaves both attaining cubics admissible. These radii compare alternative two-reading experiments; they do not describe a procedure combining both pairs."
+          },
+          {
+            "title": "A shorter window and unequal reading tolerances",
+            "question": "Change the permitted window to $H=1/40$, retain $M=3$, and suppose the negative-input reading has tolerance $\\eta_-=1/12000$ while the positive-input reading has tolerance $\\eta_+=1/6000$. Derive the noise term from these two tolerances, choose the permitted step minimizing the certificate, and find the sharp derivative interval when $y_\\pm=\\pm3/80$. Construct attaining cubics, including any necessary constant term. How would the noise contribution change if both reports instead had one known-to-be-identical unknown offset?",
+            "hint": "Bound $|e_+-e_-|$ before dividing by $2h$. The unequal tolerances shift an attaining curve's intercept as well as its slope. A guaranteed shared offset imposes extra information beyond two separate tolerances.",
+            "solution": "The noise term is $(\\eta_-+\\eta_+)/(2h)=1/(8000h)$. Its effective common tolerance is $1/8000$, so the unconstrained optimum is $1/20$, outside the shorter window. Choose $h=H=1/40$. The radius is $B(H)=1/200+1/3200=17/3200$.\n\nThe reports give $D_H=3/2$, hence $f^{\\prime}(0)\\in[4783/3200,4817/3200]$. Attaining cubics are $f_\\pm(t)=\\pm1/24000+(3/2\\pm17/3200)t\\mp t^3/2$. Their third derivatives have magnitude $3$. At $+H$ their true-minus-reported values are $\\pm1/6000$; at $-H$ they are $\\mp1/12000$. The constant shifts are needed to satisfy the unequal endpoint tolerances.\n\nFor a guaranteed identical offset, $e_+=e_-$ and the entire noise contribution cancels. That stronger measurement model gives radius $Mh^2/6$; with $M>0$ it has infimum zero as $h\\downarrow0$, without a positive-step minimizer. Two separate tolerances alone do not justify this cancellation."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Smoothness does not guarantee a Taylor representation",
+      "paragraphs": [
+        "A function is smooth if it has continuous derivatives of every order. It is analytic at $a$ if, on some neighborhood of $a$, it equals its convergent Taylor series there. Analytic functions are smooth, but the reverse implication fails. Taylor’s theorem supplies a remainder for each finite degree; equality with the infinite series additionally requires that remainder to tend to zero. Increasing derivative order changes the derivative bound, sometimes too rapidly for the factorial denominator to win.",
+        "Let $f(x)=e^{-1/x^2}$ for $x\\ne0$ and $f(0)=0$. Every derivative at zero vanishes, so every Taylor polynomial and the resulting convergent formal series are identically zero; yet $f(x)>0$ at every nonzero input. The next paragraph proves the derivative claim rather than inferring it from a flat-looking graph. At a fixed nonzero $x$, the Taylor remainder is always $f(x)$ and does not tend to zero with degree. Thus smoothness supplies coefficients, while analyticity requires equality with their series on a neighborhood.",
+        "For any fixed $m\\ge0$, set $u=1/x^2\\to\\infty$. Then $|x|^{-m}e^{-1/x^2}=u^{m/2}e^{-u}\\to0$, since a fixed power grows more slowly than $e^u$ (for example, repeated l'Hôpital steps reduce its exponent). Away from zero, each derivative is a finite polynomial in $1/x$ times $e^{-1/x^2}$. Inductively, the difference quotient at zero for each fixed derivative order has the same form with one extra inverse power and tends to zero; that derivative takes value zero and extends continuously. The argument works separately for each fixed order. A bound uniform across derivative orders can suffice for Taylor equality elsewhere, but is not necessary.",
+        "An analytic function is determined locally by all of its derivatives at a point, but a merely smooth function need not be. If two analytic functions have identical Taylor coefficients at a center, their series agree on a shared neighborhood and so do the functions there. The flat function and the zero function have identical derivatives at zero while differing at every nearby nonzero point, showing why the adjective analytic matters. This distinction appears in differential equations and approximation theory, where a formal power-series solution may require a separate convergence argument.",
+        "One should not generalize the flat example to imply that Taylor series are usually unreliable. The elementary exponential, sine, and cosine functions have controlled remainders that tend to zero for every fixed real x, so their Taylor series represent them globally. The logarithm near one and geometric rational functions have finite radii limited by nearby singularities. The correct question for each function is whether a proved remainder tends to zero on the requested region. A plot, a list of derivatives, or a symbolic series alone does not settle that question.",
+        "Convergence of the coefficient series and approximation of the given function are different claims even on a closed interval. Fix $r>0$. For the flat function above, every Taylor polynomial $T_n$ is zero, and the formal series converges uniformly to zero on $[-r,r]$. Nevertheless, $\\max_{|x|\\le r}|f(x)-T_n(x)|=e^{-1/r^2}>0$ for every degree $n$: the value grows with $|x|$ and is attained at $x=\\pm r$. Given a tolerance smaller than this fixed error, increasing the degree can never meet it on that interval. Making the interval smaller can reduce the error, but that changes the region rather than proving Taylor equality there. An extremely small positive value may disappear in a plotted scale or numerical display. Neither visual flatness nor convergence of the formal series establishes that it represents the original function."
+      ]
+    },
+    {
+      "title": "Certifying an approximation on an entire interval",
+      "paragraphs": [
+        "Suppose a reader needs $e^x$ to within $10^{-6}$ for every $x$ in $[-1/2,1/2]$. A Taylor polynomial at zero is $T_N(x)=\\sum_{k=0}^N x^k/k!$. The problem asks for one degree that works for infinitely many inputs, not a polynomial that happens to match a few sample points. Taylor’s theorem provides that uniform guarantee. The next derivative of $e^x$ is $e^x$, and on the entire interval its maximum is $e^{1/2}<1.649$. Also $|x|\\le1/2$. Therefore $|e^x-T_N(x)|\\le1.649(1/2)^{N+1}/(N+1)!$ simultaneously for every $x$ in the interval.",
+        "For $N=6$ the bound is $1.649(1/2)^7/7!\\approx2.56\\times10^{-6}$, which does not meet the requested tolerance. This failure of the bound does not prove $T_6$ is inaccurate; it says this certificate is insufficient. For $N=7$ the bound is $1.649(1/2)^8/8!\\approx1.60\\times10^{-7}$, below $10^{-6}$. Thus $T_7$ is a certified choice. At $x=1/2$, $T_4(1/2)=1.6484375$ whereas $e^{1/2}\\approx1.64872127$. The observed degree-four error $\\approx0.00028377$ is consistent with its uniform bound $\\approx0.00042943$, but the observation alone would not certify all $x$.",
+        "The factorial makes the Taylor bound shrink rapidly for this entire function, yet it is still important to state the interval. The bound $e^{1/2}$ was chosen because all points between the center zero and any requested $x$ lie inside $[-1/2,1/2]$. If the requested interval were $[2,3]$, the derivative bound would have to cover $[0,3]$ for a Maclaurin approximation, and its maximum would be $e^3$. Moving the center nearer the interval can reduce both the displacement and the derivative range.",
+        "In software, evaluating a polynomial in nested Horner form can reduce operations and roundoff: $T_N(x)=1+x(1+x/2(1+x/3(\\cdots)))$ only if the nesting is arranged with the correct coefficients. The mathematical remainder bound does not account for floating-point rounding in that evaluation. At a tolerance near machine precision, a report needs both truncation and computational error. For a first pass at $10^{-6}$ on this small interval, rounding is far below the certified truncation bound in ordinary double precision, but that claim should be checked if the interval, degree, or arithmetic changes.",
+        "A smooth function need not equal its infinite Taylor series. The remainder bound above succeeds for $e^x$ because its derivative growth is controlled strongly enough to force the remainder toward zero. Merely matching every derivative at one point does not give that conclusion. The distinction between constructing coefficients and proving convergence to the original function is central to using Taylor models responsibly.",
+        "To certify a whole interval, write the calculation as an inequality valid for every $x$ in it. If $|x|\\le1/2$, then $|e^x-T_N(x)|\\le e^{1/2}(1/2)^{N+1}/(N+1)!$. Testing $N$ in this bound gives a clear stopping decision. The function $e^x$ is positive and monotone, so its maximum derivative value on $[-1/2,1/2]$ is exactly $e^{1/2}$, not a guess from sample points. Replacing it by $1.649$ gives a slightly weaker but convenient numerical bound. The requested tolerance and the final bound should be reported with the same strictness convention.",
+        "A uniform Taylor bound can be reused for many evaluations. Once $T_7$ is certified on $[-1/2,1/2]$ within $10^{-6}$, each new $x$ in that interval needs only polynomial arithmetic; the proof does not have to be repeated at every point. Outside the interval, the certificate says nothing, even though the polynomial can still be evaluated. If a new range is required, either recompute the bound or choose a nearer center. This makes a Taylor model a local surrogate with a documented region of trust rather than an unrestricted replacement for the original function.",
+        "A numerical implementation can evaluate $T_N$ in Horner form to reduce multiplication count. For the exponential series, start with the highest coefficient $1/N!$ and nest backward: $\\mathrm{value}=1/k!+x\\cdot\\mathrm{value}$ for $k=N-1$ down to zero. This computes the polynomial exactly in real arithmetic and often more stably in floating point than computing each $x^k$ and $k!$ independently. The algorithm's output still has rounding error. At moderate degrees and $|x|\\le1/2$ that error is small, but a mathematically certified total error would add a floating-point bound to the Taylor truncation bound.",
+        "The degree need not be chosen by trial and error alone. The ratio of successive bound terms $B_{N+1}/B_N$ is $|x|/(N+2)$ for a fixed derivative bound $M$ in the exponential case. Once $N$ grows, this ratio rapidly becomes small, so successive degrees improve the certificate predictably. On the whole interval use $|x|\\le1/2$, giving ratio at most $1/[2(N+2)]$. This observation helps estimate how many further degrees may be needed after a near miss, while the final numerical inequality remains the actual proof of the chosen tolerance.",
+        "A certificate also depends on the precision of constants used to construct the polynomial. If a shifted Taylor model uses a measured value for $f(a)$, then uncertainty in that value affects every prediction even if the formal remainder is tiny. For the exact mathematical $e^x$ model, derivatives at zero are known exactly, so this extra source is absent. In a scientific model, report input uncertainty alongside truncation and floating-point errors. A theorem about the difference between $f$ and an exact Taylor polynomial does not automatically cover uncertainty in $f$ or its derivatives.",
+        "Use $c_k$ for the stipulated stored coefficients and let $P_c(t)=\\sum_{k=0}^n c_kt^k$. Horner starts with $b_n=c_n$ and computes $b_j=\\operatorname{fl}(\\operatorname{fl}(xb_{j+1})+c_j)$ for $j=n-1,\\ldots,0$. This is $n$ separately rounded multiplications and $n$ additions, at an exactly represented input $x$. It does not use fused multiply-add. The finite-product inequality proved in Lesson 3.3 bounds the rounding factors accumulated along each coefficient's path. The theorem below turns that operation count into a coefficient-weighted absolute error certificate.",
+        "Consider instead the dimensionless polynomial $p_0(t)=4t^2-12t+9=(2t-3)^2$, a separate target with Taylor remainder zero. Put $h=2^{-27}$ and $x=3/2+h$, both exactly represented. Its exact value is $p_0(x)=2^{-52}$. Separate Horner operations give $4x=6+2^{-25}$ and $4x-12=-6+2^{-25}$ exactly. The next exact product is $-9+2^{-52}$, which rounds to $-9$; adding $9$ returns zero. Evaluating the known factorization instead gives $2x-3=2^{-26}$ and its square $2^{-52}$ exactly. This trace describes the declared polynomial and arithmetic, not the exponential approximation's interval.",
+        "At this nonzero value, the expanded-coefficient condition number is $\\kappa_{\\mathrm{coeff}}=(4x^2+12x+9)/|p_0(x)|=162129587390644225$. Small backward error can coexist with poor relative forward accuracy. Keep three objects explicit: nominal exact coefficients $a_k$, stored coefficients $c_k$, and any unknown true coefficients specified by a data model. Known conversion bounds $|c_k-a_k|\\le\\varepsilon_k$ and physical coefficient tolerances describe different discrepancies. Count each discrepancy once. For example, replacing the uncertain family $(2t-3)^2+\\delta$ by its nominal square would discard the allowed change in the constant coefficient.",
+        "Suppose the exact nominal polynomial $p_a$ approximates $f$ with a proved remainder bound $R$ on the declared interval. Conversion and Horner arithmetic then add their own terms to that remainder, as the proof shows. The target is $f$ at the same stipulated represented input; uncertainty or conversion in its argument needs a separate bound. A numerical calculation of the certificate also needs exact arithmetic, directed rounding, or proved upper bounds. A displayed bound above the tolerance leaves that certificate insufficient; it does not establish actual inaccuracy. The optional tasks use exact rational comparisons and a separate uncertain-coefficient model."
+      ],
+      "formula": "|eˣ−T_N(x)| ≤ 1.649(1/2)^(N+1)/(N+1)! on [−1/2,1/2]; N=7 certifies error <10⁻⁶.",
+      "formulaTex": "\\begin{gathered}|e^x-T_N(x)|\\le\\frac{1.649(1/2)^{N+1}}{(N+1)!}\\quad\\left(-\\frac12\\le x\\le\\frac12\\right),\\\\ N=7:\\quad |e^x-T_7(x)|\\le\\frac{1.649(1/2)^8}{8!}<10^{-6}.\\end{gathered}",
+      "theorems": [
+        {
+          "title": "A finite Horner computation has a coefficient-weighted error bound",
+          "statement": "Let $c_0,\\ldots,c_n$ and $x$ be finite, exactly represented binary64 values, with $n\\ge0$. Evaluate $P_c(x)=\\sum_{k=0}^n c_kx^k$ by the separate Horner operations above, using round-to-nearest with ties to even and unit roundoff $u=2^{-53}$. Assume no overflow or underflow and that every nonzero exact intermediate product or sum is in the normal floating-point range. If $2nu<1$, the bound below holds. For $n=0$, assigning $c_0$ performs no arithmetic and has zero error. These hypotheses concern the stored coefficients and input; they do not identify unknown physical values.",
+          "equationTex": "\\left|\\widehat p-P_c(x)\\right|\\le\\gamma_{2n}\\sum_{k=0}^{n}|c_k||x|^k,\\qquad \\gamma_{2n}=\\frac{2nu}{1-2nu}.",
+          "proof": [
+            "For $n\\ge1$, write a multiplication's error as $\\mu_j$ and the following addition's error as $\\nu_j$. The model gives $\\widehat b_j=(x\\widehat b_{j+1}(1+\\mu_j)+c_j)(1+\\nu_j)$, where $|\\mu_j|,|\\nu_j|\\le u$. For an exactly zero result, take its error parameter to be zero. The initial assignment $\\widehat b_n=c_n$ is exact. The two operations have separate factors; a fused multiply-add would be a different model and count.",
+            "Unroll these finite recurrences. The coefficient $c_0$ has one factor. For $1\\le k<n$, the term $c_kx^k$ has $2k+1$ factors: its insertion addition and two more for each later Horner stage. The leading term $c_nx^n$ has $2n$ factors. Thus $\\widehat p=\\sum_k c_kx^k(1+\\theta_k)$ with $|\\theta_k|\\le\\gamma_{2n}$ by Lesson 3.3's finite-product inequality. No independence of the factors is required. If $n=0$, the sole factor is the empty product one.",
+            "Equivalently, $\\widehat p$ is the exact value at the same $x$ of coefficients $c_k+\\Delta c_k$, with $|\\Delta c_k|\\le\\gamma_{2n}|c_k|$. This is a coefficient backward-error statement; it does not perturb the input $x$. Subtract $P_c(x)$ and apply the triangle inequality to obtain the displayed absolute bound. For $P_c(x)\\ne0$, division gives relative bound $\\gamma_{2n}\\kappa_{\\mathrm{coeff}}$, where $\\kappa_{\\mathrm{coeff}}=\\sum_k|c_k||x|^k/|P_c(x)|$. At a zero value, use absolute error; the relative expressions are undefined.",
+            "Now let $p_a(t)=\\sum_k a_kt^k$ have exact nominal coefficients, with $|c_k-a_k|\\le\\varepsilon_k$, and suppose $|f(x)-p_a(x)|\\le R$ throughout the intended interval. For $|x|\\le r$, coefficient conversion contributes at most $\\sum_k\\varepsilon_kr^k$. Two triangle inequalities therefore give $|\\widehat p-f(x)|\\le R+\\sum_k\\varepsilon_kr^k+\\gamma_{2n}\\sum_k|c_k|r^k$, whenever this computation satisfies the arithmetic hypotheses. Each term has output units. This uses the proved remainder of the nominal polynomial and a separate conversion bound; it assumes neither is zero.",
+            "An unknown physical coefficient family is a separate target. If it has coefficients $a_k+\\delta_k$ with $|\\delta_k|\\le\\eta_k$, its value differs from the nominal value by at most $\\sum_k\\eta_k|x|^k$. When every coefficient deviation is independently allowed, both endpoints are attained by choosing each sign to agree with $x^k$ or its negative. A constant-only tolerance is a different set from independent relative changes in every coefficient. Do not count the same coefficient discrepancy once as conversion and again as physical uncertainty."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "horner-certificate",
+        "title": "Separate a Taylor certificate from its stored computation",
+        "introduction": "Use the theorem's binary64 rounding and range assumptions. Each task states its own target and coefficient provenance. These optional written tasks are outside the numbered problem bank.",
+        "tasks": [
+          {
+            "title": "A changed interval and two strict tolerances",
+            "question": "Evaluate the degree-nine exponential Taylor polynomial at stipulated represented inputs $x\\in[1/8,1/4]$. Each coefficient $c_k=\\operatorname{RN}(1/k!)$ is constructed by one correct rounding, followed by separate Horner multiplications and additions. Use $e^{1/4}<1649/1000$, $u=2^{-53}$, and $\\sum_{k=0}^9(1/k!)(1/4)^k<4/3$. Derive the displayed full certificate $C_9=R_9+76/[3(2^{53}-18)]$, where $R_9=1649/[1000\\cdot4^{10}\\cdot10!]$. Does this certificate prove each strict target $|\\widehat p_9-e^x|<2^{-41}$ and $|\\widehat p_9-e^x|<R_9+2^{-50}$? Explain what an unproved target means.",
+            "hint": "Separate the remainder, one-time coefficient conversion and eighteen rounded Horner operations. Bound the stored coefficient sum by $(1+u)4/3$, then simplify $u+\\gamma_{18}(1+u)$. Compare the exact rational bounds, preserving the strict inequalities; a failed upper-bound test need not be an actual error.",
+            "solution": "Taylor's theorem gives $R_9=1649/3805072588800000$. The coefficients satisfy $2^{-19}<c_k\\le1$. With $1/8\\le x\\le1/4$, all Horner accumulators stay positive and below $2$, so the relevant nonzero products and sums are normal and finite. There are nine multiplications and nine additions. The target is $e^x$ at this same represented input.\n\nOne correct coefficient rounding gives $|c_k-1/k!|\\le u/k!$. Hence conversion contributes at most $4u/3$, and the represented-coefficient arithmetic bound is at most $(4/3)\\gamma_{18}(1+u)$. Their sum is $(4/3)[u+\\gamma_{18}(1+u)]=76/[3(2^{53}-18)]$. Add the remainder to obtain the stated $C_9$.\n\nExact rational comparison gives $C_9<2^{-41}$, so this certificate proves the first strict target. Conversely $C_9>R_9+2^{-50}$, so it does not prove the second. Numerically $C_9\\approx4.36181433\\times10^{-13}$, but the inequalities use exact fractions. Failure of this displayed certificate does not prove actual inaccuracy; a sharper analysis may give a different conclusion."
+          },
+          {
+            "title": "One stored constant and an uncertain root set",
+            "question": "Return to the separate polynomial target $p_\\delta(t)=(2t-3)^2+\\delta$, with unknown physical $|\\delta|\\le2^{-50}$. The nominal coefficients $(9,-12,4)$ are stored exactly, so their conversion error is zero; this target has no Taylor remainder. At $x=3/2+2^{-27}$, find the sharp true-value interval. Classify the real roots for negative, zero and positive $\\delta$, then find the union of possible real-root locations and prove attainment. Does that union guarantee a root for every allowed polynomial? Explain why the stored constant remains $9$ and why factoring the nominal square does not remove this uncertainty.",
+            "hint": "Use $p_\\delta(x)=2^{-52}+\\delta$. Solve $(2t-3)^2=-\\delta$ and preserve the cases where the right side is positive, zero or negative. The spacing at $9$ is $2^{-49}$; inspect both halfway endpoints with ties-to-even. A union of possibilities is different from an existence guarantee for each model.",
+            "solution": "The value is $2^{-52}+\\delta$, so the sharp interval is $[-3\\cdot2^{-52},5\\cdot2^{-52}]$. Its endpoints use $\\delta=-2^{-50}$ and $\\delta=2^{-50}$. More accurate evaluation of the nominal polynomial leaves this physical input uncertainty.\n\nFor $\\delta<0$, the two roots are $3/2\\pm\\sqrt{-\\delta}/2$. At $\\delta=0$ there is the double root $3/2$; for $\\delta>0$ there are no real roots. The union over all admissible coefficients is the closed interval $[3/2-2^{-26},3/2+2^{-26}]$. Every offset $d$ with $|d|\\le2^{-26}$ is attained by $\\delta=-4d^2$; its endpoints use $\\delta=-2^{-50}$. This union is not a bracket guaranteeing a root for every allowed polynomial.\n\nAll true constants $9+\\delta$ round to $9$: their deviations are at most half the spacing $2^{-49}$, and both endpoint ties select $9$'s even significand. This storage fact does not add a second copy of the stipulated physical tolerance. The faithful family remains $(2t-3)^2+\\delta$. Factoring only the nominal square, or observing Horner's computed zero, does not establish a true root for every admissible model."
+          }
+        ]
+      }
+    },
+    {
+      "title": "From a coefficient rule to a function",
+      "paragraphs": [
+        "If $F(t)=\\sum_{n\\ge0}a_nt^n$ has positive radius $R$, the lesson 2 theorem permits differentiation on $|t|<R$. Reindexing $j=n-1$ in $\\sum_{n\\ge1}na_nt^{n-1}$ gives $F'(t)=\\sum_{j\\ge0}(j+1)a_{j+1}t^j$; reindexing $j=n-2$ after a second differentiation gives $F''(t)=\\sum_{j\\ge0}(j+2)(j+1)a_{j+2}t^j$. The first coefficient is a useful off-by-one check. Compare only coefficients of the same power after these shifts.",
+        "Coefficient uniqueness requires an actual convergent series on a neighborhood of its center. If it represents zero there, repeated justified differentiation gives its $n$th derivative at zero as $n!a_n=0$; apply this to the difference of two series for equality. An ODE recurrence derived by matching powers first defines a formal candidate only. Prove a positive convergence radius, justify as many derivative series as the ODE uses, then substitute and check the initial values. A formal coefficient list alone gives no function to differentiate and cannot invoke uniqueness.",
+        "For $(1-t)y'=y$ with $y(0)=1$, coefficient comparison yields $a_{n+1}=a_n=1$. The resulting geometric series represents $1/(1-t)$ only for $|t|<1$, though the rational IVP solution extends to $(-\\infty,1)$. A finite polynomial has its own residual; cancellation of low-degree coefficients or a few sampled residuals proves neither convergence nor a global solution.",
+        "Convergence must cover every operation used by the equation. A first-order ODE needs a series for the candidate and its first derivative; a second-order ODE needs the second derivative as well. Standard power-series theory gives the derivative series on each compact interval inside a positive radius. At a boundary point the interior theorem gives no permission to differentiate: the original series may converge while its derivative series diverges. Test the endpoint and justify any derivative identity separately. Establish the interval first, apply the theorem only inside it, and then verify the equation and data there.",
+        "The geometric example shows why three intervals should be named separately. The coefficient recurrence for $(1-t)y'=y$ gives $\\sum t^n$, whose centered convergence interval is $(-1,1)$. Direct rational algebra gives $y=1/(1-t)$ on the larger connected IVP interval $(-\\infty,1)$. A physical model might restrict time further to $t\\ge0$. At $t=-1$, the function value is $1/2$ but the centered series alternates and does not converge. At $t=1$, the original differential equation has a singular coefficient and the rational response blows up.",
+        "A second-order example makes every stage explicit. Seek a series solution of $y^{\\prime\\prime}+y=0$ with $y(0)=0$ and $y^{\\prime}(0)=1$. Matching the coefficient of $t^n$ formally gives $(n+2)(n+1)a_{n+2}+a_n=0$, with $a_0=0$ and $a_1=1$. The even coefficients vanish, while $a_{2k+1}=(-1)^k/(2k+1)!$. Thus the candidate is $S(t)=\\sum_{k\\ge0}(-1)^kt^{2k+1}/(2k+1)!$. For any fixed nonzero $t$, the ratio of successive absolute nonzero terms is $|t|^2/[(2k+2)(2k+3)]$, which tends to zero. At zero convergence is immediate. The radius is therefore infinite. Lesson 2 now justifies both derivative series on every closed bounded interval. Substituting the recurrence into the second derivative gives $S^{\\prime\\prime}=-S$, and the first two coefficients verify the initial data. Only after these steps is the formal candidate an actual solution.",
+        "Uniqueness in this example can also be proved with tools already available. If two $C^2$ solutions have these data on one connected interval containing zero, their difference $w$ satisfies $w^{\\prime\\prime}+w=0$, $w(0)=0$, and $w^{\\prime}(0)=0$. Differentiate $E(t)=w(t)^2+w^{\\prime}(t)^2$: the product rule gives $E^{\\prime}=2w^{\\prime}(w+w^{\\prime\\prime})=0$. The mean value theorem makes $E$ constant on that interval, and its initial value is zero. Both squares are nonnegative, so $w=0$ throughout. The usual sine function satisfies the same equation and data, identifying the constructed series with $\\sin t$. This proof distinguishes coefficient construction, convergence, valid substitution, and uniqueness; it does not assume that matching a finite number of coefficients proves an ODE solution."
+      ],
+      "formula": "If F=Σ a_n t^n has radius R>0, then F'=Σ(n+1)a_(n+1)t^n and F''=Σ(n+2)(n+1)a_(n+2)t^n for |t|<R.",
+      "formulaTex": "\\begin{gathered}F(t)=\\sum_{n=0}^{\\infty}a_nt^n\\quad(|t|<R),\\\\F'(t)=\\sum_{n=0}^{\\infty}(n+1)a_{n+1}t^n,\\quad F''(t)=\\sum_{n=0}^{\\infty}(n+2)(n+1)a_{n+2}t^n.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "An interval with unequal endpoints",
+      "problem": "Find the radius and interval of convergence of $\\sum_{n=1}^{\\infty}(x-2)^n/(n\\,3^n)$.",
+      "steps": [
+        "The successive absolute-term ratio tends to $|x-2|/3$. It is below one when $|x-2|<3$, giving $R=3$ and interior $(-1,5)$.",
+        "At $x=-1$ the series becomes $\\sum(-1)^n/n$. The magnitudes decrease to zero, so the alternating test gives convergence; the absolute series is harmonic and diverges.",
+        "At $x=5$ the series is $\\sum1/n$ and diverges. At $x=2$ all terms are zero, as expected at the center."
+      ],
+      "answer": "Radius $3$; interval $[-1,5)$. Convergence is absolute in the interior and conditional at $-1$."
+    },
+    {
+      "title": "Certifying a fourth-degree model",
+      "problem": "Approximate $e^x$ on $[-0.5,0.5]$ with its degree-four Maclaurin polynomial and certify absolute error below $0.0005$.",
+      "steps": [
+        "All derivatives at zero equal one, so $T_4(x)=1+x+x^2/2+x^3/6+x^4/24$.",
+        "The fifth derivative is $e^x$ and is at most $e^{0.5}$ throughout the interval. Every point has distance at most $0.5$ from the center.",
+        "The remainder is at most $e^{0.5}(0.5)^5/120\\approx0.0004293545$, below the requested tolerance. Even the coarse bound $e^{0.5}<1.65$ gives $0.0004296875$.",
+        "At $x=0.5$, $T_4=1.6484375$ and $e^{0.5}\\approx1.6487212707$, giving error about $0.0002837707$. This checks one point numerically; the derivative argument certifies all points."
+      ],
+      "answer": "The degree-four polynomial meets the $0.0005$ absolute tolerance across the whole specified interval."
+    },
+    {
+      "title": "Two endpoints need separate series tests",
+      "problem": "Find the interval of convergence of $\\sum_{n=1}^{\\infty}(x-2)^n/(n\\,3^n)$.",
+      "steps": [
+        "The ratio of successive absolute terms tends to $|x-2|/3$, giving radius $3$ and open interval $(-1,5)$.",
+        "At $x=5$ the series is harmonic and diverges.",
+        "At $x=-1$ it becomes $\\sum(-1)^n/n$, which converges conditionally by the alternating test."
+      ],
+      "answer": "Radius $3$; interval $[-1,5)$."
+    },
+    {
+      "title": "Differentiate the geometric identity safely",
+      "problem": "Derive a series for $1/(1-x)^2$ and state its domain.",
+      "steps": [
+        "For $|x|<1$, $1/(1-x)=\\sum_{n=0}^{\\infty}x^n$.",
+        "Termwise differentiation is valid inside the radius and gives $1/(1-x)^2=\\sum_{n=1}^{\\infty}n x^{n-1}$.",
+        "The differentiated series has the same open radius $1$; at $x=\\pm1$ its terms do not approach zero."
+      ],
+      "answer": "The stated derivative series holds for $|x|<1$."
+    },
+    {
+      "title": "Taylor coefficients for a logarithm",
+      "problem": "Find the quadratic Taylor polynomial of $\\ln x$ centered at $1$.",
+      "steps": [
+        "$f(1)=0$, $f^{\\prime}(x)=1/x$ so $f^{\\prime}(1)=1$, and $f^{\\prime\\prime}(x)=-1/x^2$ so $f^{\\prime\\prime}(1)=-1$.",
+        "Insert these coefficients into $T_2(x)=f(1)+f^{\\prime}(1)(x-1)+f^{\\prime\\prime}(1)(x-1)^2/2$.",
+        "The result is $(x-1)-(x-1)^2/2$, intended locally on $x>0$."
+      ],
+      "answer": "$T_2(x)=(x-1)-(x-1)^2/2$."
+    },
+    {
+      "title": "A uniform logarithm error bound",
+      "problem": "Bound the error of that quadratic $\\ln x$ model for every $x\\in[0.9,1.1]$.",
+      "steps": [
+        "The third derivative is $f^{\\prime\\prime\\prime}(x)=2/x^3$, so $|f^{\\prime\\prime\\prime}(x)|\\le2/(0.9)^3$ throughout the interval.",
+        "The center is $1$ and $|x-1|\\le0.1$.",
+        "Taylor's bound is $[2/(0.9)^3]\\cdot0.1^3/3!\\approx0.00045725$."
+      ],
+      "answer": "The absolute error is at most about $4.573\\times10^{-4}$ throughout the interval."
+    },
+    {
+      "title": "A zero Taylor series need not be the function",
+      "problem": "Let $f(0)=0$ and $f(x)=e^{-1/x^2}$ for $x\\ne0$. What is its Taylor series at zero, and does it represent $f$ nearby?",
+      "steps": [
+        "Every derivative at zero is zero because exponential decay dominates the powers of $1/x$ created by differentiation.",
+        "For $x\\ne0$, induction gives $f^{(n)}(x)=P_n(1/x)e^{-1/x^2}$ for a polynomial $P_n$, since differentiation preserves that form. If $f^{(n-1)}(0)=0$, its difference quotient at zero is $P_{n-1}(1/h)e^{-1/h^2}/h\\to0$: the exponential dominates every fixed power of $1/|h|$.",
+        "Every Taylor coefficient is therefore zero, so the formal series is identically zero.",
+        "For every nonzero $x$, $f(x)>0$, so the zero series does not equal $f$ on any neighborhood of zero."
+      ],
+      "answer": "Its Taylor series is zero everywhere but does not represent $f$ at nearby nonzero inputs."
+    },
+    {
+      "title": "Choose a degree from a uniform certificate",
+      "problem": "Find a sufficient Maclaurin degree for $e^x$ with absolute error below $10^{-6}$ on $[-1/2,1/2]$.",
+      "steps": [
+        "Every derivative is $e^x\\le e^{1/2}<1.649$ on the interval.",
+        "Taylor's bound is $1.649(1/2)^{N+1}/(N+1)!$.",
+        "At $N=6$ the bound is about $2.56\\times10^{-6}$; at $N=7$ it is about $1.60\\times10^{-7}$, so $N=7$ is certified."
+      ],
+      "answer": "Degree seven is a sufficient certified choice."
+    },
+    {
+      "title": "A geometric ODE series",
+      "problem": "Solve $(1-t)y'=y$, $y(0)=1$, by coefficients.",
+      "steps": [
+        "Set $y=\\sum a_nt^n$. The coefficient equation is $(n+1)a_{n+1}-na_n=a_n$, hence $a_{n+1}=a_n$.",
+        "The initial value sets every $a_n=1$. The geometric series converges only for $|t|<1$, along with its derivative series there.",
+        "Summation gives $1/(1-t)$; direct substitution verifies the ODE on that interval. The rational solution continues to $t<1$."
+      ],
+      "answer": "The centered series is $\\sum_{n\\ge0}t^n$ for $|t|<1$, representing $1/(1-t)$."
+    },
+    {
+      "title": "A convergent residual check",
+      "problem": "Construct $y'=y$, $y(0)=1$, from a power series and calculate the degree-three residual.",
+      "steps": [
+        "Coefficient comparison yields $(n+1)a_{n+1}=a_n$ with $a_0=1$, so $a_n=1/n!$.",
+        "Factorial ratios prove the series and its derivative converge on every bounded interval, giving $y=e^t$ and $y'=y$.",
+        "For $P_3=1+t+t^2/2+t^3/6$, direct differentiation gives $P_3'-P_3=-t^3/6$."
+      ],
+      "answer": "The full series is an exact solution; the finite degree-three polynomial retains residual $-t^3/6$."
+    }
+  ],
+  "misconceptions": [
+    "“A convergent Taylor series must equal its source function.” The smooth function $f(x)=e^{-1/x^2}$ for $x\\ne0$, extended by $f(0)=0$, has an everywhere-convergent zero Taylor series at zero but is positive elsewhere.",
+    "“The radius decides the endpoints.” The power series centered at zero with coefficients $1$, $1/n$, and $1/n^2$ for $n\\ge1$ all have radius one. At $x=-1$ they respectively diverge, converge conditionally, and converge absolutely.",
+    "“Adding terms always improves computed accuracy.” Truncation bounds may improve while cancellation and rounding limit the computed result."
+  ],
+  "lab": {
+    "title": "Move the center and certify a Taylor model",
+    "description": "Approximate $e^x$ on an editable dimensionless interval. Plot the function and polynomial, report a sampled maximum absolute error, and compare it with a whole-interval Lagrange bound. Choose the center within the interval; an endpoint is allowed.",
+    "code": "// Adjustable center, degree, and interval; keep these modest.\nconst center = 0;\nconst degree = 4;\nconst left = -0.5;\nconst right = 0.5;\nif (![center, left, right].every(Number.isFinite) || left >= right || center < left || center > right || Math.max(Math.abs(left), Math.abs(right)) > 10) throw new Error('Choose a finite increasing interval within [-10, 10] containing the center.');\nif (!Number.isInteger(degree) || degree < 0 || degree > 30) throw new Error('Degree must be an integer from 0 to 30.');\nfunction taylor(x) {\n  let term = Math.exp(center);\n  let sum = term;\n  for (let k = 1; k <= degree; k++) {\n    term *= (x - center) / k;\n    sum += term;\n  }\n  return sum;\n}\nlet factorial = 1;\nfor (let k = 2; k <= degree + 1; k++) factorial *= k;\nconst distance = Math.max(center - left, right - center);\nconst bound = Math.exp(right) * distance ** (degree + 1) / factorial;\nconst exactPoints = [];\nconst modelPoints = [];\nlet sampledMax = 0;\nfor (let j = 0; j <= 200; j++) {\n  const x = left + (right - left) * j / 200;\n  const exact = Math.exp(x);\n  const approx = taylor(x);\n  exactPoints.push([x, exact]);\n  modelPoints.push([x, approx]);\n  sampledMax = Math.max(sampledMax, Math.abs(exact - approx));\n}\nplot(exactPoints, 'e^x (x dimensionless)');\nplot(modelPoints, 'Taylor polynomial (x dimensionless)');\nconsole.log('center, degree:', center, degree);\nconsole.log('sampled maximum absolute error:', sampledMax);\nconsole.log('whole-interval truncation bound:', bound);\nconsole.log('right endpoint polynomial:', taylor(right));",
+    "tasks": [
+      "Before running, predict where the degree-four model centered at zero should be most accurate. Explain why it is exact at the center.",
+      "Change the degree to 2 and 6. Compare measured errors and bounds, and identify the lowest tested degree that certifies tolerance 0.0005.",
+      "Keep the interval fixed and set center = 0.4. Explain how the maximum distance used by the certificate changes. Then set left = 1.5, right = 2.5, and center = 2 together; compare the sampled error and bound with the defaults.",
+      "Try degree 30 on the original interval. Explain why a rounded sampled error may exceed a tiny truncation bound. Test an invalid center outside the interval and interpret the validation message."
+    ],
+    "expected": "Defaults produce two plots of 201 finite points. The right endpoint polynomial is 1.6484375; sampled maximum error is approximately 0.0002837707001282; the whole-interval truncation bound is approximately 0.0004293544975782. The sampled maximum is below the bound, but sampling alone is not a proof."
+  },
+  "exercises": [
+    {
+      "question": "Find the radius and interval for $\\sum_{n=1}^{\\infty} (x + 1)^n/(n^2 2^n)$.",
+      "hint": "Use the ratio test for $|x+1|<2$, then inspect $x=-3$ and $x=1$ separately.",
+      "solution": "The absolute-term ratio tends to $|x+1|/2$, so $R=2$. At $x=-3$ and $x=1$, the absolute terms are $1/n^2$ and converge. Thus the interval is $[-3,1]$, with absolute convergence at both endpoints.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the radius of $\\sum_{n=1}^{\\infty}\\frac{x^n}{n}$.",
+      "hint": "Find where the absolute-term ratio is less than $1$.",
+      "solution": "The absolute-term ratio tends to $|x|$, so convergence holds for $|x|<1$ and fails for $|x|>1$. Hence $R=1$; endpoint behavior is a separate question.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Test both endpoints of $\\sum_{n=1}^{\\infty}\\frac{x^n}{n}$.",
+      "hint": "At $x=1$ use the harmonic test; at $x=-1$ use the alternating test.",
+      "solution": "At $x=1$ the harmonic series diverges. At $x=-1$, $\\sum(-1)^n/n$ converges conditionally by the alternating test. The interval is $[-1,1)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the radius of $\\sum_{n=0}^{\\infty}n!x^n$.",
+      "hint": "Inspect the ratio for $x\\ne0$.",
+      "solution": "For $x\\ne0$, the absolute ratio is $(n+1)|x|\\to\\infty$, so terms cannot tend to zero. At $x=0$, only the first term survives. Thus $R=0$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the radius of $\\sum_{n=0}^{\\infty}\\frac{x^n}{n!}$.",
+      "hint": "Inspect the ratio for each fixed $x$.",
+      "solution": "The absolute ratio is $|x|/(n+1)\\to0$ for every fixed $x$, so the series converges for all real $x$ and $R=\\infty$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Derive the power series for $\\arctan x$ from the geometric series and justify termwise integration for every $|x|<1$. State why equality at $x=\\pm1$ requires a separate argument.",
+      "hint": "For each fixed $|x|<1$, choose $r$ with $|x|<r<1$. Use uniform convergence on the compact interval between $0$ and $x$ before integrating.",
+      "solution": "For $|t|<1$, the geometric identity gives $1/(1+t^2)=\\sum_{n=0}^{\\infty}(-1)^nt^{2n}$. Fix any $|x|<1$ and choose $r$ with $|x|<r<1$. On the compact interval between $0$ and $x$, every term has magnitude at most $r^{2n}$; the geometric majorant converges, so the series converges uniformly there and may be integrated term by term.\n\nUsing $\\int_0^x(1+t^2)^{-1}\\,dt=\\arctan x$, we obtain $\\arctan x=\\sum_{n=0}^{\\infty}(-1)^nx^{2n+1}/(2n+1)$ for every $|x|<1$. The radius is $1$. At $x=\\pm1$ the alternating series converge, but equality with $\\arctan(\\pm1)$ needs a separate limiting argument; the compact-interior proof alone does not establish it.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Differentiate $\\sum_{n=0}^{\\infty}x^n$ termwise for $|x|<1$.",
+      "hint": "Differentiate $1/(1-x)$ on $|x|<1$.",
+      "solution": "Since $\\sum_{n=0}^{\\infty}x^n=1/(1-x)$ for $|x|<1$, termwise differentiation gives $\\sum_{n=1}^{\\infty}nx^{n-1}=1/(1-x)^2$ on that open interval.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Integrate $\\sum_{n=0}^{\\infty}x^n$ from $0$ to $x$, $|x|<1$.",
+      "hint": "Integrate the geometric identity termwise from $0$ to $x$.",
+      "solution": "Termwise integration yields $\\sum_{n=0}^{\\infty}x^{n+1}/(n+1)=-\\ln(1-x)$ for $|x|<1$. Both sides vanish at $x=0$, fixing the constant.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does convergence of the integrated geometric series at $x=-1$ justify differentiating there?",
+      "hint": "Check whether the derivative series converges at $x=-1$.",
+      "solution": "No. At $x=-1$, the integrated series converges, but its formal derivative becomes $\\sum_{n=0}^{\\infty}(-1)^n$, whose terms do not tend to zero. The interior differentiation theorem gives no endpoint permission.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why does termwise differentiation preserve the open radius but not necessarily endpoint membership?",
+      "hint": "The differentiation theorem applies inside $|x-a|<R$; endpoints need separate tests.",
+      "solution": "Let $S(x)=\\sum_{n=0}^{\\infty}c_n(x-a)^n$ have radius $R$. Termwise differentiation is valid for $|x-a|<R$, so the derivative series has radius at least $R$. If it had a larger radius, integrating it termwise from $a$ and adding $c_0$ would recover the original power series on that larger interval, contradicting its radius. Thus the open radius is unchanged. Endpoint membership still needs separate tests: $\\sum_{n=0}^{\\infty}x^{n+1}/(n+1)$ converges at $x=-1$, while its derivative series $\\sum_{n=0}^{\\infty}x^n$ does not.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the quadratic Taylor polynomial of $\\ln x$ about 1.",
+      "hint": "Evaluate the first two derivatives of $\\ln x$ at $x=1$.",
+      "solution": "Since $f(1)=0$, $f^{\\prime}(1)=1$, and $f^{\\prime\\prime}(1)=-1$, the quadratic polynomial is $T_2(x)=(x-1)-(x-1)^2/2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the cubic Maclaurin polynomial of $\\sin x$.",
+      "hint": "Match derivatives of $\\sin x$ through degree $3$ at $0$.",
+      "solution": "The derivatives at $0$ give coefficients $0,1,0,-1/3!$, so $T_3(x)=x-x^3/6$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "What is the degree-four Maclaurin polynomial of $\\sin x$?",
+      "hint": "Check the coefficient of $x^4$ in the sine series.",
+      "solution": "The $x^4$ coefficient of $\\sin x$ is $0$. Hence $T_4(x)=x-x^3/6$, still matching derivatives through order $4$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is the polynomial for $\\ln x$ at $1$ not a real approximation at $x=-1$?",
+      "hint": "Check whether $\\ln(-1)$ is defined as a real value.",
+      "solution": "The polynomial has a value at $x=-1$, but the real function $\\ln x$ is undefined there; therefore no real approximation error exists at that input.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the quadratic Taylor polynomial of $\\ln x$ about $a = 1$, and bound its error on $[0.9, 1.1]$.",
+      "hint": "Use $f^{\\prime\\prime\\prime}(x)=2/x^3$ and its maximum on $[0.9,1.1]$.",
+      "solution": "The Taylor polynomial is $T_2(x)=(x-1)-(x-1)^2/2$. On $[0.9,1.1]$, $|f^{\\prime\\prime\\prime}(x)|=2/x^3\\le2/(0.9)^3$. Since $|x-1|\\le0.1$, the error is at most $[2/(0.9)^3](0.1)^3/6\\approx0.0004572474$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "A proposed certificate claims that $x-x^3/6$ approximates $\\sin x$ to within $0.000084$ on $[-0.4,0.4]$. Is the claim true?",
+      "hint": "At $x=2/5$, use the alternating sine series. Bound the positive remainder below by its first omitted term minus the next one, then compare exact fractions.",
+      "solution": "At $x=2/5$, the error $\\sin x-(x-x^3/6)$ is positive. The omitted alternating terms $x^5/5!,x^7/7!,\\ldots$ decrease strictly to zero, so the alternating-series bounds give the strict lower bound $\\sin x-(x-x^3/6)>x^5/5!-x^7/7!=2092/24609375$.\n\nThat rational bound exceeds the proposed $84/1000000$ by exactly $397/393750000>0$. Hence the uniform certificate is false already at $x=2/5$. The approximate error $0.00008500898$ illustrates the size, but the strict rational comparison proves the counterexample.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Use Taylor’s theorem to bound the error of $T_3(x)=x-x^3/6$ for $\\sin x$ on $|x|\\le 0.2$.",
+      "hint": "Bound the fourth derivative on $|x|\\le0.2$.",
+      "solution": "The fourth derivative is $\\sin x$, with magnitude at most $1$. Taylor’s theorem gives $|R_3(x)|\\le|x|^4/4!\\le0.2^4/24=1/15000\\approx0.0000667$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use the integral remainder to bound the degree-two Taylor error for $f(x)=e^x$ at $a=0$ on $|x|\\le 1/4$.",
+      "hint": "Bound $f^{\\prime\\prime\\prime}$ on $[-1/4,1/4]$ and use $|x|^3/3!$.",
+      "solution": "On $[-1/4,1/4]$, $f^{\\prime\\prime\\prime}(x)=e^x\\le e^{1/4}$. The integral remainder bound gives $|e^x-(1+x+x^2/2)|\\le e^{1/4}|x|^3/3!\\le e^{1/4}/384\\approx0.003344$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $T_2(x)=(x-1)-(x-1)^2/2$ be the quadratic Taylor polynomial of $\\ln x$ centered at $1$. Bound $|\\ln x-T_2(x)|$ uniformly on $[0.9,1.1]$.",
+      "hint": "Use $|f^{\\prime\\prime\\prime}(x)|\\le2/(0.9)^3$.",
+      "solution": "On the entire interval $[0.9,1.1]$, the third derivative satisfies $|f^{\\prime\\prime\\prime}(x)|=2/x^3\\le2/(0.9)^3$. The largest distance from the center is $0.1$, so Taylor’s bound gives $|R_2(x)|\\le[2/(0.9)^3](0.1)^3/6\\approx0.00045725$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Bound the degree-three $\\sin x$ error for $|x|\\le 0.2$ using a fourth-derivative bound.",
+      "hint": "Bound the fourth derivative by $1$.",
+      "solution": "Because $|f^{(4)}(x)|=|\\sin x|\\le1$, Taylor’s theorem yields $|R_3(x)|\\le0.2^4/4!\\approx0.00006667$ throughout the interval.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "On $|x|\\le0.2$, can treating $x-x^3/6$ as the degree-four Maclaurin polynomial of $\\sin x$ give a sharper Taylor bound than treating it as degree three?",
+      "hint": "The fourth coefficient vanishes; use the fifth derivative to bound $R_4$.",
+      "solution": "Yes. Although $T_4=T_3$, the fifth derivative has magnitude at most $1$, giving $|R_4(x)|\\le0.2^5/5!\\approx0.000002667$ for $|x|\\le0.2$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "If a Taylor upper bound exceeds $\\varepsilon$, does that prove actual error exceeds $\\varepsilon$?",
+      "hint": "Write what the upper-bound inequality guarantees, then consider a smaller possible actual error.",
+      "solution": "No. If an upper bound exceeds $\\varepsilon$, the certificate is insufficient; the actual error may still be below $\\varepsilon$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "If every derivative of a smooth function is zero at zero, must the function vanish near zero? What additional assumption would make the conclusion valid?",
+      "hint": "Distinguish zero Taylor coefficients from equality with the function.",
+      "solution": "No. The smooth function $f(0)=0$ and $f(x)=e^{-1/x^2}$ for $x\\ne0$ has every derivative zero at $0$, yet $f(x)>0$ elsewhere. Analyticity at $0$ would force equality with its zero Taylor series on a neighborhood.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(x)=e^{-1/x^2}$ away from zero and $f(0)=0$, what are its Taylor coefficients at zero?",
+      "hint": "Find all derivatives at $0$ before forming coefficients.",
+      "solution": "All derivatives $f^{(n)}(0)$ vanish, so every Taylor coefficient $f^{(n)}(0)/n!$ is $0$ and the Taylor series is identically zero.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(0)=0$ and $f(x)=e^{-1/x^2}$ for $x\\ne0$. Does its zero Taylor series at $0$ equal $f$ on any neighborhood of $0$?",
+      "hint": "Compare the zero series with $f(x)$ for $x\\ne0$.",
+      "solution": "No. The Taylor series is zero because every derivative at $0$ vanishes, but $f(x)=e^{-1/x^2}>0$ for $x\\ne0$. It agrees with the function only at the center.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What additional property ensures a function equals its Taylor series locally?",
+      "hint": "Name the property that guarantees local equality with a Taylor series.",
+      "solution": "Analyticity at the center means that the function equals its convergent Taylor series on some neighborhood. Smoothness alone gives no such equality.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $T_N(x)=\\sum_{k=0}^{N}x^k/k!$ be the degree-$N$ Maclaurin polynomial of $e^x$. Find a degree $N$ that certifies $|e^x-T_N(x)|<10^{-4}$ for every $|x|\\le1/2$.",
+      "hint": "Use $e^x\\le e^{1/2}<1.649$ and compare consecutive factorial bounds.",
+      "solution": "A uniform bound is $|e^x-T_N(x)|\\le1.649(1/2)^{N+1}/(N+1)!$. For $N=4$ this is about $0.0004294$; for $N=5$ it is about $0.0000358<10^{-4}$. Thus degree $5$ suffices. The failed degree-$4$ bound does not prove its actual error is too large.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $T_N(x)=\\sum_{k=0}^{N}x^k/k!$ be the degree-$N$ Maclaurin polynomial of $e^x$. State a uniform bound for $|e^x-T_N(x)|$ on $|x|\\le1/2$.",
+      "hint": "Bound every derivative by $e^{1/2}$ over the interval.",
+      "solution": "Every derivative is $e^x\\le e^{1/2}$ on $[-1/2,1/2]$. Hence $|e^x-T_N(x)|\\le e^{1/2}(1/2)^{N+1}/(N+1)!$ uniformly.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A small-angle sensor replaces $\\sin x$ by the cubic Taylor model $x-x^3/6$ for $|x|\\le 0.2$ radians. Certify a uniform error bound using the next nonzero term and decide whether the model meets a $3\\times10^{-6}$ tolerance.",
+      "hint": "Use the first omitted sine magnitude $|x|^5/5!$ on this interval.",
+      "solution": "For $|x|\\le0.2$, the omitted sine terms alternate in decreasing magnitude, so $|\\sin x-(x-x^3/6)|\\le|x|^5/5!\\le0.2^5/120\\approx2.67\\times10^{-6}<3\\times10^{-6}$. Thus the model meets the tolerance when angles are in radians.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "Why must a Maclaurin bound for $e^x$ on $[2,3]$ cover $[0,3]$?",
+      "hint": "The remainder connects center $0$ to each $x\\in[2,3]$.",
+      "solution": "The remainder derivative is evaluated between the Maclaurin center $0$ and each $x\\in[2,3]$. The union of those connecting intervals is $[0,3]$, so the derivative bound must hold there.",
+      "lesson": 6,
+      "type": "Proof"
+    }
+  ],
+  "summary": [
+    "A power series has a symmetric open interval of absolute convergence; each finite endpoint requires a separate test.",
+    "Termwise differentiation and integration preserve the radius, with endpoint behavior checked again.",
+    "Taylor coefficients match derivatives; derivative bounds certify finite polynomial approximations.",
+    "A smooth function need not equal its Taylor series, and sampled error does not establish a uniform certificate."
+  ],
+  "next": "Chapter 18 applies differentiation and integration to parametric and polar curves. Taylor models remain useful for approximating those curves locally and understanding small-angle geometric behavior."
+}

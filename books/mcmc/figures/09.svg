@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title desc"><title id="title">Metropolis–Hastings balances accepted probability flow</title><desc id="desc">For two states with target probabilities 0.8 and 0.2, proposals q(B|A)=0.6 and q(A|B)=0.4 have unequal proposed flows 0.48 and 0.08. Acceptance makes both accepted flows 0.08.</desc><rect width="960" height="560" fill="#fafbf9"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#233445"/></marker></defs>
+<text x="35.00" y="43.00" fill="#233445" font-family="system-ui,sans-serif" font-size="25" text-anchor="start">Metropolis–Hastings balances accepted probability flow</text>
+<text x="65.00" y="175.00" fill="#235e91" font-family="system-ui,sans-serif" font-size="22" text-anchor="start">A → B</text>
+<text x="65.00" y="315.00" fill="#087f7b" font-family="system-ui,sans-serif" font-size="22" text-anchor="start">B → A</text>
+<rect x="200" y="135" width="576" height="55" rx="5" fill="#c9dceb"/>
+<rect x="200" y="275" width="96" height="55" rx="5" fill="#c7e4df"/>
+<rect x="200" y="198" width="96" height="38" rx="5" fill="#235e91"/>
+<rect x="200" y="338" width="96" height="38" rx="5" fill="#087f7b"/>
+<text x="805.00" y="170.00" fill="#233445" font-family="system-ui,sans-serif" font-size="20" text-anchor="start">0.48</text>
+<text x="325.00" y="310.00" fill="#233445" font-family="system-ui,sans-serif" font-size="20" text-anchor="start">0.08</text>
+<text x="325.00" y="225.00" fill="#235e91" font-family="system-ui,sans-serif" font-size="19" text-anchor="start">accepted 0.08; α(A,B) = 1/6</text>
+<text x="325.00" y="365.00" fill="#087f7b" font-family="system-ui,sans-serif" font-size="19" text-anchor="start">accepted 0.08; α(B,A) = 1</text>
+<text x="200.00" y="105.00" fill="#233445" font-family="system-ui,sans-serif" font-size="18" text-anchor="start">light bars: proposed stationary flow π(x)q(y|x)</text>
+<text x="45.00" y="509.00" fill="#233445" font-family="system-ui,sans-serif" font-size="17" text-anchor="start">Acceptance uses the reverse proposal: α(x,y) = min{1, π(y)q(x|y) / [π(x)q(y|x)]}.</text>
+<text x="45.00" y="537.00" fill="#233445" font-family="system-ui,sans-serif" font-size="16" text-anchor="start"></text></svg>

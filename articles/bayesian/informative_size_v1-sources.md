@@ -1,0 +1,9 @@
+# Sources for informative group size and prediction targets
+
+[Jaakko Nevalainen, Somnath Datta and Hannu Oja, Inference on the marginal distribution of clustered data with informative cluster size](https://arxiv.org/pdf/1803.01175), definition 1, section 2 and section 3.1. The inspected author PDF contains 30 pages. Section 2 begins on PDF page 4 and formulates a joint model of group size and outcomes. Section 3.1, PDF pages 9–12, distinguishes the mean obtained by giving groups equal influence from statistics that weight larger groups more. Example 4 discusses the pooled mean relative to a typical-group target. It does not assert that every ratio of expectations is wrong for every target.
+
+The paper's model uses independent random clusters. This extension instead fixes four groups under each of two possible persistent compositions. Its ticket mechanism, exact Bayesian posterior, finite covariance identity, redraw-per-proposal comparison and changed logged-sequence exercises are derived here. The primary source supplies a conceptual framework, rather than these local numerical results. The distinction between an expectation of a population ratio and a ratio of expected totals is proved for each stated experiment.
+
+The existing [hierarchical chapter](../../books/bayesian/09_hierarchical.md) already flags informative group size, selection mechanisms and different future group/member targets. This additive lesson develops a distinct finite observation mechanism, preserving that core material and the other extensions.
+
+Primary passages inspected 2026-10-20. The displayed risks are known future Bernoulli means, not fixed observed proportions. The study-time estimate and task progression have not been evaluated with learners; the source does not establish instructional effectiveness for this module.

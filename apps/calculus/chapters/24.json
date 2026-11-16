@@ -1,0 +1,479 @@
+{
+  "id": "24",
+  "title": "Change of variables and probability",
+  "subtitle": "How can a change of coordinates simplify both a region and the probability distributed over it?",
+  "prerequisites": [
+    "Chapter 23: double and triple integrals, iterated integration, and mass.",
+    "Chapter 21: derivative matrices and Jacobians.",
+    "Chapters 2 and 18: trigonometry, polar coordinates, and parameter bounds."
+  ],
+  "objectives": [
+    "Transform an integrand and its domain together, including the absolute Jacobian determinant.",
+    "Choose polar, cylindrical, or spherical coordinates from geometry and state their conventions.",
+    "Normalize a joint density, compute probabilities, derive marginals, and evaluate expectations.",
+    "Compare numerical integrals against an exact normalization and explain geometric discretization error."
+  ],
+  "sections": [
+    {
+      "title": "1. A new coordinate grid changes area",
+      "paragraphs": [
+        "An integral combines two ingredients: the value being accumulated and the size of each small piece. Rewriting $x$ and $y$ in terms of $u$ and $v$ changes both. Imagine drawing a rectangular grid on a rubber sheet and stretching it into the region of interest. Equal rectangles on the original sheet may become unequal parallelograms. Substituting new formulas into the integrand without changing the area element would count these unequal pieces as though they were still equal.",
+        "Let $T(u,v)=(x(u,v),y(u,v))$. Its derivative matrix has columns $T_u$ and $T_v$. Near a point, a parameter rectangle with side lengths $\\Delta u$ and $\\Delta v$ becomes approximately the parallelogram spanned by $T_u\\Delta u$ and $T_v\\Delta v$. Its area is $|x_u y_v-x_v y_u|\\,\\Delta u\\,\\Delta v$. The determinant $J=x_u y_v-x_v y_u$ can be negative when the map reverses orientation; geometric area remains nonnegative, so an ordinary double integral uses $|J|$.",
+        "A standard change-of-variables theorem assumes a continuously differentiable, one-to-one map between the interiors of suitable bounded regions, with nonzero determinant there, and an integrable transformed integrand; continuity of the original integrand on the image closure is a convenient sufficient assumption in regular examples. Piecewise smooth boundaries are adequate here. Coordinate seams and isolated degeneracies can be handled by splitting regions or removing sets of area zero and taking limits. A singular integrand still requires an integrability check: a coordinate change does not automatically make an improper integral converge.",
+        "On a compact regular parameter piece where $T$ is $C^1$, one-to-one, and $J\\ne0$, divide it into small cells. The derivative approximation makes each image-cell area approach $|J(u_i,v_i)|\\Delta u_i\\Delta v_i$; continuity controls the total area error and the variation of $f$ inside each image cell. One-to-one coverage counts each cell once, so the sums approach the transformed integral. Seams, degeneracies, and unbounded integrands require separate limiting checks. For example, $T(u,v)=(u+u^2,v)$ maps $[0,1]^2$ onto $[0,2]\\times[0,1]$ with $J=1+2u$. Here $\\iint_D x\\,dA=2=\\int_0^1\\int_0^1(u+u^2)(1+2u)\\,dv\\,du$; omitting $J$ gives $5/6$. This explains the regular case rather than proving a formula for unrestricted maps.",
+        "The transformed domain is $E=\\{(u,v):T(u,v)\\in D\\}$, with parameter restrictions that avoid repeated coverage. Determine $E$ by translating every boundary and inequality, rather than merely copying the old bounds. For example, $x=2u$ and $y=-3v$ map the unit square $0\\le u,v\\le1$ to $0\\le x\\le2$, $-3\\le y\\le0$. The determinant is $-6$, but the image has area $6$. If a map covers the same region twice, the usual integral over its entire parameter domain counts the contribution twice.",
+        "Orientation and physical area must be separated. The map $(u,v)\\mapsto(2u,3v)$ sends a unit square to a rectangle of area $6$ with determinant $6$; $(u,v)\\mapsto(2u,-3v)$ also gives area $6$ but determinant $-6$. Hence ordinary area and mass use $|J|$, while the sign records orientation for later vector-calculus integrals.",
+        "A nonzero determinant checks local area scale but does not guarantee global one-to-one coverage. The polar map over $0\\le\\theta\\le4\\pi$ counts most of a disk twice even though its determinant $r$ is correct at $r>0$. Restrict the angle to one full turn, apart from its zero-area seam, or account for multiplicity. The later polar lesson develops this domain choice; the local Jacobian alone cannot decide it.",
+        "An affine shear illustrates that visual distortion does not always change area. Let $T(u,v)=(u+v,v)$. Its derivative has determinant $1$. The unit square $E=[0,1]^2$ becomes a slanted parallelogram $D$, but its base and height are both $1$, so area remains $1$. A change-of-variables calculation gives $\\iint_D 1\\,dA=\\int_0^1\\!\\int_0^1 1\\,dv\\,du=1$. Looking only at the slanted side length might suggest a larger area; the determinant accounts for the angle between transformed coordinate directions as well as their lengths.",
+        "The transformed domain must be described before integration. For $T(u,v)=(2u,3v)$, the ellipse $x^2/4+y^2/9\\le1$ becomes $u^2+v^2\\le1$, while its integrand $f(x,y)=x^2+y^2$ becomes $f(T(u,v))=4u^2+9v^2$. The area factor is $|J|=6$. Copying the ellipse equation without substituting the coordinate map would integrate over the wrong parameter set. In less symmetric problems, drawing both the physical and parameter regions helps track which boundaries become constants and which remain curves.",
+        "At a point where the determinant vanishes, the linearized image of a small parameter square has zero area to first order. Polar coordinates at $r=0$ have this property because changing angle at the origin changes no Cartesian point. Many useful coordinate formulas allow such exceptional sets of area zero, but one should not divide by the determinant there or claim a local inverse exists at the singular point. The precise theorem handles interior regularity and harmless boundary exceptions; computations should state the range that gives almost-everywhere one-to-one coverage.",
+        "A practical verification uses an easy integrand first. If a proposed transformation of a region $D$ yields an area different from a known geometric area when $f=1$, then either the new domain, determinant, or coverage is wrong. Only after that check should a difficult transformed integrand be trusted. Similarly, units provide a check: if $u$ and $v$ are dimensionless and $x,y$ are metres, the Jacobian has units $\\mathrm{m}^2$. Multiplying by $du\\,dv$ then restores a physical area element. The determinant is not an optional decoration of the formula.",
+        "A transformation can have a variable determinant, so one local scale factor cannot be pulled out of the whole integral. For $T(u,v)=(u^2,v)$ on $0\\le u\\le1$, $0\\le v\\le1$, the Jacobian is $2u$. The image is again the unit square, and $\\int_0^1\\!\\int_0^1 2u\\,dv\\,du=1$, matching its area. Using the endpoint value $2$ or midpoint value $1$ as a global factor would be unjustified, even though the midpoint happens to give the correct area here. For a nonconstant integrand such coincidences disappear. At $u=0$ the determinant vanishes, but that boundary line has zero area and does not prevent this area calculation.",
+        "The Jacobian factor is local area or volume scaling, so it belongs in the transformed measure even when the integrand is a probability density. In polar coordinates a small coordinate rectangle has approximate sides $dr$ and $r\\,d\\theta$, giving area $r\\,dr\\,d\\theta$. A density $p(x,y)$ therefore becomes $p(r\\cos\\theta,r\\sin\\theta)r$ in the polar integral; omitting $r$ changes both normalization and expected values. The polar map is many-to-one at the origin and periodic in angle, so choose an angular interval that covers the region once, apart from boundary overlap of area zero. A probability answer offers an independent check: total mass should equal $1$, and the expected value of a bounded quantity must lie between its smallest and largest values on the support. These checks do not replace the Jacobian derivation, but they catch many setup errors."
+      ],
+      "formula": "∬_D f(x,y) dA = ∬_E f(x(u,v),y(u,v)) |∂(x,y)/∂(u,v)| du dv.",
+      "formulaTex": "\\iint_D f(x,y)\\,dA=\\iint_E f(x(u,v),y(u,v))\\,|J(u,v)|\\,du\\,dv",
+      "theorems": [
+        {
+          "title": "The polar Jacobian is an area scale",
+          "statement": "The change $(r,\\theta)\\mapsto(r\\cos\\theta,r\\sin\\theta)$ multiplies local parameter area by $r$ when $r\\ge0$.",
+          "equationTex": "\\left|\\frac{\\partial(x,y)}{\\partial(r,\\theta)}\\right|=\\left|\\begin{matrix}\\cos\\theta&-r\\sin\\theta\\\\\\sin\\theta&r\\cos\\theta\\end{matrix}\\right|=r",
+          "proof": [
+            "Differentiate $x=r\\cos\\theta$ and $y=r\\sin\\theta$ with respect to the two new variables. The radial column is $(\\cos\\theta,\\sin\\theta)$; the angular column is $(-r\\sin\\theta,r\\cos\\theta)$. Their determinant is $r(\\cos^2\\theta+\\sin^2\\theta)=r$. The two columns are perpendicular, with lengths one and $r$, so the determinant agrees with the small-parallelogram area picture.",
+            "A small cell of width $dr$ and angle $d\\theta$ therefore corresponds approximately to physical area $r\\,dr\\,d\\theta$. Near the origin the angular direction collapses, which is why the Jacobian is zero at $r=0$. A standard polar integral handles that single point by continuity or an improper limit where needed. On $r\\ge0$ the absolute determinant is simply $r$; using negative radii without accounting for overlapping representation can double count a region.",
+            "For the radius-$R$ disk, integrate one to check: $\\int_0^{2\\pi}\\int_0^R r\\,dr\\,d\\theta=\\pi R^2$. Omitting the Jacobian would yield $2\\pi R$, a length-scale expression rather than area. Units and the familiar disk formula both expose the error."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Polar coordinates organize circular regions",
+      "paragraphs": [
+        "Polar coordinates use $x=r\\cos\\theta$ and $y=r\\sin\\theta$, with $r\\ge0$ and $\\theta$ measured in radians. The derivative columns are $(\\cos\\theta,\\sin\\theta)$ and $(-r\\sin\\theta,r\\cos\\theta)$; their determinant is $r$. Consequently $dA=r\\,dr\\,d\\theta$. A sector of thickness $dr$ and angular width $d\\theta$ has approximate area $dr$ times the arc length $r\\,d\\theta$, giving the same factor geometrically. Equal angular steps sweep wider pieces farther from the origin.",
+        "The disk $x^2+y^2\\le R^2$ with $R\\ge0$ becomes $0\\le r\\le R$ and $0\\le\\theta<2\\pi$. The missing endpoint of the angular interval is only a seam; including it in integral bounds changes no area, although we do not interpret it as a second copy of that radial line. At $r=0$ every angle represents the origin and the Jacobian vanishes. This degeneracy is harmless for bounded integrands because the origin has area zero. An annular sector $a\\le r\\le b$, $\\alpha\\le\\theta\\le\\beta$ is especially simple, but a shifted disk may need variable radial bounds or several pieces.",
+        "For a less automatic example, $x^2+y^2\\le2x$ becomes $r^2\\le2r\\cos\\theta$. Taking $-\\pi/2\\le\\theta\\le\\pi/2$ gives $0\\le r\\le2\\cos\\theta$. These bounds describe the disk centered at $(1,0)$ of radius $1$ exactly once, apart from boundary coincidences. Allowing the same radial expression for every angle would produce negative upper bounds and would cease to describe the intended region.",
+        "Coordinates are a choice of description, not a change in the quantity being measured. Over a centered disk, a function of $x^2+y^2$ becomes a function of $r^2$, so both the geometry and integrand simplify. Conversely, a rectangle with a function depending only on $x$ may be easier in Cartesian coordinates. Before calculating, inspect the region and the integrand separately and decide whether the proposed substitution improves both.",
+        "The polar radius is nonnegative; allowing negative $r$ duplicates points unless the angular interval is adjusted. For example, $(r,\\theta)$ and $(-r,\\theta+\\pi)$ map to the same Cartesian location. The usual choice $r\\ge0$ and $\\theta$ in one full $2\\pi$ interval avoids this duplication except at the angular seam and origin. When a problem describes angles using degrees, convert to radians before integrating: a $90^\\circ$ sector has width $\\pi/2$ radians, rather than $90$ radians. The Jacobian $r$ assumes $\\theta$ is measured in radians.",
+        "For an annulus $a\\le\\sqrt{x^2+y^2}\\le b$ with $0\\le a\\le b$, area is $\\int_0^{2\\pi}\\!\\int_a^b r\\,dr\\,d\\theta=\\pi(b^2-a^2)$. A common error is to integrate $dr\\,d\\theta$ and obtain $2\\pi(b-a)$, which has length rather than area units. If instead $a\\le x^2+y^2\\le b$ with $0\\le a\\le b$, the radii are $\\sqrt a$ and $\\sqrt b$, not $a$ and $b$. Translate every inequality into $r$ carefully and inspect units before evaluating.",
+        "The shifted disk $x^2+y^2\\le2x$ from paragraph 3 has angular range $-\\pi/2\\le\\theta\\le\\pi/2$ and radial cap $2\\cos\\theta$. Its area checks the setup: $\\int_{-\\pi/2}^{\\pi/2}\\int_0^{2\\cos\\theta}r\\,dr\\,d\\theta=\\pi$, matching the radius-one disk centered at $(1,0)$. This calculation checks the $r$ factor and bounds without treating the shifted disk as a centered one.",
+        "For a radial integrand $f(x,y)=g(x^2+y^2)$, a radius-$R$ disk integral becomes $2\\pi\\int_0^R g(r^2)r\\,dr$. Setting $u=r^2$ gives $\\pi\\int_0^{R^2}g(u)\\,du$. This reduction explains why Gaussian-shaped densities are naturally normalized in polar coordinates. If the region is only a sector, replace $2\\pi$ by its angular width when the integrand remains radial. If the integrand depends on $\\theta$, the angular part cannot simply be factored out.",
+        "A ring makes the sampling distinction measurable. In a disk of radius $R>0$, a uniform radius gives $P(r\\le s)=s/R$, but uniform area gives $P(r\\le s)=\\pi s^2/(\\pi R^2)=s^2/R^2$ for $0\\le s\\le R$. At $s=R/2$ these are $1/2$ and $1/4$. The ring from $R/2$ to $R$ therefore receives $1/2$ of uniform-radius samples but $3/4$ of uniform-area samples. This exact area ratio explains the outer-ring crowding difference before any finite scatterplot is read.",
+        "To sample uniformly by area, take $U$ uniform on $[0,1]$, set $r=R\\sqrt U$, and choose an independent angle uniformly on one full turn. Then $P(r\\le s)=P(U\\le s^2/R^2)=s^2/R^2$. Equal-area rings have equal probabilities, while equal-width rings do not. A plot can illustrate this calculation, but only the area law establishes it for every radius."
+      ],
+      "formula": "∬_(x²+y²≤R²) g(x²+y²) dA = ∫₀²π ∫₀ᴿ g(r²) r dr dθ.",
+      "formulaTex": "\\begin{gathered}\nR\\ge0,\\qquad D=\\{(x,y):x^2+y^2\\le R^2\\},\\\\\n\\iint_D g(x^2+y^2)\\,dA\n=\\int_0^{2\\pi}\\!\\int_0^R g(r^2)r\\,dr\\,d\\theta\n\\quad\\text{if }g(x^2+y^2)\\text{ is integrable on }D.\n\\end{gathered}"
+    },
+    {
+      "title": "3. Cylindrical and spherical volume elements",
+      "paragraphs": [
+        "Cylindrical coordinates retain height: $x=r\\cos\\theta$, $y=r\\sin\\theta$, $z=z$. The volume factor is $r$, so $dV=r\\,dr\\,d\\theta\\,dz$, with the integration order adjusted to the chosen bounds. For a cylinder of radius $R$ and height $H$, the bounds $0\\le r\\le R$, $0\\le\\theta\\le2\\pi$, $0\\le z\\le H$ yield volume $\\pi R^2H$. A solid below $z=4-x^2-y^2$ and above $z=0$ instead uses $0\\le z\\le4-r^2$, $0\\le r\\le2$, and $0\\le\\theta\\le2\\pi$. The curved top becomes a simple limit on height.",
+        "We use spherical coordinates $\\rho\\ge0$, azimuth $0\\le\\theta<2\\pi$, and polar angle $0\\le\\phi\\le\\pi$ measured down from the positive $z$-axis. Then $x=\\rho\\sin\\phi\\cos\\theta$, $y=\\rho\\sin\\phi\\sin\\theta$, and $z=\\rho\\cos\\phi$. Other texts interchange the angle names, so the defining formulas matter more than the symbols. The volume factor is $\\rho^2\\sin\\phi$. One small box has approximate edge lengths $d\\rho$, $\\rho\\,d\\phi$, and $\\rho\\sin\\phi\\,d\\theta$, which explains why the factor shrinks near the polar axis.",
+        "A ball of radius $a\\ge0$ becomes $0\\le\\rho\\le a$ with the full angular ranges $0\\le\\phi\\le\\pi$ and $0\\le\\theta\\le2\\pi$. Integrating $\\rho^2\\sin\\phi$ gives $(a^3/3)(2)(2\\pi)=4\\pi a^3/3$. The upper hemisphere changes the polar-angle range to $0\\le\\phi\\le\\pi/2$. A cone about the positive $z$-axis often becomes an upper bound $\\phi\\le\\phi_0$, while spherical shells become bounds on $\\rho$. Carefully distinguish the cylindrical radius $r$, distance from the $z$-axis, from the spherical radius $\\rho$, distance from the origin: $r=\\rho\\sin\\phi$.",
+        "When lengths are in metres, $dA$ has units $\\mathrm{m}^2$ and $dV$ has units $\\mathrm{m}^3$; angles in radians are dimensionless. Multiplying a volume density in $\\mathrm{kg}/\\mathrm{m}^3$ by the spherical volume element produces mass in $\\mathrm{kg}$. The coordinate axes, angular seams, and origin are exceptional sets of volume zero, but a density that blows up near them may still make the total mass infinite. For example, $\\rho^{-p}$ near the origin gives a radial integral proportional to $\\int_0^a\\rho^{2-p}\\,d\\rho$, finite exactly when $p<3$ for $a>0$.",
+        "Cylindrical coordinates are useful when the $xy$ projection is circular but height bounds are simple. A solid inside $x^2+y^2\\le4$ and between $z=0$ and $z=3$ has volume $\\int_0^{2\\pi}\\!\\int_0^2\\!\\int_0^3 r\\,dz\\,dr\\,d\\theta=12\\pi$. If the top is $z=4-r^2$, the $z$ integral gives the variable height $4-r^2$. The $r$ factor still comes from horizontal area scaling; the vertical coordinate is unchanged. Writing all three bounds before integrating helps prevent a missing or duplicated $r$.",
+        "Spherical coordinates use two angular factors for distinct geometric reasons. At radius $\\rho$, an angular change $d\\phi$ traces length approximately $\\rho\\,d\\phi$. At polar angle $\\phi$, an azimuth change $d\\theta$ traces length approximately $\\rho\\sin\\phi\\,d\\theta$. Multiplying these with radial thickness $d\\rho$ gives $\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta$. Near the polar axis $\\sin\\phi$ tends to zero because azimuthal circles shrink. This geometric derivation makes the volume element easier to remember than a bare determinant formula.",
+        "The convention for $\\phi$ matters. Here $\\phi$ is measured down from the positive $z$-axis, so the upper hemisphere has $0\\le\\phi\\le\\pi/2$ and the lower has $\\pi/2\\le\\phi\\le\\pi$. Some physics texts call the azimuth $\\phi$ instead. A formula copied across conventions can place a cone or hemisphere in the wrong region while still producing a plausible volume. Always write $x,y,z$ in terms of the coordinates beside the bounds, especially when comparing sources or software libraries.",
+        "For a cone about the positive $z$-axis with half-angle $\\alpha$ satisfying $0\\le\\alpha\\le\\pi/2$, the interior points inside a radius-$a$ ball, $a\\ge0$, have $0\\le\\rho\\le a$, $0\\le\\phi\\le\\alpha$, and $0\\le\\theta\\le2\\pi$. Their volume is $\\frac{2\\pi a^3}{3}(1-\\cos\\alpha)$. At $\\alpha=\\pi/2$ this is half the ball volume; as $\\alpha\\to0$ it tends to zero. These endpoint checks validate the angular integration. If the cone has a finite height rather than a spherical cap, the $\\rho$ upper bound depends on $\\phi$ and must be derived from the plane cutting it.",
+        "Radial power integrals in three dimensions have a threshold set by $\\rho^2$. A density behaving like $\\rho^{-p}$ near the origin contributes approximately $\\int_0^a\\rho^{2-p}\\,d\\rho$ for $a>0$, finite exactly when $p<3$. The corresponding two-dimensional threshold was $p<2$ because the area element carries one power of radius. This is a dimensional pattern: in $n$ dimensions, a radial shell contributes $r^{n-1}\\,dr$. The threshold holds when the region contains a full neighborhood of the origin or a cone with a fixed positive solid angle. A cusp whose angular width shrinks toward the origin can change the available volume and hence the threshold.",
+        "The spherical map has coordinate singularities at $\\rho=0$ and on the polar axis, where angles cease to identify unique directions. These sets have zero volume in ordinary ball integrals, so the formula still computes volume correctly. They are not evidence that the physical ball has a hole or an infinite density. When transforming vector fields or derivatives, however, singular coordinate denominators require more care than a scalar volume calculation. Keep the distinction between a chart singularity and a singular integrand.",
+        "To integrate a radial function over a ball of radius $a\\ge0$, separate the angular contribution before attacking the radial antiderivative. Under this convention, $\\int_0^{2\\pi}d\\theta=2\\pi$ and $\\int_0^\\pi\\sin\\phi\\,d\\phi=2$, giving an angular factor $4\\pi$. Thus $\\iiint_{\\rho\\le a}g(\\rho)\\,dV=4\\pi\\int_0^a g(\\rho)\\rho^2\\,d\\rho$. If $g$ is a mass density, the result has mass units after the volume factor is included. For a shell $0\\le b\\le\\rho\\le a$, change only the radial limits. For a cap or cone, the angular limits must also change; reusing $4\\pi$ there would integrate over the full sphere."
+      ],
+      "formula": "Cylindrical: dV = r dr dθ dz. Spherical: dV = ρ² sin φ dρ dφ dθ.",
+      "formulaTex": "\\begin{gathered}\n\\text{Cylindrical:}\\quad dV=r\\,dr\\,d\\theta\\,dz\n\\quad(r\\ge0,\\ 0\\le\\theta<2\\pi),\\\\\n\\text{Spherical:}\\quad dV=\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta\n\\quad(\\rho\\ge0,\\ 0\\le\\phi\\le\\pi,\\ 0\\le\\theta<2\\pi),\\\\\nr=\\rho\\sin\\phi,\\qquad z=\\rho\\cos\\phi.\n\\end{gathered}"
+    },
+    {
+      "title": "4. Probability is mass with total amount one",
+      "paragraphs": [
+        "When a random pair $(X,Y)$ has a joint probability density $f(x,y)$, that density is nonnegative almost everywhere and its integral over the plane equals $1$. Probability in a region $A$ is $\\iint_A f\\,dA$. The density itself is not a probability: its value may exceed $1$, and changing its value at a single point does not change any probability. For a pair with a joint density, an individual point has probability zero even though observations must land somewhere. Only integrated density gives the probability of an event.",
+        "To normalize a proposed shape $h\\ge0$, calculate $Z=\\iint_{\\mathbb R^2}h\\,dA$ and set $f=h/Z$ if $0<Z<\\infty$. If $Z=0$ or $Z=\\infty$, no finite positive constant can turn that shape into a density. The support, the region outside which the density is zero, is part of the model. If $X$ and $Y$ are lengths in metres, the joint density has units $\\mathrm{m}^{-2}$, so its area integral is dimensionless. A normalization constant therefore may carry units.",
+        "The marginal density of $X$ is $f_X(x)=\\int_{\\mathbb R}f(x,y)\\,dy$, integrating over all allowed $y$ at that $x$. It describes $X$ without recording $Y$. Its bounds generally depend on $x$ when the support is not rectangular. Similarly, $f_Y(y)=\\int_{\\mathbb R}f(x,y)\\,dx$. Nonnegativity permits iterated integration by Tonelli’s theorem, and normalization ensures the marginals integrate to one. Independence requires the factorization $f(x,y)=f_X(x)f_Y(y)$ almost everywhere; symmetry alone does not establish it.",
+        "Expectation weights a quantity by probability: $\\mathbb E[g(X,Y)]=\\iint_{\\mathbb R^2}g(x,y)f(x,y)\\,dA$. For a signed $g$, absolute integrability is a sufficient condition for a finite expectation and free exchange of integration order. The mean position has coordinates $\\mathbb E[X]$ and $\\mathbb E[Y]$, exactly like the center of mass of a lamina of total mass one. Expected distance from the origin is $\\mathbb E[\\sqrt{X^2+Y^2}]$, which is generally different from the distance $\\sqrt{\\mathbb E[X]^2+\\mathbb E[Y]^2}$ of the mean position.",
+        "If $(X,Y)=T(U,V)$, the density in parameter coordinates is $f_{U,V}(u,v)=f_{X,Y}(T(u,v))|J_T(u,v)|$ when the map covers the support once. Thus a uniform distribution over a disk is not uniform in radius. For disk radius $R>0$, the radial density is $f_r(r)=2r/R^2$ on $0\\le r\\le R$: outer annuli contain more area. Probability is preserved by a coordinate change, while the numerical density changes to compensate for the new grid.",
+        "A density can exceed one at a point because probability is an integral over area. For a uniform distribution on a tiny square of area $0.01$ square units, the density is $100$ per square unit, and the total probability is still one. The probability of any individual point is zero for an ordinary continuous density. These facts prevent the common mistake of reading the height of a density plot as a direct probability. A valid density must be nonnegative almost everywhere and integrate to one over its support.",
+        "Marginals and conditionals answer different questions. The marginal $f_X(x)$ integrates out $y$ across all allowed values, giving the distribution of $X$ alone. If $f_X(x)>0$, the conditional density of $Y$ given $X=x$ is $f(x,y)/f_X(x)$ on the allowed $y$ slice. This ratio normalizes to one along that slice. For triangular support, the permitted $y$ interval changes with $x$; pretending it is a fixed rectangle can produce a conditional density that does not integrate to one.",
+        "Independence is a factorization property: $f(x,y)=f_X(x)f_Y(y)$ almost everywhere on the plane. Zero covariance by itself does not establish independence. A uniform distribution on a disk is rotationally symmetric and has $\\mathbb E[X]=\\mathbb E[Y]=\\mathbb E[XY]=0$, hence zero covariance, but $X$ and $Y$ are dependent because a large $|X|$ leaves little room for $|Y|$. The circular support makes that dependence visible. This example connects geometry of the domain with probability structure.",
+        "For a uniform disk of radius $R>0$, planar density is $1/(\\pi R^2)$ inside the disk. The radial cumulative distribution is $P(\\text{radius}\\le r)=r^2/R^2$ for $0\\le r\\le R$, so the radial density is $2r/R^2$. Consequently $\\mathbb E[r]=\\int_0^R r(2r/R^2)\\,dr=2R/3$. The mean radius is larger than $R/2$ because outer rings occupy more area. This calculation also shows why a radial histogram should be compared with $2r/R^2$ rather than with a flat line.",
+        "Expected value is a weighted integral, so it can fail to exist even for a normalized density. A probability law may put increasingly small mass far from the origin in a way that leaves total mass one but makes $\\iint_{\\mathbb R^2}|x|f(x,y)\\,dA$ diverge. For a signed quantity, positive and negative parts could both be infinite, making a formal cancellation meaningless. Before swapping integration order or reporting a mean, check an integrability condition. The normalization of $f$ alone controls $\\iint_{\\mathbb R^2}f\\,dA$, not every weighted integral.",
+        "A coordinate transformation of random variables needs the same coverage audit as an ordinary integral. If $T$ maps parameter values to physical points more than once, a single inverse-branch formula is insufficient; contributions from inverse branches must be summed. Polar coordinates avoid almost-everywhere duplication by fixing $r\\ge0$ and one full angle interval. The Jacobian then converts between planar and radial-angular densities. A density in $(r,\\theta)$ coordinates is not numerically the same function as the planar density evaluated at $(r\\cos\\theta,r\\sin\\theta)$.",
+        "Conditional distributions require normalization on the selected slice. For the triangular density $f(x,y)=6x$ on $0\\le x\\le1$, $0\\le y\\le1-x$, the marginal is $f_X(x)=6x(1-x)$. At a fixed $0<x<1$, the conditional density of $Y$ given $X=x$ is $f/f_X=1/(1-x)$ for $0\\le y\\le1-x$. Hence $Y$ given $X=x$ is uniform on an interval whose length shrinks as $x$ grows. Its conditional mean is $(1-x)/2$. This calculation makes the dependence between $X$ and $Y$ explicit: knowing a large $X$ restricts the possible $Y$ values, even though the joint formula $6x$ has no $y$ factor inside its support.",
+        "The coverage warning above has a constructive answer. Divide the source into disjoint regions on which the transformation has an inverse, transform each region's probability, and add the contributions wherever their images overlap. Different branches can have different image regions and different source densities. A single global multiplicity factor generally cannot replace this calculation. The branch formula below concerns a source with an ordinary planar density; it does not assume that every transformation preserves the existence of such a density.",
+        "For a fold $(u,v)\\mapsto(u^2,v)$, the two inverses use $u=\\sqrt x$ and $u=-\\sqrt x$. A source inequality involving $u$ produces a different permitted $y$ range on each branch. Each contribution must be set to zero outside its own image before the contributions are added. The line $u=0$ has zero source probability for a planar density, so it can be excluded from the regular branches. An inverse density can grow without bound near the fold while remaining integrable; that growth does not by itself create a point mass.",
+        "Always check transformed probabilities against source events: $P(T(U,V)\\in B)=P((U,V)\\in T^{-1}(B))$. Total mass one is necessary but does not identify the correct law. Dropping a branch loses probability. Rescaling the remaining contribution to integrate to one generally conditions on the retained branch; it does not restore the omitted outcomes. The first optional task has unequal branch masses and a joint event for which this normalization repair gives the wrong answer.",
+        "A collapsed region changes the question. Under $(u,v)\\mapsto(\\max(0,u^2-1),v)$, the whole strip $-1<u<1$ maps to a vertical line. If that strip has positive source probability, it cannot be discarded as an exceptional set. The image law then has probability on an area-zero line and cannot be represented entirely by an ordinary planar density. Its first-coordinate marginal can have a point atom, even though every individual joint point still has probability zero. The second task separates this line-supported mass from the regular area contribution; no division by a zero Jacobian is used."
+      ],
+      "formula": "P((X,Y) ∈ A) = ∬_A f dA; f_X(x) = ∫ f(x,y) dy; E[g(X,Y)] = ∬ g f dA.",
+      "formulaTex": "\\begin{gathered}\nf\\ge0,\\qquad\\iint_{\\mathbb R^2}f(x,y)\\,dA=1,\\\\\nP((X,Y)\\in A)=\\iint_A f(x,y)\\,dA,\\\\\nf_X(x)=\\int_{\\mathbb R}f(x,y)\\,dy,\\\\\n\\mathbb E[g(X,Y)]=\\iint_{\\mathbb R^2}g(x,y)f(x,y)\\,dA,\\\\\n\\text{provided }\\iint_{\\mathbb R^2}|g(x,y)|f(x,y)\\,dA<\\infty.\n\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Adding regular inverse branches preserves every event probability",
+          "statement": "Let $(U,V)$ have ordinary planar density $q\\ge0$ with integral $1$, and let $T:\\mathbb R^2\\to\\mathbb R^2$ be measurable. Suppose finitely many pairwise disjoint open regions $D_1,\\ldots,D_m$ cover source probability one. On each $D_i$, require $T_i=T|_{D_i}$ to be a $C^1$ diffeomorphism onto its open image $E_i$, with nonzero Jacobian determinant. Then the output has the density below, defined almost everywhere. Each summand is zero outside its own $E_i$; overlapping images add distinct source probabilities.",
+          "equationTex": "\\begin{gathered}\ng(w)=\\sum_{i=1}^{m}g_i(w),\\\\\ng_i(w)=q(T_i^{-1}(w))\\,|\\det DT_i^{-1}(w)|\n\\quad(w\\in E_i),\\\\\ng_i(w)=0\\quad(w\\notin E_i).\n\\end{gathered}",
+          "proof": [
+            "For a measurable output event $B$, split its source preimage among the disjoint $D_i$. The omitted source region has probability zero by hypothesis, so finite additivity gives $P(T(U,V)\\in B)=\\sum_i\\int_{D_i\\cap T^{-1}(B)}q(z)\\,dz$. This step counts source outcomes once even when their images overlap.",
+            "On branch $i$, the ordinary change-of-variables theorem gives $\\int_{D_i\\cap T^{-1}(B)}q(z)\\,dz=\\int_{B\\cap E_i}q(T_i^{-1}(w))|\\det DT_i^{-1}(w)|\\,dw$. Apply the theorem for a nonnegative integrable density; no continuity of $q$ at its support boundary is required. The inverse and its determinant are used only inside that branch's regular image.",
+            "Adding these integrals yields $P(T(U,V)\\in B)=\\int_Bg(w)\\,dw$. Taking $B=\\mathbb R^2$ proves normalization. Density values on area-zero sets may be chosen arbitrarily. The result is a sufficient finite-branch theorem, not a claim that a nonzero local Jacobian alone guarantees global coverage.",
+            "A source set of area zero has probability zero because the source has a planar density. More generally, the hypothesis asks for zero source probability of the omitted set. A region with positive probability cannot be excluded merely because its image has area zero. The collapsed-map task violates precisely this premise and therefore requires an additional line-supported contribution."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "transformed-probability",
+        "title": "Where transformed probability goes",
+        "introduction": "Use the same normalized, dimensionless source model in both tasks: $q(u,v)=(u+1)/3$ on $-1\\le u\\le2$, $0\\le v\\le(u+1)/3$, and zero elsewhere. First derive its marginal $f_U(u)=(u+1)^2/9$ and check total mass. Then change the transformation while keeping the source law fixed. The tasks ask for probabilities and written arguments, not a density-height reading or a simulation.",
+        "tasks": [
+          {
+            "title": "A folded map with unequal branch images",
+            "question": "Set $(X,Y)=(U^2,V)$. Derive the output density with each inverse branch's image restrictions, check both branch masses, and calculate $P(X\\le1,Y\\le1/6)$. A proposed shortcut keeps only the positive-$u$ branch and then renormalizes it. Find its raw and renormalized answers for this event and explain what law the rescaling describes. Does the fold create probability at $X=0$?",
+            "hint": "Split the source at $u=0$, solve $u=\\pm\\sqrt x$, and transport the bound on $v$ separately for the two inverses. For the event, also work directly in the source: compare the caps $(u+1)/3$ and $1/6$ on $-1\\le u\\le1$. Locate their crossing before integrating.",
+            "solution": "Write $s=\\sqrt x$. On $E_+=\\{0<x<4,\\ 0<y<(1+s)/3\\}$ the positive contribution is $g_+=(1+s)/(6s)$; set it to zero elsewhere. On $E_-=\\{0<x<1,\\ 0<y<(1-s)/3\\}$ the negative contribution is $g_-=(1-s)/(6s)$; set it to zero elsewhere. The density is $g=g_++g_-$. On the overlap it is $1/(3\\sqrt x)$. Boundary values are immaterial.\n\nThe branch masses are $\\int_0^2(u+1)^2/9\\,du=26/27$ and $\\int_{-1}^0(u+1)^2/9\\,du=1/27$, so their sum is one. Direct integration over the event preimage gives $\\int_{-1}^{-1/2}(u+1)^2/9\\,du+\\int_{-1/2}^{1}(u+1)/18\\,du=1/216+5/48=47/432$.\n\nThe positive branch alone gives $\\int_0^1(u+1)/18\\,du=1/12$. Renormalizing gives $(27/26)(1/12)=9/104$, the conditional probability given $U>0$, not the original event probability. Doubling that branch would instead give total mass $52/27$. Finally, $P(X=0)=P(U=0)=0$; the integrable density singularity is not an atom."
+          },
+          {
+            "title": "Change the map and retain the collapsed mass",
+            "question": "Replace the map by $(S,W)=(\\max(0,U^2-1),V)$. Find the probability carried by $S=0$ and its distribution along that vertical line. Find the regular planar contribution for $S>0$ and check that both contributions sum to one. Can the complete joint law have an ordinary planar density? Does any individual joint point have positive probability? Derive the marginal CDF of $S$ and compare $P(S\\le5/4)$ with $P(0<S\\le5/4)$.",
+            "hint": "Identify the full preimage of $S=0$ before using a Jacobian. For fixed $0<w<2/3$, the plateau allows $3w-1<u<1$; integrate $q(u,w)$ there. For $s>0$ only $u=\\sqrt{s+1}>1$ remains. Obtain the marginal CDF from the source event $\\max(0,U^2-1)\\le s$, including its jump at zero.",
+            "solution": "The plateau $-1\\le U\\le1$ has probability $\\int_{-1}^1(u+1)^2/9\\,du=8/27$. Along $S=0$, its line density is $m(w)=\\int_{3w-1}^{1}(u+1)/3\\,du=(4-9w^2)/6$ for $0<w<2/3$, and zero elsewhere. Integrating $m$ gives $8/27$.\n\nFor $s>0$, put $t=\\sqrt{s+1}$. The regular contribution is $r(s,w)=(1+t)/(6t)$ on $0<s<3$, $0<w<(1+t)/3$, and zero elsewhere. Its mass is $19/27$. For an event $B$, add its area integral of $r$ to $\\int_0^{2/3}\\mathbf1_B(0,w)m(w)\\,dw$. The area contribution alone is a subdensity, not a normalized law.\n\nThe vertical segment has area zero but probability $8/27$, so no ordinary planar density represents the whole joint law. Every joint point still has probability zero: its preimage is contained in a line $V=w$, which has zero source probability. The $S$ marginal, however, has an atom $8/27$ at zero.\n\nIts CDF is $F_S(s)=0$ for $s<0$, $F_S(s)=(1+\\sqrt{s+1})^3/27$ for $0\\le s\\le3$, and $F_S(s)=1$ for $s>3$. Thus $P(S\\le5/4)=125/216$, while $P(0<S\\le5/4)=61/216$. The kink lines $U=\\pm1$ have zero probability; the positive-probability plateau is the obstruction to the finite-branch theorem."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Polar coordinates normalize a radial probability density",
+      "paragraphs": [
+        "Suppose a two-dimensional random position has a density proportional to $e^{-(x^2+y^2)}$ on the whole plane, with dimensionless coordinates. Write $p(x,y)=C e^{-(x^2+y^2)}$. To find $C$, the total probability must equal $1$. In polar coordinates $x^2+y^2=r^2$, and the area element is $r\\,dr\\,d\\theta$. Therefore $1=C\\int_0^{2\\pi}\\int_0^\\infty e^{-r^2}r\\,dr\\,d\\theta$. Substitution $u=r^2$ gives $\\int_0^\\infty e^{-r^2}r\\,dr=1/2$, so the full integral is $C\\pi$. Hence $C=1/\\pi$.",
+        "The Jacobian factor $r$ is essential. Without it, the radial integral would be $\\int_0^\\infty e^{-r^2}\\,dr$, a different quantity, and the resulting constant would not normalize the proposed density on the plane. Geometrically, rings farther from the center contain more area per unit radial thickness. Density decreases with $r$ while ring area grows with $r$, and the probability of a ring balances both effects.",
+        "The probability of landing inside radius $R\\ge0$ is $P(r\\le R)=\\int_0^{2\\pi}\\!\\int_0^R \\pi^{-1}e^{-r^2}r\\,dr\\,d\\theta=1-e^{-R^2}$. This result has the expected endpoint behavior: it is zero at $R=0$, increases with $R$, and approaches one as $R\\to\\infty$. Differentiating the cumulative probability gives the radial density $p_R(r)=2r e^{-r^2}$ for $r\\ge0$. It is not equal to the planar density at the point $(r,0)$; the radial density includes the circumference factor from all points at distance $r$.",
+        "The radius containing half the probability solves $1-e^{-R^2}=1/2$, hence $R=\\sqrt{\\ln2}$. This is a quantile of distance, not a coordinate median. If $x$ and $y$ carried length units, the exponent would need a positive length scale $\\sigma>0$, for example $-(x^2+y^2)/\\sigma^2$, and the normalizing constant would carry reciprocal area units. Dimensional consistency is part of the probability model, not a cosmetic detail.",
+        "This calculation provides three independent checks for a proposed density: nonnegativity, total integral one, and a cumulative probability bounded between zero and one. A numerical grid can approximate these integrals on a finite square, but it omits an infinite tail whose size must be bounded or estimated.",
+        "The cumulative radius law $P(r\\le R)=1-e^{-R^2}$ yields tail probability $P(r>R)=e^{-R^2}$ for $R\\ge0$. At $R=2$ the tail is $e^{-4}\\approx0.0183$. The same expression is the exact probability omitted when a polar numerical integration truncates the infinite plane at radius $R$. Thus a finite computation can include an analytic error bound for its missing tail. A square cutoff has a different geometry and requires a different bound; do not use the disk-tail formula for a square without relating the regions.",
+        "The radial density $p_R(r)=2r e^{-r^2}$ for $r\\ge0$ begins at zero, rises, and then falls. Its derivative is $p_R^{\\prime}(r)=2e^{-r^2}(1-2r^2)$, so its mode occurs at $r=1/\\sqrt2$. This is distinct from the median radius $\\sqrt{\\ln2}$, and from the mean radius, which requires another integral. Each statistic answers a different question. The planar density is largest at the origin, yet the most likely thin radial ring lies away from the origin because rings have growing circumference.",
+        "The scaled model $p(x,y)=(\\pi\\sigma^2)^{-1}e^{-(x^2+y^2)/\\sigma^2}$ has $\\sigma>0$ in length units. Its radial cumulative law is $P(r\\le R)=1-e^{-R^2/\\sigma^2}$ for $R\\ge0$; its median radius is $\\sigma\\sqrt{\\ln2}$, and its radial mode is $\\sigma/\\sqrt2$. A larger $\\sigma$ spreads the same total probability over a larger area, so the density peak falls as $1/\\sigma^2$. This scale check catches a missing $\\sigma$ in the normalizing constant or exponent. The original dimensionless example is the special case $\\sigma=1$.",
+        "The $x$ and $y$ marginals in the Gaussian-shaped radial model are equal by symmetry. Their product also reconstructs the joint density, so the coordinates are independent in this particular model. That conclusion uses an actual factorization, not symmetry alone; the uniform disk was symmetric but dependent. One can verify factorization by writing $e^{-(x^2+y^2)}=e^{-x^2}e^{-y^2}$ and splitting the normalizing constant as $1/\\pi=(1/\\sqrt\\pi)^2$. This comparison shows why the shape of level sets alone does not decide independence: support and normalization matter.",
+        "A Monte Carlo check can sample $U$ uniformly on $(0,1)$ and set radius $R=\\sqrt{-\\ln(1-U)}$; then $P(R\\le r)=1-e^{-r^2}$ for $r\\ge0$. Pair it with an independent angle uniformly distributed over $[0,2\\pi)$. The resulting points have the desired planar density. A histogram of radii should follow $2r e^{-r^2}$, while a two-dimensional density plot should peak at the center. Comparing both views is a stronger simulation check than inspecting one scatterplot. Finite samples fluctuate, so numerical agreement supports rather than proves the analytic model.",
+        "Finally, normalization can be checked with nested regions. The probability inside radius $R$ rises monotonically from zero to one, and the tail falls from one to zero. If a derived cumulative formula decreases anywhere or exceeds one, either the Jacobian, bounds, or constant is wrong. Differentiating $F(R)=P(r\\le R)$ returns a nonnegative radial density that integrates to one. These independent checks form a compact audit of the entire calculation and are useful for more complicated radial laws as well.",
+        "The radial cumulative law is also a calibration curve: to choose a radius containing a target probability $q$ with $0<q<1$ and scale $\\sigma>0$, solve $q=1-e^{-R^2/\\sigma^2}$. The result $R=\\sigma\\sqrt{-\\ln(1-q)}$ grows without bound as $q$ approaches one. This makes explicit why no finite disk contains all the probability of the infinite-support model, even though increasingly large disks capture arbitrarily much of it."
+      ],
+      "formula": "p(x,y)=π⁻¹e^{−(x²+y²)}; P(r≤R)=1−e^{−R²}; p_R(r)=2r e^{−r²}.",
+      "formulaTex": "\\begin{aligned}\np(x,y)&=\\pi^{-1}e^{-(x^2+y^2)}\n&&((x,y)\\in\\mathbb R^2\\text{ dimensionless}),\\\\\nP(r\\le R)&=1-e^{-R^2}&&(R\\ge0),\\\\\np_R(r)&=2r e^{-r^2}&&(r\\ge0).\n\\end{aligned}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Normalize a radial density and analyze distance",
+      "problem": "On the unit disk, let $f(x,y)=c(x^2+y^2)$, and set $f=0$ outside. Coordinates are dimensionless. Find $c$, $P(R\\le1/2)$, $E[R]$, and $E[X]$, where $R=\\sqrt{X^2+Y^2}$.",
+      "steps": [
+        "The proposed shape is nonnegative and bounded on a finite disk. In polar coordinates its total integral is $c\\int_0^{2\\pi}\\int_0^1r^3\\,dr\\,d\\theta=c\\pi/2$. Normalization therefore requires $c=2/\\pi$.",
+        "Integrating the angular coordinate gives the radial density $f_R(r)=(2/\\pi)r^2\\cdot r\\cdot2\\pi=4r^3$ for $0\\le r\\le1$. Its integral is $1$, an independent normalization check.",
+        "$P(R\\le1/2)=\\int_0^{1/2}4r^3\\,dr=1/16$. Although the inner disk occupies one quarter of the area, the model puts less density near its center.",
+        "$E[R]=\\int_0^1r\\cdot4r^3\\,dr=4/5$. Reflection across the $y$-axis changes the sign of $x$ but preserves the disk and density, so $E[X]=0$; similarly $E[Y]=0$. The mean position is the origin even though the mean distance is $0.8$."
+      ],
+      "answer": "$c=2/\\pi$; $P(R\\le1/2)=0.0625$; $E[R]=0.8$; $E[X]=0$. The lab checks normalization by two grids."
+    },
+    {
+      "title": "Marginals on a triangular support",
+      "problem": "Let $f(x,y)=c$ on $0\\le y\\le x\\le1$ and zero elsewhere. Normalize $f$, find $f_X$, and compute $E[X]$. Are $X$ and $Y$ independent?",
+      "steps": [
+        "The triangle has area $1/2$, so $c=2$. For fixed $x$ between $0$ and $1$, $y$ ranges from $0$ to $x$. Thus $f_X(x)=\\int_0^x2\\,dy=2x$, and $f_X$ is zero elsewhere.",
+        "For fixed $y$ between $0$ and $1$, $x$ ranges from $y$ to $1$. Thus $f_Y(y)=2(1-y)$. Both marginals integrate to $1$.",
+        "$E[X]=\\int_0^1x(2x)\\,dx=2/3$. Likewise $E[Y]=\\int_0^12y(1-y)\\,dy=1/3$, consistent with the triangle lying below $y=x$.",
+        "They are not independent: when $0<x<y<1$, the joint density is zero while the product $4x(1-y)$ is positive. The support restriction links the two variables even though the density is constant on its triangle."
+      ],
+      "answer": "$c=2$; $f_X(x)=2x$ on $[0,1]$; $E[X]=2/3$. $X$ and $Y$ are dependent."
+    },
+    {
+      "title": "An area-preserving shear",
+      "problem": "Map the unit square by $T(u,v)=(u+v,v)$. Find the area of its image.",
+      "steps": [
+        "The derivative matrix has columns $(1,0)$ and $(1,1)$, with determinant $1$.",
+        "The transformed square is a parallelogram covered once.",
+        "Integrate $|\\det J_T|=1$ over the unit square."
+      ],
+      "answer": "The image area is $1$ despite the shear."
+    },
+    {
+      "title": "A disk shifted off the polar origin",
+      "problem": "Find the area of $x^2+y^2\\le2x$ using polar coordinates.",
+      "steps": [
+        "The disk is centered at $(1,0)$ with radius one. In polar form $0\\le r\\le2\\cos\\theta$ for $-\\pi/2\\le\\theta\\le\\pi/2$.",
+        "Integrate $r$ first: $(1/2)(2\\cos\\theta)^2=2\\cos^2\\theta$.",
+        "Integrate over the angle interval to get $\\pi$."
+      ],
+      "answer": "The area is $\\pi$."
+    },
+    {
+      "title": "Volume within a spherical cone",
+      "problem": "Find volume inside $\\rho\\le a$ and $0\\le\\phi\\le\\pi/3$ under the stated spherical convention, with $a>0$.",
+      "steps": [
+        "Use $dV=\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta$ with $0\\le\\theta\\le2\\pi$.",
+        "The radial integral is $a^3/3$ and the polar-angle integral is $1-\\cos(\\pi/3)=1/2$.",
+        "Multiply by $2\\pi$."
+      ],
+      "answer": "The volume is $\\pi a^3/3$."
+    },
+    {
+      "title": "Radial law of a uniform disk",
+      "problem": "A point is uniform in a radius-$3$ disk. Find $P(r\\le1)$ and $E[r]$.",
+      "steps": [
+        "The cumulative area fraction at radius one is $1^2/3^2=1/9$.",
+        "The radial density is $2r/9$ for $0\\le r\\le3$.",
+        "Integrate $r(2r/9)$ from zero to three to get $2$."
+      ],
+      "answer": "$P(r\\le1)=1/9$ and mean radius is $2$."
+    },
+    {
+      "title": "A triangular joint density",
+      "problem": "Let $f(x,y)=6x$ on $0\\le y\\le1-x$, $0\\le x\\le1$. Find $f_X(x)$ and $E[X]$.",
+      "steps": [
+        "Integrate over $y$: $f_X(x)=6x(1-x)$ for $0\\le x\\le1$.",
+        "Its integral is $6(1/2-1/3)=1$.",
+        "$E[X]=\\int_0^1x\\cdot6x(1-x)\\,dx=6(1/3-1/4)=1/2$."
+      ],
+      "answer": "$f_X(x)=6x(1-x)$ on $[0,1]$ and $E[X]=1/2$."
+    },
+    {
+      "title": "Mode, median, and tail",
+      "problem": "For planar density $\\pi^{-1}e^{-r^2}$, find the radial mode, median, and $P(r>2)$.",
+      "steps": [
+        "A ring gives $f_R(r)=2\\pi r\\cdot\\pi^{-1}e^{-r^2}=2re^{-r^2}$ for $r\\ge0$.",
+        "$f_R^{\\prime}(r)=2e^{-r^2}(1-2r^2)$ is positive before $1/\\sqrt2$ and negative after, so this is the radial mode.",
+        "$F_R(R)=\\int_0^R2re^{-r^2}\\,dr=1-e^{-R^2}$. Solve $F_R(R)=1/2$ for the median and use $1-F_R(2)=e^{-4}$ for the tail."
+      ],
+      "answer": "Mode $1/\\sqrt2$; median $\\sqrt{\\ln2}$; tail $e^{-4}$."
+    }
+  ],
+  "misconceptions": [
+    "“The Jacobian can be negative, so the area can be negative.” Ordinary area and volume integrals use its absolute value; the sign records orientation.",
+    "“Uniform angle and uniform radius produce a uniform disk.” For a disk of radius $R>0$, uniform area requires radial density $2r/R^2$ for $0\\le r\\le R$, because outer annuli have more area.",
+    "“A density must stay below 1.” Its integral over a region is a probability; a density can exceed 1 on a small enough support."
+  ],
+  "lab": {
+    "title": "Compare Cartesian and polar integration",
+    "description": "Integrate the normalized density $p(x,y)=c(x^2+y^2)$ on the disk $x^2+y^2\\le R^2$, where $R$ is edited as radius and $c=2/(\\pi R^4)$. The Cartesian and polar midpoint grids use coordinates scaled by $R$, so their computed estimates do not vary with radius. The plot shows approximation versus grid size, and the console gives absolute errors relative to the exact target $1$.",
+    "code": "// Adjust radius and grid sizes; keep each grid at most 400 by 400.\nconst radius = 1;\nconst sizes = [10, 20, 40, 80, 160];\nif (!(radius > 0 && radius <= 10)) throw new Error('Use radius in (0, 10].');\nif (!Array.isArray(sizes) || sizes.length < 1 || sizes.length > 2000) throw new Error('sizes must contain 1 to 2000 grids.');\n// Scale coordinates by radius before summing; the radius cancels analytically.\nconst cartesian = [];\nconst polar = [];\nfor (const n of sizes) {\n  if (!Number.isInteger(n) || n < 2 || n > 400) throw new Error('Grid sizes must be integers from 2 to 400.');\n  const h = 2 / n;\n  let squareSum = 0;\n  for (let i = 0; i < n; i++) {\n    const x = -1 + (i + 0.5) * h;\n    for (let j = 0; j < n; j++) {\n      const y = -1 + (j + 0.5) * h;\n      const r2 = x*x + y*y;\n      if (r2 <= 1) squareSum += 8 * r2 / (Math.PI * n*n);\n    }\n  }\n  const dr = 1 / n;\n  let polarSum = 0;\n  for (let i = 0; i < n; i++) {\n    const r = (i + 0.5) * dr;\n    for (let j = 0; j < n; j++) {\n      // Density times Jacobian times parameter-cell area.\n      polarSum += 4 * r ** 3 / (n*n);\n    }\n  }\n  cartesian.push([n, squareSum]);\n  polar.push([n, polarSum]);\n  console.log('n', n, 'Cartesian', squareSum.toFixed(8), 'polar', polarSum.toFixed(8), 'absolute errors', Math.abs(squareSum-1).toFixed(8), Math.abs(polarSum-1).toFixed(8));\n}\nif (sizes.length >= 2) {\n  plot(cartesian, 'Cartesian estimate; x = cells per side, y = total probability');\n  plot(polar, 'Polar estimate; x = cells per coordinate, y = total probability');\n  plot(sizes.map(n => [n, 1]), 'Exact normalization = 1');\n} else console.log('Only one grid: refinement plots need at least two points.');",
+    "tasks": [
+      "Before running, predict which coordinate grid makes the circular boundary a constant coordinate bound and whether every refinement must reduce the Cartesian absolute error.",
+      "Change radius to 2. Derive how the physical normalization constant $c$ changes, and explain why the exact target and both printed estimates stay the same even though the disk doubles in radius.",
+      "Temporarily replace r ** 3 with r ** 2 in the polarSum summand, leaving the rest of the code unchanged. At radius=1, explain why the polar estimates approach $4/3$ instead of $1$; then restore r ** 3. Which geometric area factor did this edit remove?",
+      "Compare polar absolute errors at grid sizes $n$ and $2n$. Determine their ratio using midpoint quadrature for $r^3$, and explain why this calculation does not prove convergence for arbitrary densities."
+    ],
+    "expected": "For radius=1, polar estimates at $n=10,20,40,80,160$ are $0.995$, $0.99875$, $0.9996875$, $0.999921875$, and $0.99998046875$, up to rounding. The exact midpoint formula is $P_n=1-1/(2n^2)$. Cartesian estimates also approach $1$, but sampling a disk within a square grid introduces boundary error, so their absolute errors need not decrease at every refinement. Scaling to the unit disk makes all reported estimates independent of radius throughout the allowed range $0<R\\le10$ and avoids forming tiny powers of radius."
+  },
+  "exercises": [
+    {
+      "question": "Find the area of the ellipse $x^2/9+y^2/4\\le1$ using a change of variables.",
+      "hint": "Scale the unit disk by $x=3u$ and $y=2v$.",
+      "solution": "The transformed domain is $u^2+v^2\\le1$, and the absolute Jacobian determinant is $6$. Thus the ellipse area is $\\iint_{u^2+v^2\\le1}6\\,du\\,dv=6\\pi$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Explain why using $0\\le\\theta\\le4\\pi$ in a polar integral over a disk doubles its value, despite using the correct Jacobian.",
+      "hint": "Count how many parameter pairs represent a typical disk point.",
+      "solution": "Over $0\\le\\theta\\le4\\pi$, a typical disk point is represented twice. The polar Jacobian $r$ handles local area scale, but not repeated global coverage. Splitting into two full turns gives two copies of the intended integral.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the Jacobian determinant of $T(u,v)=(2u,-3v)$.",
+      "hint": "Differentiate both coordinate outputs.",
+      "solution": "The Jacobian matrix is $\\begin{pmatrix}2&0\\\\0&-3\\end{pmatrix}$, so its determinant is $-6$. The area scale is the absolute value, $6$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the Jacobian determinant of $T(u,v)=(u+v,v)$.",
+      "hint": "Differentiate both coordinate outputs.",
+      "solution": "The Jacobian matrix is $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$, whose determinant is $1$. Thus the shear preserves area.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does $0\\le\\theta\\le4\\pi$ double a disk integral?",
+      "hint": "Check global coverage as well as local scaling.",
+      "solution": "Most disk points are represented twice when $\\theta$ covers $0$ to $4\\pi$. The Jacobian $r$ is locally correct, but the integral doubles through repeated coverage.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Under $x=2u,y=3v$, what region maps to $x^2/4+y^2/9\\le1$?",
+      "hint": "Substitute the coordinate relations into the ellipse inequality.",
+      "solution": "With $x=2u$ and $y=3v$, $x^2/4+y^2/9=u^2+v^2$. Thus the preimage is precisely the unit disk $u^2+v^2\\le1$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can $h(x,y)=1/(x^2+y^2)$ on $0<x^2+y^2\\le1$ be normalized as a probability density?",
+      "hint": "Include the polar Jacobian in the improper integral.",
+      "solution": "In polar coordinates the total mass is $2\\pi\\int_0^1\\frac{dr}{r}$. Truncating at $\\varepsilon$ gives $-2\\pi\\ln\\varepsilon\\to\\infty$ as $\\varepsilon\\to0^+$. No positive finite normalizing constant can make the mass one.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Use polar coordinates to find the area of the annulus $1\\le x^2+y^2\\le9$.",
+      "hint": "Turn squared-radius bounds into radial bounds.",
+      "solution": "The region has $1\\le r\\le3$ and $0\\le\\theta\\le2\\pi$. Its area is $\\int_0^{2\\pi}\\int_1^3r\\,dr\\,d\\theta=2\\pi(9-1)/2=8\\pi$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use polar coordinates to find area of annulus $1\\le r\\le3$.",
+      "hint": "Integrate the polar area element over one full turn.",
+      "solution": "Since $dA=r\\,dr\\,d\\theta$, the area is $\\int_0^{2\\pi}\\int_1^3r\\,dr\\,d\\theta=\\pi(3^2-1^2)=8\\pi$. The inner radial integral measures the difference of the two squared radii divided by two.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find area of $x^2+y^2\\le2x$ using polar coordinates.",
+      "hint": "Use $0\\le r\\le2\\cos\\theta$ where $|\\theta|\\le\\pi/2$.",
+      "solution": "The disk inequality becomes $r^2\\le2r\\cos\\theta$. Thus its area is $\\int_{-\\pi/2}^{\\pi/2}\\int_0^{2\\cos\\theta}r\\,dr\\,d\\theta=2\\int_{-\\pi/2}^{\\pi/2}\\cos^2\\theta\\,d\\theta=\\pi$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R>0$, why does sampling a radius uniformly on $[0,R]$ fail to give a uniform-area point in a disk of radius $R$?",
+      "hint": "Compare equal radial intervals with their annular areas.",
+      "solution": "An annulus of radius $r$ and width $dr$ has area approximately $2\\pi r\\,dr$, which increases with $r$. Uniform radius therefore overweights the center relative to uniform area. The required radial density is $2r/R^2$, obtained by $r=R\\sqrt U$ for uniform $U$.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For a disk of radius $R>0$, how can $U$ uniform on $[0,1]$ generate a uniform-area radius?",
+      "hint": "Match the area fraction within radius $s$.",
+      "solution": "Uniform area requires $P(r\\le s)=s^2/R^2$ for $0\\le s\\le R$. If $U$ is uniform on $[0,1]$ and $r=R\\sqrt U$, then $P(r\\le s)=P(U\\le s^2/R^2)=s^2/R^2$. Use an independent uniform angle.",
+      "lesson": 2,
+      "type": "Modeling"
+    },
+    {
+      "question": "Set up and evaluate the volume of the portion of the ball $x^2+y^2+z^2\\le9$ inside the cone $0\\le\\phi\\le\\pi/3$.",
+      "hint": "Use the spherical volume factor and the stated angle ranges.",
+      "solution": "The bounds are $0\\le\\rho\\le3$, $0\\le\\phi\\le\\pi/3$, and $0\\le\\theta\\le2\\pi$. Hence $V=\\int_0^{2\\pi}\\int_0^{\\pi/3}\\int_0^3\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta=9(1/2)(2\\pi)=9\\pi$ cubic units.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find volume of a cylinder radius $2$, height $3$ using cylindrical coordinates.",
+      "hint": "Integrate $r$ over $0\\le r\\le2$, then use the height.",
+      "solution": "In cylindrical coordinates, $V=\\int_0^{2\\pi}\\int_0^2\\int_0^3r\\,dz\\,dr\\,d\\theta=2\\pi\\cdot2\\cdot3=12\\pi$ cubic units. The height integral contributes three, while the radial integral contributes two before the angular factor.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find volume of a ball of radius $a$.",
+      "hint": "Use the full spherical angular ranges and $0\\le\\rho\\le a$.",
+      "solution": "For $a\\ge0$, $V=\\int_0^{2\\pi}\\int_0^\\pi\\int_0^a\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta=(a^3/3)(2)(2\\pi)=4\\pi a^3/3$. The angular factors are two and $2\\pi$, and the radial factor is $a^3/3$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find volume inside $\\rho\\le a$ and $0\\le\\phi\\le\\pi/3$.",
+      "hint": "Integrate $\\rho^2\\sin\\phi$ over the cone's angle range.",
+      "solution": "For $a\\ge0$, the radial, polar, and azimuthal factors are $a^3/3$, $1-\\cos(\\pi/3)=1/2$, and $2\\pi$. Their product is $\\pi a^3/3$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "What spherical $\\phi$ range describes the upper hemisphere here?",
+      "hint": "Use the convention that $\\phi$ is measured down from $+z$.",
+      "solution": "Since $z=\\rho\\cos\\phi$, the upper hemisphere has $z\\ge0$, or $\\cos\\phi\\ge0$. Within $0\\le\\phi\\le\\pi$, this means $0\\le\\phi\\le\\pi/2$.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For a point $(X,Y)$ uniformly distributed in a disk of radius $2$ centered at the origin, let $R=\\sqrt{X^2+Y^2}$. Find $P(R\\le1)$ and $E[R]$.",
+      "hint": "Derive the radial density from the disk's uniform area density.",
+      "solution": "The planar density is $1/(4\\pi)$, so a ring gives $f_R(r)=r/2$ on $0\\le r\\le2$. Therefore $P(R\\le1)=\\int_0^1r/2\\,dr=1/4$ and $E[R]=\\int_0^2r^2/2\\,dr=4/3$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(x,y)=6x$ on $0\\le y\\le1-x$, $0\\le x\\le1$, and zero elsewhere. Verify normalization and find the marginal density and expectation of $X$. Now replace the supplied coefficient $6$ by an unknown real constant $c$, keeping exactly the same region and zero density outside it. Derive the normalization equation, determine every allowed $c$, and check nonnegativity.",
+      "hint": "The vertical slice at $x$ has length $1-x$.",
+      "solution": "Integrating over $y$ gives $f_X(x)=6x(1-x)$ for $0\\le x\\le1$ and zero elsewhere. Its integral is $6(1/2-1/3)=1$. Then $E[X]=6\\int_0^1(x^2-x^3)\\,dx=6(1/3-1/4)=1/2$. For the unknown coefficient, the total mass is $\\int_0^1\\int_0^{1-x}cx\\,dy\\,dx=c\\int_0^1(x-x^2)\\,dx=c/6$. Normalization forces $c/6=1$, so the only value is $c=6$. With that value the density is nonnegative throughout its support; negative constants cannot define a nonnegative density and no other constant has mass one.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R>0$, find the planar density of a uniform disk of radius $R$.",
+      "hint": "Normalize a constant over disk area $\\pi R^2$.",
+      "solution": "For $R>0$, the planar density is $1/(\\pi R^2)$ inside the disk and zero outside. Multiplying by area $\\pi R^2$ confirms total probability one.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For a point uniformly distributed in a disk of radius $R>0$, find the density of its distance from the center.",
+      "hint": "Differentiate the area fraction within radius $r$.",
+      "solution": "For $0\\le r\\le R$, the radial cumulative law is $P(\\mathcal R\\le r)=r^2/R^2$. Its derivative gives $p_{\\mathcal R}(r)=2r/R^2$, and it is zero outside the radius interval.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the joint density $f(x,y)=6x$ on $0\\le x\\le1,\\ 0\\le y\\le1-x$, and zero elsewhere, find $f_X(x)$.",
+      "hint": "Integrate over the allowed $y$ interval at fixed $x$.",
+      "solution": "For $0\\le x\\le1$, $f_X(x)=\\int_0^{1-x}6x\\,dy=6x(1-x)$. Outside $[0,1]$, the marginal is zero.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does zero covariance alone prove independence?",
+      "hint": "Use a centered disk as a counterexample.",
+      "solution": "No. Symmetry gives $\\operatorname{Cov}(X,Y)=0$ for a uniform centered disk, yet $X^2+Y^2\\le R^2$ constrains one coordinate when the other is near the edge. Thus the coordinates are dependent despite zero covariance.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $p(x,y)=\\pi^{-1}e^{-(x^2+y^2)}$, find the probability of radius greater than $2$.",
+      "hint": "Use the complementary radial cumulative probability.",
+      "solution": "The radial cumulative law is $P(r\\le R)=1-e^{-R^2}$. Thus $P(r>2)=e^{-4}\\approx0.0183156$. Truncating a numerical integral at radius $2$ loses this tail.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the radius where the radial density $p_R(r)=2r e^{-r^2}$ is largest.",
+      "hint": "Differentiate the radial density and compare endpoint behavior.",
+      "solution": "Differentiation gives $p_R^{\\prime}(r)=2e^{-r^2}(1-2r^2)$. The positive critical radius is $r=1/\\sqrt2$; density is zero at $r=0$ and tends to zero at infinity, so this is its maximum.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the planar density $p(x,y)=\\pi^{-1}e^{-(x^2+y^2)}$, find the probability that the distance from the origin exceeds $2$.",
+      "hint": "Integrate the radial tail with the substitution $u=r^2$.",
+      "solution": "The radial density is $2re^{-r^2}$, so $P(r>2)=\\int_2^\\infty2re^{-r^2}\\,dr=[-e^{-r^2}]_2^\\infty=e^{-4}$. The antiderivative vanishes at infinity and leaves the lower-endpoint tail.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the radial mode of $2r e^{-r^2}$.",
+      "hint": "Differentiate with respect to $r$ and compare the endpoints.",
+      "solution": "The derivative is $2e^{-r^2}(1-2r^2)$. It changes from positive to negative at $r=1/\\sqrt2$, which is the radial mode.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the median radius for $2r e^{-r^2}$.",
+      "hint": "Set the cumulative radial probability equal to one half.",
+      "solution": "The cumulative law is $1-e^{-r^2}$. Solving $1-e^{-r^2}=1/2$ gives $r^2=\\ln2$, so the median radius is $\\sqrt{\\ln2}$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why can planar density peak at zero while radial density peaks away from zero?",
+      "hint": "Account for the circumference of each radial ring.",
+      "solution": "Planar density measures probability per unit area, while radial density includes the ring factor $2\\pi r$. That factor vanishes at the origin and can shift the radial peak away from zero.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For the planar density $p(x,y)=(\\pi\\sigma^2)^{-1}e^{-(x^2+y^2)/\\sigma^2}$, where $\\sigma>0$, find $P(r>R)$ for distance $r=\\sqrt{x^2+y^2}$ and $R\\ge0$.",
+      "hint": "Integrate the radial tail after including the Jacobian.",
+      "solution": "For $\\sigma>0$ and $R\\ge0$, the radial density is $(2r/\\sigma^2)e^{-r^2/\\sigma^2}$. Thus $P(r>R)=\\int_R^\\infty(2r/\\sigma^2)e^{-r^2/\\sigma^2}\\,dr=e^{-R^2/\\sigma^2}$. The substitution $u=r^2/\\sigma^2$ converts the integral to an exponential tail.",
+      "lesson": 5,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "A coordinate change transforms the domain, the integrand, and the area or volume element together.",
+    "Absolute Jacobian determinants measure local scaling; parameter ranges control global coverage.",
+    "Nonnegative densities with total integral 1 turn integration into probability, marginals, and expectations.",
+    "Exact normalization and geometric bounds provide useful checks on numerical experiments."
+  ],
+  "next": "Chapter 25 integrates along paths through vector fields. The distinction between scalar size and orientation becomes essential when displacement and work replace area and probability."
+}

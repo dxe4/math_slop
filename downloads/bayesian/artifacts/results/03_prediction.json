@@ -1,0 +1,10 @@
+{
+  "predictive_mean": 13.346866666666667,
+  "predictive_variance": 7.7862835155555565,
+  "exact_variance": 7.822222222222223,
+  "plugin_variance": 4.474029795555556,
+  "prob_below_target": 0.23727091393822836,
+  "loss_intervene": 2.0,
+  "loss_leave": 2.3727091393822834,
+  "action": "intervene"
+}

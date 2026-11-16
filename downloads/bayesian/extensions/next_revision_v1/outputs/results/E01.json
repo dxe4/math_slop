@@ -1,0 +1,812 @@
+{
+  "targets": {
+    "population_parameter": {
+      "mean": 0.11609596691650698,
+      "sd": 0.3815264507967489,
+      "variance": 0.14556243265756408,
+      "interval": [
+        -0.47707225050796015,
+        0.764607845881756
+      ],
+      "interval_probabilities": [
+        0.05,
+        0.95
+      ],
+      "within_scale_variance": 0.13768140205567328,
+      "between_scale_variance": 0.007881030601890786,
+      "residual_variance": 0.0,
+      "definition": "M=sum N_j mu_j/900",
+      "conditioning": "all 18 observed responses; fixed memberships, counts, sigma and priors",
+      "units": "degrees Celsius",
+      "method": "deterministic tau integration; Normal mixture CDF inversion"
+    },
+    "sample_composition": {
+      "mean": -0.31780774866300343,
+      "sd": 0.23414835817507762,
+      "variance": 0.05482545363608444,
+      "interval": [
+        -0.7029478232766097,
+        0.06733172207292051
+      ],
+      "interval_probabilities": [
+        0.05,
+        0.95
+      ],
+      "within_scale_variance": 0.054824556882610315,
+      "between_scale_variance": 8.96753474125543e-07,
+      "residual_variance": 0.0,
+      "definition": "sum n_j mu_j/18",
+      "conditioning": "all 18 observed responses; fixed memberships, counts, sigma and priors",
+      "units": "degrees Celsius",
+      "method": "deterministic tau integration; Normal mixture CDF inversion"
+    },
+    "finite_population": {
+      "mean": 0.1161187885564337,
+      "sd": 0.38015249977507615,
+      "variance": 0.14451592308523928,
+      "interval": [
+        -0.47445215307140276,
+        0.7625563237267511
+      ],
+      "interval_probabilities": [
+        0.05,
+        0.95
+      ],
+      "within_scale_variance": 0.13554264344046174,
+      "between_scale_variance": 0.00788439075588865,
+      "residual_variance": 0.0010888888888888888,
+      "definition": "observed members fixed; predict 882 unobserved outcomes; divide total by 900",
+      "conditioning": "all 18 observed responses; fixed memberships, counts, sigma and priors",
+      "units": "degrees Celsius",
+      "method": "deterministic tau integration; Normal mixture CDF inversion"
+    },
+    "changed_population": {
+      "mean": 0.24927875425733034,
+      "sd": 0.4526609897868134,
+      "variance": 0.2049019716747776,
+      "interval": [
+        -0.4601150003845218,
+        1.0062039150779378
+      ],
+      "interval_probabilities": [
+        0.05,
+        0.95
+      ],
+      "within_scale_variance": 0.20077063640673967,
+      "between_scale_variance": 0.004131335268037935,
+      "residual_variance": 0.0,
+      "definition": "M_prime with N_prime=(80,120,100,180,120,300); same posterior",
+      "conditioning": "all 18 observed responses; fixed memberships, counts, sigma and priors",
+      "units": "degrees Celsius",
+      "method": "deterministic tau integration; Normal mixture CDF inversion"
+    },
+    "changed_contrast": {
+      "mean": 0.13318278734082337,
+      "sd": 0.12466476396343637,
+      "variance": 0.015541303374059304,
+      "interval": [
+        -0.07746387736459011,
+        0.32693344058152474
+      ],
+      "interval_probabilities": [
+        0.05,
+        0.95
+      ],
+      "within_scale_variance": 0.014936519765115583,
+      "between_scale_variance": 0.0006047836089437214,
+      "residual_variance": 0.0,
+      "definition": "M_prime-M using paired joint cells",
+      "conditioning": "all 18 observed responses; fixed memberships, counts, sigma and priors",
+      "units": "degrees Celsius",
+      "method": "deterministic tau integration; Normal mixture CDF inversion"
+    },
+    "individual_empty_cell": {
+      "mean": 0.40296726747448175,
+      "sd": 1.4572729041720915,
+      "variance": 2.1236443172341617,
+      "interval": [
+        -1.978596104317153,
+        2.757037324158605
+      ],
+      "interval_probabilities": [
+        0.05,
+        0.95
+      ],
+      "within_scale_variance": 1.121463525410154,
+      "between_scale_variance": 0.0021807918240078377,
+      "residual_variance": 1.0,
+      "definition": "new individual outcome in cell C/1",
+      "conditioning": "all 18 observed responses; fixed memberships, counts, sigma and priors",
+      "units": "degrees Celsius",
+      "method": "deterministic tau integration; Normal mixture CDF inversion"
+    }
+  },
+  "checks": [
+    {
+      "name": "quadrature_refinement",
+      "method": "full-support Legendre moments",
+      "reference": "[192, 384]",
+      "discrepancy": 7.549516567451064e-15,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "adaptive_moments",
+      "method": "quad_vec on tau; independent coefficient precision",
+      "reference": "adaptive first/second moments",
+      "discrepancy": 2.8727020762175925e-15,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "adaptive_log_evidence",
+      "method": "independent scipy density plus quad_vec",
+      "reference": "adaptive normalizer",
+      "discrepancy": 2.4868995751603507e-14,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "normalization",
+      "method": "sum normalized quadrature weights",
+      "reference": "one",
+      "discrepancy": 1.7763568394002505e-15,
+      "tolerance": {
+        "atol": 1e-12,
+        "rtol": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "fixed_scale_theta_mean",
+      "method": "observation space versus independent precision/scipy density",
+      "reference": "tau=0.75",
+      "discrepancy": 4.996003610813204e-16,
+      "tolerance": {
+        "atol": 1e-10,
+        "rtol": 1e-10
+      },
+      "passed": true
+    },
+    {
+      "name": "fixed_scale_theta_cov",
+      "method": "observation space versus independent precision/scipy density",
+      "reference": "tau=0.75",
+      "discrepancy": 6.106226635438361e-16,
+      "tolerance": {
+        "atol": 1e-10,
+        "rtol": 1e-10
+      },
+      "passed": true
+    },
+    {
+      "name": "fixed_scale_log_likelihood",
+      "method": "observation space versus independent precision/scipy density",
+      "reference": "tau=0.75",
+      "discrepancy": 3.552713678800501e-15,
+      "tolerance": {
+        "atol": 1e-10,
+        "rtol": 1e-10
+      },
+      "passed": true
+    },
+    {
+      "name": "population_interval_refinement",
+      "method": "integrated CDF inversion at both orders",
+      "reference": "192 vs final order",
+      "discrepancy": 1.7763568394002505e-15,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "sample_interval_refinement",
+      "method": "integrated CDF inversion at both orders",
+      "reference": "192 vs final order",
+      "discrepancy": 2.636779683484747e-16,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "changed_interval_refinement",
+      "method": "integrated CDF inversion at both orders",
+      "reference": "192 vs final order",
+      "discrepancy": 1.3322676295501878e-15,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "contrast_interval_refinement",
+      "method": "integrated CDF inversion at both orders",
+      "reference": "192 vs final order",
+      "discrepancy": 7.355227538141662e-16,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "prior_sensitivity_refinement",
+      "method": "Legendre moments",
+      "reference": "192 vs 384",
+      "discrepancy": 1.1657341758564144e-14,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "prior_sensitivity_adaptive",
+      "method": "quad_vec independent precision",
+      "reference": "adaptive moments",
+      "discrepancy": 5.662137425588298e-15,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "prior_sensitivity_evidence",
+      "method": "quad_vec independent density",
+      "reference": "adaptive log normalizer",
+      "discrepancy": 1.4210854715202004e-14,
+      "tolerance": {
+        "atol": 1e-08,
+        "rtol": 1e-08
+      },
+      "passed": true
+    },
+    {
+      "name": "draw_population_parameter",
+      "method": "independent draws",
+      "reference": "deterministic mean; six MCSE",
+      "discrepancy": 0.0016445045037660894,
+      "tolerance": {
+        "atol": 0.011420704736786734,
+        "rtol": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "draw_changed_population",
+      "method": "independent draws",
+      "reference": "deterministic mean; six MCSE",
+      "discrepancy": 0.0019499370923818093,
+      "tolerance": {
+        "atol": 0.013557275222583267,
+        "rtol": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "draw_changed_contrast",
+      "method": "independent draws",
+      "reference": "deterministic mean; six MCSE",
+      "discrepancy": 0.00030543258861567835,
+      "tolerance": {
+        "atol": 0.0037382196841540755,
+        "rtol": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "draw_sample_composition",
+      "method": "independent draws",
+      "reference": "deterministic mean; six MCSE",
+      "discrepancy": 0.0020119994453827172,
+      "tolerance": {
+        "atol": 0.007046227621660309,
+        "rtol": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "draw_finite_population",
+      "method": "independent draws",
+      "reference": "deterministic mean; six MCSE",
+      "discrepancy": 0.001500644272214996,
+      "tolerance": {
+        "atol": 0.01137945989008803,
+        "rtol": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "draw_tau",
+      "method": "independent draws",
+      "reference": "deterministic mean; six MCSE",
+      "discrepancy": 0.0006172838594322716,
+      "tolerance": {
+        "atol": 0.012695924714777219,
+        "rtol": 0
+      },
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "raw_sample_mean": -0.31666666666666665,
+    "counts": [
+      120.0,
+      80.0,
+      160.0,
+      140.0,
+      180.0,
+      220.0
+    ],
+    "sample_counts": [
+      8,
+      3,
+      4,
+      2,
+      1,
+      0
+    ],
+    "cell_x": [
+      -0.5,
+      0.5,
+      -0.5,
+      0.5,
+      -0.5,
+      0.5
+    ],
+    "raw_cell_means": [
+      -1.25,
+      0.3,
+      0.04999999999999999,
+      1.2,
+      0.8,
+      null
+    ],
+    "cell_summaries": [
+      {
+        "mean": -1.0018920841995524,
+        "sd": 0.3592319233558158,
+        "variance": 0.1290475747579187,
+        "interval": [
+          -1.5985938080045037,
+          -0.4169942317023889
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.10537762478950771,
+        "between_scale_variance": 0.023669949968410986,
+        "residual_variance": 0.0
+      },
+      {
+        "mean": 0.3563454135455728,
+        "sd": 0.49860352223958493,
+        "variance": 0.24860547238972025,
+        "interval": [
+          -0.46965959331664126,
+          1.1696359001163381
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.24669519370235984,
+        "between_scale_variance": 0.0019102786873604189,
+        "residual_variance": 0.0
+      },
+      {
+        "mean": -0.10830410440596791,
+        "sd": 0.4584770069961953,
+        "variance": 0.2102011659441893,
+        "interval": [
+          -0.8373923705394716,
+          0.6663262051740353
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.18047447940886174,
+        "between_scale_variance": 0.029726686535327555,
+        "residual_variance": 0.0
+      },
+      {
+        "mean": 0.789537646959938,
+        "sd": 0.5923432285861897,
+        "variance": 0.35087050045191104,
+        "interval": [
+          -0.14806402028820725,
+          1.7980068280084087
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.3218339528752511,
+        "between_scale_variance": 0.029036547576659955,
+        "residual_variance": 0.0
+      },
+      {
+        "mean": 0.0797020807296351,
+        "sd": 0.7363147389748675,
+        "variance": 0.5421593948316273,
+        "interval": [
+          -0.9879442256347821,
+          1.3978523184422877
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.42947713341044946,
+        "between_scale_variance": 0.11268226142117792,
+        "residual_variance": 0.0
+      },
+      {
+        "mean": 0.40296726747448175,
+        "sd": 1.0600209041496125,
+        "variance": 1.1236443172341617,
+        "interval": [
+          -1.3309501912498942,
+          2.0792457810857563
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 1.121463525410154,
+        "between_scale_variance": 0.0021807918240078377,
+        "residual_variance": 0.0
+      }
+    ],
+    "cell_covariance": [
+      [
+        0.1290475747579187,
+        0.012277879077235022,
+        -0.004624414838511611,
+        -0.019062820734176315,
+        -0.017508371063218314,
+        0.01908638933292682
+      ],
+      [
+        0.01227787907723503,
+        0.24860547238972025,
+        0.0010888389609322565,
+        0.0660911989371342,
+        0.0007697628503369035,
+        0.1309494686456163
+      ],
+      [
+        -0.004624414838511615,
+        0.0010888389609322547,
+        0.2102011659441893,
+        0.037418564145303396,
+        0.10344642127774385,
+        0.015850384213996368
+      ],
+      [
+        -0.019062820734176315,
+        0.06609119893713421,
+        0.037418564145303396,
+        0.35087050045191104,
+        0.07618698720914174,
+        0.14984291752174148
+      ],
+      [
+        -0.017508371063218307,
+        0.0007697628503368914,
+        0.10344642127774384,
+        0.07618698720914173,
+        0.5421593948316273,
+        0.03305321449227875
+      ],
+      [
+        0.019086389332926824,
+        0.1309494686456163,
+        0.015850384213996368,
+        0.14984291752174148,
+        0.033053214492278764,
+        1.1236443172341617
+      ]
+    ],
+    "within_scale_covariance": [
+      [
+        0.10537762478950771,
+        0.005599558208718648,
+        0.021522943844134224,
+        0.0066207597042479095,
+        0.03331268656081932,
+        0.013233699402405588
+      ],
+      [
+        0.0055995582087186545,
+        0.24669519370235984,
+        0.008348782248671211,
+        0.0734803881532126,
+        0.015365791603988564,
+        0.12921278248600832
+      ],
+      [
+        0.02152294384413422,
+        0.00834878224867121,
+        0.18047447940886174,
+        0.010037774715282673,
+        0.04903234351639943,
+        0.021555146606080638
+      ],
+      [
+        0.0066207597042479095,
+        0.07348038815321262,
+        0.010037774715282673,
+        0.3218339528752511,
+        0.019004816026082966,
+        0.15707897965240614
+      ],
+      [
+        0.03331268656081933,
+        0.015365791603988554,
+        0.049032343516399415,
+        0.019004816026082953,
+        0.42947713341044946,
+        0.04714022096767426
+      ],
+      [
+        0.013233699402405591,
+        0.12921278248600832,
+        0.021555146606080638,
+        0.15707897965240614,
+        0.04714022096767427,
+        1.121463525410154
+      ]
+    ],
+    "between_scale_covariance": [
+      [
+        0.023669949968410986,
+        0.006678320868516374,
+        -0.026147358682645835,
+        -0.025683580438424225,
+        -0.05082105762403764,
+        0.005852689930521233
+      ],
+      [
+        0.006678320868516374,
+        0.0019102786873604189,
+        -0.007259943287738955,
+        -0.007389189216078414,
+        -0.01459602875365166,
+        0.0017366861596079936
+      ],
+      [
+        -0.026147358682645835,
+        -0.007259943287738955,
+        0.029726686535327555,
+        0.027380789430020723,
+        0.05441407776134442,
+        -0.00570476239208427
+      ],
+      [
+        -0.025683580438424225,
+        -0.007389189216078414,
+        0.027380789430020723,
+        0.029036547576659955,
+        0.05718217118305877,
+        -0.007236062130664653
+      ],
+      [
+        -0.05082105762403764,
+        -0.014596028753651662,
+        0.05441407776134442,
+        0.05718217118305877,
+        0.11268226142117792,
+        -0.014087006475395505
+      ],
+      [
+        0.005852689930521233,
+        0.0017366861596079934,
+        -0.00570476239208427,
+        -0.007236062130664653,
+        -0.014087006475395505,
+        0.0021807918240078377
+      ]
+    ],
+    "tau_mean": 0.7556702968321571,
+    "tau_sd": 0.42446936453645034,
+    "tau_prior_mean": 0.7978845608028654,
+    "log_evidence": -23.96662474927347,
+    "adaptive_error_estimate": 2.8317576743348037e-11,
+    "selected_order": 384,
+    "draw_summaries": {
+      "population_parameter": {
+        "mean": 0.11774047142027307,
+        "mcse": 0.001903449122797789,
+        "discrepancy": 0.0016445045037660894,
+        "size": 40000,
+        "method": "independent joint draws from quadrature mixture"
+      },
+      "changed_population": {
+        "mean": 0.25122869134971215,
+        "mcse": 0.0022595442037638778,
+        "discrepancy": 0.0019499370923818093,
+        "size": 40000,
+        "method": "independent joint draws from quadrature mixture"
+      },
+      "changed_contrast": {
+        "mean": 0.13348821992943904,
+        "mcse": 0.0006230349473590126,
+        "discrepancy": 0.00030543258861567835,
+        "size": 40000,
+        "method": "independent joint draws from quadrature mixture"
+      },
+      "sample_composition": {
+        "mean": -0.3157957492176207,
+        "mcse": 0.0011743696036100515,
+        "discrepancy": 0.0020119994453827172,
+        "size": 40000,
+        "method": "independent joint draws from quadrature mixture"
+      },
+      "finite_population": {
+        "mean": 0.1176194328286487,
+        "mcse": 0.0018965749816813385,
+        "discrepancy": 0.001500644272214996,
+        "size": 40000,
+        "method": "independent joint draws from quadrature mixture"
+      },
+      "tau": {
+        "mean": 0.7550530129727249,
+        "mcse": 0.002115985785796203,
+        "discrepancy": 0.0006172838594322716,
+        "size": 40000,
+        "method": "independent joint draws from quadrature mixture"
+      }
+    },
+    "diagonal_only_population_variance": 0.10821965568335197,
+    "population_changed_covariance": 0.16746155047914119,
+    "empty_cell_changed_mean_contribution": 0.035819312664398376,
+    "selection_shift": 0.49,
+    "prior_sensitivity": {
+      "scale": 0.5,
+      "tau_mean": 0.5068370028881615,
+      "population_parameter": {
+        "mean": 0.06266413319006346,
+        "sd": 0.3301528474244506,
+        "variance": 0.10900090266247256,
+        "interval": [
+          -0.458945533417228,
+          0.6227015087172931
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.1017967629762517,
+        "between_scale_variance": 0.007204139686220861,
+        "residual_variance": 0.0
+      },
+      "empty_cell": {
+        "mean": 0.42946616280110295,
+        "sd": 0.7798578819220302,
+        "variance": 0.6081783159959152,
+        "interval": [
+          -0.8451719326031605,
+          1.6792808962319052
+        ],
+        "interval_probabilities": [
+          0.05,
+          0.95
+        ],
+        "within_scale_variance": 0.6075218964324499,
+        "between_scale_variance": 0.0006564195634653145,
+        "residual_variance": 0.0
+      },
+      "adaptive_error_estimate": 2.8489938264482793e-11
+    },
+    "elapsed_seconds": 1.419532585889101
+  },
+  "schema_version": 1,
+  "module_id": "E01",
+  "status": "measured",
+  "specification": {
+    "path": "specifications/E01_v1.json",
+    "sha256": "dd06a7ed1112a8b452a69938cf86d91eebfaf81405c7668a74f72f888a5cf4a7"
+  },
+  "settings": {
+    "quadrature": {
+      "transform": "tau=t/(1-t); Jacobian=(1-t)^(-2); full support",
+      "orders": [
+        192,
+        384
+      ],
+      "fallback_order": 768,
+      "independent_adaptive": {
+        "method": "quad or quad_vec",
+        "epsabs": 1e-10,
+        "epsrel": 1e-10,
+        "limit": 250,
+        "workers": 1
+      },
+      "intervals": {
+        "method": "integrated Normal CDF + brentq",
+        "xtol": 1e-09,
+        "initial_bracket": [
+          -16,
+          16
+        ],
+        "max_bracket_doublings": 10
+      }
+    },
+    "draw_count": 40000,
+    "interval_probabilities": [
+      0.05,
+      0.95
+    ],
+    "tolerances": {
+      "moment_atol": 1e-08,
+      "moment_rtol": 1e-08,
+      "normalization_atol": 1e-12,
+      "fixed_scale_atol": 1e-10,
+      "fixed_scale_rtol": 1e-10,
+      "draw_comparison": "abs_error <= 6*actual_MCSE + deterministic_tolerance"
+    }
+  },
+  "seeds": {
+    "posterior": 41001,
+    "predictive": 41002
+  },
+  "figures": [
+    {
+      "path": "outputs/figures/E01_01.svg",
+      "alt": "Sample and population proportions differ; the empty cell retains broad posterior uncertainty.",
+      "equivalent": "Chapter cell table and metrics.cell_summaries in E01.json"
+    },
+    {
+      "path": "outputs/figures/E01_02.svg",
+      "alt": "Population targets are higher and less precise than the sample-composition mean; contrast uses paired cells.",
+      "equivalent": "Chapter target and variance tables; targets in E01.json"
+    }
+  ],
+  "provenance": {
+    "input_hashes": {
+      "extensions/next_revision_v1/specifications/E01_v1.json": {
+        "sha256": "dd06a7ed1112a8b452a69938cf86d91eebfaf81405c7668a74f72f888a5cf4a7",
+        "size": 8513
+      },
+      "extensions/next_revision_v1/labs/e01_gaussian_mrp.py": {
+        "sha256": "8ee505690f67830d126f85ebc0d93183d463d6dc049aeced094d2113aab61eca",
+        "size": 18535
+      },
+      "extensions/next_revision_v1/models/gaussian_mrp.py": {
+        "sha256": "d7c41285d47a328a896e4df9c4ac8c6b2223d7da87c7601481ce716bd7b73d91",
+        "size": 10196
+      },
+      "extensions/next_revision_v1/evidence/environment.json": {
+        "sha256": "ba0e0036c4b9b516bd773902e407f89e219fcabb5300e775411b11ace1b189a5",
+        "size": 881
+      }
+    },
+    "run_ids": [
+      "000011_e01_science_final"
+    ]
+  },
+  "limitations": [
+    "Continuous Gaussian outcome; known residual SD; no fitted logistic MRP.",
+    "Within-cell selection independence and exchangeable cell effects are assumed.",
+    "Known population counts; no census-count uncertainty or spatial/district correlation.",
+    "An empty sampled cell is extrapolated through priors/regression; no local response evidence."
+  ]
+}

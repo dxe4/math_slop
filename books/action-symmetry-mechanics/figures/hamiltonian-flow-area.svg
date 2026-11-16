@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" role="img" aria-labelledby="title desc">
+  <title id="title">Hamiltonian flow preserves phase-space area</title>
+  <desc id="desc">A rectangle 120 units wide and 115 units high in q-p coordinates maps to a sheared parallelogram with base vector 120 comma negative 20 and side vector 0 comma negative 115. Both have exact coordinate area 13,800 square units.</desc>
+  <style>
+    .axis{stroke:#334155;stroke-width:2}.cell0{fill:#2563eb;fill-opacity:.22;stroke:#1d4ed8;stroke-width:3}.cell1{fill:#0d9488;fill-opacity:.24;stroke:#0f766e;stroke-width:3}.arrow{stroke:#9333ea;stroke-width:3;fill:none;marker-end:url(#head)}.label{fill:#0f172a;font:17px system-ui,sans-serif}.small{fill:#334155;font:15px system-ui,sans-serif}
+    @media (prefers-color-scheme:dark){.axis{stroke:#cbd5e1}.cell0{fill:#60a5fa;fill-opacity:.3;stroke:#bfdbfe}.cell1{fill:#2dd4bf;fill-opacity:.3;stroke:#99f6e4}.arrow{stroke:#d8b4fe}.label{fill:#f8fafc}.small{fill:#e2e8f0}}
+  </style>
+  <defs><marker id="head" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#9333ea"/></marker></defs>
+  <g aria-hidden="true">
+    <path class="axis" d="M65 285H315M90 310V55M445 285H695M470 310V55"/>
+    <text class="label" x="320" y="291">q</text><text class="label" x="82" y="45">p</text><text class="label" x="700" y="291">q</text><text class="label" x="462" y="45">p</text>
+    <path class="cell0" d="M135 235 L255 235 L255 120 L135 120 Z"/>
+    <path class="cell1" d="M510 245 L630 225 L630 110 L510 130 Z"/>
+    <path class="arrow" d="M305 175 C350 145 400 145 445 175"/>
+    <text class="small" x="140" y="270">initial cell R</text><text class="small" x="505" y="270">evolved cell φₜ(R)</text>
+    <text class="label" x="148" y="183">∫R dq∧dp</text><text class="label" x="530" y="177">same area</text>
+    <text class="small" x="318" y="130">Hamiltonian flow</text>
+  </g>
+</svg>

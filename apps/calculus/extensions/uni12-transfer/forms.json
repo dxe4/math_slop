@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "uni12-public-transfer",
+  "title": "Eighteen public calculus transfer forms",
+  "role": "required-public-self-study",
+  "families": [
+    {
+      "path": "families/limits-ftc-taylor.json",
+      "sha256": "4e6cd82fb3ff2bba1ef8217b1577a592d331a9b59f9e758b972acd10d0f0eac7",
+      "ids": [
+        "U12-LIM-A",
+        "U12-LIM-B",
+        "U12-FTC-A",
+        "U12-FTC-B",
+        "U12-TAY-A",
+        "U12-TAY-B"
+      ]
+    },
+    {
+      "path": "families/geometry-differentiability.json",
+      "sha256": "d3b1b50e4054a93a324bb274b5dd9b3a74d2d7eb356f5e4949a0afa76014b21b",
+      "ids": [
+        "U12-SET-A",
+        "U12-SET-B",
+        "U12-VEC-A",
+        "U12-VEC-B",
+        "U12-DIF-A",
+        "U12-DIF-B"
+      ]
+    },
+    {
+      "path": "families/circulation-numerical-navigation.json",
+      "sha256": "329627cb7987db7f4f1cf2c964f62d56e07aceef58f9e449e1f555ea4d8c1b6c",
+      "ids": [
+        "U12-CIR-A",
+        "U12-CIR-B",
+        "U12-NUM-A",
+        "U12-NUM-B",
+        "U12-NAV-A",
+        "U12-NAV-B"
+      ]
+    }
+  ],
+  "requiredFormCount": 18,
+  "policy": {
+    "comparison": "All prompts and complete models are public. Attempting before opening comparison is voluntary.",
+    "records": "Keep a first response, comparison notes and corrected response as three named worksheet files; the packet creates no learner-store records.",
+    "freshness": "These are newly authored source forms, not unseen evidence reserves. Timing, independence and tool use are learner declarations.",
+    "review": "Independent LLM derivations and source review support the supplied teaching keys. Human, learner and assistive-technology observations remain separate optional work.",
+    "scope": "The 18 forms sit outside the stable 1,059 numbered written problems and add no bank number, assessment grade or programme allocation."
+  }
+}

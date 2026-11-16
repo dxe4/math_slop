@@ -1,0 +1,90 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Build a two-dimensional linear map from basis images, compare compositions, and construct maps that reverse orientation or collapse a square."><meta name="theme-color" content="#f8f6ef"><title>What a matrix does to a square · Maths, Unhurried</title><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../style.css"><script type="module" src="../../app.mjs"></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="header-inner"><a class="brand" href="../../index.html" aria-label="Maths, unhurried home"><span class="brand-mark" aria-hidden="true">∿</span><span>maths<span class="brand-comma">,</span> <em>unhurried</em></span></a><nav aria-label="Main navigation"><a href="../../tonight/index.html">Try an idea</a><a href="../../explore/index.html">Explore</a><a href="../../subjects/index.html">Subjects</a><a href="../index.html" aria-current="page">Series</a><a href="../../play/index.html">Playground</a><a href="../../notebook/index.html">My notebook</a></nav><a class="header-about" href="../../about/index.html">The idea <span aria-hidden="true">↗</span></a></div></header><main id="main"><header class="reading-width course-header"><a class="back-link" href="../index.html">← Series</a><div class="eyebrow">Short taster guide · 2 explorations</div><h1>What a matrix does to a square</h1><p class="article-deck">Build a two-dimensional linear map from basis images, compare compositions, and construct maps that reverse orientation or collapse a square.</p><p class="muted">About 30 minutes of reading and article exercises; guide practice and capstone take additional time</p><div class="outcome"><strong>Bring with you</strong><p>Read an ordered coordinate pair · Add and scale pairs of numbers · Substitute into simple formulas</p><strong>Where this path takes you</strong><ul><li>Reconstruct a 2×2 linear map from its basis-vector images</li><li>Calculate vector images and compare two compositions</li><li>Interpret determinant as signed area scale</li><li>Construct an orientation-reversing map and explain a singular collapse</li></ul></div></header><section class="reading-width course-resume" data-course-resume data-course="matrix-and-square" data-articles="ga-la-linear-map ga-la-determinant" data-finish="#capstone" data-finish-label="Return to the capstone"><h2>Pick up this path</h2><p data-resume-text>Begin with the first exploration, or choose any module below.</p><a class="button secondary" data-resume-link href="../../articles/ga-la-linear-map/index.html?course=matrix-and-square">Start with A matrix is a rule for moving space →</a><p class="small muted">Your next step follows the articles you mark explored in your local notebook. You can revisit any lesson whenever you like.</p><p data-resume-status role="status"></p></section><aside class="reading-width prerequisite-support" aria-label="Optional background reminders"><h2>A reminder before you begin</h2><p>Open a starting tool if it feels unfamiliar. The lesson explains its specific assumptions.</p><details class="prerequisite-refresher" data-refresher="coordinates" id="reminder-coordinates"><summary>Coordinates and slope</summary><div class="refresher-body article-body"><p>An ordered pair (x,y) specifies a position in the coordinate plane: x measures horizontal displacement and y measures vertical displacement from the origin. The order matters. The points (2,5) and (5,2) usually occupy different places.</p>
+<p><strong>Worked example.</strong> From P=(1,2) to Q=(4,8), the horizontal change is 4−1=3 and the vertical change is 8−2=6. The slope is vertical change divided by horizontal change, giving 6/3=2.</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>m</mi><mo>=</mo><mfrac><mrow><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>y</mi><mn>1</mn></msub></mrow><mrow><msub><mi>x</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mn>6</mn><mn>3</mn></mfrac><mo>=</mo><mn>2</mn></mrow></math>
+<p>Use the same order in both subtractions. Reversing the points gives (2−8)/(1−4)=−6/−3=2 again. A horizontal line has slope zero. A vertical line has zero horizontal change, so this quotient does not define a finite slope.</p>
+<p><strong>Try one.</strong> Find the slope from (−1,4) to (2,−2).</p>
+<details><summary>Worked answer</summary><p>The horizontal change is 2−(−1)=3. The vertical change is −2−4=−6. Dividing gives slope −2. The negative sign means that y decreases as x increases along this line.</p></details>
+<p><strong>Watch the units.</strong> If x is time in hours and y is distance in kilometres, the slope has units of kilometres per hour. The scales carry mathematical information.</p>
+<p class="refresher-own-page"><a href="../../refresh/coordinates/index.html">Read this reminder on its own →</a></p></div></details><details class="prerequisite-refresher" data-refresher="vectors" id="reminder-vectors"><summary>Vectors and small matrices</summary><div class="refresher-body article-body"><p>A vector in the coordinate plane can be represented by an ordered pair. Add vectors component by component: (1,2)+(3,−1)=(4,1). A scalar is an ordinary number used to scale a vector, so 2(1,2)=(2,4). These operations describe displacements using the chosen coordinate axes.</p>
+<p><strong>Worked example.</strong> A two-by-two matrix has two columns. Let its first column be (2,1) and its second be (0,3). Applied to a vector (x,y), it produces x times the first column plus y times the second.</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mrow><mo>(</mo><mtable><mtr><mtd><mn>2</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>3</mn></mtd></mtr></mtable><mo>)</mo></mrow><mrow><mo>(</mo><mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd></mtr></mtable><mo>)</mo></mrow><mo>=</mo><mrow><mo>(</mo><mtable><mtr><mtd><mn>2</mn></mtd></mtr><mtr><mtd><mn>7</mn></mtd></mtr></mtable><mo>)</mo></mrow></mrow></math>
+<p>Here (1,2) maps to 1(2,1)+2(0,3)=(2,7). The columns tell you what happens to the unit vectors (1,0) and (0,1); scaling and addition then determine every other input.</p>
+<p><strong>Try one.</strong> Where does the same matrix send (−1,1)?</p>
+<details><summary>Worked answer</summary><p>Use −1(2,1)+1(0,3)=(−2,−1)+(0,3)=(−2,2). Equivalently the first output is 2x and the second is x+3y; substituting x=−1 and y=1 gives the same pair.</p></details>
+<p><strong>Watch the convention.</strong> We write input vectors as columns. Each output uses an entire row's products and sum, rather than multiplying corresponding entries independently.</p>
+<p class="refresher-own-page"><a href="../../refresh/vectors/index.html">Read this reminder on its own →</a></p></div></details><details class="prerequisite-refresher" data-refresher="algebra" id="reminder-algebra"><summary>Substitution and equations</summary><div class="refresher-body article-body"><p>A letter in a formula stands for a value. Substitution replaces that letter everywhere with a chosen number. Parentheses help keep a negative input together: if f(x)=x²+2x, then f(−3)=(−3)²+2(−3)=9−6=3. Squaring happens before adding.</p>
+<p><strong>Worked example.</strong> To solve 3x+5=20, subtract 5 from both sides and then divide both sides by 3. Applying the same operation to both sides preserves the equality; the divisor here is nonzero.</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>20</mn><mo>⇒</mo><mn>3</mn><mi>x</mi><mo>=</mo><mn>15</mn><mo>⇒</mo><mi>x</mi><mo>=</mo><mn>5</mn></mrow></math>
+<p>Substitute the answer back: 3×5+5=20. This checks the proposed value against the original equation. The distributive rule also lets you expand a bracket: 2(x+4)=2x+8.</p>
+<p><strong>Try one.</strong> Solve 2(x+4)=18 and check the result.</p>
+<details><summary>Worked answer</summary><p>Divide both sides by 2 to obtain x+4=9. Subtract 4 to get x=5. Checking gives 2(5+4)=2×9=18, as required.</p></details>
+<p><strong>Watch the sign.</strong> The values (−3)²=9 and −3²=−9 differ: the second expression applies the minus sign after squaring 3. Keep the parentheses when substituting negative values.</p>
+<p class="refresher-own-page"><a href="../../refresh/algebra/index.html">Read this reminder on its own →</a></p></div></details></aside><article class="article-body reading-width course-body" data-course-id="matrix-and-square"><section id="start">
+  <h2>Build a transformation, then measure what it does</h2>
+  <p>A two-dimensional linear map can turn a square into a slanted parallelogram, reverse its orientation, or flatten it into a segment. Two vectors tell us where every point goes. One number then tells us its signed area scale. This short course connects those descriptions and ends with a transformation you construct yourself.</p>
+  <p>Allow about 75 minutes for the two lessons and investigations. The scope is real, two-dimensional linear maps through the origin. This is not a full linear algebra course; translations, eigenvectors, and higher-dimensional determinants remain outside our main route.</p>
+  <details>
+    <summary>Background recap: vectors and the standard basis</summary>
+    <p>A vector (x,y) is an ordered pair. Add pairs coordinate by coordinate, and multiply both coordinates when scaling. The vectors e₁ = (1,0) and e₂ = (0,1) form the standard basis: (x,y) = xe₁ + ye₂. A linear map preserves addition and scalar multiplication. Its matrix columns record the images of e₁ and e₂, in that order. The determinant of columns (a,c) and (b,d) is ad − bc. The lessons explain why this expression measures signed area.</p>
+  </details>
+</section>
+
+<section id="lessons">
+  <h2>Read these two explorations</h2>
+  <ol>
+    <li><a href="../../articles/ga-la-linear-map/index.html?course=matrix-and-square">A linear map from two basis images</a>. Follow T(e₁) = (2,0) and T(e₂) = (1,1). Linearity turns those facts into T(x,y) = (2x+y,y).</li>
+    <li><a href="../../articles/ga-la-determinant/index.html?course=matrix-and-square">Determinant, signed area, and collapse</a>. Connect the two matrix columns to the sides of the transformed unit square. Separate area magnitude from orientation.</li>
+  </ol>
+  <p>The first lesson supplies the map; the second describes one feature of it. Two maps with the same determinant can still move points very differently. Keep an example of an individual vector alongside every area calculation.</p>
+</section>
+
+<section id="connect">
+  <h2>From columns to the whole square</h2>
+  <p>A point in the unit square has 0 ≤ x ≤ 1 and 0 ≤ y ≤ 1. Its image is x times the first column plus y times the second. Thus the square's vertices become (0,0), (2,0), (3,1), and (1,1), in order. This is the filled parallelogram generated by the columns, not just its boundary.</p>
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>T</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><mi>x</mi><mo>(</mo><mn>2</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>+</mo><mi>y</mi><mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo></mrow></math>
+  <p>The determinant is 2·1 − 1·0 = 2. The transformed unit square has ordinary area two, and the map preserves orientation. That does not say every length doubles: e₁ becomes length two while e₂ becomes length √2. Area scale is a different measurement from length scale.</p>
+  <p>A useful return check is T(1,2) = (4,2). You can get it from the coordinate formula or from one copy of the first column plus two copies of the second. Agreement connects the symbolic and geometric descriptions.</p>
+</section>
+
+<section id="practice">
+  <h2>Worked composition challenge: does order matter?</h2>
+  <p>Introduce the quarter-turn S(x,y) = (−y,x). Compare S∘T, meaning “apply T, then S,” with T∘S. Before opening the solution, predict whether they have the same area scale and whether they send (1,2) to the same point.</p>
+  <details><summary>A hint</summary><p>Substitute the output pair of the first map into the second map. To recover columns, evaluate the composite at e₁ and e₂.</p></details>
+  <details>
+    <summary>Worked solution</summary>
+    <p>Applying T first gives (2x+y,y). Applying S to that pair gives (S∘T)(x,y) = (−y,2x+y). Its columns are (0,2) and (−1,1), so its determinant is 0·1 − (−1)·2 = 2.</p>
+    <p>Reversing the order gives (T∘S)(x,y) = T(−y,x) = (x−2y,x). Its columns are (1,1) and (−2,0), with determinant 1·0 − (−2)·1 = 2.</p>
+    <p>For (1,2), the first composite gives (−2,4); the second gives (−3,1). The maps differ although both multiply area by two and preserve orientation. We computed both determinants directly; these two calculations alone are not a proof of a general rule about determinants of compositions.</p>
+  </details>
+  <p>Optional counterexample hunt: the identity map and S both have determinant one. Identify a vector they move differently. The determinant summarises area and orientation; it does not identify the map.</p>
+</section>
+
+<section id="capstone">
+  <h2>Construct a map with prescribed signed area</h2>
+  <p>Build a linear map U with U(e₁) = (1,2) and determinant −3. Choose an integer-coordinate image for e₂. Find U(2,−1), the four vertices of the transformed unit square, its ordinary area, and its orientation. Finally, change only the second column to make the entire square collapse.</p>
+  <details><summary>A hint</summary><p>Write the second column as (u,v). The determinant is v−2u. For collapse, try making that column a multiple of the first.</p></details>
+  <details>
+    <summary>Model construction and explanation</summary>
+    <p>Choose U(e₂) = (2,1). Its determinant is 1·1 − 2·2 = −3, as required. Linearity gives U(x,y) = (x+2y,2x+y), so U(2,−1) = (0,3).</p>
+    <p>The square's vertices become (0,0), (1,2), (3,3), and (2,1), in order. Its ordinary area is |−3| = 3. The negative determinant means orientation reverses; it does not mean ordinary area is negative.</p>
+    <p>For collapse, replace the second column with (2,4). Then the image of (x,y) is (x+2y)(1,2). Every image lies on the line through (1,2), and the unit square maps to the segment from (0,0) to (3,6). The determinant is 4−4 = 0. The different inputs (2,0) and (0,1) now have the same image, so the map cannot be inverted.</p>
+    <p>There are many valid non-collapsed constructions: every integer u with v = 2u−3 satisfies v−2u = −3. Different choices have the same signed area scale without being the same map.</p>
+  </details>
+  <h3>What each activity checks</h3>
+  <table>
+    <thead><tr><th>Outcome</th><th>Evidence to look for</th></tr></thead>
+    <tbody>
+      <tr><td>Reconstruct a map from basis images</td><td>The first lesson and the formula for U use the columns in the correct order.</td></tr>
+      <tr><td>Find a vector's image</td><td>The composition calculation and U(2,−1) agree with linear combinations.</td></tr>
+      <tr><td>Interpret determinant and collapse</td><td>The capstone distinguishes signed area, ordinary area, orientation, and loss of dimension.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Self-review rubric:</strong> a complete response supplies valid columns, correct vector and vertex calculations, an area/orientation explanation, and a reason for collapse beyond merely reporting zero. A different valid second column is welcome. If only the arithmetic works, revisit its geometric meaning. Reading completion is not a certification of independent mastery.</p>
+</section>
+
+<section id="takeaway">
+  <h2>Two descriptions worth keeping together</h2>
+  <p>Columns determine a linear map; the determinant describes its signed area scale. You have also seen why equal determinants do not make maps equal and why operation order matters. For a deeper question, try proving the determinant composition rule for arbitrary 2×2 matrices by expanding both sides.</p>
+  <p>The course problems and connecting explanations are original. Mathematical reference notes accompany the linked lessons. This bounded pilot has not received external mathematical or learning-effectiveness review.</p>
+</section>
+<section class="quiet-panel"><h2>Your path, at your pace.</h2><p>Each lesson can stand on its own. Use “Mark as explored” on a lesson if you want to remember your place. Reading completion is your own note, not a test of mastery.</p><ol class="course-progress"><li><a href="../../articles/ga-la-linear-map/index.html?course=matrix-and-square">A matrix is a rule for moving space</a><span data-progress-for="ga-la-linear-map" class="progress-status"></span></li><li><a href="../../articles/ga-la-determinant/index.html?course=matrix-and-square">What determinant actually counts</a><span data-progress-for="ga-la-determinant" class="progress-status"></span></li></ol></section><p class="small muted">This is a bounded taster.</p></article></main><footer class="site-footer"><div><a class="brand" href="../../index.html" aria-label="Maths, unhurried home"><span class="brand-mark" aria-hidden="true">∿</span><span>maths<span class="brand-comma">,</span> <em>unhurried</em></span></a><p>For the joy of figuring things out.</p></div><div class="footer-links"><a href="../../tonight/index.html">Try an idea</a><a href="../../discover/index.html">Small discoveries</a><a href="../../start/index.html">Start here</a><a href="../../about/index.html">About this project</a><a data-report-link href="../../feedback/index.html?page=%2Fcourses%2Fmatrix-and-square%2F">Report a problem</a><a href="../../roadmap/index.html">The bigger picture</a><a href="../../refresh/index.html">Refresh a tool</a><a href="../../glossary/index.html">Glossary</a><a href="../../notebook/index.html">Your local notebook</a><span>Library edition · September 2026</span></div></footer></body></html>

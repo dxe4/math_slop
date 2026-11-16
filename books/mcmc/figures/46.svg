@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">ABC tolerance changes the inferential target</title><desc id="desc">Simulated summaries are accepted inside a tolerance ball around the observed summary.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">ABC tolerance changes the inferential target</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Simulated summaries are accepted inside a tolerance ball around the observed summary.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">For a hard ABC kernel: accept if d(s(y*),s(yobs))≤ε. Smaller ε reduces tolerance error but not summary-information loss.</text>
+<line x1="85.00" y1="420.00" x2="525.00" y2="420.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="85.00" y1="420.00" x2="85.00" y2="135.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="305.00" y="455.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">summary component s₁</text>
+<text x="85.00" y="120.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="start">summary component s₂</text>
+<circle cx="310.00" cy="275.00" r="118" fill="#e2edf6" stroke="#275c91" stroke-width="2"/>
+<circle cx="310.00" cy="275.00" r="57" fill="#c8e6e7" stroke="#167d8d" stroke-width="2"/>
+<circle cx="451.98" cy="258.00" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="336.62" cy="370.65" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="197.99" cy="286.35" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="334.74" cy="392.06" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="122.39" cy="176.89" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="233.23" cy="362.15" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="434.61" cy="193.17" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="464.02" cy="289.30" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="482.64" cy="388.96" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="145.77" cy="398.72" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="294.32" cy="198.25" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="289.26" cy="178.21" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="398.32" cy="293.38" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="152.11" cy="215.46" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="305.03" cy="350.73" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="215.90" cy="186.13" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="246.57" cy="176.91" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="239.20" cy="373.60" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="180.74" cy="233.92" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="407.68" cy="209.89" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="154.22" cy="220.80" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="344.96" cy="334.37" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="370.54" cy="175.82" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="219.31" cy="188.37" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="325.64" cy="249.63" r="3" fill="#167d8d" stroke="#167d8d" stroke-width="2"/>
+<circle cx="399.22" cy="299.31" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="334.18" cy="202.03" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="318.90" cy="176.13" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="148.76" cy="370.27" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="177.08" cy="160.25" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="385.61" cy="205.45" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="225.82" cy="300.79" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="471.89" cy="165.68" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="360.03" cy="168.58" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="408.33" cy="249.57" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="143.03" cy="256.03" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="360.47" cy="193.26" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="256.71" cy="351.24" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="425.63" cy="338.32" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="291.33" cy="332.71" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="167.35" cy="253.93" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="229.98" cy="192.34" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="125.79" cy="172.95" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="485.69" cy="252.52" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="232.95" cy="320.77" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="389.08" cy="379.92" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="461.10" cy="173.97" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="205.22" cy="255.35" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="227.94" cy="296.22" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="202.89" cy="380.21" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="236.39" cy="379.01" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="466.36" cy="321.95" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="214.83" cy="173.89" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="492.95" cy="386.09" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="298.56" cy="174.99" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="403.25" cy="231.94" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="278.16" cy="400.07" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="463.37" cy="367.80" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="138.78" cy="319.89" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="342.93" cy="335.58" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="116.16" cy="383.60" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="174.96" cy="160.34" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="363.03" cy="340.63" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="386.30" cy="181.59" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="198.55" cy="293.61" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="343.09" cy="341.21" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="115.57" cy="320.11" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="192.37" cy="243.65" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="169.81" cy="281.60" r="3" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<circle cx="208.23" cy="313.44" r="3" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="310.00" cy="275.00" r="7" fill="#bb5b27" stroke="#bb5b27" stroke-width="2"/>
+<text x="322.00" y="265.00" font-family="system-ui,sans-serif" font-size="14" fill="#bb5b27" font-weight="400" text-anchor="start">observed</text>
+<line x1="310.00" y1="275.00" x2="428.00" y2="275.00" stroke="#275c91" stroke-width="2"/>
+<text x="610.00" y="180.00" font-family="system-ui,sans-serif" font-size="18" fill="#275c91" font-weight="400" text-anchor="start">Outer radius: ε = 1</text>
+<text x="610.00" y="230.00" font-family="system-ui,sans-serif" font-size="18" fill="#167d8d" font-weight="400" text-anchor="start">Inner radius: ε = 0.5</text>
+<text x="610.00" y="315.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Dots are illustrative simulations.</text>
+<text x="610.00" y="355.00" font-family="system-ui,sans-serif" font-size="17" fill="#233443" font-weight="400" text-anchor="start">Tolerance is part of the target.</text>
+</svg>

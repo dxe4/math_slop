@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+  <title id="title">Quotient by a vertical direction</title>
+  <desc id="desc">Three vertical affine lines in R cubed represent cosets of the vertical subspace U. A quotient arrow sends each entire line to one point in R squared. Two marked points on the same line have the same image, and the central subspace U maps to zero.</desc>
+  <style>
+    .bg{fill:#fbfaf7}.ink{stroke:#202936;fill:none;stroke-width:2}.arrowfill{fill:#202936}.soft{stroke:#7b8798;fill:none;stroke-width:1.5}.coset{stroke:#2878a8;fill:none;stroke-width:4}.accent{stroke:#c05621;fill:none;stroke-width:3}.point{fill:#c05621}.image{fill:#2878a8}.panel{fill:#f2f5f7;stroke:#c6ced8;stroke-width:1.5}.txt{fill:#202936;font:16px system-ui,sans-serif}.small{fill:#4b5868;font:14px system-ui,sans-serif}.label{fill:#202936;font:bold 17px system-ui,sans-serif}
+    @media (prefers-color-scheme:dark){.bg{fill:#151a21}.ink{stroke:#edf2f7}.arrowfill{fill:#edf2f7}.soft{stroke:#96a3b5}.coset{stroke:#62b7e5}.accent{stroke:#f0a06b}.point{fill:#f0a06b}.image{fill:#62b7e5}.panel{fill:#202833;stroke:#526173}.txt,.label{fill:#edf2f7}.small{fill:#c3ccd8}}
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowfill" d="M0 0L10 5L0 10Z"/></marker>
+    <marker id="accentArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#c05621"/></marker>
+  </defs>
+  <rect class="bg" width="760" height="430" rx="18"/>
+  <rect class="panel" x="24" y="44" width="310" height="338" rx="14"/>
+  <rect class="panel" x="472" y="44" width="264" height="338" rx="14"/>
+  <text class="label" x="43" y="77">V = ℝ³, U = span(e₃)</text>
+  <text class="label" x="493" y="77">V/U ≅ ℝ²</text>
+
+  <path class="soft" d="M75 310L286 310M180 354L180 106"/>
+  <path class="ink" d="M75 310L286 310" marker-end="url(#arrow)"/>
+  <path class="ink" d="M180 354L180 106" marker-end="url(#arrow)"/>
+  <text class="small" x="291" y="316">horizontal data (x,y)</text>
+  <text class="small" x="188" y="119">z</text>
+
+  <path class="coset" d="M112 334L112 132"/>
+  <path class="accent" d="M180 346L180 120"/>
+  <path class="coset" d="M257 334L257 132"/>
+  <text class="small" x="79" y="367">(a,b)+U</text>
+  <text class="small" x="159" y="367">U</text>
+  <text class="small" x="229" y="367">(c,d)+U</text>
+
+  <circle class="point" cx="112" cy="178" r="6"/>
+  <circle class="point" cx="112" cy="264" r="6"/>
+  <text class="txt" x="52" y="171">v+u</text>
+  <text class="txt" x="82" y="285">v</text>
+  <path class="accent" d="M101 181L91 181M101 262L91 262"/>
+  <text class="small" x="47" y="211">same coset:</text>
+  <text class="small" x="47" y="231">q(v+u)=q(v)</text>
+
+  <path class="ink" d="M354 213L445 213" marker-end="url(#arrow)"/>
+  <text class="label" x="373" y="194">q</text>
+  <text class="small" x="339" y="243">q(x,y,z)=(x,y)</text>
+
+  <path class="ink" d="M514 326L694 326M547 355L547 115"/>
+  <path class="soft" d="M547 326L547 115"/>
+  <text class="small" x="698" y="331">x</text>
+  <text class="small" x="553" y="123">y</text>
+  <circle class="image" cx="579" cy="220" r="7"/>
+  <circle class="point" cx="547" cy="326" r="7"/>
+  <circle class="image" cx="653" cy="163" r="7"/>
+  <text class="txt" x="589" y="224">q(v)</text>
+  <text class="txt" x="556" y="350">q(U)=0</text>
+  <text class="small" x="575" y="278">one point for</text>
+  <text class="small" x="575" y="298">each vertical coset</text>
+</svg>

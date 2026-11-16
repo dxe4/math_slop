@@ -1,0 +1,15 @@
+var e=`---
+parent_id: book-representation-theory-finite-groups
+matter_id: references
+title: "References and Provenance"
+license: CC BY-SA 4.0
+---
+
+# References and Provenance
+
+The new exposition, proofs, worked examples and REP exercise sets are original Euler authoring under CC BY-SA 4.0. Chapters on character tables, symmetric groups and the character-table project begin from Euler's earlier CC BY-SA sources in Computational Algebra, whose original files and identities are preserved. Retention of those sources does not imply that a short survey already meets the expanded chapter commission.
+
+Jean-Pierre Serre, *Linear Representations of Finite Groups*, and Gordon James and Martin Liebeck, *Representations and Characters of Groups*, are the roadmap's depth benchmarks. No third-party prose is reproduced here. A bibliographic benchmark is not evidence of independent review.
+
+Each authored theorem states its field and finiteness assumptions and supplies its argument locally or links to an earlier proved result. All fourteen commissioned chapters are authored; the book is Draft. Chapter 4 proves character completeness directly through central group-algebra elements and the regular module; Chapter 5 links that proof in place of its earlier imported completeness statement. Chapter 6 proves the complex matrix-block decomposition, coefficient inversion and the algebraic-integer degree-divisibility argument. Chapter 7 proves induction, Frobenius reciprocity, transitivity, tensor compatibility and Mackey decomposition. Chapter 8 proves the Specht submodule theorem, dominance distinction, completeness, standard-basis straightening and hook-length formula. Its additional Murnaghan–Nakayama rule remains explicitly imported as a named theorem, with independent small-case calculations; the classification proof does not depend on it. Chapters 9–13 prove Burnside solvability, the indicator/real-form criterion, tensor and symmetric/exterior identities, Molien dimensions, worked group families, composition-factor uniqueness and cyclic modular block structure. Chapter 14 preserves the earlier exact S_4 computation and adds a specified finite matrix certificate with its soundness proof. This is source authorship, not independent review or program execution. No reviewer, executed software result, assembled release or print edition is claimed.
+`;export{e as default};

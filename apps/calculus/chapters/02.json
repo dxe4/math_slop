@@ -1,0 +1,502 @@
+{
+  "id": "02",
+  "title": "Algebra, trigonometry, and coordinates",
+  "subtitle": "How can algebra, angle measurement, and units make a calculus calculation trustworthy?",
+  "prerequisites": [
+    "Chapter 1: domains, functions, intervals, and equivalent statements.",
+    "School arithmetic, fractions, and solving simple linear equations."
+  ],
+  "objectives": [
+    "Simplify rational expressions while retaining their original domain restrictions.",
+    "Use powers and logarithms with explicit real-number assumptions.",
+    "Interpret radians, unit-circle identities, and Cartesian and polar coordinates.",
+    "Check dimensional consistency and investigate the accuracy of sin θ ≈ θ.",
+    "Derive hyperbolic identities and select the correct real inverse branches."
+  ],
+  "sections": [
+    {
+      "title": "Factoring changes the view, not the allowed inputs",
+      "paragraphs": [
+        "Calculus frequently asks us to compare two nearby function values. The resulting fractions may look complicated even when their structure is simple. Factoring reverses multiplication: $x^2-9$ becomes $(x-3)(x+3)$, and $x^2+5x+6$ becomes $(x+2)(x+3)$. You can check either statement by multiplying out. The first is a difference of squares; the second works because $2$ and $3$ have sum $5$ and product $6$. Before searching for a clever pattern, take out any common factor.",
+        "Cancellation means dividing numerator and denominator by the same nonzero factor. Thus $\\frac{x^2-9}{x-3}=x+3$ for $x\\ne3$. The original expression still has no value at 3. The polynomial on the right defines an extension to an extra input, rather than repairing the original fraction automatically. Chapter 1 treated a domain as part of a function; here that principle prevents a small algebraic change from becoming a false claim about functions.",
+        "Terms joined by addition cannot simply be cancelled. For example, $\\frac{x+2}{x}$ is $1+\\frac2x$ for $x\\ne0$, not $2$. When adding fractions, first choose a common denominator: $\\frac1x+\\frac1{x+1}=\\frac{2x+1}{x(x+1)}$, with $x\\ne0$ and $x\\ne-1$. Record these restrictions before simplifying, since a later cancellation can hide them.",
+        "Rationalizing is another way to reveal a useful factor. Multiplying $\\sqrt{1+h}-1$ by its conjugate $\\sqrt{1+h}+1$ produces $h$. Therefore $\\frac{\\sqrt{1+h}-1}{h}$ equals $\\frac1{\\sqrt{1+h}+1}$ when $h\\ge-1$ and $h\\ne0$. The endpoint $h=-1$ is allowed; $h=0$ is not. Later we will use the second expression to understand behavior near zero without pretending the first expression is defined there.",
+        "A factorization is an identity on all real inputs where both polynomial sides are defined: $x^2-9=(x-3)(x+3)$. Dividing that identity by $x-3$ is a new operation that requires $x\\ne3$. The quotient function $\\frac{x^2-9}{x-3}$ and the polynomial $x+3$ agree on their shared domain but have different natural domains. When a later limit approaches three, the simplified expression can reveal nearby behavior without assigning a value to the original quotient at three.",
+        "For $\\frac{x^2+3x}{x^2-9}$, factor $\\frac{x(x+3)}{(x-3)(x+3)}$. The denominator vanishes at both $x=3$ and $x=-3$, so both are excluded before cancellation. For $x\\ne\\pm3$, the quotient simplifies to $\\frac{x}{x-3}$. The cancelled factor leaves a removable hole at −3, while $x=3$ remains a denominator zero in the simplified formula. A graph that draws only the simplified curve without labeling the hole misrepresents the original function.",
+        "The difference of squares $a^2-b^2=(a-b)(a+b)$ is especially useful when comparing nearby values. For example $\\frac{(x+h)^2-x^2}{h}$ factors as $\\frac{h(2x+h)}h=2x+h$ for $h\\ne0$. The cancellation exposes the behavior as $h$ approaches zero, but the original difference quotient still excludes $h=0$. This is the algebraic bridge to a derivative: the limiting slope can exist even though a finite difference quotient is undefined at exactly zero step.",
+        "Rationalizing should preserve sign and domain. For $h\\ge-1$ and $h\\ne0$, $\\frac{\\sqrt{1+h}-1}{h}=\\frac1{\\sqrt{1+h}+1}$. The conjugate is positive on this domain, so no extra zero appears in the denominator. At $h=-1$ the original fraction is $\\frac{0-1}{-1}=1$, and the rationalized expression is also one. At $h=0$ the original quotient is undefined, while the rationalized expression is defined and equals $\\frac12$. The latter extends the original function continuously to that missing input.",
+        "Common-denominator work should be checked by substitution at an allowed value. For $\\frac1x+\\frac1{x+1}$, the correct numerator is $(x+1)+x=2x+1$ over $x(x+1)$, with $x\\ne0,-1$. At $x=1$ the original sum is $1+\\frac12=\\frac32$, and the combined fraction gives $\\frac32$. This quick check can catch a missing term, but one numerical agreement does not prove the identity. Cross-multiplication or direct algebra on the common domain supplies the proof.",
+        "A difference quotient is a function of both a base point and a nonzero step. At base $x$, the quotient for $f(u)=u^2$ is $\\frac{(x+h)^2-x^2}{h}=2x+h$, valid only for $h\\ne0$. If $x$ is fixed and $h$ approaches zero, the outputs approach $2x$. If $h$ is fixed and $x$ changes, a different comparison is being made. Writing the variables and restrictions explicitly helps later when partial derivatives hold some inputs fixed and vary others. The algebraic simplification is the starting point of a limit argument, not a replacement for one."
+      ],
+      "formula": "a² − b² = (a − b)(a + b); cancellation requires a nonzero factor.",
+      "formulaTex": "a^2-b^2=(a-b)(a+b)"
+    },
+    {
+      "title": "Powers and logarithms are inverse languages",
+      "paragraphs": [
+        "For a positive real base $a$, powers satisfy $a^sa^t=a^{s+t}$, $a^s/a^t=a^{s-t}$, and $(a^s)^t=a^{st}$ for real $s$ and $t$. The positivity assumption keeps arbitrary real powers within the real numbers and avoids branch ambiguities. For nonzero $a$, integer powers also permit negative bases: $a^0=1$ and $a^{-n}=1/a^n$. Zero to a negative power is undefined. In this chapter we also leave $0^0$ undefined rather than adopting a context-specific convention.",
+        "A fractional power involves a root. For $x\\ge0$, $x^{\\frac12}$ means the nonnegative square root, so $\\sqrt{x^2}=|x|$ for real $x$. At $x=-4$ the result is 4, not −4. Odd roots allow negative inputs, such as the real cube root of −8 being −2; nevertheless unrestricted rules for arbitrary real exponents should be used with positive bases. Also remember that $(a+b)^2=a^2+2ab+b^2$: powers do not distribute over addition.",
+        "For $b>0$ and $b\\ne1$, $\\log_b x$ is the exponent $y$ satisfying $b^y=x$, and its real domain is $x>0$. Consequently $\\log_b(b^y)=y$ for every real $y$, and $b^{\\log_b x}=x$ for $x>0$. The natural logarithm $\\ln$ uses the base $e$, approximately 2.71828. The inverse relationship is the important idea here; later calculus explains why this particular base is especially convenient.",
+        "For positive $u$ and $v$, $\\ln(uv)=\\ln u+\\ln v$, $\\ln\\left(\\frac uv\\right)=\\ln u-\\ln v$, and $\\ln(u^r)=r\\ln u$ for real $r$. These rules translate multiplication into addition because exponential multiplication adds exponents. There is no corresponding rule $\\ln(u+v)=\\ln u+\\ln v$; $u=v=1$ already disproves it. Solve logarithmic equations with the input restrictions visible. In $\\ln(x-1)=\\ln3$, the requirement $x>1$ is satisfied by the solution $x=4$. Change of base gives $\\log_b x=\\frac{\\ln x}{\\ln b}$.",
+        "Power rules have domain conditions. The identity $x^{\\frac12}x^{\\frac12}=x$ holds for $x\\ge0$ in real arithmetic. Rewriting $x^{\\frac12}$ as $\\sqrt x$ for negative $x$ would leave the real number system. The tempting identity $\\sqrt{x^2}=x$ fails for $x<0$; the correct result is $|x|$. For rational exponents with odd denominators, negative inputs may be meaningful in a real-root convention, but the safest approach is to state the domain before combining exponents.",
+        "Exponential functions with base $b>0,b\\ne1$ map all real inputs to positive outputs. If $b>1$, the function increases; if $0<b<1$, it decreases. Its inverse $\\log_b$ is therefore defined only for positive inputs. Solving $b^x=c$ with $c>0$ gives $x=\\log_b c$. The logarithm does not turn nonpositive values into real numbers, so an equation involving $\\ln(x-1)$ begins with $x>1$ even if later algebra produces other roots.",
+        "To solve $\\ln(x-1)+\\ln(x+1)=\\ln8$, first require $x-1>0$ and $x+1>0$, hence $x>1$. Combine logs to get $\\ln((x-1)(x+1))=\\ln8$, so $x^2-1=8$. Algebra gives $x=\\pm3$, but only $x=3$ belongs to the original domain. Checking candidate roots in the original equation is essential after any operation that changes the visible domain. A formal polynomial solution can include extraneous values.",
+        "The equation $\\ln u+\\ln v=\\ln(u+v)$ is generally false. At $u=v=1$, the left side is zero while the right side is $\\ln2$. Log rules mirror multiplication, division, and powers of positive quantities, not addition. One can test a proposed identity against simple positive values before using it. An attractive simplification that fails at one allowed input is not an identity, no matter how often it appears in a symbolic manipulation.",
+        "The change-of-base formula $\\log_b x=\\frac{\\ln x}{\\ln b}$ follows because $b^y=x$ implies $y\\ln b=\\ln x$. Its denominator is nonzero when $b\\ne1$. This lets one compare logarithms with different bases and gives a way to compute them from a natural-log key. If $b$ is between zero and one, $\\ln b$ is negative, so $\\log_b$ decreases as $x$ increases. This sign explains inequality reversals when applying a decreasing logarithm base.",
+        "Logarithms also carry sign information. Because $\\ln$ is increasing, $\\ln u<\\ln v$ is equivalent to $u<v$ when $u$ and $v$ are positive. If the base lies between zero and one, $\\log_b$ is decreasing and the inequality direction reverses. For example $\\log_{\\frac12}(\\frac14)=2$ while $\\log_{\\frac12}(\\frac12)=1$, even though $\\frac14<\\frac12$. A method that applies logarithms to an inequality without noting the base and positive domain can produce a reversed or meaningless result."
+      ],
+      "formula": "bʸ = x ⇔ y = log_b x, with b > 0, b ≠ 1, and x > 0.",
+      "formulaTex": "\\begin{gathered}b^y=x\\iff y=\\log_b x,\\\\ b>0,\\quad b\\ne1,\\quad x>0.\\end{gathered}"
+    },
+    {
+      "title": "Radians put angles on a numerical scale",
+      "paragraphs": [
+        "An angle in radians is the signed arc length on a circle divided by its radius: $\\theta=s/r$. A complete counterclockwise turn has angle $2\\pi$ because the circumference is $2\\pi r$. Thus $180^\\circ$ equals $\\pi$ radians, and degrees convert to radians by multiplication by $\\pi/180$. Clockwise rotation gives a negative angle. Radius and arc length must use the same length unit; their ratio is dimensionless, although the label rad records which angular convention is intended.",
+        "On the unit circle, the point reached at angle $\\theta$ has coordinates $(\\cos\\theta,\\sin\\theta)$. This definition covers all real angles, including those outside a single revolution. At angles $0$, $\\frac\\pi2$, $\\pi$, and $\\frac{3\\pi}2$ the points are $(1,0)$, $(0,1)$, $(-1,0)$, and $(0,-1)$. An equilateral triangle split in half gives $\\sin(\\frac\\pi6)=\\frac12$ and $\\cos(\\frac\\pi6)=\\frac{\\sqrt3}2$; an isosceles right triangle gives $\\sin(\\frac\\pi4)=\\cos(\\frac\\pi4)=\\frac{\\sqrt2}2$. Signs elsewhere follow from the quadrant.",
+        "Adding $2\\pi$ returns to the same point, so sine and cosine have period $2\\pi$. Reflection across the horizontal axis shows $\\sin(-\\theta)=-\\sin\\theta$ and $\\cos(-\\theta)=\\cos\\theta$. The ratio $\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}$ is defined only when $\\cos\\theta\\ne0$, excluding $\\theta=\\frac\\pi2+k\\pi$ for integers $k$. A calculator value near a very large tangent should prompt a domain check, not confidence that the exact value is finite.",
+        "For small radian angles, $\\sin\\theta$ is close to $\\theta$. This is an approximation, not an identity: $\\sin(0.1)\\approx0.0998334$. Geometrically, a short unit-circle arc is close in length to its vertical displacement. Chapter 4 will make the limiting statement precise, and Chapter 17 will supply quantitative polynomial error bounds. The current lab records evidence. Using a numerical angle in degrees in place of $\\theta$ destroys the approximation: $\\sin1^\\circ\\approx0.0174524$, not about 1.",
+        "Radian measure is dimensionless because arc length is divided by radius, both lengths. Yet it carries a geometric convention: one radian is the angle subtending an arc equal in length to the radius. A degree value must be multiplied by $\\frac\\pi{180}$ before entering formulas derived with radians. For example $30^\\circ$ is $\\frac\\pi6$ radians. If a formula uses angular speed $\\omega$ in radians per second, then $\\omega t$ is dimensionless as required inside sine or cosine.",
+        "Quadrant signs can be read from the unit circle. In quadrant II, $x=\\cos\\theta$ is negative and $y=\\sin\\theta$ is positive, so $\\tan\\theta$ is negative. If $\\cos\\theta=-\\frac5{13}$ there, the identity $\\sin^2\\theta+\\cos^2\\theta=1$ gives $\\sin\\theta=+\\frac{12}{13}$ and $\\tan\\theta=-\\frac{12}5$. The positive square-root branch for sine is chosen from the stated quadrant, not from the algebraic identity alone. A sign diagram prevents a common wrong-root error.",
+        "Periodicity gives entire families of solutions. The equation $\\sin\\theta=0$ holds at $\\theta=k\\pi$ for any integer $k$, not just $\\theta=0$. When a problem restricts $0\\le\\theta<2\\pi$, only $\\theta=0$ and $\\theta=\\pi$ remain. Endpoint $2\\pi$ is excluded because it represents the same unit-circle point as zero but lies outside the half-open interval. Recording the specified angle range is part of solving a trigonometric equation, just as recording a function domain is part of algebra.",
+        "The relation between arc length and angle is $s=r\\theta$ for a circle of radius $r$ when $\\theta$ is in radians and the arc follows one signed direction. A sector's area is $\\frac12r^2\\theta$ for $\\theta\\ge0$ within the ordinary one-turn picture; it follows from the fraction $\\frac\\theta{2\\pi}$ of the full disk area $\\pi r^2$. These formulas give a geometric reason to use radians. Replacing $\\theta$ by a raw degree number would multiply the result by an incorrect factor of $\\frac{180}\\pi$.",
+        "For small positive $\\theta$, the unit-circle geometry gives $\\sin\\theta\\le\\theta\\le\\tan\\theta$ within $0<\\theta<\\frac\\pi2$. For $0<\\theta<\\pi/2$, $0\\le\\sin\\theta\\le\\theta$, so $0\\le1-\\cos\\theta=\\sin^2\\theta/(1+\\cos\\theta)\\le\\theta^2$ and $\\cos\\theta\\to1$ without assuming a trigonometric limit. Since $\\cos\\theta\\le\\sin\\theta/\\theta\\le1$, the squeeze theorem gives $\\sin\\theta/\\theta\\to1$ as $\\theta\\to0$. The same limit from negative $\\theta$ follows by oddness. This is more than a plotted approximation: it is the foundation for differentiating sine in chapter 6. At finite angles, the difference remains nonzero and should be quantified if used in a model. To see the geometric inequality for $0<\\theta<\\pi/2$, compare the inscribed triangle, unit sector, and outer tangent triangle. They are nested and have respective areas $\\sin\\theta/2$, $\\theta/2$, and $\\tan\\theta/2$. Containment gives $\\sin\\theta\\le\\theta\\le\\tan\\theta$.",
+        "The small-angle comparison can be made quantitative near zero. For $|\\theta|\\le1$ radian, Taylor's theorem later gives $|\\sin\\theta-\\theta|\\le\\frac{|\\theta|^3}6$. At $\\theta=0.1$ this upper bound is about 0.0001667, consistent with $\\sin0.1\\approx0.0998334$. The error is absolute angle-to-output difference; relative error compared with $\\theta$ is at most $\\frac{\\theta^2}6$ when $\\theta\\ne0$. At a fixed engineering tolerance, this bound can determine when replacing sine by its angle is acceptable. A degree number must first be converted to radians.",
+        "The unit-circle limit prepares a later calculation: Chapter 6 derives the sine derivative and explains the conversion factor for degree input. For now, use radian arc length and the geometric comparison without differentiating. In a physical model, a wheel turning at $2\\,\\mathrm{rad/s}$ has angular rate $2$ per second, while a point on its rim at radius $r$ metres has tangential speed $2r\\,\\mathrm{m/s}$. The arc-length relation $s=r\\theta$ explains the units; the chain rule in Chapter 6 formalizes rates when the angular speed varies."
+      ],
+      "formula": "θ in radians = (angle in degrees)π/180; sin θ ≈ θ near θ = 0.",
+      "formulaTex": "\\begin{gathered}\\theta_{\\mathrm{rad}}=\\frac{\\pi}{180}\\,\\theta_{\\mathrm{deg}},\\\\ \\sin\\theta\\approx\\theta\\quad(\\theta\\to0\\text{ in radians}).\\end{gathered}",
+      "theorems": [
+        {
+          "title": "The unit circle ties identities to coordinates",
+          "statement": "If a point on the unit circle makes angle $\\theta$ with the positive horizontal axis, its coordinates are $(\\cos\\theta,\\sin\\theta)$ and satisfy $\\cos^2\\theta+\\sin^2\\theta=1$.",
+          "equationTex": "\\cos^2\\theta+\\sin^2\\theta=1",
+          "proof": [
+            "A circle of radius one centered at the origin is the set of points $(x,y)$ satisfying $x^2+y^2=1$. Defining cosine and sine as the horizontal and vertical coordinates of the angle point therefore gives the identity immediately. It holds in every quadrant; sine or cosine may be negative, while their squares remain nonnegative. Dividing by $\\cos^2\\theta$ where cosine is nonzero gives $1+\\tan^2\\theta=1/\\cos^2\\theta$. The division is not permitted at the angles where cosine vanishes.",
+            "On a circle of radius $r>0$, the corresponding point is $(r\\cos\\theta,r\\sin\\theta)$. The radius measured in length units multiplies both dimensionless trig coordinates. In radian measure, a central angle $\\theta$ subtends signed arc length $s=r\\theta$; for a nonnegative central angle below a full turn, ordinary arc length is also $r\\theta$. This is why radians appear naturally when geometric motion is differentiated later.",
+            "The identity can check a numerical pair: if a claimed point on the unit circle has cosine $3/5$ and positive sine, then sine must be $4/5$, not an unrelated decimal. But the identity alone does not identify the quadrant, because both $4/5$ and $-4/5$ have the same square. Geometry and domain information remain part of the calculation."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Identities are equalities with conditions",
+      "paragraphs": [
+        "Every unit-circle point satisfies $x^2+y^2=1$. Substituting $x=\\cos\\theta$ and $y=\\sin\\theta$ proves $\\sin^2\\theta+\\cos^2\\theta=1$ for every real $\\theta$. Here $\\sin^2\\theta$ means $(\\sin\\theta)^2$, not $\\sin(\\theta^2)$. Dividing by $\\cos^2\\theta$ gives $1+\\tan^2\\theta=\\sec^2\\theta$, where $\\sec\\theta=1/\\cos\\theta$, but now only for $\\cos\\theta\\ne0$. An identity inherited by division may have a narrower domain than the identity that produced it.",
+        "The angle-addition formulas are $\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta$ and $\\cos(\\alpha+\\beta)=\\cos\\alpha\\cos\\beta-\\sin\\alpha\\sin\\beta$. One geometric explanation is that rotation by $\\alpha$ maps coordinates $(x,y)$ to $(x\\cos\\alpha-y\\sin\\alpha,\\,x\\sin\\alpha+y\\cos\\alpha)$; apply this to the unit-circle point at $\\beta$. Setting $\\beta=\\alpha$ yields $\\sin(2\\alpha)=2\\sin\\alpha\\cos\\alpha$ and $\\cos(2\\alpha)=\\cos^2\\alpha-\\sin^2\\alpha=1-2\\sin^2\\alpha=2\\cos^2\\alpha-1$. These equivalent forms help replace a square by a doubled angle in later integration. The rotation formula follows from its action on a basis: $(1,0)$ goes to $(\\cos\\alpha,\\sin\\alpha)$ and the perpendicular vector $(0,1)$ goes to $(-\\sin\\alpha,\\cos\\alpha)$. A rotation sends their linear combination $x(1,0)+y(0,1)$ to the same linear combination of those images, giving the displayed coordinate rule.",
+        "To verify an identity, transform one side using equalities valid on the common domain. Squaring an equation can introduce extra solutions because $a^2=b^2$ permits $a=b$ or $a=-b$. Similarly, dividing an equation by $\\sin\\theta$ can discard solutions where $\\sin\\theta=0$. In $2\\sin^2\\theta=\\sin\\theta$, factoring gives $\\sin\\theta(2\\sin\\theta-1)=0$, preserving both possibilities. An algebraic operation must be judged by what it does to the solution set, not only by whether the expression looks simpler.",
+        "To solve $2\\sin^2\\theta=\\sin\\theta$ on $0\\le\\theta<2\\pi$, move terms to one side and factor $\\sin\\theta(2\\sin\\theta-1)=0$. The first factor gives $\\theta=0,\\pi$ in the interval. The second gives $\\sin\\theta=\\frac12$, hence $\\theta=\\frac\\pi6$ or $\\frac{5\\pi}6$. Dividing the original equation by $\\sin\\theta$ would discard the zero-sine solutions. Factoring retains all branches and makes the domain restriction easy to apply.",
+        "An identity and an equation play different roles. $\\sin^2\\theta+\\cos^2\\theta=1$ is true for every real $\\theta$, while $\\sin\\theta=\\frac12$ is true only for particular angles. To prove an identity, transform expressions on their common domain. To solve an equation, find all inputs where equality holds, then check any roots introduced by squaring or lost by division. This distinction prevents treating a step that changes the solution set as if it were a reversible identity.",
+        "A rotation by angle $\\theta$ preserves distance from the origin. Its coordinate matrix has columns $(\\cos\\theta,\\sin\\theta)$ and $(-\\sin\\theta,\\cos\\theta)$; their dot product is zero and each has length one. Applying this matrix to a unit vector gives the angle-addition formulas. This connects trigonometric identities to vector geometry and explains why $\\cos^2\\theta+\\sin^2\\theta=1$ is also a statement about orthonormal coordinates. Later dot products and polar changes of variables build on the same structure.",
+        "The tangent function is undefined where $\\cos\\theta=0$, even though $\\sin\\theta$ remains perfectly defined. Therefore $\\tan^2\\theta+1=\\sec^2\\theta$ is an identity only where $\\cos\\theta\\ne0$. An equation involving $\\tan\\theta$ may omit angles at which tangent is undefined; those angles cannot be added as solutions merely because a cross-multiplied polynomial vanishes there. Label the original domain before clearing trigonometric denominators.",
+        "When solving equations built from identities, track reversibility line by line. Replacing $\\cos^2\\theta$ by $1-\\sin^2\\theta$ is reversible for every real $\\theta$. Multiplying an equation by $\\cos\\theta$ can create candidate solutions where $\\cos\\theta=0$ if the original equation was undefined there; dividing by $\\cos\\theta$ can remove valid zeros if it was defined. Squaring both sides can admit opposite-sign pairs. A final substitution into the original equation and a check of its domain settle which candidates survive."
+      ],
+      "formula": "sin(2θ) = 2sin θ cos θ; cos(2θ) = 1 − 2sin² θ.",
+      "formulaTex": "\\begin{aligned}\\sin(2\\theta)&=2\\sin\\theta\\cos\\theta,\\\\ \\cos(2\\theta)&=1-2\\sin^2\\theta.\\end{aligned}"
+    },
+    {
+      "title": "Coordinates and dimensions describe the same object differently",
+      "paragraphs": [
+        "Cartesian coordinates locate a point by signed horizontal and vertical distances $(x,y)$. Polar coordinates use a radius $r$ and angle $\\theta$: $x=r\\cos\\theta$ and $y=r\\sin\\theta$. With $r\\ge0$, a nonzero point has $r=\\sqrt{x^2+y^2}$. Choose $\\theta$ using both coordinate signs: $\\tan\\theta=y/x$ alone cannot distinguish opposite quadrants and fails when $x=0$. A computational atan2(y,x) function handles the quadrants. At the origin, $r=0$ and every angle represents the same point.",
+        "Polar coordinates are not unique. Adding $2\\pi k$ to $\\theta$ preserves the point, and if negative radii are allowed, $(-r,\\theta)$ represents the same point as $(r,\\theta+\\pi)$. We normally choose $r\\ge0$ and an angle in one stated interval, such as $[0,2\\pi)$. The point $(-\\sqrt3,1)$ has $r=2$ and $\\theta=\\frac{5\\pi}6$. Substitution gives $2\\cos(\\frac{5\\pi}6)=-\\sqrt3$ and $2\\sin(\\frac{5\\pi}6)=1$. This check is more dependable than accepting the first inverse-tangent output.",
+        "Dimensions describe the kind of quantity being measured. Terms added or equated must have the same dimensions. If $v$ is a speed and $t$ a time, $vt$ is a length, while $v+t$ has no ordinary physical meaning. A formula $x(t)=A\\sin(\\omega t+\\phi)$ is dimensionally consistent when $x$ and $A$ are lengths, $\\omega$ has units rad per unit time, and $\\phi$ is an angle in radians. Trigonometric arguments use dimensionless radian measures; an exponential or logarithm also needs a dimensionless argument, such as $\\ln\\left(\\frac L{L_0}\\right)$ for positive reference length $L_0$.",
+        "Dimensional consistency is necessary but does not prove a model. Both $r^2$ and $7r^2$ have dimensions of area, yet neither identifies a circle’s area without geometric information. Build your reference sheet by writing each rule alongside its domain and one checking example. Include angle conversion, both coordinate conversions, logarithm restrictions, and a units check. This habit prepares you to diagnose later calculus errors: a wrong constant, a missing domain restriction, and an incompatible unit are different problems.",
+        "For the Cartesian point $(-3,-3)$, radius is $\\sqrt{18}=3\\sqrt2$. Both coordinates are negative, so the point lies in quadrant III and one angle in $[0,2\\pi)$ is $\\frac{5\\pi}4$. The pair $(3\\sqrt2,\\frac{5\\pi}4)$ is a standard polar representation. Adding $2\\pi$ gives another equivalent angle; using radius $-3\\sqrt2$ with angle $\\frac\\pi4$ also represents the point if negative radii are permitted. A bare $\\arctan\\left(\\frac yx\\right)=\\frac\\pi4$ would miss the correct quadrant.",
+        "The polar map $x=r\\cos\\theta,y=r\\sin\\theta$ turns $r^2$ into $x^2+y^2$. A circle centered at the origin is $r=R$, and a ray from the origin is $\\theta=\\text{constant}$, subject to $r\\ge0$. A circle not centered at the origin usually has a radius bound that depends on $\\theta$. Polar coordinates simplify radial symmetry but are not automatically better for a rectangle. Chapter 24 will account for how polar coordinate cells change area; for now, the map's geometry is the focus.",
+        "Coordinate descriptions are not always unique. At the origin, $r=0$ and every angle $\\theta$ represents the same point, so “the angle of the origin” is not defined. A polar formula that divides by $r$ must exclude that point or be interpreted by a limit. For a nonzero point, choosing $r>0$ and $\\theta$ in a half-open interval of length $2\\pi$ gives exactly one representative; the half-open endpoint convention resolves the seam. Explicit coordinate conventions avoid duplicate counting in later integrals.",
+        "Dimensional analysis can expose a missing square or rate. In $x(t)=A\\sin(\\omega t+\\phi)$, $x$ and $A$ have length units, $\\omega$ has inverse-time units, and $\\phi$ is an angle in radians. If the proposed expression is $A\\sin t+vt^2$ with $v$ in metres per second and $t$ in seconds, it has two faults: the sine argument has time units, and the second term has metre-seconds, so it cannot be added to a length. Replacing it with $A\\sin(\\omega t+\\phi)+\\frac12at^2$, where $\\omega$ has inverse-time units and acceleration $a$ has metres per second squared, repairs the dimensions, though the model's dynamics would still need justification.",
+        "A dimensionless argument is required for logarithms and exponentials in a physical model. Writing $\\ln t$ when $t$ is measured in seconds is shorthand at best; one should write $\\ln\\left(\\frac t{t_0}\\right)$ for a reference time $t_0>0$. Similarly $e^{-kt}$ requires $k$ in inverse-time units. Dimensional consistency cannot prove an equation, but violating it proves the equation cannot describe the stated quantities without omitted scaling constants. This check will be reused in rates, differential equations, and probability densities.",
+        "Polar and Cartesian coordinates can express the same distance differently: $r=\\sqrt{x^2+y^2}$, so the distance from the origin is nonnegative regardless of quadrant. The angle alone does not determine position because many radii lie on one ray. The radius alone does not determine direction because a circle contains many points. This two-coordinate description illustrates a theme repeated in multivariable calculus: a coordinate map translates a geometric object, and different coordinate choices make different symmetries visible. The object itself does not change when its labels do."
+      ],
+      "formula": "x = r cos θ, y = r sin θ, r = √(x² + y²) for r ≥ 0.",
+      "formulaTex": "\\begin{aligned}x&=r\\cos\\theta,&y&=r\\sin\\theta,\\\\ r&=\\sqrt{x^2+y^2}\\ge0,&\\theta&\\in\\mathbb R.\\end{aligned}"
+    },
+    {
+      "title": "A ramp model checks angles, slopes, and units",
+      "paragraphs": [
+        "A ramp rising $h$ metres over horizontal run $d$ metres makes an angle $\\theta$ with the horizontal, where $\\tan\\theta=h/d$ for $d>0$. If $h=1$ m and $d=12$ m, its grade is $h/d=1/12\\approx0.08333$, commonly reported as $8.33\\%$. The angle is $\\arctan(1/12)\\approx0.08314$ radians, or about $4.76$ degrees. Grade, angle in radians, and angle in degrees are three different numbers describing the same geometry; they must not be interchanged in a formula.",
+        "The ramp length is the hypotenuse $L=\\sqrt{d^2+h^2}=\\sqrt{145}\\,\\mathrm m\\approx12.0416\\,\\mathrm m$. Trigonometry checks the geometry: $\\sin\\theta=\\frac hL=\\frac1{\\sqrt{145}}$ and $\\cos\\theta=\\frac dL=\\frac{12}{\\sqrt{145}}$, so $\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}=\\frac1{12}$. These identities hold exactly even when displayed decimals are rounded. Since a ratio of two lengths is dimensionless, it is a valid argument for $\\arctan$.",
+        "For a shallow ramp, $\\theta$ in radians is close to $\\frac hd$, but “close” depends on scale and tolerance. The exact relation is $\\theta=\\arctan\\left(\\frac hd\\right)$; replacing $\\arctan z$ by $z$ is a small-angle approximation, not an identity. At grade $\\frac1{12}$ the difference is roughly 0.000192 radians. At a much steeper grade, the replacement can be materially wrong. The book later explains such differences with Taylor error bounds.",
+        "Coordinate axes must also be stated. A 1-in-12 rise over horizontal run does not mean one metre of rise per 12 metres of ramp surface, and percent grade is not a percent of the angle. A labeled right triangle and a unit check prevent both confusions before any calculus begins.",
+        "The grade $\\frac hd$ is a ratio of two lengths and therefore dimensionless. As a percentage it is $\\frac{100h}d$ percent. The ramp angle is $\\arctan\\left(\\frac hd\\right)$ in radians, while the surface length is $\\sqrt{d^2+h^2}$ in metres. These are three different outputs: ratio, angle, and distance. A report should label each, because a value such as 0.083 can mean a grade fraction or an angle in radians and the two are only approximately equal for a shallow ramp.",
+        "For a rise of 0.75 m over 9 m, grade is $\\frac{0.75}9=\\frac1{12}$, or $8\\frac13$ percent. Surface length is $\\sqrt{9^2+0.75^2}\\,\\mathrm m$, equivalently $\\sqrt{81.5625}\\,\\mathrm m$ or $\\frac{3\\sqrt{145}}4\\,\\mathrm m$. These are three exact forms of the same surface length: the first follows the right triangle, the second evaluates its radicand, and the third simplifies the radical. The angle is $\\arctan\\left(\\frac1{12}\\right)$. A good exact solution keeps the radical and inverse tangent before rounding. Rounded decimals can then be supplied to the precision warranted by measured lengths. Exact and approximate answers serve different purposes.",
+        "For $z\\ge0$, let $\\theta=\\arctan z$. The earlier unit-sector inequality gives $\\sin\\theta\\le\\theta\\le\\tan\\theta=z$, while $\\sin\\theta=z/\\sqrt{1+z^2}$. Hence $0\\le z-\\arctan z\\le z-z/\\sqrt{1+z^2}$. Rationalizing the last difference gives $z^3/[\\sqrt{1+z^2}(\\sqrt{1+z^2}+1)]\\le z^3/2$. At grade $z=1/12$, this elementary bound is about $0.0002894$ radians; the actual error is about $0.0001921$. Later integration sharpens the bound to $z^3/3$. The inequality certifies the approximation over a range, whereas a plotted comparison alone cannot. Problem 31 can be attempted now with this unit-sector bound, including $z=0$ where both sides vanish. Its sharper integral-based hint and solution are an optional Chapter 11 return: the current geometric argument gives an independently complete answer at this point in the route.",
+        "If the ramp has a horizontal run $d$ and surface length $L$, then $\\cos\\theta=\\frac dL$; if someone reports “one metre rise per twelve metres of ramp,” the ratio is $\\frac hL=\\sin\\theta$ instead of $\\frac hd=\\tan\\theta$. For small angles the two are close, but they are not the same definition. Draw the right triangle and label which side is measured. A change in measurement convention can matter when a design must satisfy a strict maximum grade.",
+        "Measurement uncertainty propagates through the model. For measured changes $\\Delta h,\\Delta d$ with $d>0$ and $d+\\Delta d>0$, exact subtraction gives $(h+\\Delta h)/(d+\\Delta d)-h/d=(d\\Delta h-h\\Delta d)/[d(d+\\Delta d)]$. If $|\\Delta d|$ is small compared with $d$, replacing $d+\\Delta d$ in the denominator by $d$ yields the first-order estimate $\\Delta g\\approx\\Delta h/d-h\\Delta d/d^2$. Both input changes have length units; the grade change is dimensionless. This preview of differentials does not manufacture extra precision from rough measurements.",
+        "For the ramp, the exact grade-to-angle map $\\theta=\\arctan g$ is increasing but not linear. Doubling grade from $g$ to $2g$ does not exactly double angle; the difference becomes more visible on steep slopes. Its derivative, derived later, is $\\frac1{1+g^2}$, so angle sensitivity per unit grade decreases as grade grows. This explains why a fixed uncertainty in measured grade produces a smaller angular uncertainty at large grades than the naive $\\theta\\approx g$ rule predicts. For the shallow example $g=\\frac1{12}$, the linear approximation is close because $g^2$ is small.",
+        "A final presentation should carry exact forms as long as possible. If measurements $h$ and $d$ are given to only a few significant figures, computing $\\sqrt{d^2+h^2}$ and $\\arctan\\left(\\frac hd\\right)$ with full calculator precision is useful internally, but reporting ten decimal places would imply unsupported measurement accuracy. State the exact symbolic result when the inputs are treated as exact; then round an applied result to a sensible precision and label the units. This separates algebraic accuracy from measurement uncertainty and makes the answer easier to inspect. The same discipline will matter in numerical integration and differential-equation simulations.",
+        "A useful ramp check begins with the question of which length was measured. If the horizontal run is $d$ and the incline angle is $\\theta$, the rise is $d\\tan\\theta$ and the ramp length is $d/\\cos\\theta$. If the ramp length is instead $L$, the same rise is $L\\sin\\theta$ and the run is $L\\cos\\theta$. These descriptions agree when $d=L\\cos\\theta$; mixing $d$ and $L$ in one formula gives a plausible-looking but wrong answer. Test the result at $\\theta=0$ and as $\\theta$ approaches a right angle, and state whether the model still describes a buildable ramp."
+      ],
+      "formula": "grade=h/d=tan θ; ramp length L=√(d²+h²).",
+      "formulaTex": "\\begin{aligned}\\text{grade}&=\\frac{h}{d}=\\tan\\theta&& (d>0),\\\\ L&=\\sqrt{d^2+h^2}&&(h\\ge0).\\end{aligned}"
+    },
+    {
+      "title": "Hyperbolic functions and real inverse branches",
+      "paragraphs": [
+        "Define $\\sinh t=(e^t-e^{-t})/2$ and $\\cosh t=(e^t+e^{-t})/2$ for every real $t$. The difference of their squares is $[(e^t+e^{-t})^2-(e^t-e^{-t})^2]/4=e^te^{-t}=1$. Their parity follows by replacing $t$ with $-t$. Since $\\cosh t>0$, $\\tanh t=\\sinh t/\\cosh t$ exists for every real $t$.",
+        "The point $(\\cosh t,\\sinh t)$ lies on the right branch of $x^2-y^2=1$. Here $t$ is a dimensionless hyperbolic parameter, neither a circular angle nor arc length. The strictly increasing $\\sinh$ has range $\\mathbb R$. The even $\\cosh$ has range $[1,\\infty)$ and needs the restriction $t\\ge0$ before it has a real inverse.",
+        "To solve $x=\\sinh t$, put $u=e^t>0$. The quadratic $u^2-2xu-1=0$ has the positive root $u=x+\\sqrt{x^2+1}$, even for negative $x$. Thus $\\operatorname{arsinh}x=\\ln(x+\\sqrt{x^2+1})$ on $\\mathbb R$. On $t\\ge0$, the same method gives $\\operatorname{arcosh}x=\\ln(x+\\sqrt{x^2-1})$ for $x\\ge1$. In particular, $\\operatorname{arcosh}(\\cosh t)=|t|$.",
+        "Finally $\\tanh t=(e^{2t}-1)/(e^{2t}+1)$. Positivity of the exponential makes the ratio strictly between $-1$ and $1$; its limiting values at the two infinite ends are not attained. Consequently $\\tanh(\\mathbb R)=(-1,1)$, a domain condition for its inverse.",
+        "The two exponential definitions also explain why hyperbolic and circular functions behave differently. Ordinary cosine stays between $-1$ and $1$, while $\\cosh t$ grows without bound in both time directions. A familiar-looking identity therefore does not make $t$ a circular angle. On the hyperbola, increasing $t$ raises the second coordinate throughout. The first coordinate decreases toward its minimum at $t=0$ for negative $t$, then increases away from that minimum for positive $t$. This geometric account matches the evenness of $\\cosh$ and oddness of $\\sinh$, and it prevents an unjustified interpretation of $t$ as arc length.",
+        "The exponential definitions show the ranges without using differentiation: if $t_2>t_1$, then $e^{t_2}>e^{t_1}$ while $e^{-t_2}<e^{-t_1}$, so $\\sinh t_2>\\sinh t_1$. Continuity and the limits $\\sinh t\\to\\pm\\infty$ at the respective ends give range $\\mathbb R$. The identity $\\cosh^2t=1+\\sinh^2t$ gives the lower bound one, attained at zero; evenness and exponential growth give its range $[1,\\infty)$. Thus the inverse branch is a mathematical choice, not merely a calculator convention. For $0\\le t_1<t_2$, strict increase and nonnegativity of $\\sinh$ give $\\sinh^2t_1<\\sinh^2t_2$. Hence $\\cosh t=\\sqrt{1+\\sinh^2t}$ is strictly increasing on the nonnegative branch, which makes its restricted inverse single-valued.",
+        "When deriving the inverse logarithm, the other quadratic root for $u=e^t$ is negative in the $\\sinh$ case and cannot equal an exponential. For $\\cosh$, both roots are positive reciprocals, corresponding to the two inputs $t$ and $-t$ of an even function. Restricting to $t\\ge0$ chooses the root at least one. A useful check is $\\operatorname{arsinh}(3/4)=\\ln2$ and $\\operatorname{arcosh}(5/4)=\\ln2$; the unrestricted equation $\\cosh t=5/4$ still has two solutions.",
+        "The strict range of $\\tanh$ is also visible without a derivative: the denominator $e^{2t}+1$ exceeds the absolute value of the numerator $e^{2t}-1$ for every finite real $t$. Solving $q=\\tanh t$ gives $e^{2t}=(1+q)/(1-q)$, a positive number exactly when $-1<q<1$. Thus $\\operatorname{artanh}q=\\frac12\\ln[(1+q)/(1-q)]$ on that open interval. At $q=\\pm1$ the equation would demand a zero or infinite exponential, so neither endpoint is an input to this real inverse. The value $q=0$ gives $t=0$; replacing $q$ by $-q$ changes the logarithm's sign, as expected from the oddness of $\\tanh$.",
+        "The five linked written problems for this lesson use exponential identities, inverse branches and dimensions; they require no derivative rule. The Chapter 02 further derivation and the sine-derivative concept check look ahead to Chapters 4–6. Treat those derivative passages as optional now, then return after Chapter 6 Lesson 3 develops the radian sine limit and chain rule. This return leaves the present branch and range reasoning intact."
+      ],
+      "formula": "sinh t=(e^t-e^(-t))/2; cosh t=(e^t+e^(-t))/2; cosh²t−sinh²t=1. arsinh is real on R; arcosh is real on [1,∞).",
+      "formulaTex": "\\begin{gathered}\\sinh t=\\frac{e^t-e^{-t}}2,\\quad\\cosh t=\\frac{e^t+e^{-t}}2,\\quad\\cosh^2t-\\sinh^2t=1,\\\\\\operatorname{arsinh}x=\\ln(x+\\sqrt{x^2+1})\\ (x\\in\\mathbb R),\\quad\\operatorname{arcosh}x=\\ln(x+\\sqrt{x^2-1})\\ (x\\ge1).\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A removable factor and an excluded solution",
+      "problem": "Simplify $(x^2-4)/(x^2-x-2)$, state its domain, and solve $(x^2-4)/(x^2-x-2)=4/3$.",
+      "steps": [
+        "Factor the numerator as $(x-2)(x+2)$ and denominator as $(x-2)(x+1)$. The original domain excludes $x=2$ and $x=-1$.",
+        "For the allowed inputs the fraction equals $(x+2)/(x+1)$. Cross-multiplication gives $3x+6=4x+4$, hence $x=2$.",
+        "That candidate is excluded from the original domain. The simplified expression takes value $4/3$ there, but the original fraction is undefined."
+      ],
+      "answer": "The simplified rule is $(x+2)/(x+1)$, with $x\\ne-1,2$; the original equation has no solution."
+    },
+    {
+      "title": "An angle, a displacement, and an approximation",
+      "problem": "A point moves on a circle of radius $2\\,\\mathrm{m}$ from angle zero to $5^\\circ$. Compute its vertical displacement and compare it with the small-angle estimate.",
+      "steps": [
+        "Convert the angle: $\\theta=5\\pi/180=\\pi/36$ radians, approximately $0.08726646$.",
+        "Its vertical coordinate starts at zero and ends at $y=2\\sin(\\pi/36)\\,\\mathrm{m}$, approximately $0.17431149\\,\\mathrm{m}$.",
+        "Replacing $\\sin\\theta$ by $\\theta$ gives $y\\approx2\\pi/36=0.17453293\\,\\mathrm{m}$. The estimate exceeds the actual displacement by about $0.00022144\\,\\mathrm{m}$, or $0.22144\\,\\mathrm{mm}$.",
+        "Dividing this absolute error by the actual displacement gives relative error about $0.00127037$, or $0.127037\\%$. The arc length is exactly $r\\theta$; it is the vertical displacement that is being approximated.",
+        "The bound $|\\sin\\theta-\\theta|\\le|\\theta|^3/6$ applies because $\\theta=\\pi/36<1$. Multiplying by the $2\\,\\mathrm m$ radius bounds the vertical-displacement error by $\\pi^3/(3\\cdot36^3)\\approx0.000221524\\,\\mathrm m$, consistent with the computed $0.000221440\\,\\mathrm m$."
+      ],
+      "answer": "Vertical displacement $\\approx0.17431149\\,\\mathrm{m}$; small-angle estimate $\\approx0.17453293\\,\\mathrm{m}$. The conversion to radians is essential. The estimate exceeds the displacement by about $0.00022144\\,\\mathrm m$ ($0.22144\\,\\mathrm{mm}$), about $0.127037\\%$ of the actual displacement."
+    },
+    {
+      "title": "A hole survives cancellation",
+      "problem": "Simplify $(x^2+3x)/(x^2-9)$ and state all excluded inputs.",
+      "steps": [
+        "Factor as $x(x+3)/[(x-3)(x+3)]$.",
+        "The original denominator excludes $x=3$ and $x=-3$.",
+        "Cancel $x+3$ only on the remaining domain."
+      ],
+      "answer": "The simplified rule is $x/(x-3)$ for $x\\ne\\pm3$."
+    },
+    {
+      "title": "A logarithm equation with an extraneous root",
+      "problem": "Solve $\\ln(x-1)+\\ln(x+1)=\\ln8$ over real $x$.",
+      "steps": [
+        "The log arguments require $x>1$.",
+        "Combine logs to get $x^2-1=8$, so $x=\\pm3$ algebraically.",
+        "Only $x=3$ satisfies the original domain and equation."
+      ],
+      "answer": "The unique real solution is $x=3$."
+    },
+    {
+      "title": "Radians and sector area",
+      "problem": "A circle has radius $3\\,\\mathrm{m}$ and central angle $60^\\circ$. Find arc length and sector area.",
+      "steps": [
+        "Convert $60^\\circ$ to $\\pi/3$ radians.",
+        "Arc length is $r\\theta=3\\cdot\\pi/3=\\pi\\,\\mathrm{m}$.",
+        "Sector area is $(1/2)r^2\\theta=(1/2)\\cdot9\\cdot\\pi/3=3\\pi/2\\,\\mathrm{m}^2$."
+      ],
+      "answer": "Arc length $\\pi\\,\\mathrm{m}$; sector area $3\\pi/2\\,\\mathrm{m}^2$."
+    },
+    {
+      "title": "A trigonometric equation without lost roots",
+      "problem": "Solve $2\\sin^2\\theta=\\sin\\theta$ for $0\\le\\theta<2\\pi$.",
+      "steps": [
+        "Factor $\\sin\\theta(2\\sin\\theta-1)=0$ without dividing by $\\sin\\theta$.",
+        "$\\sin\\theta=0$ gives $0$ and $\\pi$.",
+        "$\\sin\\theta=1/2$ gives $\\pi/6$ and $5\\pi/6$ in the stated interval."
+      ],
+      "answer": "$\\theta\\in\\{0,\\pi/6,5\\pi/6,\\pi\\}$."
+    },
+    {
+      "title": "Quadrant-aware polar coordinates",
+      "problem": "Convert $(-3,-3)$ to polar with $r\\ge0$ and $0\\le\\theta<2\\pi$.",
+      "steps": [
+        "Radius is $\\sqrt{9+9}=3\\sqrt2$.",
+        "Both coordinates are negative, placing the point in quadrant III.",
+        "Reference angle is $\\pi/4$, so $\\theta=5\\pi/4$."
+      ],
+      "answer": "$(r,\\theta)=(3\\sqrt2,5\\pi/4)$."
+    },
+    {
+      "title": "A ramp with exact and approximate answers",
+      "problem": "A ramp rises $0.75\\,\\mathrm{m}$ over $9\\,\\mathrm{m}$ horizontal run. Find grade, length, and angle.",
+      "steps": [
+        "Grade is $(3/4)/9=1/12$, or $8\\tfrac13\\%$.",
+        "Length is $\\sqrt{9^2+(3/4)^2}=3\\sqrt{145}/4\\,\\mathrm{m}$.",
+        "Angle is $\\arctan(1/12)$ radians, about $0.08314$ radians."
+      ],
+      "answer": "Grade $1/12$; length $3\\sqrt{145}/4\\,\\mathrm{m}$; angle $\\arctan(1/12)$."
+    },
+    {
+      "title": "A hyperbolic point",
+      "problem": "At $t=\\ln2$, find $(\\cosh t,\\sinh t)$ and $\\tanh t$.",
+      "steps": [
+        "Here $e^t=2$ and $e^{-t}=1/2$.",
+        "The definitions give $\\cosh t=5/4$ and $\\sinh t=3/4$.",
+        "Their square difference is $25/16-9/16=1$; division gives $\\tanh t=3/5$."
+      ],
+      "answer": "The point is $(5/4,3/4)$ with hyperbolic parameter $\\ln2$ and ratio $3/5$."
+    },
+    {
+      "title": "An inverse selects one of two solutions",
+      "problem": "Solve $\\cosh t=5/4$ for all real $t$.",
+      "steps": [
+        "With $u=e^t>0$, the equation is $u^2-(5/2)u+1=0$.",
+        "Its roots are $u=2$ and $u=1/2$, producing $t=\\ln2$ and $t=-\\ln2$.",
+        "The inverse $\\operatorname{arcosh}$ uses only the branch $t\\ge0$."
+      ],
+      "answer": "The unrestricted equation has $t=\\pm\\ln2$; $\\operatorname{arcosh}(5/4)=\\ln2$."
+    }
+  ],
+  "misconceptions": [
+    "“Cancelling a factor restores excluded inputs.” Cancellation preserves values only where the cancelled factor was nonzero; it does not enlarge the original domain.",
+    "“$\\sqrt{x^2}$ is always $x$.” The principal square root is nonnegative, so $\\sqrt{x^2}=|x|$ for real $x$.",
+    "“An identity and an approximation are interchangeable.” $\\sin^2\\theta+\\cos^2\\theta=1$ is exact for every real $\\theta$; $\\sin\\theta\\approx\\theta$ has useful accuracy only near zero when $\\theta$ is measured in radians."
+  ],
+  "lab": {
+    "title": "How small is a small angle?",
+    "description": "Compare $y=\\sin\\theta$ and $y=\\theta$ on a symmetric radian interval. Each plot uses $\\theta$ in radians horizontally and dimensionless values vertically. The console table reports absolute error $|\\theta-\\sin\\theta|$ and relative error $|\\theta-\\sin\\theta|/|\\sin\\theta|$ at selected angles; halving an extremely small representable angle can underflow to zero, and computed error can round to zero.",
+    "code": "// Adjust the maximum radian angle and sample count.\nconst maxAngle = 0.5;\nconst samples = 200;\nif (!(maxAngle > 0 && maxAngle <= 3) || !Number.isInteger(samples) || samples < 2 || samples > 1000) {\n  throw new Error('Use 0 < maxAngle <= 3 and an integer samples from 2 to 1000.');\n}\nconst sine = [];\nconst line = [];\nconst error = [];\nfor (let i = 0; i <= samples; i++) {\n  const theta = -maxAngle + 2 * maxAngle * i / samples;\n  const exact = Math.sin(theta);\n  sine.push([theta, exact]);\n  line.push([theta, theta]);\n  error.push([theta, Math.abs(theta - exact)]);\n}\nplot(sine, 'sin(theta): x in radians, y dimensionless');\nplot(line, 'theta approximation: x in radians, y dimensionless');\nplot(error, 'absolute error: x in radians, y dimensionless');\nconsole.log('theta (rad) | sine | absolute error | relative error');\nfor (const theta of [maxAngle, maxAngle / 2, maxAngle / 4]) {\n  const value = Math.sin(theta);\n  const absolute = Math.abs(theta - value);\n  console.log(theta.toPrecision(7), value.toPrecision(10), absolute.toExponential(6), value === 0 ? 'undefined (sample underflow)' : (absolute / Math.abs(value)).toExponential(6), theta === 0 ? 'selected angle underflowed to zero' : absolute === 0 && theta !== 0 ? 'computed error rounded to zero at machine precision' : '');\n}\nconsole.log('At theta = 0: absolute error is 0; relative error is undefined (0/0).');",
+    "tasks": [
+      "Predict which graph lies higher for positive $\\theta$, and how symmetry changes the comparison for negative $\\theta$.",
+      "Run with maxAngle = 0.5, then 0.1. Compare the endpoint relative errors. At the three printed angles, does halving the angle reduce absolute error by roughly a factor of eight?",
+      "Set maxAngle = 3. Explain why a small-angle estimate becomes poor and why relative error is sensitive when sine is near zero.",
+      "Explain why finitely many samples cannot certify an error bound at every point of the interval, and why degrees cannot be substituted directly into Math.sin."
+    ],
+    "expected": "Default code produces three plots of 201 finite points. At $\\theta=0.5$, $\\sin\\theta\\approx0.479425539$, absolute error is $\\approx0.0205744614$, and relative error is $\\approx0.0429148215$ ($4.29148\\%$). At $\\theta=0.25$, absolute error is $\\approx0.00259604075$; at $\\theta=0.125$ it is $\\approx0.000325266615$. Absolute error is even in $\\theta$ and zero at the origin. With maxAngle = 0.1 the endpoint relative error is about $0.00166861316$ ($0.166861\\%$); with maxAngle = 3 it is about $20.2585022$ ($2025.85\\%$). The table demonstrates behavior without proving a uniform bound."
+  },
+  "exercises": [
+    {
+      "question": "Simplify $(x^2+3x)/(x^2-9)$ and state every excluded input.",
+      "hint": "Factor out $x$ in the numerator and use a difference of squares below.",
+      "solution": "Factor the quotient as $\\frac{x(x+3)}{(x-3)(x+3)}$. Cancellation gives $\\frac{x}{x-3}$ only for $x\\ne-3,3$. Both exclusions come from the original denominator; dropping $-3$ changes the function.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Simplify $\\frac{x^2-9}{x-3}$ and keep its domain.",
+      "hint": "Factor the numerator.",
+      "solution": "Factor $x^2-9=(x-3)(x+3)$ and cancel the nonzero factor $x-3$. The result is $x+3$ for $x\\ne3$; the original input $x=3$ remains excluded.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Simplify $\\frac{x^2+3x}{x^2-9}$ and state exclusions.",
+      "hint": "Factor numerator and denominator first.",
+      "solution": "Factor $x^2+3x=x(x+3)$ and $x^2-9=(x-3)(x+3)$. Canceling gives $x/(x-3)$, but the original exclusions remain $x\\ne-3,3$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "In $\\frac{x^2+3x}{x^2-9}$, is $x=-3$ allowed after cancelling $x+3$? Explain using the original denominator.",
+      "hint": "Check original denominator.",
+      "solution": "No. In the original quotient the denominator $x^2-9$ is zero at $x=-3$. The simplified formula has a value there, but cancellation does not fill the hole in the original domain.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Rationalize $\\frac{\\sqrt{1+h}-1}{h}$ for $h\\ne0$.",
+      "hint": "Multiply by conjugate.",
+      "solution": "Multiplying by the conjugate gives $\\frac{\\sqrt{1+h}-1}{h}=\\frac1{\\sqrt{1+h}+1}$ for $h\\ge-1$ and $h\\ne0$. Cancellation is valid only because the original denominator is nonzero.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $\\ln(x-1)+\\ln(x+1)=\\ln 8$ over the real numbers.",
+      "hint": "Require $x>1$ before combining logarithms.",
+      "solution": "Both logarithm arguments must be positive, so $x>1$. Then $\\ln(x-1)+\\ln(x+1)=\\ln(x^2-1)=\\ln8$ gives $x^2-1=8$ and $x=\\pm3$. Only $x=3$ is in the domain; its arguments are $2$ and $4$, with product $8$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $\\ln(x-1)+\\ln(x+1)=\\ln 8$.",
+      "hint": "Require $x>1$ before combining logarithms.",
+      "solution": "The domain is $x>1$. Combining the logarithms gives $\\ln(x^2-1)=\\ln8$, hence $x^2=9$. Only $x=3$ satisfies the original domain condition.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Is $\\ln(u+v)=\\ln u+\\ln v$ for positive $u,v$?",
+      "hint": "Test $u=v=1$.",
+      "solution": "No. With $u=v=1$, the left side is $\\ln2$ while the proposed right side is $\\ln1+\\ln1=0$. The valid law is $\\ln(uv)=\\ln u+\\ln v$ for $u,v>0$; it applies to products.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find $\\log_2 8$ and $\\log_2(1/4)$.",
+      "hint": "Write each as a power of two.",
+      "solution": "Because $2^3=8$, $\\log_2 8=3$. Because $2^{-2}=1/4$, $\\log_2(1/4)=-2$. These powers verify both logarithms by definition.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Explain why $\\sqrt{x^2}=|x|$ for real $x$.",
+      "hint": "Square roots are nonnegative.",
+      "solution": "The principal square root is nonnegative. Both $\\sqrt{x^2}$ and $|x|$ are nonnegative and square to $x^2$, so $\\sqrt{x^2}=|x|$ for every real $x$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "If $\\cos\\theta=-5/13$ and $\\theta$ lies in quadrant II, find $\\sin\\theta$ and $\\tan\\theta$.",
+      "hint": "Use the unit-circle identity and the quadrant signs.",
+      "solution": "The identity gives $\\sin^2\\theta=1-25/169=144/169$. Sine is positive in quadrant II, so $\\sin\\theta=12/13$. Therefore $\\tan\\theta=(12/13)/(-5/13)=-12/5$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Convert $150^\\circ$ to radians.",
+      "hint": "Multiply by $\\pi/180$.",
+      "solution": "Because $180^\\circ=\\pi$ radians, multiply $150^\\circ$ by the conversion factor $\\pi/180^\\circ$. This gives $150\\pi/180=5\\pi/6$ radians after reducing the fraction.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find arc length for radius $3\\,\\mathrm{m}$ and angle $\\pi/3$.",
+      "hint": "Use $s=r\\theta$ with the angle in radians.",
+      "solution": "Arc length is $s=r\\theta$. With $r=3\\,\\mathrm m$ and $\\theta=\\pi/3$, this gives $s=3(\\pi/3)=\\pi\\,\\mathrm m$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "A circle has radius $3\\,\\mathrm{m}$ and a sector with central angle $\\pi/3$ radians. Find the sector area.",
+      "hint": "Use $A=\\frac12r^2\\theta$.",
+      "solution": "Sector area is $A=\\frac12r^2\\theta$ for an angle in radians. Substitution gives $A=\\frac12(3)^2(\\pi/3)=3\\pi/2\\,\\mathrm{m}^2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "At what real angles is $\\tan\\theta$ undefined?",
+      "hint": "Require $\\cos\\theta\\ne0$.",
+      "solution": "Because $\\tan\\theta=\\sin\\theta/\\cos\\theta$, it is undefined exactly where $\\cos\\theta=0$: $\\theta=\\pi/2+k\\pi$ for integers $k$. At these angles the denominator is zero and the numerator is $\\pm1$.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Solve $2\\sin^2\\theta=\\sin\\theta$ on $0\\le\\theta<2\\pi$.",
+      "hint": "Factor rather than dividing by sine.",
+      "solution": "Factoring gives $\\sin\\theta(2\\sin\\theta-1)=0$. On $0\\le\\theta<2\\pi$, sine is zero at $0,\\pi$ and equals $1/2$ at $\\pi/6,5\\pi/6$. Thus the solutions are $0,\\pi/6,5\\pi/6,\\pi$; $2\\pi$ is excluded.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $2\\sin^2\\theta=\\sin\\theta$ on $[0,2\\pi)$.",
+      "hint": "Factor rather than divide by sine.",
+      "solution": "Factor $\\sin\\theta(2\\sin\\theta-1)=0$. In $[0,2\\pi)$, the first factor vanishes at $0,\\pi$ and the second at $\\pi/6,5\\pi/6$. These are the four solutions.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "If $\\cos\\theta=-5/13$ in quadrant II, find $\\sin\\theta$ and $\\tan\\theta$.",
+      "hint": "Use the positive sine branch.",
+      "solution": "In quadrant II sine is positive. The $5$–$12$–$13$ triangle gives $\\sin\\theta=12/13$, so $\\tan\\theta=(12/13)/(-5/13)=-12/5$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Where is $1+\\tan^2\\theta=\\sec^2\\theta$ valid?",
+      "hint": "The identity comes from dividing by $\\cos^2\\theta$.",
+      "solution": "The identity is valid where both functions exist, namely $\\cos\\theta\\ne0$. Divide $\\sin^2\\theta+\\cos^2\\theta=1$ by $\\cos^2\\theta$ to obtain $1+\\tan^2\\theta=\\sec^2\\theta$. At $\\theta=\\pi/2+k\\pi$ the division is invalid.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Derive $\\sin 2\\theta$ from sine addition.",
+      "hint": "Set $\\alpha=\\beta=\\theta$ in the addition formula.",
+      "solution": "The addition formula is $\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta$. Setting $\\alpha=\\beta=\\theta$ gives $\\sin(2\\theta)=2\\sin\\theta\\cos\\theta$ for every real $\\theta$.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Convert the Cartesian point $(-3,-3)$ to polar coordinates with $r\\ge0$ and $0\\le\\theta<2\\pi$. Then give one different polar representation without the angle-range restriction.",
+      "hint": "Use the quadrant as well as the ratio $y/x$.",
+      "solution": "The radius is $\\sqrt{(-3)^2+(-3)^2}=3\\sqrt2$. Both coordinates are negative, so the standard angle is $5\\pi/4$. Thus one representation is $(3\\sqrt2,5\\pi/4)$; adding a full turn gives the different representation $(3\\sqrt2,13\\pi/4)$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "A proposed position formula is $x(t)=A\\sin(t)+vt^2$, with $t$ in seconds, $A$ in metres, and $v$ in metres per second. Diagnose and repair its dimensions.",
+      "hint": "Check both the sine argument and the units of each added term.",
+      "solution": "The sine argument needs a dimensionless time scale: use $\\omega t$ with $\\omega$ in radians per second. Also $vt^2$ has units of metre-seconds, so it cannot be added to $A\\sin t$. One dimensionally consistent repair is $x(t)=A\\sin(\\omega t)+vt$. Measurements would still be needed to justify that model.",
+      "lesson": 5,
+      "type": "Modeling"
+    },
+    {
+      "question": "Convert $(-3,-3)$ to polar coordinates with $r\\ge0$ and $0\\le\\theta<2\\pi$.",
+      "hint": "Use radius $3\\sqrt2$ and quadrant III.",
+      "solution": "The radius is $\\sqrt{9+9}=3\\sqrt2$. The point lies in quadrant III, where its standard angle is $5\\pi/4$. Its polar coordinates are $(3\\sqrt2,5\\pi/4)$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does the origin have a unique polar angle?",
+      "hint": "Every $\\theta$ with $r=0$ maps to the origin.",
+      "solution": "No. The coordinate equations are $x=r\\cos\\theta$ and $y=r\\sin\\theta$. At $r=0$, both coordinates vanish for every angle, so $(0,\\theta)$ represents the origin for any $\\theta$. No direction is distinguished.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Check dimensions of $A\\sin(\\omega t+\\phi)$ for position.",
+      "hint": "The argument must be dimensionless, and $A$ must have length units.",
+      "solution": "For $A\\sin(\\omega t+\\phi)$ to be a position, $\\omega$ must have inverse-time units, $\\phi$ must be an angle in radians, and $A$ must have length units. The sine factor itself is dimensionless.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Prepare a four-entry reference covering cancellation, logarithms, angles, and polar coordinates. Include a failure case for each.",
+      "hint": "Attach a condition to each rule instead of listing formulas alone.",
+      "solution": "One valid reference is: cancel a common factor only where it is nonzero, so $\\frac{x^2-1}{x-1}$ still excludes $x=1$; use $\\ln(uv)=\\ln u+\\ln v$ only for $u,v>0$, so the real right side fails at $u=v=-1$; convert degrees using $\\pi/180$ before applying the small-angle relation $\\sin\\theta\\approx\\theta$, which fails if $1^\\circ$ is treated as one radian; use $x=r\\cos\\theta$ and $y=r\\sin\\theta$, while $\\arctan(y/x)$ alone can lose the quadrant.",
+      "lesson": 6,
+      "type": "Challenge"
+    },
+    {
+      "question": "A ramp rises $0.75\\,\\mathrm{m}$ over a horizontal run of $9\\,\\mathrm{m}$. Find its exact grade and surface length.",
+      "hint": "Use rise divided by horizontal run for grade, then Pythagoras.",
+      "solution": "Grade uses rise over horizontal run: $0.75/9=1/12\\approx8.33\\%$. The surface length is the hypotenuse, $\\sqrt{9^2+0.75^2}=3\\sqrt{145}/4\\,\\mathrm m\\approx9.0312\\,\\mathrm m$. Grade does not divide by this surface length.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A right triangle has rise 3 and run 4. Find $\\sin\\theta$, $\\cos\\theta$, and $\\tan\\theta$ for its angle above horizontal.",
+      "hint": "Find the hypotenuse first.",
+      "solution": "The hypotenuse is $\\sqrt{3^2+4^2}=5$. Thus $\\sin\\theta=3/5$, $\\cos\\theta=4/5$, and $\\tan\\theta=3/4$. The angle is $\\arctan(3/4)\\approx0.6435$ radians, or about $36.87^\\circ$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A ramp rises $0.75\\,\\mathrm{m}$ over $9\\,\\mathrm{m}$ run. Find grade.",
+      "hint": "Divide rise by horizontal run.",
+      "solution": "Grade is rise divided by horizontal run: $0.75/9=1/12$. Expressed as a percentage, this is $8\\frac13\\%$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A ramp rises $0.75\\,\\mathrm{m}$ over a horizontal run of $9\\,\\mathrm{m}$. Find its surface length exactly.",
+      "hint": "Use Pythagoras.",
+      "solution": "By Pythagoras, the surface length is the hypotenuse $\\sqrt{9^2+0.75^2}=\\sqrt{1305/16}=3\\sqrt{145}/4\\,\\mathrm m$. The square root keeps the positive length.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Bound error $z-\\arctan z$ for $z\\ge0$.",
+      "hint": "For $z>0$, set $\\theta=\\arctan z$ and use the unit-sector comparison $\\sin\\theta\\le\\theta\\le\\tan\\theta$. Express $\\sin\\theta$ in terms of $z$, then rationalize $\\sqrt{1+z^2}-1$. Check $z=0$ separately.",
+      "solution": "At $z=0$ the error is zero. For $z>0$, $\\theta=\\arctan z$ lies in $(0,\\pi/2)$ and $\\tan\\theta=z$. The earlier comparison of an inscribed triangle, unit sector and tangent triangle gives $\\sin\\theta\\le\\theta\\le\\tan\\theta$. A right triangle with legs $1,z$ has hypotenuse $s=\\sqrt{1+z^2}$, so $\\sin\\theta=z/s$. Therefore $0\\le z-\\arctan z\\le z-z/s$. Since $s\\ge1$, rationalization gives $z-z/s=z(s-1)/s=z(s^2-1)/[s(s+1)]=z^3/[s(s+1)]\\le z^3/2$. Thus $0\\le z-\\arctan z\\le z^3/2$ for every $z\\ge0$, using the geometry and algebra taught in this chapter. The intermediate bound $z^3/[\\sqrt{1+z^2}(\\sqrt{1+z^2}+1)]$ is also valid and is tighter than $z^3/2$ when $z>0$.\n\nOptional later-calculus extension: after inverse-trigonometric differentiation (Chapter 6, lesson 3), order preservation for definite integrals (Chapter 10, lesson 4), and the evaluation form of the Fundamental Theorem of Calculus (Chapter 11, lesson 3), we can obtain the smaller cubic bound $z^3/3$ rather than $z^3/2$. This does not assert that it improves the rationalized geometric bound for every $z$. For $z\\ge0$, $z-\\arctan z=\\int_0^z\\frac{t^2}{1+t^2}\\,dt$. The integrand satisfies $0\\le\\frac{t^2}{1+t^2}\\le t^2$ because $1+t^2\\ge1$. Integrating gives $0\\le z-\\arctan z\\le\\int_0^z t^2\\,dt=z^3/3$.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Is percent grade a percent of ramp angle?",
+      "hint": "Distinguish the slope $h/d$ from the angle $\\theta$.",
+      "solution": "No. Percent grade is $100(h/d)\\%$, where $h$ is rise and $d$ horizontal run. The angle is $\\theta=\\arctan(h/d)$, measured in radians or degrees. They describe related but different quantities.",
+      "lesson": 6,
+      "type": "Interpretation"
+    }
+  ],
+  "summary": [
+    "Algebraic equivalence must preserve domain restrictions, especially after cancellation or logarithmic transformations.",
+    "Radians connect arc length with trigonometric function values; small-angle approximations have measurable error.",
+    "Coordinate conversions require quadrant and origin checks, while dimensional consistency checks the kind of quantity in an equation."
+  ],
+  "next": "Chapter 3 introduces the JavaScript used in this lab and explains numerical error. Chapter 4 returns to the cancelled fractions and small-angle behavior to develop limits."
+}

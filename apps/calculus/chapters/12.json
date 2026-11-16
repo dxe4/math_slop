@@ -1,0 +1,486 @@
+{
+  "id": "12",
+  "title": "Techniques of integration",
+  "subtitle": "How can the structure of an integrand suggest a transformation that makes its antiderivative visible?",
+  "prerequisites": [
+    "Chapter 2: algebraic identities, logarithms and trigonometry",
+    "Chapter 6: product and chain rules",
+    "Chapter 11: antiderivatives, substitution and the fundamental theorem of calculus"
+  ],
+  "objectives": [
+    "Choose and justify substitution, integration by parts, trigonometric methods or partial fractions",
+    "Track domains, constants and transformed endpoints throughout a calculation",
+    "Verify an antiderivative symbolically and interpret a numerical derivative check",
+    "Recognize when an exact integral need not have an elementary expression",
+    "Use a branch-safe hyperbolic substitution with transformed bounds and derivative verification."
+  ],
+  "sections": [
+    {
+      "title": "Substitution reverses a composition",
+      "paragraphs": [
+        "Differentiation has a rule for every familiar combination of elementary functions. Integration requires a more selective question: which derivative rule could have produced this particular expression? The chain rule suggests substitution. If an integrand contains a function $g(x)$ together with its derivative $g^{\\prime}(x)$, setting $u=g(x)$ may turn a complicated composition into a familiar integral. The symbol $du=g^{\\prime}(x)\\,dx$ records the entire factor that must be replaced; it is not permission to discard an inconvenient multiplier.",
+        "For example, in $\\int 2x\\cos(x^2)\\,dx$, choose $u=x^2$ and $du=2x\\,dx$. The transformed integral is $\\int\\cos(u)\\,du=\\sin(u)+C$, giving $\\sin(x^2)+C$. With $\\int x\\cos(x^2)\\,dx$ the answer has an extra factor $1/2$. With $\\int\\cos(x^2)\\,dx$, the required factor $x$ is absent, so this substitution does not produce the same simplification. Recognizing an inner expression is only half the method; accounting for its derivative is the other half.",
+        "A precise definite substitution theorem says that if $g$ is continuously differentiable on $[a,b]$ and $f$ is continuous on an interval containing $g([a,b])$, then $\\int_a^b f(g(x))g^{\\prime}(x)\\,dx=\\int_{g(a)}^{g(b)}f(u)\\,du$. This chain-rule form does not require $g$ to be one-to-one. A substitution involving an inverse expression, such as $x=a\\sin\\theta$, does require a suitable branch to recover $x$ consistently. Once the variable is $u$, the bounds must also be $u$-values; alternatively, return to $x$ before using the original bounds.",
+        "For $\\int_0^2\\frac{x}{1+x^2}\\,dx$, $u=1+x^2$ gives bounds $1$ and $5$ and the answer $\\frac12\\ln 5$. Because $u$ is positive, $\\ln u$ is appropriate. In general $\\int\\frac{du}{u}=\\ln|u|+C$ on an interval avoiding zero. Constants of integration may differ on disconnected intervals. In physical models, a logarithm's argument should be dimensionless: $\\ln|u/u_0|$ uses a nonzero reference scale $u_0$, whose contribution is absorbed into the constant.",
+        "Substitution is a change of variable, not a pattern match on visual similarity. For $\\int(3x+2)^5\\,dx$, choose $u=3x+2$, so $du=3\\,dx$ and $dx=du/3$. The answer is $u^6/18+C=(3x+2)^6/18+C$. Differentiating returns $(3x+2)^5$ because the outer power contributes $6$ and the inner derivative contributes $3$, which cancel the denominator $18$. If the inner derivative is a nonzero constant, it can be supplied by a fixed factor. If it depends on $x$ in a way not present, more algebra or a different method is needed.",
+        "Domains determine which antiderivative family is meant. For $\\int\\frac{2x}{x^2-1}\\,dx$, $u=x^2-1$ yields $\\ln|x^2-1|+C$, but the original integrand is undefined at $x=\\pm1$. The formula is valid separately on $(-\\infty,-1)$, $(-1,1)$, and $(1,\\infty)$; the constants may differ on these disconnected intervals. One cannot use a single endpoint subtraction across a pole just because the written logarithm has finite values at the chosen endpoints. The derivative identity holds only where the denominator is nonzero, and a definite integral crossing a pole requires separate improper limits.",
+        "For a definite substitution, transformed bounds can reverse. In $\\int_0^1-2xe^{-x^2}\\,dx$, setting $u=-x^2$ gives $du=-2x\\,dx$ and bounds $0$ and $-1$. The result is $e^{-1}-1$, which is negative as the original integrand is on $(0,1]$. Swapping the new bounds to $-1$ and $0$ without changing the sign loses orientation. This rule is the same one developed for oriented integrals: $\\int_a^b f(x)\\,dx$ changes sign when $a$ and $b$ are exchanged. A useful final check is the sign of the integrand over the original interval.",
+        "A substitution can be valid but unhelpful. For $\\int x^2\\cos x\\,dx$, $u=\\cos x$ makes $du=-\\sin x\\,dx$, which is absent; $u=x^2$ makes $du=2x\\,dx$, leaving a difficult factor. Integration by parts is more promising because differentiating $x^2$ reduces its degree. Conversely, $\\int x\\cos(x^2)\\,dx$ has the derivative of the inner square and needs only substitution. State what simplifies and what remains after the proposed transformation. This habit prevents writing several lines of formal $du$ algebra that merely disguise the original difficulty.",
+        "A reverse substitution sometimes begins with a differential factor that is present only after rearranging. In $\\int\\frac{x}{4+x^2}\\,dx$, the denominator's derivative is $2x$, so write the integrand as $\\frac12\\cdot\\frac{2x}{4+x^2}$ before setting $u=4+x^2$. This explicit factor one-half is easy to forget if the substitution is performed mentally. The result $\\frac12\\ln(4+x^2)+C$ differentiates back to $x/(4+x^2)$. The same idea handles $\\int\\frac{5x+1}{5x^2+2x+7}\\,dx$ because the denominator derivative is $10x+2$, exactly twice the numerator. A constant mismatch is repairable; an x-dependent mismatch requires another step.",
+        "Substitution can be understood as preserving the accumulated value under a change of clock or coordinate. If $u=g(x)$ runs twice as fast as x at one point, then a small $dx$ corresponds to $du\\approx g^{\\prime}(x)\\,dx$; the derivative factor adjusts the width of each contribution. This is why transforming only the function height and leaving the width unchanged gives a wrong integral. In a definite calculation, the transformed endpoints record where the new coordinate starts and ends. If $g$ reverses direction, the signed width reverses too. The formula follows from the chain rule, but this local-width view explains its geometry.",
+        "Substitution is also a bookkeeping rule for limits and units. In a definite integral, changing from $x$ to $u=g(x)$ changes the differential to $du=g^{\\prime}(x)\\,dx$ and changes the endpoints from $a,b$ to $g(a),g(b)$. If $g$ reverses direction, the new endpoints appear in reverse order and the sign is already accounted for; adding a separate negative sign would double-count it. A physical check can expose mistakes. If $x$ is time in seconds and $v(x)$ is metres per second, then $v(x)\\,dx$ is metres; after substitution, the transformed integrand times $du$ must still represent metres. When the integrand lacks the full derivative of the inner expression, an adjustment may be required, and some proposed substitutions simply do not simplify the integral. Verify the final antiderivative by differentiating it, or verify a definite answer against a rough geometric or numerical estimate."
+      ],
+      "formula": "∫ f(g(x))g′(x) dx = F(g(x)) + C, where F′ = f.",
+      "formulaTex": "\\int f(g(x))g^{\\prime}(x)\\,dx=F(g(x))+C,\\qquad F^{\\prime}=f"
+    },
+    {
+      "title": "Integration by parts reverses a product",
+      "paragraphs": [
+        "The product rule says $(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime}$. Integrating and rearranging transfers a derivative from one factor to another: $\\int u\\,dv=uv-\\int v\\,du$. For the definite formula, continuously differentiable functions $u$ and $v$ on $[a,b]$ suffice. Here $u$ and $v$ are functions, while $du$ and $dv$ denote their derivative factors with $dx$. The method helps when differentiating $u$ simplifies it and integrating $dv$ is feasible. It can fail strategically even when the algebra is valid: the remaining integral might be harder than the original.",
+        "In $\\int xe^x\\,dx$, take $u=x$ and $dv=e^x\\,dx$. Then $du=dx$ and $v=e^x$, so the answer is $xe^x-e^x+C$. Choosing $u=e^x$ and $dv=x\\,dx$ instead creates an integral containing $x^2e^x$ and moves in the wrong direction. A polynomial times an exponential or sine often benefits from repeated parts because repeated differentiation eventually removes the polynomial. The usual preferences for logarithms or inverse trigonometric functions as $u$ are useful heuristics, not theorems guaranteeing success.",
+        "A product can be hidden. For $\\int\\ln(x)\\,dx$ on $x>0$, write $\\ln(x)\\cdot1$, choose $u=\\ln(x)$, and integrate $dv=dx$. The result is $x\\ln(x)-x+C$. Some repeated-parts calculations return the starting integral: twice applying parts to $\\int e^x\\cos(x)\\,dx$ yields a linear equation for that integral. Solving gives $e^x(\\sin x+\\cos x)/2+C$. Check the result with the product rule rather than trusting a remembered sign pattern.",
+        "Derive parts for definite integrals before memorizing a sign. From $(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime}$, integrate over $[a,b]$ to get $[uv]_a^b=\\int_a^b v\\,du+\\int_a^b u\\,dv$. Rearranging gives $\\int_a^b u\\,dv=[uv]_a^b-\\int_a^b v\\,du$. The boundary term is part of the answer; omitting it makes a definite calculation wrong even if the remaining integral is correct. This derivation also shows why functions and derivatives must be chosen together: $u$ and $v$ are the differentiated and integrated objects, not arbitrary labels on two factors.",
+        "For $\\int x^2e^x\\,dx$, let $u=x^2$ and $dv=e^x\\,dx$. One application gives $x^2e^x-2\\int xe^x\\,dx$. A second gives $\\int xe^x\\,dx=xe^x-e^x+C$, so the result is $e^x(x^2-2x+2)+C$. Differentiate: $e^x(x^2-2x+2)+e^x(2x-2)=x^2e^x$. Repeated parts works because the polynomial degree falls until its derivative becomes zero. A tabular presentation can save writing, but the underlying justification is still repeated use of the product rule.",
+        "A cyclic parts calculation is not a failure. In this indefinite calculation, equalities are understood up to additive constants until the final answer. Let $I=\\int e^x\\cos x\\,dx$. Taking $u=\\cos x$ and $dv=e^x\\,dx$ gives $I=e^x\\cos x+\\int e^x\\sin x\\,dx$. Apply parts to $J=\\int e^x\\sin x\\,dx$ to obtain $J=e^x\\sin x-I$. Therefore $2I=e^x(\\sin x+\\cos x)$, and $I=e^x(\\sin x+\\cos x)/2+C$. The starting integral reappears with a coefficient that can be solved algebraically. If instead it reappears with the same coefficient on both sides, recheck signs and choices before claiming a result.",
+        "The choice of $u$ should reduce complexity after differentiation, but “complexity” is contextual. For $\\int\\arctan x\\,dx$, write $\\arctan x\\cdot1$, choose $u=\\arctan x$ and $dv=dx$. Then $\\int\\arctan x\\,dx=x\\arctan x-\\int\\frac{x}{1+x^2}\\,dx=x\\arctan x-\\frac12\\ln(1+x^2)+C$. Differentiation confirms cancellation of the rational terms. This hidden-product technique is useful for logarithms and inverse trig functions, yet it requires their derivative formulas and attention to their domains. Parts is an identity; strategic success is a separate judgment.",
+        "For a definite example, $\\int_0^1xe^x\\,dx$ can be evaluated without first writing an indefinite family. Choose $u=x$ and $dv=e^x\\,dx$. The boundary term $[xe^x]_0^1$ is $e$, and the remaining integral $\\int_0^1e^x\\,dx$ is $e-1$, so the result is $e-(e-1)=1$. Since the integrand is nonnegative and no larger than $e$ on $[0,1]$, a positive answer below e is plausible. The exact cancellation also shows why retaining both endpoint evaluations in the boundary term matters. Writing $uv$ only at the upper endpoint would accidentally work at zero here but fail on other intervals.",
+        "An integration-by-parts choice need not make the remaining integral elementary even when the first step is valid. For $\\int xe^{-x^2}\\,dx$, taking $u=x$ and $dv=e^{-x^2}\\,dx$ requires an antiderivative of the Gaussian factor, which is the difficult part. The substitution $u=-x^2$ instead gives $du=-2x\\,dx$ and the answer $-e^{-x^2}/2+C$ immediately. Conversely, for $\\int x^2e^x\\,dx$, on the positive branch $x>0$, substitution $u=x^2$ creates $e^{\\sqrt{u}}$ and a new Jacobian, complicating the task. Compare the transformed integral before committing to a technique. Formal correctness and useful simplification are separate criteria."
+      ],
+      "formula": "∫ from a to b u(x)v′(x) dx = [u(x)v(x)] from a to b − ∫ from a to b u′(x)v(x) dx.",
+      "formulaTex": "\\begin{gathered}u,v\\in C^1([a,b]),\\\\ \\begin{aligned}\\int_a^b u(x)v^{\\prime}(x)\\,dx&=[u(x)v(x)]_a^b\\\\ &\\quad-\\int_a^b u^{\\prime}(x)v(x)\\,dx.\\end{aligned}\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Integration by parts is the product rule integrated",
+          "statement": "For differentiable $u$ and $v$ with integrable derivatives on $[a,b]$, integration by parts trades one derivative from one factor to the other.",
+          "equationTex": "\\int_a^b u(x)v^{\\prime}(x)\\,dx=[u(x)v(x)]_a^b-\\int_a^b u^{\\prime}(x)v(x)\\,dx",
+          "proof": [
+            "The product rule says $(uv)^{\\prime}=u^{\\prime} v+uv^{\\prime}$. Integrate both sides over $[a,b]$. The fundamental theorem turns the left side into $u(b)v(b)-u(a)v(a)$. Move the $\\int u^{\\prime} v$ term to the other side to obtain the formula. This derivation explains both the boundary term and the minus sign; memorizing a slogan without them invites mistakes.",
+            "For $\\int_0^1 x e^x\\,dx$, choose $u=x$ and $v^{\\prime}=e^x$. Then $u^{\\prime}=1$ and $v=e^x$, giving $[xe^x]_0^1-\\int_0^1e^x\\,dx=e-(e-1)=1$. Different choices of which factor to differentiate can make the remaining integral harder, so the method includes a judgment about simplification.",
+            "If a boundary is infinite or the integrand has a singularity, first work on a finite nonsingular interval and then pass to the appropriate improper limits. A formal boundary term may fail to converge even when cancellations occur in a different sense. The finite-interval theorem is the safe starting point."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Trigonometric identities and substitutions",
+      "paragraphs": [
+        "Trigonometric integrals often become substitutions after an identity exposes a derivative factor. In $\\int\\sin^3(x)\\cos^2(x)\\,dx$, save one $\\sin(x)$ and replace $\\sin^2(x)$ by $1-\\cos^2(x)$. With $u=\\cos(x)$, $du=-\\sin(x)\\,dx$, the integral becomes $-\\int(1-u^2)u^2\\,du=-u^3/3+u^5/5+C$. An odd sine or cosine power suggests this strategy. When both powers are even, the half-angle identities $\\sin^2(x)=(1-\\cos(2x))/2$ and $\\cos^2(x)=(1+\\cos(2x))/2$ lower the powers instead.",
+        "For products of tangent and secant, the derivative pairs are different: $(\\tan x)^{\\prime}=\\sec^2x$ and $(\\sec x)^{\\prime}=\\sec x\\tan x$. For instance, $\\int\\tan^3(x)\\sec^2(x)\\,dx$ becomes $\\int u^3\\,du$ with $u=\\tan(x)$. The answer $\\tan^4(x)/4+C$ is valid separately between poles of tangent. Such domain restrictions are part of the answer, even when a symbolic manipulation looks identical on every branch. All trigonometric derivative formulas here use angles measured in radians.",
+        "Trigonometric substitution works in the opposite direction, replacing an algebraic radical by a trigonometric identity. For $a>0$, $x=a\\sin\\theta$, with $-\\pi/2<\\theta<\\pi/2$, turns $\\sqrt{a^2-x^2}$ into $a\\cos\\theta$ for $|x|<a$. The chosen branch makes cosine positive; without it the square root would be $a|\\cos\\theta|$. For $\\sqrt{a^2+x^2}$, $x=a\\tan\\theta$ on that same interval gives $a\\sec\\theta$. For $\\sqrt{x^2-a^2}$ on $x>a$, $x=a\\sec\\theta$ with $0<\\theta<\\pi/2$ gives $a\\tan\\theta$. The negative branch needs a separate choice.",
+        "As a short application, $\\int\\frac{dx}{\\sqrt{a^2-x^2}}$ becomes $\\int d\\theta=\\arcsin(x/a)+C$ for $|x|<a$. The substitution's Jacobian factor $dx=a\\cos\\theta\\,d\\theta$ cancels the radical. At $x=\\pm a$ the original integrand is undefined; a definite integral reaching either endpoint is improper and requires the limiting procedure of chapter 14. Algebraic cancellation inside the open interval does not make those endpoint questions disappear.",
+        "A radical that does not cancel needs one more step. For $a>0$ and $|x|<a$, set $x=a\\sin\\theta$ with $-\\pi/2<\\theta<\\pi/2$. Then $\\int\\sqrt{a^2-x^2}\\,dx=a^2\\int\\cos^2\\theta\\,d\\theta$. Using $\\cos^2\\theta=(1+\\cos2\\theta)/2$ and returning to $x$ gives $\\frac{x}{2}\\sqrt{a^2-x^2}+\\frac{a^2}{2}\\arcsin(x/a)+C$. Differentiation on $(-a,a)$ returns $\\sqrt{a^2-x^2}$. As a definite check, $\\int_0^3\\sqrt{9-x^2}\\,dx=9\\pi/4$; this integrand remains continuous at the endpoint.",
+        "The even-power identity comes from $\\cos(2x)=1-2\\sin^2x=2\\cos^2x-1$. Solving gives $\\sin^2x=(1-\\cos2x)/2$ and $\\cos^2x=(1+\\cos2x)/2$. Thus $\\int\\sin^2x\\,dx=x/2-\\sin(2x)/4+C$. The integral over a complete period is half the interval length, so the average value is $1/2$, because the oscillatory sine term cancels at period endpoints. This geometric average is a useful check on a long definite integral. Forgetting the factor 2 when integrating $\\cos(2x)$ is a common chain-rule error that differentiation immediately detects.",
+        "An odd-power strategy works because one factor can become a differential. For $\\int\\cos^3x\\,dx$, write $\\cos^2x\\cos x=(1-\\sin^2x)\\cos x$. Set $u=\\sin x$ and obtain $u-u^3/3+C=\\sin x-\\sin^3x/3+C$. In contrast, $\\int\\cos^2x\\,dx$ has no single remaining cosine after saving a factor, so the half-angle identity is natural. These are useful heuristics, not rigid categories: a transformed definite interval might favor symmetry, and a mixed product may simplify through an identity before the odd/even pattern appears.",
+        "For radicals, the interval and branch deserve explicit attention. If $x=a\\sin\\theta$ with $-\\pi/2<\\theta<\\pi/2$ and $a>0$, then $\\cos\\theta>0$ and $\\sqrt{a^2-x^2}=a\\cos\\theta$. At the endpoints $x=\\pm a$ the radical vanishes; an integrand containing its reciprocal becomes singular there. The transformed integral may simplify to an ordinary $\\theta$-integral on an open interval, but an original definite integral with a reciprocal-radical singularity at an endpoint must still be interpreted as an improper limit. An integral of the continuous radical itself is proper. Cancellation of factors inside an open interval does not grant continuity at a removed endpoint.",
+        "A common triangle diagram encodes back-substitution without relying on memory. If $x=a\\tan\\theta$ with $x\\geq0$ and $a>0$, then $\\tan\\theta=x/a$ and a right triangle with opposite side $x$ and adjacent side $a$ has hypotenuse $\\sqrt{a^2+x^2}$, so $\\sec\\theta=\\sqrt{a^2+x^2}/a$ on the chosen positive-cosine branch. For $x=a\\sec\\theta$, the corresponding triangle must respect the sign and interval chosen for $\\theta$. It is safer to derive each relation from identities and the branch than to memorize a single diagram and apply it across positive and negative domains indiscriminately.",
+        "The tangent–secant pair is a compact test of derivative recognition. Since $d(\\tan x)=\\sec^2x\\,dx$, $\\int\\tan^3x\\sec^2x\\,dx=\\tan^4x/4+C$ on any interval avoiding tangent's poles. Since $d(\\sec x)=\\sec x\\tan x\\,dx$, $\\int\\sec^2x\\tan x\\,dx$ can instead be written $\\int\\sec x\\,(\\sec x\\tan x\\,dx)=\\sec^2x/2+C$. Different groupings of the same factors may work, but the derivative factor must be exact. The answers are asserted separately on connected intervals where the functions are defined; a pole separates the constants just as a rational singularity does.",
+        "Trigonometric substitution should end with an expression in the original variable and a domain statement. For $\\int\\frac{dx}{\\sqrt{a^2-x^2}}$ with $a>0$ and $|x|<a$, $x=a\\sin\\theta$ yields $\\int d\\theta=\\theta+C$ and $\\theta=\\arcsin(x/a)$ on the principal branch. Differentiating $\\arcsin(x/a)$ gives $(1/a)/\\sqrt{1-x^2/a^2}=1/\\sqrt{a^2-x^2}$ on that interval. The derivative check confirms both the scale and the branch. For an integral approaching $x=a$ from within $(-a,a)$, ordinary FTC does not apply at the singular endpoint; an improper limit is needed even though the endpoint limit of $\\arcsin(x/a)$ is finite."
+      ]
+    },
+    {
+      "title": "Rational functions and completing the square",
+      "paragraphs": [
+        "A rational integrand $P(x)/Q(x)$ can be decomposed into simpler rational pieces. First use polynomial division if the numerator's degree is at least the denominator's. Next factor the denominator over the real numbers. A simple linear factor $x-r$ contributes $A/(x-r)$. A repeated factor $(x-r)^m$ requires terms for every power from $1$ through $m$. An irreducible quadratic contributes a linear numerator, $(Bx+C)/(\\text{quadratic})$; repeated quadratics likewise require all powers. Multiply through by the denominator and equate polynomial coefficients to determine the constants.",
+        "For $1/((x-1)(x+2))$, write $A/(x-1)+B/(x+2)$. Multiplying gives $1=A(x+2)+B(x-1)$. Setting $x=1$ and $x=-2$ yields $A=1/3$ and $B=-1/3$. These substitutions are made in a polynomial identity, not in the original undefined fractions. Integrating gives $\\frac13\\ln|x-1|-\\frac13\\ln|x+2|+C$ on any interval excluding $-2$ and $1$. A definite integral crossing a pole cannot be evaluated by blindly subtracting endpoint values of this expression.",
+        "Completing the square treats quadratic denominators that do not factor over the reals. Since $x^2+2x+5=(x+1)^2+4$, $\\int\\frac{dx}{x^2+2x+5}$ equals $\\frac12\\arctan((x+1)/2)+C$. More generally, split a linear numerator into a multiple of the denominator's derivative plus a constant. In $(3x+1)/(x^2+2x+5)$, write $3x+1=\\frac32(2x+2)-2$. The first term integrates to a logarithm and the second to an arctangent, giving $\\frac32\\ln(x^2+2x+5)-\\arctan((x+1)/2)+C$. The denominator is always positive, so this formula works on all real $x$.",
+        "Partial fractions work because rational expressions with factored denominators can be represented as a sum of simpler rational pieces. The proposed form depends on factor multiplicity. For $1/[x(x+1)^2]$, write $A/x+B/(x+1)+C/(x+1)^2$, not just $A/x+B/(x+1)$. Multiplying by $x(x+1)^2$ gives a polynomial identity $1=A(x+1)^2+Bx(x+1)+Cx$. Matching coefficients yields $A=1$, $B=-1$, $C=-1$. Integrating then gives $\\ln|x|-\\ln|x+1|+1/(x+1)+C$ on intervals avoiding $0$ and $-1$. Differentiate to verify the decomposition and signs.",
+        "Polynomial division must precede proper partial fractions. For $(x^2+1)/(x-1)$, divide to obtain $x+1+2/(x-1)$, since $(x-1)(x+1)+2=x^2+1$. Its antiderivative is $x^2/2+x+2\\ln|x-1|+C$ on either side of $x=1$. Trying $A/(x-1)$ alone cannot represent a rational function that grows like $x$ at infinity. A quick comparison of degrees detects this before any coefficient solving. The quotient contributes an ordinary polynomial integral, while the remainder contributes the logarithm.",
+        "Completing the square exposes a standard arctangent pattern. For $x^2+4x+8=(x+2)^2+4$, set $u=(x+2)/2$ so $dx=2\\,du$ and denominator $4(1+u^2)$. The integral $\\int\\frac{dx}{x^2+4x+8}$ becomes $\\frac12\\arctan u+C$, or $\\frac12\\arctan((x+2)/2)+C$. Differentiate carefully: $\\frac{d}{du}\\arctan u=1/(1+u^2)$ and $u^{\\prime}=1/2$. The two scale factors are easy to lose. The original denominator is positive for all real $x$, so this primitive is valid on the whole real line.",
+        "A quadratic numerator's derivative part is logarithmic. For $(2x+4)/(x^2+4x+8)$, the numerator is exactly the derivative of the denominator, so the integral is $\\ln(x^2+4x+8)+C$. If the numerator were $2x+5$, split it as $(2x+4)+1$; the second term produces an arctangent. This decomposition is often faster than a full partial-fraction calculation. It also explains why irreducible quadratic factors require linear numerators in the general rational decomposition: one component tracks the quadratic's derivative, while the remainder tracks an arctangent-type integral.",
+        "For an irreducible quadratic $q(x)=x^2+bx+c$ with discriminant $b^2-4c<0$, completing the square gives $q(x)=(x+b/2)^2+(c-b^2/4)$, where the second term is positive. The logarithmic derivative $q^{\\prime}/q$ handles the numerator part parallel to $2x+b$; the remaining constant numerator produces an arctangent after scaling. This explains the standard linear numerator $Bx+C$ over a quadratic in partial fractions. The decomposition is not merely an algebraic recipe: it chooses components whose antiderivatives are already known. When the discriminant is zero or positive, real linear factors instead lead to logarithmic terms and possible poles.",
+        "Partial fractions must respect the domain of the original rational function, even if algebraic cancellation simplifies it. For $(x^2-1)/(x-1)$, cancellation gives $x+1$ only when $x\\ne1$. The original function has a removable hole at $x=1$. On either side, an antiderivative has derivative $x+1$ at points in its domain, but the original integrand has no value at the missing point. A definite Riemann integral over an interval containing that single removable hole can be defined by assigning any finite value there, without changing its integral. This differs sharply from a genuine pole such as $1/(x-1)$."
+      ],
+      "formula": "For a > 0, ∫ dx/((x−h)²+a²) = (1/a)arctan((x−h)/a) + C.",
+      "formulaTex": "\\int\\frac{dx}{(x-h)^2+a^2}=\\frac1a\\arctan\\!\\left(\\frac{x-h}{a}\\right)+C\\qquad(a>0,\\ x,h\\in\\mathbb R)"
+    },
+    {
+      "title": "A decision guide, and knowing when to stop",
+      "paragraphs": [
+        "Begin an integration decision guide with the domain and purpose: are we finding an antiderivative on an interval or a definite accumulation? Simplify algebra first, then look for an inner function with its derivative. For a product whose factor simplifies under differentiation, try parts. For powers of trigonometric functions, try identities. For radicals of quadratic expressions, complete the square and consider a branch-controlled trigonometric substitution. For rational functions, divide and decompose. Each choice should name the structural feature it exploits; simply writing 'use substitution' does not explain why that substitution helps.",
+        "Several methods can succeed, and several may need to cooperate. The goal is a simpler remaining integral, not loyalty to a technique. After finding a candidate $F$, differentiate it and compare with the original integrand on the stated domain. If the problem is definite, evaluate the endpoints only after checking continuity or addressing improper limits. The units of $F$ differ from those of $f$ by the units of $x$: integrating a rate in litres per minute over minutes produces litres. A lost scale factor can therefore be a mathematical and dimensional mistake.",
+        "Not every elementary integrand has an elementary antiderivative. A central example is $e^{-x^2}$: its antiderivative cannot be expressed using a finite combination of the usual algebraic, exponential, logarithmic and trigonometric functions and their inverses. Establishing that impossibility requires theory beyond this chapter; failure of our favorite methods is not its proof. Nevertheless $A(x)=\\int_0^x e^{-t^2}\\,dt$ is a perfectly valid differentiable function, with $A^{\\prime}(x)=e^{-x^2}$ by the FTC. Exact definitions, numerical integration and later power-series approximations remain available.",
+        "The lab checks derivatives with a central difference. Its residual is an approximation to $F^{\\prime}(x)-f(x)$, not a symbolic identity. A wrong coefficient produces a systematic discrepancy; a missing additive constant produces none because every constant has derivative zero. A finite sample can also miss a local error, while an extremely small difference step can increase rounding error. Numerical checks are useful for finding mistakes, but proof still comes from differentiation and domain analysis.",
+        "Compare three integrands on $[0,1]$ before looking at their algebra. For $x^2/(1+x^2)$, $u=1+x^2$ leaves an unmatched factor $x$; divide to get $1-1/(1+x^2)$. For $x/(1+x^2)$, $du=2x\\,dx$ supplies exactly the needed differential, so substitution works directly. For $x\\ln(1+x^2)$, the same substitution leaves $\\frac12\\int\\ln u\\,du$, which then needs parts. Lesson 6 works all three values. The decision turns on the full numerator and differential, not the shared denominator.",
+        "A definite integral may be easy even when the antiderivative is not. If $a>0$ and $f$ is odd and integrable on $[-a,a]$, symmetry gives $\\int_{-a}^a f(x)\\,dx=0$ without finding a primitive. If $f$ is even, the integral is twice $\\int_0^a f(x)\\,dx$. Comparison can supply bounds, and a convergent series can supply an approximation. These routes are legitimate calculations. The purpose of integration is to answer an accumulation question, not to force every integrand into a catalog of elementary formulas.",
+        "Verification has several levels. Differentiating a proposed $F$ and obtaining $f$ proves the local antiderivative identity on a connected domain. Checking $F(b)-F(a)$ against rough area or rate bounds detects sign and size errors in a definite result. Numerical sampling of $F^{\\prime}-f$ may reveal mistakes but cannot prove equality at unsampled inputs. Unit analysis can expose lost scale factors in applied models. Use all four when they are available; each catches a different class of error, and none excuses ignoring a singularity within the interval.",
+        "A sound stopping decision is also a method choice. For $e^{-x^2}$ on a finite interval, define its accumulation by the integral, use the FTC to describe its derivative, and use a numerical rule with a justified error bound if a number is needed. The assertion that no elementary primitive exists is a later-theory result, not something failed substitutions prove. An odd integrand on a symmetric interval can instead be integrated by symmetry without finding any primitive.",
+        "A decision guide should also recognize when no integration is needed. If a definite integrand is odd on a symmetric interval, its signed contributions cancel; if it is nonnegative and bounded, comparison yields a quick magnitude check. If the question asks for a derivative of an accumulation function, the fundamental theorem may answer it without evaluating the integral. If a model asks for total distance, absolute value and sign intervals matter before any technique. Choosing the operation that matches the question avoids solving a harder symbolic problem than necessary. This is especially important when an expression has no elementary primitive but its requested property is simple.",
+        "When a primitive contains a logarithm, check its argument and interval. The derivative of $\\ln|g(x)|$ is $g^{\\prime}(x)/g(x)$ wherever $g$ is nonzero; the absolute value handles negative values on a branch, but it does not bridge a zero of $g$. A logarithm of a positive quadratic needs no absolute-value sign, while $\\ln x$ assumes $x>0$. If a definite integral runs through a zero of $g$ in the denominator, neither version grants permission to cross it. This domain check should be recorded alongside the technique, rather than appended only after a contradictory endpoint calculation appears."
+      ]
+    },
+    {
+      "title": "A complete integration decision: simplify, substitute, verify",
+      "paragraphs": [
+        "A useful integration strategy starts by asking what the integrand is made of. Consider $I=\\int_0^1\\frac{x^2}{1+x^2}\\,dx$. The denominator never vanishes on the real line, so there is no singularity hidden inside the interval. Substituting $u=1+x^2$ is tempting, but $du=2x\\,dx$ while the numerator contains $x^2\\,dx$. That mismatch does not make substitution impossible; it signals that a simpler algebraic move should come first. Divide the numerator by the denominator: $x^2/(1+x^2)=1-1/(1+x^2)$. This identity holds for every real $x$ and separates a constant from a standard arctangent derivative.",
+        "Now integrate each term on the original bounds: $I=[x-\\arctan x]_0^1=1-\\pi/4\\approx0.2146018$. The value passes an immediate size check. On $[0,1]$, the integrand is nonnegative and at most $1/2$, so $0\\le I\\le1/2$. The exact answer lies inside that interval. Differentiating $x-\\arctan x$ gives $1-1/(1+x^2)=x^2/(1+x^2)$, independently verifying the antiderivative. This check is stronger than comparing a handful of plotted samples.",
+        "A related integral shows when substitution really is the natural first move. For $J=\\int_0^1\\frac{x}{1+x^2}\\,dx$, set $u=1+x^2$ and $du=2x\\,dx$. The bounds become $u=1$ and $u=2$, so $J=\\frac12\\int_1^2\\frac{du}{u}=\\frac12\\ln2$. The integrands differ by one factor of $x$, and that factor determines whether the inner derivative is present. Memorizing that both involve $x^2+1$ is less useful than tracking the derivative of the proposed inner expression.",
+        "A third layer combines the two ideas. For $K=\\int_0^1x\\ln(1+x^2)\\,dx$, the same substitution produces $\\frac12\\int_1^2\\ln u\\,du$. Integration by parts gives $\\int\\ln u\\,du=u\\ln u-u+C$, so $K=\\frac12[u\\ln u-u]_1^2=\\ln2-1/2\\approx0.1931472$. Since $0\\le\\ln(1+x^2)\\le\\ln2$ and $0\\le x\\le1$, the result is nonnegative and below $(\\ln2)/2$; the numerical value satisfies that bound. This sequence illustrates a method choice: simplify algebraically, check for an inner derivative, transform bounds if definite, then differentiate or bound the result.",
+        "No one technique solves every antiderivative. A proposed substitution should be tested against the actual differential, and a logarithm from $\\int du/u$ must retain the appropriate domain. For a definite integral crossing a zero denominator, split it and use improper limits before applying a formula. When no elementary antiderivative is available, a numerical value with an error estimate may be the appropriate final form rather than a forced symbolic expression.",
+        "Before performing the algebra, sort the three cases by what $du=2x\\,dx$ would leave behind: an unmatched $x$ for $I$, a constant multiple for $J$, and $\\ln u$ for $K$. Division is therefore the clean first step for $I$; substitution alone finishes $J$; substitution followed by parts finishes $K$. The existing Lesson 6 checkpoint can be used after this comparison. For an optional transfer, make this prediction on a fresh rational or logarithmic integrand before opening its worked method.",
+        "A useful independent numerical check for $I=1-\\pi/4$ is to apply a small midpoint sum to $f(x)=x^2/(1+x^2)$ on $[0,1]$. Since f rises from zero to $1/2$, any left sum is below the true integral and any right sum above it; the exact value near $0.2146$ lies in those bounds. Midpoint values should approach it as the partition refines. These checks do not establish the primitive, but they constrain the answer. An exact expression that violates a simple integral bound should be rejected immediately, regardless of how polished the symbolic steps look.",
+        "A domain check precedes the final endpoint evaluation. The denominator $1+x^2$ stays positive, so all three integrands are continuous on $[0,1]$. By contrast, replacing it with $x^2-1$ would create a singular endpoint at $x=1$, and a formally similar logarithm or arctangent calculation would need an improper limit. This distinction is not cosmetic. A continuous integrand on a closed interval has a finite Riemann integral; an unbounded one may converge or diverge only under a separate limiting definition. Chapter 14 develops that test.",
+        "The three antiderivative checks here share the real domain: $1+x^2>0$ for every real $x$, so $x-\\arctan x$, $\\frac12\\ln(1+x^2)$, and $\\frac12[(1+x^2)\\ln(1+x^2)-(1+x^2)]$ differentiate to their respective integrands everywhere on $\\mathbb R$. Their definite values additionally require the specified bounds and continuity on the whole integration interval. State whether a result is a primitive family, an exact definite number, or a numerical approximation; those are different claims even when all formulas have the same domain.",
+        "The exact value of K can be checked by differentiating an antiderivative in $x$. Substitution and parts suggest $G(x)=\\frac12[(1+x^2)\\ln(1+x^2)-(1+x^2)]$. Differentiating gives $x\\ln(1+x^2)+x-x=x\\ln(1+x^2)$, the original integrand. Then $G(1)-G(0)=\\ln2-1/2$. This proof is independent of a decimal approximation. Because $x\\ln(1+x^2)$ is nonnegative on $[0,1]$, the result must be nonnegative; because $\\ln(1+x^2)\\le\\ln2$ and $\\int_0^1x\\,dx=1/2$, it must not exceed $(\\ln2)/2$. Both checks hold.",
+        "In the antiderivative lab, numerical differences should be compared at more than one scale. A central difference $[F(x+h)-F(x-h)]/(2h)$ usually reduces truncation error as $h$ shrinks at first, but subtracting nearly equal floating-point values eventually amplifies roundoff. A sequence of apparent agreements is therefore evidence, not a universal proof. If the candidate $F$ has a wrong additive constant, derivative checks will never detect it; a definite endpoint or initial-value condition must fix that constant. If $F$ has a wrong scale factor, derivative discrepancies persist across ordinary sample points. These observations tell us what each verification tool can and cannot establish.",
+        "For a definite integral, use the bounds as part of the method rather than an afterthought. If $u=g(x)$, transform both endpoints to $g(a)$ and $g(b)$, including their order; a decreasing substitution reverses the orientation automatically. For integration by parts, evaluate the boundary product at both endpoints before subtracting the remaining integral. After any method, differentiate the proposed antiderivative on the original domain and compare its derivative with the integrand. This check catches lost chain-rule factors and sign errors, but it does not repair an omitted domain restriction or an improper endpoint that needs a separate limit."
+      ],
+      "formula": "∫₀¹ x²/(1+x²) dx = 1 − π/4; ∫₀¹ x/(1+x²) dx = (ln 2)/2.",
+      "formulaTex": "\\begin{aligned}\\int_0^1\\frac{x^2}{1+x^2}\\,dx&=1-\\frac\\pi4,\\\\ \\int_0^1\\frac{x}{1+x^2}\\,dx&=\\frac{\\ln2}{2}.\\end{aligned}"
+    },
+    {
+      "title": "A radical becomes a hyperbolic square",
+      "paragraphs": [
+        "Chapter 02 Lesson 7 introduced $\\sinh$, $\\cosh$, and the real inverse $\\operatorname{arsinh}$; Chapter 06 Lesson 6 derived their derivatives. Recall $\\cosh^2t-\\sinh^2t=1$, $\\cosh t>0$ for real $t$, and the fact that $\\sinh$ increases from $-\\infty$ to $\\infty$. For $I=\\int_0^1\\sqrt{1+x^2}\\,dx$, set $x=\\sinh t$. Its bounds become $0$ and $\\operatorname{arsinh}1=\\ln(1+\\sqrt2)$, while $dx=\\cosh t\\,dt$ and $\\sqrt{1+\\sinh^2t}=\\cosh t$. This is a forward use of the earlier hyperbolic lessons, with the positive-root branch stated explicitly.",
+        "Expanding the exponential definition gives $\\cosh^2t=(1+\\cosh2t)/2$. An antiderivative is $(t+\\sinh t\\cosh t)/2$, so $I=(\\sqrt2+\\ln(1+\\sqrt2))/2$. This identity comes from hyperbolic exponentials, not a circular-angle formula. The transformed calculation uses the new variable throughout.",
+        "In the original variable, $F(x)=[x\\sqrt{1+x^2}+\\operatorname{arsinh}x]/2$. Its derivative is $[\\sqrt{1+x^2}+x^2/\\sqrt{1+x^2}+1/\\sqrt{1+x^2}]/2=\\sqrt{1+x^2}$ for every real $x$. This derivative verifies the antiderivative beyond plotted examples. For $a>0$, $x=a\\sinh t$ similarly turns $\\sqrt{a^2+x^2}$ into $a\\cosh t$; a negative $a$ changes that sign step.",
+        "The substitution changes both the differential and the bounds: $0\\le x\\le1$ corresponds to $0\\le t\\le\\operatorname{arsinh}1$, and the transformed integrand is $\\cosh^2t$. Keeping the old upper number $1$ or dropping the Jacobian would compute a different integral. The existing Lesson 7 depth checkpoint and hyperbolic-substitution investigation provide practice with those two independent checks; return to Chapter 02 Lesson 7 for the inverse branch if needed.",
+        "The positive square-root choice is a domain argument, not an algebraic cancellation. From $1+\\sinh^2t=\\cosh^2t$ we first get $\\sqrt{1+\\sinh^2t}=|\\cosh t|$. Because $\\cosh t=(e^t+e^{-t})/2>0$ for all real $t$, the absolute value can then be removed. A similar scaled substitution $x=a\\sinh t$ assumes $a>0$ so $\\sqrt{a^2\\cosh^2t}=a\\cosh t$. If $a<0$, the radical would instead contain $|a|$, changing the apparently simple cancellation.",
+        "For a scaled example, $\\int_0^4\\sqrt{9+x^2}\\,dx$ uses $x=3\\sinh t$. Its upper limit is $\\operatorname{arsinh}(4/3)=\\ln(4/3+5/3)=\\ln3$, not $4/3$ or $4$. After the substitution the integrand is $9\\cosh^2t$, and evaluation gives $10+(9/2)\\ln3$. Differentiating the proposed original-variable antiderivative $[x\\sqrt{9+x^2}+9\\operatorname{arsinh}(x/3)]/2$ returns $\\sqrt{9+x^2}$ everywhere on the real line, independently verifying the integration step.",
+        "A definite integral can be numerically checked, but a finite set of values cannot certify its formula. The derivative calculation establishes the antiderivative on an interval, and the fundamental theorem then establishes every pair of endpoints in that interval. For negative bounds the original integrand $\\sqrt{1+x^2}$ is even, so the integral from $-1$ to zero equals the one from zero to $1$. The substitution handles negative $x$ as well because $\\operatorname{arsinh}$ is defined on all real numbers and $\\cosh$ remains positive. This symmetry is a useful independent sign check.",
+        "For a fixed $a>0$, the same calculation gives the reusable primitive $[x\\sqrt{a^2+x^2}+a^2\\operatorname{arsinh}(x/a)]/2+C$ on the real line. Differentiate it to check both the radical and inverse term. This covers finite positive and negative endpoints because $\\operatorname{arsinh}$ is real on all of $\\mathbb R$; $a<0$ instead requires an explicit $|a|$ in the square-root step. Practice on this scaled case in the linked Lesson 7 depth questions before comparing with the worked $a=3$ calculation."
+      ],
+      "formula": "For a>0, x=a sinh t gives dx=a cosh t dt and √(a²+x²)=a cosh t; transform both integration endpoints.",
+      "formulaTex": "\\begin{gathered}x=\\sinh t,\\quad dx=\\cosh t\\,dt,\\quad t:0\\to\\operatorname{arsinh}1,\\\\\\int_0^1\\sqrt{1+x^2}\\,dx=\\frac{\\sqrt2+\\ln(1+\\sqrt2)}2,\\quad F'(x)=\\sqrt{1+x^2}.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Parts after substitution",
+      "problem": "Evaluate $\\int_0^1 x^3e^{x^2}\\,dx$.",
+      "steps": [
+        "Set $u = x^{2}$. Then $x^3\\,dx=x^2(x\\,dx)=\\frac u2\\,du$ and the bounds remain $0$ and $1$.",
+        "The integral is $\\frac12\\int_0^1 ue^u\\,du$. Use parts with the factor $u$ differentiated and $e^u$ integrated.",
+        "An antiderivative is $\\frac12(u-1)e^u$. Its values at $1$ and $0$ are $0$ and $-1/2$, respectively.",
+        "As a check before evaluating, differentiating $\\frac12(x^2-1)e^{x^2}$ gives $xe^{x^2}+x(x^2-1)e^{x^2}=x^3e^{x^2}$."
+      ],
+      "answer": "The definite integral equals $1/2$. Both substitution and the FTC apply because the functions are smooth on the full interval."
+    },
+    {
+      "title": "A repeated denominator factor",
+      "problem": "Find $\\int\\frac{2x+1}{x(x+1)^2}\\,dx$ and state its domain.",
+      "steps": [
+        "Use $\\frac Ax+\\frac B{x+1}+\\frac C{(x+1)^2}$. The repeated factor requires both of its powers.",
+        "Multiplying gives $2x+1=A(x+1)^2+Bx(x+1)+Cx$. Constant, quadratic and linear coefficients yield $A=1$, $B=-1$ and $C=1$.",
+        "Integrate term by term: $\\int\\frac1x\\,dx=\\ln|x|$, $\\int-\\frac1{x+1}\\,dx=-\\ln|x+1|$, and $\\int\\frac1{(x+1)^2}\\,dx=-\\frac1{x+1}$.",
+        "Differentiating restores the three fractions; combining their numerators gives $2x+1$, confirming the decomposition."
+      ],
+      "answer": "$\\ln|x|-\\ln|x+1|-\\frac1{x+1}+C$ on any interval avoiding $x=-1$ and $x=0$; each connected interval can have its own constant."
+    },
+    {
+      "title": "A linear inner derivative supplies a scale",
+      "problem": "Find $\\int(3x+2)^5\\,dx$ and verify.",
+      "steps": [
+        "Let $u=3x+2$, so $du=3dx$ and $dx=du/3$.",
+        "The integral is $\\frac13\\cdot\\frac{u^6}{6}+C=\\frac{(3x+2)^6}{18}+C$.",
+        "Differentiating gives $\\frac{6(3x+2)^5\\cdot3}{18}=(3x+2)^5$."
+      ],
+      "answer": "The antiderivative family is $\\frac{(3x+2)^6}{18}+C$."
+    },
+    {
+      "title": "Repeated parts reduces polynomial degree",
+      "problem": "Use repeated integration by parts to find $\\int x^2e^x\\,dx$ and verify by differentiation.",
+      "steps": [
+        "Choose $u=x^{2}$ and $dv=e^x\\,dx$ to obtain $x^2e^x-2\\int xe^x\\,dx$.",
+        "For the remaining integral, parts gives $\\int xe^x\\,dx=xe^x-e^x+C$.",
+        "Substitute and simplify to $e^x(x^2-2x+2)+C$. Differentiation returns $x^2e^x$."
+      ],
+      "answer": "The antiderivative is $e^x(x^2-2x+2)+C$."
+    },
+    {
+      "title": "An even trigonometric power",
+      "problem": "Evaluate $\\int_0^\\pi\\sin^2x\\,dx$.",
+      "steps": [
+        "Use $\\sin^2x=\\frac{1-\\cos(2x)}2$.",
+        "An antiderivative is $\\frac x2-\\frac{\\sin(2x)}4$.",
+        "At $\\pi$ and $0$, the sine terms vanish, leaving $\\pi /2$. The average of $\\sin ^{2}$ over this full interval is $1/2$."
+      ],
+      "answer": "The integral is $\\pi /2$."
+    },
+    {
+      "title": "A repeated pole needs every partial-fraction term",
+      "problem": "Decompose and integrate $\\frac1{x(x+1)^2}$.",
+      "steps": [
+        "Write $\\frac Ax+\\frac B{x+1}+\\frac C{(x+1)^2}$ and multiply through to get $1=A(x+1)^2+Bx(x+1)+Cx$.",
+        "Matching constant, quadratic, and linear coefficients gives $A=1$, $A+B=0$, and $2A+B+C=0$. Hence $(A,B,C)=(1,-1,-1)$ and $\\frac1{x(x+1)^2}=\\frac1x-\\frac1{x+1}-\\frac1{(x+1)^2}$.",
+        "Integrate termwise: $\\ln|x|-\\ln|x+1|+\\frac1{x+1}+C$ on intervals avoiding $x=0$ and $x=-1$."
+      ],
+      "answer": "$\\displaystyle\\int\\frac{dx}{x(x+1)^2}=\\ln|x|-\\ln|x+1|+\\frac1{x+1}+C$, separately on each interval avoiding $-1$ and $0$."
+    },
+    {
+      "title": "Separate derivative and arctangent parts",
+      "problem": "Find $\\int\\frac{2x+5}{x^2+4x+8}\\,dx$.",
+      "steps": [
+        "Split numerator into $(2x+4)+1$.",
+        "The first part integrates to $\\ln (x^{2}+4x+8)$ because the quadratic is positive and its derivative is $2x+4$.",
+        "Complete the square $x^{2}+4x+8=(x+2)^{2}+4$; the remaining integral is $\\frac12\\arctan\\left(\\frac{x+2}{2}\\right)$."
+      ],
+      "answer": "The result is $\\ln(x^2+4x+8)+\\frac12\\arctan\\left(\\frac{x+2}{2}\\right)+C$."
+    },
+    {
+      "title": "Odd symmetry evaluates a definite integral",
+      "problem": "Evaluate $\\int_{-1}^1 xe^{-x^2}\\,dx$ without finding a new antiderivative.",
+      "steps": [
+        "The factor $e^{-x^2}$ is even and $x$ is odd, so their product is odd.",
+        "The integrand is continuous on the symmetric interval $[-1,1]$.",
+        "Pair $x$ and $-x$ contributions; they cancel exactly."
+      ],
+      "answer": "The definite integral is zero by odd symmetry."
+    },
+    {
+      "title": "A complete hyperbolic substitution",
+      "problem": "Evaluate $\\int_0^{\\sqrt3}\\sqrt{1+x^2}\\,dx$ and check an antiderivative.",
+      "steps": [
+        "Set $x=\\sinh t$. The bounds become $0$ and $\\operatorname{arsinh}\\sqrt3=\\ln(2+\\sqrt3)$; since $\\cosh t>0$, the transformed integrand is $\\cosh^2t$.",
+        "Integrate $\\cosh^2t=(1+\\cosh2t)/2$ to obtain $(t+\\sinh t\\cosh t)/2$. At the upper bound, $\\sinh t=\\sqrt3$ and $\\cosh t=2$.",
+        "Differentiating $[x\\sqrt{1+x^2}+\\operatorname{arsinh}x]/2$ gives $\\sqrt{1+x^2}$ for every real $x$, independently checking the antiderivative."
+      ],
+      "answer": "The value is $\\sqrt3+\\frac12\\ln(2+\\sqrt3)$."
+    },
+    {
+      "title": "A scaled radical",
+      "problem": "Evaluate $\\int_0^3\\sqrt{4+x^2}\\,dx$.",
+      "steps": [
+        "Set $x=2\\sinh t$. The upper bound is $\\operatorname{arsinh}(3/2)=\\ln((3+\\sqrt{13})/2)$ and $\\cosh t=\\sqrt{13}/2$ there.",
+        "The radical is $2\\cosh t>0$ and $dx=2\\cosh t\\,dt$, so the integral is $2[t+\\sinh t\\cosh t]$ between the transformed bounds.",
+        "At the upper bound $\\sinh t=3/2$. Differentiating $[x\\sqrt{4+x^2}+4\\operatorname{arsinh}(x/2)]/2$ recovers the original integrand."
+      ],
+      "answer": "The value is $3\\sqrt{13}/2+2\\ln((3+\\sqrt{13})/2)$."
+    }
+  ],
+  "misconceptions": [
+    "A substitution changes only the formula, not the bounds. In a definite integral, the bounds must be values of the current variable; keeping bounds in $x$ after switching the integral to $u$ generally changes the quantity being evaluated.",
+    "A tiny sampled derivative residual proves an antiderivative is correct. Finite differences introduce approximation and rounding errors, and finite samples cannot establish an identity over an interval.",
+    "Every continuous elementary function has an elementary antiderivative. The FTC guarantees an accumulation-function antiderivative, which need not have an elementary expression."
+  ],
+  "lab": {
+    "title": "Check candidate antiderivatives numerically",
+    "description": "Compare $f(x)=xe^x$ with the numerical derivative of $F(x)=(x-a)e^x+C$ on $[-1,1]$, where the JavaScript inputs coefficient and constant supply $a$ and $C$. Edit coefficient, constant, and the difference step h. Separate plots show $f$, the estimated derivative, and their residual; console output labels sampled values and the maximum absolute residual. All variables here are dimensionless.",
+    "code": "// Adjustable candidate and central-difference step.\nconst coefficient = 1;\nconst constant = 0;\nconst h = 0.0001;\nif (!Number.isFinite(coefficient) || !Number.isFinite(constant) || !Number.isFinite(h) || h <= 0) throw new Error('Use finite parameters and a positive h.');\nconst f = x => x * Math.exp(x);\nconst F = x => (x - coefficient) * Math.exp(x) + constant;\nconst target = [], derivative = [], residual = [];\nlet maxError = 0;\nconsole.log('x | f(x) | central derivative | residual');\nfor (let i = 0; i <= 100; i++) {\n  const x = -1 + 2 * i / 100;\n  const estimate = (F(x + h) - F(x - h)) / (2 * h);\n  const error = estimate - f(x);\n  if (!Number.isFinite(estimate)) throw new Error('Nonfinite estimate; reduce parameter magnitudes.');\n  target.push([x, f(x)]);\n  derivative.push([x, estimate]);\n  residual.push([x, error]);\n  maxError = Math.max(maxError, Math.abs(error));\n  if (i % 25 === 0) console.log(x.toFixed(2), f(x).toFixed(8), estimate.toFixed(8), error.toExponential(3));\n}\nplot(target, 'f(x) = x exp(x); horizontal axis x');\nplot(derivative, 'Central-difference estimate of F derivative');\nplot(residual, 'Estimated F derivative minus f; horizontal axis x');\nconsole.log('Maximum absolute sampled residual:', maxError);",
+    "tasks": [
+      "Before running, differentiate $F$ by hand and predict which value of coefficient makes $F'(x)=f(x)$. Predict whether changing the additive constant should affect the exact derivative.",
+      "Set coefficient to 0.9. Before running, predict the residual as a function of $x$; then compare its value at $x=1$ with the numerical output.",
+      "Restore coefficient=1 and try h=0.01, 0.0001 and 1e-12. Explain why a smaller h eventually becomes less reliable.",
+      "Set constant=1e12 with h=0.0001. Explain how subtraction of large nearby floating-point values can spoil a mathematically unchanged derivative."
+    ],
+    "expected": "With defaults, three plots each contain 101 finite points. The maximum absolute sampled residual is about $1.36\\times10^{-8}$ near $x=1$; the estimated derivative there is about 2.718281842. At the default coefficient, $F'(x)=xe^x$ exactly for every additive constant. Setting coefficient to 0.9 makes the exact derivative residual $0.1e^x$ (about 0.271828 at $x=1$); the computed residual also includes finite-difference and rounding error."
+  },
+  "exercises": [
+    {
+      "question": "Find $\\int \\frac{x}{4+x^2}\\,dx$ and verify it.",
+      "hint": "Use the denominator as $u$ and compare $du$ with the numerator.",
+      "solution": "Let $u=4+x^2$, so $du=2x\\,dx$. Then $\\int x/(4+x^2)\\,dx=\\frac12\\ln(4+x^2)+C$. Differentiating gives $\\frac12(2x)/(4+x^2)$; the logarithm's argument is positive for all real $x$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^1\\frac{x}{(1+x^2)^2}\\,dx$ by substitution.",
+      "hint": "Set $u=1+x^2$ and change both bounds.",
+      "solution": "With $u=1+x^2$ and $du=2x\\,dx$, the bounds become $1$ and $2$. Thus the integral is $\\frac12\\int_1^2u^{-2}\\,du=\\frac12[-1/u]_1^2=1/4$. Differentiating $-1/[2(1+x^2)]$ checks the antiderivative.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int(4x-1)^3\\,dx$.",
+      "hint": "Set $u=4x-1$.",
+      "solution": "With $u=4x-1$ and $du=4\\,dx$, the integral is $\\frac14\\int u^3\\,du=(4x-1)^4/16+C$. Differentiation recovers the integrand.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\frac{2x}{x^2+5}\\,dx$.",
+      "hint": "The numerator is the denominator derivative.",
+      "solution": "The numerator is the derivative of $x^2+5$, so $\\int 2x/(x^2+5)\\,dx=\\ln(x^2+5)+C$. The argument is positive for every real $x$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^1 -2xe^{-x^2}\\,dx$.",
+      "hint": "Set $u=-x^2$ and retain oriented bounds.",
+      "solution": "With $u=-x^2$ and $du=-2x\\,dx$, the bounds become $0$ and $-1$. Hence $\\int_0^1-2xe^{-x^2}\\,dx=\\int_0^{-1}e^u\\,du=e^{-1}-1$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does $u=x^2$ not directly simplify $\\int\\cos(x^2)\\,dx$ to $\\sin(x^2)$?",
+      "hint": "Differentiate the proposed answer.",
+      "solution": "Differentiating $\\sin(x^2)$ gives $2x\\cos(x^2)$, which has an extra $2x$ factor. The proposed substitution $u=x^2$ does not directly supply that factor.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\int_1^e \\ln(x)\\,dx$.",
+      "hint": "Regard $\\ln x$ as a product with $1$.",
+      "solution": "Integration by parts with $u=\\ln x$ and $dv=dx$ gives primitive $x\\ln x-x$. Evaluating at $e$ gives $0$, and at $1$ gives $-1$, so $\\int_1^e\\ln x\\,dx=1$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^1 x\\cos x\\,dx$ by parts.",
+      "hint": "Take $u=x$ and $dv=\\cos x\\,dx$.",
+      "solution": "With $u=x$, $dv=\\cos x\\,dx$, $du=dx$, and $v=\\sin x$, parts gives $\\int_0^1x\\cos x\\,dx=[x\\sin x]_0^1-\\int_0^1\\sin x\\,dx=\\sin1+\\cos1-1$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int x^2e^x\\,dx$.",
+      "hint": "Use parts twice.",
+      "solution": "Two applications of integration by parts reduce the polynomial degree: $\\int x^2e^x\\,dx=x^2e^x-2\\int xe^x\\,dx=e^x(x^2-2x+2)+C$. Differentiation confirms the result.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\ln x\\,dx$ for $x>0$.",
+      "hint": "Treat $\\ln x$ as $\\ln x\\cdot1$.",
+      "solution": "On $x>0$, parts with $u=\\ln x$, $dv=dx$ gives $\\int\\ln x\\,dx=x\\ln x-\\int1\\,dx=x\\ln x-x+C$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\arctan x\\,dx$.",
+      "hint": "Use parts with $u=\\arctan x$.",
+      "solution": "Parts with $u=\\arctan x$ and $dv=dx$ yields $x\\arctan x-\\int x/(1+x^2)\\,dx=x\\arctan x-\\frac12\\ln(1+x^2)+C$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^1 xe^x\\,dx$.",
+      "hint": "Use integration by parts with $u=x$ and $dv=e^x\\,dx$; then evaluate both endpoints.",
+      "solution": "One integration by parts gives primitive $e^x(x-1)$. Thus $\\int_0^1xe^x\\,dx=[e^x(x-1)]_0^1=0-(-1)=1$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^\\pi \\sin^2(x)\\,dx$.",
+      "hint": "Use a half-angle identity rather than trying $u=\\sin x$.",
+      "solution": "Use $\\sin^2x=(1-\\cos2x)/2$. Then $\\int_0^\\pi\\sin^2x\\,dx=[x/2-\\sin(2x)/4]_0^\\pi=\\pi/2$, since both sine boundary terms vanish.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\cos^3x\\,dx$.",
+      "hint": "Save one $\\cos x$ and set $u=\\sin x$.",
+      "solution": "Write $\\cos^3x=(1-\\sin^2x)\\cos x$. With $u=\\sin x$, integrate $1-u^2$ to get $\\sin x-\\sin^3x/3+C$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\sin^2x\\,dx$.",
+      "hint": "Use the half-angle identity.",
+      "solution": "The half-angle identity $\\sin^2x=(1-\\cos2x)/2$ separates the integral into a constant term and a cosine term. Integrating each gives $\\int\\sin^2x\\,dx=x/2-\\sin(2x)/4+C$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^\\pi\\cos^2x\\,dx$.",
+      "hint": "Use half-angle or symmetry.",
+      "solution": "Using $\\cos^2x=(1+\\cos2x)/2$, the sine boundary term vanishes and $\\int_0^\\pi\\cos^2x\\,dx=[x/2+\\sin(2x)/4]_0^\\pi=\\pi/2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "State a valid $\\theta$-interval for $x=a\\sin\\theta$ when simplifying $\\sqrt{a^2-x^2}$, $a>0$.",
+      "hint": "Choose an interval where $\\cos\\theta\\ge0$.",
+      "solution": "Choose $-\\pi/2\\le\\theta\\le\\pi/2$. On this interval, $x=a\\sin\\theta$ covers $[-a,a]$ once and $\\cos\\theta\\ge0$. Therefore the positive square root simplifies as $\\sqrt{a^2-x^2}=a\\sqrt{\\cos^2\\theta}=a|\\cos\\theta|=a\\cos\\theta$. The interval choice justifies dropping the absolute value.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find $\\int \\frac{dx}{x^2-4x+13}$.",
+      "hint": "Complete the square, then identify the arctangent scale.",
+      "solution": "Complete the square: $x^2-4x+13=(x-2)^2+9$. With $u=(x-2)/3$, $dx=3\\,du$ and the integral becomes $\\frac13\\int du/(1+u^2)=\\frac13\\arctan((x-2)/3)+C$, valid for all real $x$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Decompose $\\frac{1}{x(x+1)^2}$ into partial fractions.",
+      "hint": "Include both powers of the repeated factor $x+1$.",
+      "solution": "For $x\\ne0,-1$, $1/[x(x+1)^2]=1/x-1/(x+1)-1/(x+1)^2$. Multiplying through by $x(x+1)^2$ gives $1=(x+1)^2-x(x+1)-x$, verifying the decomposition.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Divide $\\frac{x^2+1}{x-1}$ before integrating.",
+      "hint": "Use polynomial long division.",
+      "solution": "Division gives $(x^2+1)/(x-1)=x+1+2/(x-1)$ for $x\\ne1$. Hence an antiderivative on either side of $1$ is $x^2/2+x+2\\ln|x-1|+C$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\frac{dx}{x^2+4x+8}$.",
+      "hint": "Complete the square.",
+      "solution": "Complete the square: $x^2+4x+8=(x+2)^2+2^2$. The arctangent form gives $\\int dx/(x^2+4x+8)=\\frac12\\arctan((x+2)/2)+C$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\int\\frac{2x+4}{x^2+4x+8}\\,dx$.",
+      "hint": "Recognize the denominator derivative.",
+      "solution": "Since the numerator is the derivative of $x^2+4x+8=(x+2)^2+4>0$, the integral is $\\ln(x^2+4x+8)+C$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "A proposed calculation gives $\\int_{-1}^1 \\frac{dx}{x^2} = \\left[-\\frac{1}{x}\\right]_{-1}^1 = -2$. Explain the error.",
+      "hint": "Check the domain before applying the FTC.",
+      "solution": "The integrand is undefined at $x=0$, so the ordinary fundamental theorem cannot cross that point. For example, $\\int_\\varepsilon^1x^{-2}\\,dx=1/\\varepsilon-1\\to+\\infty$ as $\\varepsilon\\to0^+$. Both one-sided improper integrals diverge; endpoint subtraction is invalid.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Write a justified method choice for $\\int x^2\\cos(x)\\,dx$, $\\int\\frac{3x^2}{1+x^3}\\,dx$, and $\\int e^{-x^2}\\,dx$. Must a valid answer always use elementary functions?",
+      "hint": "Look for a simplifying derivative, an inner derivative, and an accumulation function, respectively.",
+      "solution": "Use parts twice for $\\int x^2\\cos x\\,dx$, obtaining $x^2\\sin x+2x\\cos x-2\\sin x+C$. Use $u=1+x^3$ for the second integral, obtaining $\\ln|1+x^3|+C$ on intervals avoiding $x=-1$. The third has no elementary antiderivative, but $A(x)=\\int_0^x e^{-t^2}\\,dt$ has derivative $e^{-x^2}$ by the fundamental theorem, so $A(x)+C$ is valid.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $\\int x^2\\cos x\\,dx$, which technique naturally reduces complexity?",
+      "hint": "Differentiate the polynomial factor $x^2$.",
+      "solution": "Integration by parts with $u=x^2$ and $dv=\\cos x\\,dx$ lowers the polynomial degree in the remaining integral.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\int_{-1}^1 xe^{-x^2}\\,dx$.",
+      "hint": "Use symmetry.",
+      "solution": "The integrand $xe^{-x^2}$ is continuous and odd, so $\\int_{-1}^1xe^{-x^2}\\,dx=0$ by symmetry.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "If $f$ is Riemann integrable on $[0,2]$ and $|f(x)|\\le3$ for every $x\\in[0,2]$, bound $|\\int_0^2 f(x)\\,dx|$.",
+      "hint": "Use the integral triangle inequality.",
+      "solution": "The integral triangle inequality gives $|\\int_0^2f(x)\\,dx|\\le\\int_0^2|f(x)|\\,dx\\le\\int_0^2 3\\,dx=6$. Equality is possible for constant $f=3$ or $f=-3$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Why is a failed search for a familiar primitive not proof that no elementary primitive exists?",
+      "hint": "A list of attempted techniques is incomplete.",
+      "solution": "A list of attempted techniques is incomplete; an impossibility claim needs a theorem about elementary functions. Even without an elementary primitive, an integral can define an accumulation function.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\int_0^2 \\frac{x^2}{x^2+4}\\,dx$ and check its size against the integrand.",
+      "hint": "Divide $x^2$ by $x^2+4$ before integrating.",
+      "solution": "Write $x^2/(x^2+4)=1-4/(x^2+4)$. A primitive is $x-2\\arctan(x/2)$, so the integral is $2-2\\arctan1=2-\\pi/2\\approx0.4292$. Since $0\\le x^2/(x^2+4)\\le1/2$ on $[0,2]$, the result lies between $0$ and $1$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A drug concentration is modeled by $C(t)=te^{-t}$ milligrams per litre for $0\\le t\\le4$ hours. Find the area under the concentration curve, give its units, and state why integration by parts is appropriate.",
+      "hint": "Use $u=t$ and $dv=e^{-t}\\,dt$, then evaluate at both endpoints.",
+      "solution": "Parts gives $\\int te^{-t}\\,dt=-(t+1)e^{-t}+C$. Thus exposure is $[-(t+1)e^{-t}]_0^4=1-5e^{-4}\\approx0.9084\\,\\mathrm{mg\\,h/L}$. The algebraic factor simplifies when differentiated, while the exponential is easy to integrate.",
+      "lesson": 6,
+      "type": "Modeling"
+    }
+  ],
+  "summary": [
+    "Choose methods from derivative structure: composition suggests substitution, products suggest parts, and rational structure suggests decomposition.",
+    "Trigonometric identities and completed squares expose familiar forms, while substitution branches control signs and domains.",
+    "Check every candidate by differentiation, keep bounds consistent, and treat numerical agreement as evidence rather than proof.",
+    "An accumulation function exists for a continuous integrand even when no elementary antiderivative exists."
+  ],
+  "next": "Chapter 13 turns integrals into geometric and physical quantities; chapter 14 supplies numerical methods and the limiting definitions needed at singularities."
+}

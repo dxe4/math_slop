@@ -1,0 +1,447 @@
+{
+  "id": "26",
+  "title": "Green, Stokes, and divergence theorems",
+  "subtitle": "How can information throughout a region be recovered from its oriented boundary?",
+  "prerequisites": [
+    "Chapter 19: dot products, cross products, and parametrized curves.",
+    "Chapters 21 and 23: partial derivatives and multiple integrals.",
+    "Chapter 25: vector line integrals, circulation, and domain restrictions."
+  ],
+  "objectives": [
+    "Choose Green, Stokes, or the divergence theorem from the dimension and type of integral.",
+    "Construct a surface area element and distinguish scalar area from oriented flux.",
+    "Compute curl and divergence and interpret their different physical meanings.",
+    "Check smoothness, closed boundaries, and compatible orientations before applying a theorem."
+  ],
+  "sections": [
+    {
+      "title": "1. Green’s theorem: circulation from a planar interior",
+      "paragraphs": [
+        "A line integral measures what happens along a curve. A double integral measures what happens throughout a region. Green’s theorem connects them when the curve is the entire boundary of that region. Let $D$ be a bounded planar region with a piecewise smooth boundary, and let $P$ and $Q$ have continuous first partial derivatives on an open set containing $D$ and its boundary. With positive boundary orientation, the circulation integral of $P\\,dx+Q\\,dy$ equals the integral of $Q_x-P_y$ over $D$. The integrand measures local circulation per unit area.",
+        "Positive orientation means that the region stays on your left as you travel along its boundary. For a disk this means counterclockwise travel. For a region with a hole, the outer boundary is counterclockwise and each inner boundary is clockwise. Every boundary component matters. Reversing the entire boundary reverses the line integral; the double integral acquires a corresponding minus sign if we deliberately use negative orientation.",
+        "A proof sketch for a vertically simple region explains the sign. Integrating $-P_y$ first in $y$ gives $P$ on the lower boundary minus $P$ on the upper boundary. These are exactly the contributions from traveling right along the bottom and left along the top. Integrating $Q_x$ first in $x$ produces the other pair of edges. For more general regions, subdivide into suitable pieces: shared edges are traversed in opposite directions and cancel. This cancellation is the mechanism behind all three theorems in this chapter.",
+        "The flux version is equally useful: the outward planar flux of $\\mathbf F=(P,Q)$ is $\\oint_{\\partial D}(P\\,dy-Q\\,dx)$, which equals $\\iint_D(P_x+Q_y)\\,dA$. Along a positively oriented curve, the outward normal element is $\\mathbf n\\,ds=(dy,-dx)$. Thus circulation uses the tangential component, whereas flux uses the normal component. Do not interchange these expressions merely because they integrate along the same boundary.",
+        "Green's circulation formula can be checked on a rectangle before trusting a complicated curve. For $\\mathbf F=(-y,x)$, the scalar curl $Q_x-P_y$ is $1-(-1)=2$. On $[0,2]\\times[0,1]$, the area is two, so positive circulation is four. Direct integration around its four edges gives the same answer. If the traversal is clockwise, the sign is $-4$. This example separates three ingredients: the field derivative, the enclosed area, and boundary orientation. A wrong sign in any one of them changes the result.",
+        "A region with a hole has a complete boundary containing more than one loop. On an annulus $a\\le r\\le b$, positive orientation means outer circle counterclockwise and inner circle clockwise. For $\\mathbf F=(-y/2,x/2)$, the outer circulation is $\\pi b^2$ and the inner contribution is $-\\pi a^2$, so the total is $\\pi(b^2-a^2)$, exactly the integral of scalar curl $1$ over the annular area. Omitting the inner boundary would count a disk that is not in the region. The theorem is about the entire oriented boundary.",
+        "Green's flux form follows from the circulation form by rotating the field. If $\\mathbf F=(P,Q)$, the outward normal line element for a positively oriented planar boundary is $\\mathbf n\\,ds=(dy,-dx)$. Thus $\\mathbf F\\cdot\\mathbf n\\,ds=P\\,dy-Q\\,dx$. Set the rotated field to $(-Q,P)$; its circulation integral is exactly this flux, and its scalar curl is $P_x+Q_y$. This derivation shows why divergence pairs with outward flux while curl pairs with tangential circulation. Both are local derivatives converted to boundary measurements.",
+        "For a simple closed curve that is not positively oriented, one may reverse the given parameterization or insert a minus sign after applying Green's theorem to the positive orientation. A diagram should mark arrows, especially when a curve is described as “clockwise as seen from above.” For a planar hole, the inner clockwise direction is already part of positive orientation of the whole region. It is easy to reverse it twice by mistake if orientation is treated as a decorative note rather than part of the integral.",
+        "The field must be continuously differentiable on an open neighborhood of the region and its boundary in the elementary theorem. The angular field from chapter 25 is undefined at the origin. Applying Green's theorem to a full disk around that point would be invalid, even though its curl is zero at every point where it is defined. Applying it to an annulus that excludes the origin is valid and includes two boundary circles whose circulations cancel. The domain check comes before the derivative calculation."
+      ],
+      "formula": "∮∂D (P dx + Q dy) = ∬D (∂Q/∂x − ∂P/∂y) dA",
+      "theorems": [
+        {
+          "title": "Green’s theorem on a rectangle is cancellation at work",
+          "statement": "For a continuously differentiable planar field $\\mathbf F=(P,Q)$ on a neighborhood of a rectangle $R$, counterclockwise circulation around $\\partial R$ equals the integral of scalar curl $Q_x-P_y$ over $R$.",
+          "proof": [
+            "Travel right along the bottom edge and left along the top. Their $P$ contributions are $\\int_a^bP(x,c)\\,dx-\\int_a^bP(x,d)\\,dx$. By the one-variable fundamental theorem in $y$, $P(x,d)-P(x,c)$ is the integral of $P_y(x,y)$ from $c$ to $d$. Thus the combined horizontal contribution is the negative integral of $P_y$ over $R$. The sign comes from the reversed top-edge orientation.",
+            "Travel upward on the right edge and downward on the left. Their $Q$ contributions are the integral of $Q(b,y)$ from $c$ to $d$ minus the integral of $Q(a,y)$ over that interval. The fundamental theorem in $x$ turns their difference into the integral of $Q_x$ over $R$. Add vertical and horizontal contributions; both are integrals over the same rectangle, yielding $\\iint_R(Q_x-P_y)\\,dA$.",
+            "A general simple region can be decomposed into small pieces. Every internal edge is traversed in opposite directions by adjacent pieces, so its line integrals cancel. Only the external boundary remains. Turning that picture into a theorem requires regularity of the boundary and field, as well as a suitable limiting argument. A hole creates an additional boundary component with its own orientation. The rectangle proof exposes the mechanism without pretending that a diagram alone proves every version of Green’s theorem."
+          ],
+          "equationTex": "\\oint_{\\partial R}(P\\,dx+Q\\,dy)=\\iint_R(Q_x-P_y)\\,dA"
+        }
+      ],
+      "formulaTex": "\\oint_{\\partial D}(P\\,dx+Q\\,dy)=\\iint_D(Q_x-P_y)\\,dA"
+    },
+    {
+      "title": "2. Parametrized surfaces and their area elements",
+      "paragraphs": [
+        "A surface patch is described by $\\mathbf r(u,v)=(x(u,v),y(u,v),z(u,v))$ for $(u,v)$ in a planar parameter region $R$. The vectors $\\mathbf r_u$ and $\\mathbf r_v$ are tangent to its coordinate curves. A tiny parameter rectangle becomes approximately a parallelogram whose area is $\\lvert\\mathbf r_u\\times\\mathbf r_v\\rvert\\,du\\,dv$. Regularity means this cross product is nonzero in the interior of a regular patch. A whole surface may require several patches; seams of area zero can be handled separately.",
+        "The scalar surface integral $\\iint_S g\\,dS$ therefore becomes $\\iint_R g(\\mathbf r(u,v))\\lvert\\mathbf r_u\\times\\mathbf r_v\\rvert\\,du\\,dv$. If $g$ is surface mass density in kilograms per square metre, this integral is mass in kilograms. A parametrization that covers a patch twice counts its contribution twice unless multiplicity is explicitly corrected. Parameter bounds and coverage are mathematical data, not merely convenient plotting choices.",
+        "Flux requires an orientation as well as area. Choose a continuous unit normal $\\mathbf n$ on the surface. Then $\\iint_S\\mathbf F\\cdot\\mathbf n\\,dS$ becomes $\\iint_R\\mathbf F(\\mathbf r(u,v))\\cdot(\\mathbf r_u\\times\\mathbf r_v)\\,du\\,dv$ when the cross product points in the chosen direction. Reverse the cross product when necessary. The norm belongs in a scalar area integral; the signed vector belongs in a flux integral. If $\\mathbf F$ is a fluid velocity in metres per second, its flux is a signed volume rate in cubic metres per second.",
+        "For a graph $z=g(x,y)$, use $\\mathbf r(x,y)=(x,y,g(x,y))$. The upward vector area element is $\\mathbf n\\,dS=(-g_x,-g_y,1)\\,dx\\,dy$. This formula avoids separately normalizing the normal and then multiplying by the area factor. A sphere cannot be covered by a single globally regular longitude–latitude patch at its poles, but the usual spherical formula still integrates correctly because the exceptional parameter edges have area zero. A nonorientable surface, such as a Möbius strip, has no globally consistent choice of normal, so ordinary globally oriented flux is not defined on it.",
+        "For a graph $z=g(x,y)$, the tangent vectors are $\\mathbf r_x=(1,0,g_x)$ and $\\mathbf r_y=(0,1,g_y)$. Their cross product is $\\mathbf r_x\\times\\mathbf r_y=(-g_x,-g_y,1)$, which points upward. Its magnitude $\\sqrt{1+g_x^2+g_y^2}$ converts planar parameter area into actual surface area. For $g=x+2y$ over the unit square, the surface-area factor is $\\sqrt6$, so the slanted patch has area $\\sqrt6$. If $\\mathbf F=(0,0,3)$, upward flux is only $3$ because $\\mathbf F\\cdot(-1,-2,1)=3$. Flux and scalar area differ.",
+        "An oriented flux integral can be negative. It records flow through a surface in the chosen normal direction; a negative value means net flow in the opposite direction. For $\\mathbf F=(0,0,3)$ through the preceding graph over the unit square, upward flux is $3$. Reversing the normal makes it $-3$, while scalar surface area and any nonnegative surface mass stay positive. A computation that takes an absolute value of $\\mathbf F\\cdot\\mathbf n$ everywhere would answer a different question, summing unsigned crossing rather than net flux.",
+        "A sphere cannot be covered by one regular graph over a single plane because its top and bottom lie above the same base points. Use two graph patches, or spherical parameters away from coordinate singularities. For a closed-surface flux, each patch's normal must point outward; the upper graph uses an upward normal while the lower graph uses a downward normal. If both patches are assigned upward normals, their contributions may cancel incorrectly. The divergence theorem often avoids this patch bookkeeping when its hypotheses hold.",
+        "A surface parameterization can cover the same physical patch more than once. The scalar integral with $\\lvert\\mathbf r_u\\times\\mathbf r_v\\rvert$ then counts area with multiplicity, while oriented flux can count signed multiplicity depending on orientation. Before using a formula, identify the parameter domain and whether its interior maps injectively to the surface. Angular seams and poles in standard sphere coordinates are lower-dimensional exceptions that do not double the ordinary surface integral. A full extra turn in an angle would double it.",
+        "A useful physical test is a constant vertical field through a tilted planar patch. The flux equals field strength times the area of the patch’s horizontal projection, with a sign set by orientation. For the graph $z=x+2y$ over the unit square, that projection has area one, so vertical field $\\mathbf F=(0,0,3)$ gives flux three regardless of the patch’s larger slanted area $\\sqrt6$. The dot product with the normal accounts for the tilt. This is why “flux equals magnitude times surface area” is usually false."
+      ],
+      "formula": "dS = |rᵤ × rᵥ| du dv;  n dS = ±(rᵤ × rᵥ) du dv",
+      "formulaTex": "\\begin{aligned}dS&=\\lvert\\mathbf r_u\\times\\mathbf r_v\\rvert\\,du\\,dv,\\\\ \\mathbf n\\,dS&=\\pm(\\mathbf r_u\\times\\mathbf r_v)\\,du\\,dv,\\qquad \\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf0;\\ \\text{sign sets orientation}.\\end{aligned}"
+    },
+    {
+      "title": "3. Curl, divergence, and Stokes’ theorem",
+      "paragraphs": [
+        "For $F=(P,Q,R)$, divergence is the scalar $P_x+Q_y+R_z$. Positive divergence describes a local excess of outward flux over inward flux. Curl is the vector $(R_y-Q_z,P_z-R_x,Q_x-P_y)$. Its component along a unit normal describes local circulation density in the corresponding plane. Curl is not a velocity, and divergence is not the magnitude of the field. Both involve spatial changes of components. For a velocity field, both have units of inverse seconds.",
+        "Stokes’ theorem says that the circulation of $\\mathbf F$ around the boundary of an oriented surface equals the flux of $\\nabla\\times\\mathbf F$ through that surface. Assume $S$ is a compact, orientable, piecewise smooth surface with piecewise smooth boundary and $\\mathbf F$ has continuous first derivatives on an open neighborhood of $S$. The boundary must have the orientation induced by the chosen normal. On an upward disk the boundary is counterclockwise when viewed from above: curling the fingers of the right hand along the boundary makes the thumb point upward.",
+        "The surface need not be flat. A bowl and a flat disk with the same boundary give the same curl flux when their orientations induce the same boundary direction and the field is smooth near both surfaces. This can replace a difficult integral over a curved surface by a simple integral over a disk. It does not say that the flux of $\\mathbf F$ itself is independent of the spanning surface. The field being integrated over the surface in Stokes’ theorem is $\\nabla\\times\\mathbf F$.",
+        "A proof sketch partitions the surface into small oriented patches and applies the planar circulation idea in local coordinates. Tangential contributions on interior edges cancel, leaving only the actual boundary. Green’s circulation theorem is the special case of a planar surface in $z=0$ with upward normal. For a closed oriented surface there is no boundary, so the total flux of $\\nabla\\times\\mathbf F$ is zero under the stated smoothness assumptions; no volume extension is required for that conclusion.",
+        "The curl vector has components determined by circulation in the three coordinate planes. Its $z$ component $Q_x-P_y$ is the planar scalar curl used in Green's theorem. For $\\mathbf F=(-y/2,x/2,0)$, $\\nabla\\times\\mathbf F=(0,0,1)$. A horizontal disk with upward normal therefore has curl flux equal to its area. Its boundary direction, viewed from above, is counterclockwise by the right-hand rule. Reversing the disk normal reverses both flux and induced boundary direction, keeping Stokes' equality intact.",
+        "The right-hand rule is an orientation convention, not a force law. Point the right thumb along the chosen surface normal; curled fingers show positive boundary traversal. On a flat disk this is easy to visualize. On a curved surface, use the same local convention consistently along its edge. If a space curve is prescribed clockwise from above, an upward-oriented spanning surface has the wrong induced direction; choose downward orientation or negate a result calculated upward.",
+        "Stokes' theorem allows a convenient spanning surface when the field is smooth near the relevant surfaces. A tilted or curved cap may have a complicated normal, while a flat disk with the same boundary makes curl flux simple. The two oriented surfaces must induce the same traversal of the common boundary. This does not justify choosing a spanning disk through a singularity of the field. The domain condition survives the surface swap.",
+        "The identity $\\nabla\\cdot(\\nabla\\times\\mathbf F)=0$ holds for fields with sufficiently continuous second derivatives, because mixed partial terms cancel in pairs. It is a local identity and helps check calculations. It also implies that the total flux of curl through a closed surface is zero under the divergence theorem's hypotheses. A closed surface has no boundary, so Stokes' theorem likewise predicts zero circulation around its empty boundary when appropriately interpreted. These consistency relations connect the two boundary theorems.",
+        "Green's theorem is the planar case of Stokes' theorem. Embed a planar region in $z=0$ with normal $+\\mathbf k$, extend $\\mathbf F=(P,Q,0)$, and note that $(\\nabla\\times\\mathbf F)\\cdot\\mathbf k=Q_x-P_y$. Its boundary circulation is $\\oint_{\\partial D}(P\\,dx+Q\\,dy)$. The general surface theorem adds arbitrary orientable surfaces in three dimensions while preserving the same circulation-versus-curl structure. Recognizing this relationship helps choose a theorem without memorizing unrelated formulas."
+      ],
+      "formula": "∮∂S F·dr = ∬S (curl F)·n dS",
+      "formulaTex": "\\begin{gathered}\\oint_{\\partial S}\\mathbf F\\cdot d\\mathbf r=\\iint_S(\\nabla\\times\\mathbf F)\\cdot\\mathbf n\\,dS,\\\\ S\\text{ compact, orientable, piecewise smooth};\\quad\\mathbf F\\in C^1\\text{ near }S,\\\\ \\partial S\\text{ has the orientation induced by }\\mathbf n.\\end{gathered}"
+    },
+    {
+      "title": "4. The divergence theorem and conservation",
+      "paragraphs": [
+        "Let $V$ be a bounded solid with a closed piecewise smooth boundary and let $F$ have continuous first derivatives on an open set containing $V$ and its boundary. The divergence theorem equates outward flux across the entire boundary with the triple integral of $\\operatorname{div}F$ inside. A lidless cylinder is not a closed boundary. Either integrate directly or add the missing lid, apply the theorem to the resulting closed surface, and subtract its outward flux.",
+        "Outward means away from the material of $V$. For a solid with an internal cavity, the cavity boundary normal points into the empty cavity. This agrees with the same cancellation principle: partition the volume into small boxes, use the one-variable fundamental theorem on opposite faces, and cancel flux across all internal faces. Only the external boundary and cavity boundaries remain. This argument is a proof sketch; extending it to curved boundaries requires approximation and regularity control.",
+        "The hypotheses prevent a serious trap. The field $\\mathbf F=(x,y,z)/(x^2+y^2+z^2)^{3/2}$ has divergence zero away from the origin, yet its outward flux across a sphere centered at the origin is $4\\pi$. There is no contradiction: $\\mathbf F$ is undefined at the origin. On a spherical shell the theorem does apply. The outer sphere contributes $4\\pi$ and the inner boundary, oriented toward the origin, contributes $-4\\pi$, so the total is zero.",
+        "For a mass flux field $\\mathbf J$ measured in kilograms per square metre per second, $\\nabla\\cdot\\mathbf J$ is a net outflow rate per unit volume. If density $\\rho$ changes with time and mass is neither created nor destroyed, the integral balance is $\\frac{d}{dt}\\iiint_V\\rho\\,dV=-\\iint_{\\partial V}\\mathbf J\\cdot\\mathbf n\\,dS$ for a fixed volume $V$. Under sufficient differentiability, the divergence theorem leads to $\\rho_t+\\nabla\\cdot\\mathbf J=0$. A negative sign is necessary: net outward transport decreases the mass inside.",
+        "For $\\mathbf F=(x,y,z)$ on a radius-$R$ ball centered at the origin, $\\nabla\\cdot\\mathbf F=3$. The volume integral is $3(4\\pi R^3/3)=4\\pi R^3$. Directly on the sphere, the outward unit normal is $\\mathbf n=(x,y,z)/R$, so $\\mathbf F\\cdot\\mathbf n=R$, and multiplying by sphere area $4\\pi R^2$ gives the same result. The direct calculation is a useful check on orientation and the divergence theorem. If the normal points inward, the flux becomes $-4\\pi R^3$ and no longer matches the outward convention.",
+        "For $\\mathbf F=(x^2,y,z)$ on the unit cube, divergence is $2x+2$. Integrating over the cube gives $\\int_0^1(2x+2)\\,dx=3$. A face-by-face calculation agrees: the $x=1$ face contributes $1$, $x=0$ contributes $0$, $y=1$ contributes $1$, $y=0$ contributes $0$, $z=1$ contributes $1$, and $z=0$ contributes $0$. Listing all six faces can reveal an omitted side or a wrong normal. The divergence route is shorter because it sums local sources throughout the volume.",
+        "For a shell $a\\le r\\le b$, $0<a<b$, retain both surfaces in $\\partial V$. With $\\mathbf F=(x,y,z)$, the outward flux is $4\\pi b^3-4\\pi a^3$, equal to divergence $3$ times the shell volume. The negative inner contribution follows because the shell’s outward normal points into the cavity. This repeats the ball arithmetic only to test a new boundary component; it does not allow the singular radial field to be used on a full ball.",
+        "For the singular field $\\mathbf F=\\mathbf r/|\\mathbf r|^3$, divergence is zero only for $r>0$. On a shell $\\varepsilon\\le r\\le R$, the outer flux $4\\pi$ and inward-pointing inner-boundary flux $-4\\pi$ cancel. Letting $\\varepsilon\\to0$ does not restore the field value at the origin, so the ordinary theorem still cannot be applied to the full ball. A distributional point source is a separate extension.",
+        "The fixed-volume mass balance above becomes local when it holds for every sufficiently small volume and $\\rho,\\mathbf J$ are smooth enough to pass the time derivative inside: $\\iiint_V(\\rho_t+\\nabla\\cdot\\mathbf J)\\,dV=0$. Continuity of the integrand then forces $\\rho_t+\\nabla\\cdot\\mathbf J=0$ pointwise. If sources exist, their density belongs on the right side. The negative sign in the original outward-flux balance encodes loss of mass inside."
+      ],
+      "formula": "∬∂V F·n dS = ∭V div F dV, with n outward",
+      "formulaTex": "\\begin{gathered}\\iint_{\\partial V}\\mathbf F\\cdot\\mathbf n\\,dS=\\iiint_V\\nabla\\cdot\\mathbf F\\,dV,\\\\ V\\text{ bounded with closed piecewise smooth boundary};\\quad\\mathbf n\\text{ outward},\\\\ \\mathbf F\\in C^1\\text{ near }\\overline V.\\end{gathered}"
+    },
+    {
+      "title": "5. Choosing the boundary principle",
+      "paragraphs": [
+        "First identify the quantity. A planar circulation integral suggests Green; a space-curve circulation suggests Stokes; outward flux through a closed surface suggests divergence. Next identify the region, its complete boundary, and any singularities of the field. Finally choose the easier side to calculate. A theorem is useful even when direct integration is possible because it supplies an independent check and explains which geometric features determine the answer.",
+        "These results share the fundamental theorem’s structure: integrating a derivative over an interior gives oriented data on its boundary. In one dimension, the endpoints carry opposite signs. In two dimensions, neighboring edges cancel. In three dimensions, neighboring faces cancel. The derivative and the boundary measurement must match: curl with circulation, divergence with flux. Numerical agreement illustrates this structure but cannot establish smoothness or rule out an unsampled singularity.",
+        "Choose Green's theorem when the requested boundary is a closed planar curve and the field is regular on its enclosed region. Choose Stokes when a space curve bounds an orientable surface and circulation is requested. Choose divergence when the requested quantity is outward flux through a closed surface around a solid. A scalar line integral against $ds$ is none of these boundary data; it measures length-weighted accumulation and is not converted by curl or divergence. Identifying the differential element first prevents applying the wrong theorem to a familiar-looking curve.",
+        "After choosing a theorem, write its full interior and boundary hypotheses. A circle in space might bound many surfaces, but a chosen spanning surface must lie where the field is smooth. A closed surface may surround a cavity or singularity that changes the admissible volume. A planar region with holes has multiple boundary loops. These geometric details determine whether a derivative integral represents the requested boundary integral or omits a component. A quick sketch of the domain and arrows is often more valuable than immediately differentiating the field.",
+        "Orientation has a different concrete meaning in each setting. Green's positive planar boundary keeps the region on the left. Stokes uses a surface normal and its induced edge direction by the right-hand rule. Divergence uses outward normals on every closed-surface component. Reversing any one orientation negates the corresponding signed integral. Scalar area, volume, and mass integrals do not acquire a negative sign merely from reversing a parameter, because their measure factors use magnitudes.",
+        "Not every transformed integral is simpler. For a polynomial field on a box, direct face fluxes might be as easy as a triple integral; for a radial field on a sphere, direct dot products may beat divergence calculations. A theorem offers an equality, not a command to use one side. Compute derivative fields and inspect region geometry before deciding. When both sides are tractable, calculating both independently is a strong check of sign, factor, and orientation.",
+        "A useful diagnostic table has four entries: boundary quantity, interior derivative, dimension of the interior, and orientation. Planar circulation pairs with scalar curl over area; planar outward flux pairs with planar divergence over area; space-curve circulation pairs with curl flux over a surface; closed-surface outward flux pairs with divergence over volume. The matching dimensions are a clue: a boundary integral in each case becomes an integral over one higher-dimensional interior. This organizing idea generalizes the one-variable fundamental theorem without making the hypotheses disappear.",
+        "A theorem checklist should distinguish a field singularity from a coordinate singularity. Spherical coordinates are awkward at a pole, but a smooth Cartesian field such as $\\mathbf F=(x,y,z)$ remains defined there, so the divergence theorem on a ball is unaffected. By contrast, $\\mathbf F=\\mathbf r/\\lvert\\mathbf r\\rvert^3$ is genuinely undefined at the origin, and a ball containing it fails the field hypothesis. Choosing a different coordinate chart cannot repair that missing field value. This distinction helps prevent rejecting valid calculations merely because a parameterization has a seam, and prevents accepting invalid calculations merely because a convenient parameter formula hides a physical singularity.",
+        "Now attempt the existing linked Problem 26.34 unaided after the basic theorem-choice checks. It uses the smooth polynomial field $\\mathbf F=(-y,x,z)$ on three different regions. Before opening its hint or solution, write a separate plan for each requested boundary measurement: identify the quantity and complete oriented boundary, check the field on the whole region required by the theorem, choose Green, Stokes, or divergence, and then compute. The square, tilted disk, and unit sphere require different interior dimensions and orientation checks. Compare your three values only after committing your own work in the linked problem. The problem keeps its original chapter-practice position.",
+        "For an unlabeled boundary problem, write five facts before calculating: the field domain, the exact requested quantity, every component of the chosen boundary, regularity on the surface or solid required by a proposed identity, and the chosen orientation. A theorem whose hypotheses fail gives no value for the integral. Calculate the requested quantity independently or choose a valid replacement method.",
+        "For flux, the curved upper hemisphere omits its base and is open. A constant upward field has positive flux through it even though its flux through a complete sphere vanishes. A closed shell has both outer and inner spheres; the shell-outward normal on the inner sphere points toward its center. The inverse-square field is defined on both shell surfaces and throughout a neighborhood of the shell, but not throughout a ball containing the origin.",
+        "For circulation, inspect the singular set on each entire proposed spanning surface. The angular vortex excludes the whole vertical axis: both a flat disk and the upper hemisphere meet that axis. A radial inverse-square field excludes only the origin: the disk meets it, but the radius-two hemisphere stays clear. The same boundary curve therefore admits different theorem audits for the two fields.",
+        "Problems 26.36–38 ask for direct integrals as well as theorem eligibility and oriented components. Predict each conclusion before reading the solution. Failure of one invocation does not force a nonzero answer or rule out another surface; a zero curl or divergence also needs the right regular domain and complete boundary."
+      ]
+    },
+    {
+      "title": "Two boundary theorems checked from both sides",
+      "paragraphs": [
+        "Use the exact ball result from Lesson 4 as the reference for this diagnostic section: for $\\mathbf F=(x,y,z)$ on the radius-$R$ ball centered at the origin, $\\nabla\\cdot\\mathbf F=3$ and the complete outward sphere flux is $4\\pi R^3$. The direct dot product $\\mathbf F\\cdot\\mathbf n=R$ agrees with the volume calculation because sphere area is $4\\pi R^2$. With this identity already established, the new task is to diagnose a numerical result that disagrees: check whether its panels cover the whole boundary, use outward normals, and carry the area factor. Equality at one sampled radius would not establish the theorem or those implementation conditions.",
+        "Orientation is not optional. If the sphere normal points inward, $\\mathbf F\\cdot\\mathbf n$ becomes $-R$ and the surface integral is $-4\\pi R^3$. The standard divergence theorem uses the outward normal. A code routine that sums surface panels can silently reverse normals while still drawing a plausible sphere, so an analytic field such as this is a valuable orientation test. The ball and the field satisfy the smoothness assumptions everywhere, including the center.",
+        "The disk calculation from Lesson 3 is the orientation reference: $\\mathbf G=(-y/2,x/2,0)$ has curl $\\mathbf k$, so an upward radius-$R$ disk and its counterclockwise edge both give $\\pi R^2$. Here use that known exact value as a numerical diagnostic. If the sampled edge sum differs, inspect polygon geometry, chord directions, and the chosen normal before attributing the difference to roundoff.",
+        "These two examples use different local quantities. Divergence measures net source strength and pairs with flux through a closed surface. Curl measures local rotation and pairs with circulation along a surface boundary. Green’s theorem is the planar circulation case of this curl principle. A surface can be curved, but the orientation relation remains: its chosen normal determines the positive direction around its boundary by the right-hand rule.",
+        "When applying any boundary theorem, write down the region or surface, its boundary, the field’s domain and differentiability, and the orientation before integrating. A singularity inside the region may invalidate a direct application even when the field is smooth along the boundary itself. Checking both sides on a simple case can reveal sign errors, but it does not replace a theorem’s hypotheses.",
+        "The sphere example can be scaled without repeating the integral. On radius $R$, divergence remains three, ball volume scales as $R^3$, and flux is $4\\pi R^3$. On the surface, $\\mathbf F\\cdot\\mathbf n=R$ and area scales as $R^2$, giving the same cubic scaling. If a numerical surface discretization reports a quadratic dependence on $R$, it likely used area but forgot the field’s changing magnitude. Scaling is therefore a practical check as well as a conceptual link between the two sides of the theorem.",
+        "Reverse the known disk normal and boundary arrow together: both exact sides become $-\\pi R^2$. Reversing only the normal while leaving the edge counterclockwise produces opposite signs and is an incompatible Stokes setup. For a code check, record the two orientation choices independently and display whether they match; agreement of unsigned magnitudes hides this error.",
+        "Suppose a code lab approximates sphere flux with midpoint panels. Its error can arise from approximating each curved patch by a planar panel, evaluating $\\mathbf F$ at a midpoint, and estimating a normal. Refining the grid may reduce error, but equal-looking values at two resolutions are not a proof of exact equality. Compare against $4\\pi R^3$, report the radius and panel count, and verify that all panels point outward. A single reversed band can introduce a large error that refinement alone will not repair.",
+        "For a horizontal disk, a numerical boundary sum can approximate circulation using short chords. The field $\\mathbf G$ is linear, so the midpoint rule on each straight chord computes the work along that chord exactly. The polygon encloses less area than the true circle; Green’s theorem then says the polygon’s circulation equals its area, not the disk’s $\\pi R^2$. As more sides are added, polygon area approaches circle area. This explains a typical finite-grid discrepancy geometrically rather than treating it as arbitrary floating-point noise.",
+        "The two test fields emphasize complementary measurements. $\\mathbf F=(x,y,z)$ points outward on a sphere and has positive divergence, so it is natural for closed-surface flux. $\\mathbf G=(-y/2,x/2,0)$ circulates around the $z$-axis and has curl $\\mathbf k$, so it is natural for a disk boundary. Trying to infer one field’s behavior from the other theorem without matching the quantity would mix source strength with rotation. A clear solution names the field, the region, the requested integral, and the derivative theorem used before presenting a number.",
+        "A strong numerical check uses several independent invariants: sign under orientation reversal, expected scaling with radius, and agreement with a simple exact case. For the disk example, doubling radius should multiply both Stokes sides by four, while changing the normal to $-\\mathbf k$ should negate both. For the sphere example, doubling radius should multiply flux by eight. If a discretization passes a single numerical comparison but fails these transformations, it likely has a structural error such as wrong panel normals, a missing Jacobian, or an incomplete boundary. These checks do not replace theorem hypotheses, but they make implementation mistakes easier to isolate."
+      ],
+      "formula": "∭_{B_R} div(x,y,z)dV = ∬_{∂B_R}(x,y,z)·n dS = 4πR³; ∬_{S}curl G·k dS = ∮_{∂S}G·dr = πR².",
+      "formulaTex": "\\begin{gathered}R>0,\\quad \\mathbf F=(x,y,z),\\quad B_R=\\{x^2+y^2+z^2\\le R^2\\},\\\\ \\iiint_{B_R}\\nabla\\cdot\\mathbf F\\,dV=\\iint_{\\partial B_R}\\mathbf F\\cdot\\mathbf n\\,dS=4\\pi R^3\\quad(\\mathbf n\\text{ outward}),\\\\ \\mathbf G=(-y/2,x/2,0),\\quad S=\\{z=0,\\ x^2+y^2\\le R^2\\},\\\\ \\iint_S(\\nabla\\times\\mathbf G)\\cdot\\mathbf k\\,dS=\\oint_{\\partial S}\\mathbf G\\cdot d\\mathbf r=\\pi R^2\\quad(\\partial S\\text{ counterclockwise}).\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Circulation around an ellipse",
+      "problem": "Compute $\\oint_C(-y\\,dx+x\\,dy)$ around $x^2/a^2+y^2/b^2=1$ counterclockwise, with $a,b>0$ and dimensionless coordinates.",
+      "steps": [
+        "Here $P=-y$ and $Q=x$, so $Q_x-P_y=2$. Both components are smooth everywhere, and $C$ encloses a region of area $\\pi ab$. Green’s theorem gives $2\\pi ab$.",
+        "Directly parametrize $C$ by $(a\\cos t,b\\sin t)$, $0\\le t\\le2\\pi$. Then $-y\\,dx+x\\,dy=ab(\\sin^2t+\\cos^2t)\\,dt=ab\\,dt$. Integration gives the same value.",
+        "At $a=2$ and $b=1$, the circulation is $4\\pi\\approx12.566371$. Clockwise traversal gives $-4\\pi$. As either semiaxis tends to zero, the circulation tends to zero, although the limiting collapsed curve is no longer a simple ellipse."
+      ],
+      "answer": "The counterclockwise circulation is $2\\pi ab$; the sign is fixed by orientation."
+    },
+    {
+      "title": "A curved surface replaced by a disk",
+      "problem": "For $\\mathbf F=(-y/2,x/2,z)$, find the flux of $\\nabla\\times\\mathbf F$ through the upper unit hemisphere with outward normal.",
+      "steps": [
+        "Differentiate: $\\nabla\\times\\mathbf F=(0,0,1)$. The outward normal on the upper hemisphere induces counterclockwise traversal of the equator viewed from positive $z$.",
+        "An upward unit disk induces the same boundary orientation. Stokes’ theorem allows replacement of the hemisphere by that disk, since $\\mathbf F$ is smooth everywhere. On the disk, $(\\nabla\\times\\mathbf F)\\cdot\\mathbf n=1$, so its flux is $\\pi$.",
+        "As a boundary check, set $\\mathbf r(t)=(\\cos t,\\sin t,0)$. The dot product $\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t)$ is $1/2$, and integrating from $0$ to $2\\pi$ gives $\\pi$."
+      ],
+      "answer": "The curl flux is $\\pi$. This is not a calculation of the flux of $\\mathbf F$ itself."
+    },
+    {
+      "title": "Outflow from a ball",
+      "problem": "A velocity field is $\\mathbf F=k(x,y,z)$, where coordinates are in metres and $k=2\\ \\mathrm{s^{-1}}$. Find outward volume flow across a sphere of radius $3\\ \\mathrm m$.",
+      "steps": [
+        "The divergence is $3k=6\\ \\mathrm{s^{-1}}$. The enclosed volume is $(4\\pi/3)3^3=36\\pi\\ \\mathrm{m^3}$. The divergence theorem therefore gives $216\\pi\\ \\mathrm{m^3/s}$.",
+        "Directly on a sphere of radius $a$ centered at the origin, the unit normal is $(x,y,z)/a$ and $\\mathbf F\\cdot\\mathbf n=ka$. Multiplying by area $4\\pi a^2$ gives $4\\pi ka^3$, again $216\\pi\\ \\mathrm{m^3/s}$."
+      ],
+      "answer": "The signed outward flow is $216\\pi\\ \\mathrm{m^3/s}$, approximately $678.584\\ \\mathrm{m^3/s}$."
+    },
+    {
+      "title": "Green circulation around a rectangle",
+      "problem": "Use Green’s theorem for $\\mathbf F=(-y,x)$ around $[0,2]\\times[0,1]$ counterclockwise.",
+      "steps": [
+        "The scalar curl is $Q_x-P_y=1-(-1)=2$.",
+        "The rectangle has area $2$.",
+        "Positive orientation is counterclockwise, so circulation is the curl integral $2\\cdot2$."
+      ],
+      "answer": "The circulation is $4$."
+    },
+    {
+      "title": "A graph’s area differs from its vertical flux",
+      "problem": "For $z=x+2y$ over $[0,1]^2$, find scalar area and upward flux of $\\mathbf F=(0,0,3)$.",
+      "steps": [
+        "Parametrize the graph by $\\mathbf r(x,y)=(x,y,x+2y)$ over $[0,1]^2$.",
+        "$\\mathbf r_x=(1,0,1)$ and $\\mathbf r_y=(0,1,2)$, so their upward cross product is $(-1,-2,1)$.",
+        "Its magnitude is $\\sqrt6$; integrating over the unit base square gives scalar area $\\sqrt6$.",
+        "For flux, $(0,0,3)\\cdot(-1,-2,1)=3$, so upward flux is $3$."
+      ],
+      "answer": "Surface area is $\\sqrt6$; upward flux is $3$."
+    },
+    {
+      "title": "A cavity reverses its normal",
+      "problem": "For $\\mathbf F=(x,y,z)$, find outward flux through the boundary of shell $a\\le r\\le b$, where $0<a<b$.",
+      "steps": [
+        "Divergence is $3$; shell volume is $(4\\pi/3)(b^3-a^3)$.",
+        "The divergence theorem gives $4\\pi(b^3-a^3)$.",
+        "Directly, outer flux is $4\\pi b^3$ and the cavity boundary contributes $-4\\pi a^3$."
+      ],
+      "answer": "Outward shell flux is $4\\pi(b^3-a^3)$."
+    },
+    {
+      "title": "Stokes with reversed orientation",
+      "problem": "For $\\mathbf G=(-y/2,x/2,0)$, find circulation around a radius-$R$ circle clockwise from above, where $R>0$.",
+      "steps": [
+        "$\\nabla\\times\\mathbf G=\\mathbf k$.",
+        "A clockwise boundary corresponds to normal $-\\mathbf k$ on the horizontal disk.",
+        "Curl flux is $-1$ times disk area $\\pi R^2$."
+      ],
+      "answer": "The circulation is $-\\pi R^2$."
+    },
+    {
+      "title": "The singular radial field on a shell",
+      "problem": "For $\\mathbf H=\\mathbf r/|\\mathbf r|^3$ on $\\varepsilon\\le|\\mathbf r|\\le R$, where $0<\\varepsilon<R$, compare divergence integral and total boundary flux.",
+      "steps": [
+        "$\\mathbf H$ has divergence zero throughout the shell.",
+        "Outer sphere flux is $4\\pi$; inner sphere uses inward radial normal relative to the origin and contributes $-4\\pi$.",
+        "The total is zero, consistent with the divergence integral."
+      ],
+      "answer": "Both sides are zero on the shell; the full ball remains outside the ordinary theorem."
+    }
+  ],
+  "misconceptions": [
+    "“Zero divergence means zero flux through every surface.” It guarantees zero total outward flux for a closed surface bounding a region on which the field is sufficiently smooth. An open patch can have nonzero flux.",
+    "“The normal can be chosen after choosing the boundary direction.” Stokes’ theorem couples the normal and boundary orientation. Reversing only one orientation changes the sign of its integral; when the common value is nonzero, the two sides no longer agree.",
+    "“A field smooth on the boundary is enough.” Green and divergence require smoothness throughout the enclosed region as well; a hidden singularity can invalidate the calculation."
+  ],
+  "lab": {
+    "title": "Check Green’s theorem on a rectangle",
+    "description": "Compare an oriented boundary midpoint rule with an interior midpoint rule for $\\mathbf F=(0,x^3+xy^2)$ on $[0,a]\\times[0,b]$. The horizontal edges contribute zero. With positive orientation, the right vertical edge is traversed upward and the left downward; changing orientation reverses the signs of both estimates. The plot uses subdivisions $n$ on the horizontal axis and signed integral estimates on the vertical axis; the table also reports absolute error.",
+    "code": "// Adjustable positive side lengths and an orientation sign (+1 or -1).\nconst a = 2, b = 1, orientation = 1;\nif (!(a > 0 && b > 0 && Number.isFinite(a) && Number.isFinite(b))) throw new Error('Use finite positive side lengths.');\nif (orientation !== 1 && orientation !== -1) throw new Error('Orientation must be +1 or -1.');\nconst boundaryPoints = [], interiorPoints = [], exactPoints = [];\nconst A = ((a*b)*a)*a, B = (((a*b)*b)*b)/3;\nconst exact = orientation * (A + B);\nif (![A, B, exact].every(Number.isFinite) || exact === 0) throw new Error('Derived integral is outside representable range.');\nconsole.log('n | boundary estimate | interior estimate | boundary error | interior error');\nfor (const n of [2, 4, 8, 16, 32, 64]) {\n  let meanV2 = 0, meanU2 = 0;\n  for (let j = 0; j < n; j++) meanV2 += ((j+0.5)/n)**2/n;\n  for (let i = 0; i < n; i++) meanU2 += ((i+0.5)/n)**2/n;\n  const boundary = orientation * (A + 3*B*meanV2);\n  const interior = orientation * (3*A*meanU2 + 3*B*meanV2);\n  if (![boundary, interior].every(Number.isFinite)) throw new Error('Derived midpoint estimate is outside representable range.');\n  boundaryPoints.push([n, boundary]);\n  interiorPoints.push([n, interior]);\n  exactPoints.push([n, exact]);\n  console.log(n, boundary.toFixed(9), interior.toFixed(9), Math.abs(boundary-exact).toExponential(3), Math.abs(interior-exact).toExponential(3));\n}\nplot(boundaryPoints, 'Boundary circulation vs subdivisions n');\nplot(interiorPoints, 'Interior curl integral vs subdivisions n');\nplot(exactPoints, 'Exact signed value vs subdivisions n');\nconsole.log('Exact signed integral:', exact);",
+    "tasks": [
+      "Before running, compute $Q_x-P_y$ and predict the common limiting value. For each midpoint rule, predict the sign of its signed error (estimate minus exact value).",
+      "Double a while keeping b at its default, then reset and double b while keeping a at its default. Derive each new exact value before comparing with the output.",
+      "Set orientation to −1. Explain why the code also negates the interior result, and what would go wrong if only the boundary were reversed.",
+      "Compare absolute errors at $n$ and $2n$. Why can two approximations disagree at finite $n$ even when Green’s theorem holds? In a different field with a singularity inside the rectangle, why would numerical agreement alone fail to justify applying the theorem?"
+    ],
+    "expected": "With a = 2, b = 1, and orientation = 1, the exact value is $26/3\\approx8.666666667$. At $n=2$ the boundary estimate is 8.625 and the interior estimate is 8.125. At $n=64$ they are approximately 8.666625977 and 8.666137695. Their absolute errors are $1/(6n^2)$ and $13/(6n^2)$, respectively, so doubling $n$ quarters both errors."
+  },
+  "exercises": [
+    {
+      "question": "Use Green’s theorem to compute $\\oint_C(x^2\\,dx+xy\\,dy)$ around the unit square counterclockwise.",
+      "hint": "Compute $Q_x-P_y$ and use Green's theorem.",
+      "solution": "Here $P=x^2$, $Q=xy$, so $Q_x-P_y=y$. For the counterclockwise unit square, Green's theorem gives $\\oint_C(P\\,dx+Q\\,dy)=\\int_0^1\\int_0^1y\\,dx\\,dy=1/2$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use the rectangle version of Green’s theorem for $\\mathbf F=(-y,x)$ on $[0,2]\\times[0,1]$. Find the counterclockwise circulation.",
+      "hint": "Compute planar curl and multiply by rectangle area.",
+      "solution": "For $P=-y$ and $Q=x$, $Q_x-P_y=1-(-1)=2$. The rectangle has area $2$, so counterclockwise circulation is $2\\cdot2=4$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use Green for $\\mathbf F=(-y,x)$ around $[0,2]\\times[0,1]$ counterclockwise.",
+      "hint": "Use the constant curl and the region's area.",
+      "solution": "Green's theorem gives $\\oint_C\\mathbf F\\cdot d\\mathbf r=\\iint_D(Q_x-P_y)\\,dA=\\iint_D2\\,dA=2\\cdot2=4$ for counterclockwise orientation.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "What direction is positive on the inner boundary of a planar annulus?",
+      "hint": "Keep the annular region on the left during traversal.",
+      "solution": "Along the inner boundary, keeping the annulus on the left requires clockwise travel around the hole. The outer boundary is counterclockwise under the same positive boundary convention.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $\\mathbf F=(P,Q)$, write the positive-boundary outward flux line element.",
+      "hint": "Rotate the tangent clockwise to obtain the outward normal element.",
+      "solution": "For a positively oriented planar boundary, $\\mathbf n\\,ds=\\langle dy,-dx\\rangle$. Therefore $\\mathbf F\\cdot\\mathbf n\\,ds=P\\,dy-Q\\,dx$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does Green’s theorem not apply to the zero-curl angular field $\\mathbf F=(-y/r^2,x/r^2)$ on a disk containing the origin, where $r^2=x^2+y^2$?",
+      "hint": "Check whether the field is defined across the whole disk.",
+      "solution": "The angular field is undefined at the origin, which lies inside the disk. Green's theorem requires sufficient smoothness throughout the enclosed region, so zero curl away from zero does not make it applicable.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "For the upward graph $z=x+2y$ over the unit square, compute the flux of $\\mathbf F=(0,0,3)$.",
+      "hint": "Use the upward vector area element of the graph.",
+      "solution": "With $\\mathbf r(x,y)=\\langle x,y,x+2y\\rangle$, $\\mathbf r_x\\times\\mathbf r_y=\\langle-1,-2,1\\rangle$. Its dot product with $\\mathbf F=\\langle0,0,3\\rangle$ is $3$. Integrating over the unit base gives flux $3$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find area of $z=x+2y$ over the unit square.",
+      "hint": "Use the graph area factor.",
+      "solution": "For $z=x+2y$, $z_x=1$ and $z_y=2$, so $\\sqrt{1+z_x^2+z_y^2}=\\sqrt6$. The unit-square base has area $1$, giving surface area $\\sqrt6$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the upward flux of $\\mathbf F=(0,0,3)$ through $z=x+2y$ over the unit square.",
+      "hint": "Dot the field with the upward vector area element.",
+      "solution": "The graph has $d\\mathbf S=\\langle-z_x,-z_y,1\\rangle\\,dA=\\langle-1,-2,1\\rangle\\,dA$. Dotting with $\\langle0,0,3\\rangle$ gives $3\\,dA$, hence upward flux $3$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does reversing a surface normal reverse scalar surface area?",
+      "hint": "Compare the magnitude of a normal with its orientation.",
+      "solution": "Reversal leaves $|\\mathbf r_u\\times\\mathbf r_v|$ unchanged, so scalar area is unchanged. It replaces $\\mathbf n$ by $-\\mathbf n$, which reverses the sign of $\\mathbf F\\cdot\\mathbf n$ and thus signed flux.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $\\mathbf F=(-y,x,0)$, find circulation around the circle $x^2+y^2=9$, $z=4$, viewed clockwise from above.",
+      "hint": "Choose the disk normal compatible with clockwise viewing from above.",
+      "solution": "Clockwise traversal corresponds to the downward normal. Since $\\nabla\\times\\mathbf F=\\langle0,0,2\\rangle$, its normal component is $-2$. The disk area is $9\\pi$, so Stokes' theorem gives circulation $-18\\pi$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find curl of $\\mathbf G=(-y/2,x/2,0)$.",
+      "hint": "Compute the third curl component $Q_x-P_y$.",
+      "solution": "The first two curl components vanish. With $P=-y/2$ and $Q=x/2$, $Q_x-P_y=1/2-(-1/2)=1$, so $\\nabla\\times\\mathbf G=\\langle0,0,1\\rangle$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R>0$, find the positive circulation of $\\mathbf G=(-y/2,x/2,0)$ around the boundary of a radius-$R$ horizontal disk with normal $+\\mathbf k$.",
+      "hint": "Use Stokes' theorem and the disk's area.",
+      "solution": "Since $\\nabla\\times\\mathbf G=\\mathbf k$ and the disk normal is $+\\mathbf k$, Stokes’ theorem gives circulation $\\iint_S1\\,dS=\\pi R^2$ for $R>0$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $R>0$, what is the circulation of $\\mathbf G=(-y/2,x/2,0)$ around a radius-$R$ horizontal circle clockwise from above?",
+      "hint": "Reverse the induced boundary orientation.",
+      "solution": "Clockwise viewing from above corresponds to normal $-\\mathbf k$. This negates the upward-normal curl flux, so the circulation is $-\\pi R^2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can a flat spanning disk be used through a point where F is undefined?",
+      "hint": "Check regularity on the proposed spanning surface.",
+      "solution": "No. Stokes' theorem requires the field to be smooth on a neighborhood of the selected spanning surface. A disk passing through a point where the field is undefined fails that hypothesis.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Compute the outward flux of $\\mathbf F=(x^2,y,z)$ across the boundary of $[0,1]^3$.",
+      "hint": "Integrate divergence over the entire cube.",
+      "solution": "Here $\\nabla\\cdot\\mathbf F=2x+2$. The divergence theorem gives flux $\\iiint_{[0,1]^3}(2x+2)\\,dV=\\int_0^1(2x+2)\\,dx=3$; the $y$ and $z$ intervals each have length one.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why cannot the divergence theorem be applied directly to $\\mathbf F = (x,y,z)/|\\mathbf r|^3$ on the unit ball? How does removing a smaller ball repair the calculation?",
+      "hint": "Remove a small ball and include its boundary flux.",
+      "solution": "The field is undefined at the origin, so the theorem does not apply directly to the unit ball. For $0<\\varepsilon<1$, remove the concentric ball of radius $\\varepsilon$. On $\\varepsilon\\le|\\mathbf r|\\le1$, divergence is zero. Outer flux is $4\\pi$; the shell-outward inner normal contributes $-4\\pi$. Their sum is zero.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Use the divergence theorem to find outward flux of $\\mathbf F=(x,y,z)$ through a sphere of radius $2$.",
+      "hint": "Multiply divergence by ball volume.",
+      "solution": "Since $\\nabla\\cdot\\mathbf F=3$ and the radius-$2$ ball has volume $4\\pi(2^3)/3$, the divergence theorem gives flux $3\\cdot4\\pi(2^3)/3=32\\pi$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find outward flux of $\\mathbf F=(x,y,z)$ through radius-$2$ sphere.",
+      "hint": "Use constant divergence and the radius-$2$ volume.",
+      "solution": "The divergence is $3$, and the ball volume is $32\\pi/3$. Thus outward flux is $3(32\\pi/3)=32\\pi$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find outward flux of $\\mathbf F=(x^2,y,z)$ through $[0,1]^3$.",
+      "hint": "Integrate $2x+2$ over the unit cube.",
+      "solution": "The divergence is $\\nabla\\cdot\\mathbf F=2x+1+1=2x+2$. Since the other side lengths are one, flux is $\\int_0^1(2x+2)\\,dx=3$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the outward flux of $\\mathbf F=(x,y,z)$ through the boundary of the spherical shell $a\\le|\\mathbf r|\\le b$, where $0<a<b$.",
+      "hint": "Multiply divergence by shell volume.",
+      "solution": "The divergence is $3$ and the shell volume is $4\\pi(b^3-a^3)/3$, so outward flux is $4\\pi(b^3-a^3)$. Directly, the outer sphere contributes $4\\pi b^3$ and the inner sphere, whose shell-outward normal points toward the origin, contributes $-4\\pi a^3$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does the outward normal on an internal cavity wall point into the cavity? Where does it point for a spherical cavity?",
+      "hint": "Define outward relative to the solid material; then consider a spherical cavity separately.",
+      "solution": "At a cavity wall, leaving the solid means entering the empty cavity, so the solid’s outward normal points into the cavity. If the cavity is spherical, this normal points toward that sphere’s center. A general cavity wall need not have normals directed toward one center.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Which theorem converts closed-surface outward flux to a volume integral?",
+      "hint": "Match closed-surface outward flux with a volume integral.",
+      "solution": "The divergence theorem states $\\iint_{\\partial V}\\mathbf F\\cdot\\mathbf n\\,dS=\\iiint_V\\nabla\\cdot\\mathbf F\\,dV$, with outward orientation and sufficient smoothness on a neighborhood of the solid.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Which theorem converts circulation around a space curve to a surface integral?",
+      "hint": "Match boundary circulation with curl flux through a surface.",
+      "solution": "Stokes' theorem states $\\oint_{\\partial S}\\mathbf F\\cdot d\\mathbf r=\\iint_S(\\nabla\\times\\mathbf F)\\cdot\\mathbf n\\,dS$. The curve orientation follows the surface normal by the right-hand rule, and the field must be smooth near the surface.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does a scalar line integral $\\int g\\,ds$ become a curl integral by Stokes?",
+      "hint": "Distinguish arc-length measure from oriented displacement.",
+      "solution": "No. Stokes' theorem concerns oriented circulation $\\oint_C\\mathbf F\\cdot d\\mathbf r$. The scalar integral $\\int_Cg\\,ds$ uses nonnegative arc length and is unchanged by reversal, so it has different orientation behavior.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Explain the exact midpoint errors in the lab without relying on its printed values.",
+      "hint": "Use the exact composite-midpoint error for a quadratic.",
+      "solution": "For $\\int_0^Lx^2\\,dx$, exact minus midpoint is $L^3/(12n^2)$. For the lab’s default positive orientation, the boundary term $a\\int_0^b y^2\\,dy$ therefore has error $ab^3/(12n^2)=1/(6n^2)$ at default lengths. The interior term $3b\\int_0^a x^2\\,dx$ has error $ba^3/(4n^2)$; together they give $13/(6n^2)$. Constant terms have zero midpoint error, and doubling $n$ quarters both errors. Reversing orientation reverses the signed errors, while their magnitudes are unchanged.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "For $\\mathbf G=(-y/2,x/2,0)$, find the circulation around a radius-$2$ disk boundary with the orientation induced by normal $-\\mathbf k$.",
+      "hint": "Use the normal $-\\mathbf k$ in Stokes' theorem.",
+      "solution": "Since $\\nabla\\times\\mathbf G=\\mathbf k$, its flux through the radius-$2$ disk with normal $-\\mathbf k$ is $-\\pi(2^2)=-4\\pi$. The induced boundary is clockwise from above.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A steady fluid velocity is $\\mathbf F=\\kappa(x,y,0)$ inside a vertical cylinder of radius $R>0$ and height $H>0$, where $\\kappa>0$ has units of inverse time and $x,y,R,H$ are lengths. Use the divergence theorem to find the outward volume flow rate through the closed cylinder, then explain why all of it crosses the curved wall.",
+      "hint": "Integrate the constant divergence over the cylinder and inspect the horizontal caps.",
+      "solution": "Here $\\nabla\\cdot\\mathbf F=2\\kappa$, so the total outward volume flow rate is $2\\kappa\\operatorname{vol}(V)=2\\kappa\\pi R^2H$. The caps have normals $\\pm\\mathbf k$ and $\\mathbf F\\cdot\\mathbf k=0$, so all flow crosses the curved wall.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $R>0$, explain the outward flux scaling on a sphere of radius $R$ centered at the origin for $\\mathbf F=(x,y,z)$.",
+      "hint": "Use normal component times sphere area.",
+      "solution": "On a radius-$R$ sphere centered at the origin, $\\mathbf n=\\langle x,y,z\\rangle/R$, so $\\mathbf F\\cdot\\mathbf n=R$. Multiplying by area $4\\pi R^2$ gives outward flux $4\\pi R^3$, also equal to divergence $3$ times ball volume.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Why does $\\mathbf F=\\mathbf r/|\\mathbf r|^3$ have zero total outward flux on the spherical shell $a\\le|\\mathbf r|\\le b$, where $0<a<b$?",
+      "hint": "Include the inner boundary with its outward normal.",
+      "solution": "The singular radial field has zero divergence on the shell. Its outer flux is $4\\pi$ and its inner flux is $-4\\pi$ because the shell's inner normal points inward; total flux is zero.",
+      "lesson": 6,
+      "type": "Proof"
+    }
+  ],
+  "summary": [
+    "Green connects planar circulation to scalar curl; Stokes connects boundary circulation to curl flux through an oriented surface.",
+    "The divergence theorem connects total outward flux on a closed boundary to integrated divergence in its volume.",
+    "Surface parametrizations determine both area factors and orientation; theorem hypotheses include the relevant interior, not just the boundary."
+  ],
+  "next": "Chapter 27 turns rate relationships into differential equations. The conservation balance derived here is one source of those models: accumulation inside a region is controlled by transport and sources."
+}

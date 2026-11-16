@@ -1,0 +1,2260 @@
+{
+  "schema_version": 1,
+  "lab_id": "21_prior_workflow",
+  "seed": 2121,
+  "method": "Equal-weight Beta CDF fit in log shapes; exact beta-binomial prediction; independent quadrature",
+  "source_hashes": {
+    "labs/21_prior_workflow.py": "1aa355871ea45b1556e708f5f9417bf0f1fca3736046f4746915def2cb917426",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "labs/extension_common.py": "3fdb0437bbd31cff4336dd0c1d6bdadd7f79eb7eb31cea9b216257383e75d56c",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "batch_size": 20,
+    "required_usable": 16,
+    "print_cost": 2.0,
+    "shortfall_penalty": 25.0,
+    "outsource_cost": 15.0,
+    "judgment_probabilities": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "randomness": "none; deterministic reference, seed retained",
+    "assumption": "one stable unknown theta shared by all labels in this job",
+    "cdf_feedback_tolerance": 0.025
+  },
+  "metrics": {
+    "packets": [
+      {
+        "packet_id": "A0",
+        "provenance": {
+          "fictional": true,
+          "provider_role": "production planner",
+          "elicitation_date": "2026-09-01",
+          "quantity": "theta: usable-label probability under one unchanged aligned setup",
+          "units": "probability, dimensionless",
+          "population": "labels on printer P with stock S and alignment fixed",
+          "horizon": "the next 20-label job before any maintenance or stock change",
+          "information_already_used": [
+            "shared fictional setup memo; no counted trial data",
+            "role-specific recollections, potentially overlapping"
+          ],
+          "excluded_information": "no outcomes from the future job; no numeric archive fixture",
+          "candidate_family": "Beta",
+          "status": "initial",
+          "revises": [],
+          "revision_reason": "Initial fictional role card; retained unchanged."
+        },
+        "fit": {
+          "alpha": 13.421900528897547,
+          "beta": 3.6339540586682673,
+          "values": [
+            0.65,
+            0.8,
+            0.9
+          ],
+          "probabilities": [
+            0.1,
+            0.5,
+            0.9
+          ],
+          "fitted_cdf": [
+            0.09226233437540796,
+            0.5068596321161108,
+            0.8923342863837213
+          ],
+          "cdf_residuals": [
+            -0.007737665624592049,
+            0.0068596321161108476,
+            -0.007665713616278769
+          ],
+          "fitted_quantiles": [
+            0.6555482116639954,
+            0.7983148968718272,
+            0.9027485293883813
+          ],
+          "quantile_residuals": [
+            0.005548211663995328,
+            -0.0016851031281728268,
+            0.0027485293883813267
+          ],
+          "sum_squared_cdf_residuals": 0.00016568918733317456,
+          "max_abs_cdf_residual": 0.007737665624592049,
+          "cdf_feedback_tolerance": 0.025,
+          "feedback_required": false,
+          "optimizer": {
+            "method": "scipy.optimize.least_squares in log(alpha), log(beta)",
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 10,
+            "optimality": 4.0944439256389025e-09,
+            "log_shape_bounds": [
+              -12.0,
+              12.0
+            ],
+            "boundary_hit": false,
+            "selected_start": 4,
+            "attempts": [
+              {
+                "start_shapes": [
+                  1.0,
+                  1.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 13,
+                "sum_squared_cdf_residuals": 0.00016568918733318074
+              },
+              {
+                "start_shapes": [
+                  2.0,
+                  2.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 10,
+                "sum_squared_cdf_residuals": 0.00016568918733317938
+              },
+              {
+                "start_shapes": [
+                  8.0,
+                  2.0
+                ],
+                "success": true,
+                "status": 3,
+                "message": "`xtol` termination condition is satisfied.",
+                "nfev": 14,
+                "sum_squared_cdf_residuals": 0.00016568918733318003
+              },
+              {
+                "start_shapes": [
+                  2.0,
+                  8.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 12,
+                "sum_squared_cdf_residuals": 0.00016568918733317762
+              },
+              {
+                "start_shapes": [
+                  0.5,
+                  0.5
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 10,
+                "sum_squared_cdf_residuals": 0.00016568918733317456
+              }
+            ]
+          }
+        },
+        "predictive": {
+          "n": 20,
+          "required": 16,
+          "counts": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "pmf": [
+            1.1367945876942292e-07,
+            1.3482349428006905e-06,
+            8.538385850699988e-06,
+            3.828974424168298e-05,
+            0.00013610906237600256,
+            0.00040721852821237574,
+            0.001063536175053835,
+            0.0024835819226055396,
+            0.005271803091610286,
+            0.010289498972381579,
+            0.018613905665515813,
+            0.03137094940762342,
+            0.049390228941072305,
+            0.07266092282902156,
+            0.09963923761910146,
+            0.12658382216074132,
+            0.14727593878492085,
+            0.15368841543543882,
+            0.1383129751660882,
+            0.09872338628946634,
+            0.04404017990428305
+          ],
+          "theta_mean": 0.7869380252973357,
+          "theta_sd": 0.09636386604816886,
+          "theta_variance": 0.009285994679749431,
+          "mean": 15.738760505946715,
+          "variance": 6.882009371074094,
+          "expected_conditional_variance": 3.1676114991743214,
+          "variance_of_conditional_mean": 3.7143978718997723,
+          "shortfall_probability": 0.41795910441980944,
+          "plugin_shortfall_probability": 0.42762483453653066,
+          "plugin_variance": 3.353331392769311,
+          "count_quantiles": [
+            12,
+            16,
+            19
+          ],
+          "loss": {
+            "print": 12.448977610495236,
+            "outsource": 15.0,
+            "action": "print",
+            "shortfall_probability_threshold": 0.52
+          }
+        },
+        "penalty_sensitivity": [
+          {
+            "penalty": 15.0,
+            "print": 8.269386566297142,
+            "outsource": 15.0,
+            "action": "print",
+            "shortfall_probability_threshold": 0.8666666666666667
+          },
+          {
+            "penalty": 25.0,
+            "print": 12.448977610495236,
+            "outsource": 15.0,
+            "action": "print",
+            "shortfall_probability_threshold": 0.52
+          },
+          {
+            "penalty": 40.0,
+            "print": 18.718364176792377,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.325
+          }
+        ]
+      },
+      {
+        "packet_id": "B0",
+        "provenance": {
+          "fictional": true,
+          "provider_role": "maintenance technician",
+          "elicitation_date": "2026-09-01",
+          "quantity": "theta: usable-label probability under one unchanged aligned setup",
+          "units": "probability, dimensionless",
+          "population": "labels on printer P with stock S and alignment fixed",
+          "horizon": "the next 20-label job before any maintenance or stock change",
+          "information_already_used": [
+            "shared fictional setup memo; no counted trial data",
+            "role-specific recollections, potentially overlapping"
+          ],
+          "excluded_information": "no outcomes from the future job; no numeric archive fixture",
+          "candidate_family": "Beta",
+          "status": "retained_initial",
+          "revises": [],
+          "revision_reason": "Initial fictional role card; retained unchanged."
+        },
+        "fit": {
+          "alpha": 5.360218853817255,
+          "beta": 4.414264062617634,
+          "values": [
+            0.35,
+            0.55,
+            0.75
+          ],
+          "probabilities": [
+            0.1,
+            0.5,
+            0.9
+          ],
+          "fitted_cdf": [
+            0.10495338893130161,
+            0.4955542556596168,
+            0.9050169048502521
+          ],
+          "cdf_residuals": [
+            0.004953388931301608,
+            -0.004445744340383195,
+            0.00501690485025208
+          ],
+          "fitted_quantiles": [
+            0.34579182541211667,
+            0.5518186913162416,
+            0.7461090610404738
+          ],
+          "quantile_residuals": [
+            -0.0042081745878833066,
+            0.0018186913162415719,
+            -0.003890938959526191
+          ],
+          "sum_squared_cdf_residuals": 6.947003892127335e-05,
+          "max_abs_cdf_residual": 0.00501690485025208,
+          "cdf_feedback_tolerance": 0.025,
+          "feedback_required": false,
+          "optimizer": {
+            "method": "scipy.optimize.least_squares in log(alpha), log(beta)",
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 9,
+            "optimality": 3.636328975252045e-09,
+            "log_shape_bounds": [
+              -12.0,
+              12.0
+            ],
+            "boundary_hit": false,
+            "selected_start": 4,
+            "attempts": [
+              {
+                "start_shapes": [
+                  1.0,
+                  1.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 8,
+                "sum_squared_cdf_residuals": 6.947003892127591e-05
+              },
+              {
+                "start_shapes": [
+                  2.0,
+                  2.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 8,
+                "sum_squared_cdf_residuals": 6.947003892127371e-05
+              },
+              {
+                "start_shapes": [
+                  8.0,
+                  2.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 9,
+                "sum_squared_cdf_residuals": 6.947003892127686e-05
+              },
+              {
+                "start_shapes": [
+                  2.0,
+                  8.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 10,
+                "sum_squared_cdf_residuals": 6.947003892127341e-05
+              },
+              {
+                "start_shapes": [
+                  0.5,
+                  0.5
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 9,
+                "sum_squared_cdf_residuals": 6.947003892127335e-05
+              }
+            ]
+          }
+        },
+        "predictive": {
+          "n": 20,
+          "required": 16,
+          "counts": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "pmf": [
+            0.0004928267236330395,
+            0.002256452808952797,
+            0.006082714549649918,
+            0.012544006232427863,
+            0.02183278356797715,
+            0.03368403878305741,
+            0.04737821892939332,
+            0.061814491155829265,
+            0.07563945807601619,
+            0.0874133819406489,
+            0.09579419517802883,
+            0.09971880380407254,
+            0.09856130692765547,
+            0.09224872422223811,
+            0.0813166804453011,
+            0.06689035784064111,
+            0.05058011887279077,
+            0.034286927108271595,
+            0.019920788690161905,
+            0.009047329291680502,
+            0.0024963948515711997
+          ],
+          "theta_mean": 0.5483889940412646,
+          "theta_sd": 0.1516101946256938,
+          "theta_variance": 0.022985651114440758,
+          "mean": 10.967779880825292,
+          "variance": 13.687717528600977,
+          "expected_conditional_variance": 4.4934570828246745,
+          "variance_of_conditional_mean": 9.194260445776303,
+          "shortfall_probability": 0.883668441185523,
+          "plugin_shortfall_probability": 0.9817799683656626,
+          "plugin_variance": 4.953170105113489,
+          "count_quantiles": [
+            6,
+            11,
+            16
+          ],
+          "loss": {
+            "print": 24.091711029638077,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.52
+          }
+        },
+        "penalty_sensitivity": [
+          {
+            "penalty": 15.0,
+            "print": 15.255026617782844,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.8666666666666667
+          },
+          {
+            "penalty": 25.0,
+            "print": 24.091711029638077,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.52
+          },
+          {
+            "penalty": 40.0,
+            "print": 37.34673764742092,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.325
+          }
+        ]
+      },
+      {
+        "packet_id": "B1",
+        "provenance": {
+          "fictional": true,
+          "provider_role": "maintenance technician",
+          "elicitation_date": "2026-09-01",
+          "quantity": "theta: usable-label probability under one unchanged aligned setup",
+          "units": "probability, dimensionless",
+          "population": "labels on printer P with stock S and alignment fixed",
+          "horizon": "the next 20-label job before any maintenance or stock change",
+          "information_already_used": [
+            "shared fictional setup memo; no counted trial data",
+            "role-specific recollections, potentially overlapping"
+          ],
+          "excluded_information": "no outcomes from the future job; no numeric archive fixture",
+          "candidate_family": "Beta",
+          "status": "illustrative_revision",
+          "revises": [
+            "B0"
+          ],
+          "revision_reason": "After predictive feedback, B recognizes unaligned setup memories; offers B1 for the aligned setup, without new outcome data."
+        },
+        "fit": {
+          "alpha": 7.615999155235994,
+          "beta": 3.472577526463166,
+          "values": [
+            0.5,
+            0.7,
+            0.85
+          ],
+          "probabilities": [
+            0.1,
+            0.5,
+            0.9
+          ],
+          "fitted_cdf": [
+            0.09491903358583756,
+            0.504527440303831,
+            0.894940171988223
+          ],
+          "cdf_residuals": [
+            -0.005080966414162447,
+            0.00452744030383101,
+            -0.005059828011777068
+          ],
+          "fitted_quantiles": [
+            0.5045957928936241,
+            0.6984052645139791,
+            0.8527687584187731
+          ],
+          "quantile_residuals": [
+            0.004595792893624107,
+            -0.0015947354860208485,
+            0.0027687584187731096
+          ],
+          "sum_squared_cdf_residuals": 7.191579491536409e-05,
+          "max_abs_cdf_residual": 0.005080966414162447,
+          "cdf_feedback_tolerance": 0.025,
+          "feedback_required": false,
+          "optimizer": {
+            "method": "scipy.optimize.least_squares in log(alpha), log(beta)",
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 14,
+            "optimality": 6.335512025868115e-09,
+            "log_shape_bounds": [
+              -12.0,
+              12.0
+            ],
+            "boundary_hit": false,
+            "selected_start": 3,
+            "attempts": [
+              {
+                "start_shapes": [
+                  1.0,
+                  1.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 11,
+                "sum_squared_cdf_residuals": 7.191579491536685e-05
+              },
+              {
+                "start_shapes": [
+                  2.0,
+                  2.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 10,
+                "sum_squared_cdf_residuals": 7.191579491536654e-05
+              },
+              {
+                "start_shapes": [
+                  8.0,
+                  2.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 8,
+                "sum_squared_cdf_residuals": 7.191579491536669e-05
+              },
+              {
+                "start_shapes": [
+                  2.0,
+                  8.0
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 14,
+                "sum_squared_cdf_residuals": 7.191579491536409e-05
+              },
+              {
+                "start_shapes": [
+                  0.5,
+                  0.5
+                ],
+                "success": true,
+                "status": 2,
+                "message": "`ftol` termination condition is satisfied.",
+                "nfev": 9,
+                "sum_squared_cdf_residuals": 7.191579491536519e-05
+              }
+            ]
+          }
+        },
+        "predictive": {
+          "n": 20,
+          "required": 16,
+          "counts": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "pmf": [
+            1.899516652899631e-05,
+            0.00012874995942770308,
+            0.0004907860098694241,
+            0.0013831373749218433,
+            0.003204731732669263,
+            0.006448678607388108,
+            0.011640601356608316,
+            0.019243912251545408,
+            0.029540141756460015,
+            0.04249865677540324,
+            0.05765588715751574,
+            0.07402902722948011,
+            0.09009250352774494,
+            0.10384656608778255,
+            0.1130051832650053,
+            0.11532358073391866,
+            0.10907205358612207,
+            0.09363832223010374,
+            0.070198514008189,
+            0.04232117692157418,
+            0.01621879426174362
+          ],
+          "theta_mean": 0.6868328888238301,
+          "theta_sd": 0.13339084685676889,
+          "theta_variance": 0.017793118025165967,
+          "mean": 13.736657776476601,
+          "variance": 11.063254282637914,
+          "expected_conditional_variance": 3.946007072571527,
+          "variance_of_conditional_mean": 7.117247210066386,
+          "shortfall_probability": 0.6685511389922696,
+          "plugin_shortfall_probability": 0.799646723468975,
+          "plugin_variance": 4.301869433074847,
+          "count_quantiles": [
+            9,
+            14,
+            18
+          ],
+          "loss": {
+            "print": 18.71377847480674,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.52
+          }
+        },
+        "penalty_sensitivity": [
+          {
+            "penalty": 15.0,
+            "print": 12.028267084884044,
+            "outsource": 15.0,
+            "action": "print",
+            "shortfall_probability_threshold": 0.8666666666666667
+          },
+          {
+            "penalty": 25.0,
+            "print": 18.71377847480674,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.52
+          },
+          {
+            "penalty": 40.0,
+            "print": 28.742045559690784,
+            "outsource": 15.0,
+            "action": "outsource",
+            "shortfall_probability_threshold": 0.325
+          }
+        ]
+      }
+    ],
+    "coherent_poor_beta_fit": {
+      "alpha": 167.5902657647219,
+      "beta": 1353.5949556471978,
+      "values": [
+        0.1,
+        0.11,
+        0.9
+      ],
+      "probabilities": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "fitted_cdf": [
+        0.0999999999996929,
+        0.49999999999999756,
+        1.0
+      ],
+      "cdf_residuals": [
+        -3.071015663991261e-13,
+        -2.4424906541753444e-15,
+        0.09999999999999998
+      ],
+      "fitted_quantiles": [
+        0.10000000000001326,
+        0.11000000000000004,
+        0.12056137751226444
+      ],
+      "quantile_residuals": [
+        1.3253287356462806e-14,
+        4.163336342344337e-17,
+        -0.7794386224877355
+      ],
+      "sum_squared_cdf_residuals": 0.009999999999999995,
+      "max_abs_cdf_residual": 0.09999999999999998,
+      "cdf_feedback_tolerance": 0.025,
+      "feedback_required": true,
+      "optimizer": {
+        "method": "scipy.optimize.least_squares in log(alpha), log(beta)",
+        "success": true,
+        "status": 2,
+        "message": "`ftol` termination condition is satisfied.",
+        "nfev": 15,
+        "optimality": 1.1709213258029524e-11,
+        "log_shape_bounds": [
+          -12.0,
+          12.0
+        ],
+        "boundary_hit": false,
+        "selected_start": 3,
+        "attempts": [
+          {
+            "start_shapes": [
+              1.0,
+              1.0
+            ],
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 7,
+            "sum_squared_cdf_residuals": 0.07472819948322255
+          },
+          {
+            "start_shapes": [
+              2.0,
+              2.0
+            ],
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 10,
+            "sum_squared_cdf_residuals": 0.07472819948322247
+          },
+          {
+            "start_shapes": [
+              8.0,
+              2.0
+            ],
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 10,
+            "sum_squared_cdf_residuals": 0.07472819948322261
+          },
+          {
+            "start_shapes": [
+              2.0,
+              8.0
+            ],
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 15,
+            "sum_squared_cdf_residuals": 0.009999999999999995
+          },
+          {
+            "start_shapes": [
+              0.5,
+              0.5
+            ],
+            "success": true,
+            "status": 2,
+            "message": "`ftol` termination condition is satisfied.",
+            "nfev": 8,
+            "sum_squared_cdf_residuals": 0.07472819948322273
+          }
+        ]
+      }
+    },
+    "mixtures": [
+      {
+        "weight_A0": 0.25,
+        "weight_B1": 0.75,
+        "shortfall_probability": 0.6059031303491546,
+        "loss": {
+          "print": 17.147578258728863,
+          "outsource": 15.0,
+          "action": "outsource",
+          "shortfall_probability_threshold": 0.52
+        }
+      },
+      {
+        "weight_A0": 0.5,
+        "weight_B1": 0.5,
+        "shortfall_probability": 0.5432551217060395,
+        "loss": {
+          "print": 15.581378042650988,
+          "outsource": 15.0,
+          "action": "outsource",
+          "shortfall_probability_threshold": 0.52
+        }
+      },
+      {
+        "weight_A0": 0.75,
+        "weight_B1": 0.25,
+        "shortfall_probability": 0.4806071130629245,
+        "loss": {
+          "print": 14.015177826573112,
+          "outsource": 15.0,
+          "action": "print",
+          "shortfall_probability_threshold": 0.52
+        }
+      }
+    ],
+    "mixture_switch_weight_A0": 0.5928007218813459,
+    "information_reuse": {
+      "base_shapes": [
+        2,
+        2
+      ],
+      "archive_successes": 8,
+      "archive_trials": 10,
+      "prior_after_archive": [
+        10,
+        4
+      ],
+      "wrong_archive_reused": [
+        18,
+        6
+      ],
+      "fresh_successes": 4,
+      "fresh_trials": 5,
+      "correct_after_fresh": [
+        14,
+        5
+      ],
+      "wrong_after_fresh": [
+        22,
+        7
+      ],
+      "archive_id": "fictional_archive_01",
+      "fresh_id": "fictional_fresh_02",
+      "note": "One archive enters once, through either prior construction or likelihood."
+    }
+  },
+  "checks": [
+    {
+      "id": "A0.cdf_0_quadrature",
+      "actual": 0.09226233437540796,
+      "expected": 0.09226233437540779,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.cdf_0_quadrature_error",
+      "actual": 2.0354221193063395e-15,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.cdf_1_quadrature",
+      "actual": 0.5068596321161108,
+      "expected": 0.5068596321161115,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.cdf_1_quadrature_error",
+      "actual": 2.597726387946491e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.cdf_2_quadrature",
+      "actual": 0.8923342863837213,
+      "expected": 0.892334286383721,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.cdf_2_quadrature_error",
+      "actual": 1.1601115937775844e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_0_quadrature",
+      "actual": 1.1367945876942292e-07,
+      "expected": 1.1367945876942197e-07,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_0_quadrature_error",
+      "actual": 3.540884522231938e-14,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_1_quadrature",
+      "actual": 1.3482349428006905e-06,
+      "expected": 1.3482349428006805e-06,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_1_quadrature_error",
+      "actual": 7.861537185788295e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_2_quadrature",
+      "actual": 8.538385850699988e-06,
+      "expected": 8.53838585069992e-06,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_2_quadrature_error",
+      "actual": 1.6069892092297994e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_3_quadrature",
+      "actual": 3.828974424168298e-05,
+      "expected": 3.828974424168293e-05,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_3_quadrature_error",
+      "actual": 2.5558081898789306e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_4_quadrature",
+      "actual": 0.00013610906237600256,
+      "expected": 0.00013610906237600208,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_4_quadrature_error",
+      "actual": 3.6236325711005513e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_5_quadrature",
+      "actual": 0.00040721852821237574,
+      "expected": 0.00040721852821237514,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_5_quadrature_error",
+      "actual": 6.596899364135822e-18,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_6_quadrature",
+      "actual": 0.001063536175053835,
+      "expected": 0.0010635361750538342,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_6_quadrature_error",
+      "actual": 9.972941607738414e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_7_quadrature",
+      "actual": 0.0024835819226055396,
+      "expected": 0.002483581922605535,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_7_quadrature_error",
+      "actual": 1.9638177951387802e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_8_quadrature",
+      "actual": 0.005271803091610286,
+      "expected": 0.00527180309161024,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_8_quadrature_error",
+      "actual": 1.9084766500294886e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_9_quadrature",
+      "actual": 0.010289498972381579,
+      "expected": 0.01028949897238152,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_9_quadrature_error",
+      "actual": 1.7252198052834618e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_10_quadrature",
+      "actual": 0.018613905665515813,
+      "expected": 0.018613905665515636,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_10_quadrature_error",
+      "actual": 2.0091153740686707e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_11_quadrature",
+      "actual": 0.03137094940762342,
+      "expected": 0.0313709494076232,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_11_quadrature_error",
+      "actual": 9.598437786208386e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_12_quadrature",
+      "actual": 0.049390228941072305,
+      "expected": 0.04939022894107191,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_12_quadrature_error",
+      "actual": 4.912723560230702e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_13_quadrature",
+      "actual": 0.07266092282902156,
+      "expected": 0.07266092282902106,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_13_quadrature_error",
+      "actual": 3.2940869199645723e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_14_quadrature",
+      "actual": 0.09963923761910146,
+      "expected": 0.09963923761910079,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_14_quadrature_error",
+      "actual": 5.5308875322883274e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_15_quadrature",
+      "actual": 0.12658382216074132,
+      "expected": 0.12658382216074063,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_15_quadrature_error",
+      "actual": 1.2623753140930373e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_16_quadrature",
+      "actual": 0.14727593878492085,
+      "expected": 0.14727593878491624,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_16_quadrature_error",
+      "actual": 8.767999785615739e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_17_quadrature",
+      "actual": 0.15368841543543882,
+      "expected": 0.15368841543552017,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_17_quadrature_error",
+      "actual": 9.073191682379373e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_18_quadrature",
+      "actual": 0.1383129751660882,
+      "expected": 0.13831297516605706,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_18_quadrature_error",
+      "actual": 2.5002944347815654e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_19_quadrature",
+      "actual": 0.09872338628946634,
+      "expected": 0.09872338629051244,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_19_quadrature_error",
+      "actual": 1.2263954387745453e-09,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_20_quadrature",
+      "actual": 0.04404017990428305,
+      "expected": 0.04404017990417598,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.pmf_20_quadrature_error",
+      "actual": 8.141159076088672e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.normalization",
+      "actual": 1.0000000000000067,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.quadrature_normalization",
+      "actual": 1.0000000000009885,
+      "expected": 1.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.mean",
+      "actual": 15.738760505946715,
+      "expected": 15.738760505965265,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.variance",
+      "actual": 6.882009371074094,
+      "expected": 6.882009371083262,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.action_loss_enumeration",
+      "actual": 12.448977610495236,
+      "expected": 12.448977610497142,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.optimizer_success",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "A0.interior_fit",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.cdf_0_quadrature",
+      "actual": 0.10495338893130161,
+      "expected": 0.10495338893128209,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.cdf_0_quadrature_error",
+      "actual": 4.0655017430109335e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.cdf_1_quadrature",
+      "actual": 0.4955542556596168,
+      "expected": 0.49555425565939204,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.cdf_1_quadrature_error",
+      "actual": 8.20960081574515e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.cdf_2_quadrature",
+      "actual": 0.9050169048502521,
+      "expected": 0.9050169048490478,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.cdf_2_quadrature_error",
+      "actual": 8.846471740124116e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_0_quadrature",
+      "actual": 0.0004928267236330395,
+      "expected": 0.0004928267236329578,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_0_quadrature_error",
+      "actual": 4.2663070829207424e-14,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_1_quadrature",
+      "actual": 0.002256452808952797,
+      "expected": 0.002256452808953341,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_1_quadrature_error",
+      "actual": 1.6468894864026175e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_2_quadrature",
+      "actual": 0.006082714549649918,
+      "expected": 0.0060827145496498754,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_2_quadrature_error",
+      "actual": 2.1458164266207293e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_3_quadrature",
+      "actual": 0.012544006232427863,
+      "expected": 0.01254400623242786,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_3_quadrature_error",
+      "actual": 7.154228669739249e-14,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_4_quadrature",
+      "actual": 0.02183278356797715,
+      "expected": 0.021832783567976834,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_4_quadrature_error",
+      "actual": 2.225344572243798e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_5_quadrature",
+      "actual": 0.03368403878305741,
+      "expected": 0.033684038783057466,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_5_quadrature_error",
+      "actual": 6.536243837728917e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_6_quadrature",
+      "actual": 0.04737821892939332,
+      "expected": 0.04737821892939338,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_6_quadrature_error",
+      "actual": 4.238132497280315e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_7_quadrature",
+      "actual": 0.061814491155829265,
+      "expected": 0.06181449115582921,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_7_quadrature_error",
+      "actual": 1.5191771657926262e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_8_quadrature",
+      "actual": 0.07563945807601619,
+      "expected": 0.07563945807601617,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_8_quadrature_error",
+      "actual": 1.129459748384215e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_9_quadrature",
+      "actual": 0.0874133819406489,
+      "expected": 0.08741338194064897,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_9_quadrature_error",
+      "actual": 1.3017485006594498e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_10_quadrature",
+      "actual": 0.09579419517802883,
+      "expected": 0.09579419517802876,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_10_quadrature_error",
+      "actual": 1.3448028671550483e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_11_quadrature",
+      "actual": 0.09971880380407254,
+      "expected": 0.09971880380407253,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_11_quadrature_error",
+      "actual": 1.1473674354361973e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_12_quadrature",
+      "actual": 0.09856130692765547,
+      "expected": 0.09856130692765534,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_12_quadrature_error",
+      "actual": 3.06207230578448e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_13_quadrature",
+      "actual": 0.09224872422223811,
+      "expected": 0.09224872422223804,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_13_quadrature_error",
+      "actual": 1.2360814539035155e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_14_quadrature",
+      "actual": 0.0813166804453011,
+      "expected": 0.08131668044530112,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_14_quadrature_error",
+      "actual": 1.6141818066670613e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_15_quadrature",
+      "actual": 0.06689035784064111,
+      "expected": 0.06689035784064024,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_15_quadrature_error",
+      "actual": 1.4092212943447868e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_16_quadrature",
+      "actual": 0.05058011887279077,
+      "expected": 0.05058011887279072,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_16_quadrature_error",
+      "actual": 2.9751353293509194e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_17_quadrature",
+      "actual": 0.034286927108271595,
+      "expected": 0.03428692710827122,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_17_quadrature_error",
+      "actual": 1.1376632250425607e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_18_quadrature",
+      "actual": 0.019920788690161905,
+      "expected": 0.019920788690166093,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_18_quadrature_error",
+      "actual": 1.3437922517828748e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_19_quadrature",
+      "actual": 0.009047329291680502,
+      "expected": 0.009047329291679207,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_19_quadrature_error",
+      "actual": 6.773549656207672e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_20_quadrature",
+      "actual": 0.0024963948515711997,
+      "expected": 0.0024963948515933356,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.pmf_20_quadrature_error",
+      "actual": 1.944937850614707e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.normalization",
+      "actual": 0.999999999999999,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.quadrature_normalization",
+      "actual": 1.0000000000000224,
+      "expected": 1.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.mean",
+      "actual": 10.967779880825292,
+      "expected": 10.96777988082575,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.variance",
+      "actual": 13.687717528600977,
+      "expected": 13.68771752860289,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.action_loss_enumeration",
+      "actual": 24.091711029638077,
+      "expected": 24.091711029638095,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.optimizer_success",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B0.interior_fit",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.cdf_0_quadrature",
+      "actual": 0.09491903358583756,
+      "expected": 0.09491903358583756,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.cdf_0_quadrature_error",
+      "actual": 4.111029102924587e-15,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.cdf_1_quadrature",
+      "actual": 0.504527440303831,
+      "expected": 0.5045274403038315,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.cdf_1_quadrature_error",
+      "actual": 1.0250755956388984e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.cdf_2_quadrature",
+      "actual": 0.894940171988223,
+      "expected": 0.894940171988222,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.cdf_2_quadrature_error",
+      "actual": 2.8586328634451583e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_0_quadrature",
+      "actual": 1.899516652899631e-05,
+      "expected": 1.8995166528996102e-05,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_0_quadrature_error",
+      "actual": 6.998570526147063e-16,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_1_quadrature",
+      "actual": 0.00012874995942770308,
+      "expected": 0.00012874995942770303,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_1_quadrature_error",
+      "actual": 7.720396906393906e-16,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_2_quadrature",
+      "actual": 0.0004907860098694241,
+      "expected": 0.0004907860098694228,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_2_quadrature_error",
+      "actual": 4.723361518665643e-15,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_3_quadrature",
+      "actual": 0.0013831373749218433,
+      "expected": 0.001383137374921838,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_3_quadrature_error",
+      "actual": 3.092040237996691e-14,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_4_quadrature",
+      "actual": 0.003204731732669263,
+      "expected": 0.003204731732669252,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_4_quadrature_error",
+      "actual": 9.987835532845924e-14,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_5_quadrature",
+      "actual": 0.006448678607388108,
+      "expected": 0.006448678607388079,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_5_quadrature_error",
+      "actual": 4.053144382891883e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_6_quadrature",
+      "actual": 0.011640601356608316,
+      "expected": 0.011640601356608316,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_6_quadrature_error",
+      "actual": 5.708443190800133e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_7_quadrature",
+      "actual": 0.019243912251545408,
+      "expected": 0.019243912251545384,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_7_quadrature_error",
+      "actual": 9.198792560462764e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_8_quadrature",
+      "actual": 0.029540141756460015,
+      "expected": 0.029540141756459873,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_8_quadrature_error",
+      "actual": 9.920409329081115e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_9_quadrature",
+      "actual": 0.04249865677540324,
+      "expected": 0.042498656775403196,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_9_quadrature_error",
+      "actual": 1.8263083181716856e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_10_quadrature",
+      "actual": 0.05765588715751574,
+      "expected": 0.05765588715751556,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_10_quadrature_error",
+      "actual": 4.692413449990107e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_11_quadrature",
+      "actual": 0.07402902722948011,
+      "expected": 0.07402902722947999,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_11_quadrature_error",
+      "actual": 1.2026362967553633e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_12_quadrature",
+      "actual": 0.09009250352774494,
+      "expected": 0.09009250352774457,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_12_quadrature_error",
+      "actual": 3.901052575667837e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_13_quadrature",
+      "actual": 0.10384656608778255,
+      "expected": 0.10384656608778241,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_13_quadrature_error",
+      "actual": 1.3755316892992572e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_14_quadrature",
+      "actual": 0.1130051832650053,
+      "expected": 0.11300518326500315,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_14_quadrature_error",
+      "actual": 8.775021638138258e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_15_quadrature",
+      "actual": 0.11532358073391866,
+      "expected": 0.11532358073391842,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_15_quadrature_error",
+      "actual": 6.937223804512177e-13,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_16_quadrature",
+      "actual": 0.10907205358612207,
+      "expected": 0.1090720535861208,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_16_quadrature_error",
+      "actual": 6.357476065952488e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_17_quadrature",
+      "actual": 0.09363832223010374,
+      "expected": 0.09363832223012708,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_17_quadrature_error",
+      "actual": 9.514286076966516e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_18_quadrature",
+      "actual": 0.070198514008189,
+      "expected": 0.07019851400817825,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_18_quadrature_error",
+      "actual": 6.151301306850682e-12,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_19_quadrature",
+      "actual": 0.04232117692157418,
+      "expected": 0.04232117692195399,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_19_quadrature_error",
+      "actual": 3.5279008575976565e-10,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_20_quadrature",
+      "actual": 0.01621879426174362,
+      "expected": 0.016218794261699403,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.pmf_20_quadrature_error",
+      "actual": 4.607810685089411e-11,
+      "expected": 0.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.normalization",
+      "actual": 1.0000000000000022,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.quadrature_normalization",
+      "actual": 1.0000000000003457,
+      "expected": 1.0,
+      "atol": 2e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.mean",
+      "actual": 13.736657776476601,
+      "expected": 13.736657776483101,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.variance",
+      "actual": 11.063254282637914,
+      "expected": 11.063254282646763,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.action_loss_enumeration",
+      "actual": 18.71377847480674,
+      "expected": 18.71377847480735,
+      "atol": 2e-08,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.optimizer_success",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "B1.interior_fit",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mixture_0.25.loss_linearity",
+      "actual": 17.147578258728863,
+      "expected": 17.147578258728863,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mixture_0.5.loss_linearity",
+      "actual": 15.581378042650988,
+      "expected": 15.58137804265099,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mixture_0.75.loss_linearity",
+      "actual": 14.015177826573112,
+      "expected": 14.015177826573112,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "coherent_poor_fit_requires_feedback",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "reuse.once_mean",
+      "actual": 0.7142857142857143,
+      "expected": 0.7142857142857143,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "reuse.twice_mean",
+      "actual": 0.75,
+      "expected": 0.75,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "All roles, judgments, dates, revisions, observations and costs are fictional teaching inputs.",
+    "Three quantiles do not identify an unrestricted distribution or uniquely justify the Beta family.",
+    "Optimizer convergence and a 0.025 CDF residual screen do not establish fidelity, truth or expert authority.",
+    "Five starts and finite log-shape bounds are numerical safeguards, not a global optimization proof.",
+    "Quantile judgments are not independent binomial observations; overlapping information is not new evidence.",
+    "Mixture weights are illustrative sensitivity assumptions; no expert pooling rule is endorsed.",
+    "A stable shared probability excludes physical drift, batch heterogeneity and dependence given theta.",
+    "Costs and guaranteed outsourcing are stipulated; conditional actions are not operational recommendations."
+  ]
+}

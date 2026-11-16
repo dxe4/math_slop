@@ -1,0 +1,12 @@
+
+# Glossary and Theorem Finder
+
+**Weak derivative:** a locally integrable function representing the distributional derivative through the compact-test integration identity. **Sobolev space:** a function space requiring named weak derivatives in a specified integrability class. **Trace:** a boundary operator extending the classical boundary value when continuity in the function-space norm permits it. **Zero-boundary space:** $H_0^1$, the closure of compactly supported smooth functions.
+
+**Coercivity:** $A(v,v)\ge\alpha\|v\|^2$ for a fixed positive $\alpha$ in a stated norm. **Dual norm:** the supremum of $|F(v)|$ over unit-norm tests. **Distributional solution:** an equation interpreted against compactly supported smooth functions; boundary data require additional specification. **Weak boundary solution:** an equation with declared energy and test spaces, including the boundary contract.
+
+The authored [Sobolev chapter](sobolev-spaces.md) proves weak-derivative uniqueness, Hilbert completeness of $H^1$, interval representatives and traces, a nonsharp interval Poincaré bound, and bounded-coercive existence from the Hilbert Riesz theorem. Its corner and jump examples distinguish first- from second-order membership; its point-load example identifies a source in $H^{-1}$ in one dimension. No higher-dimensional point-evaluation embedding follows from that example.
+
+**Interior regularity** is proved by [difference quotients](regularity.md) under Lipschitz-coefficient and square-integrable-load hypotheses; a reentrant corner distinguishes it from global regularity. **Energy-space time trace** is the continuous square-integrable representative proved in [parabolic equations](parabolic-equations.md). **Generator domain** identifies states with a strong initial derivative in [semigroup theory](semigroups-evolution-equations.md).
+
+**Finite propagation** follows from a shrinking-cone energy inequality in [hyperbolic equations](hyperbolic-conservation-laws.md). **Entropy production** supplies a signed jump defect in [conservation laws](conservation-laws-shocks.md), with the general bounded-data comparison theorem stated separately. **Direct-method attainment** requires coercivity, compactness, admissible closure and lower semicontinuity, with explicit failures in [variational methods](variational-direct-methods.md). **Turing onset** concerns a domain eigenvalue in an unstable band; [reaction–diffusion](reaction-diffusion-patterns.md) distinguishes it from nonlinear stationary-pattern existence.

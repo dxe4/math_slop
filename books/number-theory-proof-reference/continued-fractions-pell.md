@@ -1,0 +1,1048 @@
+
+# Continued Fractions and Pell Equations {#section-1-continued-fractions-and-pell-equations}
+
+Continued fractions encode the Euclidean algorithm, produce canonical rational approximations, and solve the apparently nonlinear equation $x^{2}-Dy^{2}=1$. Their strength comes from exact recurrences and determinant identities, not decimal closeness alone.
+
+This chapter assumes Euclid, linear Diophantine equations, and elementary inequalities. Afterward you should be able to expand rational and quadratic irrational numbers, certify convergents, prove their approximation bounds, extract Pell solutions, and distinguish the positive and negative Pell equations.
+
+<a id="section-5-1-finite-simple-continued-fractions"></a>
+## 1. Finite simple continued fractions {#section-7-1-finite-simple-continued-fractions}
+
+A simple continued fraction is
+
+$[a_{0};a_{1},\ldots,a_{n}]=a_{0}+1/(a_{1}+1/(\ldots+1/a_{n}))$,
+
+where $a_{0}$ is an integer and later $a_{i}$ are positive integers. The Euclidean algorithm produces the expansion of a positive rational.
+
+<a id="section-13-worked-rational-expansion"></a>
+### Worked rational expansion {#section-15-worked-rational-expansion}
+
+For $415/93$, Euclid gives
+
+$415=4*93+43$, $93=2*43+7$, $43=6*7+1$, $7=7*1$.
+
+Therefore $415/93=[4;2,6,7]$. The alternate ending $[4;2,6,6,1]$ has the same value; requiring the last partial quotient greater than one gives uniqueness.
+
+<a id="section-21-2-convergents-and-recurrences"></a>
+## 2. Convergents and recurrences {#section-23-2-convergents-and-recurrences}
+
+Define
+
+$p_{-2}=0, p_{-1}=1$, $q_{-2}=1, q_{-1}=0$,
+
+and
+
+$p_{k}=a_{k} p_{k-1}+p_{k-2}$, $q_{k}=a_{k} q_{k-1}+q_{k-2}$.
+
+Then the $k$th convergent is $p_{k}/q_{k}=[a_{0};\ldots;a_{k}]$. Matrix multiplication proves the recurrence and the determinant identity
+
+$p_{k} q_{k-1}-p_{k-1}q_{k}=(-1)^{k-1}$.
+
+Consequently consecutive convergents are reduced and differ by exactly $1/(q_{k} q_{k-1})$ in absolute value.
+
+For $[4;2,6,7]$, convergents are $4/1$, $9/2$, $58/13$, $415/93$.
+
+<a id="section-39-3-infinite-expansions-and-approximation"></a>
+## 3. Infinite expansions and approximation {#section-41-3-infinite-expansions-and-approximation}
+
+Every irrational real number has an infinite simple continued fraction obtained by repeatedly taking the floor and inverting the fractional part. Its convergents alternate around the number and converge to it.
+
+If $\alpha=[a_{0};a_{1},\ldots]$, then
+
+$\lvert \alpha-p_{k}/q_{k}\rvert < 1/(q_{k} q_{k+1}) \le 1/q_{k}^{2}$.
+
+The first inequality follows by writing the remaining tail as a positive real larger than $a_{k+1}$ and using the determinant identity.
+
+**Best-approximation boundary.** If $0<q<q_{k+1}$ and $p/q \ne p_{k}/q_{k}$, then $\lvert q \alpha-p\rvert \ge \lvert q_{k} \alpha-p_{k}\rvert$ in the standard second-kind sense. Thus convergents are canonical excellent approximants; the claim is not that every numerical notion of “closest” has no semiconvergent exceptions.
+
+<a id="section-51-4-continued-fraction-of-a-square-root"></a>
+## 4. Continued fraction of a square root {#section-53-4-continued-fraction-of-a-square-root}
+
+For positive nonsquare integer $D$, the expansion of $\sqrt{D}$ is eventually periodic; in fact
+
+$\sqrt{D}=[a_{0};\overline{a_{1},\ldots,a_{L}}]$.
+
+An exact algorithm tracks triples
+
+$m_{k+1}=d_{k} a_{k}-m_{k}$,
+
+$d_{k+1}=(D-m_{k+1}^{2})/d_{k}$,
+
+$a_{k+1}=\left\lfloor (a_{0}+m_{k+1})/d_{k+1} \right\rfloor$,
+
+starting with $m_{0}=0,d_{0}=1,a_{0}=\left\lfloor \sqrt{D} \right\rfloor$. Only finitely many admissible pairs $(m,d)$ occur, so a state repeats; reversibility and the conjugate inequalities yield periodicity.
+
+<a id="section-67-worked-expansion-of-sqrt-13"></a>
+### Worked expansion of $\sqrt{13}$ {#section-69-worked-expansion-of-sqrt-13}
+
+The recurrence gives partial quotients
+
+$3; 1,1,1,1,6, 1,1,1,1,6,\ldots$,
+
+so $\sqrt{13}=[3;\overline{1,1,1,1,6}]$. The period length is five.
+
+<a id="section-75-5-pell-s-equation"></a>
+## 5. Pell's equation {#section-77-5-pell-s-equation}
+
+For positive nonsquare integer $D$, Pell's equation is
+
+$x^{2}-Dy^{2}=1$.
+
+The convergents of $\sqrt{D}$ contain solutions. If the period length $L$ is even, the convergent at index `L-1` gives the least positive solution. If $L$ is odd, the convergent at index $2L-1$ does. This follows from the continued-fraction matrix over one period and its determinant sign.
+
+For $D=13$, the odd period requires two periods. The relevant convergent is $649/180$, and
+
+$649^{2}-13*180^{2}=421201-421200=1$.
+
+The least solution can be large relative to $D$; exhaustive search in $y$ is not a proof strategy.
+
+<a id="section-89-6-generating-all-positive-solutions"></a>
+## 6. Generating all positive solutions {#section-91-6-generating-all-positive-solutions}
+
+In the ring $\mathbb{Z}[\sqrt{D}]$, define norm
+
+$N(x+y \sqrt{D})=x^{2}-Dy^{2}$.
+
+Norms multiply. If $x_{1}+y_{1} \sqrt{D}$ is the least unit greater than one of norm one, every positive solution is generated by
+
+$x_{k}+y_{k} \sqrt{D}=(x_{1}+y_{1} \sqrt{D})^k$, $k\ge 1$.
+
+Multiplication yields the recurrence
+
+$x_{k+1}=x_{1}x_{k}+Dy_{1}y_{k}$, $y_{k+1}=x_{1}y_{k}+y_{1}x_{k}$.
+
+For $D=2$, the fundamental solution is $(3,2)$, producing $(17,12)$, then $(99,70)$.
+
+<a id="section-105-7-negative-pell-and-other-right-sides"></a>
+## 7. Negative Pell and other right sides {#section-107-7-negative-pell-and-other-right-sides}
+
+The equation $x^{2}-Dy^{2}=-1$ is solvable exactly when the period length of $\sqrt{D}$ is odd. When it has a solution, squaring its unit gives a positive Pell solution. For $D=2$, $1^{2}-2*1^{2}=-1$; for $D=3$, the period length is two and the negative equation is insoluble.
+
+For $x^{2}-Dy^{2}=N$ with general $N$, periodic continued fractions still help, but the existence and complete parametrization require extra work. Do not transfer the $N=\pm 1$ criterion unchanged.
+
+<a id="section-111-8-exactness-audit"></a>
+## 8. Exactness audit {#section-113-8-exactness-audit}
+
+Compute partial quotients using integer recurrences, not floating-point square roots: rounding near an integer can corrupt the entire tail. Verify every proposed Pell pair by exact multiplication. A period declaration includes the repeated state, not only a visually repeated decimal pattern.
+
+<a id="section-115-9-complete-quotients-and-the-exact-error-formula"></a>
+## 9. Complete quotients and the exact error formula {#section-117-9-complete-quotients-and-the-exact-error-formula}
+
+Let the tail after $a_{k}$ be
+
+$\alpha_{k+1}=[a_{k+1};a_{k+2},\ldots]$.
+
+Matrix recurrences give the exact reconstruction
+
+$\alpha=(p_{k} \alpha_{k+1}+p_{k-1})/(q_{k} \alpha_{k+1}+q_{k-1})$.
+
+Subtract $p_{k}/q_{k}$ and use the determinant identity:
+
+$\lvert \alpha-p_{k}/q_{k}\rvert=1/[q_{k}(q_{k} \alpha_{k+1}+q_{k-1})]$.
+
+Since $\alpha_{k+1}>a_{k+1}$ and $q_{k+1}=a_{k+1}q_{k}+q_{k-1}$, this proves the standard upper bound $1/(q_{k} q_{k+1})$. It also shows exactly why a large next partial quotient improves approximation.
+
+<a id="section-131-worked-error-enclosure-for-sqrt-2"></a>
+### Worked error enclosure for $\sqrt{2}$ {#section-133-worked-error-enclosure-for-sqrt-2}
+
+Every complete quotient after the integer part equals $1+\sqrt{2}$, and the convergent $7/5$ has previous denominator $2$. Therefore
+
+$\lvert \sqrt{2}-7/5\rvert=1/[5(5(1+\sqrt{2})+2)]$.
+
+Bounding $7/5<\sqrt{2}<3/2$ turns this into a rational interval without decimals. Exact tail formulas provide certificates stronger than plotting the two numbers.
+
+<a id="section-139-10-best-approximations-from-determinant-area"></a>
+## 10. Best approximations from determinant area {#section-141-10-best-approximations-from-determinant-area}
+
+**Proof architecture.** Suppose $p/q$ is a rational distinct from $p_{k}/q_{k}$ with $0<q<q_{k+1}$. The integer determinant
+
+\[p q_{k}-q p_{k}\]
+
+is nonzero, hence has absolute value at least one. Write it as
+
+$q_{k}(p-q \alpha)-q(p_{k}-q_{k} \alpha)$.
+
+If both $\lvert q \alpha-p\rvert$ and $\lvert q_{k} \alpha-p_{k}\rvert$ were too small, the triangle inequality would make this integer have absolute value below one. Completing the proof requires the standard denominator-bracketing lemma: express $(p,q)$ in the unimodular basis formed by two consecutive convergent vectors and use $0<q<q_{k+1}$ to bound its integer coefficients. We record the mechanism and theorem here, but do not present this paragraph as the omitted coefficient argument itself.
+
+The determinant is an oriented area of the integer vectors $(p,q)$ and $(p_{k},q_{k})$. No picture is required: “area at least one” is exactly the nonzero-integer determinant inequality.
+
+<a id="section-153-11-semiconvergents"></a>
+## 11. Semiconvergents {#section-155-11-semiconvergents}
+
+The recurrence between two consecutive convergent vectors also produces the intermediate fractions
+
+$(r p_{k}+p_{k-1})/(r q_{k}+q_{k-1})$, $1\le r<a_{k+1}$.
+
+These **semiconvergents** can be best approximations under first-kind or denominator-restricted conventions even when they are not principal convergents. Therefore the phrase “continued fractions give all best approximations” is incomplete until “best” is defined.
+
+<a id="section-161-worked-semiconvergent"></a>
+### Worked semiconvergent {#section-163-worked-semiconvergent}
+
+For a continued fraction beginning $[1;3,\ldots]$, the recurrence gives $(2*1+1)/(2*1+0)=3/2$ when $r=2$. This is intermediate in the recurrence, although it lies outside the numerical interval between the alternating convergents $1$ and $4/3$. Its approximation role depends on the next tail and the chosen error criterion. The determinant with the prior convergent confirms it is reduced.
+
+<a id="section-165-12-pell-solutions-as-matrix-dynamics"></a>
+## 12. Pell solutions as matrix dynamics {#section-167-12-pell-solutions-as-matrix-dynamics}
+
+Associate a partial quotient with matrix
+
+$M(a)=\begin{pmatrix}a&1\\1&0\end{pmatrix}$.
+
+The product over a period has determinant $(-1)^L$. Its dominant eigenvalue is a quadratic unit. When $L$ is even, the period matrix has norm one; when $L$ is odd, it has norm minus one and squaring yields norm one. This explains the period-parity rule for positive and negative Pell equations.
+
+For a fundamental solution $(x_{1},y_{1})$, all powers obey a second-order linear recurrence. Since $\varepsilon=x_{1}+y_{1}\sqrt{D}$ and $\varepsilon^{-1}=x_{1}-y_{1}\sqrt{D}$,
+
+$x_{k}=(\varepsilon^k+\varepsilon^{-k})/2$,
+
+$y_{k}=(\varepsilon^k-\varepsilon^{-k})/(2\sqrt{D})$.
+
+Consequently
+
+$x_{k+2}=2x_{1}x_{k+1}-x_{k}$,
+
+and the same recurrence holds for $y_{k}$. This gives exact fast generation without repeatedly multiplying symbolic radicals.
+
+<a id="section-185-13-generalized-pell-orbits"></a>
+## 13. Generalized Pell orbits {#section-187-13-generalized-pell-orbits}
+
+For fixed nonzero $N$, solutions of $x^{2}-Dy^{2}=N$ are acted on by norm-one Pell units: multiplying one solution by $\varepsilon^k$ produces more. There may be several inequivalent starting orbits, or none. Congruence restrictions and ideal classes determine which seeds exist.
+
+Thus the positive Pell fundamental unit describes motion within solution sets but not automatic existence for every $N$. A complete solver must find a finite set of orbit representatives under a proved bound, not merely generate from the first small solution discovered.
+
+<a id="section-191-14-continued-fraction-failure-diagnostics"></a>
+## 14. Continued-fraction failure diagnostics {#section-193-14-continued-fraction-failure-diagnostics}
+
+Four audits catch most errors:
+
+1. Recompute each Euclidean remainder or exact $(m,d,a)$ state.
+2. Verify $p_{k} q_{k-1}-p_{k-1}q_{k}=\pm 1$ on every convergent row.
+3. Substitute Pell candidates into $x^{2}-Dy^{2}$, using integer arithmetic.
+4. Distinguish period length from the number of displayed partial quotients before a repeated state.
+
+A decimal expansion can suggest a period but never certifies it. A huge fundamental solution is not evidence the algorithm failed; $D=61$, for example, has a famously large least solution relative to $D$, illustrating why bounded brute-force search is unreliable.
+
+<a id="section-202-15-legendre-s-recognition-criterion"></a>
+## 15. Legendre's recognition criterion {#section-204-15-legendre-s-recognition-criterion}
+
+Continued fractions do not merely produce good approximations; sufficiently good reduced approximations must come from them.
+
+**Theorem 13.1.** If irrational $\alpha$ and reduced $p/q$ satisfy
+
+$\lvert \alpha-p/q\rvert<1/(2q^{2})$,
+
+then $p/q$ is a convergent of $\alpha$.
+
+**Proof architecture.** Choose consecutive convergents whose denominators bracket $q$. The decisive standard lemma says that a reduced nonconvergent in this denominator range has approximation error at least $1/(2q^2)$; its proof writes $(p,q)$ in the unimodular basis of consecutive convergent vectors and compares the integer coefficients with the exact complete-quotient error formula. The determinant separation alone does not establish which of the two rational errors is large. Applying that lemma gives the stated criterion. This volume records the theorem and its proof dependency rather than disguising the omitted denominator comparison as a complete proof.
+
+The factor $1/2$ is a safe universal threshold. Fractions with larger error may still be convergents; the theorem is sufficient, not necessary.
+
+<a id="section-216-rational-reconstruction-use"></a>
+### Rational reconstruction use {#section-218-rational-reconstruction-use}
+
+Suppose an exact computation produces a real interval known to contain a rational $p/q$ with $q\le B$, and the interval width is below $1/(2B^{2})$. At most one such reduced rational can lie inside: two distinct rationals with denominators at most $B$ differ by at least $1/B^{2}$. Continued fractions of any point in the interval recover the candidate, which is then verified against the original exact congruence or equation.
+
+This is useful in symbolic computation, but floating output alone is insufficient. The enclosing interval and denominator bound are the certificate that reconstruction is unique.
+
+<a id="section-222-16-lagrange-s-periodicity-theorem"></a>
+## 16. Lagrange's periodicity theorem {#section-224-16-lagrange-s-periodicity-theorem}
+
+The square-root result is part of a complete characterization.
+
+**Theorem 13.2.** A real irrational has an eventually periodic simple continued fraction exactly when it is a quadratic irrational.
+
+If the continued fraction is eventually periodic, its repeating tail $\beta$ is fixed by the fractional-linear transformation represented by one period matrix:
+
+$\beta=(a \beta+b)/(c \beta+d)$.
+
+Rearrangement gives a quadratic equation with integer coefficients. The original number is another integer fractional-linear transform of $\beta$, so it is quadratic as well.
+
+**Converse proof architecture.** Let $\alpha$ be quadratic. Every complete quotient has the form
+
+\[(P_{k}+\sqrt{D})/Q_{k}\]
+
+after clearing a fixed discriminant. The standard reduced-complete-quotient lemma proves that after a finite prefix the floor and conjugate inequalities bound $P_k,Q_k$ in terms of $D$, while divisibility conditions restrict them to finitely many integer pairs. Some complete quotient then repeats, and the deterministic continued-fraction map repeats forever. Establishing those eventual bounds is the deferred lemma in this proof architecture.
+
+<a id="section-240-reduced-quadratic-irrationals"></a>
+### Reduced quadratic irrationals {#section-242-reduced-quadratic-irrationals}
+
+Pure periodicity has a sharper criterion: a quadratic irrational is reduced when it exceeds one while its conjugate lies strictly between $-1$ and zero. Reduced quadratic irrationals have purely periodic expansions, and every quadratic irrational reaches a reduced complete quotient after a finite prefix.
+
+This distinction explains why $\sqrt{2}=[1;\overline{2}]$ is eventually but not purely periodic, while $1+\sqrt{2}=[\overline{2}]$ is purely periodic under the displayed convention.
+
+<a id="section-246-17-continuants-and-symbolic-control"></a>
+## 17. Continuants and symbolic control {#section-248-17-continuants-and-symbolic-control}
+
+The **continuant** $K(a_{0},\ldots,a_{k})$ is defined recursively by
+
+$K()=1$, $K(a_{0})=a_{0}$,
+
+$K(a_{0},\ldots,a_{k})=a_{k} K(a_{0},\ldots,a_{k-1})+K(a_{0},\ldots,a_{k-2})$.
+
+Up to the standard shift of the first entry, convergent numerators and denominators are continuants. The recurrence packages long continued fractions as integer polynomials in the partial quotients. For positive integer entries, continuants are positive and strictly increasing in each entry; denominator continuants use only the positive entries $a_1,\ldots,a_k$. An arbitrary integer $a_0$ gives no general numerator-positivity claim.
+
+The reversal identity
+
+\[K(a_{1},\ldots,a_{k})=K(a_{k},\ldots,a_{1})\]
+
+follows from transposing the symmetric matrices $M(a)=\begin{pmatrix}a&1\\1&0\end{pmatrix}$ and reversing their product. This symmetry helps explain the palindromic period before the final $2a_{0}$ in square-root continued fractions.
+
+<a id="section-262-worked-symbolic-convergent"></a>
+### Worked symbolic convergent {#section-264-worked-symbolic-convergent}
+
+For $[a_{0};a_{1},a_{2}]$, recurrence gives
+
+$p_{2}=a_{2}(a_{1}a_{0}+1)+a_{0}$,
+
+$q_{2}=a_{2}a_{1}+1$.
+
+Direct nesting gives
+
+$a_{0}+1/(a_{1}+1/a_{2})=[a_{0}(a_{1}a_{2}+1)+a_{2}]/(a_{1}a_{2}+1)$,
+
+the same numerator after rearrangement. The symbolic check catches index-order mistakes before numerical substitution.
+
+<a id="section-276-18-fast-convergent-and-pell-computation"></a>
+## 18. Fast convergent and Pell computation {#section-278-18-fast-convergent-and-pell-computation}
+
+Matrix products permit divide-and-conquer multiplication when a block of partial quotients repeats. Instead of stepping through $r$ identical periods, exponentiate the period matrix by repeated squaring. Its entries recover distant convergents and Pell powers in logarithmically many matrix multiplications.
+
+Integer sizes still grow linearly in the target index, so bit complexity must include large-entry multiplication. The speedup counts matrix operations; it does not make outputting an exponentially large solution constant cost.
+
+An audit compares the powered matrix determinant with $(-1)^{rL}$, checks adjacent-entry determinant one, and substitutes the resulting Pell coordinates. These independent invariants detect both exponentiation and indexing errors.
+
+<a id="section-284-exercises-with-complete-solutions"></a>
+## Project: an exact Pell certificate generator {#section-569-project-an-exact-pell-certificate-generator}
+
+For every nonsquare $2\le D\le 100$, compute the exact continued-fraction period, the fundamental positive Pell solution, and whether negative Pell is solvable. Store the repeated $(m,d,a)$ state, convergent recurrence rows, and direct norm verification. Compare solution size with $D$, identify the largest fundamental $x$, and explain why floating-point period detection would be untrustworthy.
+
+<a id="section-571-chapter-summary"></a>
+## Closing the second-kind denominator argument {#section-576-closing-the-second-kind-denominator-argument}
+
+Let $\alpha$ be irrational, and put $E_j=q_j\alpha-p_j$ for its convergents. The exact tail formula already proved shows that consecutive errors have opposite signs. All denominators are positive from $q_0=1$ onward; after the possible equality $q_0=q_1=1$, they increase strictly and without bound. Indeed $q_{j+1}\ge q_j+q_{j-1}$ for $j\ge1$. These facts supply the missing denominator-bracketing argument without assuming any first-kind optimality.
+
+Fix $k\ge0$ and integers $p,q$ with $0<q<q_{k+1}$ and $p/q\ne p_k/q_k$. The determinant identity makes $(p_k,q_k)$ and $(p_{k+1},q_{k+1})$ an integer basis of $\mathbb Z^2$: the inverse of their two-by-two matrix has integer entries because its determinant is $1$ or $-1$. Therefore there are integers $A,B$ such that
+$$
+(p,q)=A(p_k,q_k)+B(p_{k+1},q_{k+1}).
+$$
+Here $B\ne0$, since otherwise the fractions would coincide. Also $A\ne0$: if $A=0$, the positive denominator would be a positive integer multiple of $q_{k+1}$.
+
+The coefficients cannot both be positive, since then $q\ge q_k+q_{k+1}>q_{k+1}$, and cannot both be negative, since then $q<0$. They consequently have opposite signs. Because $E_k$ and $E_{k+1}$ also have opposite signs, the two terms in
+$$
+q\alpha-p=AE_k+BE_{k+1}
+$$
+have the same sign. Their absolute values add, so $|q\alpha-p|\ge|A||E_k|\ge|E_k|$. This is the claimed best-approximation theorem of the second kind. The proof even works for a nonreduced competitor, provided its fraction is distinct.
+
+The restriction is on $|q\alpha-p|$, not directly on $|\alpha-p/q|$. Dividing by different denominators changes the comparison, which is why the earlier semiconvergent discussion remains necessary. Also, when $q_{k+1}=1$, the interval $0<q<q_{k+1}$ contains no integer: the statement is then vacuous, not a claim about a missing competitor. This small boundary explains why formulations that begin with an unspecified “first best integer approximation” can need an exception.
+
+The argument gives a reusable proof mechanism. An exact determinant supplies integer coordinates in a neighboring-convergent basis; the denominator range forces their signs; alternating errors turn those signs into an inequality. Merely bounding a determinant by the triangle inequality omits the decisive sign information. Here every part of the omitted coefficient lemma is now available for the next recognition theorem.
+
+<a id="section-594-a-worked-basis-calculation-separates-two-error-conventi"></a>
+## A worked basis calculation separates two error conventions {#section-596-a-worked-basis-calculation-separates-two-error-conventi}
+
+Take $\alpha=\sqrt6$. Exact rationalization gives $\alpha_1=(\sqrt6+2)/2$, whose floor is $2$, and the next quotient is $\sqrt6+2$, whose floor is $4$. Thus the continued fraction begins $[2;2,4,\ldots]$, with convergent vectors $(2,1),(5,2),(22,9)$. Their neighboring determinant is $5\cdot9-22\cdot2=1$.
+
+The competitor $(p,q)=(12,5)$ has denominator $5<9$. Solving in the basis of the last two vectors gives
+$$
+(12,5)=-2(5,2)+(22,9).
+$$
+Both coefficients are nonzero and their signs are opposite, exactly as in the general proof. The corresponding errors are $E_1=2\sqrt6-5<0$ and $E_2=9\sqrt6-22>0$. Hence
+$$
+5\sqrt6-12=-2E_1+E_2=2|E_1|+|E_2|>|E_1|.
+$$
+The positivity of $E_2$ follows from $6\cdot81=486>484=22^2$; no decimal approximation is needed. The second-kind theorem is visible as an identity in this example.
+
+Nevertheless $12/5$ is closer to $\sqrt6$ in ordinary absolute error than $5/2$ is. Both differences have known signs, and
+$$
+\sqrt6-\frac{12}{5}<\frac52-\sqrt6
+\quad\Longleftrightarrow\quad
+\sqrt6<\frac{49}{20}.
+$$
+The last inequality follows from $6\cdot400=2400<2401=49^2$. Dividing the second-kind errors by their different denominators has reversed the comparison.
+
+The fraction $12/5=(2\cdot5+2)/(2\cdot2+1)$ is also a semiconvergent. This connects the earlier definition to an actual comparison rather than to a label alone. The example does not contradict either theorem: the principal convergent wins for the error $|q\alpha-p|$ in the stated denominator range, while an intermediate fraction can win for $|\alpha-p/q|$. A claimed best-approximation certificate must name the error being compared.
+
+<a id="section-618-legendre-recognition-and-exact-rational-reconstruction"></a>
+## Legendre recognition and exact rational reconstruction {#section-620-legendre-recognition-and-exact-rational-reconstruction}
+
+Suppose $p/q$ is reduced, $q>0$, and $|\alpha-p/q|<1/(2q^2)$. Choose the largest index $k$ with $q_k\le q$. This exists because denominators are unbounded, and taking the largest index handles the possible initial duplicate denominator. Then $q_k\le q<q_{k+1}$. If the fraction were not $p_k/q_k$, the theorem just proved would give $|E_k|\le\delta$, where $\delta=|q\alpha-p|<1/(2q)$. But the nonzero integer determinant satisfies
+$$
+1\le|pq_k-qp_k|
+ \le q_k\delta+q|E_k|
+ \le(q_k+q)\delta
+ \le2q\delta<1.
+$$
+The contradiction proves Legendre's criterion. Reducedness makes equality with a convergent an equality of its primitive numerator and positive denominator, rather than a scaled representation.
+
+This criterion recognizes exceptionally accurate fractions; it does not say that all convergents satisfy the threshold. Its constant is a sufficient universal test. Nothing in the proof says that a fraction which fails the test is a poor approximation or is not a semiconvergent. The conclusion is deliberately one-way.
+
+For reconstruction, suppose an exact closed interval $I$ contains a rational $r=p/q$ in lowest terms, with $1\le q\le B$, where $B$ is a positive integer. If the width is less than $1/(2B^2)$, there can be at most one such rational: distinct reduced fractions $p/q,u/v$ with $q,v\le B$ differ by
+$$
+\frac{|pv-uq|}{qv}\ge\frac1{B^2}.
+$$
+Uniqueness requires both a denominator bound and a certified interval. A narrow decimal display without a proof of containment supplies neither.
+
+Choose an irrational point $t$ in the interval. Its distance from $r$ is less than $1/(2B^2)\le1/(2q^2)$, so Legendre places $r$ among its convergents. For an entirely rational computation, an exact rational endpoint works too. To justify that variant, let its reduced denominator be $S$. If a distinct candidate has $q\ge S$, determinant separation gives distance at least $1/(qS)\ge1/q^2$, contradicting the required small error. Thus $q<S$, and the same basis argument before the endpoint's final convergent applies. At the final basis the endpoint error is zero; the adding-absolute-values argument still gives the needed weak inequality.
+
+For a concrete reconstruction, take $I=[427/1000,430/1000]$ and $B=10$. Its width $3/1000$ is less than $1/200$, and $3/7$ lies inside because $2989\le3000\le3010$ after cross multiplication by $7000$. The endpoint $427/1000$ has initial continued fraction $[0;2,2,1,\ldots]$, whose convergents include $3/7$. The interval and denominator bound prove that this is the only permitted candidate. Existence still matters: a narrow interval not containing any fraction with denominator at most $B$ has no candidate to reconstruct.
+
+After a candidate is recovered, verify its original exact equation or congruence. Interval uniqueness certifies the reconstruction step, not the upstream computation that produced the interval. This separation is particularly useful when a large integer calculation has several independently checkable stages.
+
+<a id="section-643-reduced-conjugates-complete-the-periodicity-proof"></a>
+## Reduced conjugates complete the periodicity proof {#section-645-reduced-conjugates-complete-the-periodicity-proof}
+
+Here is the missing converse in Lagrange's theorem. Let $\alpha$ be a real quadratic irrational and $\alpha_n$ its complete quotients. For $n\ge1$, $\alpha_n>1$ and $a_n=\lfloor\alpha_n\rfloor\ge1$. Let $\beta_n$ be its algebraic conjugate. Conjugation commutes with the rational operations, so
+$$
+\beta_{n+1}=\frac1{\beta_n-a_n}.
+$$
+The denominator is never zero, since a conjugate of a quadratic irrational is irrational.
+
+Eventually $\beta_n$ is negative. Otherwise all sufficiently late $\beta_n$ would be positive, hence $\beta_n>a_n$. Since also $\beta_{n+1}>a_{n+1}\ge1$, one would have $0<\beta_n-a_n<1$. Thus $\beta_n$ and $\alpha_n$ would have the same entire infinite simple continued fraction. They must then be equal: their common convergents have unbounded denominators, and the error bounds force the distance between the two limits to zero. Distinct conjugates cannot be equal. Once $\beta_n<0$, the next value lies strictly between $-1$ and $0$, and that interval is preserved because $a_n\ge1$.
+
+Choose a fixed positive nonsquare integer $\Delta$ so that an initial quotient is $(P+\sqrt\Delta)/Q$ with integers $P,Q$ and $Q\mid\Delta-P^2$. The quadratic formula for an integer quadratic equation supplies this representation, with a possible negative $Q$. The recurrence preserves it:
+$$
+P_{n+1}=a_nQ_n-P_n,\qquad
+Q_{n+1}=\frac{\Delta-P_{n+1}^2}{Q_n}.
+$$
+Divisibility makes every new $Q$ integral, and rationalization proves the displayed complete-quotient expression. When $\alpha_n>1$ and $-1<\beta_n<0$, their difference $2\sqrt\Delta/Q_n$ is positive, so $Q_n>0$. The same inequalities give
+$$
+-\sqrt\Delta<P_n<\sqrt\Delta,\qquad
+0<Q_n<2\sqrt\Delta.
+$$
+For example, $\beta_n<0$ gives $P_n<\sqrt\Delta$, while $\alpha_n>1$ gives $Q_n<P_n+\sqrt\Delta$; combining $\beta_n>-1$ with these yields the lower bound on $P_n$. There are only finitely many integer pairs in this rectangle.
+
+A repeated pair is a repeated complete quotient, and its deterministic floor-and-invert rule makes the tail periodic. Together with the earlier quadratic-equation argument for an already periodic tail, this proves the full equivalence. It does not assume that a visibly repeating decimal expansion has detected the same object.
+
+For pure periodicity, the reduced states have a unique reduced predecessor. If $t>1$ has conjugate $t'\in(-1,0)$, a predecessor is $a+1/t$. Its conjugate lies in $(-1,0)$ exactly for the unique integer $a=\lfloor-1/t'\rfloor$. In the representation above, rationalization gives integer predecessor parameters and the same divisibility condition. Hence the map permutes the finite reduced-state set; an orbit that starts reduced has no nonperiodic prefix. For $\sqrt D$, the first quotient after $a_0$ is $1/(\sqrt D-a_0)$, with conjugate $-1/(\sqrt D+a_0)\in(-1,0)$. This proves that precisely the tail after $a_0$ is purely periodic for positive nonsquare integer $D$.
+
+<a id="section-669-a-quadratic-quotient-that-is-not-itself-a-square-root"></a>
+## A quadratic quotient that is not itself a square root {#section-671-a-quadratic-quotient-that-is-not-itself-a-square-root}
+
+The reduced-state proof is not confined to expressions $\sqrt D$. Consider
+$$
+\theta=\frac{1+\sqrt{13}}2.
+$$
+The bounds $3<\sqrt{13}<4$ show $\lfloor\theta\rfloor=2$. Its next complete quotient is
+$$
+\theta_1=\frac2{\sqrt{13}-3}=\frac{3+\sqrt{13}}2.
+$$
+Its floor is $3$, and inverting $\theta_1-3=(\sqrt{13}-3)/2$ returns $\theta_1$ itself. Therefore $\theta=[2;\overline3]$.
+
+In the general integer representation, the initial parameters are $(P,Q)=(1,2)$ with fixed $\Delta=13$, and $Q\mid\Delta-P^2$ because $2\mid12$. The update with $a_0=2$ gives $(P_1,Q_1)=(3,2)$; the update with $a_1=3$ leaves that pair fixed. The repeated pair is an exact certificate for the period. Its recurrence does not need a rounded approximation to the radical.
+
+The conjugate initially equals $(1-\sqrt{13})/2<-1$, so $\theta$ is not reduced. After one step it is $(3-\sqrt{13})/2\in(-1,0)$, so the tail is reduced and purely periodic. The example identifies the prefix rather than confusing eventual periodicity with pure periodicity from the first term. A finite prefix can alter numerator and denominator formulas while leaving the quadratic field unchanged.
+
+Square-root tails have additional structure, including the terminal $2a_0$ digit discussed earlier. That digit should not be demanded of an arbitrary quadratic irrational such as $\theta$. The common interface is the reduced complete quotient and its exact return; the special square-root interface is what will connect that return to the Pell norm equation.
+
+<a id="section-687-from-a-period-certificate-to-the-least-pell-solution"></a>
+## From a period certificate to the least Pell solution {#section-689-from-a-period-certificate-to-the-least-pell-solution}
+
+Put $\alpha=\sqrt D$, $s=\lfloor\sqrt D\rfloor$, and let $L$ be the least return time of its first reduced complete quotient $\alpha_1=1/(\alpha-s)$. The return relation $\alpha_{L+1}=\alpha_1$, combined with reconstruction at index $L$, gives
+$$
+p_L=sp_{L-1}+Dq_{L-1},\qquad
+q_L=p_{L-1}+sq_{L-1}.
+$$
+These follow by multiplying by $\alpha-s$ and equating the rational and irrational parts. Substitute them into the adjacent determinant to obtain
+$$
+p_{L-1}^2-Dq_{L-1}^2=(-1)^L.
+$$
+The same calculation at any multiple $jL$ gives $p_{jL-1}^2-Dq_{jL-1}^2=(-1)^{jL}$. Thus a period supplies an exact norm certificate, not just an approximate square root.
+
+Why can no smaller Pell pair have been skipped? Any positive integer solution of norm $\eta\in\{1,-1\}$ is reduced, since a common divisor of its coordinates would have square dividing $1$. Also
+$$
+\left|\frac xy-\sqrt D\right|=\frac1{y(x+y\sqrt D)}<\frac1{2y^2}.
+$$
+For $\eta=1$ this is immediate from $x/y>\sqrt D>1$. For $\eta=-1$, $x^2=Dy^2-1\ge y^2$ for $D\ge2$, $y\ge1$, so $x/y\ge1$ and $x/y+\sqrt D>2$. Legendre therefore makes every such pair a convergent.
+
+If a convergent at index $k$ has norm $\eta=\pm1$, reconstructing its next tail gives
+$$
+\alpha_{k+1}
+=\frac{Dq_kq_{k-1}-p_kp_{k-1}}{\eta}
++\frac{(-1)^{k-1}}{\eta}\sqrt D.
+$$
+The tail is reduced: its conjugate lies in $(-1,0)$, and the tail minus its conjugate is positive, forcing the coefficient of $\sqrt D$ to be $1$. The remaining integer $h$ satisfies $-1<h-\sqrt D<0$, hence $h=s$. Thus $\alpha_{k+1}=\sqrt D+s$ and $\alpha_{k+2}=\alpha_1$. Least periodicity now gives $L\mid k+1$. This argument includes $k=0$ with the initialized previous convergent.
+
+The norm sign is $(-1)^{k+1}$ because convergents alternate across the positive square root. The first norm-one index is consequently $L-1$ when $L$ is even and $2L-1$ when $L$ is odd. A norm-minus-one pair exists exactly when $L$ is odd, first at $L-1$. Positive convergent numerators increase strictly, so the first positive norm-one pair minimizes $x$; the equation then also minimizes $y$. This completes the minimality and negative-Pell interfaces used by the original exercises.
+
+Finally, let $\varepsilon=x_1+y_1\sqrt D$ be this least norm-one element above one. For any positive norm-one element $\gamma$, choose $j\ge0$ with $\varepsilon^j\le\gamma<\varepsilon^{j+1}$. The quotient $\delta=\gamma\varepsilon^{-j}$ still belongs to $\mathbb Z[\sqrt D]$ because $\varepsilon^{-1}=x_1-y_1\sqrt D$. Its coordinates are integers, its conjugate is $\delta^{-1}$, and $1\le\delta<\varepsilon$. The formulas $(\delta+\delta^{-1})/2$ and $(\delta-\delta^{-1})/(2\sqrt D)$ show that either $\delta=1$ or it is a smaller positive Pell element. Minimality excludes the latter. Hence every positive solution is a power of $\varepsilon$.
+
+<a id="section-718-continuant-domains-and-the-ring-in-which-pell-is-solved"></a>
+## Continuant domains and the ring in which Pell is solved {#section-720-continuant-domains-and-the-ring-in-which-pell-is-solved}
+
+The continuant recurrence is an integer-polynomial identity, even for a zero or negative first entry. Positivity is a different assertion. With every entry a positive integer, the recurrence starts from positive values and preserves positivity; induction also shows strict increase when any one entry increases. At the final entry the positive preceding continuant is its coefficient, and at an earlier entry the positive recurrence propagates the increase. A general numerator continuant may instead start with $K(-1)=-1$, so the unrestricted claim would be false.
+
+Denominator continuants use only the positive later entries. This explains why denominator growth and reducedness are available for arbitrary real continued fractions even when the numerator is negative. Reversal follows from the same symmetric-matrix product without a positivity hypothesis. Separating polynomial identities from order inequalities prevents a symbolic identity from silently acquiring a numerical domain it did not have.
+
+For Pell, keep the coefficient ring fixed. The equation asks for integers $x,y$ in $x+y\sqrt D\in\mathbb Z[\sqrt D]$, including when $D$ is not squarefree. Replacing $D$ by its squarefree part changes the permitted coefficient set unless the divisibility restriction on $y$ is retained. Nor may one automatically substitute a smallest unit of the full ring of integers of the quadratic field.
+
+For example, $\sqrt{12}=[3;\overline{2,6}]$. Its states after the integer part are $(3,3,2)$ and $(3,1,6)$, then the first repeats. The least positive Pell pair is $(7,2)$ because $49-12\cdot4=1$. Although $2+\sqrt3$ has norm one in $\mathbb Z[\sqrt3]$, it is $2+\tfrac12\sqrt{12}$ and is not in $\mathbb Z[\sqrt{12}]$. Squaring it yields $7+2\sqrt{12}$, which is permitted. This small nonsquarefree case is an effective domain check for a certificate generator.
+
+The full-range reference below retains $D$ itself. It verifies finite arithmetic identities and uses the proved period/minimality theorem to interpret them. That is stronger than a search that happens to find a norm-one pair before a chosen cutoff, while remaining a statement about the specified ring rather than all algebraic units in its ambient field.
+
+<a id="section-730-exercises-continuant-signs-and-reconstruction-certifica"></a>
+
+## Summary
+
+<a id="section-573-chapter-summary"></a>
+Continued fractions are Euclid's algorithm in nested form. Their determinant identity yields reduced convergents and sharp approximation. Quadratic irrational expansions are periodic, and the period parity selects convergents solving positive and negative Pell equations. Exact integer states and norm checks make every result reproducible.
+<a id="section-574-closing-the-second-kind-denominator-argument"></a>
+
+## Exercises {#section-286-exercises-with-complete-solutions}
+
+<a id="section-286-1-expand-a-rational"></a>
+### 1. Expand a rational {#section-288-1-expand-a-rational}
+
+Find the continued fraction of $43/19$.
+
+**Hint 1.** Use Euclid on forty-three and nineteen.
+
+**Hint 2.** The successive quotients are the continued-fraction entries.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $43=2*19+5$, $19=3*5+4$, $5=1*4+1$, $4=4*1$; hence $[2;3,1,4]$.
+
+</details>
+
+<a id="section-300-2-reconstruct"></a>
+### 2. Reconstruct {#section-302-2-reconstruct}
+
+Evaluate $[2;3,1,4]$.
+
+**Hint 1.** Evaluate from the final entry upward.
+
+**Hint 2.** Invert the current tail before adding the next entry.
+
+<details><summary>Full solution</summary>
+
+**Solution.** From the end: $1+1/4=5/4$, $3+4/5=19/5$, and $2+5/19=43/19$.
+
+</details>
+
+<a id="section-314-3-convergents"></a>
+### 3. Convergents {#section-316-3-convergents}
+
+List the convergents of $[2;3,1,4]$.
+
+**Hint 1.** Apply the numerator and denominator recurrences one entry at a time.
+
+**Hint 2.** Start with the standard initial pairs for convergents.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Recurrence gives $2/1$, $7/3$, $9/4$, $43/19$.
+
+</details>
+
+<a id="section-328-4-determinant-check"></a>
+### 4. Determinant check {#section-330-4-determinant-check}
+
+Verify the final determinant identity in Exercise 3.
+
+**Hint 1.** Use the last two convergents in the list.
+
+**Hint 2.** Their cross-products should differ by one with the appropriate alternating sign.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $43*4-9*19=172-171=1$, matching $(-1)^{3-1}=1$.
+
+</details>
+
+<a id="section-342-5-reduced-fractions"></a>
+### 5. Reduced fractions {#section-344-5-reduced-fractions}
+
+Why is every convergent reduced?
+
+**Hint 1.** A common divisor of numerator and denominator divides the adjacent determinant.
+
+**Hint 2.** That determinant has absolute value one.
+
+<details><summary>Full solution</summary>
+
+**Solution.** A common divisor of $p_{k},q_{k}$ would divide $p_{k} q_{k-1}-p_{k-1}q_{k}=\pm 1$, so it must be one.
+
+</details>
+
+<a id="section-356-6-golden-ratio"></a>
+### 6. Golden ratio {#section-358-6-golden-ratio}
+
+Show $\varphi=(1+\sqrt{5})/2=[1;\overline{1}]$.
+
+**Hint 1.** The positive root satisfies the identity phi equals one plus its reciprocal.
+
+**Hint 2.** Repeating the same complete quotient gives the periodic expansion.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $\varphi=1+1/\varphi$; repeatedly substituting the same positive solution gives the continued fraction. Its convergents are ratios of consecutive Fibonacci numbers.
+
+</details>
+
+<a id="section-370-7-approximate-sqrt-2"></a>
+### 7. Approximate $\sqrt{2}$ {#section-372-7-approximate-sqrt-2}
+
+Give the first four convergents.
+
+**Hint 1.** Use the repeating entry two after the initial one.
+
+**Hint 2.** Apply the convergent recurrence four times.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $\sqrt{2}=[1;\overline{2}]$; recurrence gives $1/1,3/2,7/5,17/12$.
+
+</details>
+
+<a id="section-384-8-error-certificate"></a>
+### 8. Error certificate {#section-386-8-error-certificate}
+
+Verify $\lvert \sqrt{2}-7/5\rvert<1/25$ without decimals.
+
+**Hint 1.** Rationalise the difference using the Pell numerator seven and denominator five.
+
+**Hint 2.** Bound the positive conjugate denominator below by twenty-five.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Since $(7/5)^{2}=49/25<2$, the difference is $(2-49/25)/(\sqrt{2}+7/5)=(1/25)/(\sqrt{2}+7/5)<1/25$.
+
+</details>
+
+<a id="section-398-9-square-root-recurrence"></a>
+### 9. Square-root recurrence {#section-400-9-square-root-recurrence}
+
+Compute $\sqrt{3}$'s period.
+
+**Hint 1.** Use the exact square-root complete-quotient recurrence.
+
+**Hint 2.** It returns to the initial periodic state with entries one and two.
+
+<details><summary>Full solution</summary>
+
+**Solution.** The exact recurrence gives $[1;\overline{1,2}]$, period length two.
+
+</details>
+
+<a id="section-412-10-pell-for-three"></a>
+### 10. Pell for three {#section-414-10-pell-for-three}
+
+Find the least positive solution of $x^{2}-3y^{2}=1$.
+
+**Hint 1.** Check the smallest positive denominator first.
+
+**Hint 2.** For y equal to one, the required square is four.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Even period length two uses convergent $[1;1]=2/1$; indeed $4-3=1$.
+
+</details>
+
+<a id="section-426-11-pell-for-two"></a>
+### 11. Pell for two {#section-428-11-pell-for-two}
+
+Why is $(3,2)$, not $(1,1)$, the fundamental positive Pell solution for $D=2$?
+
+**Hint 1.** The pair one,one has norm minus one rather than one.
+
+**Hint 2.** The next convergent three,two has norm one and is minimal in positive denominator.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $(1,1)$ has norm $-1$. Squaring $1+\sqrt{2}$ gives $3+2\sqrt{2}$, whose norm is $1$ and which is the least positive norm-one unit above one.
+
+</details>
+
+<a id="section-440-12-generate-next-solution"></a>
+### 12. Generate next solution {#section-442-12-generate-next-solution}
+
+From $(3,2)$ for $D=2$, compute the next Pell solution.
+
+**Hint 1.** Square the algebraic number three plus two times the square root of two.
+
+**Hint 2.** Separate its rational and irrational coefficients.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Square $3+2\sqrt{2}$: $x=9+8=17$, $y=12$, giving $(17,12)$.
+
+</details>
+
+<a id="section-454-13-verify-exactness"></a>
+### 13. Verify exactness {#section-456-13-verify-exactness}
+
+Verify $(17,12)$.
+
+**Hint 1.** Compute the two squared integers exactly.
+
+**Hint 2.** Their difference should be one.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $17^{2}-2*12^{2}=289-288=1$.
+
+</details>
+
+<a id="section-468-14-negative-pell-for-five"></a>
+### 14. Negative Pell for five {#section-470-14-negative-pell-for-five}
+
+Find a solution to $x^{2}-5y^{2}=-1$.
+
+**Hint 1.** Try the smallest positive denominator.
+
+**Hint 2.** At y equal to one, x equal to two has norm minus one.
+
+<details><summary>Full solution</summary>
+
+**Solution.** $(x,y)=(2,1)$ gives $4-5=-1$. The period of $\sqrt{5}$ has odd length one.
+
+</details>
+
+<a id="section-482-15-negative-pell-obstruction"></a>
+### 15. Negative Pell obstruction {#section-484-15-negative-pell-obstruction}
+
+Show $x^{2}-3y^{2}=-1$ has no solution modulo $3$.
+
+**Hint 1.** Reduce the equation modulo three.
+
+**Hint 2.** Minus one is not a square in that field.
+
+<details><summary>Full solution</summary>
+
+**Solution.** It would imply $x^{2}\equiv-1\equiv 2 \bmod 3$, but squares modulo $3$ are $0,1$.
+
+</details>
+
+<a id="section-496-16-square-d-boundary"></a>
+### 16. Square $D$ boundary {#section-498-16-square-d-boundary}
+
+Solve $x^{2}-4y^{2}=1$ in nonnegative integers.
+
+**Hint 1.** Factor into x minus twice y and x plus twice y.
+
+**Hint 2.** Two positive integer factors of one must both equal one.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Factor $(x-2y)(x+2y)=1$. Nonnegative integer factors force both to be one, giving $(x,y)=(1,0)$. The infinite Pell theorem requires nonsquare $D$.
+
+</details>
+
+<a id="section-510-17-recurrence-preservation"></a>
+### 17. Recurrence preservation {#section-512-17-recurrence-preservation}
+
+Prove multiplying two norm-one Pell solutions produces another.
+
+**Hint 1.** Multiply the two algebraic numbers and compare their coefficients.
+
+**Hint 2.** The norm product is one, giving the preserved equation.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Norm multiplicativity gives $N(\alpha \beta)=N(\alpha)N(\beta)=1$. Expanding the product shows integer coordinates.
+
+</details>
+
+<a id="section-524-18-growth"></a>
+### 18. Growth {#section-526-18-growth}
+
+Why are the positive solutions generated by powers all distinct?
+
+**Hint 1.** The positive unit is greater than one.
+
+**Hint 2.** Its strictly increasing powers have different positive real values and hence different coordinate pairs.
+
+<details><summary>Full solution</summary>
+
+**Solution.** The fundamental unit $\varepsilon=x_{1}+y_{1}\sqrt{D}>1$; its positive real powers strictly increase, so no two coordinate pairs coincide.
+
+</details>
+
+<a id="section-538-19-approximation-from-pell"></a>
+### 19. Approximation from Pell {#section-540-19-approximation-from-pell}
+
+For positive integers $x,y$ satisfying $x^2-Dy^2=1$ with positive nonsquare integer $D$, compute $\lvert x/y-\sqrt{D}\rvert$.
+
+**Hint 1.** Rationalise the difference of x over y and the positive square root.
+
+**Hint 2.** Use the norm-one equality to replace the numerator by one.
+
+<details><summary>Full solution</summary>
+
+**Solution.** From $(x-y \sqrt{D})(x+y \sqrt{D})=1$, the positive difference is $x/y-\sqrt{D}=1/[y(x+y \sqrt{D})]$, less than $1/(2y^{2} \sqrt{D})$.
+
+</details>
+
+<a id="section-552-20-general-right-side-warning"></a>
+### 20. General-right-side warning {#section-554-20-general-right-side-warning}
+
+Why does a solution to $x^{2}-Dy^{2}=N$ not follow merely from periodicity?
+
+**Hint 1.** Periodicity addresses the unit equation and its powers.
+
+**Hint 2.** A different norm value needs a separate existence argument or obstruction.
+
+<details><summary>Full solution</summary>
+
+**Solution.** Periodicity guarantees norm $\pm 1$ units and approximation structure. A specified $N$ must lie in a represented norm class; congruence, ideal, and orbit obstructions may prevent it. Extra analysis is required.
+
+</details>
+
+
+<a id="section-567-project-an-exact-pell-certificate-generator"></a>
+
+<a id="section-732-exercises-continuant-signs-and-reconstruction-certifica"></a>
+### 21. NTP-11-E21: a negative first partial quotient {#section-734-ntp-11-e21-a-negative-first-partial-quotient}
+
+Evaluate $[-2;3,2]$ by nesting and by the continuant recurrence. Explain which positivity claim remains valid and which fails.
+
+**Hint 1.** The first partial quotient can be negative while all later ones are positive.
+
+**Hint 2.** The denominator recurrence stays positive even though the represented number and some numerators are negative.
+
+<a id="section-740-ntp-11-e22-reconstruct-within-an-exact-interval"></a>
+### 22. NTP-11-E22: reconstruct within an exact interval {#section-742-ntp-11-e22-reconstruct-within-an-exact-interval}
+
+A reduced rational has denominator at most $10$ and belongs to $[777/1000,779/1000]$. Recover it using the endpoint's initial continued fraction $[0;1,3,2,\ldots]$, and certify containment and uniqueness without decimals.
+
+**Hint 1.** Use the convergent seven ninths suggested by the common initial block.
+
+**Hint 2.** Distinct reduced rationals with denominators at most ten are separated by at least one hundredth.
+
+<a id="section-748-solutions-continuant-signs-and-reconstruction-certifica"></a>
+
+## Solutions: continuant signs and reconstruction certificates {#section-750-solutions-continuant-signs-and-reconstruction-certifica}
+
+<a id="section-750-ntp-11-e21-a-negative-first-partial-quotient-solution"></a>
+### NTP-11-E21: a negative first partial quotient — solution {#section-752-ntp-11-e21-a-negative-first-partial-quotient-solution}
+
+<details><summary>Full solution</summary>
+
+Nesting gives $-2+1/(3+1/2)=-2+2/7=-12/7$. The numerator continuants are $-2$, $3(-2)+1=-5$, and $2(-5)+(-2)=-12$. The denominator is $K(3,2)=3\cdot2+1=7>0$. The recurrence and determinant identities remain valid, and denominator positivity follows from positive later entries. General numerator positivity fails because the first entry is negative.
+
+</details>
+
+<a id="section-758-ntp-11-e22-reconstruct-within-an-exact-interval-solutio"></a>
+### NTP-11-E22: reconstruct within an exact interval — solution {#section-760-ntp-11-e22-reconstruct-within-an-exact-interval-solutio}
+
+<details><summary>Full solution</summary>
+
+The indicated convergents are $0/1$, $1/1$, $3/4$ and $7/9$. The last lies in the interval: $777\cdot9=6993<7000<7011=779\cdot9$. Its denominator is at most $10$. The interval width $2/1000=1/500$ is less than $1/100$, the minimum separation of distinct reduced fractions with denominators at most $10$. Hence no second permitted rational lies inside. The stronger Legendre width condition $1/500<1/200$ also holds.
+
+</details>
+
+<a id="section-766-solutions-full-range-exact-pell-certificate-model"></a>
+
+## Solutions: full-range exact Pell certificate model {#section-768-solutions-full-range-exact-pell-certificate-model}
+
+The original Pell project retains every positive nonsquare integer $D$ from $2$ through $100$. There are $99$ integers in the range and nine excluded squares, namely $4,9,16,25,36,49,64,81,100$, leaving $90$ required records. Nonsquarefree values such as $12$ remain included. The pure-local listing in the next section is a complete bounded reference generator for all those records; it is supplied unexecuted. No aggregate below is presented as an observed program result.
+
+For each $D$, the model returns the initial state $(0,1,a_0)$, all distinct reduced $(m,d,a)$ states beginning at index one, the repeated closing state and both recurrence indices. It records every convergent row through the least positive solution, including partial quotient, numerator, denominator, adjacent determinant and exact norm. It also returns the least negative-Pell pair when one exists, or an explicit insolubility status derived from even period parity. Thus a negative status uses the proved theorem rather than an unsuccessful bounded search.
+
+The state bound is proved, not a guessed timeout. In the reduced tail, $|m|<\sqrt D$ and $0<d<2\sqrt D$. With $s=\lfloor\sqrt D\rfloor$, there are at most $(2s+1)^2$ integer pairs in the containing rectangle $-s\le m\le s$, $1\le d\le2s+1$. The reduced map is a permutation, so its first repeated state is the first reduced state, not the original nonreduced state $(0,1,s)$. At most $361$ distinct states and $722$ convergent rows suffice for any permitted input. A bound failure raises an error instead of returning a partial certificate.
+
+The producer advances the integer recurrence. Its verifier independently checks state equations and exact floor inequalities by squaring, and reconstructs each finite convergent backward from its partial quotients rather than using the producer's forward recurrence. It checks uniqueness and closure of the period, every determinant and norm, the first norm-one index and the negative-Pell sign. The range verifier demands the full ordered nonsquare input list and independently folds through all fundamental $x$ values to check the returned maximum and all maximizing $D$ values.
+
+<a id="section-776-hand-derived-finite-checks-and-changed-case"></a>
+### Hand-derived finite checks and changed case {#section-778-hand-derived-finite-checks-and-changed-case}
+
+The following expectations are mathematical checks, not observed output. For $D=2$, the period state is $(1,1,2)$; positive Pell gives $(3,2)$ and negative Pell gives $(1,1)$, with norms $9-8=1$ and $1-2=-1$. For $D=3$, the two period states are $(1,2,1),(1,1,2)$; positive Pell gives $(2,1)$ and the even period excludes negative Pell.
+
+For $D=13$, the five states are $(3,4,1),(1,3,1),(2,3,1),(1,4,1),(3,1,6)$. The negative pair is $(18,5)$, since $324-325=-1$; the positive pair is $(649,180)$ with the exact norm already verified in the original example. These states check the odd-period two-pass index without reproducing an unrelated long search.
+
+The changed case $D=12$ keeps the nonsquarefree input: states $(3,3,2),(3,1,6)$ give $(7,2)$ and no negative solution. Replacing $D$ by $3$ and returning $(2,1)$ would fail the direct $D=12$ norm check, since $4-12=-8$. This is a domain error, not an alternate fundamental-unit convention.
+
+To reproduce the model, root may load the exact listing and call its no-I/O function $reference\_model()$. Successful reproduction must obtain all $90$ verified records and inspect the computed maximum reduction. The largest fundamental $x$ is deliberately computed from the entire certified range; it is not guessed here from the familiar large $D=61$ example. The full output and maximum remain unobserved until an actual root execution receipt exists.
+
+For rejection checks, change a stored state coefficient, a convergent numerator, the repeated-state index, the negative-Pell flag or the maximum; the corresponding identity or range check must reject it. The input function rejects squares, values outside $2,\ldots,100$ and noninteger inputs. Omitting one nonsquare record or inserting a duplicate fails the full-range verifier. These are specified negative fixtures, with no claim that they have already been run.
+
+<a id="section-788-rubric-for-the-original-pell-certificate-project"></a>
+### Rubric for the original Pell certificate project {#section-790-rubric-for-the-original-pell-certificate-project}
+
+A complete result covers the entire original range and stores the exact states and all required convergent rows, not merely $90$ final pairs or a table of decimal square roots. It declares the zero-based convergent convention and the state-one return convention, verifies each norm, and justifies minimality by recognition and period return. An odd period must distinguish its first norm-minus-one pair from the later norm-one pair.
+
+The solution-size comparison identifies the maximum over every included $D$ using exact integers. It explains that a small $D$ can have a large fundamental solution and that period length alone does not determine numerical size: the partial quotients also enter the continuant products. It retains nonsquarefree inputs in the actual ring $\mathbb Z[\sqrt D]$.
+
+Finally, require a correctness argument, an independently specified certificate check and a truthful reproduction record. Floating-point state equality is unsuitable because rounding can merge distinct states or miss an exact return. A supplied but unexecuted implementation is source evidence; a completed runtime receipt requires an actual run and checked output. Other complete implementations or hand certificates are permitted by the original prompt, but a few illustrative cases do not satisfy its full range.
+
+<a id="section-796-solutions-unexecuted-pure-local-pell-reference-listing"></a>
+
+## Solutions: unexecuted pure-local Pell reference listing {#section-798-solutions-unexecuted-pure-local-pell-reference-listing}
+
+This listing uses only Python integer arithmetic and the standard-library integer square root. It has no input/output side effects. Calling reference_model returns the complete bounded model; root alone performs reproduction.
+
+```python
+from math import isqrt
+
+def _require(condition):
+    if not condition:
+        raise ValueError("invalid bounded Pell certificate")
+
+def _scope(D):
+    _require(type(D) is int and 2 <= D <= 100)
+    s = isqrt(D)
+    _require(s * s != D)
+    return s
+
+def pell_record(D):
+    s = _scope(D)
+    bound = (2 * s + 1) ** 2
+    m, d, a = 0, 1, s
+    states, seen = [], {}
+    for unused in range(bound + 1):
+        m = d * a - m
+        numerator = D - m * m
+        _require(numerator > 0 and numerator % d == 0)
+        d = numerator // d
+        a = (s + m) // d
+        state = (m, d, a)
+        if state in seen:
+            _require(seen[state] == 0)
+            repeated = list(state)
+            break
+        seen[state] = len(states)
+        states.append(list(state))
+    else:
+        raise ValueError("reduced-state bound exceeded")
+    L = len(states)
+    _require(L > 0)
+    last = L - 1 if L % 2 == 0 else 2 * L - 1
+    pm2, pm1, qm2, qm1 = 0, 1, 1, 0
+    rows = []
+    for k in range(last + 1):
+        ak = s if k == 0 else states[(k - 1) % L][2]
+        p, q = ak * pm1 + pm2, ak * qm1 + qm2
+        rows.append({
+            "k": k, "a": ak, "p": p, "q": q,
+            "determinant": p * qm1 - pm1 * q,
+            "norm": p * p - D * q * q,
+        })
+        pm2, pm1, qm2, qm1 = pm1, p, qm1, q
+    positive = [rows[-1]["p"], rows[-1]["q"]]
+    negative = [rows[L - 1]["p"], rows[L - 1]["q"]] if L % 2 else None
+    record = {
+        "D": D, "a0": s, "initial_state": [0, 1, s],
+        "period_states": states, "repeated_state": repeated,
+        "repeat_from": 1, "repeat_at": L + 1,
+        "convergents": rows, "positive": positive,
+        "negative_solvable": bool(L % 2), "negative": negative,
+    }
+    verify_record(record)
+    return record
+
+def verify_record(record):
+    _require(type(record) is dict)
+    D = record["D"]
+    s = _scope(D)
+    bound = (2 * s + 1) ** 2
+    _require(type(record["a0"]) is int and record["a0"] == s)
+    _require(record["initial_state"] == [0, 1, s])
+    states = record["period_states"]
+    _require(type(states) is list and 1 <= len(states) <= bound)
+    seen = set()
+    old_m, old_d, old_a = 0, 1, s
+    for state in states:
+        _require(type(state) is list and len(state) == 3)
+        _require(all(type(v) is int for v in state))
+        m, d, a = state
+        _require(-s <= m <= s and 1 <= d <= 2 * s + 1 and a >= 1)
+        _require(m == old_d * old_a - old_m)
+        _require(old_d * d == D - m * m)
+        lower, upper = d * a - m, d * (a + 1) - m
+        _require((lower <= 0 or lower * lower < D)
+                 and upper > 0 and upper * upper > D)
+        _require(tuple(state) not in seen)
+        seen.add(tuple(state))
+        old_m, old_d, old_a = m, d, a
+    closing_m = old_d * old_a - old_m
+    closing_numerator = D - closing_m * closing_m
+    _require(closing_numerator > 0 and closing_numerator % old_d == 0)
+    closing_d = closing_numerator // old_d
+    closing_a = (s + closing_m) // closing_d
+    closing = [closing_m, closing_d, closing_a]
+    L = len(states)
+    _require(closing == states[0] == record["repeated_state"])
+    _require(type(record["repeat_from"]) is int and record["repeat_from"] == 1)
+    _require(type(record["repeat_at"]) is int and record["repeat_at"] == L + 1)
+    rows = record["convergents"]
+    count = L if L % 2 == 0 else 2 * L
+    _require(type(rows) is list and len(rows) == count)
+    partials = []
+    previous_p, previous_q = 1, 0
+    for k, row in enumerate(rows):
+        _require(type(row) is dict)
+        _require(all(type(row[name]) is int
+                     for name in ("k", "a", "p", "q", "determinant", "norm")))
+        ak = s if k == 0 else states[(k - 1) % L][2]
+        partials.append(ak)
+        u, v = partials[-1], 1
+        for entry in reversed(partials[:-1]):
+            u, v = entry * u + v, u
+        _require(row["k"] == k and row["a"] == ak)
+        _require(row["p"] == u and row["q"] == v and u > 0 and v > 0)
+        determinant = u * previous_q - previous_p * v
+        _require(row["determinant"] == determinant == (-1 if k % 2 == 0 else 1))
+        _require(row["norm"] == u * u - D * v * v)
+        previous_p, previous_q = u, v
+    _require(rows[-1]["norm"] == 1)
+    _require(all(row["norm"] != 1 for row in rows[:-1]))
+    _require(all(abs(row["norm"]) != 1 for row in rows[:L - 1]))
+    _require(record["positive"] == [rows[-1]["p"], rows[-1]["q"]])
+    _require(type(record["negative_solvable"]) is bool
+             and record["negative_solvable"] == bool(L % 2))
+    if L % 2:
+        _require(rows[L - 1]["norm"] == -1)
+        _require(record["negative"] == [rows[L - 1]["p"], rows[L - 1]["q"]])
+    else:
+        _require(record["negative"] is None)
+    return True
+
+def verify_model(model):
+    _require(type(model) is dict and model["range"] == [2, 100])
+    records = model["records"]
+    _require(type(records) is list and len(records) == 90)
+    expected = [D for D in range(2, 101) if isqrt(D) ** 2 != D]
+    _require([record["D"] for record in records] == expected)
+    largest, maximizers = 0, []
+    for record in records:
+        verify_record(record)
+        x = record["positive"][0]
+        if x > largest:
+            largest, maximizers = x, [record["D"]]
+        elif x == largest:
+            maximizers.append(record["D"])
+    _require(model["maximum"] == {"x": largest, "D": maximizers})
+    return True
+
+def reference_model():
+    records = [pell_record(D) for D in range(2, 101) if isqrt(D) ** 2 != D]
+    largest = max(record["positive"][0] for record in records)
+    model = {
+        "range": [2, 100], "records": records,
+        "maximum": {
+            "x": largest,
+            "D": [record["D"] for record in records
+                  if record["positive"][0] == largest],
+        },
+    }
+    verify_model(model)
+    by_D = {record["D"]: record for record in records}
+    hand = {
+        2: ([[1, 1, 2]], [3, 2], [1, 1]),
+        3: ([[1, 2, 1], [1, 1, 2]], [2, 1], None),
+        12: ([[3, 3, 2], [3, 1, 6]], [7, 2], None),
+        13: ([[3, 4, 1], [1, 3, 1], [2, 3, 1], [1, 4, 1], [3, 1, 6]],
+             [649, 180], [18, 5]),
+    }
+    for D, (states, positive, negative) in hand.items():
+        record = by_D[D]
+        _require(record["period_states"] == states)
+        _require(record["positive"] == positive and record["negative"] == negative)
+    return model
+
+```
+
+<a id="section-971-references-continued-fraction-theorem-checks"></a>
+
+## Sources: continued-fraction theorem checks {#section-973-references-continued-fraction-theorem-checks}
+
+The new denominator, recognition, conjugate-state and Pell-interface arguments above are proved in this chapter. For independently checked theorem statements and indexing comparisons, see Kumar's MIT 18.781 [Lecture 20](https://ocw.mit.edu/courses/18-781-theory-of-numbers-spring-2012/8ff6ae31a851874a11c508ddfa4b754c_MIT18_781S12_lec20.pdf) on quadratic periodicity and [Lecture 21, Theorems 73, 75 and 76](https://ocw.mit.edu/courses/18-781-theory-of-numbers-spring-2012/13cf7a5b5cc750bac32299824469a8d2_MIT18_781S12_lec21.pdf) on Pell, including positive nonsquare integers that are not squarefree. Their state notation differs from ours; the actual return and norm equations, not the printed index name, determine the correspondence. These sources were checked for this source review; no execution or learner study is implied.

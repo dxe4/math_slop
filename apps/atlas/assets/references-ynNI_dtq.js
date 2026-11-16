@@ -1,0 +1,18 @@
+var e=`---
+parent_id: book-electromagnetism-relativity
+chapter_id: references
+title: "References and Scope"
+level: advanced-undergraduate
+license: CC BY-SA 4.0
+---
+
+# References and Scope
+
+This book is original exposition. The publisher contents listings below were consulted on 14 November 2026 to benchmark subject coverage and chapter sequencing. That access establishes neither inspection of the full books nor equivalence of depth, exercises or pedagogy. Their prose, examples and exercises are not reproduced here.
+
+David J. Griffiths, *Introduction to Electrodynamics*, fifth edition, Cambridge University Press, 2023, DOI [10.1017/9781009397735](https://doi.org/10.1017/9781009397735). The [publisher contents page](https://www.cambridge.org/highereducation/books/introduction-to-electrodynamics/FD23E188E2BDCDB40199CFE3386EC08F/contents/A489AF09692CF136DD0A5EE2E53A690A) places static sources before dynamics, conservation, propagation and radiation. We use those broad subject landmarks while collecting material response into one chapter and developing special relativity across three chapters. Our shorter route does not claim the same range of boundary-value techniques or specialized configurations.
+
+Bernard Schutz, *A First Course in General Relativity*, third edition, Cambridge University Press, 2022, DOI [10.1017/9781108610865](https://doi.org/10.1017/9781108610865). The [publisher chapter listing](https://www.cambridge.org/highereducation/books/a-first-course-in-general-relativity/933C1A8C84420EF1349B676F0D70A065/special-relativity/42511BDE6FF1905C0CD754C4043C12EB) supplies the benchmark for an initial progression from inertial geometry to vectors, tensors and conserved quantities. We remain in flat spacetime; curvature, gravitational field equations and cosmology are outside this commission. Our metric convention is stated independently and must be compared explicitly with any external source.
+
+Related Euler readings include [electromagnetic field balance](../../fields-fluids-continuum/electromagnetic-field-balance.md), [field actions](../../action-symmetry-mechanics/field-theory-action.md) and [field Noether identities](../../action-symmetry-mechanics/noether-s-theorem-in-field-theory.md). Their broader continuum and variational settings provide further context; translate their stated conventions before combining component formulas.
+`;export{e as default};

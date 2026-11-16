@@ -1,0 +1,14 @@
+# A has determinant s. At s=0 an entire line of inputs maps to the origin.
+# Drag s through zero: area collapses, then orientation reverses.
+scene "A singular matrix collapses a dimension";
+domain -4 4;
+range -3 3;
+coordinates equal;
+param s = 1 from -1.5 to 1.5;
+param u = 1 from -2 to 2;
+param v = 1 from -2 to 2;
+transform A = (1,1,0,s);
+vector original = (u,v) color rose;
+vector image = (u+v,s*v) color amber;
+vector candidatekernel = (1,-1) color violet;
+point kernelimage = (0,-s) color teal;

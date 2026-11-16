@@ -1,0 +1,459 @@
+{
+  "id": "01",
+  "title": "Functions and mathematical language",
+  "subtitle": "How do we describe an input, its allowed values, and the output it determines?",
+  "prerequisites": [
+    "Optional bridge: Chapters 01–03 review L1 algebra and functions before the L2 single-variable calculus course.",
+    "Arithmetic with signed numbers, fractions, and squares",
+    "Solving a simple linear equation; unfamiliar notation is introduced here"
+  ],
+  "objectives": [
+    "Translate between intervals, inequalities, and absolute-value descriptions",
+    "Determine domains and ranges while preserving excluded endpoints",
+    "Compose functions and decide when an inverse function exists",
+    "Explain graph transformations through the movement of individual points",
+    "Distinguish evidence, proof, and counterexamples"
+  ],
+  "sections": [
+    {
+      "title": "1. Sets describe the inputs we allow",
+      "paragraphs": [
+        "This single-variable Calculus book is an L1–L2 route. Chapters 1–3 are optional preparation: use them to repair functions, algebra, trigonometry or laboratory notation, or begin with Chapter 4 if those tools are familiar. The main route reads chapters 04–18, then the differential-equation previews in chapters 27–28. Chapters 19–26 and 29–30 form the separate Multivariable and Vector Calculus book.",
+        "Calculus studies changing quantities, but before asking how a quantity changes we must say what values it may take. A set is a collection of objects. We write $x\\in A$ when $x$ belongs to the set $A$, and $x\\notin A$ when it does not. The real numbers, written $\\mathbb{R}$, include integers, fractions, and irrational numbers such as $\\sqrt{2}$. Unless a problem says otherwise, the functions in this chapter take real inputs and give real outputs. This convention matters: a square root of a negative number is not a real output.",
+        "Intervals describe uninterrupted portions of the real line. The interval $[a,b]$ includes both endpoints and means $a\\le x\\le b$. The interval $(a,b)$ excludes both and means $a<x<b$. Mixed brackets, such as $[a,b)$, include only the endpoint next to the square bracket. Infinity is a direction of unbounded extent, not a real endpoint: write $[2,\\infty)$, never $[2,\\infty]$. The empty set, $\\varnothing$, contains no values. A single allowed value is a set too: $\\{2\\}$ is not the same as an interval of positive length.",
+        "Two operations combine restrictions. The intersection $A\\cap B$ contains values in both sets; the union $A\\cup B$ contains values in at least one. Thus $x\\ge1$ and $x<4$ gives $[1,4)$, while $x<0$ or $x>2$ gives $(-\\infty,0)\\cup(2,\\infty)$. The word 'or' here is inclusive: membership in both sets is permitted. Set-builder notation $\\{x\\in\\mathbb R:x^2<4\\}$ means the set of real $x$ satisfying the condition after the colon; in this case it is $(-2,2)$. With equality allowed, $\\{x\\in\\mathbb R:x^2\\le9\\}=[-3,3]$; the strict version gives $(-3,3)$. A denominator restriction must still remove its zeros after the inequality is solved.",
+        "Inequalities obey familiar algebra except that multiplying or dividing by a negative number reverses the direction. From $-2x<6$ we obtain $x>-3$. Dividing by an expression of unknown sign requires cases, and dividing by zero is forbidden. For instance, solving $\\frac1x>0$ by multiplying indiscriminately by $x$ loses precisely the sign information the question asks for. Split into $x>0$ and $x<0$, or use the sign of a reciprocal directly.",
+        "Empty intersections are possible. The conditions $x<1$ and $x\\ge2$ have no common solution, written $\\varnothing$. By contrast, $x<1$ or $x\\ge2$ gives two unbounded pieces. An interval drawing can show this difference immediately, but a drawing should also label open and closed endpoints. A hollow dot means an excluded boundary, while a filled dot means included. The symbols $<$ and $\\le$, not the visual thickness of a plotted line, determine inclusion.",
+        "When solving a product inequality, a sign chart separates intervals at zeros and undefined points. For $\\frac{x-1}{x+2}>0$, the critical values are $-2$ and $1$. The quotient is positive on $(-\\infty,-2)$ and $(1,\\infty)$, negative between them. The point $-2$ is undefined and $1$ gives zero, so neither belongs to the strict solution. Testing one point in each interval is safer than multiplying both sides by $x+2$ without knowing its sign.",
+        "Finite unions of intervals describe many one-variable domains, but not every set is an interval. The natural domain of $\\frac{1}{x^2-1}$ is $\\mathbb R$ without $-1$ and $1$: $(-\\infty,-1)\\cup(-1,1)\\cup(1,\\infty)$. Each component is a maximal connected piece of the domain. Later continuity and derivative arguments often work on one such piece at a time. A statement about “all $x$” must include only the $x$ values where its expressions exist.",
+        "A mathematical model may impose stricter limits than an algebraic expression. If $x$ is a time since launch, $x\\ge0$ even when a polynomial formula accepts negative numbers. If a sensor is calibrated only for $1\\le v\\le3$ volts, predictions outside that range are extrapolations. Distinguish a formula's natural real domain, a problem's stipulated domain, and a model's trusted physical range. The first is determined by operations; the others come from the context or the author.",
+        "It is useful to distinguish a condition from the set it defines. The inequality $x^2<9$ is a sentence whose truth depends on $x$; the set $(-3,3)$ collects exactly the real $x$ values that make it true. Equivalent inequalities define the same set only under a stated universe. For example $x^2<9$ and $-3<x<3$ agree over real numbers, while interpreting $x$ as a whole-number count changes the solution set to finitely many integers. The universe of discourse also controls whether a square root is real or complex. This book uses real calculus unless a chapter explicitly says otherwise."
+      ],
+      "formula": "[a, b) = {x ∈ ℝ : a ≤ x < b}; A ∩ B means both, A ∪ B means either.",
+      "formulaTex": "[a,b)=\\{x\\in\\mathbb R:a\\le x<b\\}"
+    },
+    {
+      "title": "2. Absolute value measures distance",
+      "paragraphs": [
+        "The absolute value $|x|$ is the distance of $x$ from zero: it equals $x$ when $x\\ge 0$ and $-x$ when $x<0$. The second expression is positive because $x$ itself is negative. More generally, $|x-c|$ is the distance between $x$ and $c$. This geometric meaning turns a symbolic restriction into a location on the number line. For $r>0$, $|x-c|<r$ describes points strictly within distance $r$ of $c$, giving $c-r<x<c+r$.",
+        "For example, $|x-3|\\le0.2$ gives $[2.8,3.2]$, including the endpoints. If $x$ measures a length in metres, $c$ and $r$ must also be in metres, and the statement means the length differs from 3 metres by at most 0.2 metres. In a mathematical example without specified physical quantities, we treat the numbers as dimensionless. An equation that adds a distance to a temperature has no consistent physical interpretation merely because its algebra looks valid.",
+        "An outside-distance condition uses a union: $|x-c|\\ge r$, with $r>0$, means $x\\le c-r$ or $x\\ge c+r$. Endpoint cases need attention. The condition $|x-c|<0$ has no solutions; $|x-c|\\le0$ has exactly $x=c$. These are small examples of a habit needed throughout calculus: check whether a parameter can be zero and whether a boundary is included before applying a remembered rule.",
+        "Absolute value obeys the triangle inequality $|a+b|\\le|a|+|b|$. Geometrically, traveling from zero to $a$ and then by $b$ cannot produce a final distance larger than the total distance traveled. A useful consequence is $\\bigl||a|-|b|\\bigr|\\le|a-b|$, obtained by applying the triangle inequality twice. These bounds appear throughout calculus: they let us control a complicated error by simpler pieces. The inequality is about magnitude, so it remains valid regardless of signs. Indeed, write $a=(a-b)+b$ and apply the triangle inequality to obtain $|a|-|b|\\le|a-b|$. Interchanging $a$ and $b$ gives $|b|-|a|\\le|a-b|$. Together these inequalities give the stated absolute difference.",
+        "To solve $|2x-6|<4$, first factor $2|x-3|<4$, giving $|x-3|<2$. The distance from $x$ to $3$ is less than $2$, so $1<x<5$. Equivalently, $-4<2x-6<4$ leads to the same interval. Both endpoints are excluded because the original inequality is strict. A common error is to solve only $2x-6<4$ and omit the lower side of the distance condition.",
+        "An error tolerance can be written as an absolute-value inequality. If an approximation $a$ to a target $L$ has absolute error at most $\\varepsilon$, then $|a-L|\\le\\varepsilon$. This says $a$ lies in $[L-\\varepsilon,L+\\varepsilon]$. Relative error divides by $|L|$ when $L\\ne0$, so it answers a different question and is undefined at a zero target. Later numerical chapters use both notions; the distance interpretation here keeps the distinction clear.",
+        "The inequality $|x-c|<r$ describes an open neighborhood of $c$ when $r>0$. A punctured neighborhood adds $x\\ne c$; limits concern nearby points without requiring the function to be defined at the center. Continuity will add the value at the center back into the comparison. These definitions grow naturally from the number-line geometry rather than from a mysterious epsilon–delta notation. The radius $r$ is a bound on input distance, not on output error unless a function relates them.",
+        "For a compound expression, isolate the entire quantity inside the bars before splitting cases. The equation $|x^2-1|=3$ becomes $x^2-1=3$ or $x^2-1=-3$. The first gives $x=\\pm2$; the second gives $x^2=-2$ and no real solutions. Replacing $|x^2-1|$ by $x^2-1$ without a sign check would miss the logic. When the inner expression changes sign across the domain, a piecewise representation can also be useful for graphing and integration."
+      ],
+      "formula": "For r > 0: |x − c| ≤ r ⇔ c − r ≤ x ≤ c + r.",
+      "formulaTex": "r>0:\\quad |x-c|\\le r\\iff c-r\\le x\\le c+r"
+    },
+    {
+      "title": "3. A function includes its domain",
+      "paragraphs": [
+        "A function assigns exactly one output to each allowed input. Writing $f:D\\to C$ specifies the domain $D$ and a target set, or codomain, $C$. The range is the set of outputs actually attained, $\\{f(x):x\\in D\\}$; it may be smaller than $C$. The formula is only one part of the description. The functions $x\\mapsto x^2$ on $\\mathbb{R}$ and $x\\mapsto x^2$ on $[0,1]$ use the same rule but have different domains and ranges. Their ranges are $[0,\\infty)$ and $[0,1]$, respectively.",
+        "When given a real formula without an explicit domain, we usually seek its natural real domain: every input for which all its operations are defined. A denominator must be nonzero, and the quantity inside a real square root must be nonnegative. Restrictions apply together, so we take their intersection. For $\\frac{\\sqrt{x+2}}{x-1}$, the root requires $x\\ge-2$ and the denominator excludes $1$. The domain is $[-2,1)\\cup(1,\\infty)$. Cancellation later in a calculation never retroactively supplies a missing input.",
+        "Range questions ask which outputs can actually occur, not merely which outputs seem plausible. For $f(x)=x^2$ on $\\mathbb R$, every output is nonnegative, and every $y\\ge0$ is attained by $x=\\sqrt y$. Both parts are needed to establish that the range is $[0,\\infty)$. A plot can suggest the answer, but its viewing window cannot establish unboundedness. Conversely, an input restriction can remove an output even when the formula remains perfectly well behaved nearby. Restricting the same rule to $[1,3]$ changes its range to $[1,9]$: the domain endpoints are attained, and no input in this interval has a smaller or larger square.",
+        "The graph of $f$ is the set of ordered pairs $(x,f(x))$ for $x$ in its domain. A vertical line can meet it at most once, because one input cannot have two outputs. A circle fails this test, although its upper and lower halves can separately define functions on suitable domains. A physical model may restrict the domain further than algebra does: a formula for a tank's volume after $t$ seconds may only apply until the tank fills. Always separate mathematical admissibility from the interval where the model describes the situation.",
+        "Two functions are equal only when they have the same domain and agree at every input in it, under the usual set-of-ordered-pairs view. The formulas $\\frac{x^2-1}{x-1}$ and $x+1$ agree for $x\\ne1$, but the first is undefined at 1 while the second is defined there. They are not the same function on their natural domains. One may extend the first by assigning the missing value 2, producing a new function. This distinction becomes central when limits and removable discontinuities are introduced.",
+        "The domain of $\\frac{\\sqrt{5-x}}{x+1}$ is determined by two simultaneous conditions: $5-x\\ge0$ and $x+1\\ne0$. Thus $x\\le5$ but $x\\ne-1$, giving $(-\\infty,-1)\\cup(-1,5]$. The square-root boundary at $x=5$ is included; the denominator zero at $x=-1$ is excluded. A correct answer should state both conditions before combining them, so a reader can inspect why each endpoint has its status.",
+        "A function can be represented by a formula, graph, table, piecewise rule, or verbal procedure. Each representation should assign at most one output to each allowed input. A vertical line test checks that property for a graph, but it cannot determine units, measurement uncertainty, or whether a plotted endpoint is included unless those are labeled. An isolated data table gives only sampled outputs, not necessarily a rule for values between them. State what the representation actually specifies.",
+        "The codomain matters when discussing surjectivity and inverses. The rule $f:\\mathbb R\\to\\mathbb R$, $f(x)=x^2$, is not onto its stated codomain because negative real numbers are never outputs. The same rule $f:\\mathbb R\\to[0,\\infty)$ is onto, though still not one-to-one. In elementary range problems, the range is the actual output set regardless of codomain. Keeping these words separate avoids describing a function as invertible just because its output values are known.",
+        "A piecewise function must assign one value at every included boundary point. Define $f(x)=x^2$ for $x<0$ and $f(x)=x+1$ for $x\\ge0$. The value at zero comes from the second rule, so $f(0)=1$. If both branches included zero and gave different values, the description would not define a function. If neither included zero, the function would have a gap in its domain. Later continuity tests compare the branch limits with the actual boundary value, so this bookkeeping is not merely notation."
+      ],
+      "formula": "range(f) = {f(x) : x ∈ domain(f)} ⊆ codomain(f).",
+      "formulaTex": "f:D\\to C,\\qquad \\operatorname{range}(f)=\\{f(x):x\\in D\\}\\subseteq C",
+      "theorems": [
+        {
+          "title": "When does an inverse function exist?",
+          "statement": "A function $f:D\\to C$ has an inverse function from its range back to $D$ exactly when it is one-to-one on $D$.",
+          "equationTex": "f^{-1}:f(D)\\to D\\text{ exists}\\quad\\Longleftrightarrow\\quad f\\text{ is injective on }D",
+          "proof": [
+            "Suppose an inverse $g$ exists and two inputs satisfy $f(x_1)=f(x_2)$. Apply $g$ to both sides. Because $g(f(x))=x$ for each input in $D$, we obtain $x_1=x_2$. Thus an inverse forces injectivity: two distinct inputs cannot share an output. A graph that fails the horizontal-line test displays exactly this obstruction, but the equation gives the proof.",
+            "Conversely, if $f$ is injective, every value $y$ in the range $f(D)$ has at least one preimage by the definition of range and at most one by injectivity. Define $g(y)$ to be that unique preimage. Then $g(f(x))=x$ for $x\\in D$ and $f(g(y))=y$ for $y\\in f(D)$. This constructs an inverse on the range without assuming that the original codomain contains no unused values.",
+            "For $f(x)=x^2$ on all real inputs, $f(1)=f(-1)$ and no inverse exists. Restricting the domain to $[0,\\infty)$ makes it injective and gives $f^{-1}(y)=\\sqrt y$. A physical model may supply this restriction naturally, but it must be stated. The proof also explains why an inverse branch is a mathematical choice, not an automatic calculator output."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. Composition and reversing a rule",
+      "paragraphs": [
+        "Composition feeds one function's output into another. The expression $(f\\circ g)(x)$ means $f(g(x))$: evaluate $g$ first, then $f$. Its domain consists of inputs $x$ in the domain of $g$ whose outputs $g(x)$ belong to the domain of $f$. Order matters. If $f(u)=\\sqrt{u}$ and $g(x)=x-2$, then $f(g(x))=\\sqrt{x-2}$ has domain $[2,\\infty)$, whereas $g(f(x))=\\sqrt{x}-2$ has domain $[0,\\infty)$. Their values at $x=4$ are $\\sqrt{2}$ and $0$.",
+        "An inverse reverses the input-output assignment. Such a reversal is a function only when distinct inputs of the original function give distinct outputs: this property is called injectivity or being one-to-one. If $f$ is one-to-one on $D$, its inverse $f^{-1}$ has domain $\\operatorname{range}(f)$ and returns values in $D$. If we demand an inverse on the entire stated codomain $C$, $f$ must also attain every element of $C$; this additional property is called surjectivity. A function satisfying both properties is bijective.",
+        "The rule $f(x)=x^2$ on $\\mathbb R$ is not one-to-one because $f(2)=f(-2)$. Restricting its domain to $[0,\\infty)$ gives the inverse $f^{-1}(y)=\\sqrt y$ for $y\\ge0$. Restricting instead to $(-\\infty,0]$ gives the inverse $-\\sqrt y$. The choice of domain decides which reversal is valid. To find an inverse algebraically, write $y=f(x)$, solve for the allowed $x$, then specify the new domain and range. Check both compositions: $f^{-1}(f(x))=x$ on the original domain and $f(f^{-1}(y))=y$ on the original range.",
+        "The superscript $-1$ in $f^{-1}$ names an inverse function; it does not mean the reciprocal $1/f$. Graphically, reversing a pair $(x,y)$ gives $(y,x)$, so inverse graphs reflect across the line $y=x$ when both axes use compatible scales. A horizontal line meeting the original graph more than once exposes the failure of one-to-one behavior.",
+        "The domain of $f\\circ g$ requires two checks in sequence: $x$ must be allowed for $g$, and $g(x)$ must be allowed for $f$. Let $f(u)=\\sqrt u$ and $g(x)=x-2$. Then $(f\\circ g)(x)=\\sqrt{x-2}$ has domain $x\\ge2$. But $(g\\circ f)(x)=\\sqrt x-2$ has domain $x\\ge0$. The formulas look similar, yet their allowed inputs and outputs differ. Parentheses and the order of evaluation are part of the mathematical statement.",
+        "If $f(x)=\\frac1x$ and $g(x)=x^2-4$, then $f\\circ g=\\frac{1}{x^2-4}$ with $x\\ne\\pm2$. Conversely $g\\circ f=\\frac{1}{x^2}-4$ with $x\\ne0$. Neither composition inherits only the domain of the outer function. This is an example where algebraic simplification is easy but domain tracking is the real work. Write the inner output first, then apply every outer restriction to it.",
+        "An inverse swaps domain and range. For $f(x)=3x-5$ on $\\mathbb R$, solve $y=3x-5$ for $x$ to obtain $x=\\frac{y+5}{3}$. The inverse has domain $\\mathbb R$ and range $\\mathbb R$, and substitution in both directions gives $f^{-1}(f(x))=x$ and $f(f^{-1}(y))=y$. A single algebraic rearrangement is not enough if the original rule is not one-to-one or if the inverse's proposed domain includes unattained outputs.",
+        "A strictly increasing function on an interval is one-to-one because larger inputs always produce larger outputs. A strictly decreasing function is also one-to-one. A horizontal line intersects either graph at most once. The condition is sufficient, not necessary on arbitrary disconnected domains; however it is a practical test for many continuous elementary functions. A turning point often prevents a global inverse, prompting a domain restriction to one monotone branch.",
+        "Inverse functions undo values, not physical dimensions. If $F(s)=s^2$ maps nonnegative side lengths in metres to areas in square metres, then $F^{-1}(B)=\\sqrt B$ returns a length in metres for any attainable area $B\\ge0$. The inverse domain is the nonnegative areas. Writing “$\\pm\\sqrt B$” would describe solutions of the equation $s^2=B$ on all real $s$, not the inverse of the physical function whose domain is $s\\ge0$. Model restrictions and mathematical injectivity support the same branch choice."
+      ],
+      "formula": "domain(f ∘ g) = {x ∈ domain(g) : g(x) ∈ domain(f)}.",
+      "formulaTex": "\\operatorname{dom}(f\\circ g)=\\{x\\in\\operatorname{dom}(g):g(x)\\in\\operatorname{dom}(f)\\}"
+    },
+    {
+      "title": "5. Transformations and mathematical claims",
+      "paragraphs": [
+        "Consider $G(x)=a f(b(x-h))+k$ with $b\\ne0$. If $(u,v)$ belongs to the graph of $f$, solve $b(x-h)=u$ to obtain the corresponding point $(h+u/b,k+av)$ of $G$. This point rule is more reliable than memorizing a list of shifts. The parameter $h$ moves the reference point horizontally and $k$ moves it vertically. A factor $|a|$ scales vertical distances, with a negative $a$ reflecting them. A factor $|b|$ divides horizontal distances, with a negative $b$ reversing horizontal orientation. Conversely, for every allowed transformed input $x$, put $u=b(x-h)$. The original point $(u,f(u))$ maps to $(x,G(x))$, so the point rule accounts for the entire transformed graph. This also works when $a=0$; only $b\\ne0$ is needed.",
+        "The transformed domain is every $x$ with $b(x-h)$ in the original domain. When $b$ is negative, an interval's endpoint order reverses, along with the locations of its included and excluded ends. When $a=0$, the output is the constant $k$ wherever the original composition is defined; the formula still requires that inner evaluation. The point rule cannot divide by $b$ when $b=0$. In that separate case, $G$ is constant on all real inputs if $f(0)$ exists, and the composition is undefined everywhere if it does not.",
+        "Mathematical statements also have domains. 'For every real $x$, $x^2\\ge0$' is a universal claim. A proof must cover every allowed input, which here follows from the sign rules for multiplication. 'There exists a real $x$ with $x^2=4$' is an existence claim; giving $x=2$ proves it. To disprove a universal claim, one valid counterexample suffices. The claim 'every real $x$ satisfies $\\sqrt{x^2}=x$' fails at $x=-2$. The correct identity is $\\sqrt{x^2}=|x|$.",
+        "An implication says that whenever a hypothesis holds, a conclusion follows. Its converse swaps these roles and needs separate justification: $x=2$ implies $x^2=4$, but $x^2=4$ does not imply $x=2$. A double arrow $\\Leftrightarrow$ asserts both directions. Checking a thousand sample values can disprove a claim if one fails, but cannot ordinarily prove a statement about all real inputs. Our lab is therefore an experiment to interpret an already-derived point rule, not a substitute for its algebraic justification.",
+        "The point mapping $(u,v)\\mapsto(h+\\frac ub,k+av)$ handles horizontal and vertical transformations together. If $b<0$, the horizontal coordinate reverses orientation: a point originally to the right of $u=0$ may appear to the left of $x=h$. If $a<0$, the output reflects across the horizontal line $y=k$ after scaling. This point rule avoids the common slogan error that $f(2x)$ stretches a graph horizontally; it compresses horizontal distances by a factor of two.",
+        "For $f(x)=\\sqrt x$ with domain $[0,\\infty)$, the transformed rule $G(x)=f(-2(x-1))$ has domain $-2(x-1)\\ge0$, hence $x\\le1$. The negative inner factor reflects and scales the input, while shifting the endpoint to $x=1$. The graph starts at $(1,0)$ and extends left. Checking the transformed domain before drawing prevents a square-root curve from being sketched on the wrong side of its endpoint.",
+        "A universal claim is disproved by one counterexample in its stated domain. The assertion $f(x+1)=f(x)+1$ for every real-valued $f$ on $\\mathbb R$ fails for $f(x)=x^2$ at $x=0$: the two sides are 1 and 1, so that input does not disprove it, but at $x=1$ they are 4 and 2. One must choose a counterexample that actually violates the equation. The identity does hold for $f(x)=x+C$ for any constant $C$; an existence example does not rescue the universal claim.",
+        "A proof of an implication begins with its hypothesis. To prove $x>2$ implies $x^2>4$ over real $x$, the hypothesis guarantees $x$ positive, so multiplying $x>2$ by positive $x$ and comparing is safe. The converse $x^2>4$ implies $x>2$ is false because $x=-3$ also has square nine. Domain conditions can change truth: if $x\\ge0$ is assumed, then $x^2>4$ does imply $x>2$. Words such as “for all,” “there exists,” and “if” govern the logic as much as the algebra does.",
+        "A numerical plot can support a conjecture but cannot prove a universal transformation or inequality. It samples finitely many inputs and may hide excluded endpoints or narrow features. The point mapping proves the transformation for every original graph point, while an algebraic counterexample disproves a false claim at one exact value. Learning to move between visualization and proof is part of calculus preparation: graphics guide questions, and quantified arguments settle them.",
+        "A quantified statement can be strengthened or weakened by changing the domain. “For every real $x$, $\\frac1x$ is defined” is false because zero is an allowed counterexample. “For every nonzero real $x$, $x\\cdot\\frac1x=1$” is true. The second claim carries its necessary hypothesis explicitly. When a proof divides by an expression, it should first establish that expression is nonzero on the case being considered; otherwise the derivation may silently discard solutions. This habit will recur in solving equations, proving limits, and separating differential equations. Explicit assumptions make a mathematical argument reusable and show exactly where it stops applying. This precision matters when a model has excluded inputs."
+      ],
+      "formula": "G(x) = a f(b(x − h)) + k: (u, f(u)) ↦ (h + u/b, k + a f(u)), for b ≠ 0.",
+      "formulaTex": "\\begin{gathered}G(x)=a\\,f(b(x-h))+k,\\qquad b\\ne0,\\\\ (u,f(u))\\longmapsto\\left(h+\\frac{u}{b},\\,k+a f(u)\\right)\\quad(u\\in\\operatorname{dom}(f)).\\end{gathered}"
+    },
+    {
+      "title": "Restricting a domain to make an inverse function",
+      "paragraphs": [
+        "A rule is not an inverse until its domain and output are specified. The squaring rule $f(x)=x^2$ on all real numbers sends both $3$ and $-3$ to $9$, so it is not one-to-one. No inverse function can choose a unique real input from every output without an added convention. Restrict $f$ to $x\\ge0$. It now increases from $0$ without bound and maps $[0,\\infty)$ onto $[0,\\infty)$. The inverse is $f^{-1}(y)=\\sqrt{y}$, with both its input and output restricted to nonnegative numbers. For $0\\le x_1<x_2$, $x_2^2-x_1^2=(x_2-x_1)(x_2+x_1)>0$, proving injectivity on this restriction. Every output is nonnegative, and each $y\\ge0$ is attained at $x=\\sqrt y$, proving the claimed range.",
+        "The equations $f^{-1}(f(x))=x$ and $f(f^{-1}(y))=y$ have different domains. The first reads $\\sqrt{x^2}=x$ for $x\\ge0$; for an unrestricted real $x$ it would instead equal $|x|$. The second reads $(\\sqrt y)^2=y$ for $y\\ge0$. Writing both identities prevents the common false claim that $\\sqrt{x^2}=x$ for every real $x$. Restricting $f$ to $x\\le0$ gives another valid inverse branch, $f^{-1}(y)=-\\sqrt y$. On the negative branch, $x_1<x_2\\le0$ implies $x_1^2>x_2^2$, so squaring is strictly decreasing and still one-to-one there.",
+        "For a physical square with side length $s$ metres, $A(s)=s^2$ square metres naturally has domain $s\\ge0$. Given area 9 m², the side is 3 m, not $\\pm3$ m, because negative length is excluded by the model. The mathematical domain and the physical domain agree here, but in other models physical constraints may restrict a mathematically valid formula further. A graph reflected across $y=x$ helps visualize an inverse only after the original branch is one-to-one.",
+        "Units follow the inverse: if $A$ is in m², $\\sqrt A$ is in m. A square-root key on a calculator does not decide which branch a problem means. State the admissible inputs, resulting outputs, and branch before using an inverse in an equation or composition.",
+        "For $f(x)=(x-2)^2$ with $x\\ge2$, the range is $y\\ge0$ and solving $y=(x-2)^2$ gives $x=2+\\sqrt y$. The minus branch $2-\\sqrt y$ would usually lie below 2 and violate the chosen domain. The inverse is $f^{-1}(y)=2+\\sqrt y$ for $y\\ge0$. If instead $x\\le2$, the inverse is $2-\\sqrt y$. The algebraic quadratic equation has two solutions in general; the inverse function chooses the one compatible with its original domain.",
+        "A domain restriction may be imposed by context rather than by mathematical convenience. For a sensor calibration $T(v)=20+5(v-1)$ on $1\\le v\\le3$ volts, the range is $20\\le T\\le30$ °C. Inverting gives $v=1+\\frac{T-20}{5}$ for $20\\le T\\le30$. A temperature of 40 °C cannot be converted by this calibrated inverse without extrapolation, even though the linear expression produces a number. The model's trusted interval is part of the inverse's domain.",
+        "When reading an inverse graph, reflection across $y=x$ assumes the horizontal and vertical axes represent compatible numerical scales. If one axis is volts and the other degrees Celsius, a literal geometric reflection on a printed page may be visually misleading unless scales are chosen and units are relabeled. The algebraic reversal of ordered pairs remains valid. This is why an inverse should be justified by domain, range, and composition identities rather than by a picture alone."
+      ],
+      "formula": "f:[0,∞)→[0,∞), f(x)=x², has inverse f⁻¹(y)=√y; √(x²)=|x| on ℝ.",
+      "formulaTex": "\\begin{gathered}f:[0,\\infty)\\to[0,\\infty),\\qquad f(x)=x^2,\\\\ f^{-1}(y)=\\sqrt y\\quad(y\\ge0),\\\\ \\sqrt{x^2}=|x|\\quad(x\\in\\mathbb R).\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A cancelled factor leaves a missing point",
+      "problem": "Find the domain and range of $q(x)=(x^2-1)/(x-1)$, and explain its graph.",
+      "steps": [
+        "The denominator is zero at $x=1$, so the domain is $(-\\infty,1)\\cup(1,\\infty)$.",
+        "For allowed inputs, factor $x^2-1=(x-1)(x+1)$ and cancel to get $q(x)=x+1$. The cancellation is justified only because $x\\ne1$.",
+        "The line $y=x+1$ attains $y=2$ only at $x=1$. That input is excluded, so the range excludes $2$ and includes every other real number: for $y\\ne2$, choose $x=y-1$.",
+        "A numerical cross-check gives $q(0)=1$, $q(2)=3$, and $q(1.5)=2.5$. None fills the missing point $(1,2)$."
+      ],
+      "answer": "The graph is $y=x+1$ with $(1,2)$ removed; its range is $(-\\infty,2)\\cup(2,\\infty)$."
+    },
+    {
+      "title": "Transform a root and recover the input",
+      "problem": "For $G(x)=-2\\sqrt{3(x-1)}+4$, determine domain, range, key points, and inverse.",
+      "steps": [
+        "The root requires $3(x-1)\\ge0$, so $x\\ge1$. Because the root is nonnegative, $G(x)\\le4$, with equality at $x=1$.",
+        "Every $y\\le4$ occurs: solving $y=-2\\sqrt{3(x-1)}+4$ gives $\\sqrt{3(x-1)}=(4-y)/2$ and $x=1+(4-y)^2/12$. This $x$ is allowed.",
+        "Map root-graph points $(0,0)$, $(1,1)$, and $(4,2)$ to $(1,4)$, $(4/3,2)$, and $(7/3,0)$. The graph starts at its included endpoint and decreases as $x$ increases.",
+        "The root increases strictly, and multiplication by $-2$ makes $G$ strictly decreasing, hence one-to-one. The algebraic reversal therefore defines its inverse on $y\\le4$. For a cross-check, $G(4)=-2\\sqrt9+4=-2$, and $1+(4-(-2))^2/12=4$."
+      ],
+      "answer": "Domain $[1,\\infty)$, range $(-\\infty,4]$, and $G^{-1}(y)=1+(4-y)^2/12$ for $y\\le4$. Key points are $(1,4)$, $(4/3,2)$, and $(7/3,0)$."
+    },
+    {
+      "title": "A quotient inequality with an excluded point",
+      "problem": "Solve $(x-1)/(x+2)>0$ over the reals.",
+      "steps": [
+        "Critical values are $x=-2$, where the quotient is undefined, and $x=1$, where it is zero.",
+        "Test $x=-3,0,2$ in the intervals cut by $-2$ and $1$. The quotient has signs $+,-,+$, respectively; its sign can change only at a numerator zero or denominator zero.",
+        "Strict inequality excludes the zero at one, and division excludes negative two."
+      ],
+      "answer": "The solution is $(-\\infty,-2)\\cup(1,\\infty)$."
+    },
+    {
+      "title": "Absolute error as a distance interval",
+      "problem": "A measurement differs from $3\\,\\mathrm{m}$ by at most $0.2\\,\\mathrm{m}$. Write the condition and interval.",
+      "steps": [
+        "Translate “differs by at most” to $|x-3|\\le0.2$, with $x$ measured in metres.",
+        "Subtract the distance on each side: $3-0.2\\le x\\le3+0.2$.",
+        "Endpoints are included because the tolerance says at most."
+      ],
+      "answer": "$|x-3|\\le0.2$, or $x\\in[2.8,3.2]$ metres."
+    },
+    {
+      "title": "Same rule, different function",
+      "problem": "Compare $p(x)=(x^2-1)/(x-1)$ and $q(x)=x+1$ on their natural domains.",
+      "steps": [
+        "$p$ is defined only for $x\\ne1$; $q$ is defined for every real $x$.",
+        "For $x\\ne1$, factor and cancel to get $p(x)=x+1$.",
+        "At $x=1$, $p$ has no value while $q(1)=2$."
+      ],
+      "answer": "They agree wherever $p$ is defined but are not equal as functions on their natural domains."
+    },
+    {
+      "title": "Two composition domains",
+      "problem": "Let $f(u)=\\sqrt u$ and $g(x)=x-2$. Find both compositions and domains.",
+      "steps": [
+        "$f(g(x))=\\sqrt{x-2}$ requires $x-2\\ge0$.",
+        "$g(f(x))=\\sqrt x-2$ requires $x\\ge0$.",
+        "The evaluation order produces distinct rules and domain restrictions."
+      ],
+      "answer": "$(f\\circ g)(x)=\\sqrt{x-2}$ on $[2,\\infty)$, while $(g\\circ f)(x)=\\sqrt{x}-2$ on $[0,\\infty)$."
+    },
+    {
+      "title": "A counterexample to a universal shift rule",
+      "problem": "Disprove $f(x+1)=f(x)+1$ for every $f:\\mathbb{R}\\to\\mathbb{R}$ and give a function satisfying it.",
+      "steps": [
+        "Take $f(x)=x^2$ and $x=1$: $f(2)=4$ while $f(1)+1=2$.",
+        "Take $g(x)=x+C$: $g(x+1)=x+1+C=g(x)+1$ for every $x$.",
+        "The counterexample defeats the universal claim; the second example shows the property is possible."
+      ],
+      "answer": "The rule is not universal, though every translation $g(x)=x+C$ satisfies it."
+    },
+    {
+      "title": "Choose the inverse branch",
+      "problem": "Find the inverse of $f(x)=(x-2)^2$ on $[2,\\infty)$, including its domain.",
+      "steps": [
+        "The range of $f$ is $[0,\\infty)$.",
+        "Solve $y=(x-2)^2$ with $x-2\\ge0$ to get $x=2+\\sqrt y$.",
+        "Check $f(2+\\sqrt y)=y$ and $2+\\sqrt{(x-2)^2}=x$ for $x\\ge2$."
+      ],
+      "answer": "$f^{-1}(y)=2+\\sqrt y$ for $y\\ge0$."
+    }
+  ],
+  "misconceptions": [
+    "'Cancelling a factor repairs the original domain.' Cancellation gives an equal formula only where the original division was defined; an excluded input remains excluded.",
+    "'A larger inside multiplier makes a graph wider.' In $f(bx)$, with $b\\ne0$, an old input $u$ occurs at $x=u/b$, so $|b|>1$ compresses horizontal distances.",
+    "'Several matching numerical outputs prove two functions are equal.' Equality requires the same domain and agreement at every input in it; samples alone establish neither."
+  ],
+  "lab": {
+    "title": "Build and compare transformed root functions",
+    "description": "Sample $f(u)=\\sqrt{u}$ and $G(x)=a\\sqrt{b(x-h)}+k$ through the point transformation. Edit the four dimensionless parameters and the sample count. The plots label the original and transformed functions; the console supplies exact-reference inputs and numerical outputs. No programming background is needed to change the values at the top.",
+    "code": "// Adjustable dimensionless parameters; b must be nonzero.\nconst a = -2, b = 3, h = 1, k = 4;\nconst samples = 120; // Integer from 2 to 1000.\nif (![a, b, h, k].every(Number.isFinite) || b === 0) throw new Error('Use finite parameters and nonzero b.');\nif (!Number.isInteger(samples) || samples < 2 || samples > 1000) throw new Error('samples must be an integer from 2 to 1000.');\nconst original = [], transformed = [];\nfor (let i = 0; i <= samples; i++) {\n  const u = 9 * i / samples;\n  original.push([u, Math.sqrt(u)]);\n  transformed.push([h + u / b, k + a * Math.sqrt(u)]);\n}\nif (!transformed.every(p => p.every(Number.isFinite))) throw new Error('Parameters overflowed the number system.');\ntransformed.sort((p, q) => p[0] - q[0]);\nif (transformed.some((p, i) => i && p[0] === transformed[i-1][0])) throw new Error('Transformed x samples collapse at machine resolution; reduce |h| or change b.');\nplot(original, 'Original: horizontal u, vertical sqrt(u)');\nplot(transformed, 'Transformed: horizontal x, vertical G(x)');\nconsole.log('Reference table: u, x = h + u/b, G(x)');\nfor (const u of [0, 1, 4, 9]) console.log(u, h + u / b, k + a * Math.sqrt(u));\nconsole.log('Domain:', b > 0 ? 'x >= ' + h : 'x <= ' + h);\nconsole.log('Only original inputs 0 through 9 are sampled; this is not the full domain.');",
+    "tasks": [
+      "Before running, predict the included endpoint and whether $G$ rises or falls with $x$ for the default parameters. Check your prediction against the table and Example 2.",
+      "Change b = 3 to b = -3. Predict the domain and the new $x$-coordinate of the point generated by $u=9$; explain why its height stays fixed.",
+      "Set a = 0. Explain why the plotted values are constant although the domain restriction remains. Then set b = 0 and explain the guard using the separate mathematical case in Section 5.",
+      "Reduce samples to 2. Why do straight segments between samples fail to reproduce a curved root graph? Can any finite plot establish the entire range or prove injectivity?"
+    ],
+    "expected": "Defaults generate two plots of 121 finite points. Reference rows $(u,x,G(x))$ are $(0,1,4)$, $(1,4/3,2)$, $(4,7/3,0)$, and $(9,4,-2)$, with thirds rounded numerically. The full domain is $x\\ge1$, but the displayed transformed interval is only $[1,4]$. With b = -3 and the other defaults, the final reference point becomes $(-2,-2)$ and the full domain becomes $x\\le1$. With a = 0 and the other defaults, the transformed plot is constant at $4$ on $x\\ge1$; b = 0 is rejected by the point-map code even though the separate mathematical rule gives the constant $4$ for every real $x$. Setting samples = 2 produces three points per plot."
+  },
+  "exercises": [
+    {
+      "question": "Write $\\{x\\in\\mathbb R:x^2<9\\}$ as an interval.",
+      "hint": "Take values strictly between $-3$ and $3$.",
+      "solution": "The inequality $x^2<9$ is equivalent to $|x|<3$, so $-3<x<3$ and the interval is $(-3,3)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $\\frac{x-1}{x+2}>0$.",
+      "hint": "Use a sign chart at $-2$ and $1$.",
+      "solution": "The denominator is zero at $-2$ and the numerator is zero at $1$. Testing the three resulting intervals shows that the quotient is positive on $(-\\infty,-2)$ and $(1,\\infty)$; both endpoints are excluded.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Is $-2$ in the domain of $\\frac{1}{x+2}$?",
+      "hint": "Check the denominator.",
+      "solution": "No. At $x=-2$ the denominator $x+2$ is zero, so $1/(x+2)$ is undefined. The natural real domain is $\\mathbb R\\setminus\\{-2\\}$; nearby limiting behavior cannot assign a value at an excluded input.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find $[-1,3)\\cap(2,5]$.",
+      "hint": "Keep points in both sets.",
+      "solution": "A number must exceed $2$ and be less than $3$ to belong to both sets, so the intersection is $(2,3)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Express $|2x-6|<4$ as an interval and explain both endpoints.",
+      "hint": "Factor out the positive factor 2, then interpret distance from 3.",
+      "solution": "Since $|2x-6|=2|x-3|$, divide by $2$ to get $|x-3|<2$. Thus $1<x<5$, or $(1,5)$. Each endpoint gives absolute value $4$ in the original inequality and is excluded by the strict sign.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $|x-3|\\le0.2$ as an interval. State its greatest permitted value of $x$ and explain whether that endpoint is included.",
+      "hint": "Treat it as distance from three.",
+      "solution": "The inequality means $-0.2\\le x-3\\le0.2$. Adding $3$ throughout gives the interval $[2.8,3.2]$. The greatest permitted value is $3.2$; it is included because $|3.2-3|=0.2$ satisfies the non-strict inequality.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Solve $|2x-6|<4$.",
+      "hint": "Divide by two before splitting.",
+      "solution": "Divide $|2x-6|<4$ by $2$ to get $|x-3|<2$, hence $1<x<5$ and the interval is $(1,5)$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "State and prove the reverse triangle inequality for real $a,b$.",
+      "hint": "Apply triangle inequality in both directions.",
+      "solution": "The triangle inequality gives $|a|=|(a-b)+b|\\le|a-b|+|b|$, so $|a|-|b|\\le|a-b|$. Interchanging $a$ and $b$ gives $|b|-|a|\\le|a-b|$. Together these say $\\bigl||a|-|b|\\bigr|\\le|a-b|$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "What does $|x-c|<r$ describe when $r>0$?",
+      "hint": "Use distance on the number line.",
+      "solution": "The inequality says that the distance from $x$ to $c$ is less than $r$. Since $r>0$, it is equivalent to $-r<x-c<r$, hence $c-r<x<c+r$. It describes the open interval $(c-r,c+r)$; the strict sign excludes the endpoints.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the natural real domain of $\\sqrt{5-x}/(x+1)$.",
+      "hint": "Intersect the root restriction with the denominator restriction.",
+      "solution": "The root requires $5-x\\ge0$, or $x\\le5$, and the denominator requires $x+1\\ne0$, or $x\\ne-1$. Their intersection is $(-\\infty,-1)\\cup(-1,5]$. The endpoint $5$ is allowed: the numerator is zero and the denominator is $6$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find domain of $\\frac{\\sqrt{5-x}}{x+1}$.",
+      "hint": "Check the square-root input and the denominator separately, then combine their restrictions.",
+      "solution": "The radicand permits $x\\le5$, while the denominator excludes $x=-1$. The domain is $(-\\infty,-1)\\cup(-1,5]$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is range of $x^2$ on $\\mathbb R$ exactly $[0,\\infty)$?",
+      "hint": "Prove both containment and attainment.",
+      "solution": "For every real $x$, $x^2\\ge0$, so the range is contained in $[0,\\infty)$. Conversely, for any $y\\ge0$, the input $x=\\sqrt y$ satisfies $x^2=y$. Every nonnegative output is attained and no negative output is possible, so the range is exactly $[0,\\infty)$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Are $\\frac{x^2-1}{x-1}$ and $x+1$ the same function on natural domains?",
+      "hint": "Compare the domains at $x=1$.",
+      "solution": "No. For $x\\ne1$, factoring gives $\\frac{x^2-1}{x-1}=\\frac{(x-1)(x+1)}{x-1}=x+1$. The quotient is undefined at $x=1$, while $x+1$ is defined there. Functions include their domains, so these are different functions on their natural domains.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find range of $x^2$ restricted to $[1,3]$.",
+      "hint": "Square the endpoint values and use monotonicity.",
+      "solution": "Squaring is increasing on $[1,3]$. The endpoint outputs are $1^2=1$ and $3^2=9$, so the range is $[1,9]$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(x)=1/x$ and $g(x)=x^2-4$ on their natural real domains. Find $f\\circ g$ and $g\\circ f$, including domains.",
+      "hint": "Check the first function evaluated before checking its output in the second.",
+      "solution": "Composition gives $(f\\circ g)(x)=\\frac1{x^2-4}$, with domain $\\mathbb R\\setminus\\{-2,2\\}$ because $g(x)\\ne0$. In the other order, $(g\\circ f)(x)=\\frac1{x^2}-4$, with domain $\\mathbb R\\setminus\\{0\\}$ because $f(x)$ must exist. The formulas and domains differ.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove that $f(x)=3x-5$ has an inverse on $\\mathbb R$ and find it.",
+      "hint": "Check injectivity and solve $y=3x-5$ for $x$.",
+      "solution": "If $3x_1-5=3x_2-5$, then $x_1=x_2$, so $f$ is injective. Solving $y=3x-5$ gives $x=(y+5)/3$. Hence $f^{-1}(y)=(y+5)/3$ for every real $y$; substitution in either order gives the identity.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Find $f\\circ g$ for $f(u)=\\sqrt{u},g(x)=x-2$ and its domain.",
+      "hint": "Require $g(x)\\ge0$.",
+      "solution": "Substitution gives $(f\\circ g)(x)=\\sqrt{x-2}$. The root requires $x-2\\ge0$, so the domain is $[2,\\infty)$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f(u)=\\sqrt{u}$ and $g(x)=x-2$ on their natural real domains. Find $g\\circ f$ and its domain.",
+      "hint": "Require $x\\ge0$ for $f$.",
+      "solution": "Substitution gives $(g\\circ f)(x)=g(\\sqrt x)=\\sqrt x-2$. The square root requires $x\\ge0$, so the domain is $[0,\\infty)$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find inverse of $f(x)=3x-5$ on $\\mathbb R$.",
+      "hint": "Solve $y=3x-5$.",
+      "solution": "Set $y=3x-5$ and solve for $x$: $x=(y+5)/3$. Therefore $f^{-1}(y)=(y+5)/3$ for every real $y$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "What does $f^{-1}$ mean: reciprocal or inverse function?",
+      "hint": "Use composition identity.",
+      "solution": "The notation $f^{-1}$ denotes an inverse function when one exists: $f^{-1}(f(x))=x$ on the relevant domain. The reciprocal is $1/f(x)$ and exists only where $f(x)\\ne0$. An inverse reverses inputs and outputs; a reciprocal divides $1$ by an output.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Disprove the claim that $f(x+1)=f(x)+1$ for every real-valued function on $\\mathbb R$. Give one function for which it does hold.",
+      "hint": "Try the square function for a counterexample and a linear function for agreement.",
+      "solution": "Take $f(x)=x^2$ and $x=1$. Then $f(2)=4$ but $f(1)+1=2$, disproving the universal claim. For $f(x)=x$, direct substitution gives $f(x+1)=x+1=f(x)+1$ for every real $x$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "For $G(x)=\\sqrt{-2(x-1)}$, find its natural real domain and its greatest allowed input. Is $G$ defined at that input?",
+      "hint": "Require inner argument nonnegative.",
+      "solution": "A real square root requires $-2(x-1)\\ge0$. Dividing by $-2$ reverses the inequality, giving $x\\le1$, or $(-\\infty,1]$. The greatest allowed input is $1$, and $G(1)=0$ is defined, so the endpoint is included.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Disprove $f(x+1)=f(x)+1$ for every function $f$ on $\\mathbb R$.",
+      "hint": "Choose $f(x)=x^2$ and $x=1$.",
+      "solution": "A universal claim needs only one counterexample. Take $f(x)=x^2$ and $x=1$. Then $f(x+1)=f(2)=4$, while $f(x)+1=f(1)+1=2$. Since the values differ, the identity fails for some real function and input.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Why does $f(2x)$ compress the graph horizontally?",
+      "hint": "Track which $x$ produces an original input $u$.",
+      "solution": "A feature of the graph of $f$ at input $u$ occurs in the graph of $f(2x)$ when $2x=u$, at $x=u/2$. Outputs stay the same while horizontal coordinates are halved, giving a horizontal compression by factor $2$.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the inverse of $f(x)=(x-2)^2$ with domain $[2,\\infty)$. Would your answer work on all of $\\mathbb R$?",
+      "hint": "The domain determines which square-root sign is permitted.",
+      "solution": "The range is $[0,\\infty)$. Solving $y=(x-2)^2$ with $x-2\\ge0$ gives $x=2+\\sqrt y$, so $f^{-1}(y)=2+\\sqrt y$ for $y\\ge0$. On all of $\\mathbb R$, the rule is not one-to-one: $f(1)=f(3)=1$. It has no inverse function on that larger domain.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A sensor calibration is $T(v)=20+5(v-1)$ for $1\\le v\\le3$, where $v$ is voltage in volts and $T$ is temperature in degrees Celsius. Find its range and the voltage for 27.5 degrees Celsius.",
+      "hint": "The coefficient 5 has units degrees Celsius per volt; evaluate endpoints and reverse the rule.",
+      "solution": "The positive coefficient makes the calibration increasing. Endpoint values are $T(1)=20$ and $T(3)=30$, so the range is $[20,30]$ degrees Celsius. Solving $27.5-20=5(v-1)$ gives $v=2.5$ volts, within the calibration domain; substitution returns $27.5$ degrees Celsius.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "Find the inverse of $f(x)=(x-2)^2$ when its domain is $x\\ge2$.",
+      "hint": "Solve $y=(x-2)^2$ using the sign of $x-2$.",
+      "solution": "Because $x-2\\ge0$, $\\sqrt y=x-2$. Thus $f^{-1}(y)=2+\\sqrt y$ for $y\\ge0$. The inverse maps nonnegative outputs to inputs at least $2$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can $f(x)=x^2$ on $x\\le0$ have the inverse $\\sqrt{x}$? State the correct inverse and check it.",
+      "hint": "Which sign must the original $x$ have?",
+      "solution": "No. The inverse is $f^{-1}(y)=-\\sqrt y$ for $y\\ge0$. If $x\\le0$, then $f^{-1}(f(x))=-\\sqrt{x^2}=-|x|=x$. The positive square-root branch would give the wrong sign.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Invert $f(x)=(x-2)^2$ on $[2,\\infty)$.",
+      "hint": "Take the nonnegative branch $x-2\\ge0$.",
+      "solution": "From $y=(x-2)^2$ and $x-2\\ge0$, take the nonnegative root: $f^{-1}(y)=2+\\sqrt y$, with inverse domain $y\\ge0$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Invert $x^2$ on $x\\le0$.",
+      "hint": "Choose the nonpositive branch.",
+      "solution": "For $y=x^2$ with $x\\le0$, the original input lies on the negative branch. Thus $f^{-1}(y)=-\\sqrt y$ for $y\\ge0$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Check both inverse identities for squaring on $[0,\\infty)$.",
+      "hint": "Use $\\sqrt{x^2}=x$ when $x\\ge0$.",
+      "solution": "Let $f(x)=x^2$ and $g(y)=\\sqrt y$, both on $[0,\\infty)$. For every $x\\ge0$, $g(f(x))=\\sqrt{x^2}=|x|=x$. For every $y\\ge0$, $f(g(y))=(\\sqrt y)^2=y$. Both compositions are identity maps on the stated domains.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "For $T(v)=20+5(v-1)$ on $1\\le v\\le3$, find calibrated inverse and its input range.",
+      "hint": "First find the output range $20\\le T\\le30$.",
+      "solution": "The calibration is increasing, so $v\\in[1,3]$ gives $T\\in[20,30]$ degrees Celsius. Solving $T=20+5(v-1)$ gives $v=1+(T-20)/5$. The inverse has input domain $20\\le T\\le30$ degrees Celsius and output range $1\\le v\\le3$.",
+      "lesson": 6,
+      "type": "Modeling"
+    }
+  ],
+  "summary": [
+    "Domain restrictions belong to the function and persist through algebraic simplification.",
+    "Composition requires each intermediate output to be an allowed next input; an inverse requires one-to-one behavior.",
+    "Point mappings explain transformations, while explicit hypotheses and counterexamples keep claims precise."
+  ],
+  "next": "Chapter 2 develops the algebra, trigonometry, and coordinate tools needed to manipulate these functions. Chapter 3 explains the lab code; Chapter 4 uses intervals and quantified statements to make approach and continuity precise."
+}

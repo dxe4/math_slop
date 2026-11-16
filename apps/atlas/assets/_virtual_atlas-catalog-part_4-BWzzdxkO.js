@@ -1,0 +1,1 @@
+var e={key:`license`,array:!1,value:`CC BY-SA 4.0`};export{e as default};

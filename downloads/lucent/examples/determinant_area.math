@@ -1,0 +1,16 @@
+# A's columns span a parallelogram. Its signed area is a*d-b*c.
+# Predict the area when one column doubles, or when the columns become parallel.
+scene "Determinants measure oriented area";
+domain -5 5;
+range -4 4;
+coordinates equal;
+param a = 2 from -2 to 2;
+param b = 0.5 from -2 to 2;
+param c = 0.5 from -2 to 2;
+param d = 1.5 from -2 to 2;
+transform A = (a,b,c,d);
+vector firstcolumn = (a,c) color blue;
+vector secondcolumn = (b,d) color teal;
+segment firstedge from (a,c) to (a+b,c+d) color teal;
+segment secondedge from (b,d) to (a+b,c+d) color blue;
+point oppositecorner = (a+b,c+d) color rose;

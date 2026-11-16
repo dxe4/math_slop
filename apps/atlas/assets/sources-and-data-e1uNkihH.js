@@ -1,0 +1,16 @@
+var e=`---
+parent_id: book-time-series
+chapter_id: sources-and-data
+title: Sources, Data Rights and Imports
+level: advanced-undergraduate
+license: CC BY-SA 4.0
+---
+
+# Sources, Data Rights and Imports
+
+This Time Series manuscript is original Euler teaching text and exercises under CC BY-SA 4.0. Its finite numerical vectors, hypothetical likelihood tables and case-study values were authored for the book and are openly shared with it. They are synthetic examples, not observations from a public dataset. No external dataset license is claimed or needed for these numbers. R code is supplied as source for a fresh base-R session; authoring did not execute it or generate empirical results.
+
+The route and terminology were benchmarked against the official publisher page for Brockwell and Davis, *Time Series: Theory and Methods*, second edition ([Springer](https://link.springer.com/book/10.1007/978-1-4419-0320-4)), and the authors' open online *Forecasting: Principles and Practice*, third edition ([OTexts](https://otexts.com/fpp3/)). These are bibliographic and curriculum references. No full protected text, proprietary figures or externally licensed dataset is reproduced. The online OTexts edition is free to read; that access fact is not a license to copy its prose or data without checking their own terms.
+
+The book proves the elementary covariance, projection, AR, MA, differencing, periodogram and Kalman recursions it uses locally. Deeper results such as general ARMA likelihood asymptotics, spectral representation for every stationary process, broad state-space convergence, GARCH existence beyond stated sufficient conditions, cointegration inference and long-memory limit theory are identified as imported or outside scope in the chapters that mention them. A numerical illustration cannot substitute for those hypotheses.
+`;export{e as default};

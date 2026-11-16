@@ -1,0 +1,3099 @@
+{
+  "schemaVersion": 1,
+  "id": "uni12-objective-written-coverage",
+  "method": "Independent manual nonauthor source audits of all current canonical and depth written prompts, hints and keys, including all append/mutation sites. Final authored repairs receive a distinct review. No learner observation or authored-program execution is implied.",
+  "limits": [
+    "Worked examples, laboratories, concept checks, figures, appendices and generated editions retain their existing separately declared review/check scope.",
+    "Source task/key review and exact identity accounting establish no human qualification, learner mastery, verified delay or unseen performance."
+  ],
+  "counts": {
+    "chapters": 28,
+    "objectives": 132,
+    "written": 1059,
+    "priorityWritten": 226,
+    "newPublicForms": 18
+  },
+  "priorityChapters": [
+    "04",
+    "11",
+    "17",
+    "21",
+    "26",
+    "28"
+  ],
+  "sourcePins": {
+    "chapters/01.json": "fdd4e2cf3efbaa90b28026d2bb5868ddfb7714dccbfafffa41e72f3dfb125e8d",
+    "chapters/02.json": "cfcdc58260c9828b39043697167d9d1182d6ba9fe3a45fcbf0cf262c40a7a6f9",
+    "chapters/03.json": "72c020cc67ee0fd378ba62a48b5ffa6e46f92e517bc9e910720c36c6f96533b1",
+    "chapters/04.json": "fc8764734eff9eb4c697ae0d8a491340a91f9f22c8cf29a1832607499abd560b",
+    "chapters/05.json": "75fa94cbb99344b2068bc1387c0e8abe30468b61fae4333344ad303784799a4f",
+    "chapters/06.json": "12953b048b4758e6f4ce1f70db6bae8688517512b70f643462f664354d2a332b",
+    "chapters/07.json": "19705bffeaa7db6c50d7762d4468f740337ab96b0f9395822cd22b0af4463146",
+    "chapters/08.json": "1e793cad9a5c66b62b8a7c12b8df3a828713ed572dbaf3cf90a190b4d203af5b",
+    "chapters/09.json": "d711352ba15e2f5a1a3b88dfe1346e8f076a779024e69c71c3fe72c8091e6d31",
+    "chapters/10.json": "51d1f82a187cc80db220df416c77af7b2b381c73dfa42ab2bc027e1f3a1bfbff",
+    "chapters/11.json": "5e6b80cd2dcf45a354328e746e0b2e2a106d9129d6dcbe866046e87dcb4e8320",
+    "chapters/12.json": "615c056dffd9382daa1a36811317d89b0bdd3900e7ee78554cae2902d032933c",
+    "chapters/13.json": "3b482708a2278577931b93c8596131be77398b3736f4efe032a75f814fd74694",
+    "chapters/14.json": "31123ccf1967bbdd48ad4f97925516333af2ea2345135bffa28465f5da98ba2a",
+    "chapters/15.json": "8ff07846fe898d692a6ce3a40127a3ce49266a4b1cd5098fa7be2c964b8297ba",
+    "chapters/16.json": "e723c6c9a9310b47fc0f0cbddcc082abe7640f68a371a56ee41e9a6bd2f62557",
+    "chapters/17.json": "9032734b467fb9b3022851352f871f05a9d85be34250919f0b1973d7f8e4b910",
+    "chapters/18.json": "9d551e865386a5a25fbe61fea49466a96721428e400fd37a018b481d3e981ad5",
+    "chapters/19.json": "a4eccae3578fb4354f18ffd2c8970c45a4d5469c0f515485f3c9b97a500de881",
+    "chapters/20.json": "b2066780b9520ac96b844aac6626dca30218f91513e0593f396e1b9be65ef4a3",
+    "chapters/21.json": "3cc817cfd43939014a42008777bd99777acb7e1f0a2038a169169091c9c55f4a",
+    "chapters/22.json": "425b750cf576ff98468419cfd9ceb41fa274a3c6e3fe06546c980729132d36fd",
+    "chapters/23.json": "5d3cb4b7c808596004bc831d376801a9ac414d098598ab90155d877b9acc2b96",
+    "chapters/24.json": "2f152994482dc4c42ce5076439034c3536e7fc18f3797d1d5857b5988f039dbc",
+    "chapters/25.json": "08c0f105da2518c272236725d564baa6a3c149fd5057a33e0ae1f36a8e28a20a",
+    "chapters/26.json": "eb4fdb90dd77be042fccc38425c15e992a2a00574f19cb281940b8cbcf58d9c6",
+    "chapters/27.json": "19241a86b9f4a11965f05621980d5c6f8585665bac278ddb1cf1f6eb8a9a3bdf",
+    "chapters/28.json": "893e75e065ce6a8ac889155ca470d8faa5a4ebd96577f551afa9e5d309856acf",
+    "depth.js": "109a66a2158532d57a12fbab0b7b624cca8f4df7afecf5a8ef19db3c29020468",
+    "objective-practice.js": "6f7496e23e71ba304f591eb9812c944d8787d55270c9383f40337b84ffd83638",
+    "handbook.js": "d20daac39a90c304b6ccca8bf6bbd31887eef4bfdca1efd9335fc78a9a998b9c"
+  },
+  "chapters": [
+    {
+      "id": "01",
+      "canonicalCount": 32,
+      "depthCount": 5,
+      "writtenCount": 37,
+      "checkedWrittenIds": [
+        "01.1",
+        "01.2",
+        "01.3",
+        "01.4",
+        "01.5",
+        "01.6",
+        "01.7",
+        "01.8",
+        "01.9",
+        "01.10",
+        "01.11",
+        "01.12",
+        "01.13",
+        "01.14",
+        "01.15",
+        "01.16",
+        "01.17",
+        "01.18",
+        "01.19",
+        "01.20",
+        "01.21",
+        "01.22",
+        "01.23",
+        "01.24",
+        "01.25",
+        "01.26",
+        "01.27",
+        "01.28",
+        "01.29",
+        "01.30",
+        "01.31",
+        "01.32",
+        "01.33",
+        "01.34",
+        "01.35",
+        "01.36",
+        "01.37"
+      ],
+      "baselineSHA256": "fdd4e2cf3efbaa90b28026d2bb5868ddfb7714dccbfafffa41e72f3dfb125e8d",
+      "sourceSHA256": "fdd4e2cf3efbaa90b28026d2bb5868ddfb7714dccbfafffa41e72f3dfb125e8d",
+      "sourceReviewer": "uni12_audit_foundations"
+    },
+    {
+      "id": "02",
+      "canonicalCount": 32,
+      "depthCount": 12,
+      "writtenCount": 44,
+      "checkedWrittenIds": [
+        "02.1",
+        "02.2",
+        "02.3",
+        "02.4",
+        "02.5",
+        "02.6",
+        "02.7",
+        "02.8",
+        "02.9",
+        "02.10",
+        "02.11",
+        "02.12",
+        "02.13",
+        "02.14",
+        "02.15",
+        "02.16",
+        "02.17",
+        "02.18",
+        "02.19",
+        "02.20",
+        "02.21",
+        "02.22",
+        "02.23",
+        "02.24",
+        "02.25",
+        "02.26",
+        "02.27",
+        "02.28",
+        "02.29",
+        "02.30",
+        "02.31",
+        "02.32",
+        "02.33",
+        "02.34",
+        "02.35",
+        "02.36",
+        "02.37",
+        "02.38",
+        "02.39",
+        "02.40",
+        "02.41",
+        "02.42",
+        "02.43",
+        "02.44"
+      ],
+      "baselineSHA256": "cfcdc58260c9828b39043697167d9d1182d6ba9fe3a45fcbf0cf262c40a7a6f9",
+      "sourceSHA256": "cfcdc58260c9828b39043697167d9d1182d6ba9fe3a45fcbf0cf262c40a7a6f9",
+      "sourceReviewer": "uni12_audit_foundations"
+    },
+    {
+      "id": "03",
+      "canonicalCount": 32,
+      "depthCount": 5,
+      "writtenCount": 37,
+      "checkedWrittenIds": [
+        "03.1",
+        "03.2",
+        "03.3",
+        "03.4",
+        "03.5",
+        "03.6",
+        "03.7",
+        "03.8",
+        "03.9",
+        "03.10",
+        "03.11",
+        "03.12",
+        "03.13",
+        "03.14",
+        "03.15",
+        "03.16",
+        "03.17",
+        "03.18",
+        "03.19",
+        "03.20",
+        "03.21",
+        "03.22",
+        "03.23",
+        "03.24",
+        "03.25",
+        "03.26",
+        "03.27",
+        "03.28",
+        "03.29",
+        "03.30",
+        "03.31",
+        "03.32",
+        "03.33",
+        "03.34",
+        "03.35",
+        "03.36",
+        "03.37"
+      ],
+      "baselineSHA256": "72c020cc67ee0fd378ba62a48b5ffa6e46f92e517bc9e910720c36c6f96533b1",
+      "sourceSHA256": "72c020cc67ee0fd378ba62a48b5ffa6e46f92e517bc9e910720c36c6f96533b1",
+      "sourceReviewer": "uni12_audit_foundations"
+    },
+    {
+      "id": "04",
+      "canonicalCount": 30,
+      "depthCount": 9,
+      "writtenCount": 39,
+      "checkedWrittenIds": [
+        "04.1",
+        "04.2",
+        "04.3",
+        "04.4",
+        "04.5",
+        "04.6",
+        "04.7",
+        "04.8",
+        "04.9",
+        "04.10",
+        "04.11",
+        "04.12",
+        "04.13",
+        "04.14",
+        "04.15",
+        "04.16",
+        "04.17",
+        "04.18",
+        "04.19",
+        "04.20",
+        "04.21",
+        "04.22",
+        "04.23",
+        "04.24",
+        "04.25",
+        "04.26",
+        "04.27",
+        "04.28",
+        "04.29",
+        "04.30",
+        "04.31",
+        "04.32",
+        "04.33",
+        "04.34",
+        "04.35",
+        "04.36",
+        "04.37",
+        "04.38",
+        "04.39"
+      ],
+      "baselineSHA256": "0e2419da6a7498a2f2fd46b4d92508ffa9965c538ab5b42512ab6a8c59c457a3",
+      "sourceSHA256": "fc8764734eff9eb4c697ae0d8a491340a91f9f22c8cf29a1832607499abd560b",
+      "sourceReviewer": "uni12_audit_04_11"
+    },
+    {
+      "id": "05",
+      "canonicalCount": 30,
+      "depthCount": 5,
+      "writtenCount": 35,
+      "checkedWrittenIds": [
+        "05.1",
+        "05.2",
+        "05.3",
+        "05.4",
+        "05.5",
+        "05.6",
+        "05.7",
+        "05.8",
+        "05.9",
+        "05.10",
+        "05.11",
+        "05.12",
+        "05.13",
+        "05.14",
+        "05.15",
+        "05.16",
+        "05.17",
+        "05.18",
+        "05.19",
+        "05.20",
+        "05.21",
+        "05.22",
+        "05.23",
+        "05.24",
+        "05.25",
+        "05.26",
+        "05.27",
+        "05.28",
+        "05.29",
+        "05.30",
+        "05.31",
+        "05.32",
+        "05.33",
+        "05.34",
+        "05.35"
+      ],
+      "baselineSHA256": "75fa94cbb99344b2068bc1387c0e8abe30468b61fae4333344ad303784799a4f",
+      "sourceSHA256": "75fa94cbb99344b2068bc1387c0e8abe30468b61fae4333344ad303784799a4f",
+      "sourceReviewer": "uni12_audit_foundations"
+    },
+    {
+      "id": "06",
+      "canonicalCount": 30,
+      "depthCount": 10,
+      "writtenCount": 40,
+      "checkedWrittenIds": [
+        "06.1",
+        "06.2",
+        "06.3",
+        "06.4",
+        "06.5",
+        "06.6",
+        "06.7",
+        "06.8",
+        "06.9",
+        "06.10",
+        "06.11",
+        "06.12",
+        "06.13",
+        "06.14",
+        "06.15",
+        "06.16",
+        "06.17",
+        "06.18",
+        "06.19",
+        "06.20",
+        "06.21",
+        "06.22",
+        "06.23",
+        "06.24",
+        "06.25",
+        "06.26",
+        "06.27",
+        "06.28",
+        "06.29",
+        "06.30",
+        "06.31",
+        "06.32",
+        "06.33",
+        "06.34",
+        "06.35",
+        "06.36",
+        "06.37",
+        "06.38",
+        "06.39",
+        "06.40"
+      ],
+      "baselineSHA256": "12953b048b4758e6f4ce1f70db6bae8688517512b70f643462f664354d2a332b",
+      "sourceSHA256": "12953b048b4758e6f4ce1f70db6bae8688517512b70f643462f664354d2a332b",
+      "sourceReviewer": "uni12_audit_foundations"
+    },
+    {
+      "id": "07",
+      "canonicalCount": 30,
+      "depthCount": 3,
+      "writtenCount": 33,
+      "checkedWrittenIds": [
+        "07.1",
+        "07.2",
+        "07.3",
+        "07.4",
+        "07.5",
+        "07.6",
+        "07.7",
+        "07.8",
+        "07.9",
+        "07.10",
+        "07.11",
+        "07.12",
+        "07.13",
+        "07.14",
+        "07.15",
+        "07.16",
+        "07.17",
+        "07.18",
+        "07.19",
+        "07.20",
+        "07.21",
+        "07.22",
+        "07.23",
+        "07.24",
+        "07.25",
+        "07.26",
+        "07.27",
+        "07.28",
+        "07.29",
+        "07.30",
+        "07.31",
+        "07.32",
+        "07.33"
+      ],
+      "baselineSHA256": "5251594c08fd015492dc76dcc1b37258125ce2a2b8bb6e7fd9a1bd1b4807b01d",
+      "sourceSHA256": "19705bffeaa7db6c50d7762d4468f740337ab96b0f9395822cd22b0af4463146",
+      "sourceReviewer": "uni12_audit_foundations"
+    },
+    {
+      "id": "08",
+      "canonicalCount": 30,
+      "depthCount": 7,
+      "writtenCount": 37,
+      "checkedWrittenIds": [
+        "08.1",
+        "08.2",
+        "08.3",
+        "08.4",
+        "08.5",
+        "08.6",
+        "08.7",
+        "08.8",
+        "08.9",
+        "08.10",
+        "08.11",
+        "08.12",
+        "08.13",
+        "08.14",
+        "08.15",
+        "08.16",
+        "08.17",
+        "08.18",
+        "08.19",
+        "08.20",
+        "08.21",
+        "08.22",
+        "08.23",
+        "08.24",
+        "08.25",
+        "08.26",
+        "08.27",
+        "08.28",
+        "08.29",
+        "08.30",
+        "08.31",
+        "08.32",
+        "08.33",
+        "08.34",
+        "08.35",
+        "08.36",
+        "08.37"
+      ],
+      "baselineSHA256": "1e793cad9a5c66b62b8a7c12b8df3a828713ed572dbaf3cf90a190b4d203af5b",
+      "sourceSHA256": "1e793cad9a5c66b62b8a7c12b8df3a828713ed572dbaf3cf90a190b4d203af5b",
+      "sourceReviewer": "uni12_audit_integral"
+    },
+    {
+      "id": "09",
+      "canonicalCount": 30,
+      "depthCount": 3,
+      "writtenCount": 33,
+      "checkedWrittenIds": [
+        "09.1",
+        "09.2",
+        "09.3",
+        "09.4",
+        "09.5",
+        "09.6",
+        "09.7",
+        "09.8",
+        "09.9",
+        "09.10",
+        "09.11",
+        "09.12",
+        "09.13",
+        "09.14",
+        "09.15",
+        "09.16",
+        "09.17",
+        "09.18",
+        "09.19",
+        "09.20",
+        "09.21",
+        "09.22",
+        "09.23",
+        "09.24",
+        "09.25",
+        "09.26",
+        "09.27",
+        "09.28",
+        "09.29",
+        "09.30",
+        "09.31",
+        "09.32",
+        "09.33"
+      ],
+      "baselineSHA256": "d711352ba15e2f5a1a3b88dfe1346e8f076a779024e69c71c3fe72c8091e6d31",
+      "sourceSHA256": "d711352ba15e2f5a1a3b88dfe1346e8f076a779024e69c71c3fe72c8091e6d31",
+      "sourceReviewer": "uni12_audit_integral"
+    },
+    {
+      "id": "10",
+      "canonicalCount": 30,
+      "depthCount": 6,
+      "writtenCount": 36,
+      "checkedWrittenIds": [
+        "10.1",
+        "10.2",
+        "10.3",
+        "10.4",
+        "10.5",
+        "10.6",
+        "10.7",
+        "10.8",
+        "10.9",
+        "10.10",
+        "10.11",
+        "10.12",
+        "10.13",
+        "10.14",
+        "10.15",
+        "10.16",
+        "10.17",
+        "10.18",
+        "10.19",
+        "10.20",
+        "10.21",
+        "10.22",
+        "10.23",
+        "10.24",
+        "10.25",
+        "10.26",
+        "10.27",
+        "10.28",
+        "10.29",
+        "10.30",
+        "10.31",
+        "10.32",
+        "10.33",
+        "10.34",
+        "10.35",
+        "10.36"
+      ],
+      "baselineSHA256": "51d1f82a187cc80db220df416c77af7b2b381c73dfa42ab2bc027e1f3a1bfbff",
+      "sourceSHA256": "51d1f82a187cc80db220df416c77af7b2b381c73dfa42ab2bc027e1f3a1bfbff",
+      "sourceReviewer": "uni12_audit_integral"
+    },
+    {
+      "id": "11",
+      "canonicalCount": 30,
+      "depthCount": 6,
+      "writtenCount": 36,
+      "checkedWrittenIds": [
+        "11.1",
+        "11.2",
+        "11.3",
+        "11.4",
+        "11.5",
+        "11.6",
+        "11.7",
+        "11.8",
+        "11.9",
+        "11.10",
+        "11.11",
+        "11.12",
+        "11.13",
+        "11.14",
+        "11.15",
+        "11.16",
+        "11.17",
+        "11.18",
+        "11.19",
+        "11.20",
+        "11.21",
+        "11.22",
+        "11.23",
+        "11.24",
+        "11.25",
+        "11.26",
+        "11.27",
+        "11.28",
+        "11.29",
+        "11.30",
+        "11.31",
+        "11.32",
+        "11.33",
+        "11.34",
+        "11.35",
+        "11.36"
+      ],
+      "baselineSHA256": "e63e3df39b0d55265cfb4adcbb7a8faa1c1f66e69ad6e314393996cc83ab67ae",
+      "sourceSHA256": "5e6b80cd2dcf45a354328e746e0b2e2a106d9129d6dcbe866046e87dcb4e8320",
+      "sourceReviewer": "uni12_audit_04_11"
+    },
+    {
+      "id": "12",
+      "canonicalCount": 30,
+      "depthCount": 10,
+      "writtenCount": 40,
+      "checkedWrittenIds": [
+        "12.1",
+        "12.2",
+        "12.3",
+        "12.4",
+        "12.5",
+        "12.6",
+        "12.7",
+        "12.8",
+        "12.9",
+        "12.10",
+        "12.11",
+        "12.12",
+        "12.13",
+        "12.14",
+        "12.15",
+        "12.16",
+        "12.17",
+        "12.18",
+        "12.19",
+        "12.20",
+        "12.21",
+        "12.22",
+        "12.23",
+        "12.24",
+        "12.25",
+        "12.26",
+        "12.27",
+        "12.28",
+        "12.29",
+        "12.30",
+        "12.31",
+        "12.32",
+        "12.33",
+        "12.34",
+        "12.35",
+        "12.36",
+        "12.37",
+        "12.38",
+        "12.39",
+        "12.40"
+      ],
+      "baselineSHA256": "615c056dffd9382daa1a36811317d89b0bdd3900e7ee78554cae2902d032933c",
+      "sourceSHA256": "615c056dffd9382daa1a36811317d89b0bdd3900e7ee78554cae2902d032933c",
+      "sourceReviewer": "uni12_audit_integral"
+    },
+    {
+      "id": "13",
+      "canonicalCount": 30,
+      "depthCount": 4,
+      "writtenCount": 34,
+      "checkedWrittenIds": [
+        "13.1",
+        "13.2",
+        "13.3",
+        "13.4",
+        "13.5",
+        "13.6",
+        "13.7",
+        "13.8",
+        "13.9",
+        "13.10",
+        "13.11",
+        "13.12",
+        "13.13",
+        "13.14",
+        "13.15",
+        "13.16",
+        "13.17",
+        "13.18",
+        "13.19",
+        "13.20",
+        "13.21",
+        "13.22",
+        "13.23",
+        "13.24",
+        "13.25",
+        "13.26",
+        "13.27",
+        "13.28",
+        "13.29",
+        "13.30",
+        "13.31",
+        "13.32",
+        "13.33",
+        "13.34"
+      ],
+      "baselineSHA256": "3b482708a2278577931b93c8596131be77398b3736f4efe032a75f814fd74694",
+      "sourceSHA256": "3b482708a2278577931b93c8596131be77398b3736f4efe032a75f814fd74694",
+      "sourceReviewer": "uni12_audit_integral"
+    },
+    {
+      "id": "14",
+      "canonicalCount": 30,
+      "depthCount": 6,
+      "writtenCount": 36,
+      "checkedWrittenIds": [
+        "14.1",
+        "14.2",
+        "14.3",
+        "14.4",
+        "14.5",
+        "14.6",
+        "14.7",
+        "14.8",
+        "14.9",
+        "14.10",
+        "14.11",
+        "14.12",
+        "14.13",
+        "14.14",
+        "14.15",
+        "14.16",
+        "14.17",
+        "14.18",
+        "14.19",
+        "14.20",
+        "14.21",
+        "14.22",
+        "14.23",
+        "14.24",
+        "14.25",
+        "14.26",
+        "14.27",
+        "14.28",
+        "14.29",
+        "14.30",
+        "14.31",
+        "14.32",
+        "14.33",
+        "14.34",
+        "14.35",
+        "14.36"
+      ],
+      "baselineSHA256": "31123ccf1967bbdd48ad4f97925516333af2ea2345135bffa28465f5da98ba2a",
+      "sourceSHA256": "31123ccf1967bbdd48ad4f97925516333af2ea2345135bffa28465f5da98ba2a",
+      "sourceReviewer": "uni12_audit_integral"
+    },
+    {
+      "id": "15",
+      "canonicalCount": 30,
+      "depthCount": 5,
+      "writtenCount": 35,
+      "checkedWrittenIds": [
+        "15.1",
+        "15.2",
+        "15.3",
+        "15.4",
+        "15.5",
+        "15.6",
+        "15.7",
+        "15.8",
+        "15.9",
+        "15.10",
+        "15.11",
+        "15.12",
+        "15.13",
+        "15.14",
+        "15.15",
+        "15.16",
+        "15.17",
+        "15.18",
+        "15.19",
+        "15.20",
+        "15.21",
+        "15.22",
+        "15.23",
+        "15.24",
+        "15.25",
+        "15.26",
+        "15.27",
+        "15.28",
+        "15.29",
+        "15.30",
+        "15.31",
+        "15.32",
+        "15.33",
+        "15.34",
+        "15.35"
+      ],
+      "baselineSHA256": "bc0d6d9b6d6095262bb6e1bc87866603313f0f535bef02c1a876f89964355196",
+      "sourceSHA256": "8ff07846fe898d692a6ce3a40127a3ce49266a4b1cd5098fa7be2c964b8297ba",
+      "sourceReviewer": "uni12_audit_series_space"
+    },
+    {
+      "id": "16",
+      "canonicalCount": 30,
+      "depthCount": 5,
+      "writtenCount": 35,
+      "checkedWrittenIds": [
+        "16.1",
+        "16.2",
+        "16.3",
+        "16.4",
+        "16.5",
+        "16.6",
+        "16.7",
+        "16.8",
+        "16.9",
+        "16.10",
+        "16.11",
+        "16.12",
+        "16.13",
+        "16.14",
+        "16.15",
+        "16.16",
+        "16.17",
+        "16.18",
+        "16.19",
+        "16.20",
+        "16.21",
+        "16.22",
+        "16.23",
+        "16.24",
+        "16.25",
+        "16.26",
+        "16.27",
+        "16.28",
+        "16.29",
+        "16.30",
+        "16.31",
+        "16.32",
+        "16.33",
+        "16.34",
+        "16.35"
+      ],
+      "baselineSHA256": "e723c6c9a9310b47fc0f0cbddcc082abe7640f68a371a56ee41e9a6bd2f62557",
+      "sourceSHA256": "e723c6c9a9310b47fc0f0cbddcc082abe7640f68a371a56ee41e9a6bd2f62557",
+      "sourceReviewer": "uni12_audit_series_space"
+    },
+    {
+      "id": "17",
+      "canonicalCount": 30,
+      "depthCount": 7,
+      "writtenCount": 37,
+      "checkedWrittenIds": [
+        "17.1",
+        "17.2",
+        "17.3",
+        "17.4",
+        "17.5",
+        "17.6",
+        "17.7",
+        "17.8",
+        "17.9",
+        "17.10",
+        "17.11",
+        "17.12",
+        "17.13",
+        "17.14",
+        "17.15",
+        "17.16",
+        "17.17",
+        "17.18",
+        "17.19",
+        "17.20",
+        "17.21",
+        "17.22",
+        "17.23",
+        "17.24",
+        "17.25",
+        "17.26",
+        "17.27",
+        "17.28",
+        "17.29",
+        "17.30",
+        "17.31",
+        "17.32",
+        "17.33",
+        "17.34",
+        "17.35",
+        "17.36",
+        "17.37"
+      ],
+      "baselineSHA256": "9b5594a8f2c6b34335c47679f4cd2778fde080cff2e7798e621e4a5d975e7263",
+      "sourceSHA256": "9032734b467fb9b3022851352f871f05a9d85be34250919f0b1973d7f8e4b910",
+      "sourceReviewer": "uni12_audit_17_21"
+    },
+    {
+      "id": "18",
+      "canonicalCount": 30,
+      "depthCount": 19,
+      "writtenCount": 49,
+      "checkedWrittenIds": [
+        "18.1",
+        "18.2",
+        "18.3",
+        "18.4",
+        "18.5",
+        "18.6",
+        "18.7",
+        "18.8",
+        "18.9",
+        "18.10",
+        "18.11",
+        "18.12",
+        "18.13",
+        "18.14",
+        "18.15",
+        "18.16",
+        "18.17",
+        "18.18",
+        "18.19",
+        "18.20",
+        "18.21",
+        "18.22",
+        "18.23",
+        "18.24",
+        "18.25",
+        "18.26",
+        "18.27",
+        "18.28",
+        "18.29",
+        "18.30",
+        "18.31",
+        "18.32",
+        "18.33",
+        "18.34",
+        "18.35",
+        "18.36",
+        "18.37",
+        "18.38",
+        "18.39",
+        "18.40",
+        "18.41",
+        "18.42",
+        "18.43",
+        "18.44",
+        "18.45",
+        "18.46",
+        "18.47",
+        "18.48",
+        "18.49"
+      ],
+      "baselineSHA256": "06410f809889033c0434ccf7b6e313d6fe28d9c60097b0bb7431aae86740869c",
+      "sourceSHA256": "9d551e865386a5a25fbe61fea49466a96721428e400fd37a018b481d3e981ad5",
+      "sourceReviewer": "uni12_audit_series_space"
+    },
+    {
+      "id": "19",
+      "canonicalCount": 30,
+      "depthCount": 8,
+      "writtenCount": 38,
+      "checkedWrittenIds": [
+        "19.1",
+        "19.2",
+        "19.3",
+        "19.4",
+        "19.5",
+        "19.6",
+        "19.7",
+        "19.8",
+        "19.9",
+        "19.10",
+        "19.11",
+        "19.12",
+        "19.13",
+        "19.14",
+        "19.15",
+        "19.16",
+        "19.17",
+        "19.18",
+        "19.19",
+        "19.20",
+        "19.21",
+        "19.22",
+        "19.23",
+        "19.24",
+        "19.25",
+        "19.26",
+        "19.27",
+        "19.28",
+        "19.29",
+        "19.30",
+        "19.31",
+        "19.32",
+        "19.33",
+        "19.34",
+        "19.35",
+        "19.36",
+        "19.37",
+        "19.38"
+      ],
+      "baselineSHA256": "a4eccae3578fb4354f18ffd2c8970c45a4d5469c0f515485f3c9b97a500de881",
+      "sourceSHA256": "a4eccae3578fb4354f18ffd2c8970c45a4d5469c0f515485f3c9b97a500de881",
+      "sourceReviewer": "uni12_audit_series_space"
+    },
+    {
+      "id": "20",
+      "canonicalCount": 30,
+      "depthCount": 14,
+      "writtenCount": 44,
+      "checkedWrittenIds": [
+        "20.1",
+        "20.2",
+        "20.3",
+        "20.4",
+        "20.5",
+        "20.6",
+        "20.7",
+        "20.8",
+        "20.9",
+        "20.10",
+        "20.11",
+        "20.12",
+        "20.13",
+        "20.14",
+        "20.15",
+        "20.16",
+        "20.17",
+        "20.18",
+        "20.19",
+        "20.20",
+        "20.21",
+        "20.22",
+        "20.23",
+        "20.24",
+        "20.25",
+        "20.26",
+        "20.27",
+        "20.28",
+        "20.29",
+        "20.30",
+        "20.31",
+        "20.32",
+        "20.33",
+        "20.34",
+        "20.35",
+        "20.36",
+        "20.37",
+        "20.38",
+        "20.39",
+        "20.40",
+        "20.41",
+        "20.42",
+        "20.43",
+        "20.44"
+      ],
+      "baselineSHA256": "b2066780b9520ac96b844aac6626dca30218f91513e0593f396e1b9be65ef4a3",
+      "sourceSHA256": "b2066780b9520ac96b844aac6626dca30218f91513e0593f396e1b9be65ef4a3",
+      "sourceReviewer": "uni12_audit_series_space"
+    },
+    {
+      "id": "21",
+      "canonicalCount": 30,
+      "depthCount": 7,
+      "writtenCount": 37,
+      "checkedWrittenIds": [
+        "21.1",
+        "21.2",
+        "21.3",
+        "21.4",
+        "21.5",
+        "21.6",
+        "21.7",
+        "21.8",
+        "21.9",
+        "21.10",
+        "21.11",
+        "21.12",
+        "21.13",
+        "21.14",
+        "21.15",
+        "21.16",
+        "21.17",
+        "21.18",
+        "21.19",
+        "21.20",
+        "21.21",
+        "21.22",
+        "21.23",
+        "21.24",
+        "21.25",
+        "21.26",
+        "21.27",
+        "21.28",
+        "21.29",
+        "21.30",
+        "21.31",
+        "21.32",
+        "21.33",
+        "21.34",
+        "21.35",
+        "21.36",
+        "21.37"
+      ],
+      "baselineSHA256": "c076c9e542fdb8687b61ccb570a663634639bf4c40ae0193b0f003c70e073510",
+      "sourceSHA256": "3cc817cfd43939014a42008777bd99777acb7e1f0a2038a169169091c9c55f4a",
+      "sourceReviewer": "uni12_audit_17_21"
+    },
+    {
+      "id": "22",
+      "canonicalCount": 30,
+      "depthCount": 4,
+      "writtenCount": 34,
+      "checkedWrittenIds": [
+        "22.1",
+        "22.2",
+        "22.3",
+        "22.4",
+        "22.5",
+        "22.6",
+        "22.7",
+        "22.8",
+        "22.9",
+        "22.10",
+        "22.11",
+        "22.12",
+        "22.13",
+        "22.14",
+        "22.15",
+        "22.16",
+        "22.17",
+        "22.18",
+        "22.19",
+        "22.20",
+        "22.21",
+        "22.22",
+        "22.23",
+        "22.24",
+        "22.25",
+        "22.26",
+        "22.27",
+        "22.28",
+        "22.29",
+        "22.30",
+        "22.31",
+        "22.32",
+        "22.33",
+        "22.34"
+      ],
+      "baselineSHA256": "425b750cf576ff98468419cfd9ceb41fa274a3c6e3fe06546c980729132d36fd",
+      "sourceSHA256": "425b750cf576ff98468419cfd9ceb41fa274a3c6e3fe06546c980729132d36fd",
+      "sourceReviewer": "uni12_audit_multi_ode"
+    },
+    {
+      "id": "23",
+      "canonicalCount": 30,
+      "depthCount": 5,
+      "writtenCount": 35,
+      "checkedWrittenIds": [
+        "23.1",
+        "23.2",
+        "23.3",
+        "23.4",
+        "23.5",
+        "23.6",
+        "23.7",
+        "23.8",
+        "23.9",
+        "23.10",
+        "23.11",
+        "23.12",
+        "23.13",
+        "23.14",
+        "23.15",
+        "23.16",
+        "23.17",
+        "23.18",
+        "23.19",
+        "23.20",
+        "23.21",
+        "23.22",
+        "23.23",
+        "23.24",
+        "23.25",
+        "23.26",
+        "23.27",
+        "23.28",
+        "23.29",
+        "23.30",
+        "23.31",
+        "23.32",
+        "23.33",
+        "23.34",
+        "23.35"
+      ],
+      "baselineSHA256": "5d3cb4b7c808596004bc831d376801a9ac414d098598ab90155d877b9acc2b96",
+      "sourceSHA256": "5d3cb4b7c808596004bc831d376801a9ac414d098598ab90155d877b9acc2b96",
+      "sourceReviewer": "uni12_audit_multi_ode"
+    },
+    {
+      "id": "24",
+      "canonicalCount": 30,
+      "depthCount": 7,
+      "writtenCount": 37,
+      "checkedWrittenIds": [
+        "24.1",
+        "24.2",
+        "24.3",
+        "24.4",
+        "24.5",
+        "24.6",
+        "24.7",
+        "24.8",
+        "24.9",
+        "24.10",
+        "24.11",
+        "24.12",
+        "24.13",
+        "24.14",
+        "24.15",
+        "24.16",
+        "24.17",
+        "24.18",
+        "24.19",
+        "24.20",
+        "24.21",
+        "24.22",
+        "24.23",
+        "24.24",
+        "24.25",
+        "24.26",
+        "24.27",
+        "24.28",
+        "24.29",
+        "24.30",
+        "24.31",
+        "24.32",
+        "24.33",
+        "24.34",
+        "24.35",
+        "24.36",
+        "24.37"
+      ],
+      "baselineSHA256": "b7962313b5ba06223a580d9471f9e63aa66ff617b99cd867229873ccb2c7c75d",
+      "sourceSHA256": "2f152994482dc4c42ce5076439034c3536e7fc18f3797d1d5857b5988f039dbc",
+      "sourceReviewer": "uni12_audit_multi_ode"
+    },
+    {
+      "id": "25",
+      "canonicalCount": 30,
+      "depthCount": 3,
+      "writtenCount": 33,
+      "checkedWrittenIds": [
+        "25.1",
+        "25.2",
+        "25.3",
+        "25.4",
+        "25.5",
+        "25.6",
+        "25.7",
+        "25.8",
+        "25.9",
+        "25.10",
+        "25.11",
+        "25.12",
+        "25.13",
+        "25.14",
+        "25.15",
+        "25.16",
+        "25.17",
+        "25.18",
+        "25.19",
+        "25.20",
+        "25.21",
+        "25.22",
+        "25.23",
+        "25.24",
+        "25.25",
+        "25.26",
+        "25.27",
+        "25.28",
+        "25.29",
+        "25.30",
+        "25.31",
+        "25.32",
+        "25.33"
+      ],
+      "baselineSHA256": "08c0f105da2518c272236725d564baa6a3c149fd5057a33e0ae1f36a8e28a20a",
+      "sourceSHA256": "08c0f105da2518c272236725d564baa6a3c149fd5057a33e0ae1f36a8e28a20a",
+      "sourceReviewer": "uni12_audit_multi_ode"
+    },
+    {
+      "id": "26",
+      "canonicalCount": 30,
+      "depthCount": 8,
+      "writtenCount": 38,
+      "checkedWrittenIds": [
+        "26.1",
+        "26.2",
+        "26.3",
+        "26.4",
+        "26.5",
+        "26.6",
+        "26.7",
+        "26.8",
+        "26.9",
+        "26.10",
+        "26.11",
+        "26.12",
+        "26.13",
+        "26.14",
+        "26.15",
+        "26.16",
+        "26.17",
+        "26.18",
+        "26.19",
+        "26.20",
+        "26.21",
+        "26.22",
+        "26.23",
+        "26.24",
+        "26.25",
+        "26.26",
+        "26.27",
+        "26.28",
+        "26.29",
+        "26.30",
+        "26.31",
+        "26.32",
+        "26.33",
+        "26.34",
+        "26.35",
+        "26.36",
+        "26.37",
+        "26.38"
+      ],
+      "baselineSHA256": "0b409781050b9bd8d8797ef4c63811737950c27b1d67d9ee66273d0109b58d44",
+      "sourceSHA256": "eb4fdb90dd77be042fccc38425c15e992a2a00574f19cb281940b8cbcf58d9c6",
+      "sourceReviewer": "uni12_audit_26_28"
+    },
+    {
+      "id": "27",
+      "canonicalCount": 30,
+      "depthCount": 21,
+      "writtenCount": 51,
+      "checkedWrittenIds": [
+        "27.1",
+        "27.2",
+        "27.3",
+        "27.4",
+        "27.5",
+        "27.6",
+        "27.7",
+        "27.8",
+        "27.9",
+        "27.10",
+        "27.11",
+        "27.12",
+        "27.13",
+        "27.14",
+        "27.15",
+        "27.16",
+        "27.17",
+        "27.18",
+        "27.19",
+        "27.20",
+        "27.21",
+        "27.22",
+        "27.23",
+        "27.24",
+        "27.25",
+        "27.26",
+        "27.27",
+        "27.28",
+        "27.29",
+        "27.30",
+        "27.31",
+        "27.32",
+        "27.33",
+        "27.34",
+        "27.35",
+        "27.36",
+        "27.37",
+        "27.38",
+        "27.39",
+        "27.40",
+        "27.41",
+        "27.42",
+        "27.43",
+        "27.44",
+        "27.45",
+        "27.46",
+        "27.47",
+        "27.48",
+        "27.49",
+        "27.50",
+        "27.51"
+      ],
+      "baselineSHA256": "19241a86b9f4a11965f05621980d5c6f8585665bac278ddb1cf1f6eb8a9a3bdf",
+      "sourceSHA256": "19241a86b9f4a11965f05621980d5c6f8585665bac278ddb1cf1f6eb8a9a3bdf",
+      "sourceReviewer": "uni12_audit_multi_ode"
+    },
+    {
+      "id": "28",
+      "canonicalCount": 30,
+      "depthCount": 9,
+      "writtenCount": 39,
+      "checkedWrittenIds": [
+        "28.1",
+        "28.2",
+        "28.3",
+        "28.4",
+        "28.5",
+        "28.6",
+        "28.7",
+        "28.8",
+        "28.9",
+        "28.10",
+        "28.11",
+        "28.12",
+        "28.13",
+        "28.14",
+        "28.15",
+        "28.16",
+        "28.17",
+        "28.18",
+        "28.19",
+        "28.20",
+        "28.21",
+        "28.22",
+        "28.23",
+        "28.24",
+        "28.25",
+        "28.26",
+        "28.27",
+        "28.28",
+        "28.29",
+        "28.30",
+        "28.31",
+        "28.32",
+        "28.33",
+        "28.34",
+        "28.35",
+        "28.36",
+        "28.37",
+        "28.38",
+        "28.39"
+      ],
+      "baselineSHA256": "894b03683da8b554ce4d4d21e0cd83b6028a023a24e7e4d178f076b29e7fe151",
+      "sourceSHA256": "893e75e065ce6a8ac889155ca470d8faa5a4ebd96577f551afa9e5d309856acf",
+      "sourceReviewer": "uni12_audit_26_28"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "01.1",
+      "objective": "Translate between intervals, inequalities, and absolute-value descriptions",
+      "targets": [
+        "01.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "01.2",
+      "objective": "Determine domains and ranges while preserving excluded endpoints",
+      "targets": [
+        "01.10",
+        "01.12"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "01.3",
+      "objective": "Compose functions and decide when an inverse function exists",
+      "targets": [
+        "01.15",
+        "01.25"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "01.4",
+      "objective": "Explain graph transformations through the movement of individual points",
+      "targets": [
+        "01.37"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "01.5",
+      "objective": "Distinguish evidence, proof, and counterexamples",
+      "targets": [
+        "01.35",
+        "01.21"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "02.1",
+      "objective": "Simplify rational expressions while retaining their original domain restrictions.",
+      "targets": [
+        "02.1"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "02.2",
+      "objective": "Use powers and logarithms with explicit real-number assumptions.",
+      "targets": [
+        "02.6",
+        "02.10"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "02.3",
+      "objective": "Interpret radians, unit-circle identities, and Cartesian and polar coordinates.",
+      "targets": [
+        "02.12",
+        "02.11",
+        "02.21"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "02.4",
+      "objective": "Check dimensional consistency and investigate the accuracy of sin θ ≈ θ.",
+      "targets": [
+        "02.22",
+        "02.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "02.5",
+      "objective": "Derive hyperbolic identities and select the correct real inverse branches.",
+      "targets": [
+        "02.38",
+        "02.39",
+        "02.41"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "03.1",
+      "objective": "Translate a mathematical function into a small JavaScript function and use the Math API.",
+      "targets": [
+        "03.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "03.2",
+      "objective": "Build and inspect a reusable sampler with arrays, bounded loops, and endpoint checks.",
+      "targets": [
+        "03.37"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "03.3",
+      "objective": "Measure absolute and relative error and recognize cancellation in floating-point arithmetic.",
+      "targets": [
+        "03.13",
+        "03.21",
+        "03.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "03.4",
+      "objective": "Separate a numerical experiment, a counterexample, and a proof.",
+      "targets": [
+        "03.11",
+        "03.20",
+        "03.21"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "04.1",
+      "objective": "Distinguish a function value from one-sided and two-sided limits.",
+      "targets": [
+        "04.1",
+        "04.2"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "04.2",
+      "objective": "Evaluate limits using laws, algebra, and the squeeze theorem with their hypotheses.",
+      "targets": [
+        "04.10",
+        "04.7",
+        "04.5"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "04.3",
+      "objective": "Prove linear and nonlinear finite limits from the epsilon–delta definition by choosing a positive radius that works for every eligible nearby input.",
+      "targets": [
+        "04.11",
+        "04.36",
+        "04.38"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "04.4",
+      "objective": "Classify discontinuities and asymptotes and apply the intermediate value theorem.",
+      "targets": [
+        "04.35",
+        "04.16",
+        "04.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "05.1",
+      "objective": "Calculate average rates and derive instantaneous rates using limits.",
+      "targets": [
+        "05.1"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "05.2",
+      "objective": "Construct a tangent line and interpret its slope with units.",
+      "targets": [
+        "05.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "05.3",
+      "objective": "Prove that differentiability implies continuity and diagnose corners, cusps, and endpoint cases.",
+      "targets": [
+        "05.31",
+        "05.35",
+        "05.5"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "05.4",
+      "objective": "Interpret first and higher derivatives in a motion model.",
+      "targets": [
+        "05.22",
+        "05.21"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "06.1",
+      "objective": "Differentiate sums, products, quotients, and nested compositions while preserving their domains.",
+      "targets": [
+        "06.1",
+        "06.7",
+        "06.31"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "06.2",
+      "objective": "Use exponential, logarithmic, trigonometric, and inverse trigonometric derivatives with correct hypotheses.",
+      "targets": [
+        "06.16",
+        "06.7",
+        "06.15"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "06.3",
+      "objective": "Find derivatives from implicit equations and by logarithmic differentiation.",
+      "targets": [
+        "06.25",
+        "06.13"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "06.4",
+      "objective": "Compare a symbolic derivative with numerical evidence and explain why agreement is not a proof.",
+      "targets": [
+        "06.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "06.5",
+      "objective": "Differentiate hyperbolic functions and their inverses with their domain and branch conditions.",
+      "targets": [
+        "06.37",
+        "06.38",
+        "06.40"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "07.1",
+      "objective": "Translate a geometric constraint into an equation relating rates, with consistent units.",
+      "targets": [
+        "07.4"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "07.2",
+      "objective": "Construct a local linear approximation and distinguish a differential from an actual change.",
+      "targets": [
+        "07.6",
+        "07.10"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "07.3",
+      "objective": "Estimate measurement uncertainty and check the estimate against an exact interval.",
+      "targets": [
+        "07.12"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "07.4",
+      "objective": "Interpret absolute sensitivity and dimensionless elasticity while stating model assumptions.",
+      "targets": [
+        "07.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "08.1",
+      "objective": "Apply the extreme value, Rolle, and mean value theorems after checking their hypotheses.",
+      "targets": [
+        "08.34",
+        "08.6"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "08.2",
+      "objective": "Use critical points and derivative signs to distinguish local and absolute extrema.",
+      "targets": [
+        "08.13",
+        "08.2"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "08.3",
+      "objective": "Determine concavity and identify genuine changes of concavity.",
+      "targets": [
+        "08.15",
+        "08.16"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "08.4",
+      "objective": "Evaluate suitable indeterminate limits using a correctly stated version of L’Hôpital’s rule.",
+      "targets": [
+        "08.20",
+        "08.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "08.5",
+      "objective": "Explain what a sampled sign chart can suggest and what requires an analytic argument.",
+      "targets": [
+        "08.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "09.1",
+      "objective": "Translate a design problem into an objective and a feasible interval, then justify a global optimum.",
+      "targets": [
+        "09.2",
+        "09.3"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "09.2",
+      "objective": "Compare bisection and Newton iteration using hypotheses, error bounds, and failure cases.",
+      "targets": [
+        "09.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "09.3",
+      "objective": "Apply elementary gradient descent and explain how the step size affects convergence.",
+      "targets": [
+        "09.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "10.1",
+      "objective": "Construct signed Riemann sums on uniform and nonuniform partitions",
+      "targets": [
+        "10.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "10.2",
+      "objective": "Explain integrability as independence from sufficiently fine sample choices",
+      "targets": [
+        "10.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "10.3",
+      "objective": "Use integral properties and interpret average value",
+      "targets": [
+        "10.16",
+        "10.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "10.4",
+      "objective": "Distinguish displacement from total distance",
+      "targets": [
+        "10.21"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "10.5",
+      "objective": "Implement and check a finite Riemann-sum approximation",
+      "targets": [
+        "10.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "11.1",
+      "objective": "Interpret an accumulation function and differentiate it under appropriate hypotheses.",
+      "targets": [
+        "11.1",
+        "11.6",
+        "11.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "11.2",
+      "objective": "Explain both parts of the fundamental theorem, including their proof ideas.",
+      "targets": [
+        "11.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "11.3",
+      "objective": "Recover total change and an initial value from a rate model.",
+      "targets": [
+        "11.5"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "11.5"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "11.4",
+      "objective": "Differentiate integrals with moving endpoints and evaluate definite integrals by substitution.",
+      "targets": [
+        "11.18",
+        "11.25",
+        "11.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "12.1",
+      "objective": "Choose and justify substitution, integration by parts, trigonometric methods or partial fractions",
+      "targets": [
+        "12.24",
+        "12.34",
+        "12.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "12.2",
+      "objective": "Track domains, constants and transformed endpoints throughout a calculation",
+      "targets": [
+        "12.2",
+        "12.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "12.3",
+      "objective": "Verify an antiderivative symbolically and interpret a numerical derivative check",
+      "targets": [
+        "12.1",
+        "12.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "12.4",
+      "objective": "Recognize when an exact integral need not have an elementary expression",
+      "targets": [
+        "12.24"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "12.5",
+      "objective": "Use a branch-safe hyperbolic substitution with transformed bounds and derivative verification.",
+      "targets": [
+        "12.37",
+        "12.39",
+        "12.40"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "13.1",
+      "objective": "Choose a small representative piece and turn its approximate contribution into a definite integral.",
+      "targets": [
+        "13.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "13.2",
+      "objective": "Compute areas, volumes, curve lengths, and surfaces of revolution with correct geometric bounds.",
+      "targets": [
+        "13.33",
+        "13.11",
+        "13.15"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "13.3",
+      "objective": "Model work, mass, and center of mass while tracking units and assumptions.",
+      "targets": [
+        "13.17",
+        "13.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "13.4",
+      "objective": "Compare a numerical solid approximation with an exact result and identify its limitations.",
+      "targets": [
+        "13.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "14.1",
+      "objective": "Compute composite trapezoidal and Simpson approximations and choose valid error bounds.",
+      "targets": [
+        "14.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "14.2",
+      "objective": "Explain adaptive refinement and distinguish an error estimate from a guarantee.",
+      "targets": [
+        "14.34",
+        "14.11"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "14.3",
+      "objective": "Define improper integrals through independent limits and test their convergence.",
+      "targets": [
+        "14.35",
+        "14.14"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "14.4",
+      "objective": "Separate quadrature error from truncation error and distinguish principal values from ordinary integrals.",
+      "targets": [
+        "14.13",
+        "14.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "15.1",
+      "objective": "Distinguish a sequence limit from convergence of its series of partial sums.",
+      "targets": [
+        "15.15"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "15.2",
+      "objective": "Use monotonicity and bounds to prove convergence.",
+      "targets": [
+        "15.9",
+        "15.28"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "15.3",
+      "objective": "Evaluate geometric and telescoping series and estimate their tails.",
+      "targets": [
+        "15.11",
+        "15.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "15.4",
+      "objective": "Apply the divergence, integral, and comparison tests with their hypotheses.",
+      "targets": [
+        "15.15",
+        "15.21",
+        "15.35"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "15.15"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "16.1",
+      "objective": "Distinguish absolute convergence, conditional convergence and divergence.",
+      "targets": [
+        "16.1",
+        "16.2",
+        "16.4"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "16.2",
+      "objective": "Apply alternating-series, ratio and root tests with their hypotheses and inconclusive cases.",
+      "targets": [
+        "16.34",
+        "16.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "16.3",
+      "objective": "Select a useful convergence test from the structure of a series.",
+      "targets": [
+        "16.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "16.4",
+      "objective": "Turn a remainder theorem into a justified computational stopping criterion.",
+      "targets": [
+        "16.30"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "16.5",
+      "objective": "Explain why changing the order of a conditionally convergent series can change its sum.",
+      "targets": [
+        "16.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "17.1",
+      "objective": "Find a power series radius of convergence and test its endpoints separately.",
+      "targets": [
+        "17.1"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "17.2",
+      "objective": "Differentiate and integrate a power series on its open interval of convergence.",
+      "targets": [
+        "17.7",
+        "17.8"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "17.3",
+      "objective": "Construct Taylor polynomials about a chosen center and certify approximation errors.",
+      "targets": [
+        "17.15",
+        "17.36",
+        "17.37"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "17.4",
+      "objective": "Distinguish a smooth function from a function represented by its Taylor series.",
+      "targets": [
+        "17.23"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "17.5",
+      "objective": "Reindex differentiated power series and distinguish formal coefficient rules from convergent functions.",
+      "targets": [
+        "17.34",
+        "17.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.1",
+      "objective": "Compute parametric first and second derivatives with their validity conditions.",
+      "targets": [
+        "18.6",
+        "18.9",
+        "18.32"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.2",
+      "objective": "Distinguish slope, velocity, speed, and distance traveled.",
+      "targets": [
+        "18.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.3",
+      "objective": "Derive and apply parametric and polar arc-length formulas.",
+      "targets": [
+        "18.33",
+        "18.13",
+        "18.23"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "18.33"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "18.4",
+      "objective": "Compute polar areas using bounds that describe the intended region once.",
+      "targets": [
+        "18.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.5",
+      "objective": "Find intersections while accounting for negative radii and repeated tracing.",
+      "targets": [
+        "18.22",
+        "18.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.6",
+      "objective": "Derive and classify conics from a focus, directrix, and positive eccentricity.",
+      "targets": [
+        "18.37",
+        "18.38",
+        "18.46"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.7",
+      "objective": "Recover foci, directrices, asymptotes and complete paths from translated standard forms.",
+      "targets": [
+        "18.40",
+        "18.43",
+        "18.44"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "18.40"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "18.8",
+      "objective": "Trace both polar hyperbola branches with valid radius domains and excluded directions.",
+      "targets": [
+        "18.41",
+        "18.42",
+        "18.48"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "18.9",
+      "objective": "Use measured distance ratios while distinguishing finite evidence from algebraic proof.",
+      "targets": [
+        "18.45",
+        "18.47"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "19.1",
+      "objective": "Calculate vector lengths, projections, dot products, and cross products with geometric interpretations.",
+      "targets": [
+        "19.2",
+        "19.5",
+        "19.6"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "19.2",
+      "objective": "Describe lines and planes and check intersections without losing exceptional cases.",
+      "targets": [
+        "19.11",
+        "19.12",
+        "19.13"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "19.3",
+      "objective": "Differentiate vector-valued motion and separate acceleration into changes of speed and direction.",
+      "targets": [
+        "19.20"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "19.4",
+      "objective": "Compute curvature under regularity assumptions and test a space-curve model numerically.",
+      "targets": [
+        "19.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "19.5",
+      "objective": "Calculate a space-curve tangent, speed and curvature from world coordinates and interpret projection limits.",
+      "targets": [
+        "19.35",
+        "19.36",
+        "19.38"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "19.38"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "20.1",
+      "objective": "Describe domains, graphs, and level sets of functions of two or three variables.",
+      "targets": [
+        "20.1",
+        "20.6",
+        "20.10"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "20.2",
+      "objective": "Disprove limits using conflicting paths and prove limits using bounds that hold in every direction.",
+      "targets": [
+        "20.12",
+        "20.30"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "20.3",
+      "objective": "Compute and interpret partial and higher partial derivatives, including units.",
+      "targets": [
+        "20.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "20.4",
+      "objective": "State sufficient hypotheses for equality of mixed partial derivatives.",
+      "targets": [
+        "20.27"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "20.5",
+      "objective": "Classify translated axis-aligned standard quadrics using domains and actual traces.",
+      "targets": [
+        "20.35",
+        "20.37",
+        "20.38"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "20.38"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "20.6",
+      "objective": "Reconstruct and test a proposed surface from measured slices under stated family assumptions.",
+      "targets": [
+        "20.39",
+        "20.40",
+        "20.42"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "21.1",
+      "objective": "Distinguish differentiability from the existence of partial derivatives.",
+      "targets": [
+        "21.24"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "21.2",
+      "objective": "Construct a total differential and tangent plane, then measure their approximation error.",
+      "targets": [
+        "21.7",
+        "21.8",
+        "21.10"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "21.3",
+      "objective": "Use Jacobian matrices and the multivariable chain rule to track linked changes.",
+      "targets": [
+        "21.11",
+        "21.12"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "21.4",
+      "objective": "Compute directional derivatives and interpret the geometry and units of a gradient.",
+      "targets": [
+        "21.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "21.5",
+      "objective": "Derive regular implicit-surface normals and tangent planes and identify singular exceptions.",
+      "targets": [
+        "21.34",
+        "21.35",
+        "21.36",
+        "21.37"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "22.1",
+      "objective": "Find interior critical points and classify them using second derivatives or direct comparisons.",
+      "targets": [
+        "22.5"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "22.2",
+      "objective": "Check every part of a compact feasible domain, including edges, corners, and singular constraint points.",
+      "targets": [
+        "22.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "22.3",
+      "objective": "Use Lagrange multipliers with their regularity hypotheses and distinguish candidates from certified extrema.",
+      "targets": [
+        "22.19",
+        "22.17",
+        "22.22"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "22.4",
+      "objective": "Explain and experimentally test step-size restrictions for gradient descent on a quadratic.",
+      "targets": [
+        "22.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "23.1",
+      "objective": "Translate a planar region or solid into consistent integration bounds.",
+      "targets": [
+        "23.11",
+        "23.17"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "23.2",
+      "objective": "Evaluate iterated integrals and explain when changing their order is justified.",
+      "targets": [
+        "23.7"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "23.3",
+      "objective": "Use double and triple integrals for volume, mass, and moments with correct units.",
+      "targets": [
+        "23.2",
+        "23.17",
+        "23.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "23.4",
+      "objective": "Distinguish integrable singularities from divergent accumulation and assess grid approximations.",
+      "targets": [
+        "23.21",
+        "23.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "24.1",
+      "objective": "Transform an integrand and its domain together, including the absolute Jacobian determinant.",
+      "targets": [
+        "24.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "24.2",
+      "objective": "Choose polar, cylindrical, or spherical coordinates from geometry and state their conventions.",
+      "targets": [
+        "24.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "24.3",
+      "objective": "Normalize a joint density, compute probabilities, derive marginals, and evaluate expectations.",
+      "targets": [
+        "24.19",
+        "24.18"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "24.19"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "24.4",
+      "objective": "Compare numerical integrals against an exact normalization and explain geometric discretization error.",
+      "targets": [
+        "24.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "25.1",
+      "objective": "Distinguish scalar line integrals from oriented work integrals and compute both from a parametrization.",
+      "targets": [
+        "25.5",
+        "25.9"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "25.2",
+      "objective": "Construct potential functions and use the fundamental theorem for line integrals.",
+      "targets": [
+        "25.11"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "25.3",
+      "objective": "Test path independence while checking smoothness and the topology of the field’s domain.",
+      "targets": [
+        "25.23",
+        "25.3"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "25.4",
+      "objective": "Compare exact work calculations with numerical integration along different paths.",
+      "targets": [
+        "25.33"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "26.1",
+      "objective": "Choose Green, Stokes, or the divergence theorem from the dimension and type of integral.",
+      "targets": [
+        "26.34",
+        "26.36",
+        "26.38"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "26.2",
+      "objective": "Construct a surface area element and distinguish scalar area from oriented flux.",
+      "targets": [
+        "26.7",
+        "26.8",
+        "26.10"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "26.3",
+      "objective": "Compute curl and divergence and interpret their different physical meanings.",
+      "targets": [
+        "26.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "26.4",
+      "objective": "Check smoothness, closed boundaries, and compatible orientations before applying a theorem.",
+      "targets": [
+        "26.17",
+        "26.33",
+        "26.11",
+        "26.37"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.1",
+      "objective": "Read a slope field and distinguish a differential equation from an initial value problem",
+      "targets": [
+        "27.33"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "27.33"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "27.2",
+      "objective": "Solve separable and first-order linear equations without losing equilibrium solutions",
+      "targets": [
+        "27.7",
+        "27.13",
+        "27.8"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.3",
+      "objective": "Compare exponential and logistic growth using units, equilibria, and stability",
+      "targets": [
+        "27.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.4",
+      "objective": "State local existence and uniqueness hypotheses and recognize their limitations",
+      "targets": [
+        "27.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.5",
+      "objective": "Solve homogeneous second-order constant-coefficient equations and interpret damping",
+      "targets": [
+        "27.36"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.6",
+      "objective": "Construct forced responses by trial families and resonance multiplicity, then fit initial data.",
+      "targets": [
+        "27.37",
+        "27.39",
+        "27.44"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.7",
+      "objective": "Derive variation of parameters using a nonzero Wronskian on a valid interval.",
+      "targets": [
+        "27.40",
+        "27.41",
+        "27.43"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "27.8",
+      "objective": "Construct IVP series, prove convergence of required derivatives, and verify ODE residuals.",
+      "targets": [
+        "27.47",
+        "27.49",
+        "27.51"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "28.1",
+      "objective": "Implement Euler, improved Euler and classical Runge–Kutta 4 for an initial value problem.",
+      "targets": [
+        "28.33"
+      ],
+      "baselineFit": "partial",
+      "repairWrittenIds": [
+        "28.33"
+      ],
+      "sourceFit": "repaired-reviewed",
+      "limit": "Fit describes requested written work, not observed performance.",
+      "repairReviewer": "uni12_source_repair_review"
+    },
+    {
+      "id": "28.2",
+      "objective": "Distinguish consistency, convergence and stability using formulas and step-size experiments.",
+      "targets": [
+        "28.34"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "28.3",
+      "objective": "Interpret systems in a phase plane and check physical or mathematical invariants.",
+      "targets": [
+        "28.35"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    },
+    {
+      "id": "28.4",
+      "objective": "Design a reproducible investigation in motion, optimization or accumulation.",
+      "targets": [
+        "28.36",
+        "28.37",
+        "28.38",
+        "28.39"
+      ],
+      "baselineFit": "sufficient",
+      "repairWrittenIds": [],
+      "sourceFit": "sufficient",
+      "limit": "Fit describes requested written work, not observed performance."
+    }
+  ],
+  "audits": [
+    {
+      "reviewer": "uni12_audit_foundations",
+      "chapters": [
+        "01",
+        "02",
+        "03",
+        "05",
+        "06",
+        "07"
+      ]
+    },
+    {
+      "reviewer": "uni12_audit_integral",
+      "chapters": [
+        "08",
+        "09",
+        "10",
+        "12",
+        "13",
+        "14"
+      ]
+    },
+    {
+      "reviewer": "uni12_audit_series_space",
+      "chapters": [
+        "15",
+        "16",
+        "18",
+        "19",
+        "20"
+      ]
+    },
+    {
+      "reviewer": "uni12_audit_multi_ode",
+      "chapters": [
+        "22",
+        "23",
+        "24",
+        "25",
+        "27"
+      ]
+    },
+    {
+      "reviewer": "uni12_audit_04_11",
+      "chapters": [
+        "04",
+        "11"
+      ]
+    },
+    {
+      "reviewer": "uni12_audit_17_21",
+      "chapters": [
+        "17",
+        "21"
+      ]
+    },
+    {
+      "reviewer": "uni12_audit_26_28",
+      "chapters": [
+        "26",
+        "28"
+      ]
+    }
+  ],
+  "repairReview": {
+    "reviewer": "uni12_source_repair_review",
+    "method": "Distinct nonauthor final-byte mathematical/source review of every correction and added requirement, with separate static implementation review.",
+    "result": "Approved source changes; project execution and observed learner outcomes remain separate."
+  }
+}

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" role="img" aria-labelledby="title desc">
+  <title id="title">Triangle filtration and its persistence pairs</title>
+  <desc id="desc">At scale zero, three vertices are separate. At scale one, three edges form a cycle. At scale two, a triangular face fills the cycle. The barcode shows one component lasting forever, two components dying at scale one, and one one-dimensional cycle born at scale one and dying at scale two. Labels identify vertex-edge pivot pairs and the edge-face pivot pair.</desc>
+  <defs>
+    <marker id="arrow" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#93c5fd"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="450" rx="18" fill="#0f172a"/>
+  <text x="500" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="22" font-weight="700">A pivot pairs an earlier birth with a later death</text>
+
+  <g font-family="system-ui, sans-serif">
+    <g transform="translate(35 70)">
+      <rect width="210" height="205" rx="12" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+      <text x="105" y="28" text-anchor="middle" fill="#bfdbfe" font-size="17" font-weight="700">scale 0: vertices</text>
+      <g fill="#f8fafc" stroke="#2563eb" stroke-width="4">
+        <circle cx="105" cy="62" r="9"/><circle cx="48" cy="157" r="9"/><circle cx="162" cy="157" r="9"/>
+      </g>
+      <g fill="#e2e8f0" font-size="14">
+        <text x="115" y="61">v₀</text><text x="20" y="181">v₁</text><text x="168" y="181">v₂</text>
+      </g>
+      <text x="105" y="195" text-anchor="middle" fill="#e2e8f0" font-size="14">three H₀ classes</text>
+    </g>
+
+    <path d="M255 173H294" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <g transform="translate(305 70)">
+      <rect width="210" height="205" rx="12" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+      <text x="105" y="28" text-anchor="middle" fill="#bfdbfe" font-size="17" font-weight="700">scale 1: edges</text>
+      <path d="M105 62L48 157L162 157Z" fill="none" stroke="#fbbf24" stroke-width="6" stroke-linejoin="round"/>
+      <g fill="#f8fafc" stroke="#2563eb" stroke-width="4">
+        <circle cx="105" cy="62" r="8"/><circle cx="48" cy="157" r="8"/><circle cx="162" cy="157" r="8"/>
+      </g>
+      <text x="105" y="195" text-anchor="middle" fill="#e2e8f0" font-size="14">one H₀ class; one H₁ class</text>
+    </g>
+
+    <path d="M525 173H564" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <g transform="translate(575 70)">
+      <rect width="210" height="205" rx="12" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+      <text x="105" y="28" text-anchor="middle" fill="#bfdbfe" font-size="17" font-weight="700">scale 2: face</text>
+      <path d="M105 62L48 157L162 157Z" fill="#0f766e" stroke="#5eead4" stroke-width="5" stroke-linejoin="round"/>
+      <g fill="#f8fafc" stroke="#2563eb" stroke-width="4">
+        <circle cx="105" cy="62" r="8"/><circle cx="48" cy="157" r="8"/><circle cx="162" cy="157" r="8"/>
+      </g>
+      <text x="105" y="195" text-anchor="middle" fill="#e2e8f0" font-size="14">one H₀ class; H₁ killed</text>
+    </g>
+
+    <g transform="translate(820 70)">
+      <rect width="145" height="205" rx="12" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+      <text x="72.5" y="28" text-anchor="middle" fill="#bfdbfe" font-size="17" font-weight="700">pivot pairs</text>
+      <g fill="#e2e8f0" font-size="14">
+        <text x="16" y="65">(v₁, e₀₁)</text><text x="16" y="88">kills H₀</text>
+        <text x="16" y="120">(v₂, e₁₂)</text><text x="16" y="143">kills H₀</text>
+        <text x="16" y="175">(e₂₀, face)</text><text x="16" y="198">kills H₁</text>
+      </g>
+    </g>
+
+    <g transform="translate(115 315)">
+      <text x="-70" y="9" fill="#e2e8f0" font-size="15" font-weight="700">H₀</text>
+      <text x="-70" y="69" fill="#e2e8f0" font-size="15" font-weight="700">H₁</text>
+      <path d="M0 5H735" stroke="#334155" stroke-width="2"/>
+      <path d="M0 65H735" stroke="#334155" stroke-width="2"/>
+      <g stroke="#93c5fd" stroke-width="6" stroke-linecap="round">
+        <path d="M0 0H735"/><path d="M0 20H270"/><path d="M0 40H270"/>
+      </g>
+      <path d="M270 65H540" stroke="#fbbf24" stroke-width="6" stroke-linecap="round"/>
+      <g fill="#cbd5e1" font-size="14" text-anchor="middle">
+        <text x="0" y="105">0</text><text x="270" y="105">1</text><text x="540" y="105">2</text>
+      </g>
+      <g stroke="#64748b" stroke-width="2">
+        <path d="M0 82V92"/><path d="M270 82V92"/><path d="M540 82V92"/>
+      </g>
+      <text x="735" y="5" fill="#93c5fd" font-size="17">→</text>
+      <text x="367" y="128" text-anchor="middle" fill="#e2e8f0" font-size="14">barcode intervals: endpoints record the filtration values of the paired simplices</text>
+    </g>
+  </g>
+</svg>

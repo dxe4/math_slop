@@ -1,0 +1,22 @@
+.practice-host{margin:1.5rem 0}
+.practice-answer{padding:1rem 1.25rem;border:1px solid var(--rule-strong,#c7c9bd);border-left:4px solid var(--accent,#185c4a);border-radius:.6rem;background:var(--surface,#fff)}
+.practice-title{margin:0 0 .5rem;font:650 1rem var(--ui,system-ui)}
+.practice-field{margin:.75rem 0}
+.practice-label{display:block;margin-bottom:.25rem;font:600 .95rem var(--ui,system-ui)}
+.practice-answer input[type=text],.practice-answer select,.practice-answer textarea{width:100%;max-width:100%;min-height:2.6rem;padding:.5rem .75rem;border:1px solid var(--rule-strong,#c7c9bd);border-radius:.5rem;background:var(--paper,#faf9f5);color:var(--ink,#17261f);font:1rem var(--mono,monospace)}
+.practice-answer textarea{resize:vertical}
+.practice-answer select{font-family:var(--ui,system-ui)}
+.practice-answer input:focus,.practice-answer select:focus,.practice-answer textarea:focus{outline:none;border-color:var(--accent,#185c4a);box-shadow:0 0 0 3px var(--accent-soft,#e5f0eb)}
+.practice-help{display:block;margin-top:.25rem;color:var(--muted,#55635c);font-size:.85rem;line-height:1.4}
+p.practice-help{margin:.5rem 0}
+.practice-preview{min-height:1.2rem;margin-top:.25rem;color:var(--muted,#55635c);font-size:.9rem}
+.practice-preview code{font-family:var(--mono,monospace)}
+.practice-preview.practice-bad{color:var(--red,#b23e42)}
+.practice-actions{display:flex;gap:.5rem;margin-top:.75rem}
+.practice-actions .button{font:600 .95rem var(--ui,system-ui)}
+.practice-feedback{margin-top:.75rem;border-radius:.5rem;outline:none}
+.practice-feedback:not(:empty){padding:.6rem .9rem;border:1px solid var(--rule-strong,#c7c9bd);background:var(--soft,#f2f1ea)}
+.practice-feedback.practice-correct{border-color:var(--green,#2d7047);background:color-mix(in srgb,var(--green,#2d7047) 14%,var(--surface,#fff))}
+.practice-feedback.practice-incorrect{border-color:var(--red,#b23e42);background:color-mix(in srgb,var(--red,#b23e42) 12%,var(--surface,#fff))}
+.practice-feedback.practice-invalid{border-color:var(--orange,#a55318);background:var(--warn-soft,#fff1cf)}
+.practice-scope{display:block;margin-top:.35rem;color:var(--muted,#55635c);font-size:.8rem}

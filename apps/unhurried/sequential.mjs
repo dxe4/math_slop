@@ -1,0 +1,19 @@
+import {SEQUENTIAL_DEFAULTS,SEQUENTIAL_FIXTURES,SEQUENTIAL_RULES,evaluateSequential} from './sequential-model.mjs';
+import {sequentialOutput,sequentialConditional,sequentialSummary} from './sequential-markup.mjs';
+let nextId=0;
+export function mountSequential(host) {
+  if(host.dataset.sequentialMounted==='true')return;
+  const prefix=`sequential-live-${++nextId}`,el=(tag,text,className)=>{const e=document.createElement(tag);if(text)e.textContent=text;if(className)e.className=className;return e;};
+  const workshop=el('div','','sequential-workshop');workshop.append(el('p','Predict the union before switching rules. Each choice specifies a hypothetical sampling plan before its data are collected; these controls are not permission to select a favorable rule after observing a record. This activity counts exact null records, rather than simulating tests.'));
+  const controls=el('fieldset','','sequential-controls');controls.append(el('legend','Specify the whole decision procedure'));const inputs={};
+  for(const[key,labelText,options]of [['fixture','Predeclared look schedule',Object.entries(SEQUENTIAL_FIXTURES).map(([k,f])=>[k,f.label])],['rule','Rejection rule',Object.entries(SEQUENTIAL_RULES)]]){const label=el('label');label.append(el('span',labelText));const input=el('select');for(const[value,text]of options)input.add(new Option(text,value));input.value=SEQUENTIAL_DEFAULTS[key];input.dataset.sequentialControl=key;inputs[key]=input;label.append(input);controls.append(label);}
+  const actions=el('div','','sequential-actions'),output=el('div');output.dataset.sequentialOutput='';
+  const probe=el('details','','sequential-probe');probe.append(el('summary','Why the looks are dependent: inspect an early count'));
+  const label=el('label');label.append(el('span','Blue count at the first look (conditioning probe)'));const observed=el('input');observed.type='range';observed.min='0';observed.max='8';observed.step='1';observed.value='7';observed.id=`${prefix}-observed`;observed.dataset.sequentialControl='observed';inputs.observed=observed;
+  const readout=el('output');readout.htmlFor=observed.id;const conditional=el('div');conditional.dataset.sequentialConditional='';label.append(observed,readout);probe.append(label,conditional);
+  const status=el('p','','sr-only');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+  const update=(probeOnly=false)=>{observed.max=String(SEQUENTIAL_FIXTURES[inputs.fixture.value].first);observed.value=String(Math.min(Number(observed.value),Number(observed.max)));const m=evaluateSequential({fixture:inputs.fixture.value,rule:inputs.rule.value,observed:Number(observed.value)});if(!probeOnly)output.innerHTML=sequentialOutput(m,prefix);conditional.innerHTML=sequentialConditional(m);readout.value=`${m.observed} of ${m.first} blue`;observed.setAttribute('aria-valuetext',`${m.observed} blue among the first ${m.first}`);status.textContent=probeOnly?`Given ${m.observed} early blue, final-threshold probability is ${Number(m.conditionalFinal)/Number(m.conditionalDenominator)}.`:sequentialSummary(m);};
+  for(const[text,preset]of [['Use one final look',{...SEQUENTIAL_DEFAULTS,rule:'final'}],['Predeclare Bonferroni',{...SEQUENTIAL_DEFAULTS,rule:'bonferroni'}],['Restore two-look example',SEQUENTIAL_DEFAULTS]]){const b=el('button',text,'button secondary');b.type='button';b.addEventListener('click',()=>{inputs.fixture.value=preset.fixture;inputs.rule.value=preset.rule;observed.max=String(SEQUENTIAL_FIXTURES[preset.fixture].first);observed.value=String(preset.observed);update();});actions.append(b);}
+  for(const[key,input]of Object.entries(inputs))input.addEventListener(key==='observed'?'input':'change',()=>update(key==='observed'));
+  workshop.append(controls,actions,output,probe,status);update();host.append(workshop);const fallback=host.querySelector('[data-sequential-fallback]');if(fallback)fallback.hidden=true;host.dataset.sequentialMounted='true';
+}

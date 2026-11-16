@@ -1,0 +1,1 @@
+var e={key:`title`,array:!1,value:`Math Atlas`};export{e as default};

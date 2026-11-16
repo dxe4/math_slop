@@ -1,0 +1,446 @@
+{
+  "id": "08",
+  "title": "Theorems and the shape of functions",
+  "subtitle": "When does local slope information justify a conclusion about an entire graph?",
+  "prerequisites": [
+    "Limits, continuity, and closed intervals from chapter 04.",
+    "Derivatives and differentiability from chapter 05.",
+    "Differentiation rules from chapter 06; rate interpretation from chapter 07."
+  ],
+  "objectives": [
+    "Apply the extreme value, Rolle, and mean value theorems after checking their hypotheses.",
+    "Use critical points and derivative signs to distinguish local and absolute extrema.",
+    "Determine concavity and identify genuine changes of concavity.",
+    "Evaluate suitable indeterminate limits using a correctly stated version of L’Hôpital’s rule.",
+    "Explain what a sampled sign chart can suggest and what requires an analytic argument."
+  ],
+  "sections": [
+    {
+      "title": "Existence comes before calculation",
+      "paragraphs": [
+        "A graph can suggest a highest point without proving that one exists. An absolute maximum of $f$ on a domain $D$ is a value $f(c)$ at a point $c\\in D$ such that $f(x)\\le f(c)$ for every $x\\in D$. An absolute minimum reverses the inequality. A local maximum only compares nearby domain points: there is some positive distance within which no value exceeds $f(c)$. Local describes the comparison region, not the size of the value.",
+        "The extreme value theorem says that a real-valued function continuous on a closed, bounded interval $[a,b]$ attains both an absolute maximum and an absolute minimum there. Attains means the value actually occurs. The theorem provides existence, not a formula or uniqueness. Constant functions attain both extrema at every point. Continuity at an endpoint means continuity from within the interval; differentiability is unnecessary.",
+        "Each hypothesis matters. The continuous function $f(x)=x$ on $(0,1)$ has neither absolute extremum, although its values are bounded. The endpoint values are missing. On $[0,\\infty)$, $f(x)=x$ has a minimum but no maximum. On $[0,1]$, define $f(x)=x$ for $x<1$ and $f(1)=0$. This function is bounded but does not attain its supremum $1$ because continuity fails. Failure of a hypothesis does not prove that extrema are absent; it means this theorem no longer guarantees them.",
+        "Fermat’s stationary-point theorem supplies a different kind of information: if $c$ is an interior local extremum and $f$ is differentiable at $c$, then $f^{\\prime}(c)=0$. At a local maximum, the difference quotients from the right are nonpositive and those from the left are nonnegative. If their common limit exists, it must be zero. A local minimum gives the reversed signs. This argument explains why the interior and differentiability requirements cannot be omitted.",
+        "Here a critical number means an interior domain point where $f^{\\prime}$ is zero or does not exist. Thus $|x|$ has a critical number at zero even though its derivative is undefined there. A point outside the domain is never a critical number. On a closed interval, list interior critical numbers and endpoints separately when seeking absolute extrema. Some conventions count endpoints as critical; the separate endpoint check avoids any dependence on terminology.",
+        "The closed-interval condition can be understood through sequences. First the values are bounded: otherwise we could choose $x_n\\in[a,b]$ with $|f(x_n)|>n$; compactness gives a convergent subsequence, contradicting continuity at its limit. Let $M$ be the supremum of the values, and choose points $x_n$ whose values approach $M$. Compactness of the interval gives a subsequence of those points converging to some $c\\in[a,b]$. Continuity then gives $f(c)=M$, so the supremum is attained. The same reasoning handles the infimum. This is a proof sketch using a compactness fact developed more fully in analysis; it explains why both boundedness and inclusion of the limiting endpoint matter. Removing an endpoint can let the maximizing points approach a location outside the domain.",
+        "The candidate method for an absolute extremum is a consequence of two theorems, not a mnemonic. The extreme value theorem supplies an actual winning point on a closed interval. If the winning point $c$ lies inside and the derivative exists, Fermat's theorem forces $f^{\\prime}(c)=0$. If the derivative does not exist, the point is still a candidate. Otherwise the winner is an endpoint. Thus checking endpoints and all interior critical points is exhaustive when the set can be completely found. A list of several numerical stationary points is not a proof that no others exist; an exact factorization or rigorous root isolation may be needed.",
+        "An endpoint can be an absolute maximum while its ordinary two-sided derivative is irrelevant. On $[0,2]$, $f(x)=x$ attains its minimum at zero and maximum at two, despite derivative one at every interior point. The extreme value theorem includes endpoints; Fermat's theorem does not. An interior corner can similarly be an extremum without a derivative, as $|x|$ at zero demonstrates. This is why a solution that sets $f^{\\prime}=0$ and stops is incomplete even when every calculation on that list is correct."
+      ],
+      "formula": "Continuous on [a,b] ⇒ absolute minimum and maximum are attained. Interior differentiable extremum ⇒ f′(c)=0.",
+      "formulaTex": "\\exists\\,u,v\\in[a,b]\\quad\\forall x\\in[a,b]:\\quad f(u)\\le f(x)\\le f(v)"
+    },
+    {
+      "title": "Rolle’s theorem and the mean value theorem",
+      "paragraphs": [
+        "Rolle’s theorem states: if $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, $a<b$, and $f(a)=f(b)$, there is a $c\\in(a,b)$ with $f^{\\prime}(c)=0$. Proof sketch: the extreme value theorem supplies an absolute maximum and minimum. If $f$ is constant, every interior point works. Otherwise some value differs from the common endpoint value, so at least one absolute extremum occurs inside. Fermat’s theorem then gives a zero derivative there.",
+        "The mean value theorem replaces equal endpoint heights with an arbitrary secant slope. For $a<b$, under continuity on $[a,b]$ and differentiability on $(a,b)$, there is an interior $c$ for which $f^{\\prime}(c)=\\frac{f(b)-f(a)}{b-a}$. To prove it, subtract the secant line: $h(x)=f(x)-f(a)-m(x-a)$, with $m$ the displayed average slope. Then $h(a)=h(b)=0$, so Rolle gives $h^{\\prime}(c)=0$ and hence $f^{\\prime}(c)=m$. This is an existence statement: there can be several suitable points, and the theorem does not locate them.",
+        "If position $s(t)$ is measured in metres and time $t$ in seconds, the secant slope and derivative both have units metres per second. If $s$ is continuous on a $10\\,\\mathrm s$ closed interval, differentiable in its interior, and has net displacement $+120\\,\\mathrm m$, its instantaneous velocity is $12\\,\\mathrm{m/s}$ somewhere between the endpoints. This concerns signed displacement and velocity; replacing displacement by total distance changes the interpretation. Corners in a position model must be checked before applying the theorem.",
+        "The hypotheses also explain a familiar counterexample. For $f(x)=|x|$ on $[-1,1]$, the average slope is zero but the derivative is either $-1$ or $1$ wherever it exists. No interior derivative is zero. The function is continuous, but differentiability fails at the corner. A sketch cannot repair a missing hypothesis.",
+        "A useful consequence is a bound on change. If $f$ satisfies the theorem’s hypotheses between $x$ and $y$ and $|f^{\\prime}(t)|\\le M$ throughout the intervening interior, then $|f(y)-f(x)|\\le M|y-x|$. This makes a uniform sensitivity bound rigorous. If $f^{\\prime}$ is zero everywhere on an interval, applying the mean value theorem to any two points proves that $f$ is constant there. An interval is essential: a function may have derivative zero on two disconnected pieces while taking different constants on the pieces.",
+        "The mean value point need not be unique. For $f(x)=\\sin x$ on $[0,2\\pi]$, the secant slope is $0$. The derivative $\\cos x$ vanishes at both $x=\\pi/2$ and $x=3\\pi/2$, so there are two suitable interior points. For $f(x)=x^2$ on $[1,3]$, the secant slope is $4$ and $f^{\\prime}(x)=2x$, so the point is uniquely $c=2$. The theorem asserts at least one, not a prescribed number. A graph of parallel secant and tangent lines can suggest locations, but solving $f^{\\prime}(c)$ equal to the average slope identifies them exactly when possible.",
+        "The derivative bound consequence can be applied on every subinterval, not just the original endpoints. If $|f^{\\prime}|\\le M$ on an interval, then for any $u<v$ inside it, $|f(v)-f(u)|\\le M(v-u)$. This is a Lipschitz estimate: nearby inputs cannot produce output differences faster than the stated rate. A derivative bound is sufficient, not necessary; a function may be Lipschitz even if it has a corner, as $|x|$ does. To use the mean value theorem directly at a corner, divide into smooth pieces or use a separate inequality.",
+        "A zero derivative throughout a connected interval implies constancy by the mean value theorem. It is not enough to know the derivative is zero at infinitely many isolated points. The function $f(x)=x^2\\sin(1/x)$ for $x\\ne0$, extended by zero at the origin, can have many stationary points while not being constant. Nor can constants on disconnected pieces be forced to agree: define zero for $x<0$ and one for $x>0$ on the domain $\\mathbb R\\setminus\\{0\\}$; its derivative is zero on both components. The interval hypothesis bridges every pair of points to which the theorem is applied.",
+        "On $[-1,1]$, compare $f(x)=|x|-x^2+\\mu x$ with a function that jumps at zero. The curved corner is continuous, but its left and right derivatives at zero are $\\mu-1$ and $\\mu+1$, so the mean value theorem cannot be invoked. Its endpoint secant slope is $\\mu$; nevertheless, $f^{\\prime}(-1/2)=f^{\\prime}(1/2)=\\mu$. A failed hypothesis removes the theorem’s guarantee, not every possible matching point. The two matches come from solving the derivative equations on their proper sides, not from the sketch.",
+        "Now define $g(x)=(1+\\mu)x$ for $x<0$ and $g(x)=(1+\\mu)x-2$ for $x\\ge0$. Its secant slope on $[-1,1]$ is also $\\mu$, but $g(0)=-2$ while values from the left approach $0$. Away from zero its derivative is $1+\\mu$, so no eligible interior point matches the secant; at zero no derivative exists. In the next investigation, predict separately whether the theorem applies, whether any match exists, and whether your chosen point is an interior match. Problems 36 and 37 then require proofs that a plotted sample cannot supply."
+      ],
+      "formula": "f′(c) = [f(b) − f(a)]/(b − a), for some a<c<b.",
+      "theorems": [
+        {
+          "title": "Rolle’s theorem leads to the mean value theorem",
+          "statement": "If $a<b$, and $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, there is some $c\\in(a,b)$ with $f^{\\prime}(c)=\\frac{f(b)-f(a)}{b-a}$.",
+          "proof": [
+            "Begin with Rolle’s special case $f(a)=f(b)$. The extreme value theorem gives an absolute maximum and minimum on the closed interval. If $f$ is constant, every interior derivative is zero. Otherwise at least one absolute extremum must occur at an interior point: the equal endpoint value cannot be both the unique high and unique low value when the function varies. At an interior differentiable extremum, positive and negative difference quotients have opposite sign restrictions, so their common limit can only be zero. This is Fermat’s stationary-point theorem.",
+            "For a general $f$, subtract the secant line: $g(x)=f(x)-[f(a)+(f(b)-f(a))(x-a)/(b-a)]$. The new function inherits continuity and interior differentiability, and $g(a)=g(b)=0$. Rolle’s theorem supplies $c$ with $g^{\\prime}(c)=0$. Differentiating the explicit line yields $f^{\\prime}(c)-[f(b)-f(a)]/(b-a)=0$, which is the desired equality. The theorem locates at least one instantaneous slope equal to the average slope but normally does not locate $c$ itself.",
+            "Both hypotheses protect the conclusion. A jump can break continuity, while $|x|$ on $[-1,1]$ breaks differentiability at its corner despite equal endpoint values. On a disconnected domain there may be no uninterrupted interval to which the theorem applies. When using the result to bound change, state the closed interval and verify the derivative bound throughout its interior before multiplying by its length."
+          ],
+          "equationTex": "f^{\\prime}(c)=\\frac{f(b)-f(a)}{b-a}\\quad\\text{for some }a<c<b"
+        }
+      ],
+      "formulaTex": "f^{\\prime}(c)=\\frac{f(b)-f(a)}{b-a}"
+    },
+    {
+      "title": "From signs to turning points",
+      "paragraphs": [
+        "Suppose $f$ is differentiable on an interval. If $f^{\\prime}>0$ throughout it, the mean value theorem applied between any $x<y$ proves $f(y)>f(x)$, so $f$ is strictly increasing. Negative derivative gives strict decrease. The weaker condition $f^{\\prime}\\ge0$ guarantees nondecrease. A strictly increasing function need not have positive derivative at every point: $x^3$ is strictly increasing on the real line but has derivative zero at zero.",
+        "To construct a sign chart, find the domain, locate all critical numbers, and split the domain at those numbers and at missing domain points. Determine the sign of $f^{\\prime}$ on each resulting open interval. Factoring often gives an exact sign argument. Testing one point is justified only after establishing that the sign cannot change inside that interval; a continuous nonzero derivative cannot change sign by the intermediate value theorem. A disconnected domain must be treated piece by piece.",
+        "The first derivative test assumes $f$ is continuous at $c$ and differentiable on each side sufficiently near $c$. A change of $f^{\\prime}$ from positive to negative gives a strict local maximum; negative to positive gives a strict local minimum. If the derivative keeps the same strict sign across $c$, there is no local extremum there. These conclusions follow from the increasing and decreasing behavior on the two sides. They also work at corners where $f^{\\prime}(c)$ is undefined.",
+        "Stationarity alone does not classify a point: $x^2$, $-x^2$, and $x^3$ all have zero derivative at $0$ but exhibit a minimum, maximum, and neither, respectively. For an absolute extremum on a closed interval, compare function values at every interior critical number and at both endpoints. The existence theorem makes this procedure conclusive when the candidate list is complete. It may be inconvenient or infinite for complicated functions, so finding a few numerical roots of $f^{\\prime}$ is not automatically a complete search.",
+        "For $f(x)=x^3-3x$, the derivative is $f^{\\prime}(x)=3(x-1)(x+1)$. It is positive on $(-\\infty,-1)$ and $(1,\\infty)$, and negative on $(-1,1)$. The first derivative test therefore gives a local maximum at $x=-1$ with value $2$, and a local minimum at $x=1$ with value $-2$. On a closed interval such as $[-2,2]$, endpoint values must still be compared: $f(-2)=-2$ and $f(2)=2$. Both an endpoint and an interior critical point can share an absolute extreme value.",
+        "The sign of the derivative tells how values compare within an interval, but it does not by itself compare values across a domain gap. For $f(x)=1/x$, the derivative is $f^{\\prime}(x)=-1/x^2<0$ on each of $(-\\infty,0)$ and $(0,\\infty)$. It is decreasing on each component. It is not decreasing on the entire disconnected domain under the usual pairwise definition, because $-1<1$ while $f(-1)=-1<f(1)=1$. A sign chart must keep excluded inputs visible; treating two branches as one interval can produce a false global statement.",
+        "The converse of the strict sign test is false at individual points. The strictly increasing function $f(x)=x^3$ has derivative zero at zero. More generally, a function can increase throughout an interval even if its derivative vanishes on a set of points; the mean value theorem gives a sufficient test when the derivative is positive everywhere but not an equivalence point by point. To classify a candidate where $f^{\\prime}$ is zero, examine sign on neighboring intervals or another valid criterion. The number zero in a derivative table is a location for investigation, not a verdict."
+      ],
+      "formula": "f′: + then − ⇒ local maximum; f′: − then + ⇒ local minimum.",
+      "formulaTex": "\\begin{gathered}\\text{If }f\\text{ is continuous at }c\\text{ and differentiable on each side:}\\\\ f^{\\prime}:\\ +\\ \\text{to}\\ -\\quad\\Longrightarrow\\quad\\text{strict local maximum at }c,\\\\ f^{\\prime}:\\ -\\ \\text{to}\\ +\\quad\\Longrightarrow\\quad\\text{strict local minimum at }c.\\end{gathered}"
+    },
+    {
+      "title": "Curvature, concavity, and an inconclusive zero",
+      "paragraphs": [
+        "Concavity describes how slopes change. On an interval where $f^{\\prime}$ is increasing, the curve is concave up; where $f^{\\prime}$ is decreasing, it is concave down. Equivalently, for a differentiable concave-up function the graph lies above its tangent lines. When $f$ is twice differentiable, $f^{\\prime\\prime}>0$ guarantees concave up and $f^{\\prime\\prime}<0$ guarantees concave down. A decreasing function can be concave up: $e^{-x}$ has negative first derivative and positive second derivative.",
+        "An inflection point is a point on a continuous graph where concavity changes across the point. Zeros of $f^{\\prime\\prime}$ and points where $f^{\\prime\\prime}$ does not exist are candidates, not automatic inflections. For $f(x)=x^4$, $f^{\\prime\\prime}(0)=0$ but $f^{\\prime\\prime}(x)=12x^2$ stays positive on both sides, so there is no change of concavity. For $f(x)=x^3$, $f^{\\prime\\prime}(x)=6x$ changes sign at zero, which is an inflection. A vertical asymptote is not an inflection point because there is no graph point there.",
+        "One convenient second derivative test assumes $f^{\\prime}(c)=0$ and $f^{\\prime\\prime}$ is continuous near $c$. If $f^{\\prime\\prime}(c)>0$, continuity makes $f^{\\prime\\prime}$ positive nearby, so $f^{\\prime}$ increases through zero and the first derivative test yields a strict local minimum. If $f^{\\prime\\prime}(c)<0$, it gives a strict local maximum. These are sufficient hypotheses chosen to make the reasoning transparent. If $f^{\\prime\\prime}(c)=0$, this test says nothing: $x^4$, $-x^4$, and $x^3$ again demonstrate the three possibilities.",
+        "In a position model, a positive second derivative means velocity is increasing. It does not always mean speed is increasing: negative velocity becoming less negative describes slowing motion. Keep both signs and units visible. If position has units metres, its first derivative has units metres per second and its second derivative metres per second squared. For purely mathematical graphs in this chapter, x and f(x) are dimensionless unless units are specified.",
+        "Concavity can be tested through slopes of secants as well as through a second derivative. For a concave-up function on an interval, secant slopes increase as the interval slides right; a tangent line, where it exists, lies below the graph. If $f^{\\prime\\prime}\\ge0$ throughout an interval and $f^{\\prime}$ is continuous with appropriate differentiability, the mean value theorem applied to $f^{\\prime}$ makes $f^{\\prime}$ nondecreasing. The endpoint signs of $f^{\\prime}$ alone do not establish concavity; a derivative can rise and fall between the endpoints. A second-derivative sign chart needs the same care about intervals and excluded points as a first-derivative chart.",
+        "A zero second derivative does not automatically mark an inflection. At the origin, $x^4$ has $f^{\\prime\\prime}(x)=12x^2\\ge0$ on both sides and remains concave up. The function $x^3$ has $f^{\\prime\\prime}(x)=6x$, changing from negative to positive, so the origin is an inflection. A function can also change concavity where $f^{\\prime\\prime}$ fails to exist. The definition asks for a change in concavity across a graph point; the equation $f^{\\prime\\prime}=0$ merely supplies possible locations when a second derivative is available.",
+        "The second derivative test is local. If $f^{\\prime}(c)=0$ and $f^{\\prime\\prime}(c)>0$ with enough regularity, $c$ is a strict local minimum. It need not be the absolute minimum on a larger allowed domain: another valley or an endpoint can have a lower value. Conversely, a global minimum can occur at an endpoint where the second derivative test does not apply. Separate the tasks of classifying a local shape and comparing actual values across the complete domain. This distinction will matter again in multivariable optimization."
+      ],
+      "formula": "f′(c)=0 and f″(c)>0 ⇒ local minimum; f″(c)<0 ⇒ local maximum, under the stated regularity.",
+      "formulaTex": "\\begin{gathered}f^{\\prime}(c)=0,\\qquad f^{\\prime\\prime}\\text{ continuous near }c,\\\\ f^{\\prime\\prime}(c)>0\\quad\\Longrightarrow\\quad\\text{strict local minimum at }c,\\\\ f^{\\prime\\prime}(c)<0\\quad\\Longrightarrow\\quad\\text{strict local maximum at }c.\\end{gathered}"
+    },
+    {
+      "title": "L’Hôpital’s rule is a theorem about limits",
+      "paragraphs": [
+        "Sometimes a quotient approaches the indeterminate form $0/0$ or $\\infty/\\infty$. These forms do not specify an answer: $x/x$, $x^2/x$, and $x/x^2$ near zero behave differently. L’Hôpital’s rule supplies an answer under additional assumptions. A useful one-sided version considers an open interval approaching an endpoint $a$, which may be finite or infinite. Suppose $f$ and $g$ are differentiable on that interval, $g$ and $g^{\\prime}$ are nonzero there, and either $f$ and $g$ both tend to zero or both tend in magnitude to infinity. If $f^{\\prime}/g^{\\prime}$ tends to $L$, finite or infinite, then $f/g$ tends to $L$. Shrinking the interval is allowed.",
+        "For a two-sided limit at a finite point, verify the rule on both sides and check that the resulting limits agree. The functions need not be defined at the limiting point. Crucially, differentiating numerator and denominator separately is not the quotient rule: it is a special limit theorem that applies only after checking its hypotheses. The proof below derives the needed generalized mean value theorem from Rolle’s theorem.",
+        "Here is the mean-value mechanism. For functions $F,G$ continuous on a closed interval and differentiable inside, apply Rolle’s theorem to $[F(x)-F(s)][G(t)-G(s)]-[G(x)-G(s)][F(t)-F(s)]$. At some interior $c$, $[F(t)-F(s)]G^{\\prime}(c)=[G(t)-G(s)]F^{\\prime}(c)$. When $G^{\\prime}$ never vanishes, its mean value theorem also makes $G(t)\\ne G(s)$, so the quotient of endpoint differences equals $F^{\\prime}(c)/G^{\\prime}(c)$.",
+        "For the $0/0$ form at a finite endpoint, extend $f$ and $g$ by zero there and apply this generalized mean value result from the endpoint to $x$. Its interior point approaches the endpoint with $x$, so the derivative-ratio limit gives $f(x)/g(x)\\to L$. An infinite endpoint can first be moved to a finite one by $t=1/x$ or $t=-1/x$; both derivatives acquire the same nonzero chain factor, preserving their ratio.",
+        "For the $\\infty/\\infty$ form, choose a fixed anchor $t_0$ sufficiently near the approached endpoint. All derivative ratios beyond it are as close to finite $L$ as desired; for signed infinite $L$, they exceed any chosen positive bound or fall below any chosen negative bound. The generalized mean value theorem transfers these bounds to $[f(x)-f(t_0)]/[g(x)-g(t_0)]$. Finally, $f(x)/g(x)=\\{[f(x)-f(t_0)]/[g(x)-g(t_0)]\\}[1-g(t_0)/g(x)]+f(t_0)/g(x)$. Since $|g(x)|\\to\\infty$, the last two factors have the needed limits. The one-sided interval and nonzero-denominator hypotheses remain essential.",
+        "For example, as $x\\to0$, $(e^x-1)/x$ is $0/0$. The derivative denominator is $1$ and the derivative quotient $e^x$ tends to $1$, so the original limit is $1$. As $x\\to+\\infty$, $\\ln(x)/x$ is $\\infty/\\infty$, and the derivative quotient $1/x$ tends to zero. Thus logarithmic growth is slower in this precise ratio sense.",
+        "Other indeterminate expressions need algebra before the rule is even a candidate. For $x\\ln x$ as $x\\to0^+$, write $\\ln(x)/(1/x)$, giving a quotient of quantities unbounded in magnitude. The derivative quotient is $(1/x)/(-1/x^2)=-x$, so the limit is zero. For powers, taking a logarithm can convert the problem to a product, provided the base is positive; then recover the original limit using continuity of the exponential.",
+        "Check the form before each repeated application. As $x\\to0$, $(1+x)/x$ is not $0/0$; its two-sided limit does not exist, although the quotient of derivatives equals $1$. Also, failure of the derivative quotient to have a limit does not imply failure of the original limit. The rule gives a sufficient route to a conclusion, not an equivalence. Algebra, squeeze arguments, and known limits remain valid alternatives.",
+        "Repeated L'Hôpital applications require a fresh check after each differentiation. For $(1-\\cos x)/x^2$ as $x\\to0$, the first derivative quotient is $\\sin x/(2x)$, still a zero-over-zero form. A second application gives $\\cos x/2\\to1/2$. On a punctured interval, the derivative of each denominator is nonzero at the stage where the rule is used. Alternatively, the known trigonometric limit $\\sin x/x\\to1$ resolves the first derivative quotient without applying the rule again. The theorem is a route to an answer, not a substitute for choosing a simple valid route.",
+        "The rule has no converse. Let $f(0)=0$ and $f(x)=x^2\\sin(1/x)$ for $x\\ne0$, and take $g(x)=x$. Then $f(x)/g(x)=x\\sin(1/x)\\to0$. But $f^{\\prime}(x)/g^{\\prime}(x)=2x\\sin(1/x)-\\cos(1/x)$ has no limit as $x\\to0$. Failure of the derivative quotient to converge did not prevent the original quotient from converging. This is why an unsuccessful L'Hôpital attempt cannot by itself prove that the requested limit does not exist; return to algebra or squeeze estimates.",
+        "An infinite quotient may also hide an orientation issue. A formula such as $1/x$ near zero has neither a common finite nor a common one-sign infinite two-sided limit, even though the denominator tends to zero. Before differentiating a ratio, write the actual limiting form on the side under consideration. For a product such as $x\\ln x$ near zero from the right, rewriting it as $\\ln x/(1/x)$ creates an unbounded-over-unbounded quotient with a valid one-sided domain. The domain and the form are part of the theorem's hypotheses, not afterthoughts."
+      ]
+    },
+    {
+      "title": "What the mean value theorem can and cannot certify",
+      "paragraphs": [
+        "Suppose a differentiable temperature record $T(t)$, measured in degrees Celsius, is continuous from $t=0$ to $t=5$ minutes and its heating rate never exceeds 3 °C per minute in magnitude on the interior. The mean value theorem says that for some $c$ between $0$ and $5$, $T^{\\prime}(c)=[T(5)-T(0)]/5$. Because $|T^{\\prime}(c)|\\le3$, it follows that $|T(5)-T(0)|\\le15$ °C. This is a bound on the entire interval derived from a bound on every instantaneous rate.",
+        "If measurements instead show a 20 °C increase over those five minutes, the average rate is 4 °C/min. Under the continuity and differentiability hypotheses, the theorem forces at least one instant with $T^{\\prime}=4$ °C/min. Consequently the “at most 3” rate claim, the smooth-record assumptions, or the measurements must be wrong. The theorem locates no specific time $c$ and does not say the rate is 4 throughout the interval.",
+        "The Chapter 08 Lesson 2 corner $f(x)=|x|$ still warns against applying Rolle across zero: it is continuous and has equal endpoint values on $[-1,1]$, but its derivative is undefined at zero and never zero elsewhere. A jump instead breaks continuity. The finite-piece argument below explains when a global change bound can survive a corner.",
+        "More generally, if a continuous $f$ is differentiable inside $[a,b]$ and $|f^{\\prime}(x)|\\le M$ there, applying the mean value theorem to any two points $u,v$ in the interval yields $|f(v)-f(u)|\\le M|v-u|$. This Lipschitz estimate controls every pair, not just the endpoints. It is a useful bridge from local derivative information to a global error or safety bound; its units are output units per input unit times input distance.",
+        "The bound $|f^{\\prime}|\\le M$ can certify an instrument's range. If a temperature record is smooth enough on a five-minute interval and an independently justified physical law bounds its rate magnitude by $3$ °C/min throughout, then every pair of readings $u,v$ satisfies $|T(v)-T(u)|\\le3|v-u|$. In particular, readings one minute apart cannot differ by more than $3$ °C under the model. A larger observed difference signals that a premise failed—perhaps a sensor glitch, an unmodeled jump, or an incorrect rate bound. The theorem cannot identify which premise failed without extra evidence.",
+        "The mean value theorem does not say the rate equals its average at a time you can choose in advance. It also does not say the rate is near the average for most of the interval. A smooth function may move very slowly for much of a trip and rapidly for a short part while still having the required mean-value point. The theorem guarantees at least one exact match. To locate or bound where it occurs, additional information such as monotonicity of the derivative is needed.",
+        "When the derivative is bounded only on pieces separated by a corner, a similar global bound may still be assembled if the function stays continuous. Apply the mean value theorem on each smooth subinterval and add the absolute changes; the triangle inequality gives a bound over the whole route using the same maximum rate. This extension requires a finite partition whose pieces satisfy the hypotheses. It does not authorize ignoring a jump discontinuity, because a jump can create a finite output change over arbitrarily small input distance. The hypotheses tell us precisely which gaps a derivative bound cannot cross.",
+        "The absolute-value function illustrates how a global change bound can survive one corner. It is continuous everywhere and has derivative $-1$ on the negative half-line and $+1$ on the positive half-line. Although the ordinary mean value theorem cannot be applied across zero in one step, the reverse triangle inequality gives the exact bound $||u|-|v||\\le|u-v|$ for every pair of real inputs. One could also split an interval at zero, apply the theorem on each smooth piece, and add the resulting bounds. By contrast, the step function that is zero for negative inputs and one for nonnegative inputs has a jump: choosing inputs $-\\delta$ and $+\\delta$ gives output difference one over input distance $2\\delta$, so no fixed finite rate bound works as $\\delta\\downarrow0$. Checking derivatives at a finite set of sampled times would miss that jump. A claimed uniform rate guarantee must control all eligible points and address every nonsmooth boundary where the smooth theorem cannot be applied directly."
+      ],
+      "formula": "|f′|≤M on an interval, with the mean value theorem hypotheses, implies |f(v)−f(u)|≤M|v−u|.",
+      "formulaTex": "\\begin{gathered}f\\text{ continuous on }[a,b],\\quad f\\text{ differentiable on }(a,b),\\\\ |f^{\\prime}(x)|\\le M\\quad(x\\in(a,b),\\ M\\ge0)\\\\ \\Longrightarrow\\quad |f(v)-f(u)|\\le M|v-u|\\quad(u,v\\in[a,b]).\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A complete shape analysis on a closed interval",
+      "problem": "Analyze $f(x)=x^{3}-3x$ on $[-2,2]$, including absolute extrema and inflection.",
+      "steps": [
+        "The polynomial is continuous on $[-2,2]$, so the extreme value theorem guarantees attained extrema. Its derivative $3(x-1)(x+1)$ vanishes at $-1$ and $1$.",
+        "The derivative is positive on $(-2,-1)$, negative on $(-1,1)$, and positive on $(1,2)$. Therefore $-1$ is a local maximum and $1$ is a local minimum.",
+        "Compare $f(-2)=-2$, $f(-1)=2$, $f(1)=-2$, and $f(2)=2$. The endpoints tie the interior extrema; neither absolute extremum is unique.",
+        "Since $f^{\\prime\\prime}(x)=6x$, concavity changes from down to up at zero. The inflection point is $(0,0)$, where the derivative is $-3$, not zero."
+      ],
+      "answer": "Absolute maximum $2$ at $x=-1$ and $x=2$; absolute minimum $-2$ at $x=-2$ and $x=1$. Inflection at $(0,0)$."
+    },
+    {
+      "title": "Finding the mean-value point",
+      "problem": "For $f(x)=x^{2}$ on $[1,3]$, locate every point promised by the mean value theorem.",
+      "steps": [
+        "A polynomial is continuous on the closed interval and differentiable throughout its interior.",
+        "The secant slope is $\\frac{9-1}{3-1}=4$. Solve $f^{\\prime}(c)=2c=4$.",
+        "The solution $c=2$ lies strictly between $1$ and $3$. Its tangent slope equals the average slope; uniqueness here comes from the linear equation, not from the theorem."
+      ],
+      "answer": "The unique suitable point is $c=2$."
+    },
+    {
+      "title": "A limit requiring two valid applications",
+      "problem": "Evaluate $\\lim_{x\\to0}\\frac{e^x-1-x}{x^2}$.",
+      "steps": [
+        "Numerator and denominator both tend to zero. On each punctured side of zero, the functions are differentiable and the denominator derivative $2x$ is nonzero.",
+        "The derivative quotient is $\\frac{e^x-1}{2x}$, still $0/0$. Its denominator derivative is $2$, so another application is valid.",
+        "The next derivative quotient $\\frac{e^x}{2}$ tends to $\\frac12$. This establishes the limit of the first derivative quotient, which in turn establishes the original limit."
+      ],
+      "answer": "The limit is $\\frac12$. The conclusion comes from the verified hypotheses at both stages."
+    },
+    {
+      "title": "Absolute extrema require endpoints too",
+      "problem": "Find all absolute extrema of $f(x)=x^{2}-4x+1$ on $[0,3]$.",
+      "steps": [
+        "The polynomial is continuous on the closed interval, so extrema are attained.",
+        "Its derivative is $2x-4$, which vanishes at the interior point $x=2$.",
+        "Evaluate $f(0)=1$, $f(2)=-3$, and $f(3)=-2$.",
+        "Compare the values rather than assuming the stationary point supplies both extremes."
+      ],
+      "answer": "Absolute maximum $1$ at $x=0$; absolute minimum $-3$ at $x=2$."
+    },
+    {
+      "title": "Finding the mean-value tangent",
+      "problem": "Apply the mean value theorem to $f(x)=x^{2}$ on $[1,3]$ and find every suitable $c$.",
+      "steps": [
+        "A polynomial is continuous on $[1,3]$ and differentiable on $(1,3)$.",
+        "The secant slope is $\\frac{f(3)-f(1)}{3-1}=\\frac{9-1}{2}=4$.",
+        "Solve $f^{\\prime}(c)=2c=4$.",
+        "The solution $c=2$ lies strictly inside the interval."
+      ],
+      "answer": "The unique mean-value point is $c=2$."
+    },
+    {
+      "title": "A sign chart and endpoint comparison",
+      "problem": "Analyze $f(x)=x^3-3x$ on $[-3/2,5/2]$, including interior local extrema, absolute extrema, and endpoint local extrema relative to this domain.",
+      "steps": [
+        "Continuity on the closed interval guarantees absolute extrema. $f^{\\prime}(x)=3(x-1)(x+1)$ has interior critical points $-1,1$.",
+        "The derivative signs are $+,-,+$ across the three interior intervals. Thus $-1$ is an interior local maximum and $1$ an interior local minimum. Relative to this restricted domain, the left endpoint is a one-sided local minimum and the right endpoint a one-sided local maximum.",
+        "Compare $f(-3/2)=9/8$, $f(-1)=2$, $f(1)=-2$, and $f(5/2)=65/8$. The endpoint maximum exceeds the interior local maximum."
+      ],
+      "answer": "Interior local maximum $2$ at $x=-1$; interior local minimum $-2$ at $x=1$. Relative to the domain, $x=-3/2$ is also a one-sided local minimum and $x=5/2$ a one-sided local maximum. Absolute maximum $65/8$ at $x=5/2$; absolute minimum $-2$ at $x=1$."
+    },
+    {
+      "title": "A zero second derivative can still be an inflection",
+      "problem": "Classify the origin of $f(x)=x^{3}$ as a stationary point and possible inflection.",
+      "steps": [
+        "The first derivative is $3x^{2}$, which is nonnegative on both sides and zero at zero.",
+        "The function increases through the origin, so zero is not a local extremum.",
+        "The second derivative is $6x$, negative to the left and positive to the right.",
+        "Concavity changes across the graph point at zero."
+      ],
+      "answer": "The origin is a stationary inflection point with horizontal tangent, neither a local maximum nor minimum."
+    },
+    {
+      "title": "A justified repeated L'Hôpital calculation",
+      "problem": "Evaluate $\\lim_{x\\to0}\\frac{1-\\cos x}{x^2}$.",
+      "steps": [
+        "Both numerator and denominator tend to zero; on each punctured side the denominator derivative $2x$ is nonzero.",
+        "One application gives the limit of $\\frac{\\sin x}{2x}$, still a $0/0$ form.",
+        "The new denominator derivative is $2$, nonzero, so a second application gives $\\frac{\\cos x}{2}$.",
+        "This tends to $\\frac12$ from both sides."
+      ],
+      "answer": "The two-sided limit is $\\frac12$. The sine limit provides an alternative after the first application."
+    }
+  ],
+  "misconceptions": [
+    "“Every zero of the derivative is a maximum or minimum.” For $x^3$ the derivative vanishes at zero while the function increases through it. Check signs.",
+    "“A zero second derivative marks an inflection.” For $x^4$ the concavity stays up across zero. Check a change of concavity at a graph point.",
+    "“A smooth-looking plot verifies the mean value theorem hypotheses.” A plot samples finitely many points and can hide a corner, a hole, or a narrow feature. Establish continuity and differentiability analytically."
+  ],
+  "lab": {
+    "title": "Inspect derivative sign charts",
+    "description": "Vary the code parameter a in $f(x)=x^3-3ax$ on the dimensionless interval $[-2,2]$. Plot the function and its first two derivatives, then inspect a labeled numerical sign table. The analytic derivatives avoid finite-difference error; sampling still has limitations.",
+    "code": "// Change a to 0, -1, or a small positive number.\nconst a = 1;\nconst left = -2;\nconst right = 2;\nconst n = 160; // Number of sampling intervals, not a proof resolution.\nif (!Number.isFinite(a) || Math.abs(a) > 10) throw new Error('Choose finite a between -10 and 10.');\nif (!Number.isInteger(n) || n < 2 || n > 1000) throw new Error('Choose integer n between 2 and 1000.');\nconst f = x => x*x*x - 3*a*x;\nconst df = x => 3*x*x - 3*a;\nconst ddf = x => 6*x;\nconst values = [], slopes = [], bending = [];\nfor (let i = 0; i <= n; i++) {\n  const x = left + (right-left)*i/n;\n  values.push([x, f(x)]);\n  slopes.push([x, df(x)]);\n  bending.push([x, ddf(x)]);\n}\nplot(values, 'f(x) = x^3 - 3ax; x and y dimensionless');\nplot(slopes, 'First derivative f prime versus x');\nplot(bending, 'Second derivative f double prime versus x');\nconst sign = y => y > 0 ? '+' : y < 0 ? '-' : '0';\nconsole.log('x | f(x) | sign f prime | sign f double prime');\nfor (const x of [-2, -1, -0.5, 0, 0.5, 1, 2]) {\n  console.log(x, f(x), sign(df(x)), sign(ddf(x)));\n}\nconst candidates = [left, right];\nif (a >= 0) {\n  const r = Math.sqrt(a);\n  for (const x of (r === 0 ? [0] : [-r, r])) {\n    if (x > left && x < right) candidates.push(x);\n  }\n}\nconsole.log('Endpoint and stationary candidates:');\nfor (const x of candidates) console.log('x =', x, 'f =', f(x));\nconsole.log('Minimum candidate value:', Math.min(...candidates.map(f)));\nconsole.log('Maximum candidate value:', Math.max(...candidates.map(f)));",
+    "tasks": [
+      "Predict the first- and second-derivative signs and absolute extrema for a = 1 before running. Explain why both endpoints must be compared with the stationary points.",
+      "Change a to 0 and then -1. Classify $x=0$ in each case, separating stationarity from inflection.",
+      "Try a = 0.000001 and n = 20. Can the sampled function plot resolve the small decreasing interval? Derive its exact endpoints from $f'(x)=0$ instead.",
+      "Explain why the finite sign table cannot prove there are no other critical points. Identify the algebraic fact that makes the candidate list complete for this polynomial."
+    ],
+    "expected": "At a = 1, the seven table rows give $f(x)$ values $-2,2,1.375,0,-1.375,-2,2$ at the listed $x$ values. The candidate minimum is $-2$ and maximum is $2$. Each of the three plots has 161 points. Algebraically, $f'(x)=3(x^2-a)$ and $f''(x)=6x$. On the real line, $a>0$ gives stationary inputs $x=\\pm\\sqrt a$; these are interior candidates on the plotted interval only when $0<a<4$. At $a=0$ the origin is a stationary inflection; for $a<0$, the first derivative is strictly positive everywhere."
+  },
+  "exercises": [
+    {
+      "question": "Does $f(x)=1/x$ on $(0,1]$ attain an absolute maximum or minimum? Explain which extreme value theorem hypothesis is missing.",
+      "hint": "Compare values near zero and at one.",
+      "solution": "The minimum is $1$ at $x=1$ because $1/x\\ge1$ on $(0,1]$. As $x\\to0^+$, $1/x\\to\\infty$, so no maximum exists. The domain is not a closed interval, so the extreme value theorem does not apply.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the absolute maximum and minimum of $f(x)=x^2-4x+1$ on $[0,3]$.",
+      "hint": "Evaluate both endpoints and every interior critical point.",
+      "solution": "Since $f^{\\prime}(x)=2x-4$, the interior critical point is $x=2$. Compare $f(0)=1$, $f(2)=-3$, and $f(3)=-2$: the absolute maximum is $1$ at $x=0$ and the minimum is $-3$ at $x=2$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $f(x)=x^2$ on $(0,1)$ attain an absolute maximum or minimum?",
+      "hint": "The limiting endpoint values are not in the domain.",
+      "solution": "For every $x\\in(0,1)$, smaller positive inputs have smaller squares, and inputs closer to $1$ have larger squares. Neither extremum is attained. The excluded endpoints prevent the extreme value theorem from applying.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find absolute extrema of $|x|$ on $[-2,1]$. Include every type of candidate.",
+      "hint": "Check the corner at zero and both endpoints.",
+      "solution": "The corner $x=0$ is an interior critical point with $f(0)=0$; the endpoint values are $f(-2)=2$ and $f(1)=1$. Thus the absolute minimum is $0$ at $x=0$ and maximum is $2$ at $x=-2$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does Fermat's theorem not force $f^{\\prime}(0)=0$ for $f(x)=|x|$?",
+      "hint": "Check which theorem hypothesis fails.",
+      "solution": "At the interior local minimum $x=0$, the left difference quotient tends to $-1$ and the right one to $1$. Thus $f^{\\prime}(0)$ does not exist; Fermat's theorem requires differentiability there.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Apply Rolle’s theorem to $f(x)=x^2-4x+3$ on $[1,3]$ and find $c$.",
+      "hint": "Check endpoints before solving the derivative equation.",
+      "solution": "The polynomial is continuous on $[1,3]$, differentiable on $(1,3)$, and $f(1)=f(3)=0$. Rolle's theorem applies. Solving $f^{\\prime}(c)=2c-4=0$ gives $c=2\\in(1,3)$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does Rolle’s theorem not force a zero derivative for $f(x)=|x|$ on $[-1,1]$?",
+      "hint": "Check each hypothesis and look at $x=0$.",
+      "solution": "Although $f(-1)=f(1)=1$ and $f$ is continuous, it is not differentiable at $x=0$. Its derivative is $-1$ for $x<0$ and $1$ for $x>0$, so it is never zero where defined. Rolle's differentiability hypothesis fails.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the mean-value point for $f(x)=x^2$ on $[1,3]$.",
+      "hint": "Set $f^{\\prime}(c)$ equal to the secant slope.",
+      "solution": "The secant slope is $(f(3)-f(1))/(3-1)=(9-1)/2=4$. Since $f^{\\prime}(c)=2c$, the mean value point is $c=2\\in(1,3)$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Apply Rolle's theorem to $f(x)=x^2-4$ on $[-2,2]$.",
+      "hint": "The endpoint values match; solve $f^{\\prime}(c)=0$.",
+      "solution": "The polynomial is continuous on $[-2,2]$ and differentiable on $(-2,2)$, with $f(-2)=f(2)=0$. Solving $f^{\\prime}(c)=2c=0$ gives the interior point $c=0$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Apply Rolle's theorem to $\\sin x$ on $[0,\\pi]$ and find $c$.",
+      "hint": "Both endpoint values are zero.",
+      "solution": "Sine is continuous on $[0,\\pi]$ and differentiable on $(0,\\pi)$, with $\\sin 0=\\sin\\pi=0$. Its derivative $\\cos x$ vanishes at $c=\\pi/2$, the only such interior point.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove $|\\sin b-\\sin a|\\le|b-a|$ for all real $a,b$.",
+      "hint": "Use the mean value theorem and $|\\cos x|\\le1$.",
+      "solution": "If $a=b$, equality holds. Otherwise the mean value theorem gives $\\sin b-\\sin a=\\cos c\\,(b-a)$ for some $c$ between them. Hence $|\\sin b-\\sin a|=|\\cos c|\\,|b-a|\\le|b-a|$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f_a(x)=x^3-3ax$ with $a=-1$, prove that $f_a$ has no local extrema on $\\mathbb R$ and find its absolute extrema on $[-2,2]$.",
+      "hint": "The derivative has a strict sign everywhere.",
+      "solution": "Here $f(x)=x^3+3x$ and $f^{\\prime}(x)=3x^2+3>0$ for all real $x$. The mean value theorem gives strict increase, so there are no local extrema on the real line. On $[-2,2]$, continuity and monotonicity give minimum $f(-2)=-14$ and maximum $f(2)=14$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f(x)=x^3-3x$, identify intervals of increase and decrease and both local extrema.",
+      "hint": "Factor $f^{\\prime}(x)=3(x-1)(x+1)$.",
+      "solution": "The derivative is positive on $(-\\infty,-1)$ and $(1,\\infty)$, and negative on $(-1,1)$. Thus $f$ increases, decreases, then increases. It has a local maximum $f(-1)=2$ and local minimum $f(1)=-2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify the critical point and concavity of $f(x)=x^4$ on the real line.",
+      "hint": "Use signs when the second derivative test is inconclusive.",
+      "solution": "The only critical number is $0$, since $f^{\\prime}(x)=4x^3$. This derivative changes from negative to positive, so $0$ is a strict local and absolute minimum because $x^4\\ge0$. Although $f^{\\prime\\prime}(0)=0$, $f^{\\prime\\prime}(x)=12x^2>0$ on both sides; concavity does not change.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does $x^4$ have an inflection at zero? Explain using $f^{\\prime\\prime}$ signs.",
+      "hint": "Calculate the second derivative on both sides.",
+      "solution": "For $f(x)=x^4$, $f^{\\prime\\prime}(x)=12x^2>0$ for every $x\\ne0$. Concavity does not change at $0$, so it is not an inflection despite $f^{\\prime\\prime}(0)=0$.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Does $x^3$ have an inflection at zero? Is it a local extremum?",
+      "hint": "Check signs of both first and second derivatives.",
+      "solution": "Here $f^{\\prime}(x)=3x^2\\ge0$ and $f^{\\prime\\prime}(x)=6x$ changes from negative to positive at $0$. The origin is an inflection with a horizontal tangent. Since $x^3$ increases through $0$, it is not a local extremum.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Use the second derivative test to classify the stationary point of $f(x)=x^2+2x$.",
+      "hint": "Find the zero of $f^{\\prime}$ and evaluate $f^{\\prime\\prime}$.",
+      "solution": "Since $f^{\\prime}(x)=2x+2$ vanishes at $x=-1$ and $f^{\\prime\\prime}(x)=2>0$, the point is a strict local minimum with $f(-1)=-1$. The upward-opening parabola makes it absolute on $\\mathbb R$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use the second derivative test to classify the origin for $f(x)=-x^2$.",
+      "hint": "Compute the second derivative.",
+      "solution": "At $x=0$, $f^{\\prime}(0)=0$ and $f^{\\prime\\prime}(0)=-2<0$, so there is a strict local maximum. Since $f(x)=-x^2\\le0$ for all real $x$, it is also absolute.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is the second derivative test inconclusive for $f(x)=x^4$ at zero even though a minimum exists?",
+      "hint": "Evaluate $f^{\\prime}(0)$ and $f^{\\prime\\prime}(0)$, then use a direct inequality.",
+      "solution": "Both $f^{\\prime}(0)$ and $f^{\\prime\\prime}(0)$ equal $0$, so the second derivative test is inconclusive. Directly, $x^4\\ge0$ with equality only at $x=0$, proving a strict absolute minimum.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to\\infty}x/e^x$ and explain why L’Hôpital’s rule applies.",
+      "hint": "Verify both growth and the derivative denominator.",
+      "solution": "Both $x$ and $e^x$ tend to $+\\infty$; the functions are differentiable and the denominator derivative $e^x$ never vanishes. The derivative quotient $1/e^x\\to0$, so L'Hôpital's rule gives $\\lim_{x\\to\\infty}x/e^x=0$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to0}\\frac{e^x-1}{x}$ using a valid rule.",
+      "hint": "Check the $0/0$ form before differentiating.",
+      "solution": "The quotient has form $0/0$ as $x\\to0$, and its denominator derivative is $1$. The derivative quotient $e^x/1\\to1$, so L'Hôpital's rule gives $\\lim_{x\\to0}(e^x-1)/x=1$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to+\\infty}\\frac{\\ln x}{x}$.",
+      "hint": "Check the $\\infty/\\infty$ form and the derivative quotient.",
+      "solution": "Both $\\ln x$ and $x$ tend to $+\\infty$. The derivative quotient $(1/x)/1=1/x\\to0$; the denominator derivative is nonzero. Hence $\\lim_{x\\to+\\infty}\\ln x/x=0$ by L'Hôpital's rule.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to0}\\frac{\\sin x-x}{x^3}$.",
+      "hint": "Verify the $0/0$ form after each differentiation; three valid applications expose a constant limit.",
+      "solution": "The successive derivative quotients are $(\\cos x-1)/(3x^2)$, $-\\sin x/(6x)$, and $-\\cos x/6$. At each earlier stage the form remains $0/0$, and each denominator derivative is nonzero for small $x\\ne0$. Three applications give the two-sided limit $-1/6$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\lim_{x\\to0^+}x\\ln x$.",
+      "hint": "Rewrite as $\\ln x/(1/x)$ before using the rule.",
+      "solution": "As $x\\to0^+$, $\\ln x\\to-\\infty$ and $1/x\\to+\\infty$. The derivative quotient is $(1/x)/(-1/x^2)=-x\\to0$. Thus $x\\ln x\\to0$ from below.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is L'Hôpital's rule invalid for $\\frac{1+x}{x}$ as $x\\to0$, and what happens instead?",
+      "hint": "Check the numerator's limit and both one-sided signs.",
+      "solution": "The numerator tends to $1$, so this is neither a $0/0$ nor an $\\infty/\\infty$ form. Since $(1+x)/x=1/x+1$, it tends to $-\\infty$ from the left and $+\\infty$ from the right. Differentiating top and bottom would be invalid.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Give $f,g$ with $\\frac{f}{g}\\to0$ but $\\frac{f^{\\prime}}{g^{\\prime}}$ having no limit near zero.",
+      "hint": "Use a shrinking oscillation for $f$ and $g(x)=x$.",
+      "solution": "Let $f(x)=x^2\\sin(1/x)$ for $x\\ne0$ and $g(x)=x$. Then $f(x)/g(x)=x\\sin(1/x)\\to0$, but $f^{\\prime}(x)/g^{\\prime}(x)=2x\\sin(1/x)-\\cos(1/x)$ oscillates without a limit. The rule has no converse.",
+      "lesson": 5,
+      "type": "Challenge"
+    },
+    {
+      "question": "Let $t$ be measured in seconds and $s(t)$ in metres. Suppose $s$ is continuous on $[0,4]$, differentiable on $(0,4)$, and $s(0)=2$, $s(4)=18$. Show that some instantaneous velocity is $4\\,\\mathrm{m}/\\mathrm{s}$. If $|s'(t)|\\le5\\,\\mathrm{m}/\\mathrm{s}$ for every $t\\in(0,4)$, bound the magnitude of displacement over any one-second subinterval $[u,u+1]\\subseteq[0,4]$.",
+      "hint": "Apply the mean value theorem twice, with different endpoints.",
+      "solution": "The average velocity is $(18-2)/(4-0)=4\\,\\mathrm{m/s}$, so the mean value theorem supplies $c\\in(0,4)$ with $s^{\\prime}(c)=4\\,\\mathrm{m/s}$. On any one-second interval $[u,v]$, it gives $s(v)-s(u)=s^{\\prime}(d)(v-u)$ for some $d\\in(u,v)$. The speed bound implies $|s(v)-s(u)|\\le5\\,\\mathrm m$. This bounds displacement, not total distance traveled.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Prove $|\\arctan b-\\arctan a|\\le|b-a|$ for all real $a,b$, and identify when equality can occur.",
+      "hint": "Apply the mean value theorem to $\\arctan x$ and bound $1/(1+c^2)$. Then inspect equality.",
+      "solution": "If $a=b$, equality holds. Otherwise the mean value theorem gives $\\arctan b-\\arctan a=(b-a)/(1+c^2)$ for an interior $c$, proving the bound. For endpoints on the same side of $0$, an interior $c\\ne0$ makes it strict. If the interval crosses $0$, apply the theorem separately to its negative and positive pieces; both strict bounds add. Thus equality holds exactly when $a=b$.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Use the mean value theorem to prove that $|e^b-e^a|\\le e^B|b-a|$ whenever $a,b\\le B$.",
+      "hint": "Apply the theorem between $a$ and $b$, then bound $e^c$.",
+      "solution": "For $a=b$, both sides are zero. Otherwise the mean value theorem gives $e^b-e^a=e^c(b-a)$ for some $c$ between them. Since $c\\le B$, taking absolute values yields $|e^b-e^a|\\le e^B|b-a|$.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "Bound $|\\sqrt{4}-\\sqrt{1}|$ using a derivative bound on $[1,4]$, then compare with the actual change.",
+      "hint": "The largest derivative of $\\sqrt x$ on $[1,4]$ is $1/2$.",
+      "solution": "On $[1,4]$, $f^{\\prime}(x)=1/(2\\sqrt x)\\le1/2$. The mean value theorem gives $|f(4)-f(1)|\\le(1/2)(4-1)=3/2$. The actual change is $\\sqrt4-\\sqrt1=1$, so the bound holds but is not sharp.",
+      "lesson": 6,
+      "type": "Proof"
+    }
+  ],
+  "summary": [
+    "Existence theorems require their full domain and regularity hypotheses; critical-point equations only identify candidates.",
+    "The mean value theorem turns derivative signs and bounds into statements about change across intervals.",
+    "First derivative signs classify turning points; second derivative signs describe concavity, and a zero second derivative can be inconclusive.",
+    "L’Hôpital’s rule evaluates specified indeterminate quotients when the derivative quotient has an appropriate limit.",
+    "Numerical sign charts illustrate analytic conclusions and can miss small features."
+  ],
+  "next": "Chapter 09 uses these existence and shape results to justify optimization, then examines numerical methods for locating roots and candidate extrema."
+}

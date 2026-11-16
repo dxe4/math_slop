@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Feasible region for two linear inequalities</title>
+  <desc id="desc">A coordinate graph shades the quadrilateral with vertices zero zero, zero six, three three, and one point five zero. It lies in the first quadrant, below y equals negative x plus six and above y equals two x minus three.</desc>
+  <style>
+    .axis{stroke:#334155;stroke-width:2}.grid{stroke:#cbd5e1;stroke-width:1}.line1{stroke:#1d4ed8;stroke-width:4}.line2{stroke:#b45309;stroke-width:4}.region{fill:#14b8a6;fill-opacity:.28;stroke:#0f766e;stroke-width:2}.dot{fill:#0f172a}.label{fill:#0f172a;font:16px system-ui,sans-serif}.small{fill:#334155;font:14px system-ui,sans-serif}
+    @media (prefers-color-scheme:dark){.axis{stroke:#cbd5e1}.grid{stroke:#475569}.line1{stroke:#93c5fd}.line2{stroke:#fcd34d}.region{fill:#2dd4bf;fill-opacity:.3;stroke:#99f6e4}.dot{fill:#f8fafc}.label{fill:#f8fafc}.small{fill:#e2e8f0}}
+  </style>
+  <g aria-hidden="true">
+    <path class="grid" d="M90 350H570M90 300H570M90 250H570M90 200H570M90 150H570M90 100H570M170 50V350M250 50V350M330 50V350M410 50V350M490 50V350M570 50V350"/>
+    <path class="region" d="M90 350 L90 50 L330 200 L210 350 Z"/>
+    <path class="line1" d="M90 50 L570 350"/>
+    <path class="line2" d="M210 350 L410 100"/>
+    <path class="axis" d="M70 350H590M90 370V30"/>
+    <circle class="dot" cx="90" cy="350" r="5"/><circle class="dot" cx="90" cy="50" r="5"/><circle class="dot" cx="330" cy="200" r="5"/><circle class="dot" cx="210" cy="350" r="5"/>
+    <text class="label" x="596" y="356">x</text><text class="label" x="84" y="23">y</text>
+    <text class="small" x="98" y="372">(0,0)</text><text class="small" x="98" y="44">(0,6)</text><text class="small" x="340" y="194">(3,3)</text><text class="small" x="210" y="374">(1.5,0)</text>
+    <text class="label" x="440" y="286">y = −x + 6</text><text class="label" x="382" y="84">y = 2x − 3</text><text class="label" x="132" y="215">feasible</text>
+  </g>
+</svg>

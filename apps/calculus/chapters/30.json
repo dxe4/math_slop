@@ -1,0 +1,542 @@
+{
+  "id": "30",
+  "title": "Implicit functions and constrained systems",
+  "subtitle": "When do coupled equations define one smooth local branch, and how does that branch respond to constraints and parameters?",
+  "prerequisites": [
+    "Chapter 21: total derivatives, Jacobian matrices, the matrix chain rule and tangent planes.",
+    "Chapter 22: equality-constrained extrema, multipliers and second-order feasible tests.",
+    "Chapter 24: coordinate maps, singular Jacobians and separate inverse branches.",
+    "L2 linear algebra: matrix shapes, invertible square blocks, rank, kernels and solving linear systems."
+  ],
+  "objectives": [
+    "State the C1 inverse and implicit function theorems with legal open domains and neighborhood uniqueness.",
+    "Select dependent variables by an invertible derivative block and calculate their response matrix.",
+    "Identify the feasible tangent space at a regular point as a constraint derivative's kernel.",
+    "Derive the regular multiplier necessary condition using local coordinates.",
+    "Track stationary branches and distinguish differential sensitivity from finite error bounds.",
+    "Distinguish folds, nondifferentiable inverses, redundant constraints and singular feasible sets."
+  ],
+  "sections": [
+    {
+      "title": "1. Equations and local branches",
+      "paragraphs": [
+        "An explicit formula $y=f(x)$ names its independent and dependent variables. An equation such as $x^2+y^2=4$ does not. Near the top of this circle, y is a smooth function of x; near the rightmost point, x is a smooth function of y. The implicit function theorem identifies a legal local choice without requiring an elementary formula for the branch. It supplies existence and uniqueness in stated neighborhoods, rather than simply suggesting a derivative.",
+        "The word local has two jobs. We restrict the independent variables to an open neighborhood of their base values, and we restrict the dependent variables to an open neighborhood of their base values. Uniqueness concerns solutions within that second neighborhood. The theorem does not say that the equation has only one solution elsewhere. Two different branches can each be locally unique around their own base points. A curve may require different dependent coordinates in different regions.",
+        "This chapter builds on the total derivative and matrix chain rule of chapter 21, the constrained extrema of chapter 22, and the coordinate maps and branch restrictions of chapter 24. Matrices, invertibility, rank, kernels and linear systems are the additional linear algebra tools. All coordinates are real, and the domains in our standard theorems are open. A physical restriction such as positive pressure remains part of the legal domain before differentiation begins.",
+        "For a scalar constraint $H(x,y)=0$, suppose a differentiable branch $y=\\phi(x)$ already exists. The chain rule then gives $H_x+H_y\\phi'=0$, so $\\phi'=-H_x/H_y$ when $H_y\\ne0$. This is a necessary relation for an assumed differentiable branch. It does not construct that branch. A general existence theorem is needed before that short derivative calculation becomes a justified description of a solution.",
+        "The full inverse and implicit function proofs are supplied by Real Analysis chapter 21, Inverse and Implicit Function Theorems, in the proof reading linked with this chapter. Here those existence results are stated with their hypotheses. We derive their differential consequences and prove the tangent and multiplier applications. We do not present formal differentiation of an assumed solution as a proof of its existence.",
+        "Several different phenomena can produce a zero selected derivative. A fold can give two nearby solutions on one side of a parameter value and none on the other. A unique continuous inverse may fail to be differentiable. A smooth feasible set may be represented by a redundant equation whose gradient vanishes. A singular block is therefore a reason to investigate the actual set, not a universal conclusion that there is no solution."
+      ],
+      "formula": "Existence comes before differentiating a branch.",
+      "formulaTex": "H(x,\\phi(x))=0,\\quad H_y\\ne0\n\\quad\\Longrightarrow\\quad\n\\phi'(x)=-H_x/H_y."
+    },
+    {
+      "title": "2. The inverse function theorem",
+      "paragraphs": [
+        "For a square map $F:U\\subset\\mathbb R^n\\to\\mathbb R^n$, the derivative $DF(a)$ is a linear transformation of input displacements into output displacements. If it is invertible, each small linear output change has one linear preimage. Continuous variation of the derivative makes a corresponding nonlinear local inverse possible. A nonzero determinant tests invertibility in coordinates; the entire derivative map is what is inverted.",
+        "Precisely, assume U is open, F has continuous first partial derivatives on U, a belongs to U, and DF(a) is invertible. Then there are open neighborhoods W of a and V of F(a), with W contained in U, such that F maps W bijectively onto V. Its inverse g from V to W is C1. At every target b in V, its derivative is $Dg(b)=[DF(g(b))]^{-1}$. The original derivative is evaluated at the preimage, not at the target coordinates.",
+        "Once the theorem has established a differentiable inverse, its derivative formula follows from the chain rule on $F(g(b))=b$. This gives $DF(g(b))Dg(b)=I$ and hence the formula after multiplication by the inverse. The existence, neighborhood bijection and inverse regularity assertions require the full theorem in the Real Analysis reading. This short calculation proves the formula conditional on that result; it is not a replacement proof.",
+        "Local invertibility does not imply a global inverse. The map $F(u,v)=(e^u\\cos v,e^u\\sin v)$ has determinant $e^{2u}>0$ everywhere, yet v and v+2π give identical outputs. One can choose a short angular neighborhood and invert there. The theorem does not supply a single unrestricted angle branch around the punctured plane or remove the map's periodicity.",
+        "Invertibility of the derivative is sufficient for a C1 inverse, not necessary for every continuous inverse. The scalar cubic is strictly increasing and onto. Its inverse cube root is continuous, but its difference quotient at zero has magnitude $|h|^{-2/3}$ and no finite limit. The theorem correctly makes no C1 inverse claim there. Failure of a sufficient condition must not be mistaken for a proof of every possible failure.",
+        "For a nonsquare Jacobian, an ordinary inverse matrix is not defined. A map from two controls to three sensor outputs may support local reconstruction under suitable rank conditions, but it does not fall under a theorem about bijections between open sets of the same dimension. Least-squares inversion is another problem with another criterion. Always record which spaces are inputs and outputs before arranging derivatives."
+      ],
+      "theorems": [
+        {
+          "title": "Inverse function theorem: stated result",
+          "statement": "Let $F:U\\subset\\mathbb R^n\\to\\mathbb R^n$ be C1 on open U and let DF(a) be invertible. There are open neighborhoods W of a and V of F(a) such that F:W→V is bijective with C1 inverse g, and $Dg(b)=[DF(g(b))]^{-1}$ for b in V.",
+          "proof": [
+            "The existence, local bijectivity and inverse regularity are imported from the complete proof in Real Analysis chapter 21, linked as proof reading.",
+            "After that theorem supplies g, the chain rule gives $DF(g(b))Dg(b)=I$. Multiplication by the invertible original derivative yields the formula. This calculation alone would not prove the inverse exists."
+          ]
+        }
+      ],
+      "formula": "Evaluate the inverse derivative at the preimage.",
+      "formulaTex": "D(F^{-1})(b)=[DF(F^{-1}(b))]^{-1}."
+    },
+    {
+      "title": "3. Select an invertible dependent-variable block",
+      "paragraphs": [
+        "Partition variables as x in R^n and y in R^m, and let H(x,y) have m output components. We want to solve its m equations for the selected m variables y while allowing x to vary. The relevant square derivative is D_yH. The full Jacobian usually has more columns than rows and has no ordinary determinant. The selected block states exactly which variables are being solved for.",
+        "Suppose H is C1 on an open subset of R^(n+m), H(a,b)=0, and D_yH(a,b) is invertible. The implicit theorem supplies open neighborhoods X of a and Y of b, with their product contained in the original domain, and a C1 map φ:X→Y. For every (x,y) in that product, H(x,y)=0 if and only if y=φ(x). This includes existence for every x in X and uniqueness among the values y in Y.",
+        "After shrinking the neighborhoods if necessary, the selected block remains invertible along this graph. The branch derivative is $D\\phi(x)=-[D_yH(x,\\phi(x))]^{-1}D_xH(x,\\phi(x))$. The matrix shapes are m by m followed by m by n, producing m by n. Multiplication order is essential. Square matrices do not generally commute, even when their dimensions happen to match.",
+        "The formula follows by differentiating the established identity H(x,φ(x))=0. It gives $D_xH+D_yH\\,D\\phi=0$. For a particular input increment h, it is usually simpler to solve $D_yH\\,k=-D_xH\\,h$ than to compute a symbolic inverse. The resulting k is the predicted dependent increment; the actual branch change differs from k by o(||h||). That prediction is local to the chosen branch.",
+        "Variable selection can rescue a failed coordinate description. A sphere can be solved for a coordinate whose partial derivative is nonzero. When that partial vanishes, another coordinate may still work. Full row rank means some required square block is invertible, not that every choice works. An algorithm that always selects the same coordinates can fail at an otherwise smooth point.",
+        "Feasibility is part of the theorem. An invertible-looking derivative evaluated at a point not satisfying the constraints gives no solution through that point. A logarithm or denominator in H must also be defined throughout a neighborhood of the base point. Openness and continuity permit a smaller legal neighborhood around a valid point; they cannot repair a formula that was undefined at the starting point."
+      ],
+      "theorems": [
+        {
+          "title": "Implicit function theorem: stated block form",
+          "statement": "Let $H:U\\subset\\mathbb R^n\\times\\mathbb R^m\\to\\mathbb R^m$ be C1 on open U, with H(a,b)=0 and invertible D_yH(a,b). There are open X,Y with (a,b)∈X×Y⊂U and C1 φ:X→Y such that H(x,y)=0 exactly when y=φ(x) within X×Y. Along the graph, $D\\phi=-[D_yH]^{-1}D_xH$.",
+          "proof": [
+            "The full neighborhood existence, uniqueness and regularity proof is supplied in Real Analysis chapter 21. These assertions are stated results here.",
+            "Differentiating the established branch identity gives $D_xH+D_yH\\,D\\phi=0$. Solving by the invertible selected block yields the derivative formula with its displayed matrix order."
+          ]
+        }
+      ],
+      "formula": "Solve the dependent-variable block.",
+      "formulaTex": "D_yH\\,D\\phi=-D_xH,\\qquad D\\phi=-[D_yH]^{-1}D_xH."
+    },
+    {
+      "title": "4. Constraint rank and genuine feasible tangents",
+      "paragraphs": [
+        "Let G map a neighborhood of a feasible point P in R^N into R^m, with C1 components, G(P)=c, and derivative of row rank m. Reorder input coordinates so an invertible m-column block is last. Write them as (x,y), with N-m free x coordinates. The implicit theorem gives a local feasible graph y=φ(x). Thus N-m is the number of free local coordinates under this regularity hypothesis.",
+        "Define a tangent velocity as the derivative at zero of a differentiable feasible curve through P. If γ is such a curve, differentiating G(γ(t))=c gives DG(P)γ'(0)=0. Hence every tangent velocity lies in the kernel. The reverse inclusion requires a geometric construction: merely calling the kernel the tangent space would hide the role of the regularity assumption.",
+        "Write DG(P)=[C B] with B invertible and let (h,k) lie in its kernel. Then Ch+Bk=0, so k=-B^(-1)Ch=Dφ(a)h. The curve t↦(a+th,φ(a+th)) stays feasible near zero and has velocity (h,k). Every kernel vector is therefore realized. This proves that the feasible tangent space equals the kernel, conditional on the explicitly stated implicit theorem.",
+        "For one scalar constraint in three coordinates, a nonzero gradient gives a tangent plane perpendicular to that gradient. Two independent constraints give a tangent line; the cross product of their gradients supplies a nonzero direction. These descriptions are just the kernel equations in familiar forms. A straight line in a tangent direction generally leaves a curved feasible set at second order. First-order preservation is not exact preservation.",
+        "Rank counts independent first-order conditions. Writing the same equation twice does not impose a new independent restriction. If G_2=2G_1 and the constants are compatible, both equations describe the same set, and their derivative rows are dependent. A regular one-equation surface has two free coordinates in R^3, even though this redundant representation lists two equations. Count independence rather than typography.",
+        "At singular points the kernel can overestimate actual feasible motion. For G=x²+y² at the origin, DG=0 and its kernel is the whole plane, while G=0 contains only the origin. No nonzero velocity is realized by a feasible curve. The regular block hypothesis was exactly what allowed the converse construction above. Singular sets must be studied from their actual constraints rather than from a formal kernel dimension alone."
+      ],
+      "theorems": [
+        {
+          "title": "Tangent-kernel equality at a regular point",
+          "statement": "If G is C1 near feasible P and DG(P) has full row rank m, then the nearby feasible set has N-m free coordinates and its feasible curve velocities are precisely ker DG(P).",
+          "proof": [
+            "Choose an invertible block B in DG(P)=[C B], and apply the implicit theorem to write y=φ(x). A feasible curve gives DG(P)v=0 by the chain rule.",
+            "For a kernel vector v=(h,k), solve Ch+Bk=0 to get k=-B^(-1)Ch=Dφ(a)h. The curve (a+th,φ(a+th)) realizes v. Therefore the kernel contains exactly, not merely at least, the feasible tangent velocities."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. Branch sensitivity and finite error certificates",
+      "paragraphs": [
+        "In H(p,y)=0, the parameter response matrix is $D_py=-[D_yH]^{-1}D_pH$ on a specified branch. A large inverse-block norm can amplify a small forcing change. Constraint residual measures failure to satisfy the equations, whereas state error measures distance from a true branch value. They are not the same number and generally have different units.",
+        "If compatible norms give ||[D_yH]^(-1)||≤M and ||D_pH||≤K throughout a branch neighborhood, then ||Dφ||≤MK there. A finite Lipschitz comparison follows when the entire parameter segment between the two inputs stays in that neighborhood. It follows by integrating the derivative along that segment. A derivative value at just one point provides a differential prediction, not a global finite-error certificate.",
+        "A useful scalar certificate is elementary. Suppose h(y)=p has root y_* and h'≥m>0 on the interval between it and an approximation ŷ. The mean value theorem gives |h(ŷ)-p|=|h(ŷ)-h(y_*)|≥m|ŷ-y_*|. Thus the state error is at most the residual magnitude divided by m. To use it, establish the comparison interval and derivative lower bound. A flat root can have a tiny residual without a comparably tiny state error.",
+        "Sensitivity depends on scale. A volume derivative with respect to pressure carries volume-per-pressure units. Comparing Jacobian column magnitudes from differently measured inputs requires declared units or dimensionless coordinates. For pV=C>0, differentiation gives dV/dp=-V/p and dV/V=-dp/p. The latter is a dimensionless relative differential, not the numerical absolute slope expressed in arbitrary laboratory units.",
+        "Equivalent constraint coordinates leave the actual branch response unchanged. If H̃=AH for a constant invertible matrix A, then D_yH̃=A D_yH and D_pH̃=A D_pH. Its derivative product simplifies because (A D_yH)^(-1)A=(D_yH)^(-1). The residual vector changes coordinates, but the feasible branch does not. Report the constraint normalization when interpreting residual magnitudes.",
+        "The positive branch of y²=p illustrates a sensitivity boundary. Its derivative 1/(2sqrt p) grows as p decreases to zero. At zero, negative p has no real solution while positive p has two nearby roots. A branch obtained at p=1 cannot therefore be extended through zero as one unrestricted C1 graph over an open parameter interval. A different representation or continuation question is needed at the fold."
+      ],
+      "formula": "A small residual becomes a state bound only with quantitative derivative control.",
+      "formulaTex": "\\|D\\phi\\|\\le\\|[D_yH]^{-1}\\|\\|D_pH\\|,\\qquad\n|\\widehat y-y_*|\\le |h(\\widehat y)-p|/m\\quad(h'\\ge m>0)."
+    },
+    {
+      "title": "6. Regular multipliers through local coordinates",
+      "paragraphs": [
+        "Let f and G=(G_1,...,G_m) be C1 near a feasible constrained extremum P, with independent constraint gradients. At a local minimum or maximum, the derivative of f along every differentiable feasible curve vanishes. Every kernel vector is realized by such a curve, so the objective gradient annihilates ker DG(P). In Euclidean linear algebra the orthogonal complement of that kernel is the row space, suggesting the multiplier equation.",
+        "A block argument proves it directly. Write DG=[C B], with B invertible, and split the objective gradient into columns f_x,f_y. The reduced objective f(x,φ(x)) has a local extremum, hence f_x+(Dφ)^T f_y=0. Since Dφ=-B^(-1)C, set λ=B^(-T)f_y. Then f_y=B^Tλ and f_x=C^Tλ. Together these are ∇f=DG^Tλ, the necessary multiplier condition.",
+        "The original constraints accompany the gradient equation. Solving only the gradient relation can produce infeasible points. Dividing by a coordinate or multiplier can also discard zero cases, so separate them before cancellation. The theorem is a necessary condition at regular extrema, not a classification of every stationary candidate. A multiplier solution can be a maximum, minimum, or neither along the feasible set.",
+        "For a continuous objective on a compact feasible set, global extrema exist. If all feasible points are regular, a complete candidate list can be compared by objective value. Singular feasible points must be considered separately. Noncompact sets need additional control: an optimizing sequence can escape to infinity or approach an excluded boundary without any attained extremum. Local stationarity alone cannot settle that issue.",
+        "Under x²+y²=0, the origin is the entire feasible set, so it minimizes and maximizes f=x there. But the constraint gradient vanishes and no λ satisfies (1,0)=λ(0,0). This is not a counterexample to regular multipliers: their independence hypothesis fails. Direct examination of the feasible set settles the extremum immediately.",
+        "A singular representation can also hide a regular set. The equation y²=0 describes the smooth line y=0, but its gradient vanishes along that line. Replacing it by y=0 restores the regular normal without changing the set. Contrast this with the radius-zero singleton, whose local dimension really differs from that of a curve. The geometry and the chosen equations should be examined separately."
+      ],
+      "theorems": [
+        {
+          "title": "Regular equality multipliers: necessary condition",
+          "statement": "If f and G are C1 near a feasible local extremum P and DG(P) has full row rank, then ∇f(P)=DG(P)^Tλ for some multiplier vector λ, with G(P)=c.",
+          "proof": [
+            "Use an invertible block B in DG=[C B] and the implicit theorem to write feasible points as (x,φ(x)). The reduced objective has zero derivative: f_x+(Dφ)^T f_y=0.",
+            "Substitute Dφ=-B^(-1)C and define λ=B^(-T)f_y. The free and dependent components give C^Tλ=f_x and B^Tλ=f_y, proving the equation. Nothing in this argument proves sufficiency."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7. Tracking optimizers and feasible curvature",
+      "paragraphs": [
+        "Suppose f(z,p) and G(z,p) are C2 jointly near a known constrained stationary point, and c(p) is C1. Treat the position z and multipliers λ as unknowns in ∇_zf(z,p)-D_zG(z,p)^Tλ=0 and G(z,p)-c(p)=0. This stationary system is C1. An invertible derivative of the entire system with respect to (z,λ) supplies a locally unique C1 stationary branch by the implicit theorem.",
+        "This is an additional invertibility condition. Full row rank of the original constraints gives a smooth feasible set, but a degenerate restricted objective can allow stationary points to merge or split. Tracking one stationary branch also does not establish that it stays optimal under every parameter change. A classification or comparison argument must be carried along if an optimizer, rather than just a stationary candidate, is being claimed.",
+        "For C2 data at a regular stationary point, hold the multipliers fixed and define the Lagrangian L=f-Σλ_i(G_i-c_i). Along a C2 feasible curve γ with initial velocity v, the objective's second derivative is v^TH_fv+∇f·γ''. Each twice-differentiated constraint gives v^TH_G_iv+∇G_i·γ''=0. Subtract their multiplier-weighted sum. The acceleration terms cancel because ∇f=Σλ_i∇G_i.",
+        "The remaining feasible quadratic form is v^T(H_f-Σλ_iH_G_i)v on DG(P)v=0. Constraint curvature therefore matters even for a linear objective. Positive definiteness on nonzero tangent directions gives a strict local minimum, and negative definiteness gives a strict local maximum, through a local chart and Taylor's theorem as developed in chapter 22. A semidefinite form can leave higher-order behavior unresolved.",
+        "The needed C2 chart follows from the stated C1 implicit formula when the constraint data are C2: the formula for Dφ is then C1, using the entrywise quotient formulas for an invertible matrix. Thus φ is C2 and Taylor's theorem applies to the reduced objective. This explains the extra regularity behind a second-order test, instead of importing second derivatives from a merely C1 constraint.",
+        "If a differentiable family of actual optimizers z(c) is known for G(z)=c and f has no explicit c dependence, then d f(z(c))/dc=∇f·z'=λ∇G·z'=λ for one scalar constraint. This sensitivity interpretation uses the stated sign convention and a differentiable optimizer branch. Switching between competing optima can produce a corner in the optimal-value function. A numerical continuation method additionally needs its own convergence and residual analysis."
+      ],
+      "formula": "Use the Lagrangian Hessian along feasible tangents.",
+      "formulaTex": "Q(v)=v^T\\left(H_f-\\sum_i\\lambda_iH_{G_i}\\right)v,\\qquad DG(P)v=0."
+    },
+    {
+      "title": "8. Application checklist and Sources",
+      "paragraphs": [
+        "A valid application names the legal open domain, the feasible base point, the independent and dependent variable groups, and the selected square derivative block. It checks invertibility, states the neighborhoods in which uniqueness holds, and evaluates the derivative along the chosen branch. A sensitivity prediction further states the input and output scales and the region where the linear approximation is intended to operate.",
+        "Branches are part of the answer. At p=1, the equation y²=p has both roots. A small neighborhood around y=1 excludes the negative root, while a separate neighborhood around y=-1 excludes the positive root. Each branch is locally unique in its own neighborhood. Neither theorem application removed the other root or authorized continuation through the fold at p=0.",
+        "A rank calculation at a point not satisfying the equations cannot certify a feasible tangent set there. Nor can a handful of nonsingular numerical samples establish a whole-region condition. For an exact symbolic model, evaluate derivatives at the actual constrained point. For measurements, distinguish uncertainty in that point from certainty about an algebraic determinant formula. Small numerical determinants also require a scale before they can be interpreted as poor conditioning.",
+        "Sources and proof boundary: this chapter is original exposition extending the unchanged chapters 21, 22 and 24. The complete general inverse and implicit function theorem proofs are supplied by Real Analysis chapter 21, Inverse and Implicit Function Theorems. The chapter's proof reading resolves that internal resource. Jiří Lebl's author-written Basic Analysis, section 8.5, is an additional primary reference listed in Sources.",
+        "Here the derivative identities, realization of kernel directions and regular multiplier necessity were justified from the stated theorem and elementary calculus. General nonlinear existence is not claimed to follow from those short differentiations. Similarly, a global inverse, a finite sensitivity certificate and a global constrained optimum each require their own argument beyond a local derivative calculation.",
+        "The examples and practice apply a consistent workflow: establish a legal local branch, calculate its derivative, then identify which stronger conclusions are separately supported. This provides a route into constrained mechanics, nonlinear equation solving, optimization and differential geometry while preserving the hypotheses that make local coordinates meaningful."
+      ]
+    }
+  ],
+  "misconceptions": [
+    "Differentiating an assumed branch does not prove it exists; the implicit theorem supplies existence and regularity under its hypotheses.",
+    "A nonzero square Jacobian determinant gives a local inverse between selected open neighborhoods, not necessarily a global inverse.",
+    "A zero selected block can mean a bad coordinate choice, redundant equations, a nondifferentiable branch or multiple branches; investigate the actual set.",
+    "A small residual is not automatically a small state error without quantitative derivative control on a legal comparison region.",
+    "The objective Hessian alone need not classify a constrained extremum; the fixed-multiplier constraint Hessians enter the feasible quadratic form."
+  ],
+  "summary": [
+    "The inverse and implicit theorems create locally unique C1 maps under open-domain, feasibility and invertible-block hypotheses.",
+    "The constraint response is -[D_yH]^(-1)D_pH, with correct matrix order and evaluation along the selected branch.",
+    "Full row rank identifies the genuine feasible tangent space with the constraint derivative's kernel and supports regular multiplier necessity.",
+    "Global behavior, optimizer classification and finite sensitivity bounds require additional arguments.",
+    "Singular cases must be distinguished by their branch geometry; the complete general existence proofs are linked in Real Analysis chapter 21."
+  ],
+  "next": "Continue to Real Analysis chapter 21 for the complete contraction-based inverse and implicit theorem proofs. Return to chapter 22 for constrained second-order classification, or pursue nonlinear equation solving, differential geometry and dynamics with their stated additional preparation.",
+  "readingLinks": [
+    {
+      "resourceId": "library:book-proof-safe-real-analysis:inverse-implicit-function-theorems",
+      "label": "Full inverse and implicit function theorem proofs (Real Analysis, Chapter 21)"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Jiří Lebl, Basic Analysis, Section 8.5: Inverse and implicit function theorems",
+      "href": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html"
+    }
+  ],
+  "examples": [
+    {
+      "id": "implicit-circle-coordinate-directions",
+      "title": "Two graph directions on a circle",
+      "problem": "For x²+y²=4, choose local graph directions near (1,sqrt3) and (2,0), and calculate their derivatives.",
+      "steps": [
+        "At (1,sqrt3), H_y=2sqrt3 is nonzero and the point is feasible. The theorem gives a C1 y branch near the positive base value. Explicitly y=sqrt(4-x²) on a small interval around one.",
+        "Its slope at one is -H_x/H_y=-1/sqrt3. The negative square root is outside the chosen y neighborhood, rather than being deleted from the equation globally.",
+        "At (2,0), H_y vanishes but H_x=4. Solve instead for x=sqrt(4-y²) near y=0. Its derivative is -H_y/H_x=0 there. The circle remains regular even though this y-as-output chart fails."
+      ],
+      "answer": "Use y as output at the first point, with slope -1/sqrt3, and x as output at the second, with slope zero."
+    },
+    {
+      "id": "implicit-nonlinear-inverse-branch",
+      "title": "A nonlinear inverse and its preimage derivative",
+      "problem": "For F(x,y)=(x+y,x-y+y²), find the local inverse through the source origin and its derivative at the target origin.",
+      "steps": [
+        "The source Jacobian is [[1,1],[1,-1]], with determinant -2. The map is C1 on the plane, so the inverse theorem supplies open source and target neighborhoods with a unique C1 inverse.",
+        "Writing the target as (u,v), eliminate x=u-y to obtain y²-2y+u-v=0. The root through y=0 is y=1-sqrt(1-u+v). The other root is near two and lies outside the selected source neighborhood.",
+        "The inverse is (u-1+sqrt(1-u+v),1-sqrt(1-u+v)) near zero. Its derivative is [[1/2,1/2],[1/2,-1/2]], which multiplies the source Jacobian to I. Positivity of the radicand holds on a sufficiently small target neighborhood."
+      ],
+      "answer": "The displayed square-root branch is the local inverse, with derivative one half of [[1,1],[1,-1]] at zero."
+    },
+    {
+      "id": "implicit-coupled-parameter-fold",
+      "title": "Two constraints approaching a fold",
+      "problem": "Solve u+v=p, u²+v=0 near (p,u,v)=(0,0,0), and compute parameter sensitivity.",
+      "steps": [
+        "The selected block in (u,v) is [[1,1],[0,1]], with determinant one. The feasible base point and C1 equations meet the implicit theorem, giving a unique nearby branch.",
+        "Differentiation gives u'+v'=1 and 2u u'+v'=0. Thus u'=1/(1-2u), v'=-2u/(1-2u). At zero the response is (1,0).",
+        "Eliminating v gives u-u²=p. The branch through zero is u=(1-sqrt(1-4p))/2, v=-u²; the other root is near one. At p=1/4 the determinant 1-2u vanishes and the graph folds. Local existence near zero never guaranteed passage through this singular parameter."
+      ],
+      "answer": "The local branch has derivative (1,0) at p=0; its selected block becomes singular at the fold."
+    },
+    {
+      "id": "implicit-sphere-plane-tangent",
+      "title": "Realizing a tangent direction",
+      "problem": "Find the tangent line at (1,0,0) to x²+y²+z²=1 and x+y+z=1, and realize its direction by a feasible curve.",
+      "steps": [
+        "The derivative rows (2,0,0) and (1,1,1) are independent. Their kernel satisfies h_x=0 and h_y+h_z=0, so its direction is (0,1,-1).",
+        "Choose y free and (x,z) dependent. The corresponding block [[2,0],[1,1]] is invertible. The theorem gives a feasible curve with velocity (x',1,z')=(0,1,-1).",
+        "An explicit curve is x(y)=[1-y+sqrt(1+2y-3y²)]/2, z(y)=[1-y-sqrt(1+2y-3y²)]/2. The radicand is positive near zero. Substitution verifies both constraints, and differentiation gives x'(0)=0,z'(0)=-1. The straight tangent line itself generally leaves the sphere."
+      ],
+      "answer": "The tangent line is (1,0,0)+s(0,1,-1); the displayed curve realizes its tangent velocity."
+    },
+    {
+      "id": "implicit-residual-state-certificate",
+      "title": "A finite certificate for a differential prediction",
+      "problem": "For y+y³=p at (p,y)=(2,1), predict the value at p=2.04 and bound the prediction error.",
+      "steps": [
+        "The selected scalar derivative is 1+3y²=4. Thus dy/dp=1/4 and the linear prediction is ŷ=1+0.04/4=1.01.",
+        "The map h(y)=y+y³ is strictly increasing and onto. Since h(1)=2 and h(1.01)=2.040301, the true root at parameter 2.04 lies between 1 and 1.01. This establishes the finite comparison interval separately from the differential formula.",
+        "On that interval h'≥4. The residual is 0.000301, so the mean value theorem bounds the state error by 0.000301/4=0.00007525. The true root is below the prediction. This is a finite certificate; the derivative alone did not supply it."
+      ],
+      "answer": "The prediction is 1.01, and it overestimates the root by at most 0.00007525."
+    },
+    {
+      "id": "implicit-regular-circle-extrema",
+      "title": "A complete multiplier problem",
+      "problem": "Find global extrema of f=2x-y on x²+y²=9 and their multipliers in ∇f=λ∇G.",
+      "steps": [
+        "The circle is compact, so extrema exist, and its constraint gradient never vanishes. The necessary equations are (2,-1)=λ(2x,2y), together with the circle equation.",
+        "Here λ cannot be zero. The equations give x=1/λ,y=-1/(2λ), and feasibility yields 5/(4λ²)=9. Thus λ=±sqrt5/6 and the points are ±(6/sqrt5,-3/sqrt5).",
+        "The objective values are ±3sqrt5. These are all regular candidates and hence the global extrema. Independently, Cauchy–Schwarz gives |2x-y|≤sqrt5 sqrt(x²+y²)=3sqrt5, with equality exactly at the aligned candidate points."
+      ],
+      "answer": "The maximum is 3sqrt5 at (6/sqrt5,-3/sqrt5), with multiplier sqrt5/6; reversing signs gives the minimum."
+    },
+    {
+      "id": "implicit-singular-geometry-distinction",
+      "title": "Three different meanings of a zero block",
+      "problem": "Compare y²=x, y³=x and y²=0 near the origin.",
+      "steps": [
+        "For y²=x, the y derivative vanishes at zero. Negative x gives no solution, and positive x gives two nearby solutions. There is no single graph of the entire nearby zero set over an open x interval. Solving for x=y² is regular instead.",
+        "For y³=x, strict increase gives one real branch for every x, but its quotient at zero has magnitude |x|^(-2/3). The branch is continuous and unique but not differentiable there.",
+        "For y²=0, the feasible set is just the smooth line y=0. The equation's gradient is zero along the set, but replacing it by y=0 gives a regular representation. This case is not a fold or a nondifferentiable inverse."
+      ],
+      "answer": "The examples exhibit a fold, a unique nondifferentiable branch, and a poor singular representation of a smooth line."
+    },
+    {
+      "id": "implicit-optimizer-block-sensitivity",
+      "title": "A stationary optimizer branch",
+      "problem": "Minimize (x-a)²+(y-b)² under x+y=c, with a,b fixed, and track the solution as c changes.",
+      "steps": [
+        "The regular constraint has gradient (1,1). The stationary equations are 2(x-a)-λ=0, 2(y-b)-λ=0, x+y-c=0. Their block in (x,y,λ) is [[2,0,-1],[0,2,-1],[1,1,0]], with determinant four.",
+        "The implicit theorem supplies a unique smooth stationary branch. Solving gives λ=c-a-b, x=(c+a-b)/2, y=(c-a+b)/2. The derivatives with respect to c are (1/2,1/2,1).",
+        "To prove optimization rather than merely stationarity, write any feasible point as (x_*+s,y_*-s). Its objective is f_*+2s², so the branch is the unique global minimum. The minimized value is (c-a-b)²/2, whose derivative is c-a-b=λ."
+      ],
+      "answer": "The minimizer is ((c+a-b)/2,(c-a+b)/2); its multiplier and optimal-value derivative equal c-a-b."
+    },
+    {
+      "id": "implicit-constraint-curvature",
+      "title": "Constraint curvature with a linear objective",
+      "problem": "Classify (1,0) for f=x on the unit circle using feasible second-order change.",
+      "steps": [
+        "The regular multiplier is λ=1/2 and the tangent vectors are (0,s). The objective Hessian is zero, which by itself does not describe the curvature of the feasible motion.",
+        "The Lagrangian is L=x-(x²+y²-1)/2. Its position Hessian is -I. Hence the tangent quadratic form is -s², strictly negative for every nonzero tangent vector, giving a strict constrained local maximum.",
+        "Directly, the positive local circle branch is x=sqrt(1-y²), and x-1=-y²/(1+sqrt(1-y²))<0 for small nonzero y. This verifies the classification and shows exactly where the constraint's curvature entered."
+      ],
+      "answer": "The point is a strict constrained local maximum; the relevant quadratic form is -s²."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "implicit-circle-top-branch",
+      "question": "For H=x²+y²-9, justify a local y branch through (0,3) and find its slope.",
+      "hint": "First, check the feasible point and selected partial. Next, apply the slope formula after the theorem supplies the branch.",
+      "solution": "H=0 and H_y=6≠0 at the point. The C1 implicit theorem gives one C1 branch near y=3 for x near zero. It is y=sqrt(9-x²), with derivative -H_x/H_y=0 at zero. The negative root lies outside the selected dependent neighborhood.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-circle-side-coordinate",
+      "question": "At (3,0) on x²+y²=9, which coordinate can the implicit theorem solve for, and what derivative follows?",
+      "hint": "First, compare H_x and H_y at the point. Next, choose the dependent coordinate with a nonzero partial.",
+      "solution": "H_y=0, so that y-block test fails. H_x=6≠0, allowing x=sqrt(9-y²) near y=0. Its derivative is -H_y/H_x=0 there. The circle is regular despite failure of this particular y-as-output chart.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-exponential-domain",
+      "question": "For e^y+x=2, justify the branch through (1,0), find its slope and give its explicit domain.",
+      "hint": "First, the selected partial is e^y. Next, identify the domain of the logarithmic solution.",
+      "solution": "The feasible base point has H_y=1, so the theorem applies. The branch is y=log(2-x), with domain x<2 and derivative -1/(2-x). Its slope at one is -1. No theorem neighborhood can cross the logarithm boundary at x=2 while retaining this formula.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-surface-tangent-prediction",
+      "question": "For xy+z²=2, solve locally for z near (1,1,1) and give its tangent-plane prediction.",
+      "hint": "First, use x,y as free coordinates and z as dependent. Next, differentiate with respect to both free variables.",
+      "solution": "The z partial is 2, so the positive C1 branch is z=sqrt(2-xy) near the point. Its derivatives there are z_x=-1/2 and z_y=-1/2. Hence z≈1-[(x-1)+(y-1)]/2. A finite-error guarantee would additionally need a curvature bound on the actual displacement region.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-two-constraint-slope",
+      "question": "For u+v=p and 2u-v+u²=0, justify a branch at (p,u,v)=(0,0,0) and calculate (u',v').",
+      "hint": "First, form the block in u,v. Next, solve its derivative equations directly.",
+      "solution": "The block [[1,1],[2,-1]] has determinant -3, so the feasible C1 system has one nearby C1 branch. At zero, differentiation gives u'+v'=1 and 2u'-v'=0. Thus (u',v')=(1/3,2/3). These are local derivatives, not a global uniqueness assertion for all roots.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-linear-inverse",
+      "question": "Find the inverse derivative of F(x,y)=(x+y,2x-y) and verify it.",
+      "hint": "First, write the constant Jacobian. Next, solve the two linear equations for x,y.",
+      "solution": "The Jacobian is [[1,1],[2,-1]], with determinant -3. The inverse is x=(u+v)/3,y=(2u-v)/3, whose derivative is [[1/3,1/3],[2/3,-1/3]]. Multiplication by the original matrix gives I in either order. Direct algebra establishes global bijectivity here, beyond the local theorem.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-inverse-preimage",
+      "question": "For F(x,y)=(x+x³,e^y), calculate the inverse derivative at target F(1,0).",
+      "hint": "First, evaluate the original Jacobian at the source (1,0). Next, invert its diagonal entries.",
+      "solution": "The target is (2,1). DF at the source is diag(1+3x²,e^y)=diag(4,1), invertible. Therefore the local inverse derivative at target (2,1) is diag(1/4,1). Evaluating the original Jacobian at the target coordinates would give the wrong inverse derivative.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-polar-inverse-locality",
+      "question": "For F(u,v)=(e^u cos v,e^u sin v), find the inverse derivative at the output of (0,π/2) and explain the global limitation.",
+      "hint": "First, compute the two derivative columns. Next, invert the resulting rotation and use periodicity.",
+      "solution": "The target is (0,1), and the source derivative is [[0,-1],[1,0]]. Its inverse is [[0,1],[-1,0]], giving the local inverse derivative. But v and v+2π always give the same output, so the map on the whole input plane is not globally injective.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-kernel-dimension",
+      "question": "A constraint derivative is [[1,0,1],[0,1,1]]. Find its kernel and the local feasible dimension under C1 feasibility hypotheses.",
+      "hint": "First, check independence of its rows. Next, solve the two kernel equations.",
+      "solution": "The first two columns form I, so the row rank is two. The kernel is all s(-1,-1,1), one-dimensional. At a feasible C1 point the implicit theorem therefore gives a one-dimensional local feasible graph, and every kernel vector is a genuine feasible tangent velocity by the local-chart construction.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-sphere-plane-kernel",
+      "question": "Find a tangent direction at (1,1,2) to x²+y²+z²=6 and x+y+z=4.",
+      "hint": "First, evaluate both constraint gradients. Next, solve the orthogonality equations.",
+      "solution": "The independent gradient rows are (2,2,4) and (1,1,1). The kernel equations imply h_z=0 and h_x+h_y=0. A tangent direction is (1,-1,0). Full row rank guarantees this direction is realized by a feasible curve, rather than merely satisfying formal linear equations.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-redundant-constraint-count",
+      "question": "Why do x²+y²+z²=1 and 2(x²+y²+z²)=2 not define a regular one-dimensional intersection?",
+      "hint": "First, the equations have the same zero set. Next, compare their derivative rows.",
+      "solution": "The second derivative row is twice the first, so their combined rank is one on the sphere, not two. They describe the same two-dimensional sphere. The number of independent constraints, not the number of written equations, decides the regular local dimension.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "id": "implicit-singleton-extremum",
+      "question": "On x²+y²=0, classify the origin for f=y and explain why regular multipliers do not apply.",
+      "hint": "First, identify every feasible point. Next, compare both gradients at the origin.",
+      "solution": "The origin is the only feasible point, hence both a global constrained minimum and maximum. The constraint gradient vanishes, while ∇f=(0,1). No multiplier satisfies ∇f=λ∇G. The theorem's independence hypothesis fails; the extremum itself is perfectly valid.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "id": "implicit-cube-root-regularity",
+      "question": "Prove y³=x has one continuous real branch that is not differentiable at the origin.",
+      "hint": "First, use strict monotonicity and the cubic's range. Next, compute the inverse difference quotient at zero.",
+      "solution": "The cubic is continuous, strictly increasing and onto, giving the unique real cube-root branch. For nonzero x, its quotient y(x)/x=|x|^(-2/3) has no finite limit at zero. Thus the inverse is continuous and unique but not C1 there. Its selected derivative 3y² vanishes at the base point.",
+      "lesson": 8,
+      "type": "Proof"
+    },
+    {
+      "id": "implicit-crossing-branches",
+      "question": "Describe y²-x²=0 near the origin. Is the entire local zero set one y graph?",
+      "hint": "First, factor the difference of squares. Next, inspect both roots at nonzero x.",
+      "solution": "The set is the union y=x and y=-x. Each branch is smooth, but every origin neighborhood contains both branches and two y values at sufficiently small nonzero x. A single y graph cannot describe the whole local zero set. The selected derivative vanishes at the crossing.",
+      "lesson": 8,
+      "type": "Interpretation"
+    },
+    {
+      "id": "implicit-singleton-graph-failure",
+      "question": "Why does x²+y²=0 have no graph y=φ(x) solving the equation over an open interval about zero?",
+      "hint": "First, the sum of squares vanishes only at one point. Next, an open interval contains nonzero x.",
+      "solution": "The sole feasible point is (0,0). Every open interval about zero contains x≠0, for which no real y makes the sum of squares zero. Thus graph existence fails over such an interval. This is stronger than a failure of differentiability or uniqueness.",
+      "lesson": 8,
+      "type": "Proof"
+    },
+    {
+      "id": "implicit-separate-fold-neighborhoods",
+      "question": "For y²=p at p=1, find derivatives on both branches and explain their local uniqueness.",
+      "hint": "First, choose separate neighborhoods of y=1 and y=-1. Next, differentiate 2y y'=1 on each.",
+      "solution": "The positive branch has derivative 1/2 and the negative branch derivative -1/2. Near p=1 the formulas are ±sqrt p. A small neighborhood of y=1 excludes the negative root, while one around y=-1 excludes the positive root. Each is locally unique in its own selected neighborhood, not globally the only root.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-cubic-sensitivity",
+      "question": "For y+2y³=p at y=1, find the base parameter and first-order response.",
+      "hint": "First, substitute the base value into the equation. Next, invert the scalar dependent derivative.",
+      "solution": "The base parameter is p=3 and H_y=1+6y²=7. The local derivative is dy/dp=1/7. Thus a small parameter change δp predicts δy=δp/7 with remainder o(|δp|). The derivative formula alone is not a finite state-error certificate.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-bounded-sensitivity-segment",
+      "question": "Suppose ||[D_yH]^(-1)||≤3 and ||D_pH||≤4 along a branch neighborhood. Give the derivative bound and the condition for a finite parameter comparison.",
+      "hint": "First, use submultiplicativity of compatible norms. Next, keep the full connecting parameter segment in the same neighborhood.",
+      "solution": "The derivative norm is at most 12. Integrating that derivative along a legal parameter segment gives ||φ(p_1)-φ(p_0)||≤12||p_1-p_0||. A local bound does not justify comparing points across separate regions whose connecting segment is outside the branch domain.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "id": "implicit-rescaling-invariance",
+      "question": "Prove that replacing H=0 by 2H=0 leaves the implicit derivative unchanged.",
+      "hint": "First, both derivative blocks are doubled. Next, cancel the factor through the inverse.",
+      "solution": "The new formula is -[2D_yH]^(-1)(2D_pH)=-(1/2)[D_yH]^(-1)(2D_pH)=-[D_yH]^(-1)D_pH. The solution set and branch response are unchanged, although the residual doubles. A residual magnitude must therefore be paired with its constraint normalization.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "id": "implicit-pressure-relative-change",
+      "question": "For pV=6 at p=2,V=3, find dV/dp and the relative differential relation.",
+      "hint": "First, differentiate the product. Next, divide its differential by pV.",
+      "solution": "The differential equation is p dV+V dp=0, so dV/dp=-V/p=-3/2 at the point. Division by pV gives dV/V=-dp/p. The absolute slope carries volume-per-pressure units; the relative expression is dimensionless and describes first-order percentage changes.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-quadratic-line-minimizer",
+      "question": "Minimize x²+y² under x+2y=3 and compute λ in ∇f=λ∇G.",
+      "hint": "First, solve both multiplier equations with the constraint. Next, check the objective on all feasible displacements.",
+      "solution": "The equations are 2x=λ,2y=2λ, so x=3/5,y=6/5,λ=6/5 and objective 9/5. Every feasible displacement is s(-2,1), perpendicular to the candidate position. Its objective is 9/5+5s². This proves the unique global minimum rather than just a stationary condition.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-unit-circle-extrema",
+      "question": "Find the extrema of f=x on the unit circle and their multipliers.",
+      "hint": "First, use (1,0)=λ(2x,2y). Next, retain the constraint and compare the candidates.",
+      "solution": "The multiplier is nonzero, forcing y=0; feasibility gives x=±1. At (1,0), λ=1/2 and the maximum is one. At (-1,0), λ=-1/2 and the minimum is -1. Compactness gives attained extrema, and the bound -1≤x≤1 independently confirms the classification.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-stationary-no-extremum",
+      "question": "Show that (1,0) satisfies regular multipliers for f=y³ on the unit circle but is neither extremum.",
+      "hint": "First, the objective gradient is zero there. Next, use the feasible curve (sqrt(1-t²),t).",
+      "solution": "The constraint gradient is (2,0)≠0 and ∇f=(0,0), so λ=0 solves the multiplier equations. On the displayed nearby feasible curve the objective is t³, with both positive and negative values arbitrarily close to zero. Therefore the candidate is neither a constrained minimum nor maximum.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "id": "implicit-lagrangian-curvature",
+      "question": "For f=x on the unit circle at (1,0), compute the Lagrangian quadratic form on tangent vectors.",
+      "hint": "First, use multiplier one half. Next, subtract one half of the constraint Hessian.",
+      "solution": "The objective Hessian is zero and the constraint Hessian is 2I. Hence H_L=-I. Tangent vectors are (0,s), giving Q=-s²<0 for nonzero s. The regular constrained second-order test gives a strict local maximum, consistent with the direct positive-circle graph.",
+      "lesson": 7,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-optimal-value-derivative",
+      "question": "For minimizing (x-a)²+(y-b)² under x+y=c, calculate the optimal value and its c derivative.",
+      "hint": "First, use the minimizing branch from the worked example. Next, differentiate its objective value with a,b fixed.",
+      "solution": "At the minimizer both displacements from (a,b) equal (c-a-b)/2, so the minimized value is (c-a-b)²/2. Its derivative is c-a-b, equal to λ under ∇f=λ∇G. The equality uses the proved differentiable minimizing branch and would need reconsideration at an optimizer switch.",
+      "lesson": 7,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-bordered-stationary-block",
+      "question": "For maximizing f=x on the unit circle, form the stationary-system derivative in (x,y,λ) at (1,0,1/2) and decide invertibility.",
+      "hint": "First, differentiate 1-2λx and -2λy. Next, include the original constraint as the third equation.",
+      "solution": "The block is [[-1,0,-2],[0,-1,0],[2,0,0]], with determinant -4. It is invertible. A C1 parameterized stationary system therefore has a unique nearby C1 stationary branch. Identifying the branch as an optimum after perturbation still requires a separate classification or comparison argument.",
+      "lesson": 7,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-newton-residual-update",
+      "question": "For y²=p at p=4.04, use prediction ŷ=2.01 based at (4,2). Find its residual and one Newton correction.",
+      "hint": "First, evaluate the squared prediction minus the target. Next, divide the residual by 2ŷ.",
+      "solution": "The residual is 4.0401-4.04=0.0001. One correction gives y_new=2.01-0.0001/4.02=2.01-1/40200. This is a finite update, not a general Newton convergence theorem. Here the actual positive branch is separately known as sqrt(4.04).",
+      "lesson": 7,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-two-parameter-response",
+      "question": "For u²+v=p and u-v=q, calculate the response matrix at (u,v,p,q)=(1,1,2,0).",
+      "hint": "First, form the block in u,v. Next, solve 2du+dv=dp and du-dv=dq.",
+      "solution": "The block [[2,1],[1,-1]] has determinant -3. Elimination gives du=(dp+dq)/3 and dv=(dp-2dq)/3. Thus the response matrix is (1/3)[[1,1],[1,-2]], with output rows (u,v) and parameter columns (p,q). Its dimensions and variable order are part of the answer.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "id": "implicit-fold-continuation-limit",
+      "question": "Why does the local positive branch of y²=p at p=1 not guarantee a C1 graph through p=0 over an open parameter interval?",
+      "hint": "First, inspect its derivative near zero. Next, check real feasibility on both sides of zero.",
+      "solution": "The derivative 1/(2sqrt p) grows without bound as p decreases to zero, and the selected block vanishes there. An open interval about zero includes negative p with no real roots, while positive p has two nearby roots. The local graph theorem at one cannot supply an unrestricted continuation through that fold.",
+      "lesson": 8,
+      "type": "Interpretation"
+    },
+    {
+      "id": "implicit-existence-before-chain-rule",
+      "question": "A calculation assumes H(p,φ(p))=0, derives a derivative formula and declares φ exists uniquely. Identify the gap and state the needed theorem assumptions.",
+      "hint": "First, the chain rule presumes a differentiable branch. Next, separate the necessary derivative equation from existence and neighborhood uniqueness.",
+      "solution": "The calculation derives a necessary relation for a branch already assumed, so it cannot establish either existence or uniqueness. The implicit theorem requires H C1 on an open domain, a feasible base point and an invertible selected square dependent block. It then supplies open parameter and dependent neighborhoods and a locally unique C1 branch, after which the chain rule is valid.",
+      "lesson": 1,
+      "type": "Interpretation"
+    }
+  ],
+  "lab": {
+    "title": "A branch prediction and its actual error",
+    "description": "Explore the selected branch of y² = p near a positive base parameter with 1e-12 <= baseP <= 1e12. Choose 0 < parameterWindow < baseP and abs(deltaP) <= parameterWindow. The horizontal coordinate is p and the vertical coordinate is y. Compare exact branch values with the tangent prediction, then distinguish the signed state error from the equation residual. Change the named inputs and restore their defaults to reproduce the reference case.",
+    "code": "const baseP = 1, deltaP = 0.04, parameterWindow = 0.2, branch = 1;\nif (![baseP, deltaP, parameterWindow].every(Number.isFinite) ||\n    !(baseP >= 1e-12 && baseP <= 1e12 && parameterWindow > 0 && parameterWindow < baseP) ||\n    Math.abs(deltaP) > parameterWindow || (branch !== 1 && branch !== -1)) {\n  throw new Error('Choose 1e-12 <= baseP <= 1e12, 0 < parameterWindow < baseP, abs(deltaP) <= parameterWindow, and branch 1 or -1.');\n}\nconst baseY = branch * Math.sqrt(baseP);\nconst slope = branch / (2 * Math.sqrt(baseP));\nconst exactPoints = [], tangentPoints = [];\nfor (let i = 0; i <= 40; i++) {\n  const p = baseP - parameterWindow + 2 * parameterWindow * i / 40;\n  exactPoints.push([p, branch * Math.sqrt(p)]);\n  tangentPoints.push([p, baseY + slope * (p - baseP)]);\n}\nconst targetP = baseP + deltaP;\nconst exactY = branch * Math.sqrt(targetP);\nconst predictedY = baseY + slope * deltaP;\nconst signedError = predictedY - exactY;\nconst residual = predictedY * predictedY - targetP;\nif (![baseY, slope, exactY, predictedY, signedError, residual].every(Number.isFinite)) {\n  throw new Error('These inputs exceed the finite numerical range.');\n}\nplot(exactPoints, 'Exact selected branch: y versus parameter p');\nplot(tangentPoints, 'Local tangent prediction: y versus parameter p');\nconsole.log('branch | base p | target p | derivative | exact y | prediction | signed state error | residual');\nconsole.log(branch, baseP, targetP, slope, exactY, predictedY, signedError, residual);\nconsole.log('Floating-point values illustrate this finite experiment; the written theorem supplies local existence.');",
+    "tasks": [
+      "Before running the default case, use the concavity of the positive square-root branch to predict whether its tangent lies above or below the exact curve. Explain the sign change when branch is -1.",
+      "Compute the default tangent prediction and its equation residual by hand. Explain why a residual of 0.0004 is not itself the state error.",
+      "Halve deltaP while holding the base fixed. Compare the errors and explain the expected second-order scale using the second derivative of the square root; numerical agreement alone does not prove an error estimate.",
+      "Move baseP toward the allowed lower bound 1e-12 while keeping parameterWindow positive and smaller than baseP. Explain the increasing derivative and why this experiment never certifies a differentiable branch through the fold.",
+      "Restore baseP = 1, deltaP = 0.04, parameterWindow = 0.2, branch = 1 and reproduce the reference output."
+    ],
+    "expected": "With the defaults, baseY = 1, slope = 1/2, targetP = 1.04 and predictedY = 1.02. The exact selected value is sqrt(1.04), approximately 1.0198039027, so predictedY - exactY is approximately 0.0001960973. In exact arithmetic the residual is 1.02² - 1.04 = 0.0004. Changing only branch to -1 reverses y, the slope and the signed state error, but preserves the residual because the equation squares y. The displayed decimals are rounded numerical illustrations, not certified enclosures."
+  }
+}

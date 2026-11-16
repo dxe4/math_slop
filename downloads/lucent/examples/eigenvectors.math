@@ -1,0 +1,14 @@
+# This symmetric matrix has eigenvectors (1,1) and (1,-1).
+# Their eigenvalues are 1+k and 1-k. Predict which directions stay on their line.
+# Move angle to find invariant directions. At k=1 one eigenvalue vanishes.
+scene "Eigenvectors are directions a transformation preserves";
+domain -4 4;
+range -4 4;
+coordinates equal;
+param k = 0.5 from -1.5 to 1.5;
+param angle = 0.3 from -3.141593 to 3.141593;
+transform A = (1,k,k,1);
+vector original = (cos(angle),sin(angle)) color rose;
+vector image = (cos(angle)+k*sin(angle),k*cos(angle)+sin(angle)) color amber;
+segment directionone from (-3,-3) to (3,3) color teal;
+segment directiontwo from (-3,3) to (3,-3) color violet;

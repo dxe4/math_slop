@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" aria-labelledby="title desc">
+  <title id="title">Bloch-vector projection for a two-outcome measurement</title>
+  <desc id="desc">A cross-section of the Bloch sphere contains a pure unit state vector r pointing to the north pole and a unit measurement direction n. Their dot product is 0.6. A dashed exact perpendicular drops from r to n, and the outcome probabilities are one plus or minus that projection, divided by two.</desc>
+  <style>
+    .sphere{fill:#0f766e;fill-opacity:.10;stroke:#0f766e;stroke-width:3}.axis{stroke:#64748b;stroke-width:2;stroke-dasharray:7 7}.state{stroke:#be185d;stroke-width:5;marker-end:url(#stateArrow)}.measure{stroke:#b45309;stroke-width:5;marker-end:url(#measureArrow)}.projection{stroke:#475569;stroke-width:2.5;stroke-dasharray:6 5}.angle{fill:none;stroke:#7c3aed;stroke-width:3}.point{fill:#7c3aed}.label{fill:#172033;font:20px system-ui,sans-serif}.small{fill:#172033;font:17px system-ui,sans-serif}.formula{fill:#172033;font:21px system-ui,sans-serif;font-weight:600}
+    @media (prefers-color-scheme:dark){.sphere{fill:#2dd4bf;fill-opacity:.13;stroke:#5eead4}.axis{stroke:#94a3b8}.state{stroke:#f472b6}.measure{stroke:#fbbf24}.projection{stroke:#cbd5e1}.angle{stroke:#c4b5fd}.point{fill:#c4b5fd}.label,.small,.formula{fill:#edf2ff}}
+  </style>
+  <defs>
+    <marker id="stateArrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="context-stroke"/></marker>
+    <marker id="measureArrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="context-stroke"/></marker>
+  </defs>
+  <circle class="sphere" cx="330" cy="220" r="180"/>
+  <line class="axis" x1="125" y1="220" x2="535" y2="220"/>
+  <line class="axis" x1="330" y1="20" x2="330" y2="420"/>
+  <text class="small" x="540" y="226">equatorial axis</text>
+  <text class="small" x="342" y="42">z</text>
+  <line class="measure" x1="330" y1="220" x2="474" y2="112"/>
+  <line class="state" x1="330" y1="220" x2="330" y2="40"/>
+  <line class="projection" x1="330" y1="40" x2="416.4" y2="155.2"/>
+  <circle class="point" cx="416.4" cy="155.2" r="5"/>
+  <path class="angle" d="M330 150A70 70 0 0 1 386 178"/>
+  <text class="label" x="215" y="54">pure state r, |r| = 1</text>
+  <text class="label" x="481" y="111">measurement n, |n| = 1</text>
+  <text class="label" x="355" y="158">θ</text>
+  <text class="small" x="424" y="174">r·n = cos θ = 0.6</text>
+  <text class="formula" x="105" y="407">P(+) = (1 + r·n)/2</text>
+  <text class="formula" x="430" y="407">P(−) = (1 − r·n)/2</text>
+</svg>

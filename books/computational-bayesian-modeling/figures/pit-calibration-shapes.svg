@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" role="img" aria-labelledby="title desc">
+  <title id="title">Probability integral transform calibration shapes</title>
+  <desc id="desc">Three schematic histograms: calibrated forecasts have flat ranks, underdispersed forecasts have excess ranks near zero and one, and overdispersed forecasts have excess ranks near one half.</desc>
+  <rect x="1" y="1" width="838" height="328" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <g font-family="system-ui, sans-serif" fill="#172033" text-anchor="middle">
+    <text x="150" y="40" font-size="18" font-weight="700">calibrated</text>
+    <text x="420" y="40" font-size="18" font-weight="700">underdispersed</text>
+    <text x="690" y="40" font-size="18" font-weight="700">overdispersed</text>
+  </g>
+  <g fill="none" stroke="#475569" stroke-width="2">
+    <path d="M55 260H245M55 260V70"/>
+    <path d="M325 260H515M325 260V70"/>
+    <path d="M595 260H785M595 260V70"/>
+  </g>
+  <g fill="#0284c7" stroke="#075985">
+    <path d="M65 260V155H100V260M105 260V155H140V260M145 260V155H180V260M185 260V155H220V260M225 260V155H240V260"/>
+  </g>
+  <g fill="#ea580c" stroke="#9a3412">
+    <path d="M335 260V90H370V260M375 260V190H410V260M415 260V215H450V260M455 260V190H490V260M495 260V90H510V260"/>
+  </g>
+  <g fill="#16a34a" stroke="#166534">
+    <path d="M605 260V225H640V260M645 260V180H680V260M685 260V90H720V260M725 260V180H760V260M765 260V225H780V260"/>
+  </g>
+  <g fill="#172033" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle">
+    <text x="55" y="282">0</text><text x="245" y="282">1</text><text x="150" y="305">uniform ranks</text>
+    <text x="325" y="282">0</text><text x="515" y="282">1</text><text x="420" y="305">too many tail ranks</text>
+    <text x="595" y="282">0</text><text x="785" y="282">1</text><text x="690" y="305">too many central ranks</text>
+  </g>
+</svg>

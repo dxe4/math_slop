@@ -1,0 +1,2431 @@
+{
+  "schema_version": 1,
+  "lab_id": "A11",
+  "method": "beta-binomial enumeration, independent recursion, Monte Carlo",
+  "seeds": {
+    "root": 2626,
+    "roles": {
+      "training": 1,
+      "outer": 2,
+      "prior": 3,
+      "fitting": 4,
+      "posterior_replication": 5,
+      "joint_prediction": 6,
+      "changed_givens": 7
+    }
+  },
+  "settings": {
+    "stem": "26_study_design",
+    "seed": 2626,
+    "helper": "design",
+    "data": {
+      "simulations": 100000,
+      "fixed_truths": [
+        0,
+        0.5,
+        0.7,
+        0.8,
+        0.9,
+        1
+      ]
+    },
+    "policy": {
+      "design_prior": [
+        8,
+        2
+      ],
+      "analysis_prior": [
+        1,
+        1
+      ],
+      "fixed_sizes": [
+        8,
+        14,
+        20
+      ],
+      "looks": [
+        8,
+        20
+      ],
+      "p0": 0.7,
+      "success": 0.95,
+      "futility": 0.1,
+      "test_cost": 0.25,
+      "false_approve": 190,
+      "false_reject": 10
+    },
+    "changed": {
+      "design_prior": [
+        3,
+        2
+      ],
+      "policy_unchanged": true
+    },
+    "numerical": {
+      "methods": [
+        "stage beta-binomial enumeration",
+        "single-trial recursion",
+        "rational ordered paths",
+        "prospective Monte Carlo"
+      ],
+      "anchor": {
+        "looks": [
+          2,
+          4
+        ],
+        "design": [
+          1,
+          1
+        ],
+        "analysis": [
+          1,
+          1
+        ],
+        "p0": 0.5,
+        "success": 0.8,
+        "futility": 0.2
+      }
+    },
+    "tolerances": {
+      "exact": 1e-12,
+      "simulation_mcse_multiplier": 5
+    },
+    "targets": [
+      "assurance",
+      "expected sample size",
+      "expected loss",
+      "terminal states",
+      "fixed-truth operating characteristics"
+    ],
+    "status": "frozen_before_execution",
+    "schema_version": 1,
+    "streams": {
+      "training": 1,
+      "outer": 2,
+      "prior": 3,
+      "fitting": 4,
+      "posterior_replication": 5,
+      "joint_prediction": 6,
+      "changed_givens": 7
+    },
+    "failure_policy": "Retain failed execution and amend numerical method without loosening criteria.",
+    "input_paths": [
+      "labs/continuation_common.py",
+      "labs/continuation_records.py",
+      "requirements.lock",
+      "labs/26_study_design.py",
+      "labs/continuation_design.py"
+    ]
+  },
+  "specification_sha256": "296d98164931d2020d91ea93aac6bec66586a8bf75f9ac416c893e22c452ef77",
+  "source_hashes": {
+    "labs/continuation_common.py": "a5067083988f7e3db03f62d499fa573a49c6940a794f937af1f038edc2939546",
+    "labs/continuation_records.py": "797759c786112c67eea290daa6ae39208568108897234339df5dab9ead7bd447",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "labs/26_study_design.py": "87fdf27b8895660fb365135e61b0df884c2a7bf6347f75ddc9ce8b85b4d9bb04",
+    "labs/continuation_design.py": "698103d625d2b69c962dcb8ea300fb804c1c2a2cdacab3305e1600dcf7db0be0"
+  },
+  "targets": {
+    "definitions": [
+      "approval assurance",
+      "expected sample size",
+      "expected total loss in declared cost units"
+    ]
+  },
+  "metrics": {
+    "original": {
+      "fixed8": {
+        "exact": {
+          "assurance": 0.26470588235294085,
+          "expected_n": 8.0,
+          "expected_loss": 8.413355292784217,
+          "mass": 0.9999999999999997,
+          "stopping": {
+            "8:reject": 0.7352941176470589,
+            "8:approve": 0.26470588235294085
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.26373,
+            "mcse": 0.00139347920287419
+          },
+          "expected_n": {
+            "mean": 8.0,
+            "mcse": 0.0
+          },
+          "expected_loss": {
+            "mean": 8.4263,
+            "mcse": 0.04507789927747335
+          },
+          "count": 100000,
+          "approval_count": 26373,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 8,
+            "s": 0,
+            "action": "reject",
+            "probability": 0.0003702180172768407
+          },
+          {
+            "n": 8,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.002632661456190867
+          },
+          {
+            "n": 8,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.010366104483751543
+          },
+          {
+            "n": 8,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.029617441382147298
+          },
+          {
+            "n": 8,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.06787330316742075
+          },
+          {
+            "n": 8,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.130316742081448
+          },
+          {
+            "n": 8,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.21176470588235285
+          },
+          {
+            "n": 8,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.2823529411764707
+          },
+          {
+            "n": 8,
+            "s": 8,
+            "action": "approve",
+            "probability": 0.26470588235294085
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.0,
+              "8:reject": 1.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.00390625,
+            "expected_n": 8.0,
+            "expected_loss": 2.7421875,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.00390625,
+              "8:reject": 0.99609375
+            }
+          },
+          "0.7": {
+            "assurance": 0.05764800999999997,
+            "expected_n": 8.0,
+            "expected_loss": 12.953121899999994,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.05764800999999997,
+              "8:reject": 0.94235199
+            }
+          },
+          "0.8": {
+            "assurance": 0.1677721600000001,
+            "expected_n": 8.0,
+            "expected_loss": 10.322278399999998,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.1677721600000001,
+              "8:reject": 0.8322278399999998
+            }
+          },
+          "0.9": {
+            "assurance": 0.43046721000000016,
+            "expected_n": 8.0,
+            "expected_loss": 7.6953279000000006,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "8:approve": 0.43046721000000016,
+              "8:reject": 0.56953279
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 1.0,
+              "8:reject": 0.0
+            }
+          }
+        }
+      },
+      "fixed14": {
+        "exact": {
+          "assurance": 0.3320158102766799,
+          "expected_n": 14.0,
+          "expected_loss": 8.899707789130439,
+          "mass": 0.9999999999999999,
+          "stopping": {
+            "14:reject": 0.66798418972332,
+            "14:approve": 0.3320158102766799
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.33244,
+            "mcse": 0.0014897176432420224
+          },
+          "expected_n": {
+            "mean": 14.0,
+            "mcse": 0.0
+          },
+          "expected_loss": {
+            "mean": 8.8855,
+            "mcse": 0.03710967082549625
+          },
+          "count": 100000,
+          "approval_count": 33244,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 14,
+            "s": 0,
+            "action": "reject",
+            "probability": 1.83555843806214e-05
+          },
+          {
+            "n": 14,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.0001370550300419729
+          },
+          {
+            "n": 14,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.0005726942326753872
+          },
+          {
+            "n": 14,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.001762136100539656
+          },
+          {
+            "n": 14,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.004442051420110385
+          },
+          {
+            "n": 14,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.009691748552968107
+          },
+          {
+            "n": 14,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.018898909678287768
+          },
+          {
+            "n": 14,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.033598061650289356
+          },
+          {
+            "n": 14,
+            "s": 8,
+            "action": "reject",
+            "probability": 0.05512181989500598
+          },
+          {
+            "n": 14,
+            "s": 9,
+            "action": "reject",
+            "probability": 0.08399515412572348
+          },
+          {
+            "n": 14,
+            "s": 10,
+            "action": "reject",
+            "probability": 0.11899313501144154
+          },
+          {
+            "n": 14,
+            "s": 11,
+            "action": "reject",
+            "probability": 0.15577283128770553
+          },
+          {
+            "n": 14,
+            "s": 12,
+            "action": "reject",
+            "probability": 0.1849802371541502
+          },
+          {
+            "n": 14,
+            "s": 13,
+            "action": "approve",
+            "probability": 0.18972332015810286
+          },
+          {
+            "n": 14,
+            "s": 14,
+            "action": "approve",
+            "probability": 0.14229249011857706
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 14.0,
+            "expected_loss": 3.5,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 0.0,
+              "14:reject": 1.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.00091552734375,
+            "expected_n": 14.0,
+            "expected_loss": 3.6739501953125,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 0.00091552734375,
+              "14:reject": 0.99908447265625
+            }
+          },
+          "0.7": {
+            "assurance": 0.04747561509942998,
+            "expected_n": 14.0,
+            "expected_loss": 12.520366868891696,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "14:approve": 0.04747561509942998,
+              "14:reject": 0.9525243849005703
+            }
+          },
+          "0.8": {
+            "assurance": 0.1979120929996801,
+            "expected_n": 14.0,
+            "expected_loss": 11.520879070003197,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 0.1979120929996801,
+              "14:reject": 0.80208790700032
+            }
+          },
+          "0.9": {
+            "assurance": 0.5846291405156703,
+            "expected_n": 14.0,
+            "expected_loss": 7.653708594843301,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "14:approve": 0.5846291405156703,
+              "14:reject": 0.41537085948432995
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 14.0,
+            "expected_loss": 3.5,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 1.0,
+              "14:reject": 0.0
+            }
+          }
+        }
+      },
+      "fixed20": {
+        "exact": {
+          "assurance": 0.3640267778198816,
+          "expected_n": 20.0,
+          "expected_loss": 9.830133468220698,
+          "mass": 1.0000000000000007,
+          "stopping": {
+            "20:reject": 0.6359732221801193,
+            "20:approve": 0.3640267778198816
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.36421,
+            "mcse": 0.0015217207087173236
+          },
+          "expected_n": {
+            "mean": 20.0,
+            "mcse": 0.0
+          },
+          "expected_loss": {
+            "mean": 9.8394,
+            "mcse": 0.03171075735647638
+          },
+          "count": 100000,
+          "approval_count": 36421,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 20,
+            "s": 0,
+            "action": "reject",
+            "probability": 2.0968536710665696e-06
+          },
+          {
+            "n": 20,
+            "s": 1,
+            "action": "reject",
+            "probability": 1.597602797003098e-05
+          },
+          {
+            "n": 20,
+            "s": 2,
+            "action": "reject",
+            "probability": 6.829751957188237e-05
+          },
+          {
+            "n": 20,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.0002156763775954178
+          },
+          {
+            "n": 20,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.0005601594806992117
+          },
+          {
+            "n": 20,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.0012653014152264523
+          },
+          {
+            "n": 20,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.0025701434996787363
+          },
+          {
+            "n": 20,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.0047976011994003065
+          },
+          {
+            "n": 20,
+            "s": 8,
+            "action": "reject",
+            "probability": 0.008352966373955903
+          },
+          {
+            "n": 20,
+            "s": 9,
+            "action": "reject",
+            "probability": 0.013707431998286557
+          },
+          {
+            "n": 20,
+            "s": 10,
+            "action": "reject",
+            "probability": 0.02136074819732993
+          },
+          {
+            "n": 20,
+            "s": 11,
+            "action": "reject",
+            "probability": 0.03177631963239157
+          },
+          {
+            "n": 20,
+            "s": 12,
+            "action": "reject",
+            "probability": 0.04528125547615806
+          },
+          {
+            "n": 20,
+            "s": 13,
+            "action": "reject",
+            "probability": 0.061923084411840044
+          },
+          {
+            "n": 20,
+            "s": 14,
+            "action": "reject",
+            "probability": 0.08127404829054014
+          },
+          {
+            "n": 20,
+            "s": 15,
+            "action": "reject",
+            "probability": 0.10217308927953608
+          },
+          {
+            "n": 20,
+            "s": 16,
+            "action": "reject",
+            "probability": 0.12239484653277774
+          },
+          {
+            "n": 20,
+            "s": 17,
+            "action": "reject",
+            "probability": 0.1382341796134901
+          },
+          {
+            "n": 20,
+            "s": 18,
+            "action": "approve",
+            "probability": 0.14399393709738562
+          },
+          {
+            "n": 20,
+            "s": 19,
+            "action": "approve",
+            "probability": 0.13136288998357967
+          },
+          {
+            "n": 20,
+            "s": 20,
+            "action": "approve",
+            "probability": 0.08866995073891626
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 20.0,
+            "expected_loss": 5.0,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 0.0,
+              "20:reject": 1.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.00020122528076171875,
+            "expected_n": 20.0,
+            "expected_loss": 5.038232803344727,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 0.00020122528076171875,
+              "20:reject": 0.9997987747192383
+            }
+          },
+          "0.7": {
+            "assurance": 0.03548313229846866,
+            "expected_n": 20.0,
+            "expected_loss": 11.741795136709046,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "20:approve": 0.03548313229846866,
+              "20:reject": 0.9645168677015317
+            }
+          },
+          "0.8": {
+            "assurance": 0.20608471894847402,
+            "expected_n": 20.0,
+            "expected_loss": 12.93915281051526,
+            "mass": 0.9999999999999999,
+            "stopping": {
+              "20:approve": 0.20608471894847402,
+              "20:reject": 0.7939152810515259
+            }
+          },
+          "0.9": {
+            "assurance": 0.6769268051894661,
+            "expected_n": 20.0,
+            "expected_loss": 8.230731948105335,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 0.6769268051894661,
+              "20:reject": 0.3230731948105338
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 20.0,
+            "expected_loss": 5.0,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 1.0,
+              "20:reject": 0.0
+            }
+          }
+        }
+      },
+      "sequential": {
+        "exact": {
+          "assurance": 0.41122602887308746,
+          "expected_n": 15.493212669683261,
+          "expected_loss": 9.078560343672569,
+          "mass": 1.0,
+          "stopping": {
+            "8:reject": 0.1108597285067873,
+            "8:approve": 0.26470588235294085,
+            "20:reject": 0.47791424262012516,
+            "20:approve": 0.14652014652014664
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.4131,
+            "mcse": 0.0015570832171343477
+          },
+          "expected_n": {
+            "mean": 15.49952,
+            "mcse": 0.018371656780860262
+          },
+          "expected_loss": {
+            "mean": 8.99708,
+            "mcse": 0.04848194117114327
+          },
+          "count": 100000,
+          "approval_count": 41310,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 8,
+            "s": 0,
+            "action": "reject",
+            "probability": 0.0003702180172768407
+          },
+          {
+            "n": 8,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.002632661456190867
+          },
+          {
+            "n": 8,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.010366104483751543
+          },
+          {
+            "n": 8,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.029617441382147298
+          },
+          {
+            "n": 8,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.06787330316742075
+          },
+          {
+            "n": 8,
+            "s": 8,
+            "action": "approve",
+            "probability": 0.26470588235294085
+          },
+          {
+            "n": 20,
+            "s": 5,
+            "action": "reject",
+            "probability": 4.570232149940746e-06
+          },
+          {
+            "n": 20,
+            "s": 6,
+            "action": "reject",
+            "probability": 4.6416420272835885e-05
+          },
+          {
+            "n": 20,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.0002500297838696751
+          },
+          {
+            "n": 20,
+            "s": 8,
+            "action": "reject",
+            "probability": 0.0009458340268167571
+          },
+          {
+            "n": 20,
+            "s": 9,
+            "action": "reject",
+            "probability": 0.00280808121098502
+          },
+          {
+            "n": 20,
+            "s": 10,
+            "action": "reject",
+            "probability": 0.006933722265530057
+          },
+          {
+            "n": 20,
+            "s": 11,
+            "action": "reject",
+            "probability": 0.014734102006255401
+          },
+          {
+            "n": 20,
+            "s": 12,
+            "action": "reject",
+            "probability": 0.027520305781175366
+          },
+          {
+            "n": 20,
+            "s": 13,
+            "action": "reject",
+            "probability": 0.04576173451735675
+          },
+          {
+            "n": 20,
+            "s": 14,
+            "action": "reject",
+            "probability": 0.06818129396840053
+          },
+          {
+            "n": 20,
+            "s": 15,
+            "action": "reject",
+            "probability": 0.09104898100400347
+          },
+          {
+            "n": 20,
+            "s": 16,
+            "action": "reject",
+            "probability": 0.1081217632941771
+          },
+          {
+            "n": 20,
+            "s": 17,
+            "action": "reject",
+            "probability": 0.11155740810913231
+          },
+          {
+            "n": 20,
+            "s": 18,
+            "action": "approve",
+            "probability": 0.09397499052671472
+          },
+          {
+            "n": 20,
+            "s": 19,
+            "action": "approve",
+            "probability": 0.052545155993431916
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.0,
+              "8:reject": 1.0,
+              "20:approve": 0.0,
+              "20:reject": 0.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.004032135009765625,
+            "expected_n": 12.3125,
+            "expected_loss": 3.8442306518554688,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.00390625,
+              "8:reject": 0.63671875,
+              "20:approve": 0.000125885009765625,
+              "20:reject": 0.3592491149902344
+            }
+          },
+          "0.7": {
+            "assurance": 0.07855684059717012,
+            "expected_n": 16.97897167999999,
+            "expected_loss": 19.170542633462322,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.05764800999999997,
+              "8:reject": 0.1941043500000001,
+              "20:approve": 0.020908830597170146,
+              "20:reject": 0.72733880940283
+            }
+          },
+          "0.8": {
+            "assurance": 0.2801820066991677,
+            "expected_n": 17.31135488,
+            "expected_loss": 11.52601865300832,
+            "mass": 0.9999999999999999,
+            "stopping": {
+              "8:approve": 0.1677721600000001,
+              "8:reject": 0.05628159999999995,
+              "20:approve": 0.11240984669916762,
+              "20:reject": 0.6635363933008324
+            }
+          },
+          "0.9": {
+            "assurance": 0.7246526951821185,
+            "expected_n": 14.77410128,
+            "expected_loss": 6.446998368178816,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "8:approve": 0.43046721000000016,
+              "8:reject": 0.005024349999999997,
+              "20:approve": 0.2941854851821184,
+              "20:reject": 0.27032295481788166
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 1.0,
+              "8:reject": 0.0,
+              "20:approve": 0.0,
+              "20:reject": 0.0
+            }
+          }
+        }
+      }
+    },
+    "changed": {
+      "fixed8": {
+        "exact": {
+          "assurance": 0.09090909090909094,
+          "expected_n": 8.0,
+          "expected_loss": 6.119819089981818,
+          "mass": 1.0000000000000002,
+          "stopping": {
+            "8:reject": 0.9090909090909093,
+            "8:approve": 0.09090909090909094
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.09113,
+            "mcse": 0.0009100887394178305
+          },
+          "expected_n": {
+            "mean": 8.0,
+            "mcse": 0.0
+          },
+          "expected_loss": {
+            "mean": 6.1118,
+            "mcse": 0.05346437685034698
+          },
+          "count": 100000,
+          "approval_count": 9113,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 8,
+            "s": 0,
+            "action": "reject",
+            "probability": 0.01818181818181816
+          },
+          {
+            "n": 8,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.04848484848484849
+          },
+          {
+            "n": 8,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.08484848484848485
+          },
+          {
+            "n": 8,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.12121212121212134
+          },
+          {
+            "n": 8,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.15151515151515155
+          },
+          {
+            "n": 8,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.16969696969696973
+          },
+          {
+            "n": 8,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.16969696969696973
+          },
+          {
+            "n": 8,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.1454545454545454
+          },
+          {
+            "n": 8,
+            "s": 8,
+            "action": "approve",
+            "probability": 0.09090909090909094
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.0,
+              "8:reject": 1.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.00390625,
+            "expected_n": 8.0,
+            "expected_loss": 2.7421875,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.00390625,
+              "8:reject": 0.99609375
+            }
+          },
+          "0.7": {
+            "assurance": 0.05764800999999997,
+            "expected_n": 8.0,
+            "expected_loss": 12.953121899999994,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.05764800999999997,
+              "8:reject": 0.94235199
+            }
+          },
+          "0.8": {
+            "assurance": 0.1677721600000001,
+            "expected_n": 8.0,
+            "expected_loss": 10.322278399999998,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.1677721600000001,
+              "8:reject": 0.8322278399999998
+            }
+          },
+          "0.9": {
+            "assurance": 0.43046721000000016,
+            "expected_n": 8.0,
+            "expected_loss": 7.6953279000000006,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "8:approve": 0.43046721000000016,
+              "8:reject": 0.56953279
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 1.0,
+              "8:reject": 0.0
+            }
+          }
+        }
+      },
+      "fixed14": {
+        "exact": {
+          "assurance": 0.10784313725490197,
+          "expected_n": 14.0,
+          "expected_loss": 6.8387397895015685,
+          "mass": 0.9999999999999998,
+          "stopping": {
+            "14:reject": 0.8921568627450979,
+            "14:approve": 0.10784313725490197
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.10597,
+            "mcse": 0.0009733514602293721
+          },
+          "expected_n": {
+            "mean": 14.0,
+            "mcse": 0.0
+          },
+          "expected_loss": {
+            "mean": 6.8286,
+            "mcse": 0.04208731321692248
+          },
+          "count": 100000,
+          "approval_count": 10597,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 14,
+            "s": 0,
+            "action": "reject",
+            "probability": 0.004901960784313723
+          },
+          {
+            "n": 14,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.013725490196078436
+          },
+          {
+            "n": 14,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.02549019607843138
+          },
+          {
+            "n": 14,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.03921568627450981
+          },
+          {
+            "n": 14,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.05392156862745098
+          },
+          {
+            "n": 14,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.06862745098039216
+          },
+          {
+            "n": 14,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.08235294117647048
+          },
+          {
+            "n": 14,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.0941176470588234
+          },
+          {
+            "n": 14,
+            "s": 8,
+            "action": "reject",
+            "probability": 0.10294117647058817
+          },
+          {
+            "n": 14,
+            "s": 9,
+            "action": "reject",
+            "probability": 0.10784313725490197
+          },
+          {
+            "n": 14,
+            "s": 10,
+            "action": "reject",
+            "probability": 0.10784313725490197
+          },
+          {
+            "n": 14,
+            "s": 11,
+            "action": "reject",
+            "probability": 0.10196078431372553
+          },
+          {
+            "n": 14,
+            "s": 12,
+            "action": "reject",
+            "probability": 0.08921568627450983
+          },
+          {
+            "n": 14,
+            "s": 13,
+            "action": "approve",
+            "probability": 0.06862745098039216
+          },
+          {
+            "n": 14,
+            "s": 14,
+            "action": "approve",
+            "probability": 0.03921568627450981
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 14.0,
+            "expected_loss": 3.5,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 0.0,
+              "14:reject": 1.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.00091552734375,
+            "expected_n": 14.0,
+            "expected_loss": 3.6739501953125,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 0.00091552734375,
+              "14:reject": 0.99908447265625
+            }
+          },
+          "0.7": {
+            "assurance": 0.04747561509942998,
+            "expected_n": 14.0,
+            "expected_loss": 12.520366868891696,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "14:approve": 0.04747561509942998,
+              "14:reject": 0.9525243849005703
+            }
+          },
+          "0.8": {
+            "assurance": 0.1979120929996801,
+            "expected_n": 14.0,
+            "expected_loss": 11.520879070003197,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 0.1979120929996801,
+              "14:reject": 0.80208790700032
+            }
+          },
+          "0.9": {
+            "assurance": 0.5846291405156703,
+            "expected_n": 14.0,
+            "expected_loss": 7.653708594843301,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "14:approve": 0.5846291405156703,
+              "14:reject": 0.41537085948432995
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 14.0,
+            "expected_loss": 3.5,
+            "mass": 1.0,
+            "stopping": {
+              "14:approve": 1.0,
+              "14:reject": 0.0
+            }
+          }
+        }
+      },
+      "fixed20": {
+        "exact": {
+          "assurance": 0.1149068322981367,
+          "expected_n": 20.0,
+          "expected_loss": 7.892056723627929,
+          "mass": 1.0000000000000009,
+          "stopping": {
+            "20:reject": 0.8850931677018641,
+            "20:approve": 0.1149068322981367
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.11518,
+            "mcse": 0.0010095275466566896
+          },
+          "expected_n": {
+            "mean": 20.0,
+            "mcse": 0.0
+          },
+          "expected_loss": {
+            "mean": 7.9187,
+            "mcse": 0.03452033921673129
+          },
+          "count": 100000,
+          "approval_count": 11518,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 20,
+            "s": 0,
+            "action": "reject",
+            "probability": 0.0019762845849802366
+          },
+          {
+            "n": 20,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.005646527385657815
+          },
+          {
+            "n": 20,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.010728402032749874
+          },
+          {
+            "n": 20,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.016939582156973467
+          },
+          {
+            "n": 20,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.023997741389045788
+          },
+          {
+            "n": 20,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.03162055335968381
+          },
+          {
+            "n": 20,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.0395256916996048
+          },
+          {
+            "n": 20,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.04743083003952569
+          },
+          {
+            "n": 20,
+            "s": 8,
+            "action": "reject",
+            "probability": 0.055053642010163856
+          },
+          {
+            "n": 20,
+            "s": 9,
+            "action": "reject",
+            "probability": 0.062111801242236
+          },
+          {
+            "n": 20,
+            "s": 10,
+            "action": "reject",
+            "probability": 0.06832298136645966
+          },
+          {
+            "n": 20,
+            "s": 11,
+            "action": "reject",
+            "probability": 0.07340485601355173
+          },
+          {
+            "n": 20,
+            "s": 12,
+            "action": "reject",
+            "probability": 0.07707509881422933
+          },
+          {
+            "n": 20,
+            "s": 13,
+            "action": "reject",
+            "probability": 0.07905138339920961
+          },
+          {
+            "n": 20,
+            "s": 14,
+            "action": "reject",
+            "probability": 0.07905138339920946
+          },
+          {
+            "n": 20,
+            "s": 15,
+            "action": "reject",
+            "probability": 0.07679277244494646
+          },
+          {
+            "n": 20,
+            "s": 16,
+            "action": "reject",
+            "probability": 0.07199322416713733
+          },
+          {
+            "n": 20,
+            "s": 17,
+            "action": "reject",
+            "probability": 0.06437041219649924
+          },
+          {
+            "n": 20,
+            "s": 18,
+            "action": "approve",
+            "probability": 0.05364201016374935
+          },
+          {
+            "n": 20,
+            "s": 19,
+            "action": "approve",
+            "probability": 0.03952569169960473
+          },
+          {
+            "n": 20,
+            "s": 20,
+            "action": "approve",
+            "probability": 0.02173913043478262
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 20.0,
+            "expected_loss": 5.0,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 0.0,
+              "20:reject": 1.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.00020122528076171875,
+            "expected_n": 20.0,
+            "expected_loss": 5.038232803344727,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 0.00020122528076171875,
+              "20:reject": 0.9997987747192383
+            }
+          },
+          "0.7": {
+            "assurance": 0.03548313229846866,
+            "expected_n": 20.0,
+            "expected_loss": 11.741795136709046,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "20:approve": 0.03548313229846866,
+              "20:reject": 0.9645168677015317
+            }
+          },
+          "0.8": {
+            "assurance": 0.20608471894847402,
+            "expected_n": 20.0,
+            "expected_loss": 12.93915281051526,
+            "mass": 0.9999999999999999,
+            "stopping": {
+              "20:approve": 0.20608471894847402,
+              "20:reject": 0.7939152810515259
+            }
+          },
+          "0.9": {
+            "assurance": 0.6769268051894661,
+            "expected_n": 20.0,
+            "expected_loss": 8.230731948105335,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 0.6769268051894661,
+              "20:reject": 0.3230731948105338
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 20.0,
+            "expected_loss": 5.0,
+            "mass": 1.0,
+            "stopping": {
+              "20:approve": 1.0,
+              "20:reject": 0.0
+            }
+          }
+        }
+      },
+      "sequential": {
+        "exact": {
+          "assurance": 0.1417278373800113,
+          "expected_n": 13.818181818181827,
+          "expected_loss": 7.4005783309525075,
+          "mass": 1.0000000000000004,
+          "stopping": {
+            "8:reject": 0.42424242424242437,
+            "8:approve": 0.09090909090909094,
+            "20:reject": 0.43402973837756487,
+            "20:approve": 0.050818746470920356
+          }
+        },
+        "simulation": {
+          "assurance": {
+            "mean": 0.14048,
+            "mcse": 0.001098847473791384
+          },
+          "expected_n": {
+            "mean": 13.82768,
+            "mcse": 0.018965934072503587
+          },
+          "expected_loss": {
+            "mean": 7.41952,
+            "mcse": 0.05925121717537427
+          },
+          "count": 100000,
+          "approval_count": 14048,
+          "zero_success_upper_95": null
+        },
+        "states": [
+          {
+            "n": 8,
+            "s": 0,
+            "action": "reject",
+            "probability": 0.01818181818181816
+          },
+          {
+            "n": 8,
+            "s": 1,
+            "action": "reject",
+            "probability": 0.04848484848484849
+          },
+          {
+            "n": 8,
+            "s": 2,
+            "action": "reject",
+            "probability": 0.08484848484848485
+          },
+          {
+            "n": 8,
+            "s": 3,
+            "action": "reject",
+            "probability": 0.12121212121212134
+          },
+          {
+            "n": 8,
+            "s": 4,
+            "action": "reject",
+            "probability": 0.15151515151515155
+          },
+          {
+            "n": 8,
+            "s": 8,
+            "action": "approve",
+            "probability": 0.09090909090909094
+          },
+          {
+            "n": 20,
+            "s": 5,
+            "action": "reject",
+            "probability": 0.00011421252503497765
+          },
+          {
+            "n": 20,
+            "s": 6,
+            "action": "reject",
+            "probability": 0.0007138282814686112
+          },
+          {
+            "n": 20,
+            "s": 7,
+            "action": "reject",
+            "probability": 0.0024718853632570152
+          },
+          {
+            "n": 20,
+            "s": 8,
+            "action": "reject",
+            "probability": 0.006233906085837712
+          },
+          {
+            "n": 20,
+            "s": 9,
+            "action": "reject",
+            "probability": 0.012724117987275883
+          },
+          {
+            "n": 20,
+            "s": 10,
+            "action": "reject",
+            "probability": 0.022177714599305683
+          },
+          {
+            "n": 20,
+            "s": 11,
+            "action": "reject",
+            "probability": 0.0340364978943523
+          },
+          {
+            "n": 20,
+            "s": 12,
+            "action": "reject",
+            "probability": 0.04684345133934586
+          },
+          {
+            "n": 20,
+            "s": 13,
+            "action": "reject",
+            "probability": 0.05841970655539117
+          },
+          {
+            "n": 20,
+            "s": 14,
+            "action": "reject",
+            "probability": 0.0663166868578095
+          },
+          {
+            "n": 20,
+            "s": 15,
+            "action": "reject",
+            "probability": 0.06843194943881448
+          },
+          {
+            "n": 20,
+            "s": 16,
+            "action": "reject",
+            "probability": 0.06359772950161965
+          },
+          {
+            "n": 20,
+            "s": 17,
+            "action": "reject",
+            "probability": 0.051948051948051965
+          },
+          {
+            "n": 20,
+            "s": 18,
+            "action": "approve",
+            "probability": 0.03500846979107847
+          },
+          {
+            "n": 20,
+            "s": 19,
+            "action": "approve",
+            "probability": 0.015810276679841893
+          }
+        ],
+        "operating": {
+          "0.0": {
+            "assurance": 0.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.0,
+              "8:reject": 1.0,
+              "20:approve": 0.0,
+              "20:reject": 0.0
+            }
+          },
+          "0.5": {
+            "assurance": 0.004032135009765625,
+            "expected_n": 12.3125,
+            "expected_loss": 3.8442306518554688,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.00390625,
+              "8:reject": 0.63671875,
+              "20:approve": 0.000125885009765625,
+              "20:reject": 0.3592491149902344
+            }
+          },
+          "0.7": {
+            "assurance": 0.07855684059717012,
+            "expected_n": 16.97897167999999,
+            "expected_loss": 19.170542633462322,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 0.05764800999999997,
+              "8:reject": 0.1941043500000001,
+              "20:approve": 0.020908830597170146,
+              "20:reject": 0.72733880940283
+            }
+          },
+          "0.8": {
+            "assurance": 0.2801820066991677,
+            "expected_n": 17.31135488,
+            "expected_loss": 11.52601865300832,
+            "mass": 0.9999999999999999,
+            "stopping": {
+              "8:approve": 0.1677721600000001,
+              "8:reject": 0.05628159999999995,
+              "20:approve": 0.11240984669916762,
+              "20:reject": 0.6635363933008324
+            }
+          },
+          "0.9": {
+            "assurance": 0.7246526951821185,
+            "expected_n": 14.77410128,
+            "expected_loss": 6.446998368178816,
+            "mass": 1.0000000000000002,
+            "stopping": {
+              "8:approve": 0.43046721000000016,
+              "8:reject": 0.005024349999999997,
+              "20:approve": 0.2941854851821184,
+              "20:reject": 0.27032295481788166
+            }
+          },
+          "1.0": {
+            "assurance": 1.0,
+            "expected_n": 8.0,
+            "expected_loss": 2.0,
+            "mass": 1.0,
+            "stopping": {
+              "8:approve": 1.0,
+              "8:reject": 0.0,
+              "20:approve": 0.0,
+              "20:reject": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "original:fixed8:assurance:recursion",
+      "estimate": 0.26470588235294085,
+      "reference": 0.26470588235294124,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 3.885780586188048e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed8:assurance:simulation",
+      "estimate": 0.26373,
+      "reference": 0.26470588235294085,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0009758823529408267,
+      "tolerance": 0.0069673960143709504,
+      "passed": true
+    },
+    {
+      "name": "original:fixed8:expected_n:recursion",
+      "estimate": 8.0,
+      "reference": 8.0,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed8:expected_n:simulation",
+      "estimate": 8.0,
+      "reference": 8.0,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0,
+      "tolerance": 0.0,
+      "passed": true
+    },
+    {
+      "name": "original:fixed8:expected_loss:recursion",
+      "estimate": 8.413355292784217,
+      "reference": 8.413355292784216,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 1.7763568394002505e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed8:expected_loss:simulation",
+      "estimate": 8.4263,
+      "reference": 8.413355292784217,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.012944707215782003,
+      "tolerance": 0.22538949638736674,
+      "passed": true
+    },
+    {
+      "name": "original:fixed8:mass",
+      "estimate": 0.9999999999999997,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 3.3306690738754696e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:assurance:recursion",
+      "estimate": 0.3320158102766799,
+      "reference": 0.33201581027667987,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 5.551115123125783e-17,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:assurance:simulation",
+      "estimate": 0.33244,
+      "reference": 0.3320158102766799,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.00042418972332008975,
+      "tolerance": 0.007448588216210111,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:expected_n:recursion",
+      "estimate": 14.0,
+      "reference": 14.0,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:expected_n:simulation",
+      "estimate": 14.0,
+      "reference": 14.0,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0,
+      "tolerance": 0.0,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:expected_loss:recursion",
+      "estimate": 8.899707789130439,
+      "reference": 8.899707789130439,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:expected_loss:simulation",
+      "estimate": 8.8855,
+      "reference": 8.899707789130439,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.014207789130438186,
+      "tolerance": 0.18554835412748127,
+      "passed": true
+    },
+    {
+      "name": "original:fixed14:mass",
+      "estimate": 0.9999999999999999,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 1.1102230246251565e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:assurance:recursion",
+      "estimate": 0.3640267778198816,
+      "reference": 0.3640267778198813,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 2.7755575615628914e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:assurance:simulation",
+      "estimate": 0.36421,
+      "reference": 0.3640267778198816,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.00018322218011840308,
+      "tolerance": 0.007608603543586618,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:expected_n:recursion",
+      "estimate": 20.0,
+      "reference": 20.0,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:expected_n:simulation",
+      "estimate": 20.0,
+      "reference": 20.0,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0,
+      "tolerance": 0.0,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:expected_loss:recursion",
+      "estimate": 9.830133468220698,
+      "reference": 9.830133468220687,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 1.0658141036401503e-14,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:expected_loss:simulation",
+      "estimate": 9.8394,
+      "reference": 9.830133468220698,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.009266531779301701,
+      "tolerance": 0.1585537867823819,
+      "passed": true
+    },
+    {
+      "name": "original:fixed20:mass",
+      "estimate": 1.0000000000000007,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 6.661338147750939e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:assurance:recursion",
+      "estimate": 0.41122602887308746,
+      "reference": 0.41122602887308773,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 2.7755575615628914e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:assurance:simulation",
+      "estimate": 0.4131,
+      "reference": 0.41122602887308746,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0018739711269125658,
+      "tolerance": 0.007785416085671739,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:expected_n:recursion",
+      "estimate": 15.493212669683261,
+      "reference": 15.493212669683258,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 3.552713678800501e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:expected_n:simulation",
+      "estimate": 15.49952,
+      "reference": 15.493212669683261,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.006307330316738913,
+      "tolerance": 0.09185828390430131,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:expected_loss:recursion",
+      "estimate": 9.078560343672569,
+      "reference": 9.078560343672565,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 3.552713678800501e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:expected_loss:simulation",
+      "estimate": 8.99708,
+      "reference": 9.078560343672569,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.08148034367256862,
+      "tolerance": 0.24240970585571633,
+      "passed": true
+    },
+    {
+      "name": "original:sequential:mass",
+      "estimate": 1.0,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:assurance:recursion",
+      "estimate": 0.09090909090909094,
+      "reference": 0.09090909090909093,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 1.3877787807814457e-17,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:assurance:simulation",
+      "estimate": 0.09113,
+      "reference": 0.09090909090909094,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0002209090909090633,
+      "tolerance": 0.004550443697089152,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:expected_n:recursion",
+      "estimate": 8.0,
+      "reference": 8.0,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:expected_n:simulation",
+      "estimate": 8.0,
+      "reference": 8.0,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0,
+      "tolerance": 0.0,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:expected_loss:recursion",
+      "estimate": 6.119819089981818,
+      "reference": 6.119819089981818,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:expected_loss:simulation",
+      "estimate": 6.1118,
+      "reference": 6.119819089981818,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.008019089981818439,
+      "tolerance": 0.2673218842517349,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed8:mass",
+      "estimate": 1.0000000000000002,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 2.220446049250313e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:assurance:recursion",
+      "estimate": 0.10784313725490197,
+      "reference": 0.107843137254902,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 2.7755575615628914e-17,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:assurance:simulation",
+      "estimate": 0.10597,
+      "reference": 0.10784313725490197,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0018731372549019715,
+      "tolerance": 0.00486675730114686,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:expected_n:recursion",
+      "estimate": 14.0,
+      "reference": 14.0,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:expected_n:simulation",
+      "estimate": 14.0,
+      "reference": 14.0,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0,
+      "tolerance": 0.0,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:expected_loss:recursion",
+      "estimate": 6.8387397895015685,
+      "reference": 6.83873978950157,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 1.7763568394002505e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:expected_loss:simulation",
+      "estimate": 6.8286,
+      "reference": 6.8387397895015685,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.010139789501568686,
+      "tolerance": 0.21043656608461242,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed14:mass",
+      "estimate": 0.9999999999999998,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 2.220446049250313e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:assurance:recursion",
+      "estimate": 0.1149068322981367,
+      "reference": 0.11490683229813668,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 1.3877787807814457e-17,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:assurance:simulation",
+      "estimate": 0.11518,
+      "reference": 0.1149068322981367,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0002731677018633083,
+      "tolerance": 0.0050476377332834485,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:expected_n:recursion",
+      "estimate": 20.0,
+      "reference": 20.0,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:expected_n:simulation",
+      "estimate": 20.0,
+      "reference": 20.0,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0,
+      "tolerance": 0.0,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:expected_loss:recursion",
+      "estimate": 7.892056723627929,
+      "reference": 7.89205672362792,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 8.881784197001252e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:expected_loss:simulation",
+      "estimate": 7.9187,
+      "reference": 7.892056723627929,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.02664327637207098,
+      "tolerance": 0.17260169608365644,
+      "passed": true
+    },
+    {
+      "name": "changed:fixed20:mass",
+      "estimate": 1.0000000000000009,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 8.881784197001252e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:assurance:recursion",
+      "estimate": 0.1417278373800113,
+      "reference": 0.14172783738001132,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 2.7755575615628914e-17,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:assurance:simulation",
+      "estimate": 0.14048,
+      "reference": 0.1417278373800113,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.0012478373800113018,
+      "tolerance": 0.00549423736895692,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:expected_n:recursion",
+      "estimate": 13.818181818181827,
+      "reference": 13.818181818181818,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 8.881784197001252e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:expected_n:simulation",
+      "estimate": 13.82768,
+      "reference": 13.818181818181827,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.009498181818173634,
+      "tolerance": 0.09482967036251794,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:expected_loss:recursion",
+      "estimate": 7.4005783309525075,
+      "reference": 7.400578330952505,
+      "reference_method": "independent single-trial forward recursion",
+      "absolute_error": 2.6645352591003757e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:expected_loss:simulation",
+      "estimate": 7.41952,
+      "reference": 7.4005783309525075,
+      "reference_method": "exact beta-binomial terminal enumeration; MCSE is simulation uncertainty",
+      "absolute_error": 0.018941669047492837,
+      "tolerance": 0.29625608587687136,
+      "passed": true
+    },
+    {
+      "name": "changed:sequential:mass",
+      "estimate": 1.0000000000000004,
+      "reference": 1.0,
+      "reference_method": "probability axiom",
+      "absolute_error": 4.440892098500626e-16,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "rational_anchor:assurance",
+      "estimate": 0.43333333333333335,
+      "reference": 0.43333333333333335,
+      "reference_method": "rational ordered-path enumeration",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "rational_anchor:expected_n",
+      "estimate": 2.6666666666666665,
+      "reference": 2.6666666666666665,
+      "reference_method": "rational ordered-path enumeration",
+      "absolute_error": 0.0,
+      "tolerance": 1e-12,
+      "passed": true
+    }
+  ],
+  "diagnostics": {
+    "rational_anchor": {
+      "assurance": "13/30",
+      "expected_n": "8/3",
+      "fixed_assurance": "2/5"
+    },
+    "all_checks_passed": true,
+    "simulation_stream_extension": "SeedSequence([root,5,policy_index,scenario_index]); independent across policies",
+    "analysis_posteriors": {
+      "8": [
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          9,
+          1
+        ]
+      ],
+      "14": [
+        [
+          1,
+          15
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          15,
+          1
+        ]
+      ],
+      "20": [
+        [
+          1,
+          21
+        ],
+        [
+          2,
+          20
+        ],
+        [
+          3,
+          19
+        ],
+        [
+          4,
+          18
+        ],
+        [
+          5,
+          17
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          16,
+          6
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          18,
+          4
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          20,
+          2
+        ],
+        [
+          21,
+          1
+        ]
+      ]
+    }
+  },
+  "limitations": [
+    "Synthetic exchangeable Bernoulli outcomes and immediate observation only.",
+    "Candidate policy is not globally optimized.",
+    "Costs and design priors are judgments; thresholds do not guarantee frequentist error control."
+  ]
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Nested events factor a rare probability</title><desc id="desc">For F₃ ⊂ F₂ ⊂ F₁, probability factors into easier conditional probabilities.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Nested events factor a rare probability</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">For F₃ ⊂ F₂ ⊂ F₁, probability factors into easier conditional probabilities.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">P(F₃)=P(F₁)P(F₂|F₁)P(F₃|F₂). Conditional MCMC introduces dependence that must enter uncertainty estimates.</text>
+<rect x="65" y="125" width="490" height="325" rx="7" fill="#e5edf5" stroke="#275c91"/>
+<rect x="175" y="185" width="330" height="220" rx="7" fill="#c9e2e8" stroke="#167d8d"/>
+<rect x="295" y="255" width="165" height="110" rx="7" fill="#f3d5be" stroke="#bb5b27"/>
+<text x="85.00" y="155.00" font-family="system-ui,sans-serif" font-size="20" fill="#275c91" font-weight="400" text-anchor="start">F₁</text>
+<text x="195.00" y="220.00" font-family="system-ui,sans-serif" font-size="20" fill="#167d8d" font-weight="400" text-anchor="start">F₂</text>
+<text x="315.00" y="288.00" font-family="system-ui,sans-serif" font-size="20" fill="#bb5b27" font-weight="400" text-anchor="start">F₃</text>
+<text x="620.00" y="170.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="700" text-anchor="start">Illustrative probabilities</text>
+<text x="620.00" y="220.00" font-family="system-ui,sans-serif" font-size="19" fill="#233443" font-weight="400" text-anchor="start">P(F₁) = 0.1</text>
+<text x="620.00" y="265.00" font-family="system-ui,sans-serif" font-size="19" fill="#233443" font-weight="400" text-anchor="start">P(F₂ | F₁) = 0.1</text>
+<text x="620.00" y="310.00" font-family="system-ui,sans-serif" font-size="19" fill="#233443" font-weight="400" text-anchor="start">P(F₃ | F₂) = 0.1</text>
+<text x="620.00" y="385.00" font-family="system-ui,sans-serif" font-size="19" fill="#233443" font-weight="400" text-anchor="start">⇒ P(F₃) = 0.001</text>
+<text x="100.00" y="470.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Nested boxes are schematic; their areas do not represent probabilities.</text>
+</svg>

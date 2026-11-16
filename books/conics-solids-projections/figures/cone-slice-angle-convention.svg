@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+  <title id="title">Cone half-angle and slicing-plane angle in a meridian section</title>
+  <desc id="desc">A vertical cone axis passes through the vertex. Two generators make half-angle alpha with the axis. A cutting-plane trace makes angle beta with the axis and intersects both generators of the upper nappe, illustrating the ellipse case beta greater than alpha.</desc>
+  <defs>
+    <style>
+      .axis{stroke:#475569;stroke-width:2;stroke-dasharray:8 7}.cone{stroke:#1d4ed8;stroke-width:4;fill:none}.slice{stroke:#b45309;stroke-width:5;fill:none}.arc{stroke:#0f766e;stroke-width:3;fill:none}.label{font:18px system-ui,sans-serif;fill:#17212b}.small{font:15px system-ui,sans-serif;fill:#334155}.point{fill:#111827}
+    </style>
+  </defs>
+  <rect width="760" height="430" fill="#fff"/>
+  <text x="28" y="34" class="label" font-weight="700">The two angles use the cone axis as their reference</text>
+  <line x1="250" y1="385" x2="250" y2="52" class="axis"/>
+  <path d="M58,52 L250,385 L442,52" class="cone"/>
+  <path d="M70,299 L449,80" class="slice"/>
+  <circle cx="250" cy="385" r="5" class="point"/>
+  <circle cx="167.823" cy="242.474" r="5" class="point"/>
+  <circle cx="414.292" cy="100.055" r="5" class="point"/>
+  <text x="263" y="382" class="small">vertex V</text>
+  <text x="263" y="70" class="small">axis</text>
+  <text x="72" y="321" class="small" fill="#92400e">trace of slicing plane</text>
+  <path d="M250,335 A50,50 0 0 0 225,342" class="arc"/>
+  <text x="213" y="330" class="label">α</text>
+  <path d="M250,152.989 A42,42 0 0 1 286.365,173.976" class="arc"/>
+  <circle cx="250" cy="194.989" r="4" class="point"/>
+  <text x="289" y="160" class="label">β</text>
+  <text x="494" y="102" class="label" font-weight="700">Illustrated case</text>
+  <text x="494" y="139" class="label">α = 30°</text>
+  <text x="494" y="171" class="label">β = 60°</text>
+  <text x="494" y="216" class="label" fill="#166534">β &gt; α</text>
+  <text x="494" y="248" class="small">The plane misses V and</text>
+  <text x="494" y="270" class="small">cuts one nappe in a</text>
+  <text x="494" y="292" class="small">bounded ellipse.</text>
+  <text x="28" y="416" class="small">Meridian cross-section; the full slicing plane extends perpendicular to this drawing.</text>
+</svg>

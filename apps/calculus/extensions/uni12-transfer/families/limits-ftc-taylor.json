@@ -1,0 +1,125 @@
+[
+  {
+    "id": "U12-LIM-A",
+    "family": "uniform-limit",
+    "variant": "A",
+    "title": "A canceled factor leaves another denominator",
+    "preparation": [
+      {"chapterId": "04", "lesson": 2, "problems": [4]},
+      {"chapterId": "04", "lesson": 3, "problems": [12, 38, 39]}
+    ],
+    "prompt": "Let D = R \\ {-2, 2} and f(x) = (x³ - 8)/(x² - 4) on D. Decide the limit as x approaches 2 and give a complete tolerance proof: for every ε > 0, choose a positive δ before the test input is named and prove the required strict output inequality for every x in D with 0 < |x - 2| < δ. A proposed choice is δ = ε|x + 2|/|x + 1|. Explain what is missing from that choice and replace it. Finally, extend the function to 2 by assigning a finite value c. Which c makes the extension continuous there?",
+    "hypotheses": "Inputs and outputs are dimensionless real numbers. The original domain excludes both denominator zeros, -2 and 2. Domain points approach 2 from both sides. The extension adds only the point 2 and continues to exclude -2.",
+    "solution": "For x in D, cancellation gives f(x) = (x² + 2x + 4)/(x + 2), but this identity does not restore either excluded input to the original domain. The candidate limit is 3. For x in D, |f(x) - 3| = |x - 2||x + 1|/|x + 2|. The proposed radius still depends on the later arbitrary x, so it has not supplied one radius that works throughout a neighborhood. First impose |x - 2| < 1. Then 1 < x < 3, so |x + 1| < 4 and |x + 2| > 3. Given an arbitrary ε > 0, choose δ = min(1, 3ε/4), which is positive and depends only on ε and fixed data. For every x in D with 0 < |x - 2| < δ, the same neighborhood bounds hold and |f(x) - 3| < (4/3)|x - 2| < (4/3)δ ≤ ε. This proves the two-sided limit 3 for all positive tolerances. Assigning a value at 2 changes no punctured-neighborhood values. The extended function is continuous at 2 exactly when c = 3; the original function was undefined there.",
+    "criteria": [
+      "Retains the original domain D = R \\ {-2, 2} and derives the limit candidate 3 by an identity valid on that domain.",
+      "Obtains |f(x) - 3| = |x - 2||x + 1|/|x + 2| and bounds the moving ratio on one fixed neighborhood, for example by 4/3 when |x - 2| < 1.",
+      "Chooses one positive δ depending only on ε and fixed data, then proves the strict output inequality for an arbitrary eligible x; explains why the input-dependent proposed radius is insufficient.",
+      "States that the isolated assignment does not change the limit and that the continuous extension requires exactly c = 3."
+    ],
+    "boundary": "Cancellation preserves the formula only on the original domain. A sufficient radius need not be the greatest one, and the excluded point 2 is never a test input in the limit proof. Equivalent fixed-neighborhood proofs are valid.",
+    "changedFrom": "Compared with printed Problems 04.38–39 and the Chapter 04 learner row in docs/REVIEW-PACKET.md, this uses a removable cubic-over-quadratic quotient with a second excluded point; it requires cancellation and then a uniform denominator estimate, rather than a reciprocal with changed coefficients. Preparation identities are 04.04, 04.12, 04.38 and 04.39."
+  },
+  {
+    "id": "U12-LIM-B",
+    "family": "uniform-limit",
+    "variant": "B",
+    "title": "An oscillation with a shrinking envelope",
+    "preparation": [
+      {"chapterId": "04", "lesson": 2, "problems": [5, 8]},
+      {"chapterId": "04", "lesson": 3, "problems": [39]}
+    ],
+    "prompt": "On D = R \\ {-1}, define F(x) = √|x + 1| cos(1/(x + 1)) + (x + 1)² and G(x) = cos(1/(x + 1)), with angles in radians. A reader says that neither can have a limit at -1 because both contain the same endlessly oscillating cosine. Decide each claim. For any finite limit you assert, choose one positive δ for each ε > 0 before any test input is supplied and prove the output bound for every eligible input. For a claimed failure, give exact approaching input sequences with incompatible output limits. If F(-1) is then assigned a finite value, which assignment makes F continuous?",
+    "hypotheses": "All quantities are dimensionless real numbers. Both functions have domain D = R \\ {-1}, with domain approaches from both sides of -1. The square root is the nonnegative real square root of the nonnegative number |x + 1|.",
+    "solution": "Put v = |x + 1|. For x in D, v > 0 and |F(x)| ≤ √v + v². If v < 1, then v² ≤ √v, so |F(x)| ≤ 2√v. Given any ε > 0, choose δ = min(1, ε²/4). For every x in D with 0 < |x + 1| < δ, we have |F(x)| ≤ 2√v < 2√δ ≤ ε. Thus F tends to 0 at -1, uniformly over the permitted nearby inputs; no limit of the cosine factor was needed. For n = 1, 2, ..., take x_n = -1 + 1/(2πn) and y_n = -1 + 1/((2n + 1)π). Both sequences lie in D and approach -1. But G(x_n) = 1 and G(y_n) = -1, so G has no finite limit there. These two sequences disprove a two-sided limit even though they approach from the same side. The original assertion is therefore false for F and true for G. An isolated assignment at -1 does not affect F's limit, and its extension is continuous exactly when F(-1) = 0.",
+    "criteria": [
+      "Bounds |F(x)| by √v + v² and then by 2√v on a fixed neighborhood 0 < v < 1, with v = |x + 1|.",
+      "Gives a positive input-independent choice such as δ = min(1, ε²/4) and checks the forward strict inequality for every eligible input and every ε > 0.",
+      "Supplies two exact domain sequences approaching -1 on which G has different limiting values, such as the sequences giving 1 and -1 in the key.",
+      "Separates a bounded oscillatory factor from its vanishing envelope and identifies 0 as the unique value yielding a continuous extension of F."
+    ],
+    "boundary": "A favorable sequence cannot prove a limit; the bound on F covers every eligible input. Two incompatible sequences can disprove G's limit. No value at the excluded center participates in either limit test.",
+    "changedFrom": "Compared with the reciprocal and polynomial Chapter 04 review tasks and printed Problems 04.38–39, this combines a fractional-power envelope, a quadratic term and an oscillatory companion. It requires choosing between a neighborhood proof and an exact sequence disproof. Preparation identities are 04.05, 04.08 and 04.39."
+  },
+  {
+    "id": "U12-FTC-A",
+    "family": "ftc-point-behavior",
+    "variant": "A",
+    "title": "A symmetric readout can hide a corner",
+    "preparation": [
+      {"chapterId": "11", "lesson": 2, "problems": [35]}
+    ],
+    "prompt": "On [0, 2], let f_c(t) = 2 + (t - 1)². Let f_p equal f_c except that f_p(1) = -5. Let f_j(t) = 1 + (t - 1)² for t < 1, f_j(t) = 5 + (t - 1)² for t > 1, and f_j(1) = 3. For i = c, p, j define A_i(x) = ∫ from 0 to x of f_i(t) dt. For 0 < h ≤ 1 calculate the two one-sided difference quotients of A_i at 1 and the symmetric window average S_i(h) = (1/(2h))∫ from 1 - h to 1 + h of f_i(t) dt. For each rate, decide separately its continuity at 1, whether A_i′(1) exists, and whether that derivative equals f_i(1). Does S_i(h) tending to f_i(1) settle the derivative question? Justify why the one-point assignments affect or do not affect the integrals.",
+    "hypotheses": "Use ordinary Riemann integrals and oriented differences of accumulation. The three bounded functions are piecewise polynomial with only possible discontinuities at the interior point 1, so they are Riemann integrable on [0, 2]. All quantities are dimensionless.",
+    "solution": "A bounded change supported at one point has zero Riemann integral: enclose that point in partition intervals of total width η; the absolute upper estimate for a change of height at most C is Cη, which tends to zero. Here f_p - f_c is -7 only at 1, so A_p = A_c. Write u = x - 1. For c and p, A_i(1 + u) - A_i(1) = 2u + u³/3. Therefore their quotients at u = -h and u = h are both 2 + h²/3, tending to 2. Their symmetric averages are also 2 + h²/3. For j, the accumulation increment is u + u³/3 when u < 0 and 5u + u³/3 when u > 0. Its left quotient is 1 + h²/3 and its right quotient is 5 + h²/3; they tend to 1 and 5, so A_j′(1) does not exist. Nevertheless S_j(h) = 3 + h²/3 tends to 3 = f_j(1). The rate f_c is continuous and A_c′(1) = 2 = f_c(1). The rate f_p is discontinuous but A_p′(1) = 2 ≠ -5 = f_p(1). The rate f_j is discontinuous and its accumulation has no ordinary derivative at 1. A symmetric average blends the unequal sides and cannot replace the two-sided difference-quotient test. Changing the assigned value at the jump cannot change either one-sided accumulation slope.",
+    "criteria": [
+      "Justifies that bounded changes at a single point have zero Riemann integral and obtains the same accumulation increments for c and p.",
+      "Computes the one-sided quotients as 2 + h²/3 for c and p, and 1 + h²/3 and 5 + h²/3 for j.",
+      "Correctly separates rate continuity, accumulation derivative existence and equality to the assigned rate value: continuous/equal for c, discontinuous/differentiable/unequal for p, and discontinuous/nondifferentiable for j.",
+      "Computes S_c = S_p = 2 + h²/3 and S_j = 3 + h²/3 and explains why the last limit equals the jump's assigned value without proving an ordinary derivative."
+    ],
+    "boundary": "The point 1 is interior to [0, 2]. The symmetric window statistic is a different limit from the ordinary derivative. One-point reassignment changes neither oriented integrals nor the unequal one-sided slopes of a genuine jump.",
+    "changedFrom": "Compared with printed Problem 11.35 and the Chapter 11 learner row in docs/REVIEW-PACKET.md, this moves the break to 1, uses quadratic branch shapes, and adds a symmetric-window test whose limit exactly matches the assigned jump value despite derivative failure. Preparation identity is 11.35."
+  },
+  {
+    "id": "U12-FTC-B",
+    "family": "ftc-point-behavior",
+    "variant": "B",
+    "title": "Different histories, the same moving window",
+    "preparation": [
+      {"chapterId": "11", "lesson": 2, "problems": [35]},
+      {"chapterId": "11", "lesson": 4, "problems": [36]}
+    ],
+    "prompt": "On [-1, 1], let f_c(t) = 1 + t², and let f_p equal f_c except that f_p(0) = -3. Let f_j(t) = t² - 2 for t < 0, f_j(t) = t² + 4 for t > 0, and f_j(0) = 1. Define A_i(x) = ∫ from 0 to x of f_i(t) dt and B_i(x) = ∫ from -x to x of f_i(t) dt for -1 ≤ x ≤ 1. At zero, classify each rate's continuity and each A_i's derivative and its equality to the assigned rate. Then find B_i for both signs of x and decide all three B_i′(0). A reader proposes B_i′(0) = 2f_i(0) without checking any hypotheses. For which cases does that numerical equality hold, and which conclusions are actually justified by that proposed reasoning?",
+    "hypotheses": "All quantities are dimensionless. Use Riemann integrals, including reversed limits when x < 0. Each rate is bounded and piecewise polynomial on [-1, 1], and zero is an interior point of the x-domain.",
+    "solution": "A change at one point contributes zero Riemann area, since a change of bounded height C can be confined to partition intervals of arbitrarily small total width η, giving an absolute integral bound Cη. Consequently A_c(x) = A_p(x) = x + x³/3, whereas A_j(x) = -2x + x³/3 for x < 0 and 4x + x³/3 for x > 0, with A_j(0) = 0. Thus A_c′(0) = A_p′(0) = 1. Only c is continuous at zero; its derivative equals f_c(0) = 1, while A_p′(0) = 1 differs from f_p(0) = -3. The left and right quotients of A_j tend to -2 and 4, so A_j′(0) does not exist. For every x, orientation and interval additivity give B_i(x) = A_i(x) - A_i(-x). Substitution in the piecewise formulas shows, for all three rates and both signs of x, B_i(x) = 2x + 2x³/3. Hence all three B_i′(0) equal 2. The proposed value 2f_i(0) is 2 for c, -6 for p and 2 for j. The equality is correct for c, false for p, and coincidentally correct for j. Continuity of c justifies differentiating its moving-endpoint integral by the usual rule. That argument's continuity requirement fails for p and j at the endpoints attained when x = 0. For j the direct cancellation of the two moving boundaries proves the derivative; using the value assigned at the jump does not prove it. In particular a moving window can be differentiable even when the one-sided accumulation from zero has a corner.",
+    "criteria": [
+      "Uses one-point invariance and oriented integration to obtain A_c = A_p = x + x³/3 and the two correct branches of A_j.",
+      "Classifies c as continuous with accumulation derivative 1 equal to its value, p as discontinuous with derivative 1 unequal to -3, and j as discontinuous with unequal accumulation slopes -2 and 4.",
+      "Uses B_i(x) = A_i(x) - A_i(-x), handles x < 0 correctly, and derives the common formula 2x + 2x³/3 and derivative 2.",
+      "Distinguishes the valid continuous-case endpoint argument, the false point-changed numerical prediction, and the jump case's true numerical equality proved by direct cancellation despite failed continuity hypotheses."
+    ],
+    "boundary": "When x < 0 the integration limits reverse, so B_i is not an unsigned area. Equality with a formal formula in the jump case does not restore its missing hypothesis. The common window derivative does not imply existence of A_j′(0).",
+    "changedFrom": "Compared with printed Problems 11.35–36, this uses two moving boundaries with nonzero speeds and cancellation of unequal jump contributions. It does not flatten a single endpoint map by x² or x³. All three window functions coincide although their accumulation histories and point values differ. Preparation identities are 11.35 and 11.36."
+  },
+  {
+    "id": "U12-TAY-A",
+    "family": "taylor-error",
+    "variant": "A",
+    "title": "A loose certificate and an exact remainder",
+    "preparation": [
+      {"chapterId": "17", "lesson": 4, "problems": [36, 37]}
+    ],
+    "prompt": "For real x put u = x - 2 and f(x) = 1 - 2u + 3u² + u⁴. Use Q(x) = 1 - 2u + 3u² on I = [3/2, 5/2]. First verify which derivatives Q matches at 2. A report uses a uniform bound on |f‴| over I to assess the strict target |f(x) - Q(x)| < 1/10 for every x in I. Find the smallest such derivative bound and calculate that report's resulting error bound. State exactly what that certificate decides. Then determine the actual greatest absolute error on I and decide the target itself. A second report claims zero error because f‴(2) = 0. Assess that claim.",
+    "hypotheses": "f is the stated polynomial on R, so all needed derivatives are continuous on a neighborhood of I. The center 2 belongs to I. All inputs and coefficients are exact dimensionless real numbers; the task concerns mathematical approximation error.",
+    "solution": "At u = 0, f(2) = 1, f′(2) = -2 and f″(2) = 6, which are also Q's value and first two derivatives. Thus Q is the degree-two Taylor polynomial at 2. Differentiation gives f‴(x) = 24u. Since |u| ≤ 1/2 on I, the smallest uniform upper bound is M = 12, attained at both endpoints in absolute value. The degree-two remainder certificate gives |f(x) - Q(x)| ≤ M(1/2)³/3! = 12/48 = 1/4 throughout I. Since 1/4 > 1/10, this certificate alone does not prove the requested tolerance, and it does not prove a violation. Exact subtraction gives f(x) - Q(x) = u⁴. Therefore the actual maximum absolute error is (1/2)⁴ = 1/16, attained at x = 3/2 and x = 5/2. Since 1/16 < 1/10, the strict target holds for every x in I. The center value f‴(2) = 0 is not a uniform bound on I; for example |f‴(5/2)| = 12. It cannot certify zero error, and the explicit remainder is positive away from 2. One could also exploit the vanishing cubic coefficient and f⁽⁴⁾ = 24 to obtain the sharper bound, but that is a different derivative-order argument.",
+    "criteria": [
+      "Checks the matched center data f(2) = 1, f′(2) = -2 and f″(2) = 6 and identifies Q as the degree-two Taylor polynomial.",
+      "Derives f‴ = 24(x - 2), the smallest full-interval bound M = 12, and the valid uniform degree-two certificate 1/4.",
+      "Calls that certificate inconclusive for tolerance 1/10 rather than treating its excess as an actual-error witness.",
+      "Finds the exact remainder (x - 2)⁴ and maximum 1/16, proves the strict target, and rejects the center-only value 0 as a uniform derivative bound."
+    ],
+    "boundary": "The failed degree-two bound does not imply the approximation fails. Here an exact error formula proves success on the entire closed interval, including its endpoints. No sampled decimal errors or minimal-degree claim is needed.",
+    "changedFrom": "Compared with printed Problems 17.36–37 and the Chapter 17 learner row in docs/REVIEW-PACKET.md, this uses an exact shifted quartic whose cubic Taylor coefficient vanishes. The valid loose certificate is inconclusive but the actual target succeeds, rather than the rational task's actual endpoint failure. Preparation identities are 17.36 and 17.37."
+  },
+  {
+    "id": "U12-TAY-B",
+    "family": "taylor-error",
+    "variant": "B",
+    "title": "An uncertain center value survives truncation control",
+    "preparation": [
+      {"chapterId": "17", "lesson": 4, "problems": [36, 37]}
+    ],
+    "prompt": "An unknown real function f has three continuous derivatives on an open interval containing J = [1, 3/2]. The supplied data are |f(1) - 1| ≤ 1/20, f′(1) = 2, f″(1) = -2, and |f‴(t)| ≤ 3 for every t in J. The published quadratic is Q(x) = 1 + 2(x - 1) - (x - 1)². Do these data guarantee |f(x) - Q(x)| < 1/10 for every x in J? Derive a uniform error bound that includes every stated source of discrepancy. Decide whether the data determine the actual accuracy by giving explicit admissible functions that meet and miss the target. Show whether your uniform bound is sharp over the admitted function class. Finally, suppose an exact additional observation gives f(1) = 1. What can now be guaranteed?",
+    "hypotheses": "The derivative bound applies on the entire interval connecting the center 1 to each requested x. Only the center value has the stated uncertainty; the first and second center derivatives and the inputs are exact. There is no probability model and no numerical-rounding model. All quantities are dimensionless.",
+    "solution": "Set u = x - 1, so 0 ≤ u ≤ 1/2. The true quadratic Taylor polynomial is T₂(x) = f(1) + 2u - u²; Q need not be that polynomial because its constant coefficient uses the nominal value 1. The remainder theorem gives |f(x) - T₂(x)| ≤ 3u³/6 = u³/2. Therefore |f(x) - Q(x)| ≤ |f(1) - 1| + u³/2 ≤ 1/20 + 1/16 = 9/80 uniformly on J. This exceeds 1/10 = 8/80, so the bound does not certify the target. The admitted functions show that the supplied data do not determine whether the unknown f meets it: f₀(x) = Q(x) satisfies every datum and has zero error, while f₊(x) = Q(x) + 1/20 + (x - 1)³/2 has f₊(1) = 1 + 1/20, center derivatives 2 and -2, and f₊‴ = 3. At x = 3/2 its error is 1/20 + 1/16 = 9/80 > 1/10, so a guarantee for every admitted function is false. The counterpart f₋(x) = Q(x) - 1/20 - (x - 1)³/2 has f₋‴ = -3 and attains signed error -9/80 there. Thus the uniform bound 9/80 is sharp over this class, not merely loose. If the additional exact datum f(1) = 1 is supplied, Q becomes the actual quadratic Taylor polynomial. The remaining bound is then 1/16 < 1/10 throughout J, which proves the strict target for every function obeying the updated hypotheses.",
+    "criteria": [
+      "Separates Q from the true Taylor polynomial T₂ = f(1) + 2u - u² and includes the center-value uncertainty 1/20 exactly once.",
+      "Uses the full-interval third-derivative bound to derive |f - T₂| ≤ u³/2 and the uniform total bound 9/80.",
+      "Constructs and checks an admissible function with zero error and an admissible cubic with endpoint error 9/80 > 1/10; uses the attaining examples to establish sharpness and lack of a universal target guarantee.",
+      "Recomputes the conclusion under the exact datum f(1) = 1, obtaining the strict uniform certificate 1/16 < 1/10."
+    ],
+    "boundary": "A bound for truncation relative to the true Taylor polynomial does not remove uncertainty in its center coefficient. The original data allow both success and failure for the unknown function. The counterexample refutes a guarantee over the class; it does not assert that every admitted function fails.",
+    "changedFrom": "Compared with printed Problems 17.36–37, this changes the task from a known elementary function to a precisely bounded unknown function class. The nominal quadratic has an uncertain constant, and explicit admissible cubics attain the sharp combined error. It uses the coefficient-uncertainty distinction in chapters/17.json Lesson 3 as well as Lesson 4's remainder logic. Preparation identities are 17.36 and 17.37."
+  }
+]

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">Proof assistant checking and trust map</title>
+  <desc id="desc">Authoring tools and rechecked proof terms feed a kernel. The logical trust boundary contains the kernel, type rules, conversion rules, and declared axioms. The execution stack supports the kernel. A separate specification bridge connects the formal statement and definitions to the intended theorem.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .h { font: 700 23px system-ui, sans-serif; fill: #0f172a; }
+      .t { font: 600 18px system-ui, sans-serif; fill: #0f172a; }
+      .s { font: 15px system-ui, sans-serif; fill: #334155; }
+      .box { stroke-width: 2.5; rx: 14; }
+      .arrow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="960" height="640" fill="#f8fafc"/>
+  <text x="480" y="38" text-anchor="middle" class="h">What checking trusts—and what it still cannot decide</text>
+
+  <rect x="40" y="82" width="235" height="160" class="box" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="158" y="116" text-anchor="middle" class="t">Rechecked inputs</text>
+  <text x="158" y="151" text-anchor="middle" class="s">elaborator output</text>
+  <text x="158" y="178" text-anchor="middle" class="s">tactic-produced terms</text>
+  <text x="158" y="205" text-anchor="middle" class="s">library theorem bodies</text>
+
+  <rect x="350" y="72" width="300" height="220" class="box" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="500" y="108" text-anchor="middle" class="t">Logical trust boundary</text>
+  <rect x="385" y="130" width="230" height="62" class="box" fill="#ffffff" stroke="#15803d"/>
+  <text x="500" y="168" text-anchor="middle" class="t">Kernel checker</text>
+  <text x="500" y="224" text-anchor="middle" class="s">typing and conversion rules</text>
+  <text x="500" y="253" text-anchor="middle" class="s">declared axioms and opaque declarations</text>
+
+  <rect x="725" y="82" width="195" height="160" class="box" fill="#fef3c7" stroke="#d97706"/>
+  <text x="823" y="116" text-anchor="middle" class="t">Formal result</text>
+  <text x="823" y="153" text-anchor="middle" class="s">checked judgment</text>
+  <text x="823" y="180" text-anchor="middle" class="s">relative to rules</text>
+  <text x="823" y="207" text-anchor="middle" class="s">and declared axioms</text>
+
+  <path d="M275 162 H350" class="arrow"/>
+  <path d="M650 162 H725" class="arrow"/>
+
+  <rect x="350" y="340" width="300" height="145" class="box" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="500" y="377" text-anchor="middle" class="t">Execution trust</text>
+  <text x="500" y="412" text-anchor="middle" class="s">compiler and runtime</text>
+  <text x="500" y="439" text-anchor="middle" class="s">operating system and hardware</text>
+  <path d="M500 340 V292" class="arrow"/>
+
+  <rect x="40" y="340" width="235" height="145" class="box" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="158" y="377" text-anchor="middle" class="t">Intended theorem</text>
+  <text x="158" y="412" text-anchor="middle" class="s">informal problem</text>
+  <text x="158" y="439" text-anchor="middle" class="s">mathematical meaning</text>
+
+  <rect x="725" y="340" width="195" height="145" class="box" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="823" y="377" text-anchor="middle" class="t">Specification</text>
+  <text x="823" y="412" text-anchor="middle" class="s">formal statement</text>
+  <text x="823" y="439" text-anchor="middle" class="s">and definitions</text>
+
+  <path d="M158 485 V520 H823 V485" stroke="#dc2626" stroke-width="3" fill="none" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="382" y="499" width="236" height="42" rx="10" fill="#fff7f7" stroke="#dc2626"/>
+  <text x="500" y="526" text-anchor="middle" class="s">human specification audit</text>
+
+  <text x="480" y="595" text-anchor="middle" class="s">Kernel acceptance checks the formal judgment; it does not establish that the specification captures the intended theorem.</text>
+</svg>

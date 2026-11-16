@@ -1,0 +1,557 @@
+{
+  "id": "18",
+  "title": "Parametric curves and polar calculus",
+  "subtitle": "How can we measure a curve when one coordinate is not a function of the other?",
+  "prerequisites": [
+    "Chapters 2 and 6: radians, polar coordinates, and the chain rule.",
+    "Chapters 10–12: definite integrals and substitution.",
+    "Chapters 13–14: arc length and numerical integration."
+  ],
+  "objectives": [
+    "Compute parametric first and second derivatives with their validity conditions.",
+    "Distinguish slope, velocity, speed, and distance traveled.",
+    "Derive and apply parametric and polar arc-length formulas.",
+    "Compute polar areas using bounds that describe the intended region once.",
+    "Find intersections while accounting for negative radii and repeated tracing.",
+    "Derive and classify conics from a focus, directrix, and positive eccentricity.",
+    "Recover foci, directrices, asymptotes and complete paths from translated standard forms.",
+    "Trace both polar hyperbola branches with valid radius domains and excluded directions.",
+    "Use measured distance ratios while distinguishing finite evidence from algebraic proof."
+  ],
+  "sections": [
+    {
+      "title": "1. A curve is a path with a parameter",
+      "paragraphs": [
+        "A graph $y=f(x)$ associates one height with each horizontal coordinate. A circle cannot be represented by one such graph: most horizontal positions have two heights. A parametrization instead gives both coordinates from a third variable: $x=x(t)$, $y=y(t)$, $a\\le t\\le b$. As $t$ increases, the point follows a path with a specified direction. The interval belongs to the description; changing it can remove part of the path or cause the same part to be traversed several times.",
+        "For example, $x(t)=R\\cos t$ and $y(t)=R\\sin t$, with $R>0$ and $0\\le t\\le2\\pi$, trace a circle counterclockwise once. On $0\\le t\\le\\pi$ they trace only its upper semicircle. On $0\\le t\\le4\\pi$ they travel around twice. Eliminating $t$ gives $x^2+y^2=R^2$ in every case, but this equation loses direction, starting point, and number of traversals. It also cannot tell whether the parameter interval covers the entire circle.",
+        "If $t$ represents time in seconds and $x$ and $y$ are measured in meters, derivatives $x^{\\prime}(t)$ and $y^{\\prime}(t)$ are velocity components in meters per second. If $t$ is an angle or an abstract label, the derivatives describe change per unit of that parameter. This distinction matters: the same geometric circle can be followed slowly, quickly, or with varying speed. Geometry alone does not specify motion.",
+        "A point where $(x^{\\prime},y^{\\prime})\\ne(0,0)$ is called regular. Regularity guarantees a nonzero instantaneous direction, although the tangent may be vertical. A zero velocity requires separate examination; it might represent a cusp, an ordinary smooth point described by a poor parameter, or a pause. For $x=t^3$, $y=0$, both derivatives vanish at $t=0$, yet the image is simply a horizontal line. Do not infer a geometric singularity from zero derivatives alone.",
+        "A parameterization is a map from an interval into the plane. Its image is a set of points, while the map itself remembers order, direction, and repetitions. The maps $(\\cos t,\\sin t)$ and $(\\cos 2t,\\sin 2t)$ on $0\\le t\\le2\\pi$ have the same image, the unit circle, but the second travels twice. The maps $(\\cos t,\\sin t)$ and $(\\cos t,-\\sin t)$ traverse the same circle in opposite directions. These differences matter for velocity, oriented line integrals, and traveled length. Always give the interval with the coordinate formulas.",
+        "Eliminating a parameter can help identify geometry but can introduce extra points or lose restrictions. For $x=t^2$, $y=t$ with $0\\le t\\le1$, elimination gives $x=y^2$, yet that equation includes the branch with negative $y$ unless the original restriction $0\\le y\\le1$ is retained. Conversely, a closed curve may require several $y$-values for one $x$, making an explicit $y=f(x)$ representation awkward. Parameterization is not merely an alternative notation; it is often the more complete description of a moving point or a multi-branch curve.",
+        "Regularity depends on the chosen parameter. The path $(t^3,0)$ has zero derivative at $t=0$ yet its image is a straight line; reparameterizing by $s=t^3$ gives $(s,0)$ with nonzero derivative. At a genuine cusp such as $(t^2,t^3)$, the image has two branches meeting at the origin and cannot be repaired into one smooth regular arc through that point by a simple monotone parameter change. Looking at the image, limiting secants, and nearby tangent directions is safer than declaring every zero-velocity point a cusp.",
+        "A change of parameter must also transform the interval. If $t=2s$, then $x=\\cos t$, $y=\\sin t$ over $0\\le t\\le2\\pi$ becomes $x=\\cos(2s)$, $y=\\sin(2s)$ over $0\\le s\\le\\pi$ for one full lap. Keeping $0\\le s\\le2\\pi$ instead doubles the traversal. If the change reverses direction, endpoint order changes accordingly. The chain rule scales derivative components, but physical speed only has meaning when the parameter actually represents time. These checks prevent a geometric reparameterization from being mistaken for a new physical motion.",
+        "A path can be retraced without changing its image. Suppose a parameter first runs around a circle counterclockwise and then returns clockwise. The set of occupied points is still one circle, but traveled length counts both trips and net displacement is zero. An oriented line integral may cancel between the two trips, while an ordinary length integral adds their positive speeds. The correct quantity therefore depends on whether the problem asks about geometry, motion, or orientation. Stating the parameter interval and direction at the start helps decide which mathematical operation matches the question. This remains true even when the plotted image looks exactly the same."
+      ]
+    },
+    {
+      "title": "2. Slopes and second derivatives",
+      "paragraphs": [
+        "Suppose $x$ and $y$ are continuously differentiable near $t_0$ and $x^{\\prime}(t_0)\\ne0$. Locally, $x$ can serve as a coordinate along the curve. The chain rule $y^{\\prime}(t)=(dy/dx)x^{\\prime}(t)$ then gives $dy/dx=y^{\\prime}(t)/x^{\\prime}(t)$. This slope compares two simultaneous changes. It is not the speed of the point: a horizontal path has zero slope even when a particle travels along it rapidly.",
+        "If $x$ and $y$ have continuous second derivatives and $x^{\\prime}\\ne0$, differentiate the slope with respect to $t$ and divide once more by $x^{\\prime}$. Thus $\\dfrac{d^2y}{dx^2}=\\dfrac{x^{\\prime}y^{\\prime\\prime}-y^{\\prime}x^{\\prime\\prime}}{(x^{\\prime})^3}$. The extra division converts change per unit parameter into change per unit horizontal coordinate. Merely computing $y^{\\prime\\prime}/x^{\\prime\\prime}$ does not make this conversion and generally gives the wrong result. These derivatives describe a local graph branch, which matters when several branches pass through the same coordinate.",
+        "When $x^{\\prime}=0$ but $y^{\\prime}\\ne0$, the tangent is vertical. One can describe $x$ locally as a function of $y$ and use $dx/dy=x^{\\prime}/y^{\\prime}$ instead. When $y^{\\prime}=0$ but $x^{\\prime}\\ne0$, the tangent is horizontal. When both vanish, the quotient is inconclusive: inspect the first nonzero changes in $x$ and $y$ or examine limiting secant directions. At interval endpoints, only the direction supported by the available one-sided parameter values is relevant.",
+        "For $x=t^2$ and $y=t^3$, the ordinary slope away from zero is $3t/2$. Its limit is zero from both sides, but the curve has a cusp at the origin: $x$ is nonnegative and the two branches meet there. A horizontal limiting tangent does not imply that the whole curve near that point is the graph of one differentiable function of $x$. The upper and lower branches separately satisfy $y=\\pm x^{3/2}$.",
+        "Derive the parametric slope from a tangent vector. At a regular point, a small parameter change produces displacement approximately $(x^{\\prime}(t)\\Delta t,y^{\\prime}(t)\\Delta t)$. When $x^{\\prime}\\ne0$, the ratio of vertical to horizontal displacement approaches $y^{\\prime}/x^{\\prime}$. For $x=t$, $y=t^2$, the slope is $2t$, matching ordinary differentiation after eliminating $t$. For $x=t^2$, $y=t$, the slope is $1/(2t)$ away from zero and grows without bound in magnitude as $t\\to0$, indicating a vertical tangent. The same image relation $x=y^2$ confirms that local orientation.",
+        "Second derivatives require differentiating the slope with respect to $x$, not with respect to $t$ alone. Write $D_x=(1/x^{\\prime})D_t$ where $x^{\\prime}\\ne0$. Then $D_x(y^{\\prime}/x^{\\prime})=(x^{\\prime}y^{\\prime\\prime}-y^{\\prime}x^{\\prime\\prime})/(x^{\\prime})^3$. For $x=t$, $y=t^3$, this gives $6t$, the ordinary second derivative of $x^3$. For $x=t^2$, $y=t^3$ at $t\\ne0$, the first slope is $3t/2$ and the second derivative is $(3/2)/(2t)=3/(4t)$, which differs on the two branches and becomes unbounded near the cusp. State where $x^{\\prime}$ is nonzero before using either formula.",
+        "Horizontal and vertical tangents can be checked from derivative components at regular points. If $y^{\\prime}=0$ and $x^{\\prime}\\ne0$, the tangent is horizontal; if $x^{\\prime}=0$ and $y^{\\prime}\\ne0$, it is vertical. On the circle $(R\\cos t,R\\sin t)$, at $t=0$ the tangent is vertical because $x^{\\prime}=0$, $y^{\\prime}=R$; at $t=\\pi/2$ it is horizontal because $x^{\\prime}=-R$, $y^{\\prime}=0$. A graph may show this, but the derivative test supplies exact locations. When both derivatives vanish, neither conclusion follows from the component test alone.",
+        "A parametric path may cross itself, so a coordinate point may have several tangent directions corresponding to different parameter values. If $(x(t_1),y(t_1))=(x(t_2),y(t_2))$ with $t_1\\ne t_2$, evaluate derivatives at both times. There is no single $dy/dx$ for the entire image at that crossing unless the branch tangents happen to agree. This is another reason to retain $t$ in derivative formulas rather than eliminating it and pretending the image is one graph. The local branch, not merely the coordinate pair, determines the slope being requested.",
+        "The derivative ratio $y^{\\prime}/x^{\\prime}$ is unchanged by a smooth monotone reparameterization where the new parameter speed is nonzero: both numerator and denominator gain the same chain factor. Thus slope is a geometric property of the regular branch, while $x^{\\prime}$ and $y^{\\prime}$ separately depend on timing. At a zero of the reparameterization derivative, the new coordinate derivatives may both vanish even though the branch has a clear tangent, so the quotient becomes $0/0$ there. Return to the original regular parameter or use limiting secants. This explains how a poor clock can create an apparent derivative failure without changing the curve."
+      ],
+      "formula": "dy/dx = y′/x′;  d²y/dx² = (1/x′) d(y′/x′)/dt, provided x′ ≠ 0.",
+      "formulaTex": "\\begin{gathered}\\frac{dy}{dx}=\\frac{y^{\\prime}(t)}{x^{\\prime}(t)},\\\\ \\frac{d^2y}{dx^2}=\\frac1{x^{\\prime}(t)}\\frac{d}{dt}\\left(\\frac{y^{\\prime}(t)}{x^{\\prime}(t)}\\right),\\qquad x^{\\prime}(t)\\ne0.\\end{gathered}"
+    },
+    {
+      "title": "3. Speed and arc length",
+      "paragraphs": [
+        "Over a short parameter increment $\\Delta t$, the displacement is approximately $(x^{\\prime}\\Delta t,y^{\\prime}\\Delta t)$. The Pythagorean theorem gives its magnitude as $\\sqrt{(x^{\\prime})^2+(y^{\\prime})^2}|\\Delta t|$. When $t$ is time, the factor $\\sqrt{(x^{\\prime})^2+(y^{\\prime})^2}$ is speed. It is always nonnegative; reversing direction changes velocity but does not produce negative distance.",
+        "For a continuously differentiable path on a closed finite interval, its traveled length is $L=\\int_a^b\\sqrt{x^{\\prime}(t)^2+y^{\\prime}(t)^2}\\,dt$. The same formula applies to a piecewise continuously differentiable path by adding its pieces. Proof sketch: inscribed polygonal paths approximate the curve, each short chord approximates the derivative magnitude times its parameter width, and continuity controls the accumulated error as the partition is refined. This explains why the integral measures length; a numerical polygon by itself is not a proof. For every partition, the vector integral triangle inequality bounds each chord by the integral of $|\\mathbf r^{\\prime}|$ over that piece. Its chord sum is therefore at most $\\int_a^b|\\mathbf r^{\\prime}(t)|\\,dt$. The fine-mesh chord sums approach that integral, so the supremum of all polygonal chord sums equals it.",
+        "Length counts every traversal. For the radius-$R$ circle over $0\\le t\\le4\\pi$, speed is $R$ and length is $4\\pi R$, although the geometric boundary has circumference $2\\pi R$. If an application asks for wire needed to form the boundary once, repeated tracing must be removed. If it asks for distance traveled by a particle, the repetitions belong in the answer. A smooth monotone change of parameter preserves traveled length through substitution, provided the new bounds describe the same traversal.",
+        "Displacement is different again: a complete circuit has zero displacement and positive length. For a time interval of duration $T$, average speed is $L/T$, whereas average velocity is the displacement vector divided by $T$. If coordinates have length units and the parameter has time units, integrating speed restores length units. In numerical work, a polygonal chord sum underestimates the length of a circular arc; refining the parameter grid improves that estimate without turning it into an exact result.",
+        "Length is invariant under a smooth monotone reparameterization that describes the same traversal. If $t=g(s)$ increases from $a$ to $b$, then $dx/ds=x^{\\prime}(g(s))g^{\\prime}(s)$ and similarly for $y$. The speed in $s$ is $\\sqrt{x^{\\prime}(g(s))^2+y^{\\prime}(g(s))^2}\\,|g^{\\prime}(s)|$; substitution converts its integral back to the $t$-length. The absolute value matters if $g$ decreases, because traveled distance cannot become negative when direction reverses. This invariance belongs to geometric path length, while velocity components and speed per unit parameter do change when the timing changes.",
+        "For $x=3\\cos t$, $y=3\\sin t$ on $0\\le t\\le\\pi$, speed is $\\sqrt{9\\sin^2t+9\\cos^2t}=3$, so length is $3\\pi$, half the circumference. Extending to $3\\pi$ gives $9\\pi$ of travel, one and a half laps, while displacement from $t=0$ to $t=3\\pi$ has magnitude $6$. These quantities answer different questions. A closed or nearly closed image does not imply small travel. Label the parameter interval and distinguish the vector from start to end from the integral of speed.",
+        "For a graph $y=f(x)$, choose parameter $t=x$ to recover the Cartesian formula: $x^{\\prime}=1$ and $y^{\\prime}=f^{\\prime}(x)$, so $L=\\int\\sqrt{1+f^{\\prime}(x)^2}\\,dx$. Thus the parametric formula generalizes the earlier arc-length result rather than replacing it. If a graph has a vertical tangent, the $x$-based derivative may become unbounded while a smooth parameterization can still have finite speed; this can make the parametric integral easier to analyze. A different parameter does not change the geometric length when it traces the same path once.",
+        "A chord sum underestimates the length of a circular arc because each straight chord is shorter than the corresponding curved portion. Refinement improves the estimate, but showing convergence to the speed integral needs regularity of the path. For a polygonal path, the speed integral over each straight piece reproduces its Euclidean segment length exactly. These two benchmark cases check a numerical arc-length routine. If the routine reports less than the endpoint distance for any path, it has violated a basic geometric lower bound.",
+        "For a piecewise smooth path, length adds across the breakpoints even when the tangent direction jumps. Split the parameter interval at each corner and integrate speed on the smooth pieces. The path need not be the graph of any one Cartesian function. A triangle traced along three straight sides is the simplest case: each speed integral equals a side length, and their sum is its perimeter. If a path retraces one side, that side contributes again to distance traveled. This additivity is the path analogue of splitting an ordinary definite integral at a change in formula."
+      ],
+      "formula": "speed = √(x′² + y′²);  L = ∫ₐᵇ √(x′² + y′²) dt.",
+      "formulaTex": "\\begin{gathered}\\text{speed}(t)=\\sqrt{x^{\\prime}(t)^2+y^{\\prime}(t)^2},\\\\ L=\\int_a^b\\sqrt{x^{\\prime}(t)^2+y^{\\prime}(t)^2}\\,dt\\quad (x,y\\in C^1([a,b])).\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Arc length emerges from polygonal lengths",
+          "statement": "For a continuously differentiable planar path $\\mathbf r(t)$ on $[a,b]$, its traced length is the integral of its speed, counting repeated traversals.",
+          "equationTex": "L=\\int_a^b|\\mathbf r^{\\prime}(t)|\\,dt=\\int_a^b\\sqrt{x^{\\prime}(t)^2+y^{\\prime}(t)^2}\\,dt",
+          "proof": [
+            "Partition the parameter interval into short pieces. The straight chord on one piece has vector $\\mathbf r(t_i)-\\mathbf r(t_{i-1})=\\int_{t_{i-1}}^{t_i}\\mathbf r^{\\prime}(t)\\,dt$. When $\\mathbf r^{\\prime}$ changes little across that piece, the chord is close to $\\mathbf r^{\\prime}(\\tau_i)\\Delta t_i$ for any sample time $\\tau_i$ there. The error is at most the largest variation of velocity on the piece times $\\Delta t_i$. Continuity of velocity on a compact interval makes these variations uniformly small as the mesh shrinks.",
+            "Summing chord lengths and using $||u|-|v||\\le|u-v|$ shows that polygonal length approaches the Riemann sum $\\sum_i|\\mathbf r^{\\prime}(\\tau_i)|\\Delta t_i$, hence the speed integral. For every partition, the vector integral triangle inequality bounds each chord by the speed integral over its own interval. Thus every chord sum is at most $\\int_a^b|\\mathbf r^{\\prime}(t)|\\,dt$, while fine-mesh chord sums approach that value. Their supremum is therefore the speed integral, as the length definition requires. The argument also explains why the parameter itself need not measure distance: fast and slow parameterizations contribute different $dt$ intervals but the same geometric length when they trace the same arc once in the same direction.",
+            "If a path goes around a circle twice, this integral counts two laps, not the length of the image set counted once. If the path pauses, speed is zero during the pause and no length is added. State whether a problem asks for traced distance or geometric image length before evaluating the formula."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. Polar curves and swept area",
+      "paragraphs": [
+        "A polar description $r=r(\\theta)$ becomes a parametrization through $x=r(\\theta)\\cos\\theta$ and $y=r(\\theta)\\sin\\theta$. Angles are in radians. A negative radius places the point in the direction opposite $\\theta$: $(r,\\theta)$ and $(-r,\\theta+\\pi)$ represent the same point. At $r=0$ every angle represents the origin. These identifications make polar notation convenient, but they make intersection and tracing questions subtler than simply comparing two radii.",
+        "A thin circular sector of radius $r$ and angular width $\\Delta\\theta$ has area approximately $r^2\\Delta\\theta/2$. Summing sectors suggests $A=\\frac12\\int r(\\theta)^2\\,d\\theta$. For an ordinary radial region with continuous $r\\ge0$, increasing angular bounds spanning at most one revolution, and nonoverlapping sector interiors, this integral gives its geometric area. The requirement that the sectors describe the desired region once is essential; the integral otherwise counts swept contributions with multiplicity.",
+        "Negative radii do not make the squared integrand negative, but their rays must be interpreted correctly. Split at zeros when necessary and determine which loop each interval traces. For a simple closed polar loop traversed once with increasing $\\theta$, the same area formula follows from $\\frac12\\int(xy^{\\prime}-yx^{\\prime})\\,d\\theta$, since $xy^{\\prime}-yx^{\\prime}=r^2$. Reversing the bounds reverses this signed integral; geometric area remains positive. With overlapping or repeated loops, the signed boundary integral is not automatically the area of the union.",
+        "For a region between two curves on the same rays, with $0\\le r_{\\mathrm{inner}}(\\theta)\\le r_{\\mathrm{outer}}(\\theta)$, subtract sector areas: $A=\\frac12\\int\\bigl(r_{\\mathrm{outer}}(\\theta)^2-r_{\\mathrm{inner}}(\\theta)^2\\bigr)\\,d\\theta$. Solve for angular intersections and determine the ordering on every subinterval before integrating. Subtracting whole enclosed areas is valid only when the smaller region is actually contained in the larger. A quick sketch, a few point evaluations, and a statement of the bounds are part of the calculation.",
+        "The polar area factor one half follows from a sector. A full disk of radius $r$ has area $\\pi r^2$ and angle $2\\pi$, so a sector of angle $\\Delta\\theta$ has area about $(\\Delta\\theta/2\\pi)\\pi r^2=r^2\\Delta\\theta/2$. For a varying nonnegative radius, thin sectors use the local $r(\\theta)$, leading to $\\frac12\\int r(\\theta)^2\\,d\\theta$. Squaring the radius is required by area units: $r\\,d\\theta$ would have length units. The derivation assumes that the angular sectors cover the intended region without repeated overlap. A formula can be algebraically correct and geometrically misapplied if the tracing interval is wrong.",
+        "For the cardioid $r=1+\\cos\\theta$, the radius is nonnegative on $0\\le\\theta\\le2\\pi$ and vanishes only at $\\theta=\\pi$. Its total area is $\\frac12\\int_0^{2\\pi}(1+\\cos\\theta)^2\\,d\\theta$. Expand the square and use $\\int_0^{2\\pi}\\cos\\theta\\,d\\theta=0$ and $\\int_0^{2\\pi}\\cos^2\\theta\\,d\\theta=\\pi$ over a full turn to get $\\frac12(2\\pi+\\pi)=3\\pi/2$. The curve touches the origin at a cusp but the radial sectors still form the intended region once. This example links algebraic integration with a visible swept shape.",
+        "A signed polar radius can trace a point on a ray different from the displayed $\\theta$. The pair $(-2,0)$ represents Cartesian point $(-2,0)$, the same as $(2,\\pi)$. A curve that crosses $r=0$ may change which angular sector its parameter labels. To compute geometric area, identify each loop and choose bounds tracing it once; then use nonnegative radial distances or a justified oriented boundary formula. Integrating $r^2$ over an arbitrary $0$-to-$2\\pi$ interval can double-count a loop even though every integrand value is nonnegative.",
+        "For an annular sector with inner radius $1$, outer radius $2$, and angle $\\pi/2$, area is $\\frac12\\int_0^{\\pi/2}(4-1)\\,d\\theta=3\\pi/4$. This agrees with one quarter of the difference between full disk areas $4\\pi-\\pi=3\\pi$. The two routes check the factor one half and the angular bounds. If outer and inner polar curves cross, split where their radii exchange order; squaring and subtracting without checking that order can produce a negative integrand for a positive geometric area.",
+        "The sector formula has a signed boundary counterpart. For a smooth closed parametric curve traversed counterclockwise once without self-intersection, $A=\\frac12\\int(xy^{\\prime}-yx^{\\prime})\\,dt$ gives positive enclosed area. Clockwise traversal reverses the sign. Substituting $x=r\\cos\\theta$ and $y=r\\sin\\theta$ yields $xy^{\\prime}-yx^{\\prime}=r^2$, so the polar area formula follows for the standard increasing-angle traversal. With self-intersections, the boundary integral counts oriented regions with multiplicity rather than automatically returning the geometric area of the union. This is why tracing and orientation checks remain necessary even after deriving the compact formula.",
+        "A negative polar radius is a direction reversal, not an impossible distance. The pair $(r,\\theta)$ and $(-r,\\theta+\\pi)$ name the same Cartesian point because both give the same $x=r\\cos\\theta$ and $y=r\\sin\\theta$. Consequently, a polar curve can revisit a point under different parameter values, and a symmetric-looking interval may trace a petal or loop more than once. Before applying $A=\\tfrac12\\int r^2\\,d\\theta$, identify a parameter interval that sweeps the target region exactly once. Squaring $r$ makes each local area contribution nonnegative, but it does not remove double counting from repeated tracing. Test a few boundary angles and zeros of $r$ to decide where a loop begins and ends."
+      ],
+      "formula": "A = (1/2)∫αᵝ r² dθ when the region is swept once; between radial boundaries use (r_outer² − r_inner²)/2.",
+      "formulaTex": "\\begin{aligned}A&=\\frac12\\int_\\alpha^\\beta r(\\theta)^2\\,d\\theta\\quad(r(\\theta)\\ge0),\\\\ A_{\\mathrm{between}}&=\\frac12\\int_\\alpha^\\beta\\bigl(r_{\\mathrm{outer}}(\\theta)^2-r_{\\mathrm{inner}}(\\theta)^2\\bigr)\\,d\\theta,\\\\ &0\\le r_{\\mathrm{inner}}(\\theta)\\le r_{\\mathrm{outer}}(\\theta);\\quad\\text{region swept once.}\\end{aligned}"
+    },
+    {
+      "title": "5. Polar length, intersections, and tracing checks",
+      "paragraphs": [
+        "Differentiate the Cartesian coordinates: $x^{\\prime}=r^{\\prime}\\cos\\theta-r\\sin\\theta$ and $y^{\\prime}=r^{\\prime}\\sin\\theta+r\\cos\\theta$. Squaring and adding cancels the cross terms and uses $\\sin^2\\theta+\\cos^2\\theta=1$. Consequently $(x^{\\prime})^2+(y^{\\prime})^2=(r^{\\prime})^2+r^2$. For a continuously differentiable polar radius on $[\\alpha,\\beta]$, or piecewise such a radius, the traveled length is therefore $\\int_\\alpha^\\beta\\sqrt{r^2+(r^{\\prime})^2}\\,d\\theta$. The formula allows negative radii; it also counts repeated traversal just as any parametric length formula does.",
+        "To find intersections of two polar curves, solving $r_1(\\theta)=r_2(\\theta)$ finds points represented by the same angle and signed radius. It may miss an intersection where one representation differs by $\\pi$ and has the opposite radius. Also test whether each curve passes through the origin, possibly at different angles. More generally, seek parameters $\\theta$ and $\\phi$ for which both Cartesian coordinates agree. Such a search is needed for self-intersections too: two different parameter values may name the same point.",
+        "Consider $r=2a\\cos\\theta$, $a>0$. Multiplying by $r$ gives $x^2+y^2=2ax$, or $(x-a)^2+y^2=a^2$. It is a circle centered at $(a,0)$. Over $-\\pi/2\\le\\theta\\le\\pi/2$, $r$ is nonnegative and the circle is traced once. Over $0\\le\\theta\\le2\\pi$ it is traced twice: the Cartesian coordinates simplify to $x=a(1+\\cos 2\\theta)$, $y=a\\sin 2\\theta$. Their period is $\\pi$, even though the displayed radius has period $2\\pi$.",
+        "This example provides a useful audit. Its polar speed is $\\sqrt{4a^2\\cos^2\\theta+4a^2\\sin^2\\theta}=2a$. An interval of width $\\pi$ gives circumference $2\\pi a$ and area $\\pi a^2$; an interval of width $2\\pi$ doubles both integrals. The image in a plot may look identical in the two cases because the second traversal lies exactly over the first. Printed bounds, endpoint coordinates, and parameter samples expose information that an unannotated picture conceals.",
+        "Polar length can be derived by treating $\\theta$ as a parameter and applying the parametric speed formula. Differentiating $x=r\\cos\\theta$ and $y=r\\sin\\theta$ produces four terms; the mixed terms cancel when squared and added. The result $\\sqrt{r^2+(r^{\\prime})^2}$ has length units when $\\theta$ is dimensionless radians. For a constant $r=R$ over a full $2\\pi$ turn, $r^{\\prime}=0$ and the integral gives $2\\pi R$. Over two turns it gives $4\\pi R$ because length counts both traversals. This benchmark checks any more elaborate polar-length calculation.",
+        "At the origin, polar coordinates are nonunique. If two curves both have $r=0$, they intersect at the origin even if their zero-radius parameters differ. Solving $r_1(\\theta)=r_2(\\theta)$ at one common $\\theta$ may miss that fact. Negative radii add the possibility that $r_1(\\theta)=-r_2(\\theta+\\pi)$ represents the same point. A robust intersection analysis converts candidate parameter pairs to Cartesian coordinates and checks equality there. For simple nonnegative radii on a shared angular interval, the equal-radius equation is often enough away from the origin, but its assumptions should be stated.",
+        "For $r=2a\\cos\\theta$ with $a>0$, the Cartesian path has period $\\pi$ because $x=a(1+\\cos2\\theta)$, $y=a\\sin2\\theta$. On $0\\le\\theta\\le\\pi$ it starts at $(2a,0)$, passes through the origin at $\\pi/2$, and returns to $(2a,0)$, completing one circle. On $0\\le\\theta\\le2\\pi$ it repeats. The geometric circle has radius $a$ and area $\\pi a^2$; the area integral over $0\\le\\theta\\le\\pi$ gives $\\pi a^2$, while using $0\\le\\theta\\le2\\pi$ gives $2\\pi a^2$ of swept area with multiplicity. A static plot cannot show this repetition unless time or color encodes traversal.",
+        "A self-intersection is a pair of distinct parameters with the same Cartesian position. To locate one, solving only $r(\\theta)=r(\\phi)$ is insufficient because equal radii at different angles usually give different points. Solve $r(\\theta)\\cos\\theta=r(\\phi)\\cos\\phi$ and $r(\\theta)\\sin\\theta=r(\\phi)\\sin\\phi$, with $\\theta\\ne\\phi$ modulo the intended period. Then compare tangent vectors at both values to understand the crossing. This method is more work than a sketch, but it guards against false intersection claims from polar-radius coincidences.",
+        "A circle represented by $r=2a\\cos\\theta$ provides an exact tracing test for code. Sample $\\theta=0,\\pi/2,\\pi$ to obtain $(2a,0),(0,0),(2a,0)$, showing one closed lap on width $\\pi$. Sample $\\theta=3\\pi/2$ and $2\\pi$ to see a repeated lap. Its speed $2a$ stays constant even when the signed radius passes through zero; the Cartesian derivative vector remains nonzero there. Thus a zero polar radius is not necessarily a stop or cusp in the Cartesian path. The coordinate representation can be singular while the geometric motion remains smooth."
+      ],
+      "formula": "L = ∫αᵝ √(r(θ)² + r′(θ)²) dθ.",
+      "formulaTex": "L=\\int_\\alpha^\\beta\\sqrt{r(\\theta)^2+r^{\\prime}(\\theta)^2}\\,d\\theta\\quad\\bigl(r\\in C^1([\\alpha,\\beta])\\bigr)"
+    },
+    {
+      "title": "A projectile curve from position, velocity, and time",
+      "paragraphs": [
+        "Under constant downward gravitational acceleration $g$ and no air resistance, a projectile launched from level ground at speed $v$ and angle $\\theta$ above horizontal has $x(t)=v\\cos\\theta\\cdot t$ and $y(t)=v\\sin\\theta\\cdot t-(g/2)t^2$. Here $v$ has units m/s, $g$ has units m/s², and $t$ is in seconds. The physically relevant flight uses $t\\ge0$ until the next return to $y=0$; the same polynomial formulas at negative times are mathematical extensions, not part of this launch.",
+        "Factoring $y(t)=t(v\\sin\\theta-gt/2)$ gives return time $T=2v\\sin\\theta/g$ for $0<\\theta<\\pi/2$. Substituting into $x$ gives range $R=v\\cos\\theta\\,T=(v^2/g)\\sin(2\\theta)$. Because $\\sin(2\\theta)\\le1$, the maximum level-ground range for fixed speed is $v^2/g$ at $\\theta=\\pi/4$. This conclusion depends on equal launch and landing heights and the no-drag model; changing either assumption changes the optimization.",
+        "Eliminating time when $\\cos\\theta>0$ gives $t=x/(v\\cos\\theta)$ and $y=x\\tan\\theta-gx^2/(2v^2\\cos^2\\theta)$, a downward parabola in the $x$–$y$ plane. This describes the geometric path, while $x(t),y(t)$ retain timing information. Velocity is $(v\\cos\\theta,v\\sin\\theta-gt)$, so the vertical component becomes zero at the apex, halfway through the level-ground flight time; horizontal velocity remains constant.",
+        "A plot of the trajectory can communicate height and range, but it cannot alone verify units, identify the time interval, or justify the optimal angle. Parameterization, derivative, and endpoint checks work together. The model should not be used for long flights where drag or varying gravity matters without revisiting its assumptions.",
+        "The range formula contains an optimization problem. With fixed $v$ and $g$, $R(\\theta)=(v^2/g)\\sin(2\\theta)$ for $0<\\theta<\\pi/2$. Because $2\\theta$ lies in $(0,\\pi)$, its sine reaches one at $2\\theta=\\pi/2$, giving $\\theta=\\pi/4$. Complementary angles $\\theta$ and $\\pi/2-\\theta$ have the same $\\sin(2\\theta)$ and therefore the same range, but different apex heights and flight times. One trajectory is flatter and faster to land; the other rises higher and remains airborne longer. A single range number does not describe the whole flight.",
+        "The projectile's speed is not constant even though horizontal velocity is. It is $\\sqrt{(v\\cos\\theta)^2+(v\\sin\\theta-gt)^2}$, minimized at the apex when vertical velocity is zero. The traveled arc length from launch to landing is its time integral, not the horizontal range $R$ unless the path were straight and horizontal. This distinction connects parametric speed to physical motion. The range is net horizontal displacement; the arc length counts all movement along the curved path. Both have metres as units but answer different questions.",
+        "If the launch height is $h>0$, the vertical equation becomes $y(t)=h+v\\sin\\theta\\,t-gt^2/2$. The positive landing time now solves a different quadratic, and complementary-angle symmetry of the level-ground range generally disappears. Air resistance makes horizontal velocity vary too. The familiar $45^\\circ$ optimum belongs to the specific assumptions of level launch and landing heights, constant gravity, and no drag. State those assumptions beside a numerical recommendation rather than presenting the angle as universal.",
+        "A dimension check protects the range formula. $v^2/g$ has units $(\\mathrm{m}^2/\\mathrm{s}^2)/(\\mathrm{m}/\\mathrm{s}^2)=\\mathrm{m}$, while $\\sin(2\\theta)$ is dimensionless. The return time $2v\\sin\\theta/g$ has seconds, and apex height $v^2\\sin^2\\theta/(2g)$ has metres. A formula missing one factor of $v$ or $g$ would fail these checks. Dimensional consistency cannot prove a derivation correct, but it can reject many incorrect expressions before numerical substitution.",
+        "Projectile formulas should be interpreted on the physical time interval $0\\le t\\le T$. The algebraic parabola obtained by eliminating $t$ continues beyond both launch and landing, but those extra points do not represent this particular flight. If $\\theta=0$, the level-ground model returns to $y=0$ immediately and the formula $T=0$ marks a degenerate flight; if $\\theta=\\pi/2$, horizontal range is zero although vertical motion persists. The interior-angle optimization assumes $0<\\theta<\\pi/2$, with endpoints giving zero range. Including these boundary cases completes the maximum argument rather than relying only on the sine graph.",
+        "A projectile parameter also fixes the direction and timing of the traced curve. With positive horizontal speed $v_x$, $x(t)=x_0+v_xt$ is one-to-one, so eliminating $t$ gives a parabola without retracing it. The vertical velocity $v_y(t)=v_{y0}-gt$ vanishes at $t=v_{y0}/g$ only when that time lies in the physical flight interval. Substituting that time into $y(t)$ gives the maximum height for an upward launch; it is not the landing time. If the launch is horizontal or downward, the maximum on the allowed interval occurs at its initial endpoint. State the time interval before optimizing a physical trajectory."
+      ],
+      "formula": "T=2v sin θ/g; R=(v²/g)sin(2θ) for level-ground motion without drag.",
+      "formulaTex": "\\begin{gathered}T=\\frac{2v\\sin\\theta}{g},\\qquad R=\\frac{v^2}{g}\\sin(2\\theta),\\\\ v,g>0,\\quad 0<\\theta<\\frac\\pi2\\quad\\text{(level ground, no drag).}\\end{gathered}"
+    },
+    {
+      "title": "A focus, a directrix, and eccentricity",
+      "paragraphs": [
+        "Fix a focus $F=(0,0)$ and directrix $x=d$ with $d>0$. For eccentricity $e>0$, a point $P=(x,y)$ belongs exactly when $\\sqrt{x^2+y^2}=e|x-d|$. Both sides are nonnegative, so squaring is reversible. Expansion gives $(1-e^2)x^2+y^2+2e^2dx-e^2d^2=0$; neither the focus nor a point on the directrix satisfies the original equation.",
+        "If $0<e<1$, completing the square gives an ellipse centered at $h=-e^2d/(1-e^2)$ with horizontal semiaxis $a=ed/(1-e^2)$ and vertical semiaxis $b=ed/\\sqrt{1-e^2}$. Its focal distance is $c=ea$ because $a^2-b^2=e^2a^2$. At $e=1$, the equation is $y^2=-2d(x-d/2)$, a left-opening parabola with vertex halfway from the focus to the directrix.",
+        "For $e>1$, set $q=e^2-1$. The equation becomes $(x-h)^2/a^2-y^2/b^2=1$ with $h=e^2d/q$, $a=ed/q$, and $b=ed/\\sqrt q$. Its two branches obey $x\\le ed/(1+e)$ or $x\\ge ed/(e-1)$; no point bridges the central interval. At a finite directrix, $e=0$ gives only the focus. A radius-$p$ circle is instead the limit $e\\to0^+$ with $ed=p$ fixed and $d\\to\\infty$.",
+        "The distance equation gives an efficient test of any claimed point. For $F=(0,0)$ and directrix $x=d$, the nearest point on the directrix to $(x,y)$ is $(d,y)$, so its directrix distance is $|x-d|$. The focus distance is $\\sqrt{x^2+y^2}$. When $d>0$ and $e>0$, a focus point would have zero left side but positive right side, and a directrix point would have zero right side but positive focus distance. Thus neither special set accidentally enters the locus. Squaring is safe because both distances are nonnegative; one should still state that reason whenever converting a geometric condition into an algebraic equation.",
+        "Completing the square also locates the branches rather than merely naming a curve. For $0<e<1$, the center lies left of the focus, and the right vertex is $ed/(1+e)$ between focus and directrix. For $e>1$, the center lies right of the directrix, while the two vertices are $ed/(1+e)$ and $ed/(e-1)$. The open interval between those vertices has no real points because the standard hyperbola equation requires $|x-h|\\ge a$. These inequalities make the two-branch structure visible even before any polar representation is introduced.",
+        "At $e=1$, the coefficient of $x^2$ disappears exactly, leaving $y^2=d^2-2dx=-2d(x-d/2)$. The vertex $(d/2,0)$ has equal distances $d/2$ to focus and directrix, confirming the sign and opening direction. A parabola extends without bound to the left; a finite plot of it must be described as a window. The parabola is the boundary between the bounded ellipse family and the two-branch hyperbola family for this fixed focus and directrix, but no finite drawing proves that classification by itself.",
+        "The circle limit is subtle because the defining directrix must move. Hold $p=ed>0$ while $e\\to0^+$, so $d=p/e$ tends to infinity. Polar radii $r_e=p/(1+e\\cos\\theta)$ differ from $p$ by at most $pe/(1-e)$ for $0<e<1$, uniformly over every angle. This proves convergence of the entire radial locus to a radius-$p$ circle, not merely convergence at selected points. Setting $e=0$ with a finite $d$ would instead turn the original equation into $\\sqrt{x^2+y^2}=0$, leaving only the focus. The limiting process and the finite parameter case are different mathematical statements."
+      ],
+      "formula": "For F=(0,0), directrix x=d>0 and e>0: √(x²+y²)=e|x−d|. The conic is an ellipse if e<1, parabola if e=1, and hyperbola if e>1.",
+      "formulaTex": "\\sqrt{x^2+y^2}=e|x-d|\\iff(1-e^2)x^2+y^2+2e^2dx-e^2d^2=0\\quad(d,e>0)."
+    },
+    {
+      "title": "Read geometry from a translated equation",
+      "paragraphs": [
+        "Write $X=x-h$ and $Y=y-k$. The horizontal ellipse $X^2/a^2+Y^2/b^2=1$ with $a>b>0$ has vertices $(h\\pm a,k)$, foci $(h\\pm c,k)$ where $c^2=a^2-b^2$, eccentricity $e=c/a$, and paired directrices $x=h\\pm a/e$. If $a=b$, then $c=e=0$ and the circle has no finite directrix in this formula.",
+        "For $X^2/a^2-Y^2/b^2=1$, instead $c^2=a^2+b^2$ and $e=c/a>1$. Both branches require $|X|\\ge a$; asymptote lines $Y=\\pm(b/a)X$ pass through the center. The defining distance identity for either horizontal family follows by substituting its equation into $(X-c)^2+Y^2=e^2(X-a/e)^2$ and taking nonnegative square roots.",
+        "A horizontal parabola $Y^2=4pX$, $p\\ne0$, has vertex $(h,k)$, focus $(h+p,k)$ and directrix $x=h-p$; the sign of $p$ sets its opening. Complete once-only paths are $(h+a\\cos t,k+b\\sin t)$ for $0\\le t<2\\pi$, $(h+pt^2,k+2pt)$ for $t\\in\\mathbb R$, and $(h\\pm a\\sqrt{1+u^2},k+bu)$ for the two hyperbola branches. Substitution and the coordinate ranges establish coverage. These are axis-aligned standard forms; an $XY$ term may require rotation.",
+        "The symbols $a$ and $b$ are semiaxes, not arbitrary coefficients to be read without orientation. In a horizontal ellipse with $a>b$, the long axis lies along $X$; in a horizontal hyperbola, the positive $X^2$ term gives its transverse direction. Translating by $(h,k)$ moves every vertex, focus and directrix together, but does not change lengths or slopes. The corresponding vertical standard forms exchange $X$ and $Y$ and exchange horizontal and vertical descriptions. A mixed $XY$ term falls outside this axis-aligned table until a rotation removes it.",
+        "A directrix formula should be paired with its focus. For the right focus at $X=c$, the right directrix is $X=a/e$; the identity $(X-c)^2+Y^2=e^2(X-a/e)^2$ holds on the full standard ellipse or hyperbola after using the respective relation between $a,b,c$. Taking square roots is legitimate because both sides are squared distances, giving the original geometric ratio. Replacing $c$ with $-c$ gives the left pair. On a circle $c=e=0$, and the formal expression $a/e$ is undefined because there is no finite paired directrix in this construction.",
+        "A parametrization needs both a formula and a parameter domain. For an ellipse, $0\\le t<2\\pi$ includes each point once and omits the duplicate at $2\\pi$. For the parabola, its $Y$ coordinate is $2pt$, so every real height determines exactly one $t$. For a hyperbola, one sign of $h\\pm a\\sqrt{1+u^2}$ fixes one branch, while the real $u$ covers all heights on that branch. Substituting each path into the standard equation checks membership; range arguments show completeness. A formula without its domain cannot establish either one traversal or both branches.",
+        "Asymptotes of a horizontal hyperbola are full Cartesian lines through its center: $Y=\\pm(b/a)X$. They arise by comparing the squared terms when $|X|$ grows. The curve approaches them but does not equal them at finite points. In contrast, a directrix is a fixed line used in a distance ratio and is generally not an asymptote. A plot with short line segments can confuse these roles, so use the equations and their centers to distinguish them. When the ellipse or hyperbola is translated, the asymptote equations acquire $Y=y-k$ and $X=x-h$, while directrix positions translate by $h$."
+      ],
+      "formula": "For an axis-aligned ellipse X²/a²+Y²/b²=1 with a>b>0, c²=a²−b²; for a horizontal hyperbola X²/a²−Y²/b²=1, c²=a²+b².",
+      "formulaTex": "\\begin{gathered}X=x-h,\\quad Y=y-k,\\quad a,b>0,\\\\\\text{ellipse: }X^2/a^2+Y^2/b^2=1,\\ c^2=a^2-b^2;\\\\\\text{hyperbola: }X^2/a^2-Y^2/b^2=1,\\ c^2=a^2+b^2;\\\\\\text{parabola: }Y^2=4pX,\\ p\\ne0.\\end{gathered}"
+    },
+    {
+      "title": "Polar conics and the missing branch",
+      "paragraphs": [
+        "Use the focus as polar origin and $\\theta=0$ toward the directrix $x=d$. For a physical radius $R\\ge0$ on the left of the directrix, $R=e(d-R\\cos\\theta)$, hence $R=ed/(1+e\\cos\\theta)$ where its denominator is positive. If $0<e<1$ this holds over a half-open full turn; if $e=1$, exclude $\\theta=\\pi$ and use $-\\pi<\\theta<\\pi$. At the excluded direction no finite point solves the original distance equation.",
+        "For $e>1$, let $\\alpha=\\arccos(-1/e)$. The left branch uses $|\\theta|<\\alpha$. On the right of the directrix, solve $R=e(R\\cos\\phi-d)$ instead, giving $R=ed/(e\\cos\\phi-1)$ for $|\\phi|<\\beta=\\arccos(1/e)$. This second positive-radius formula traces the missing right branch once. At denominator zero the unsolved equation reads $0=ed>0$, so no finite point exists.",
+        "Equivalently the one signed-radius formula $r=ed/(1+e\\cos\\theta)$ uses negative $r$ for $\\alpha<\\theta<2\\pi-\\alpha$; the physical point then lies in direction $\\theta+\\pi$, and its distance to the focus is $|r|$. Polar singular rays begin at the focus. Cartesian asymptote lines pass through the hyperbola center $h=e^2d/(e^2-1)$ with slopes $\\pm\\sqrt{e^2-1}$, so they are generally different lines even where their directions agree.",
+        "The usual polar coordinate convention permits a signed $r$, but geometric distance is always nonnegative. Starting from the original focus/directrix condition with physical distance $R\\ge0$ avoids a sign mistake. On the left of $x=d$, the directrix distance is $d-R\\cos\\theta$, yielding the first formula. On the right it is $R\\cos\\phi-d$, yielding the second. For a hyperbola both cases occur, so a single nonnegative-radius formula derived only from the left case cannot represent the whole curve. The two denominator inequalities are part of the formulas, not optional plotting settings.",
+        "For $e>1$, the left domain $|\\theta|<\\arccos(-1/e)$ includes directions beyond a right angle, since the left branch wraps around the focus. The right domain $|\\phi|<\\arccos(1/e)$ is narrower than a right angle and points toward the distant branch. At a boundary angle the proposed denominator vanishes, while the unsolved distance equation still has positive $ed$ on the right, so no finite radius exists. The radius tends to infinity toward those boundaries, explaining the apparent rays at the edge of a finite chart.",
+        "Signed-radius notation packages both branches into $r=ed/(1+e\\cos\\theta)$ away from the singular directions. When $r<0$, the physical point is $|r|$ units in the opposite direction $\\theta+\\pi$. For $e=2,d=3$, $r(0)=2$ gives the near vertex $(2,0)$, while $r(\\pi)=-6$ gives the far vertex $(6,0)$. If a program silently drops negative radii, it loses the entire far branch. Conversely, drawing a line between samples on opposite sides of a singular angle creates a false connection across infinity.",
+        "The asymptote lines can be derived from the centered equation: for $e>1$, $a=ed/(e^2-1)$ and $b=ed/\\sqrt{e^2-1}$, so $b/a=\\sqrt{e^2-1}$. Hence the lines are $y=\\pm\\sqrt{e^2-1}(x-h)$ with $h=e^2d/(e^2-1)$. Their directions agree with the polar rays toward infinity, but their points are not the same because the lines pass through the center while rays start at the focus. At $e=2,d=3$, the center is $(4,0)$, making that distinction concrete.",
+        "The two positive-radius hyperbola branches and their exact angular restrictions belong in separate rows. Read the branch domain before interpreting the clipped chart; a denominator-zero direction contains no finite point."
+      ],
+      "formula": "With focus at the origin and directrix x=d>0, signed r=ed/(1+e cos θ). For e>1, the other branch has positive R=ed/(e cos φ−1) where |φ|<arccos(1/e).",
+      "formulaTex": "\\begin{gathered}R_{\\rm left}=\\frac{ed}{1+e\\cos\\theta},\\quad 1+e\\cos\\theta>0,\\\\R_{\\rm right}=\\frac{ed}{e\\cos\\phi-1},\\quad e>1,\\ |\\phi|<\\arccos(1/e).\\end{gathered}",
+      "comparisonTable": {
+        "caption": "Positive-radius hyperbola branches for focus (0,0), directrix x=2, e>1",
+        "headers": [
+          "Branch",
+          "Radius and allowed angle",
+          "World x-axis vertex",
+          "At domain boundary"
+        ],
+        "rows": [
+          [
+            "Left",
+            "$r=2e/(1+e\\cos\\theta)$; $|\\theta|<\\arccos(-1/e)$",
+            "$(2e/(1+e),0)$",
+            "Radius tends to infinity; angle excluded"
+          ],
+          [
+            "Right",
+            "$r=2e/(e\\cos\\phi-1)$; $|\\phi|<\\arccos(1/e)$",
+            "$(2e/(e-1),0)$",
+            "Radius tends to infinity; angle excluded"
+          ]
+        ]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "title": "Slope, concavity, and distance on a parabola",
+      "problem": "Let $t$ be elapsed time measured numerically in seconds, with $x(t)=t^2\\,\\mathrm m$ and $y(t)=2t\\,\\mathrm m$ for $1\\le t\\le2$. Find slope and second derivative at $t=1$, and set up and evaluate traveled length.",
+      "steps": [
+        "Differentiate: $x^{\\prime}=2t$ and $y^{\\prime}=2$. Since $x^{\\prime}>0$ throughout the interval, $dy/dx=1/t$. At $t=1$ the point is $(1,2)$ and its tangent line is $y-2=x-1$.",
+        "Differentiate $1/t$ with respect to $t$ and divide by $2t$: $d^2y/dx^2=-1/(2t^3)$, giving $-1/2$ per meter at $t=1$. The branch bends downward as $x$ increases.",
+        "Speed is $2\\sqrt{t^2+1}$ meters per second. Its integral from $1$ to $2$ is $[t\\sqrt{t^2+1}+\\ln(t+\\sqrt{t^2+1})]_1^2$, using numerical time values in seconds.",
+        "Subtracting the endpoint values gives $2\\sqrt5-\\sqrt2+\\ln((2+\\sqrt5)/(1+\\sqrt2))\\approx3.6202$ meters. The endpoint displacement magnitude is $\\sqrt{13}\\approx3.6056$ meters, slightly shorter, as a chord should be."
+      ],
+      "answer": "Slope $1$; second derivative $-1/2$ per meter; traveled length approximately $3.6202\\,\\mathrm m$."
+    },
+    {
+      "title": "One polar circle, two possible counts",
+      "problem": "For $r=4\\cos\\theta$, compute the enclosed area and circumference, choosing bounds that trace the boundary once.",
+      "steps": [
+        "The Cartesian equation is $(x-2)^2+y^2=4$, so the circle has radius $2$. Choose $-\\pi/2\\le\\theta\\le\\pi/2$; the curve begins and ends at the origin, passing through $(4,0)$ at $\\theta=0$.",
+        "Area is $(1/2)\\int_{-\\pi/2}^{\\pi/2}16\\cos^2\\theta\\,d\\theta$. Using $\\cos^2\\theta=(1+\\cos2\\theta)/2$ gives $4\\pi$ square units.",
+        "Since $r^{\\prime}=-4\\sin\\theta$, the length integrand is $4$. The interval width is $\\pi$, so length is $4\\pi$ units. These agree with $\\pi R^2$ and $2\\pi R$ for $R=2$.",
+        "Using $0\\le\\theta\\le2\\pi$ instead gives area integral $8\\pi$ and length $8\\pi$. The calculations are correct for their repeated sweep, but they do not report the area and circumference of the circle once."
+      ],
+      "answer": "Area $4\\pi$ square units and circumference $4\\pi$ units, using an angular interval of width $\\pi$ that traces the circle once."
+    },
+    {
+      "title": "Same image, different traversal",
+      "problem": "Compare $\\mathbf r_1(t)=(\\cos t,\\sin t)$ and $\\mathbf r_2(t)=(\\cos2t,\\sin2t)$ on $0\\le t\\le2\\pi$.",
+      "steps": [
+        "Both images are the unit circle because each coordinate pair satisfies $x^2+y^2=1$ and covers every direction.",
+        "The first has speed $1$ and length $2\\pi$ over the interval.",
+        "The second has speed $2$ and length $4\\pi$, tracing the same circle twice. Both have zero net displacement."
+      ],
+      "answer": "Same geometric image; the second path travels twice as far."
+    },
+    {
+      "title": "A vertical tangent from derivatives",
+      "problem": "For $x=t^2,y=t$ near $t=0$, identify the tangent direction.",
+      "steps": [
+        "$x^{\\prime}=2t$ and $y^{\\prime}=1$. At $t=0$, $x^{\\prime}=0$ while $y^{\\prime}\\ne0$, so the regular tangent is vertical.",
+        "Away from zero $dy/dx=1/(2t)$, whose magnitude grows as $t\\to0$.",
+        "Eliminating $t$ gives $x=y^2$, a right-opening parabola with vertical tangent at the origin."
+      ],
+      "answer": "The tangent at the origin is vertical."
+    },
+    {
+      "title": "Second derivative along a branch",
+      "problem": "For $x=t^2,y=t^3$ at $t\\ne0$, compute $dy/dx$ and $d^2y/dx^2$.",
+      "steps": [
+        "Derivatives are $x^{\\prime}=2t,y^{\\prime}=3t^2$, so $dy/dx=3t/2$.",
+        "Differentiate $3t/2$ with respect to $t$ and divide by $x^{\\prime}=2t$.",
+        "This gives $d^2y/dx^2=3/(4t)$, differing in sign on the two branches and undefined at $t=0$."
+      ],
+      "answer": "$dy/dx=3t/2$ and $d^2y/dx^2=3/(4t)$ for $t\\ne0$."
+    },
+    {
+      "title": "Area of a cardioid once",
+      "problem": "Find the area enclosed by $r=1+\\cos\\theta$ for $0\\le\\theta\\le2\\pi$.",
+      "steps": [
+        "The radius is nonnegative and this interval sweeps the cardioid once.",
+        "Area is $(1/2)\\int_0^{2\\pi}(1+2\\cos\\theta+\\cos^2\\theta)\\,d\\theta$.",
+        "The integrals are $2\\pi$, $0$, and $\\pi$, so area is $3\\pi/2$."
+      ],
+      "answer": "The enclosed area is $3\\pi/2$ square coordinate units."
+    },
+    {
+      "title": "A repeated polar circle doubles swept area",
+      "problem": "For $r=2a\\cos\\theta$ with $a>0$, compare area integrals over $0\\le\\theta\\le\\pi$ and $0\\le\\theta\\le2\\pi$.",
+      "steps": [
+        "$x=r\\cos\\theta=a(1+\\cos2\\theta)$ and $y=r\\sin\\theta=a\\sin2\\theta$. These Cartesian coordinates repeat after $\\pi$, tracing $(x-a)^2+y^2=a^2$ once on $[0,\\pi]$. The radius does not repeat after $\\pi$: $r(\\theta+\\pi)=-r(\\theta)$, with the negative radius and reversed direction naming the same Cartesian point.",
+        "The polar formula over $[0,\\pi]$ gives $(1/2)\\int_0^{\\pi}4a^2\\cos^2\\theta\\,d\\theta=\\pi a^2$, its geometric area.",
+        "Over $[0,2\\pi]$ the same integral is $2\\pi a^2$ because the circle is swept twice, not because the union area doubled."
+      ],
+      "answer": "Geometric area is $\\pi a^2$; the longer interval counts it twice."
+    },
+    {
+      "title": "Complementary projectile angles share range",
+      "problem": "For $v=20\\,\\mathrm{m/s}$ and $g=10\\,\\mathrm{m/s^2}$, compare launches at $30^\\circ$ and $60^\\circ$ from level ground.",
+      "steps": [
+        "The range is $R=(v^2/g)\\sin2\\theta=40\\sin2\\theta$ metres.",
+        "At $30^\\circ$ and $60^\\circ$, $\\sin60^\\circ=\\sin120^\\circ=\\sqrt3/2$, so both ranges are $20\\sqrt3\\,\\mathrm m$.",
+        "Return time $T=4\\sin\\theta$ seconds is $2\\,\\mathrm s$ at $30^\\circ$ and $2\\sqrt3\\,\\mathrm s$ at $60^\\circ$; the higher launch stays airborne longer."
+      ],
+      "answer": "Both ranges are $20\\sqrt3\\,\\mathrm m$, but flight times differ."
+    },
+    {
+      "title": "An ellipse measured from distances",
+      "problem": "For $F=(0,0)$, $x=6$ and $e=1/2$, find the curve and check $(0,3)$.",
+      "steps": [
+        "Squaring $\\sqrt{x^2+y^2}=|x-6|/2$ gives $3x^2+4y^2+12x-36=0$.",
+        "Completing the square gives $(x+2)^2/16+y^2/12=1$: center $(-2,0)$, semiaxes $4,2\\sqrt3$ and foci $(0,0),(-4,0)$.",
+        "At $(0,3)$, the focus and directrix distances are $3$ and $6$, ratio $1/2$. The path $(-2+4\\cos t,2\\sqrt3\\sin t)$ for $0\\le t<2\\pi$ covers it once."
+      ],
+      "answer": "The ellipse has vertices $(2,0)$ and $(-6,0)$."
+    },
+    {
+      "title": "A parabola and a missing ray",
+      "problem": "For $F=(0,0)$ and directrix $x=4$, analyze the $e=1$ conic.",
+      "steps": [
+        "Equality of distances gives $y^2=-8(x-2)$, with vertex $(2,0)$.",
+        "The path $(2-2u^2,-4u)$ covers each $y$ once.",
+        "Its polar form is $R=4/(1+\\cos\\theta)$ for $-\\pi<\\theta<\\pi$; the denominator-zero direction has no finite point."
+      ],
+      "answer": "This is a left-opening parabola with focus $(0,0)$ and directrix $x=4$."
+    },
+    {
+      "title": "Both branches of one hyperbola",
+      "problem": "For $e=2,d=3$, find the Cartesian geometry and both positive-radius polar branches.",
+      "steps": [
+        "The squared equation becomes $(x-4)^2/4-y^2/12=1$, with center $(4,0)$ and vertices $(2,0),(6,0)$.",
+        "The asymptotes are $y=\\pm\\sqrt3(x-4)$. The left radius is $6/(1+2\\cos\\theta)$ for $|\\theta|<2\\pi/3$.",
+        "The right radius is $6/(2\\cos\\phi-1)$ for $|\\phi|<\\pi/3$. At angle zero they give distinct vertices at radii $2$ and $6$."
+      ],
+      "answer": "The branches are separate and each focus/directrix distance ratio is $2$."
+    },
+    {
+      "title": "Translate, locate, and trace",
+      "problem": "Analyze $(x+2)^2/169+(y-4)^2/25=1$.",
+      "steps": [
+        "The center is $(-2,4)$, with $a=13,b=5,c=\\sqrt{169-25}=12$ and $e=12/13$.",
+        "Vertices are $(-15,4),(11,4)$; foci are $(-14,4),(10,4)$; directrices are $x=-2-169/12$ and $x=-2+169/12$.",
+        "The path $(-2+13\\cos t,4+5\\sin t)$ for $0\\le t<2\\pi$ traces once. At the right vertex, distances to the right focus and directrix are $1$ and $13/12$."
+      ],
+      "answer": "The focus/directrix distance ratio at the right vertex is $12/13$."
+    }
+  ],
+  "misconceptions": [
+    "“The second parametric derivative is $\\frac{y^{\\prime\\prime}(t)}{x^{\\prime\\prime}(t)}$.” Where the parametrization is twice continuously differentiable and $x^{\\prime}(t)\\ne0$, it is $\\frac{d^2y}{dx^2}=\\frac{1}{x^{\\prime}(t)}\\frac{d}{dt}\\left(\\frac{y^{\\prime}(t)}{x^{\\prime}(t)}\\right)$, because the derivative must be taken with respect to $x$.",
+    "“A closed plot means one traversal.” The same plotted circle can represent one, two, or more circuits; inspect the parameter interval.",
+    "“Every polar intersection solves $r_1(\\theta)=r_2(\\theta)$.” Negative-radius representations and the origin can require different parameter angles."
+  ],
+  "lab": {
+    "title": "Trace the same circle parametrically and in polar form",
+    "description": "Compare $x=a(1+\\cos t)$, $y=a\\sin t$ with $r=2a\\cos\\theta$. The plots use Cartesian $x$ and $y$ coordinates in length units. The console reports polygonal length and trapezoidal swept area, with exact circle values for comparison. Adjustable turns repeat the path; the second traversal is visually superimposed.",
+    "code": "// Adjust a, turns, and n; turns is a positive integer.\nconst a = 2;\nconst turns = 1;\nconst n = 400;\nif (!(Number.isFinite(a) && a > 0 && Number.isInteger(turns) && turns >= 1 && turns <= 4 && Number.isInteger(n) && n >= 20 && n <= 1900)) {\n  throw new Error('Use a > 0, integer turns from 1 to 4, and integer n from 20 to 1900.');\n}\nconst parametric = [];\nconst polar = [];\nlet chordLength = 0;\nlet normalizedArea = 0;\nconst h = turns * Math.PI / n;\nfor (let i = 0; i <= n; i++) {\n  const t = 2 * Math.PI * turns * i / n;\n  parametric.push([a * (1 + Math.cos(t)), a * Math.sin(t)]);\n  const theta = -Math.PI / 2 + i * h;\n  const r = 2 * a * Math.cos(theta);\n  const point = [r * Math.cos(theta), r * Math.sin(theta)];\n  if (i > 0) {\n    const previous = polar[i - 1];\n    chordLength += Math.hypot(point[0] - previous[0], point[1] - previous[1]);\n  }\n  polar.push(point);\n  const weight = (i === 0 || i === n) ? 0.5 : 1;\n  normalizedArea += weight * 2 * Math.cos(theta) ** 2 * h;\n}\nconst area = (a * normalizedArea) * a;\nconst disk = (a * Math.PI) * a;\nconst swept = turns * disk;\nif (![parametric, polar].every(points => points.every(pair => pair.every(Number.isFinite))) || ![chordLength, area, turns * 2 * Math.PI * a, swept, disk].every(Number.isFinite)) throw new Error('Derived geometry overflows; reduce a.');\nplot(parametric, 'Parametric circle: x and y (length units)');\nplot(polar, 'Polar circle: x and y (length units)');\nconsole.log('turns; polygon length; exact traveled length', turns, chordLength, turns * 2 * Math.PI * a);\nif (area === 0 || disk === 0) console.log('Swept and disk areas are below machine resolution; no representable area reference.');\nelse {\n  console.log('swept area approximation; exact area counted with turns', area, swept);\n  console.log('Area of geometric disk once', disk);\n}\nconsole.log('Polygon length absolute error', Math.abs(chordLength - turns * 2 * Math.PI * a));",
+    "tasks": [
+      "Before running, predict whether the two plots enclose the same region and whether their starting points agree.",
+      "Set turns to 2. Explain why the visible curve stays the same while the exact traveled length and swept area double. At fixed n, why does the polygonal length not quite double?",
+      "Run n = 100, 200, and 400 with turns = 1. How does the polygon length error change, and why is its sign predictable?",
+      "Explain why an area value accurate to machine precision in this symmetric example does not prove that the trapezoidal rule is exact for every polar curve."
+    ],
+    "expected": "With a = 2, turns = 1, n = 400, each plot has 401 points. Polygon length is approximately 12.566241422, below exact $4\\pi\\approx12.566370614$; swept area is approximately $4\\pi$ square units. Parametric tracing starts at $(4,0)$, polar tracing at the origin. The area quadrature is exact in exact arithmetic here because the equally spaced $\\cos^2\\theta$ samples cancel their oscillatory term."
+  },
+  "exercises": [
+    {
+      "question": "How many times does $(\\cos t,\\sin t)$ trace the unit circle on $0\\le t\\le 4\\pi$?",
+      "hint": "One lap requires a parameter interval of length $2\\pi$.",
+      "solution": "On $0\\le t\\le4\\pi$, the unit circle is traced twice because each lap takes $2\\pi$. Speed is $1$, so distance is $4\\pi$ while endpoint displacement is $0$.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Do $(\\cos t,\\sin t)$ and $(\\cos 2t,\\sin 2t)$ on $[0,2\\pi]$ have the same length?",
+      "hint": "Compare the speeds of the two parametrizations.",
+      "solution": "The first speed is $1$ and the second is $2$. Over $[0,2\\pi]$, lengths are $2\\pi$ and $4\\pi$, respectively, although both images are the unit circle.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $R>0$, what portion of $x=R\\cos t,\\ y=R\\sin t$ is traced on $0\\le t\\le\\pi$?",
+      "hint": "Use $y=R\\sin t\\ge0$ and track the endpoints.",
+      "solution": "For $0\\le t\\le\\pi$, $y=R\\sin t\\ge0$ and $x^2+y^2=R^2$. The path runs from $(R,0)$ through $(0,R)$ to $(-R,0)$, tracing the upper semicircle once counterclockwise.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why does eliminating $t$ from $x=t^2$, $y=t$ for $0\\le t\\le1$ need an extra condition?",
+      "hint": "The equation $x=y^2$ does not encode the parameter interval.",
+      "solution": "Eliminating $t$ gives $x=y^2$, but $t=y\\in[0,1]$. Without $0\\le y\\le1$, the equation includes points outside the traced arc.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $x = 3\\cos t$, $y = 3\\sin t$, find the slope and speed at $t = \\pi/2$.",
+      "hint": "Compute $x^{\\prime}$ and $y^{\\prime}$ at $t=\\pi/2$.",
+      "solution": "Here $x^{\\prime}=-3\\sin t$ and $y^{\\prime}=3\\cos t$. At $t=\\pi/2$, these are $-3$ and $0$, so $dy/dx=0/(-3)=0$ and speed is $\\sqrt{(-3)^2+0^2}=3$ length units per parameter unit.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x=t$, $y=t^3$, compute $\\frac{d^2y}{dx^2}$ and explain why $y^{\\prime\\prime}/x^{\\prime\\prime}$ fails.",
+      "hint": "Use $\\frac{d}{dx}=\\frac1{x^{\\prime}}\\frac{d}{dt}$ when $x^{\\prime}\\ne0$.",
+      "solution": "Since $x^{\\prime}=1$, $dy/dx=y^{\\prime}/x^{\\prime}=3t^2$ and $d^2y/dx^2=(1/x^{\\prime})\\,d(3t^2)/dt=6t$. The quotient $y^{\\prime\\prime}/x^{\\prime\\prime}$ is undefined because $x^{\\prime\\prime}=0$; it is not the chain-rule formula.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\frac{dy}{dx}$ for $x=t$, $y=t^3$.",
+      "hint": "Use $dy/dx=y^{\\prime}/x^{\\prime}$.",
+      "solution": "Differentiating the coordinates gives $dx/dt=1$ and $dy/dt=3t^2$. Because horizontal velocity is nonzero, the parametric chain rule gives $dy/dx=(dy/dt)/(dx/dt)=3t^2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\frac{d^2y}{dx^2}$ for $x=t$, $y=t^3$.",
+      "hint": "Differentiate $dy/dx$ with respect to $t$, then divide by $x^{\\prime}$.",
+      "solution": "The slope from the first derivative is $dy/dx=3t^2$. Differentiate that slope with respect to $t$ and divide by $dx/dt=1$; hence $d^2y/dx^2=6t$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x=t^2$, $y=t$ at $t=0$, is the tangent horizontal or vertical?",
+      "hint": "Compare $x^{\\prime}(0)$ with $y^{\\prime}(0)$.",
+      "solution": "At $t=0$, $x^{\\prime}(0)=0$ and $y^{\\prime}(0)=1$. The velocity is nonzero and vertical, so the tangent is vertical.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x=t^2$, $y=t^3$ at $t\\ne0$, find $\\frac{dy}{dx}$.",
+      "hint": "Use $dy/dx=y^{\\prime}/x^{\\prime}$ for $t\\ne0$.",
+      "solution": "For $t\\ne0$, $dy/dx=(3t^2)/(2t)=3t/2$. Division by $x^{\\prime}=2t$ requires the stated restriction.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "A particle follows $x = 2\\cos t$, $y = 2\\sin t$ for $0 \\le t \\le 3\\pi$. Find distance traveled and displacement magnitude.",
+      "hint": "Integrate speed over $[0,3\\pi]$ and compare endpoints.",
+      "solution": "The speed is $2$, so distance is $\\int_0^{3\\pi}2\\,dt=6\\pi$. The endpoints are $(2,0)$ and $(-2,0)$, giving displacement $(-4,0)$ of magnitude $4$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the traced length of $\\mathbf r(t)=(\\cos t,\\sin t)$ for $0\\le t\\le4\\pi$.",
+      "hint": "Compute $\\|\\mathbf r^{\\prime}(t)\\|$ over $[0,4\\pi]$.",
+      "solution": "The derivative is $\\mathbf r^{\\prime}(t)=(-\\sin t,\\cos t)$, with norm $1$. Thus $L=\\int_0^{4\\pi}1\\,dt=4\\pi$; the circle is traced twice.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find length of radius-$3$ semicircle $x=3\\cos t$, $y=3\\sin t$ for $0\\le t\\le\\pi$.",
+      "hint": "The speed is constant at $3$.",
+      "solution": "Differentiating the circle coordinates gives speed $\\sqrt{9\\sin^2t+9\\cos^2t}=3$. Integrating over the half-turn interval yields $L=\\int_0^{\\pi}3\\,dt=3\\pi$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x=3\\cos t,\\ y=3\\sin t$ on $0\\le t\\le3\\pi$, find the traveled length.",
+      "hint": "Integrate constant speed over an interval of length $3\\pi$.",
+      "solution": "The radius-$3$ circle has speed $3$; over $0\\le t\\le3\\pi$, $L=\\int_0^{3\\pi}3\\,dt=9\\pi$, representing one and a half laps.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $x=3\\cos t,\\ y=3\\sin t$, find the displacement magnitude from $t=0$ to $t=3\\pi$.",
+      "hint": "Compare the points at $t=0$ and $t=3\\pi$.",
+      "solution": "The endpoints are $(3,0)$ and $(-3,0)$. Their difference is $(-6,0)$, so displacement magnitude is $6$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For a $C^1$ path $\\mathbf r$ on $[a,b]$, why is arc length unchanged when a continuously differentiable monotone change $t=g(s)$ maps $[c,d]$ onto $[a,b]$, possibly reversing orientation?",
+      "hint": "Apply the chain rule to speed and substitute with $|dt/ds|$.",
+      "solution": "By the chain rule, the new speed is $\\|\\mathbf r'(g(s))\\|\\,|g'(s)|$. Because $g$ is continuously differentiable, monotone, and onto $[a,b]$, substitution gives $\\int_c^d\\|\\mathbf r'(g(s))\\|\\,|g'(s)|\\,ds=\\int_a^b\\|\\mathbf r'(t)\\|\\,dt$. The absolute value handles reversed orientation; intervals where $g'=0$ add no length.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the area inside $r = 2$ and outside $r = 1$ for $0 \\le \\theta \\le \\pi/2$.",
+      "hint": "Use $\\frac12\\int(r_{\\rm outer}^2-r_{\\rm inner}^2)\\,d\\theta$.",
+      "solution": "The outer and inner radii remain $2$ and $1$ on the stated quarter-turn. Subtracting their squared-radius sectors gives $A=\\frac12\\int_0^{\\pi/2}(2^2-1^2)\\,d\\theta=3\\pi/4$ square units.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the area of annular sector $1\\le r\\le2$, $0\\le\\theta\\le\\pi/2$.",
+      "hint": "Subtract the inner sector area from the outer sector area.",
+      "solution": "Using outer radius $2$ and inner radius $1$, $A=\\frac12\\int_0^{\\pi/2}(4-1)\\,d\\theta=3\\pi/4$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the area inside $r=1+\\cos\\theta$ over a full turn.",
+      "hint": "Expand $(1+\\cos\\theta)^2$ before integrating.",
+      "solution": "The polar area is $A=\\frac12\\int_0^{2\\pi}(1+\\cos\\theta)^2\\,d\\theta$. The integrals of $1$, $2\\cos\\theta$, and $\\cos^2\\theta$ are $2\\pi$, $0$, and $\\pi$, giving $A=3\\pi/2$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "What Cartesian point does polar pair $(-2,0)$ represent?",
+      "hint": "Use $x=r\\cos\\theta$ and $y=r\\sin\\theta$.",
+      "solution": "Using $x=r\\cos\\theta$ and $y=r\\sin\\theta$, $(-2,0)$ maps to Cartesian $(-2,0)$. An equivalent positive-radius pair is $(2,\\pi)$, up to full turns.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why can $\\frac12\\int_0^{2\\pi}r(\\theta)^2\\,d\\theta$ overcount the geometric area enclosed by a polar curve?",
+      "hint": "Check whether the same geometric loop is swept more than once.",
+      "solution": "The sector integral counts each sweep. For $a\\ne0$, $r=2a\\cos\\theta$ gives Cartesian position $(a+a\\cos2\\theta,a\\sin2\\theta)$, a circle of radius $|a|$ traced twice as $\\theta$ runs through $[0,2\\pi]$. The integral is $2\\pi a^2$, twice the circle’s geometric area $\\pi a^2$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find all geometric intersections of $r = 2\\cos\\theta$ and $r = 2\\sin\\theta$. Explain what equal-radius solving can miss.",
+      "hint": "Convert both curves to Cartesian equations; check the origin separately.",
+      "solution": "The Cartesian equations are $x^2+y^2=2x$ and $x^2+y^2=2y$. Thus $x=y$ and $2x^2=2x$, giving $(0,0)$ and $(1,1)$. Equal-radius solving finds $(1,1)$ but can miss the origin because the curves reach radius $0$ at different angles.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Show that $r=b\\theta$, $0\\le\\theta\\le1$, $b>0$, has length $\\frac b2(\\sqrt2+\\ln(1+\\sqrt2))$.",
+      "hint": "Use polar speed $\\sqrt{r^2+(dr/d\\theta)^2}$.",
+      "solution": "With $r=b\\theta$ and $r^{\\prime}=b$, speed is $b\\sqrt{1+\\theta^2}$. An antiderivative is $\\frac b2[\\theta\\sqrt{1+\\theta^2}+\\ln(\\theta+\\sqrt{1+\\theta^2})]$. Evaluation from $0$ to $1$ gives $\\frac b2(\\sqrt2+\\ln(1+\\sqrt2))$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For constant polar radius $r=R$ with $R\\ge0$, derive its speed and its length over a full turn.",
+      "hint": "Set $r^{\\prime}=0$ in the polar speed formula.",
+      "solution": "For $r=R$, $dr/d\\theta=0$ and polar speed is $\\sqrt{R^2+0}=R$ for $R\\ge0$. A full turn has length $\\int_0^{2\\pi}R\\,d\\theta=2\\pi R$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $r=2a\\cos\\theta$ with $a>0$, how long is one traversal?",
+      "hint": "Identify one parameter interval of width $\\pi$ for a single traversal.",
+      "solution": "For $r=2a\\cos\\theta$, polar speed is $\\sqrt{r^2+(dr/d\\theta)^2}=2|a|$. If $a>0$, one traversal uses an interval of width $\\pi$, so length is $2\\pi a$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why can equal-radius solving miss a polar-curve intersection at the origin?",
+      "hint": "The origin has representations with many values of $\\theta$.",
+      "solution": "At $r=0$, every angle denotes the same Cartesian point $(0,0)$. Two curves can reach that point at different angles, so solving equal radii at the same angle can miss it.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "In a no-drag projectile model with constant downward gravity, launch and landing at equal height, and horizontal range measured along level ground, take $v=20\\,\\mathrm{m}/\\mathrm{s}$ and $g=10\\,\\mathrm{m}/\\mathrm{s}^2$. Find the maximum horizontal range and its launch angle $\\theta$ above horizontal, with $0\\le\\theta\\le\\pi/2$ in radians.",
+      "hint": "For this no-drag, equal-height model, maximize the horizontal range $R=(v^2/g)\\sin(2\\theta)$ over the radian interval $0\\le\\theta\\le\\pi/2$.",
+      "solution": "The range is $R=(v^2/g)\\sin(2\\theta)=40\\sin(2\\theta)\\,\\mathrm m$. It is maximized at $2\\theta=\\pi/2$, so $\\theta=\\pi/4=45^\\circ$ and $R_{\\max}=40\\,\\mathrm m$.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "In a no-drag, equal-height projectile model with $v=20\\,\\mathrm{m/s}$, $g=10\\,\\mathrm{m/s^2}$, and launch angle $\\theta=30^\\circ$, find the return time and range.",
+      "hint": "Use $\\sin30^\\circ=1/2$ and $\\sin60^\\circ=\\sqrt3/2$.",
+      "solution": "The return time is $T=2v\\sin30^\\circ/g=2\\,\\mathrm s$. The range is $R=(v^2/g)\\sin60^\\circ=20\\sqrt3\\,\\mathrm m\\approx34.64\\,\\mathrm m$. Horizontal speed $10\\sqrt3\\,\\mathrm{m/s}$ over $2\\,\\mathrm s$ confirms it.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $v=20\\,\\mathrm{m}/\\mathrm{s}$, $g=10\\,\\mathrm{m}/\\mathrm{s}^2$, find maximum level-ground range.",
+      "hint": "Maximize $\\sin(2\\theta)$ in the range formula.",
+      "solution": "Under the no-drag equal-height model, the range is $R=(v^2/g)\\sin(2\\theta)$. Here $v^2/g=400/10=40\\,\\mathrm m$, and the sine factor is at most $1$. Equality holds at $\\theta=45^\\circ$, so the maximum range is $40\\,\\mathrm m$.",
+      "lesson": 6,
+      "type": "Modeling"
+    },
+    {
+      "question": "In the no-drag, equal-height projectile model with $v=20\\,\\mathrm{m/s}$, $g=10\\,\\mathrm{m/s^2}$, and $\\theta=30^\\circ$, find the return time and range.",
+      "hint": "Use the level-ground formulas for $T$ and $R$ at $\\theta=30^\\circ$.",
+      "solution": "For equal launch and landing heights without drag, $T=2v\\sin30^\\circ/g=2\\,\\mathrm s$ and $R=(v^2/g)\\sin60^\\circ=20\\sqrt3\\,\\mathrm m$. Both use $v=20\\,\\mathrm{m/s}$ and $g=10\\,\\mathrm{m/s^2}$.",
+      "lesson": 6,
+      "type": "Modeling"
+    }
+  ],
+  "summary": [
+    "A parametrization includes its interval, direction, and tracing multiplicity.",
+    "Parametric slopes require division by x′, and second derivatives require that conversion again.",
+    "Integrating speed counts traveled length, including every repeated traversal.",
+    "Polar area and length formulas require geometric checks on bounds, intersections, and negative-radius representations."
+  ],
+  "next": "Chapter 19 packages coordinate motion into vectors and extends velocity, acceleration, and curve geometry to three dimensions."
+}

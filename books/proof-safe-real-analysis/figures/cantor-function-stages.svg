@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-labelledby="title desc">
+  <title id="title">Finite-stage Cantor function approximations</title>
+  <desc id="desc">Three coordinate plots. Each rises from zero to one. Stage one has one middle-third plateau, stage two has three plateaus, and stage three has seven, showing increasingly concentrated rise.</desc>
+  <rect x="1" y="1" width="718" height="298" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <g fill="none" stroke="#64748b" stroke-width="2">
+    <path d="M55 225H215M55 225V45"/>
+    <path d="M280 225H440M280 225V45"/>
+    <path d="M505 225H665M505 225V45"/>
+  </g>
+  <g fill="#172033" font-family="system-ui, sans-serif" font-size="15">
+    <text x="112" y="265">stage 1</text><text x="337" y="265">stage 2</text><text x="562" y="265">stage 3</text>
+    <text x="39" y="231">0</text><text x="39" y="51">1</text>
+    <text x="264" y="231">0</text><text x="264" y="51">1</text>
+    <text x="489" y="231">0</text><text x="489" y="51">1</text>
+  </g>
+  <polyline points="55,225 108.3,135 161.7,135 215,45" fill="none" stroke="#075985" stroke-width="5" stroke-linejoin="round"/>
+  <polyline points="280,225 297.8,180 315.6,180 333.3,135 386.7,135 404.4,90 422.2,90 440,45" fill="none" stroke="#0369a1" stroke-width="5" stroke-linejoin="round"/>
+  <polyline points="505,225 510.9,202.5 516.9,202.5 522.8,180 540.6,180 546.5,157.5 552.4,157.5 558.3,135 611.7,135 617.6,112.5 623.5,112.5 629.4,90 647.2,90 653.1,67.5 659.1,67.5 665,45" fill="none" stroke="#0f766e" stroke-width="5" stroke-linejoin="round"/>
+  <g stroke="#dc2626" stroke-width="2">
+    <path d="M108.3 147v18M161.7 147v18"/>
+    <path d="M333.3 147v18M386.7 147v18"/>
+    <path d="M558.3 147v18M611.7 147v18"/>
+  </g>
+  <text x="360" y="25" text-anchor="middle" fill="#172033" font-family="system-ui, sans-serif" font-size="17" font-weight="700">More plateaus; the same total rise</text>
+</svg>

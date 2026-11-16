@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">A learned transport still needs a density correction</title><desc id="desc">An invertible map transforms a simple reference density into a proposal with a computable Jacobian.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">A learned transport still needs a density correction</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">An invertible map transforms a simple reference density into a proposal with a computable Jacobian.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">For an independence proposal: α(x,y)=min{1, π̃(y)q(x)/[π̃(x)q(y)]}. Freeze training before this kernel runs.</text>
+<rect x="55" y="145" width="200" height="115" rx="7" fill="#ffffff" stroke="#275c91"/>
+<text x="155.00" y="195.50" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">Reference z ∼ p₀</text>
+<text x="155.00" y="219.50" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">simple Gaussian</text>
+<rect x="365" y="145" width="220" height="115" rx="7" fill="#ffffff" stroke="#167d8d"/>
+<text x="475.00" y="195.50" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">Invertible map T</text>
+<text x="475.00" y="219.50" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">x = T(z)</text>
+<rect x="695" y="145" width="210" height="115" rx="7" fill="#ffffff" stroke="#bb5b27"/>
+<text x="800.00" y="195.50" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">Proposal x ∼ q</text>
+<text x="800.00" y="219.50" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">learned geometry</text>
+<line x1="265.00" y1="200.00" x2="355.00" y2="200.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="595.00" y1="200.00" x2="685.00" y2="200.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="170" y="315" width="630" height="65" rx="7" fill="#ffffff" stroke="#167d8d"/>
+<text x="485.00" y="352.50" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">log q(x) = log p₀(T⁻¹x) − log |det DT(T⁻¹x)|</text>
+<text x="175.00" y="432.00" font-family="system-ui,sans-serif" font-size="18" fill="#275c91" font-weight="400" text-anchor="start">Density evaluation + exact target evaluation → Metropolis correction</text>
+</svg>

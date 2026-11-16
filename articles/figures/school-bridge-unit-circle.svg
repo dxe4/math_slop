@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" color="#1f2937" role="img" aria-labelledby="school-bridge-circle-title school-bridge-circle-desc">
+<title id="school-bridge-circle-title">A radius and a right triangle on the unit circle</title>
+<desc id="school-bridge-circle-desc">A circle centred at the origin has radius one. A first-quadrant point P has horizontal coordinate x and vertical coordinate y. Dropping a perpendicular from P to the horizontal axis gives a right triangle with legs x and y and hypotenuse one.</desc>
+<rect width="360" height="360" fill="#ffffff" />
+<circle cx="180" cy="180" r="135" fill="none" stroke="currentColor" />
+<path d="M25 180H335 M180 25V335 M180 180L261 72L261 180Z M251 180V170H261" fill="none" stroke="currentColor" />
+<g fill="currentColor" font-size="16"><text x="164" y="201">O</text><text x="269" y="72">P</text><text x="215" y="202">x</text><text x="272" y="132">y</text><text x="209" y="121">1</text></g>
+</svg>

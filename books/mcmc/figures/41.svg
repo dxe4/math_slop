@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Cluster updates can move a correlated region</title><desc id="desc">Neighboring aligned spins can be bonded and flipped together in a ferromagnetic Ising model.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Cluster updates can move a correlated region</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Neighboring aligned spins can be bonded and flipped together in a ferromagnetic Ising model.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Schematic cluster, not a simulated draw. For zero-field Ising, bond probability is 1−exp(−2βJ) between equal spins.</text>
+<circle cx="100.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="136.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="172.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="208.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="244.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="280.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="316.00" cy="150.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="100.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="121" y="176" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="136.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="136.00" y1="193.00" x2="172.00" y2="193.00" stroke="#bb5b27" stroke-width="3"/>
+<line x1="136.00" y1="193.00" x2="136.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="157" y="176" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="172.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="172.00" y1="193.00" x2="172.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<circle cx="208.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="244.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="280.00" cy="193.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="316.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="100.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="121" y="219" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="136.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="136.00" y1="236.00" x2="172.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="157" y="219" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="172.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="172.00" y1="236.00" x2="208.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<line x1="172.00" y1="236.00" x2="172.00" y2="279.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="193" y="219" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="208.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="208.00" y1="236.00" x2="208.00" y2="279.00" stroke="#bb5b27" stroke-width="3"/>
+<circle cx="244.00" cy="236.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="280.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="316.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="100.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="136.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="157" y="262" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="172.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="172.00" y1="279.00" x2="208.00" y2="279.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="193" y="262" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="208.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<line x1="208.00" y1="279.00" x2="208.00" y2="322.00" stroke="#bb5b27" stroke-width="3"/>
+<circle cx="244.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="280.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="316.00" cy="279.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="100.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="136.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="172.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="193" y="305" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="208.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="244.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="280.00" cy="322.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="316.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="100.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="136.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="172.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="208.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="244.00" cy="365.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="280.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="316.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="580.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="616.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="652.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="688.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="724.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="760.00" cy="150.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="796.00" cy="150.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="580.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="601" y="176" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="616.00" cy="193.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="616.00" y1="193.00" x2="652.00" y2="193.00" stroke="#bb5b27" stroke-width="3"/>
+<line x1="616.00" y1="193.00" x2="616.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="637" y="176" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="652.00" cy="193.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="652.00" y1="193.00" x2="652.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<circle cx="688.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="724.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="760.00" cy="193.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="796.00" cy="193.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="580.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="601" y="219" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="616.00" cy="236.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="616.00" y1="236.00" x2="652.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="637" y="219" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="652.00" cy="236.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="652.00" y1="236.00" x2="688.00" y2="236.00" stroke="#bb5b27" stroke-width="3"/>
+<line x1="652.00" y1="236.00" x2="652.00" y2="279.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="673" y="219" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="688.00" cy="236.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="688.00" y1="236.00" x2="688.00" y2="279.00" stroke="#bb5b27" stroke-width="3"/>
+<circle cx="724.00" cy="236.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="760.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="796.00" cy="236.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="580.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="616.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="637" y="262" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="652.00" cy="279.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="652.00" y1="279.00" x2="688.00" y2="279.00" stroke="#bb5b27" stroke-width="3"/>
+<rect x="673" y="262" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="688.00" cy="279.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<line x1="688.00" y1="279.00" x2="688.00" y2="322.00" stroke="#bb5b27" stroke-width="3"/>
+<circle cx="724.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="760.00" cy="279.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="796.00" cy="279.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="580.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="616.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="652.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<rect x="673" y="305" width="31" height="35" rx="7" fill="#fae0cc" stroke="none"/>
+<circle cx="688.00" cy="322.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="724.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="760.00" cy="322.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="796.00" cy="322.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="580.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="616.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="652.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="688.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="724.00" cy="365.00" r="10" fill="#ffffff" stroke="#167d8d" stroke-width="2"/>
+<circle cx="760.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="796.00" cy="365.00" r="10" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<text x="220.00" y="118.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">Before cluster flip</text>
+<text x="700.00" y="118.00" font-family="system-ui,sans-serif" font-size="18" fill="#233443" font-weight="400" text-anchor="middle">After cluster flip</text>
+<line x1="385.00" y1="265.00" x2="540.00" y2="265.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="180.00" y="443.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Filled = +1; open = −1. Highlighted connected cluster changes sign together.</text>
+</svg>

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "lab_id": "18_gaussian_processes",
+  "seed": 1818,
+  "method": "Cholesky conditioning of fixed-hyperparameter Gaussian processes",
+  "source_hashes": {
+    "labs/18_gaussian_processes.py": "58436a944afa8ae8658f1cc81f1f51b0b9d4c87bad8915ba53da2c0a57020a27",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "labs/extension_common.py": "3fdb0437bbd31cff4336dd0c1d6bdadd7f79eb7eb31cea9b216257383e75d56c",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "inputs": [
+      -2.0,
+      -1.0,
+      0.0,
+      1.0,
+      2.0
+    ],
+    "outcomes": [
+      0.2,
+      -0.7,
+      0.1,
+      0.9,
+      0.3
+    ],
+    "test_inputs": [
+      0.5,
+      3.0
+    ],
+    "amplitude": 1,
+    "noise_sd": 0.15,
+    "length_scales": [
+      0.4,
+      1.0,
+      2.0
+    ],
+    "numerical_jitter": [
+      0.0,
+      1e-12,
+      1e-10
+    ]
+  },
+  "metrics": {
+    "scenarios": [
+      {
+        "length_scale": 0.4,
+        "latent_mean": [
+          0.43725769534332837,
+          0.011260587563757743
+        ],
+        "latent_variance": [
+          0.6062599168237666,
+          0.998108540173363
+        ],
+        "observation_variance": [
+          0.6287599168237665,
+          1.020608540173363
+        ]
+      },
+      {
+        "length_scale": 1.0,
+        "latent_mean": [
+          0.6652684357321479,
+          -0.08811988588156053
+        ],
+        "latent_variance": [
+          0.02562177855448755,
+          0.5368562125351181
+        ],
+        "observation_variance": [
+          0.04812177855448755,
+          0.559356212535118
+        ]
+      },
+      {
+        "length_scale": 2.0,
+        "latent_mean": [
+          0.4313081399558518,
+          -0.32719029688365886
+        ],
+        "latent_variance": [
+          0.012830146347662774,
+          0.13939821496900928
+        ],
+        "observation_variance": [
+          0.03533014634766277,
+          0.16189821496900927
+        ]
+      }
+    ],
+    "reference_mean": 0.8756445707432965,
+    "reference_latent_variance": 0.46889472083328276,
+    "reference_observation_variance": 0.7188947208332828,
+    "near_duplicate_max_prediction_changes": [
+      0.0,
+      9.520162436160717e-13,
+      9.518386079321317e-11
+    ]
+  },
+  "checks": [
+    {
+      "id": "two_point_mean",
+      "actual": 0.8756445707432965,
+      "expected": 0.8756445707432965,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_point_latent_variance",
+      "actual": 0.46889472083328276,
+      "expected": 0.46889472083328265,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "observation_noise_addition",
+      "actual": 0.25,
+      "expected": 0.25,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "jitter_stability",
+      "actual": 9.518386079321317e-11,
+      "expected": 0.0,
+      "atol": 1e-08,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Kernel hyperparameters are fixed scenarios; intervals omit their uncertainty.",
+    "Dense covariance storage is quadratic and factorisation cubic in sample size."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "exact_loo_elpd": -7.501874866189045,
+  "linear_minus_intercept_elpd": 157.99988895516913,
+  "difference_se_iid_approx": 12.307474846529391,
+  "max_pareto_k": {
+    "intercept": 0.06941791298132655,
+    "linear": 0.25343370432420814
+  },
+  "pareto_threshold": {
+    "intercept": 0.7,
+    "linear": 0.7
+  },
+  "observed_discrepancy": 2.3621712665766985,
+  "ppc_tail_fraction": 0.0,
+  "diagnostics": {
+    "intercept": {
+      "max_rhat": 1.0002971685321471,
+      "min_bulk_ess": 3121.327102134028,
+      "min_tail_ess": 2584.148008080713,
+      "max_mcse_mean": 0.00245632079191624,
+      "divergences": 0,
+      "min_bfmi": 0.9985777252746069,
+      "max_treedepth_hits": 0,
+      "screen_passed": true
+    },
+    "linear": {
+      "max_rhat": 1.0021712986669773,
+      "min_bulk_ess": 4321.003988488959,
+      "min_tail_ess": 3105.9908570711964,
+      "max_mcse_mean": 0.0011679892559834947,
+      "divergences": 0,
+      "min_bfmi": 1.0717051334456917,
+      "max_treedepth_hits": 0,
+      "screen_passed": true
+    }
+  }
+}

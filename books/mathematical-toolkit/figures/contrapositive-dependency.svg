@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
+  <title id="title">A theorem and its contrapositive with a standing differentiability hypothesis</title>
+  <desc id="desc">The top row shows differentiable at a and local maximum implying derivative zero. The bottom row shows differentiable at a and derivative nonzero implying not a local maximum.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+  </defs>
+  <style>
+    .box{fill:#f8fafc;stroke:#334155;stroke-width:2;rx:12}.arrow{stroke:#2563eb;stroke-width:4;marker-end:url(#arrow)}.main{fill:#0f172a;font:18px system-ui,sans-serif}.tag{fill:#475569;font:15px system-ui,sans-serif}
+    @media (prefers-color-scheme:dark){.box{fill:#1e293b;stroke:#cbd5e1}.main{fill:#f8fafc}.tag{fill:#cbd5e1}.arrow{stroke:#93c5fd}}
+  </style>
+  <g aria-hidden="true">
+    <text class="tag" x="28" y="32">theorem</text>
+    <rect class="box" x="25" y="48" width="345" height="72"/><rect class="box" x="485" y="48" width="245" height="72"/>
+    <text class="main" x="48" y="78">f differentiable at a</text><text class="main" x="48" y="103">a is a local maximum</text>
+    <path class="arrow" d="M380 84H470"/><text class="main" x="548" y="91">f′(a) = 0</text>
+    <text class="tag" x="28" y="174">contrapositive, same domain</text>
+    <rect class="box" x="25" y="190" width="345" height="72"/><rect class="box" x="485" y="190" width="245" height="72"/>
+    <text class="main" x="48" y="220">f differentiable at a</text><text class="main" x="48" y="245">f′(a) ≠ 0</text>
+    <path class="arrow" d="M380 226H470"/><text class="main" x="512" y="233">a is not a local max</text>
+  </g>
+</svg>

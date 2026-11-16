@@ -1,0 +1,8 @@
+# Compute the integral exactly: integral from 0 to 2 of x^2 dx = 8/3.
+# Change count to 4, 8, 32, and 64. Explain the signed rectangle areas.
+scene "A midpoint sum for the area under a quadratic";
+domain -0.25 2.5;
+range -0.5 5;
+fn f(x) = x^2;
+plot f color teal;
+riemann f from 0 to 2 count 16;

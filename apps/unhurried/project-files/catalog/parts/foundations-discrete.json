@@ -1,0 +1,3419 @@
+{
+  "topics": [
+    {
+      "id": "mathematical-foundations",
+      "title": "Mathematical foundations and proof",
+      "summary": "A gentle toolkit for reading definitions, making conjectures, finding counterexamples, and writing finite proofs.",
+      "entryPrerequisites": []
+    },
+    {
+      "id": "logic-set-theory",
+      "title": "Logic and set theory",
+      "summary": "Precise statements, quantifiers, sets, functions, and infinity, with semantics kept distinct from proof syntax.",
+      "entryPrerequisites": [
+        "comfort with examples and counterexamples"
+      ]
+    },
+    {
+      "id": "number-theory",
+      "title": "Number theory",
+      "summary": "Divisibility, primes, congruences, and elementary cryptographic ideas through proof and play.",
+      "entryPrerequisites": [
+        "integer arithmetic"
+      ]
+    },
+    {
+      "id": "combinatorics",
+      "title": "Combinatorics",
+      "summary": "Count without double counting, discover recurrences, and use generating functions as a deeper optional route.",
+      "entryPrerequisites": [
+        "integer arithmetic"
+      ]
+    },
+    {
+      "id": "graph-theory",
+      "title": "Graph theory",
+      "summary": "Reason about networks, paths, colourings, trees, and planar structure.",
+      "entryPrerequisites": [
+        "sets of objects and pairs"
+      ]
+    },
+    {
+      "id": "theoretical-computer-science",
+      "title": "Theoretical computer science",
+      "summary": "Finite machines, algorithmic cost, and rigorous limits of computation.",
+      "entryPrerequisites": [
+        "basic functions and finite sets"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "read-a-definition",
+      "title": "How to read a definition without fear",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "A recipe is useful only when you know which ingredients are required.",
+      "outcome": "Separate hypothesis, conclusion, and example in the definition of an even integer.",
+      "prerequisites": [],
+      "formula": "n is even iff n=2k for some integer k",
+      "visual": "A three-column card for statement, witness, and nonexample.",
+      "proof": "Justify two classifications from the definition; defer general proof methods.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer arithmetic"
+        ],
+        "editionPrerequisites": [
+          "integer arithmetic; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic"
+      ],
+      "tags": [
+        "logic-set-theory",
+        "number-theory",
+        "definitions",
+        "integer-witnesses",
+        "evenness"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "test-a-conjecture",
+      "title": "One counterexample ends a universal claim",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "A pattern survives ten cases and fails on the eleventh.",
+      "outcome": "Test a universal statement and produce the smallest valid counterexample.",
+      "prerequisites": [],
+      "formula": "for all n in N, P(n); not P(k) for one k",
+      "visual": "A conjecture board with checked cases and a visible failing input.",
+      "proof": "Explain why one counterexample refutes a universal claim; finite checks alone do not prove a claim over an infinite domain.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://discrete.openmathbooks.org/dmoi4.html"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer arithmetic"
+        ],
+        "editionPrerequisites": [
+          "integer arithmetic; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic"
+      ],
+      "tags": [
+        "counterexamples",
+        "universal-statements",
+        "conjectures"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "draw-a-proof-map",
+      "title": "What a proof actually owes",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "A convincing picture can hide one missing case.",
+      "outcome": "Mark assumptions, intermediate claims, and the exact conclusion of a proof.",
+      "prerequisites": [
+        "explorations:refresher:algebra"
+      ],
+      "formula": "P implies R via P implies Q and Q implies R",
+      "visual": "A flow diagram with assumptions and conclusion labeled.",
+      "proof": "Validate one chain of implications; defer formal deduction systems.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "basic implication"
+        ],
+        "editionPrerequisites": [
+          "basic implication; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "elementary algebra"
+      ],
+      "tags": [
+        "proof-structure",
+        "implication",
+        "divisibility"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "direct-proof-evenness",
+      "title": "A first direct proof with even numbers",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "Two even calendar intervals add to an even interval.",
+      "outcome": "Prove the sum of two even integers is even, naming witnesses.",
+      "prerequisites": [
+        "explorations:refresher:algebra"
+      ],
+      "formula": "2a+2b=2(a+b)",
+      "visual": "Tiles pair into groups of two while algebra stays visible.",
+      "proof": "Give complete direct proof; contrast testing finitely many pairs.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "definition of even integer"
+        ],
+        "editionPrerequisites": [
+          "definition of even integer; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L2",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "elementary algebra"
+      ],
+      "tags": [
+        "direct-proof",
+        "integer-witnesses",
+        "evenness"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "contrapositive-parity",
+      "title": "Proving backward by contrapositive",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "A square being even tells you something about its root.",
+      "outcome": "Prove if n² is even then n is even using the odd-square contrapositive.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:expressions-laws-factorising"
+      ],
+      "formula": "n=2k+1 implies n²=2(2k(k+1))+1",
+      "visual": "A truth-preserving arrow reversal with cases for parity.",
+      "proof": "Prove integer claim; distinguish contrapositive from converse.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "odd and even integers",
+          "implication"
+        ],
+        "editionPrerequisites": [
+          "odd and even integers; recalled locally",
+          "implication; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L2",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "expanding polynomial expressions"
+      ],
+      "tags": [
+        "contrapositive",
+        "parity",
+        "integer-squares"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "induction-dominoes",
+      "title": "Induction is a chain with a base",
+      "topic": "mathematical-foundations",
+      "level": "L2",
+      "hook": "A row of dominoes falls only after the first one is tipped.",
+      "outcome": "Prove a formula for 1+...+n using base and inductive step.",
+      "prerequisites": [
+        "explorations:refresher:algebra"
+      ],
+      "formula": "1+...+n=n(n+1)/2",
+      "visual": "Domino and area views with a separate symbolic step.",
+      "proof": "Prove for all positive integers; a finite animation is illustration only.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer arithmetic",
+          "direct proof"
+        ],
+        "editionPrerequisites": [
+          "integer arithmetic; recalled locally",
+          "direct proof; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "elementary algebra"
+      ],
+      "tags": [
+        "mathematical-induction",
+        "summation",
+        "proof-structure"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "strong-induction",
+      "title": "When the next step needs every earlier step",
+      "topic": "mathematical-foundations",
+      "level": "L2",
+      "hook": "Making any postage amount from smaller amounts resembles recursive construction.",
+      "outcome": "Use strong induction to prove every integer n≥2 factors into primes.",
+      "prerequisites": [
+        "explorations:induction-dominoes"
+      ],
+      "formula": "n=ab with 1<a,b<n",
+      "visual": "Factor tree reveals which smaller cases are invoked.",
+      "proof": "Prove existence of prime factorization, not uniqueness here.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "prime and composite numbers",
+          "induction"
+        ],
+        "editionPrerequisites": [
+          "prime and composite numbers; recalled locally",
+          "induction; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "induction"
+      ],
+      "tags": [
+        "strong-induction",
+        "prime-factorization",
+        "existence-proofs"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "invariants-reachability",
+      "title": "An invariant says what cannot happen",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "A puzzle move may preserve a hidden colour parity.",
+      "outcome": "Find a parity invariant and use it to rule out an unreachable state.",
+      "prerequisites": [
+        "explorations:direct-proof-evenness"
+      ],
+      "formula": "I(state) mod 2 is constant",
+      "visual": "A move graph colours states by parity with textual state listing.",
+      "proof": "Prove impossibility from an invariant; an unsuccessful bounded search does not prove impossibility.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "parity",
+          "legal moves"
+        ],
+        "editionPrerequisites": [
+          "parity; recalled locally",
+          "legal moves; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L2",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "parity"
+      ],
+      "tags": [
+        "invariants",
+        "reachability",
+        "parity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "existence-uniqueness",
+      "title": "Existence and uniqueness are two jobs",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "A seating plan can exist without being the only one.",
+      "outcome": "Separate existence from uniqueness in the division algorithm for a simple case.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems"
+      ],
+      "formula": "a=bq+r, 0≤r<b",
+      "visual": "Number-line intervals show quotient and remainder.",
+      "proof": "Prove uniqueness assuming existence for positive b; defer full existence proof.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://www.wstein.org/ent/"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer arithmetic",
+          "inequalities"
+        ],
+        "editionPrerequisites": [
+          "integer arithmetic; recalled locally",
+          "inequalities; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L2",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "inequalities"
+      ],
+      "tags": [
+        "existence-and-uniqueness",
+        "division-algorithm",
+        "well-ordering"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "infinite-pigeonholes",
+      "title": "Finite examples and infinite claims",
+      "topic": "mathematical-foundations",
+      "level": "L1",
+      "hook": "How can infinitely many guests fit in even-numbered rooms?",
+      "outcome": "Construct a bijection between N and its even subset and inspect cardinality.",
+      "prerequisites": [
+        "explorations:refresher:functions"
+      ],
+      "formula": "f(n)=2n",
+      "visual": "Two numbered lists linked by arrows, with complete table fallback.",
+      "proof": "Prove injectivity and surjectivity; defer Cantor diagonalization.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "foundations",
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "functions",
+          "natural numbers"
+        ],
+        "editionPrerequisites": [
+          "functions; recalled locally",
+          "natural numbers; recalled locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L3",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "elementary functions"
+      ],
+      "tags": [
+        "infinite-sets",
+        "bijections",
+        "cardinality"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "and-or-not",
+      "title": "What and, or, and not actually say",
+      "topic": "logic-set-theory",
+      "level": "L1",
+      "hook": "A dinner invitation with or has more possibilities than it first seems.",
+      "outcome": "Evaluate conjunction, inclusive disjunction, and negation on a truth table.",
+      "prerequisites": [],
+      "formula": "P∨Q is true if at least one is true",
+      "visual": "Four-row truth table with plain-language cases.",
+      "proof": "Truth-table equivalences are exhaustive for propositional inputs.",
+      "sources": [
+        "https://forallx.openlogicproject.org/",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "statements with truth values"
+      ],
+      "tags": [
+        "propositional-logic",
+        "truth-tables",
+        "de-morgan-laws"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "if-then",
+      "title": "The surprising truth of if–then",
+      "topic": "logic-set-theory",
+      "level": "L1",
+      "hook": "A promise about rain says nothing when the sky stays clear.",
+      "outcome": "Distinguish material implication from everyday causal language.",
+      "prerequisites": [
+        "explorations:and-or-not"
+      ],
+      "formula": "P→Q ≡ ¬P∨Q",
+      "visual": "Truth-table tiles with a highlighted false row.",
+      "proof": "Explain formal semantics; defer claims about conversational meaning.",
+      "sources": [
+        "https://forallx.openlogicproject.org/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "truth values"
+      ],
+      "tags": [
+        "material-implication",
+        "contrapositive",
+        "truth-tables"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "quantifier-order",
+      "title": "Every person has a book: whose book?",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "A book club sentence changes meaning when two words trade places.",
+      "outcome": "Distinguish ∀x∃y R(x,y) from ∃y∀x R(x,y).",
+      "prerequisites": [
+        "explorations:refresher:sets"
+      ],
+      "formula": "∀x∃y R(x,y) versus ∃y∀x R(x,y)",
+      "visual": "Finite people-book matrix with matching and shared-column cases.",
+      "proof": "Give finite countermodel to converse; no general equivalence asserted.",
+      "sources": [
+        "https://forallx.openlogicproject.org/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "sets",
+        "relations"
+      ],
+      "tags": [
+        "quantifiers",
+        "witnesses",
+        "countermodels"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "negate-quantifiers",
+      "title": "Negating an everyone claim",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "One missed train refutes a claim about every train.",
+      "outcome": "Apply De Morgan laws and switch quantifiers when negating a statement.",
+      "prerequisites": [
+        "explorations:and-or-not",
+        "explorations:quantifier-order"
+      ],
+      "formula": "¬∀x P(x) ≡ ∃x ¬P(x)",
+      "visual": "Nested statement cards reveal quantifier scope.",
+      "proof": "Prove by semantic equivalence; avoid merely reversing English words.",
+      "sources": [
+        "https://forallx.openlogicproject.org/",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "and/or/not",
+        "quantifiers"
+      ],
+      "tags": [
+        "quantifier-negation",
+        "de-morgan-laws",
+        "witnesses"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "sets-and-membership",
+      "title": "A set is its members, not its drawing",
+      "topic": "logic-set-theory",
+      "level": "L1",
+      "hook": "Two playlists with different order can still contain the same songs.",
+      "outcome": "Use membership, subset, and equality for finite sets.",
+      "prerequisites": [],
+      "formula": "A=B iff A⊆B and B⊆A",
+      "visual": "Venn and roster views kept in sync.",
+      "proof": "Justify equality by two inclusions; avoid picture-only argument.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "basic collections"
+      ],
+      "tags": [
+        "set-membership",
+        "subsets",
+        "set-equality"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "power-set",
+      "title": "Why n objects have 2^n subsets",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "Each option on a menu can be included or skipped.",
+      "outcome": "Bijection between subsets of an n-set and binary strings of length n.",
+      "prerequisites": [
+        "explorations:refresher:sets",
+        "explorations:refresher:counting"
+      ],
+      "formula": "abs(P(A))=2^n when abs(A)=n",
+      "visual": "Toggle chips list corresponding binary strings.",
+      "proof": "Prove bijection; defer infinite power-set theorem.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://discrete.openmathbooks.org/dmoi4.html"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "finite sets",
+        "multiplication principle"
+      ],
+      "tags": [
+        "power-sets",
+        "binary-encoding",
+        "bijections"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "functions-inverse",
+      "title": "When can a function be undone?",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "A mislabeled coat check cannot reliably return every coat.",
+      "outcome": "Test injectivity and surjectivity and relate them to inverses.",
+      "prerequisites": [
+        "explorations:refresher:sets",
+        "explorations:refresher:functions"
+      ],
+      "formula": "f⁻¹∘f=id_A and f∘f⁻¹=id_B",
+      "visual": "Arrow diagram with collisions and unused targets.",
+      "proof": "Prove two-sided inverse implies bijection for sets; no numerical inverse shortcut.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "sets",
+        "functions"
+      ],
+      "tags": [
+        "inverse-functions",
+        "bijections",
+        "images-and-preimages"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "relations-equivalence",
+      "title": "Grouping by an equivalence relation",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "Different calendar dates share a weekday.",
+      "outcome": "Check reflexive, symmetric, transitive properties for congruence mod 7.",
+      "prerequisites": [
+        "explorations:divisibility"
+      ],
+      "formula": "a~b iff 7 divides (a-b)",
+      "visual": "Calendar-day nodes merge into seven classes.",
+      "proof": "Prove the three properties; defer quotient-set abstraction beyond finite examples.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "relations",
+        "modular remainder"
+      ],
+      "tags": [
+        "equivalence-relations",
+        "partitions",
+        "congruence-classes"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "countable-diagonal",
+      "title": "Why no list catches every binary sequence",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "A purported catalogue of all infinite yes/no diaries misses one.",
+      "outcome": "Construct a diagonal binary sequence different from each listed sequence.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem"
+      ],
+      "formula": "d_n=1-a_nn",
+      "visual": "A finite prefix grid and an explicit infinite-rule card.",
+      "proof": "Give Cantor diagonal proof for {0,1}^N; finite grid is not proof.",
+      "sources": [
+        "https://slc.openlogicproject.org/",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "infinite sequences"
+      ],
+      "tags": [
+        "diagonal-argument",
+        "uncountability",
+        "binary-sequences"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "paradox-naive-sets",
+      "title": "The collection that cannot be a set",
+      "topic": "logic-set-theory",
+      "level": "L2",
+      "hook": "A filing rule that files every file that does not file itself breaks.",
+      "outcome": "Explain Russell's paradox and why unrestricted comprehension fails.",
+      "prerequisites": [
+        "explorations:refresher:sets"
+      ],
+      "formula": "R={x:x∉x} implies R∈R iff R∉R",
+      "visual": "A self-membership decision card, no misleading Venn picture.",
+      "proof": "Derive contradiction from unrestricted comprehension; defer axiomatic set theory.",
+      "sources": [
+        "https://richardhammack.github.io/BookOfProof/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "logic-set-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "sets",
+        "self-reference"
+      ],
+      "tags": [
+        "russell-paradox",
+        "set-comprehension",
+        "contradiction"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "divisibility",
+      "title": "Divisibility as a witness",
+      "topic": "number-theory",
+      "level": "L1",
+      "hook": "A tiled floor fits perfectly when no pieces remain.",
+      "outcome": "Express a divides b using an integer witness and derive a small property.",
+      "prerequisites": [],
+      "formula": "a divides b iff b=ak for some integer k",
+      "visual": "Rows of equal tiles show exact and inexact fits.",
+      "proof": "Prove a divides b and b divides c implies a divides c.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer multiplication"
+        ],
+        "editionPrerequisites": [
+          "integer multiplication, refreshed locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer multiplication"
+      ],
+      "tags": [
+        "number-theory",
+        "foundations",
+        "integer-witnesses",
+        "divisibility",
+        "counterexamples"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "euclidean-algorithm",
+      "title": "The ancient algorithm hiding in rectangles",
+      "topic": "number-theory",
+      "level": "L1",
+      "hook": "Cut the largest squares from a rectangle until none is left.",
+      "outcome": "Compute gcd by repeated remainders and explain why gcd is unchanged.",
+      "prerequisites": [
+        "explorations:existence-uniqueness"
+      ],
+      "formula": "gcd(a,b)=gcd(b,a mod b)",
+      "visual": "Rectangle tiling paired with remainder table.",
+      "proof": "Prove common divisors persist each step; termination follows decreasing remainders.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer division"
+        ],
+        "editionPrerequisites": [
+          "integer division with remainder, refreshed locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer division with remainder"
+      ],
+      "tags": [
+        "euclidean-algorithm",
+        "greatest-common-divisor",
+        "termination"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "bezout",
+      "title": "A gcd as a linear combination",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "Receipts for two pack sizes can combine to make one unit.",
+      "outcome": "Back-substitute the Euclidean algorithm to find x,y with ax+by=gcd(a,b).",
+      "prerequisites": [
+        "explorations:euclidean-algorithm",
+        "explorations:existence-uniqueness"
+      ],
+      "formula": "ax+by=gcd(a,b)",
+      "visual": "Remainder ledger traces each coefficient backward.",
+      "proof": "Prove constructed identity for an example; general existence via algorithm invariant.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Euclidean algorithm",
+          "signed integers"
+        ],
+        "editionPrerequisites": [
+          "Euclidean algorithm, recapped locally",
+          "signed integers"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "Euclidean algorithm",
+        "signed integers",
+        "division algorithm for integers"
+      ],
+      "tags": [
+        "bezout-identity",
+        "linear-combinations",
+        "back-substitution"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "primes-infinite",
+      "title": "Why the primes never run out",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "Even an enormous list of primes leaves room for another.",
+      "outcome": "Give Euclid's proof that infinitely many primes exist.",
+      "prerequisites": [
+        "explorations:divisibility"
+      ],
+      "formula": "N=p1 p2 ... pk+1",
+      "visual": "A finite prime list grows a new nondivisible candidate.",
+      "proof": "Prove a new prime divisor exists; do not claim N itself is prime.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "divisibility",
+          "prime definition"
+        ],
+        "editionPrerequisites": [
+          "divisibility and prime numbers, explained locally",
+          "proof by contradiction, introduced in the article"
+        ],
+        "rationale": "Prime divisors and contradiction are introduced in the body; integer arithmetic and divisibility support the argument.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "divisibility"
+      ],
+      "tags": [
+        "infinitely-many-primes",
+        "proof-by-contradiction",
+        "prime-divisors"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "modular-clock",
+      "title": "Arithmetic on a clock",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "A weekly rota repeats after seven days.",
+      "outcome": "Calculate congruences and explain why addition and multiplication respect them.",
+      "prerequisites": [
+        "explorations:bezout"
+      ],
+      "formula": "a≡b (mod m) iff m divides (a-b)",
+      "visual": "Clock and residue table agree for negative inputs.",
+      "proof": "Prove compatibility with + and ×; clock is an example only.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer arithmetic"
+        ],
+        "editionPrerequisites": [
+          "integer remainders, explained locally",
+          "greatest common divisor, explained locally"
+        ],
+        "rationale": "Remainders and gcd are defined locally, but the proof explicitly uses the established Bézout coefficient identity without deriving it.",
+        "catalogLevel": "L1",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "Bézout identity"
+      ],
+      "tags": [
+        "modular-arithmetic",
+        "additive-orbits",
+        "greatest-common-divisor"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "modular-inverses",
+      "title": "When division works modulo m",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "A step size reaches every stop only for some clocks.",
+      "outcome": "Find a multiplicative inverse modulo m exactly when gcd(a,m)=1.",
+      "prerequisites": [
+        "explorations:bezout",
+        "explorations:modular-clock"
+      ],
+      "formula": "ax≡1 (mod m) iff gcd(a,m)=1",
+      "visual": "Residue orbit shows collisions and an inverse table.",
+      "proof": "Prove iff via Bezout and divisibility.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "gcd",
+          "Bezout",
+          "congruence"
+        ],
+        "editionPrerequisites": [
+          "congruence, gcd and Bézout, refreshed locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "Bézout identity",
+        "congruence"
+      ],
+      "tags": [
+        "modular-inverses",
+        "coprimality",
+        "linear-congruences"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "chinese-remainder",
+      "title": "Two clocks can locate one moment",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "A timestamp says day 2 of a three-day cycle and day 4 of a five-day cycle.",
+      "outcome": "Solve two congruences with coprime moduli and explain uniqueness modulo product.",
+      "prerequisites": [
+        "explorations:modular-inverses",
+        "explorations:bezout"
+      ],
+      "formula": "x≡a (mod m), x≡b (mod n)",
+      "visual": "Two residue timelines intersect, with numerical readout.",
+      "proof": "Construct a solution and prove uniqueness for coprime m,n; defer general noncoprime case.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "modular inverses",
+          "coprime integers"
+        ],
+        "editionPrerequisites": [
+          "congruence and modular inverse, refreshed locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "modular inverses",
+        "coprime integers",
+        "Bézout identity"
+      ],
+      "tags": [
+        "chinese-remainder-theorem",
+        "simultaneous-congruences",
+        "uniqueness"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "fermat-little",
+      "title": "A prime modulus makes a striking pattern",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "Powers of two return to one on a prime-sized clock.",
+      "outcome": "Prove Fermat's little theorem by permuting nonzero residues.",
+      "prerequisites": [
+        "explorations:primes-infinite",
+        "explorations:modular-inverses"
+      ],
+      "formula": "a^(p-1)≡1 (mod p) when p∤a",
+      "visual": "A permutation of nonzero residues under multiplication by a.",
+      "proof": "Prove theorem for prime p; composite counterexamples prevent converse.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "prime",
+          "modular inverses"
+        ],
+        "editionPrerequisites": [
+          "prime numbers and modular inverse, refreshed locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "prime numbers",
+        "modular inverses",
+        "finite products"
+      ],
+      "tags": [
+        "fermat-little-theorem",
+        "residue-permutations",
+        "modular-exponentiation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "repeated-squaring",
+      "title": "Huge powers with few multiplications",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "A password-sized exponent need not require a mountain of multiplications.",
+      "outcome": "Compute modular powers using binary expansion and repeated squaring.",
+      "prerequisites": [
+        "explorations:modular-clock",
+        "explorations:refresher:powers"
+      ],
+      "formula": "a^(2k)=(a^k)^2",
+      "visual": "Exponent bits control a table of successive squares.",
+      "proof": "Prove loop invariant for result and base; cost count depends on bit length.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "binary digits",
+          "modular multiplication"
+        ],
+        "editionPrerequisites": [
+          "binary expansion and modular multiplication, refreshed locally"
+        ],
+        "rationale": "The body recalls the named definitions locally. The authoritative prerequisites name the arithmetic, algebra or prior result actually used by the proof; historical wording is retained here.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "binary expansion",
+        "modular multiplication",
+        "laws of exponents"
+      ],
+      "tags": [
+        "binary-exponentiation",
+        "loop-invariants",
+        "modular-arithmetic"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "rsa-toy",
+      "title": "A toy lock with arithmetic keys",
+      "topic": "number-theory",
+      "level": "L2",
+      "hook": "A public lock can be shown on a small number board.",
+      "outcome": "Run a tiny RSA example and state the number-theoretic condition behind decryption.",
+      "prerequisites": [
+        "explorations:primes-infinite",
+        "explorations:modular-inverses",
+        "explorations:fermat-little",
+        "explorations:repeated-squaring",
+        "explorations:chinese-remainder"
+      ],
+      "formula": "m^(ed)≡m (mod n) under stated key conditions",
+      "visual": "Small residue table and exact key parameters, clearly labeled toy scale.",
+      "proof": "Explain correctness under chosen coprime-message conditions; security claims deferred.",
+      "sources": [
+        "https://www.wstein.org/ent/",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "number-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "primes",
+          "modular inverses",
+          "Fermat or Euler theorem"
+        ],
+        "editionPrerequisites": [
+          "primes, modular inverse and Fermat's theorem, refreshed locally"
+        ],
+        "rationale": "The proof uses Fermat at each prime and coprime divisibility; the worked decryption uses repeated squaring. Euler theorem is not used.",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "prime numbers",
+        "modular inverses",
+        "Fermat little theorem",
+        "repeated squaring",
+        "coprime divisibility"
+      ],
+      "tags": [
+        "rsa",
+        "modular-exponentiation",
+        "correctness-proofs"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "counting-choices",
+      "title": "The multiplication principle",
+      "topic": "combinatorics",
+      "level": "L1",
+      "hook": "A cafe menu turns two choices into many lunches.",
+      "outcome": "Count ordered selections from finite stages with fixed extension counts.",
+      "prerequisites": [],
+      "formula": "N=n1 n2 ... nk",
+      "visual": "Choice tree and product table with zero-choice edge case.",
+      "proof": "Prove by disjoint extension of each partial choice.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "finite lists"
+      ],
+      "tags": [
+        "discrete-combinatorics",
+        "foundations",
+        "product-rule",
+        "choice-trees",
+        "ordered-outcomes"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "permutations-duplicates",
+      "title": "Why anagrams need division",
+      "topic": "combinatorics",
+      "level": "L2",
+      "hook": "MISSISSIPPI has many arrangements but repeated letters look alike.",
+      "outcome": "Count permutations of a multiset and explain the denominator.",
+      "prerequisites": [
+        "explorations:refresher:counting"
+      ],
+      "formula": "n!/(m1! ... mr!)",
+      "visual": "Swap repeated tokens while output word stays fixed.",
+      "proof": "Prove each distinct word has equal number of labelings.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "factorials",
+        "multiplication principle"
+      ],
+      "tags": [
+        "multiset-permutations",
+        "overcounting",
+        "factorials"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "combinations",
+      "title": "Choosing without caring about order",
+      "topic": "combinatorics",
+      "level": "L1",
+      "hook": "A walking group of three has no first, second, or third member.",
+      "outcome": "Derive binomial coefficient from ordered selections.",
+      "prerequisites": [
+        "explorations:refresher:sets"
+      ],
+      "formula": "C(n,k)=n!/(k!(n-k)!)",
+      "visual": "Ordered lists collapse to unordered groups.",
+      "proof": "Prove k! overcount for distinct items; clarify k=0.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "factorials",
+          "finite sets"
+        ],
+        "editionPrerequisites": [
+          "multiplication principle, explained locally",
+          "factorial notation, explained locally"
+        ],
+        "rationale": "The product rule and factorial notation are taught before the unordered-group proof; arithmetic and finite collections suffice.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer arithmetic",
+        "finite sets"
+      ],
+      "tags": [
+        "binomial-coefficients",
+        "unordered-selections",
+        "double-counting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "pascal-identity",
+      "title": "A doorway into Pascal's triangle",
+      "topic": "combinatorics",
+      "level": "L2",
+      "hook": "A committee either includes its chair or it does not.",
+      "outcome": "Prove Pascal's identity by partitioning subsets.",
+      "prerequisites": [
+        "explorations:combinations"
+      ],
+      "formula": "C(n,k)=C(n-1,k)+C(n-1,k-1)",
+      "visual": "Triangle highlights two parent entries and subset cards.",
+      "proof": "Combinatorial proof; algebra is optional second proof.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "combinations"
+      ],
+      "tags": [
+        "pascal-identity",
+        "binomial-coefficients",
+        "combinatorial-proofs"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "pigeonhole",
+      "title": "Too many letters, too few mailboxes",
+      "topic": "combinatorics",
+      "level": "L1",
+      "hook": "Thirteen people force a shared birth month.",
+      "outcome": "Use pigeonhole principle and state the sharp threshold.",
+      "prerequisites": [
+        "explorations:refresher:sets"
+      ],
+      "formula": "N>k implies some box contains at least 2",
+      "visual": "Place N chips in k boxes with counts announced.",
+      "proof": "Prove by contradiction using max one per box; no probability claim.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "finite sets"
+      ],
+      "tags": [
+        "pigeonhole-principle",
+        "capacity-arguments",
+        "sharp-bounds"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "inclusion-exclusion",
+      "title": "Counting overlaps only once",
+      "topic": "combinatorics",
+      "level": "L2",
+      "hook": "A festival attendee may appear on two mailing lists.",
+      "outcome": "Count union of two and three finite sets without double counting.",
+      "prerequisites": [
+        "explorations:refresher:sets"
+      ],
+      "formula": "abs(A∪B)=abs(A)+abs(B)-abs(A∩B)",
+      "visual": "Overlapping regions with numerical ledger.",
+      "proof": "Prove two-set formula by disjoint pieces; derive three-set form.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "set union/intersection"
+      ],
+      "tags": [
+        "inclusion-exclusion",
+        "set-unions",
+        "intersection-counts"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "derangements",
+      "title": "No gift returns to its owner",
+      "topic": "combinatorics",
+      "level": "L2",
+      "hook": "A secret gift exchange forbids self-matches.",
+      "outcome": "Count derangements by inclusion–exclusion for small n and derive formula.",
+      "prerequisites": [
+        "explorations:permutations-duplicates",
+        "explorations:inclusion-exclusion"
+      ],
+      "formula": "D_n=n! sum_(k=0)^n (-1)^k/k!",
+      "visual": "Permutation cards mark fixed points; table compares enumeration.",
+      "proof": "Prove exact formula; numerical approximation to n!/e is deferred.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "permutations",
+        "inclusion-exclusion"
+      ],
+      "tags": [
+        "derangements",
+        "fixed-points",
+        "inclusion-exclusion"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "recurrences-rabbits",
+      "title": "A recurrence remembers its past",
+      "topic": "combinatorics",
+      "level": "L1",
+      "hook": "A staircase can be climbed in one- or two-step moves.",
+      "outcome": "Derive Fibonacci recurrence from last-step cases.",
+      "prerequisites": [
+        "explorations:refresher:counting"
+      ],
+      "formula": "F_n=F_(n-1)+F_(n-2)",
+      "visual": "Staircase path tree with n=0 base case.",
+      "proof": "Prove recurrence via disjoint cases; biological rabbit story is not a model.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "finite counting",
+        "addition principle"
+      ],
+      "tags": [
+        "recurrences",
+        "fibonacci-numbers",
+        "path-counting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "generating-functions",
+      "title": "A polynomial is a counting machine",
+      "topic": "combinatorics",
+      "level": "L1",
+      "hook": "A bag of coins can be encoded by multiplying short polynomials.",
+      "outcome": "Read coefficients of a generating function as counts of choices.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:expressions-laws-factorising",
+        "explorations:refresher:counting"
+      ],
+      "formula": "[x^k] product_i (1+x^i)",
+      "visual": "Coefficient ledger shows each term's combinatorial choice.",
+      "proof": "Prove finite-product interpretation; formal power series operations introduced cautiously.",
+      "sources": [
+        "https://www2.math.upenn.edu/~wilf/DownldGF.html",
+        "https://discrete.openmathbooks.org/dmoi4.html"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "polynomial multiplication",
+        "finite counting"
+      ],
+      "tags": [
+        "generating-functions",
+        "coefficient-counting",
+        "weighted-subsets"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "stars-and-bars",
+      "title": "Distributing identical treats",
+      "topic": "combinatorics",
+      "level": "L1",
+      "hook": "How many ways to split identical pastries among friends?",
+      "outcome": "Derive weak compositions with bars and stars.",
+      "prerequisites": [
+        "explorations:combinations"
+      ],
+      "formula": "x1+...+xk=n has C(n+k-1,k-1) solutions",
+      "visual": "Move bars among stars, including zero shares.",
+      "proof": "Prove bijection; distinguish identical from distinct treats.",
+      "sources": [
+        "https://discrete.openmathbooks.org/dmoi4.html",
+        "https://richardhammack.github.io/BookOfProof/"
+      ],
+      "catalogFields": [
+        "discrete-combinatorics"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "combinations",
+        "nonnegative integers"
+      ],
+      "tags": [
+        "stars-and-bars",
+        "weak-compositions",
+        "bijections"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "graph-basics",
+      "title": "Dots, lines, and what a graph forgets",
+      "topic": "graph-theory",
+      "level": "L1",
+      "hook": "A transit map can bend tracks without changing connections.",
+      "outcome": "Define a simple undirected graph and distinguish it from a multigraph.",
+      "prerequisites": [
+        "explorations:refresher:sets"
+      ],
+      "formula": "G=(V,E), E subset of 2-element subsets of V",
+      "visual": "Same adjacency list drawn in two layouts.",
+      "proof": "Justify representation equivalence; no geometric distance is implied.",
+      "sources": [
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction",
+        "https://diestel-graph-theory.com/basic.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "finite sets"
+      ],
+      "tags": [
+        "simple-graphs",
+        "adjacency-lists",
+        "graph-modelling"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "degree-handshake",
+      "title": "Every edge has two ends",
+      "topic": "graph-theory",
+      "level": "L1",
+      "hook": "At a party, odd handshake counts come in pairs.",
+      "outcome": "Prove sum of vertex degrees equals twice edge count.",
+      "prerequisites": [
+        "explorations:refresher:networks"
+      ],
+      "formula": "sum_(v in V) deg(v)=2 abs(E)",
+      "visual": "Each edge contributes one token to each endpoint tally.",
+      "proof": "Double-count proof; loops need a degree convention and are excluded.",
+      "sources": [
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction",
+        "https://diestel-graph-theory.com/basic.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "graph basics",
+        "finite sums"
+      ],
+      "tags": [
+        "handshaking-lemma",
+        "degree-parity",
+        "double-counting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "walk-trail-path",
+      "title": "Three ways through a network",
+      "topic": "graph-theory",
+      "level": "L1",
+      "hook": "Retracing a street differs from revisiting an intersection.",
+      "outcome": "Classify walks, trails, and simple paths in finite graphs.",
+      "prerequisites": [
+        "explorations:refresher:networks"
+      ],
+      "formula": "path v0,v1,...,vk has distinct vertices",
+      "visual": "Route highlighter and vertex/edge visit log.",
+      "proof": "Definitions checked on examples; no Euler theorem yet.",
+      "sources": [
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction",
+        "https://diestel-graph-theory.com/basic.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "graph basics"
+      ],
+      "tags": [
+        "walks-trails-paths",
+        "cycle-removal",
+        "graph-connectivity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "euler-trails",
+      "title": "Can every bridge be crossed once?",
+      "topic": "graph-theory",
+      "level": "L2",
+      "hook": "A city walk asks for each bridge exactly once.",
+      "outcome": "Use vertex parity to decide Euler trail existence in a connected graph.",
+      "prerequisites": [
+        "explorations:degree-handshake",
+        "explorations:walk-trail-path"
+      ],
+      "formula": "For a connected graph, an Euler trail exists iff there are 0 or 2 odd-degree vertices; it is a circuit iff there are 0.",
+      "visual": "Bridge network with degree table and proposed traversal.",
+      "proof": "Prove necessity by counting entry and exit at vertices; outline edge-splicing sufficiency and show a disconnected counterexample.",
+      "sources": [
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction",
+        "https://diestel-graph-theory.com/basic.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "degree",
+        "connectedness",
+        "trail"
+      ],
+      "tags": [
+        "euler-trails",
+        "degree-parity",
+        "cycle-splicing"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "trees",
+      "title": "Why a tree has one fewer edge than vertices",
+      "topic": "graph-theory",
+      "level": "L2",
+      "hook": "A family connection chart with no cycles has a unique route.",
+      "outcome": "Prove equivalent tree properties for finite connected acyclic graphs.",
+      "prerequisites": [
+        "explorations:walk-trail-path",
+        "explorations:induction-dominoes"
+      ],
+      "formula": "abs(E)=abs(V)-1 for a tree",
+      "visual": "Delete leaves while preserving connectedness of remainder.",
+      "proof": "Induction proves edge formula; edge count alone does not characterize trees.",
+      "sources": [
+        "https://diestel-graph-theory.com/basic.html",
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "paths",
+        "cycles",
+        "finite induction"
+      ],
+      "tags": [
+        "trees",
+        "leaf-deletion",
+        "unique-paths"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "shortest-path",
+      "title": "Shortest routes as a proof problem",
+      "topic": "graph-theory",
+      "level": "L2",
+      "hook": "A map algorithm needs evidence that its route is truly shortest.",
+      "outcome": "Trace breadth-first search and prove layer distance for unweighted graphs.",
+      "prerequisites": [
+        "explorations:graph-basics",
+        "explorations:walk-trail-path"
+      ],
+      "formula": "dist(s,v)=first BFS layer of v",
+      "visual": "Queue log and distance labels with textual equivalent.",
+      "proof": "Prove BFS optimality for unweighted edges; weighted case deferred.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://diestel-graph-theory.com/basic.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "graphs",
+        "paths",
+        "queues"
+      ],
+      "tags": [
+        "breadth-first-search",
+        "shortest-paths",
+        "queue-invariants"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "graph-colouring",
+      "title": "Scheduling by colouring conflicts",
+      "topic": "graph-theory",
+      "level": "L2",
+      "hook": "Meetings sharing a person cannot occupy the same slot.",
+      "outcome": "Model conflicts as graph colouring and bound colours by degree.",
+      "prerequisites": [
+        "explorations:refresher:networks"
+      ],
+      "formula": "chi(G)≤Delta(G)+1",
+      "visual": "Colour slots and conflict adjacency list.",
+      "proof": "Prove greedy upper bound; optimal colouring is not found by every greedy order.",
+      "sources": [
+        "https://diestel-graph-theory.com/basic.html",
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "graph basics",
+        "degree"
+      ],
+      "tags": [
+        "vertex-colouring",
+        "greedy-algorithms",
+        "chromatic-number"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "planar-euler",
+      "title": "A formula for flat networks",
+      "topic": "graph-theory",
+      "level": "L3",
+      "hook": "Faces of a street map obey a surprising count.",
+      "outcome": "Derive Euler's formula for connected planar embeddings.",
+      "prerequisites": [
+        "explorations:trees",
+        "library:book-discrete-mathematics-proof-counting-structure:planarity-coloring-matchings"
+      ],
+      "formula": "V-E+F=2",
+      "visual": "Add edges to a spanning tree and count new faces.",
+      "proof": "Prove finite connected planar case; drawing crossings change applicability.",
+      "sources": [
+        "https://diestel-graph-theory.com/basic.html",
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "trees",
+        "graph embedding"
+      ],
+      "tags": [
+        "plane-graphs",
+        "euler-formula",
+        "face-counting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "matching",
+      "title": "Pairing people and tasks",
+      "topic": "graph-theory",
+      "level": "L2",
+      "hook": "A fair assignment needs distinct partners for distinct requests.",
+      "outcome": "Use augmenting paths to improve a matching in a bipartite graph.",
+      "prerequisites": [
+        "explorations:walk-trail-path",
+        "library:book-discrete-mathematics-proof-counting-structure:graphs-trees-connectivity"
+      ],
+      "formula": "size(M')=size(M)+1 after augmentation",
+      "visual": "Alternate matched and unmatched edges along a path.",
+      "proof": "Prove augmentation grows matching; full Hall theorem deferred.",
+      "sources": [
+        "https://diestel-graph-theory.com/basic.html",
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "paths",
+        "bipartite graphs"
+      ],
+      "tags": [
+        "bipartite-matchings",
+        "augmenting-paths",
+        "berge-lemma"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "graph-isomorphism",
+      "title": "Same network, different drawing",
+      "topic": "graph-theory",
+      "level": "L1",
+      "hook": "Two social diagrams may hide the same relationships.",
+      "outcome": "Test graph isomorphism using degree and adjacency; construct an explicit bijection.",
+      "prerequisites": [
+        "explorations:refresher:networks",
+        "explorations:refresher:functions"
+      ],
+      "formula": "{u,v} in E_G iff {f(u),f(v)} in E_H",
+      "visual": "Relabel vertices and compare adjacency tables.",
+      "proof": "Prove an exhibited map is an isomorphism; matching degree lists alone is insufficient.",
+      "sources": [
+        "https://openstax.org/books/contemporary-mathematics/pages/12-introduction",
+        "https://diestel-graph-theory.com/basic.html"
+      ],
+      "catalogFields": [
+        "graph-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "School algebra and explicitly introduced definitions suffice for the complete argument.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "graph basics",
+        "functions"
+      ],
+      "tags": [
+        "graph-isomorphism",
+        "graph-invariants",
+        "adjacency-preservation"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "algorithm-as-proof",
+      "title": "What counts as an algorithm?",
+      "topic": "theoretical-computer-science",
+      "level": "L1",
+      "hook": "A recipe must finish and give the promised dish.",
+      "outcome": "Specify input, output, termination, and correctness for a finite procedure.",
+      "prerequisites": [
+        "explorations:refresher:functions"
+      ],
+      "formula": "A(x)=y with stated precondition and postcondition",
+      "visual": "Trace table maps states to outputs and halting points.",
+      "proof": "Prove a sample algorithm terminates and is correct; examples alone are tests.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "finite sequences"
+      ],
+      "tags": [
+        "algorithm-correctness",
+        "loop-invariants",
+        "termination"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "binary-search",
+      "title": "Why halving a search works",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "Finding a page in a sorted book takes few questions.",
+      "outcome": "Explain binary search invariant and logarithmic comparison bound.",
+      "prerequisites": [],
+      "formula": "T(n)≤ceil(log2(n))+1",
+      "visual": "Narrowing interval with a candidate-in-range readout.",
+      "proof": "Prove invariant and bound for sorted input; unsorted counterexample.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "ordered finite list",
+        "integer intervals"
+      ],
+      "tags": [
+        "binary-search",
+        "sorted-search",
+        "loop-invariants"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "growth-rates",
+      "title": "When input size changes the story",
+      "topic": "theoretical-computer-science",
+      "level": "L1",
+      "hook": "A fast laptop cannot rescue an exploding search space forever.",
+      "outcome": "Compare linear, quadratic, and exponential operation counts.",
+      "prerequisites": [
+        "explorations:refresher:powers",
+        "library:book-algebra-and-functions:functions-domain-graphs"
+      ],
+      "formula": "n, n², 2^n",
+      "visual": "Exact count table on shared axes; do not rely on animation.",
+      "proof": "Establish comparisons by exact arithmetic for shown n; asymptotic claims require later proof.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "powers",
+        "graphs of functions"
+      ],
+      "tags": [
+        "operation-counts",
+        "polynomial-growth",
+        "exponential-growth"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "big-o",
+      "title": "Big O is an eventual bound",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "A tiny program can lose to a bigger one at large scale.",
+      "outcome": "Use constants and thresholds to justify an asymptotic upper bound.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems",
+        "explorations:refresher:functions"
+      ],
+      "formula": "f(n)=O(g(n)) iff ∃C,n0 ∀n≥n0: f(n)≤Cg(n)",
+      "visual": "Plot threshold with Cg(n) envelope and numeric table.",
+      "proof": "Prove 3n+5=O(n); finite benchmark timing proves nothing asymptotic.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "inequalities",
+        "functions"
+      ],
+      "tags": [
+        "asymptotic-bounds",
+        "big-o",
+        "quantifiers"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "finite-automata",
+      "title": "A machine with finite memory",
+      "topic": "theoretical-computer-science",
+      "level": "L1",
+      "hook": "A turnstile remembers locked or unlocked with one bit.",
+      "outcome": "Run a deterministic finite automaton and define acceptance.",
+      "prerequisites": [
+        "explorations:refresher:sets",
+        "explorations:refresher:functions"
+      ],
+      "formula": "M=(Q,Sigma,delta,q0,F)",
+      "visual": "State diagram paired with transition table.",
+      "proof": "Trace strings exactly; general DFA language definition supplied.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "sets",
+        "functions",
+        "finite strings"
+      ],
+      "tags": [
+        "deterministic-finite-automata",
+        "parity-languages",
+        "state-invariants"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "regex-automata",
+      "title": "Patterns and machines",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "A text pattern can be a small machine in disguise.",
+      "outcome": "Build an automaton for binary strings ending in 01.",
+      "prerequisites": [
+        "explorations:finite-automata"
+      ],
+      "formula": "L={w in {0,1}*: w ends in 01}",
+      "visual": "Transition table and string-prefix trace.",
+      "proof": "Prove invariant for states' remembered suffix; full regex equivalence deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/",
+        "https://slc.openlogicproject.org/"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "finite automata",
+        "binary strings"
+      ],
+      "tags": [
+        "regular-expressions",
+        "finite-automata",
+        "suffix-invariants"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "recurrence-cost",
+      "title": "A recursive algorithm's bill",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "Splitting a task in half creates many smaller bills.",
+      "outcome": "Derive and solve a simple recurrence for merge-style division.",
+      "prerequisites": [
+        "library:book-algorithms-computation-proof-desk:induction-recursion-loop-reasoning",
+        "library:book-algebra-and-functions:sequences-series-binomial-theorem",
+        "explorations:refresher:powers"
+      ],
+      "formula": "T(n)=2T(n/2)+n for n=2^k",
+      "visual": "Recursion tree with per-level costs.",
+      "proof": "Prove T(n)=n log2 n plus base contribution for powers of two.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "recursion",
+        "sums",
+        "logarithms"
+      ],
+      "tags": [
+        "recurrence-relations",
+        "recursion-trees",
+        "divide-and-conquer"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "dynamic-programming",
+      "title": "Remembering subproblems",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "A route puzzle repeats the same small question many times.",
+      "outcome": "Turn Fibonacci recurrence into memoized and bottom-up algorithms.",
+      "prerequisites": [
+        "explorations:recurrences-rabbits"
+      ],
+      "formula": "F_n=F_(n-1)+F_(n-2)",
+      "visual": "Dependency DAG contrasts repeated-call tree.",
+      "proof": "Prove each subproblem solved once and count arithmetic steps.",
+      "sources": [
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html",
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "recurrences",
+        "finite arrays"
+      ],
+      "tags": [
+        "dynamic-programming",
+        "memoization",
+        "state-design"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "halting-limit",
+      "title": "The program no checker can always judge",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "Could one program always tell whether another will stop?",
+      "outcome": "Follow diagonal contradiction for the halting problem.",
+      "prerequisites": [
+        "explorations:algorithm-as-proof",
+        "library:book-introduction-to-proof:contrapositive-contradiction"
+      ],
+      "formula": "H(P,x) decides halt(P,x) leads to D(D) contradiction",
+      "visual": "Two-case decision table, no simulated claim of infinite run.",
+      "proof": "Prove undecidability in the stated machine model; Church–Turing thesis distinct.",
+      "sources": [
+        "https://slc.openlogicproject.org/",
+        "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "algorithm specification",
+        "self-reference",
+        "proof by contradiction"
+      ],
+      "tags": [
+        "halting-problem",
+        "undecidability",
+        "diagonal-argument"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "p-versus-np",
+      "title": "Checking and finding are different questions",
+      "topic": "theoretical-computer-science",
+      "level": "L2",
+      "hook": "A completed crossword can be checked faster than it may be found.",
+      "outcome": "Define P and NP through decision problems and certificates; explain open status of P vs NP.",
+      "prerequisites": [
+        "explorations:algorithm-as-proof",
+        "explorations:growth-rates"
+      ],
+      "formula": "P⊆NP; P=?NP",
+      "visual": "Certificate verifier diagram with input-size labels.",
+      "proof": "Prove P subset NP from definitions; no claim that P differs from NP.",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/pages/syllabus/",
+        "https://jeffe.web.engr.illinois.edu/teaching/algorithms/index.html"
+      ],
+      "catalogFields": [
+        "computability-complexity"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogLevel": "L3",
+        "levelRationale": "The article develops an introductory proof or discrete-mathematics argument with local definitions; it assumes no completed proof course or later field core.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "algorithms",
+        "polynomial bounds",
+        "decision problems"
+      ],
+      "tags": [
+        "p-versus-np",
+        "polynomial-time",
+        "certificate-verification"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "courses": [
+    {
+      "id": "mathematical-foundations-primer",
+      "title": "Proof without hurry",
+      "topic": "mathematical-foundations",
+      "prerequisites": [],
+      "outcomes": [
+        "Parse definitions",
+        "Find counterexamples",
+        "Write one direct proof"
+      ],
+      "modules": [
+        {
+          "title": "Claims and examples",
+          "articleIds": [
+            "read-a-definition",
+            "test-a-conjecture"
+          ]
+        },
+        {
+          "title": "A proof on paper",
+          "articleIds": [
+            "draw-a-proof-map",
+            "direct-proof-evenness"
+          ]
+        }
+      ],
+      "capstone": "Annotate a false pattern claim, repair it, and prove the repaired statement.",
+      "assessment": "Untimed explain-your-reasoning prompts with a model proof and self-check rubric.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 6
+      },
+      "retained": true,
+      "seriesId": "unhurried-mathematical-foundations"
+    },
+    {
+      "id": "mathematical-foundations-accelerated",
+      "title": "Proof skills refresher",
+      "topic": "mathematical-foundations",
+      "prerequisites": [
+        "comfortable with school algebra"
+      ],
+      "outcomes": [
+        "Use contrapositive and induction",
+        "Separate existence from uniqueness"
+      ],
+      "modules": [
+        {
+          "title": "Quick recall",
+          "articleIds": [
+            "read-a-definition",
+            "draw-a-proof-map"
+          ]
+        },
+        {
+          "title": "Proof engines",
+          "articleIds": [
+            "contrapositive-parity",
+            "induction-dominoes",
+            "existence-uniqueness"
+          ]
+        }
+      ],
+      "capstone": "Compare two proofs of a parity claim and locate a hidden converse error.",
+      "assessment": "Three proof submissions checked against hypotheses, logic, and conclusion.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8
+      },
+      "retained": true,
+      "seriesId": "unhurried-mathematical-foundations"
+    },
+    {
+      "id": "mathematical-foundations-deep",
+      "title": "Proof patterns and invariants",
+      "topic": "mathematical-foundations",
+      "prerequisites": [
+        "direct proof and elementary induction"
+      ],
+      "outcomes": [
+        "Write strong induction",
+        "Use an invariant to prove impossibility",
+        "Construct a bijection"
+      ],
+      "modules": [
+        {
+          "title": "Inductive structure",
+          "articleIds": [
+            "induction-dominoes",
+            "strong-induction"
+          ]
+        },
+        {
+          "title": "What persists",
+          "articleIds": [
+            "invariants-reachability",
+            "existence-uniqueness"
+          ]
+        },
+        {
+          "title": "Infinity through maps",
+          "articleIds": [
+            "infinite-pigeonholes"
+          ]
+        }
+      ],
+      "capstone": "Choose a puzzle invariant and defend it for every legal move.",
+      "assessment": "Proof portfolio with a counterexample audit and explicit limitation notes.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 13
+      },
+      "retained": true,
+      "seriesId": "unhurried-mathematical-foundations"
+    },
+    {
+      "id": "logic-set-theory-primer",
+      "title": "Statements, sets, and scope",
+      "topic": "logic-set-theory",
+      "prerequisites": [],
+      "outcomes": [
+        "Evaluate compound statements",
+        "Read quantifiers",
+        "Compare finite sets"
+      ],
+      "modules": [
+        {
+          "title": "Truth values",
+          "articleIds": [
+            "and-or-not",
+            "if-then"
+          ]
+        },
+        {
+          "title": "People and objects",
+          "articleIds": [
+            "sets-and-membership",
+            "quantifier-order"
+          ]
+        }
+      ],
+      "capstone": "Translate a club rule into symbols and construct a countermodel to a mistaken interpretation.",
+      "assessment": "Truth-table and finite-model checks followed by a short explanation.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 7
+      },
+      "retained": true,
+      "seriesId": "unhurried-logic-set-theory"
+    },
+    {
+      "id": "logic-set-theory-accelerated",
+      "title": "Logic and functions refresher",
+      "topic": "logic-set-theory",
+      "prerequisites": [
+        "elementary set notation"
+      ],
+      "outcomes": [
+        "Negate quantified claims",
+        "Prove basic function properties",
+        "Partition by equivalence"
+      ],
+      "modules": [
+        {
+          "title": "Scope",
+          "articleIds": [
+            "if-then",
+            "quantifier-order",
+            "negate-quantifiers"
+          ]
+        },
+        {
+          "title": "Structure",
+          "articleIds": [
+            "power-set",
+            "functions-inverse",
+            "relations-equivalence"
+          ]
+        }
+      ],
+      "capstone": "Design a modular timetable partition and prove it is an equivalence relation.",
+      "assessment": "Two semantic countermodels and a written iff proof.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-logic-set-theory"
+    },
+    {
+      "id": "logic-set-theory-deep",
+      "title": "Infinity and logical boundaries",
+      "topic": "logic-set-theory",
+      "prerequisites": [
+        "quantifiers, functions, and basic proof"
+      ],
+      "outcomes": [
+        "Prove uncountability by diagonalization",
+        "Explain unrestricted comprehension failure"
+      ],
+      "modules": [
+        {
+          "title": "Finite foundations",
+          "articleIds": [
+            "power-set",
+            "functions-inverse"
+          ]
+        },
+        {
+          "title": "Infinite constructions",
+          "articleIds": [
+            "countable-diagonal",
+            "paradox-naive-sets"
+          ]
+        }
+      ],
+      "capstone": "Review a proposed complete listing of binary streams and construct the missed stream.",
+      "assessment": "Written diagonal proof and diagnosis of an invalid finite extrapolation.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 13
+      },
+      "retained": true,
+      "seriesId": "unhurried-logic-set-theory"
+    },
+    {
+      "id": "number-theory-primer",
+      "title": "Patterns on integer clocks",
+      "topic": "number-theory",
+      "prerequisites": [
+        "integer arithmetic"
+      ],
+      "outcomes": [
+        "Work with divisibility",
+        "Find gcd",
+        "Calculate congruences"
+      ],
+      "modules": [
+        {
+          "title": "Divides and remainders",
+          "articleIds": [
+            "divisibility",
+            "euclidean-algorithm"
+          ]
+        },
+        {
+          "title": "Clock arithmetic",
+          "articleIds": [
+            "modular-clock"
+          ]
+        }
+      ],
+      "capstone": "Create and justify a repeating rota using a modulus and gcd.",
+      "assessment": "Worked computations plus a short invariant explanation.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 7
+      },
+      "retained": true,
+      "seriesId": "unhurried-number-theory"
+    },
+    {
+      "id": "number-theory-accelerated",
+      "title": "Number theory for rusty graduates",
+      "topic": "number-theory",
+      "prerequisites": [
+        "basic algebra and proof by contradiction"
+      ],
+      "outcomes": [
+        "Back-substitute Euclid",
+        "Prove primes infinite",
+        "Use modular inverses"
+      ],
+      "modules": [
+        {
+          "title": "Euclid twice",
+          "articleIds": [
+            "euclidean-algorithm",
+            "bezout",
+            "primes-infinite"
+          ]
+        },
+        {
+          "title": "Congruences",
+          "articleIds": [
+            "modular-clock",
+            "modular-inverses",
+            "repeated-squaring"
+          ]
+        }
+      ],
+      "capstone": "Find a modular inverse and use it to decode an affine toy cipher.",
+      "assessment": "Computations checked against divisibility proofs.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 10
+      },
+      "retained": true,
+      "seriesId": "unhurried-number-theory"
+    },
+    {
+      "id": "number-theory-deep",
+      "title": "Congruences and a toy public key",
+      "topic": "number-theory",
+      "prerequisites": [
+        "Euclidean algorithm, induction, modular arithmetic"
+      ],
+      "outcomes": [
+        "Prove CRT for coprime moduli",
+        "Prove Fermat theorem",
+        "Explain limited RSA correctness"
+      ],
+      "modules": [
+        {
+          "title": "Modular tools",
+          "articleIds": [
+            "bezout",
+            "modular-inverses",
+            "chinese-remainder"
+          ]
+        },
+        {
+          "title": "Powers and primes",
+          "articleIds": [
+            "fermat-little",
+            "repeated-squaring"
+          ]
+        },
+        {
+          "title": "Toy key",
+          "articleIds": [
+            "rsa-toy"
+          ]
+        }
+      ],
+      "capstone": "Build an exact small-key RSA demonstration, state assumptions and why it says nothing about security.",
+      "assessment": "Proof of two core lemmas and a numerical round-trip with edge cases.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-number-theory"
+    },
+    {
+      "id": "combinatorics-primer",
+      "title": "Count the surprising ways",
+      "topic": "combinatorics",
+      "prerequisites": [
+        "integer arithmetic"
+      ],
+      "outcomes": [
+        "Apply product rule",
+        "Count selections",
+        "Find forced collisions"
+      ],
+      "modules": [
+        {
+          "title": "Choices",
+          "articleIds": [
+            "counting-choices",
+            "combinations"
+          ]
+        },
+        {
+          "title": "Guarantees",
+          "articleIds": [
+            "pigeonhole",
+            "pascal-identity"
+          ]
+        }
+      ],
+      "capstone": "Plan a small event seating selection and explain order versus no order.",
+      "assessment": "Untimed counting explanations with small exhaustive checks.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 7
+      },
+      "retained": true,
+      "seriesId": "unhurried-combinatorics"
+    },
+    {
+      "id": "combinatorics-accelerated",
+      "title": "Counting without double counting",
+      "topic": "combinatorics",
+      "prerequisites": [
+        "finite sets and factorials"
+      ],
+      "outcomes": [
+        "Correct overcounting",
+        "Use inclusion–exclusion",
+        "Build recurrences"
+      ],
+      "modules": [
+        {
+          "title": "Arrange and choose",
+          "articleIds": [
+            "permutations-duplicates",
+            "combinations",
+            "pascal-identity"
+          ]
+        },
+        {
+          "title": "Overlap and recurrence",
+          "articleIds": [
+            "inclusion-exclusion",
+            "recurrences-rabbits",
+            "stars-and-bars"
+          ]
+        }
+      ],
+      "capstone": "Compare three counting models for a gift allocation and identify assumptions.",
+      "assessment": "Two independent derivations and a small-case audit.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 10
+      },
+      "retained": true,
+      "seriesId": "unhurried-combinatorics"
+    },
+    {
+      "id": "combinatorics-deep",
+      "title": "Counting by structure",
+      "topic": "combinatorics",
+      "prerequisites": [
+        "binomial coefficients, polynomial multiplication"
+      ],
+      "outcomes": [
+        "Prove derangement formula",
+        "Interpret generating coefficients",
+        "Use bijections"
+      ],
+      "modules": [
+        {
+          "title": "Overlap",
+          "articleIds": [
+            "inclusion-exclusion",
+            "derangements"
+          ]
+        },
+        {
+          "title": "Algebra of choices",
+          "articleIds": [
+            "generating-functions",
+            "stars-and-bars"
+          ]
+        },
+        {
+          "title": "Proof by partition",
+          "articleIds": [
+            "pascal-identity"
+          ]
+        }
+      ],
+      "capstone": "Count constrained coin selections by direct cases and generating functions, then reconcile.",
+      "assessment": "Written bijection, coefficient explanation, and counterexample to a tempting formula.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-combinatorics"
+    },
+    {
+      "id": "graph-theory-primer",
+      "title": "Networks as mathematics",
+      "topic": "graph-theory",
+      "prerequisites": [
+        "finite sets"
+      ],
+      "outcomes": [
+        "Read graph models",
+        "Use degree parity",
+        "Distinguish route types"
+      ],
+      "modules": [
+        {
+          "title": "Representation",
+          "articleIds": [
+            "graph-basics",
+            "walk-trail-path"
+          ]
+        },
+        {
+          "title": "Counting edges",
+          "articleIds": [
+            "degree-handshake"
+          ]
+        }
+      ],
+      "capstone": "Model a local walking map and explain which map facts the graph discards.",
+      "assessment": "Adjacency-list construction and handshaking proof.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 7
+      },
+      "retained": true,
+      "seriesId": "unhurried-graph-theory"
+    },
+    {
+      "id": "graph-theory-accelerated",
+      "title": "Routes, trees, and schedules",
+      "topic": "graph-theory",
+      "prerequisites": [
+        "simple graphs and basic proof"
+      ],
+      "outcomes": [
+        "Test Euler routes",
+        "Prove a tree property",
+        "Trace shortest path"
+      ],
+      "modules": [
+        {
+          "title": "Routes",
+          "articleIds": [
+            "walk-trail-path",
+            "euler-trails",
+            "shortest-path"
+          ]
+        },
+        {
+          "title": "Structure",
+          "articleIds": [
+            "trees",
+            "graph-colouring"
+          ]
+        }
+      ],
+      "capstone": "Plan a street inspection and a clash-free meeting schedule on the same graph.",
+      "assessment": "Route certificate, impossibility reason, and justified colour upper bound.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 10
+      },
+      "retained": true,
+      "seriesId": "unhurried-graph-theory"
+    },
+    {
+      "id": "graph-theory-deep",
+      "title": "Structure of finite graphs",
+      "topic": "graph-theory",
+      "prerequisites": [
+        "induction and finite graph terminology"
+      ],
+      "outcomes": [
+        "Prove planar Euler formula",
+        "Augment matchings",
+        "Exhibit isomorphisms"
+      ],
+      "modules": [
+        {
+          "title": "Graphs and trees",
+          "articleIds": [
+            "degree-handshake",
+            "trees"
+          ]
+        },
+        {
+          "title": "Embeddings and matching",
+          "articleIds": [
+            "planar-euler",
+            "matching"
+          ]
+        },
+        {
+          "title": "Same structure",
+          "articleIds": [
+            "graph-isomorphism"
+          ]
+        }
+      ],
+      "capstone": "Analyze two network drawings for isomorphism and planarity, explaining every invariant used.",
+      "assessment": "Three short written proofs with one counterexample to a false converse.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-graph-theory"
+    },
+    {
+      "id": "theoretical-computer-science-primer",
+      "title": "Machines and instructions",
+      "topic": "theoretical-computer-science",
+      "prerequisites": [
+        "finite sets and basic arithmetic"
+      ],
+      "outcomes": [
+        "Specify algorithms",
+        "Compare growth",
+        "Run a finite automaton"
+      ],
+      "modules": [
+        {
+          "title": "A precise recipe",
+          "articleIds": [
+            "algorithm-as-proof",
+            "growth-rates"
+          ]
+        },
+        {
+          "title": "Tiny memory",
+          "articleIds": [
+            "finite-automata"
+          ]
+        }
+      ],
+      "capstone": "Design a two-state reminder machine and specify its accepted strings.",
+      "assessment": "Trace tables and a termination/correctness checklist.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 7
+      },
+      "retained": true,
+      "seriesId": "unhurried-theoretical-computer-science"
+    },
+    {
+      "id": "theoretical-computer-science-accelerated",
+      "title": "Algorithms with reasons",
+      "topic": "theoretical-computer-science",
+      "prerequisites": [
+        "proof by induction and basic logarithms"
+      ],
+      "outcomes": [
+        "Prove binary search",
+        "Use asymptotic bounds",
+        "Analyze recursion"
+      ],
+      "modules": [
+        {
+          "title": "Search and cost",
+          "articleIds": [
+            "binary-search",
+            "big-o"
+          ]
+        },
+        {
+          "title": "Reuse work",
+          "articleIds": [
+            "recurrence-cost",
+            "dynamic-programming"
+          ]
+        },
+        {
+          "title": "Finite states",
+          "articleIds": [
+            "finite-automata",
+            "regex-automata"
+          ]
+        }
+      ],
+      "capstone": "Compare search strategies on a sorted archive and prove the stated cost.",
+      "assessment": "Loop-invariant proof and recurrence solution; timings treated as illustration.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 11
+      },
+      "retained": true,
+      "seriesId": "unhurried-theoretical-computer-science"
+    },
+    {
+      "id": "theoretical-computer-science-deep",
+      "title": "Limits of mechanical reasoning",
+      "topic": "theoretical-computer-science",
+      "prerequisites": [
+        "proof by contradiction, asymptotics, functions"
+      ],
+      "outcomes": [
+        "Prove a halting impossibility",
+        "Distinguish P from NP definitions",
+        "Explain the status of P versus NP"
+      ],
+      "modules": [
+        {
+          "title": "Formal preparation",
+          "articleIds": [
+            "algorithm-as-proof",
+            "big-o",
+            "finite-automata"
+          ]
+        },
+        {
+          "title": "Machines and limits",
+          "articleIds": [
+            "regex-automata",
+            "halting-limit"
+          ]
+        },
+        {
+          "title": "Efficient checking",
+          "articleIds": [
+            "p-versus-np"
+          ]
+        }
+      ],
+      "capstone": "Write a public explanation of why a universal halting checker fails, with exact machine assumptions.",
+      "assessment": "Formal diagonal argument, two definition checks, and open-problem communication rubric.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-theoretical-computer-science"
+    }
+  ],
+  "labs": [
+    {
+      "id": "counterexample-hunt",
+      "title": "Conjecture stress test",
+      "topic": "mathematical-foundations",
+      "articleIds": [
+        "test-a-conjecture"
+      ],
+      "controls": [
+        "Select claim",
+        "Choose integer input",
+        "Request smallest found counterexample"
+      ],
+      "readout": "Truth value and substitution for each tested input; claim scope shown.",
+      "invariant": "A single counterexample refutes a universal claim; passing finite cases does not prove it.",
+      "pitfalls": "Do not label a long successful search as proof.",
+      "accessibleFallback": "Form fields, ordered results table, and textual substitution; all actions keyboard operable.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "induction-builder",
+      "title": "Base and step builder",
+      "topic": "mathematical-foundations",
+      "articleIds": [
+        "induction-dominoes",
+        "strong-induction"
+      ],
+      "controls": [
+        "Choose target identity",
+        "Set n",
+        "Reveal base or step obligation"
+      ],
+      "readout": "Current formula, base calculation, and symbolic step with assumptions separated.",
+      "invariant": "The induction hypothesis is available only at earlier indices.",
+      "pitfalls": "Animation alone cannot establish all n; prevent circular use of target.",
+      "accessibleFallback": "Static numbered proof obligations and text equations; reduced motion switch.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "quantifier-scope-grid",
+      "title": "Quantifier order grid",
+      "topic": "logic-set-theory",
+      "articleIds": [
+        "quantifier-order",
+        "negate-quantifiers"
+      ],
+      "controls": [
+        "Add person",
+        "Add book",
+        "Toggle relation cell",
+        "Swap quantifier order"
+      ],
+      "readout": "Truth of both quantified sentences and explicit witness or failing case.",
+      "invariant": "Truth follows the selected finite relation and current quantifier scopes.",
+      "pitfalls": "Finite models can refute equivalence but cannot prove it generally.",
+      "accessibleFallback": "Keyboard editable relation table with plain-text witnesses and failures.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "diagonal-sequence",
+      "title": "The missed binary sequence",
+      "topic": "logic-set-theory",
+      "articleIds": [
+        "countable-diagonal"
+      ],
+      "controls": [
+        "Edit first N rows",
+        "Increase visible prefix N",
+        "Reveal diagonal rule"
+      ],
+      "readout": "Diagonal bits and first differing position for every visible row.",
+      "invariant": "Constructed nth bit differs from nth listed sequence bit.",
+      "pitfalls": "A finite grid illustrates the infinite proof; never claim it exhausts all sequences.",
+      "accessibleFallback": "Accessible numbered table and algorithm stated in text.",
+      "priority": "P2",
+      "status": "published"
+    },
+    {
+      "id": "euclidean-tiles",
+      "title": "Euclid in rectangles",
+      "topic": "number-theory",
+      "articleIds": [
+        "euclidean-algorithm",
+        "bezout"
+      ],
+      "controls": [
+        "Set positive a and b",
+        "Step division",
+        "Show back-substitution"
+      ],
+      "readout": "Remainder table, gcd, quotient sequence, and Bezout coefficients.",
+      "invariant": "The set of common divisors is unchanged by (a,b)→(b,a mod b).",
+      "pitfalls": "Handle zero endpoint and forbid division by zero; tiles are an analogy.",
+      "accessibleFallback": "Numeric division ledger and keyboard step buttons.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "residue-orbits",
+      "title": "Clock orbits and inverses",
+      "topic": "number-theory",
+      "articleIds": [
+        "modular-clock",
+        "modular-inverses"
+      ],
+      "controls": [
+        "Choose modulus m≥2",
+        "Choose multiplier a",
+        "Step residue"
+      ],
+      "readout": "Orbit, multiplication table, gcd(a,m), and inverse if it exists.",
+      "invariant": "Multiplication permutes residues exactly when gcd(a,m)=1.",
+      "pitfalls": "A visible orbit alone is not a proof for every modulus.",
+      "accessibleFallback": "Text table with highlighted collisions and inverse value.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "counting-choice-tree",
+      "title": "Choice tree and overcount",
+      "topic": "combinatorics",
+      "articleIds": [
+        "counting-choices",
+        "combinations"
+      ],
+      "controls": [
+        "Set small option counts",
+        "Toggle order relevance",
+        "List outcomes"
+      ],
+      "readout": "Ordered count, unordered count when valid, and explicit outcome list.",
+      "invariant": "Each ordered path represents one sequence; unordered groups have k! labelings only for distinct picks.",
+      "pitfalls": "No division by k! when repetition or symmetry changes multiplicity.",
+      "accessibleFallback": "Nested text list of choices and count formula; keyboard controls.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "inclusion-exclusion-sets",
+      "title": "Overlap ledger",
+      "topic": "combinatorics",
+      "articleIds": [
+        "inclusion-exclusion",
+        "derangements"
+      ],
+      "controls": [
+        "Toggle memberships for up to 12 elements",
+        "Choose two or three sets"
+      ],
+      "readout": "Region counts and every signed term in inclusion–exclusion.",
+      "invariant": "Each element contributes exactly one to the union total.",
+      "pitfalls": "Venn geometry must not imply area-proportional counts.",
+      "accessibleFallback": "Membership table and arithmetic ledger with textual per-element contributions.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "degree-route-lab",
+      "title": "Edge degrees and routes",
+      "topic": "graph-theory",
+      "articleIds": [
+        "degree-handshake",
+        "euler-trails"
+      ],
+      "controls": [
+        "Add vertex",
+        "Add or remove edge",
+        "Attempt trail"
+      ],
+      "readout": "Adjacency list, degree sum, edge count, and route status.",
+      "invariant": "For simple graphs sum degrees=2E; Euler criterion requires connected nonisolated part.",
+      "pitfalls": "Disconnected even-degree examples must fail circuit claim; loops excluded.",
+      "accessibleFallback": "Keyboard adjacency editor and ordered trail as text.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "bfs-layer-explorer",
+      "title": "Shortest path layers",
+      "topic": "graph-theory",
+      "articleIds": [
+        "shortest-path"
+      ],
+      "controls": [
+        "Choose source",
+        "Add unweighted edge",
+        "Step BFS queue"
+      ],
+      "readout": "Queue, discovered vertices, distance labels, and predecessor path.",
+      "invariant": "First discovery gives shortest edge-count distance in an unweighted graph.",
+      "pitfalls": "Weighted travel times invalidate this optimality argument.",
+      "accessibleFallback": "Text queue log, adjacency table, and distance list.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "automaton-builder",
+      "title": "Finite state machine workshop",
+      "topic": "theoretical-computer-science",
+      "articleIds": [
+        "finite-automata",
+        "regex-automata"
+      ],
+      "controls": [
+        "Edit finite states",
+        "Edit binary transition table",
+        "Set accepting states",
+        "Enter word"
+      ],
+      "readout": "State-by-state trace and accept or reject.",
+      "invariant": "At each symbol, exactly one transition determines the next DFA state.",
+      "pitfalls": "Missing transitions require an explicit reject sink or invalid-machine state.",
+      "accessibleFallback": "Keyboard editable transition table and text trace.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "growth-comparator",
+      "title": "Growth and thresholds",
+      "topic": "theoretical-computer-science",
+      "articleIds": [
+        "growth-rates",
+        "big-o"
+      ],
+      "controls": [
+        "Choose two functions",
+        "Set n range",
+        "Set constant C and threshold n0"
+      ],
+      "readout": "Exact operation counts and whether f(n)≤Cg(n) on displayed values.",
+      "invariant": "A displayed finite range cannot establish an asymptotic bound.",
+      "pitfalls": "Avoid calling empirical run times Big O proof or hiding crossover points.",
+      "accessibleFallback": "Numeric table and explicit symbolic bound statement.",
+      "priority": "P2",
+      "status": "published"
+    }
+  ]
+}

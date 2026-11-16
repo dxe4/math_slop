@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Breadth-first search distance layers and queue frontier</title>
+  <desc id="desc">Directed graph with source s at distance zero, vertices a and b at distance one, c and d at distance two, and e at distance three. Edges go from s to a and b, from a to c, from b to c and d, and from c and d to e. A dashed boundary separates settled lower layers from the queue frontier.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#94a3b8"/></marker></defs>
+  <rect width="900" height="430" rx="18" fill="#0f172a"/>
+  <text x="450" y="32" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="21" font-weight="700">BFS discovers vertices in nondecreasing distance layers</text>
+  <g stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)" fill="none">
+    <path d="M135 182L277 117"/><path d="M135 198L277 263"/><path d="M343 118L493 156"/>
+    <path d="M343 262L493 184"/><path d="M343 275L493 285"/><path d="M557 169L737 206"/><path d="M557 280L737 224"/>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+    <g fill="#064e3b" stroke="#6ee7b7" stroke-width="4"><circle cx="100" cy="190" r="38"/></g><text x="100" y="196" fill="#f8fafc">s</text>
+    <g fill="#164e63" stroke="#67e8f9" stroke-width="4"><circle cx="310" cy="105" r="38"/><circle cx="310" cy="275" r="38"/></g><text x="310" y="111" fill="#f8fafc">a</text><text x="310" y="281" fill="#f8fafc">b</text>
+    <g fill="#713f12" stroke="#fcd34d" stroke-width="4"><circle cx="525" cy="165" r="38"/><circle cx="525" cy="285" r="38"/></g><text x="525" y="171" fill="#f8fafc">c</text><text x="525" y="291" fill="#f8fafc">d</text>
+    <g fill="#581c87" stroke="#d8b4fe" stroke-width="4"><circle cx="775" cy="215" r="38"/></g><text x="775" y="221" fill="#f8fafc">e</text>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="15" text-anchor="middle" fill="#e2e8f0">
+    <text x="100" y="370">distance 0</text><text x="310" y="370">distance 1</text><text x="525" y="370">distance 2</text><text x="775" y="370">distance 3</text>
+  </g>
+  <path d="M414 60V345" stroke="#fca5a5" stroke-width="3" stroke-dasharray="9 7"/>
+  <text x="414" y="407" text-anchor="middle" fill="#fecaca" font-family="system-ui, sans-serif" font-size="15">after layer 1 is processed, the queue frontier contains only layer 2</text>
+</svg>

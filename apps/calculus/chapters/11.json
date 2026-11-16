@@ -1,0 +1,449 @@
+{
+  "id": "11",
+  "title": "The fundamental theorem of calculus",
+  "subtitle": "How can adding a rate and taking a derivative undo one another?",
+  "prerequisites": [
+    "Chapter 4: continuity and limits",
+    "Chapters 5–6: derivatives and the chain rule",
+    "Chapter 8: the mean value theorem",
+    "Chapter 10: signed definite integrals and integral properties"
+  ],
+  "objectives": [
+    "Interpret an accumulation function and differentiate it under appropriate hypotheses.",
+    "Explain both parts of the fundamental theorem, including their proof ideas.",
+    "Recover total change and an initial value from a rate model.",
+    "Differentiate integrals with moving endpoints and evaluate definite integrals by substitution."
+  ],
+  "sections": [
+    {
+      "title": "1. Turning an integral into a function",
+      "paragraphs": [
+        "A definite integral over a fixed interval is a number. An accumulation function lets its upper endpoint move: $A(x)=\\int_a^x f(t)\\,dt$. The letter $t$ is a temporary integration variable; after integration the result depends on $x$. The lower endpoint $a$ is fixed, and $A(a)=0$. Changing the lower endpoint changes the baseline from which accumulation is measured, rather than the underlying rate. This simple change of viewpoint connects the integral of Chapter 10 with the derivative of Chapter 5.",
+        "For example, if $f(t)=2t$, then $A(x)=x^2-a^2$. You can obtain this result geometrically when $0\\le a\\le x$ by subtracting two triangular areas. Differentiating gives $A^{\\prime}(x)=2x=f(x)$. The accumulated quantity need not equal the original rate: $x^2-a^2$ and $2x$ have different shapes and, in applications, different units. It is the slope of the accumulation graph that agrees with the rate graph.",
+        "Orientation matters when $x<a$. By definition $\\int_a^x f(t)\\,dt=-\\int_x^a f(t)\\,dt$. Thus a positive rate can give negative accumulation relative to a later baseline. Conversely, when $x$ increases through an interval where $f$ is negative, $A$ decreases. An accumulation function is not automatically increasing, because a signed integral records losses as well as gains. If $f$ changes from negative to positive at $c$, the accumulation function can have a local minimum there even when $A(c)\\ne0$.",
+        "If $t$ is measured in hours and $f(t)$ in litres per hour, $A(x)$ is measured in litres. A tank with initial volume $V(a)$ has volume $V(x)=V(a)+A(x)$, provided the rate describes net inflow and the tank neither empties nor overflows during the modeled interval. The integral supplies a change; a starting value supplies the absolute amount. Separating these two roles prevents a common modeling error.",
+        "A moving upper endpoint turns a completed total into a history of totals. For $f(t)=t-1$ and baseline $a=0$, direct geometry gives $A(x)=x^2/2-x$ for $0\\le x\\le2$. $A$ first decreases because the rate is negative, reaches its minimum $-1/2$ at $x=1$, and then increases; at $x=2$ the earlier loss has been recovered and $A(2)=0$. The zero of $A$ at $2$ is not a zero of the rate. Confusing $A(x)$ with $f(x)$ would misidentify both the turning point and the accumulated amount. Plot both curves and compare each slope of $A$ with the corresponding height of $f$.",
+        "The baseline can be changed without changing the local rate. Let $A_a(x)=\\int_a^x f(t)\\,dt$ and $A_b(x)=\\int_b^x f(t)\\,dt$. Interval additivity gives $A_b(x)=A_a(x)-A_a(b)$, so the graphs differ by a vertical constant. Their derivatives are equal wherever $f$ is continuous. In a tank model, changing the starting time changes the recorded cumulative change; adding the actual initial volume locates the physical amount. If the measured net rate later becomes negative, a formal volume curve may dip below zero. That would signal failure of the unrestricted rate model once the tank empties.",
+        "An accumulation function can be understood without an antiderivative formula. Suppose $f(t)=\\exp(-t^2)$, whose integral has no elementary expression. The function $A(x)=\\int_0^x\\exp(-t^2)\\,dt$ is still well defined for every real $x$, differentiable, and has derivative $A^{\\prime}(x)=\\exp(-x^2)$. It is increasing because the rate is positive, and its slope is largest at $x=0$. Numerical integration can approximate values of $A$, but its differentiability follows from continuity of the integrand, not from the existence of a familiar closed form. This distinction prepares us for applications where accumulated quantities are known only through data or computation.",
+        "The function $A$ inherits shape information from $f$. Where $f>0$, $A$ increases; where $f<0$, $A$ decreases. If $f$ itself is differentiable, then $A^{\\prime\\prime}=f^{\\prime}$, so a rising rate makes the accumulation graph concave up and a falling rate makes it concave down. These statements hold on intervals where the required derivatives exist. A horizontal tangent of $A$ at $x=c$ means $f(c)=0$, but it may be a local extremum or merely a stationary crossing depending on how the sign of $f$ changes. Reading one graph as the derivative of the other is a central skill, not merely a symbolic identity.",
+        "There is a useful inverse relationship between this chapter and the previous one. Chapter 10 constructed a total from many local contributions, while the fundamental theorem says that differentiating the total recovers the local rate at continuity points. Neither operation erases all information in both directions. Differentiation loses the vertical constant in an accumulation function; integration over an interval needs a baseline or two endpoints to recover a number. If two tanks have the same net inflow curve but different initial volumes, their volume graphs have the same slope and differ by a constant. This is the physical meaning of the arbitrary constant in antiderivatives. Always check units and orientation."
+      ],
+      "formula": "A(x) = ∫ₐˣ f(t) dt; A(x + h) − A(x) = ∫ₓˣ⁺ʰ f(t) dt.",
+      "formulaTex": "A(x)=\\int_a^x f(t)\\,dt,\\qquad A(x+h)-A(x)=\\int_x^{x+h}f(t)\\,dt"
+    },
+    {
+      "title": "2. The first part: the derivative of accumulation",
+      "paragraphs": [
+        "Fundamental theorem, accumulation form: if $f$ is continuous on the closed interval $[a,b]$, then $A(x)=\\int_a^x f(t)\\,dt$ is continuous on $[a,b]$ and differentiable on $(a,b)$, with $A^{\\prime}(x)=f(x)$. At $a$ and $b$ the corresponding one-sided derivatives equal the endpoint values. Ordinary two-sided derivatives are not asserted at endpoints without an extension beyond the interval. Continuity is a sufficient hypothesis that is easy to check for polynomials, trigonometric functions, and compositions on their domains.",
+        "Proof idea, made into an estimate: fix an interior $x$. For nonzero $h$ small enough to remain in the interval, the difference quotient is $\\frac{A(x+h)-A(x)}{h}=\\frac1h\\int_x^{x+h}f(t)\\,dt$. Subtract $f(x)$ and rewrite the difference as $\\frac1h\\int_x^{x+h}[f(t)-f(x)]\\,dt$. Its absolute value is at most the largest value of $|f(t)-f(x)|$ between $x$ and $x+h$. This estimate works for negative $h$ too, because reversing the interval and taking absolute values remove both signs. Continuity at $x$ makes that bound tend to zero. Therefore the difference quotient tends to $f(x)$.",
+        "The argument says that the average value of a continuous rate over a shrinking interval tends to its value at the point. It explains why continuity matters rather than treating it as a decorative condition. Continuity of $A$ itself follows from boundedness: if $|f|\\le M$ on $[a,b]$, then $|A(y)-A(x)|\\le M|y-x|$. Even a bounded Riemann-integrable $f$ gives a continuous accumulation function. Differentiability at a particular point is guaranteed by continuity of $f$ there, not merely by integrability elsewhere.",
+        "For a concrete failure, take $f(t)=-1$ for $t<0$ and $f(t)=1$ for $t\\ge0$ on $[-1,1]$. Its accumulation from $-1$ is $A(x)=-x-1$ for $x\\le0$ and $A(x)=x-1$ for $x\\ge0$. The graph is continuous but has left slope $-1$ and right slope $1$ at zero, so no derivative exists there. Altering only the assigned value $f(0)$ cannot fix the corner: changing one point does not change a Riemann integral. Numerical agreement at many sampled points would miss this single exceptional point.",
+        "The proof estimate can be written uniformly for either sign of $h$: $\\left|\\frac{A(x+h)-A(x)}{h}-f(x)\\right|\\le\\sup\\{|f(t)-f(x)|:t\\text{ lies between }x\\text{ and }x+h\\}$. For $h>0$ this follows by integrating the pointwise difference over $[x,x+h]$ and dividing by $h$. For $h<0$, reverse the integration limits and divide by $|h|$ after taking absolute values. Continuity at $x$ makes the supremum tend to zero. This is more than an informal picture of a thin rectangle: it gives a quantitative reason that all sufficiently short strips have average height close to $f(x)$.",
+        "Continuity at the single point $x$ is enough for the derivative conclusion there, provided $f$ is Riemann integrable on the surrounding interval. The full statement “$f$ continuous on $[a,b]$” is a convenient global hypothesis that ensures every point works. If $f$ has an isolated discontinuity at $c$, $A$ can still be differentiable at $c$ or fail to be. For $f(t)=0$ except $f(0)=9$, $A$ is identically zero and $A^{\\prime}(0)=0$, unequal to $f(0)$. For a step from $-1$ to $+1$ at zero, $A$ has a corner there. The integrand's assigned value at one point cannot control an accumulated derivative by itself.",
+        "The bounded-integrand estimate $|A(y)-A(x)|\\le M|y-x|$ shows that accumulation is Lipschitz continuous when $|f|\\le M$. It is stronger than ordinary continuity: a bounded rate cannot make the total jump instantaneously. If $f$ is unbounded, $A$ may still be continuous under an improper integral, but this estimate no longer applies with a finite $M$. In a physical model, an actual jump in stored amount would require an impulse or an instantaneous transfer not represented by an ordinary bounded rate. The mathematical hypothesis thus carries a concrete modeling meaning.",
+        "At the endpoints, one-sided difference quotients are appropriate. If $f$ is continuous on $[a,b]$, then the right derivative of $A$ at $a$ equals $f(a)$ and the left derivative at $b$ equals $f(b)$. Claiming an ordinary two-sided derivative there silently assumes $A$ and $f$ have been extended outside the interval. Many textbooks abbreviate the statement as $A^{\\prime}=f$ “on $[a,b]$”; read that notation with the endpoint convention in mind. The interval orientation also matters: defining $C(x)=\\int_x^b f(t)\\,dt$ gives $C^{\\prime}(x)=-f(x)$, because increasing $x$ removes a strip from the left.",
+        "A precise local version follows from the same estimate even when $f$ is not continuous everywhere. Suppose $f$ is bounded and Riemann integrable on $[a,b]$, and continuous at an interior point $c$. Then $A(x)=\\int_a^x f(t)\\,dt$ is differentiable at $c$ with $A^{\\prime}(c)=f(c)$. Discontinuities elsewhere do not interfere because the difference quotient only integrates over the shrinking interval from $c$ to $c+h$. This localization is useful when a piecewise rate has a small number of jumps: the accumulation curve is differentiable on each continuous piece, while its behavior at each jump must be checked separately. The global continuous-function theorem packages these local conclusions into one statement.",
+        "The argument also makes the units transparent. Dividing a small accumulated change by the endpoint change returns units of rate: litres divided by hours becomes litres per hour. If the accumulation came from a signed rate, this quotient may be negative. The limit identifies its local value at continuity points, while the finite quotient remains the average rate over the small interval. Keeping these quantities distinct helps explain why the theorem is plausible before applying its symbolic rule.",
+        "A useful refinement handles a piecewise continuous rate at a jump $c$. If $f$ approaches finite values $L$ from the left and $R$ from the right, the same shrinking-average estimate gives $A$'s left derivative as $L$ and its right derivative as $R$. Thus $A$ has an ordinary derivative at $c$ exactly when these one-sided limits agree; the separately assigned value $f(c)$ need not equal that derivative. For example, a rate of $2$ before noon and $5$ after noon produces a continuous total with a corner at noon, regardless of what number the model assigns at the exact instant. This gives a direct graph test without confusing a rate's point value with its nearby behavior.",
+        "At zero, ask three questions separately. For $f_c(t)=t+2$, the rate is continuous, $A_c(x)=x^2/2+2x$, and the accumulation derivative equals $f_c(0)=2$. If only $f_p(0)$ changes to $9$, every oriented integral stays the same: a single changed value contributes zero Riemann area. Thus $A_p=A_c$ and $A_p^{\\prime}(0)=2$, although $f_p$ is discontinuous and $A_p^{\\prime}(0)\\ne f_p(0)$.",
+        "The actual shrinking averages distinguish these cases from a jump. At $x=-h$ and $x=h$, with $h>0$, both $A_c$ and $A_p$ have quotients $2-h/2$ and $2+h/2$, so both one-sided limits are $2$. If $f_j(t)=t+2$ to the left and $t+4$ to the right, with $f_j(0)=9$, its quotients are $2-h/2$ and $4+h/2$. Their limits disagree, so $A_j^{\\prime}(0)$ does not exist. Continuity of the rate, derivative existence, and equality to the assigned rate are different decisions; Problem 11.35 asks you to justify all three."
+      ],
+      "formula": "If f is continuous, d/dx [∫ₐˣ f(t) dt] = f(x) for interior x.",
+      "theorems": [
+        {
+          "title": "The accumulation theorem needs continuity only at the point",
+          "statement": "If $f$ is Riemann integrable on $[a,b]$ and continuous at an interior point $c$, then $A(x)=\\int_a^x f(t)\\,dt$ is differentiable at $c$ with $A^{\\prime}(c)=f(c)$.",
+          "proof": [
+            "Riemann integrability makes $f$ bounded, so $A$ is continuous: if $|f|\\le M$, then $|A(y)-A(x)|=\\left|\\int_x^y f(t)\\,dt\\right|\\le M|y-x|$. Now fix $c$ where $f$ is continuous. For a nonzero $h$ small enough that $c+h$ remains in $[a,b]$, additivity of the integral gives $[A(c+h)-A(c)]/h=(1/h)\\int_c^{c+h}f(t)\\,dt$. Subtract $f(c)$, which is the average of the constant $f(c)$ over that oriented interval.",
+            "Given $\\varepsilon>0$, continuity at $c$ supplies $\\delta>0$ such that $|f(t)-f(c)|<\\varepsilon$ whenever $|t-c|<\\delta$. If $0<|h|<\\delta$, every $t$ between $c$ and $c+h$ satisfies this estimate. Therefore $\\left|[A(c+h)-A(c)]/h-f(c)\\right|\\le(1/|h|)\\int_{\\min(c,c+h)}^{\\max(c,c+h)}|f(t)-f(c)|\\,dt<\\varepsilon$. For $h<0$ the reversed orientation and negative denominator cancel; the same bound applies. This proves the two-sided derivative without requiring $f$ to be continuous at distant points.",
+            "At a discontinuity of $f$ the conclusion may hold or fail, and changing $f$ at one point never changes $A$. For example, if $f$ is zero except $f(c)=9$, then $A$ is identically zero and $A^{\\prime}(c)=0$, not $9$. The theorem gives a sufficient local hypothesis; it does not assert that every discontinuity makes $A$ nondifferentiable. Distinguishing a sufficient condition from a necessary one is part of using the fundamental theorem precisely."
+          ],
+          "equationTex": "A^{\\prime}(c)=f(c),\\qquad A(x)=\\int_a^x f(t)\\,dt"
+        }
+      ],
+      "formulaTex": "\\frac{d}{dx}\\int_a^x f(t)\\,dt=f(x)\\quad\\text{at continuity points}"
+    },
+    {
+      "title": "3. The second part: endpoints replace infinitely many sums",
+      "paragraphs": [
+        "Fundamental theorem, evaluation form: suppose $f$ is continuous on $[a,b]$, and $F$ is continuous on $[a,b]$ and differentiable on $(a,b)$, with $F^{\\prime}=f$ there. Then $\\int_a^b f(x)\\,dx=F(b)-F(a)$. The function $F$ is called an antiderivative of $f$. This theorem is a bridge from the limiting sums that define integration to a calculation involving only two function values. It does not redefine the integral as an antiderivative, and it applies whether or not a convenient formula for $F$ is available.",
+        "Proof sketch using the first part: define $A(x)=\\int_a^x f(t)\\,dt$. On $(a,b)$, the function $H=F-A$ has derivative zero. The mean value theorem shows that $H$ is constant on $[a,b]$: between any two points its change equals a derivative value times their separation, hence is zero. Because $A(a)=0$, that constant is $F(a)$. Evaluating $F(x)=A(x)+F(a)$ at $b$ gives the result. Notice the role of an interval in the constant argument; it provides the uninterrupted domain needed by the mean value theorem.",
+        "All antiderivatives of a continuous $f$ on an interval therefore have the form $F(x)+C$. The notation $\\int f(x)\\,dx$ means this family and is called an indefinite integral. A definite integral instead has endpoints and is a single signed number. In evaluating $[F(x)+C]_a^b$, the two constants cancel. An initial condition such as $V(0)=12$ determines $C$ when reconstructing a quantity, but no extra arbitrary constant should be attached to the numerical value of a definite integral.",
+        "Domains still govern the calculation. For $x\\ne0$, $1/x$ has antiderivative $\\ln|x|$ on each interval avoiding zero. We cannot conclude that $\\int_{-1}^{1}\\frac{1}{x}\\,dx=\\ln(1)-\\ln(1)$. The integrand is undefined and unbounded at an interior point, so the present theorem does not apply. Chapter 14 treats improper integrals and explains why a symmetric cancellation is a different question. Always inspect the whole interval before evaluating endpoint expressions.",
+        "The evaluation theorem is a consequence of a uniqueness fact: two functions with the same derivative on an interval differ by a constant. Its proof uses the mean value theorem on every closed subinterval. A disconnected domain breaks the single-constant conclusion. The derivative of $\\ln|x|$ is $1/x$ for $x\\ne0$, but one may add one constant on $(-\\infty,0)$ and a different constant on $(0,\\infty)$. The integral $\\int f(x)\\,dx$ describes a family on each connected interval of definition. When applying endpoint evaluation, first confirm that one valid antiderivative covers the entire integration interval.",
+        "For $f(x)=2x$ on $[1,3]$, $F(x)=x^2$ is an antiderivative, so $\\int_1^3 2x\\,dx=F(3)-F(1)=9-1=8$. The result is also the area of a trapezoid with parallel vertical sides of heights $2$ and $6$ and width $2$: $(2+6)\\cdot2/2=8$. This geometric check is independent of the endpoint algebra. A wrong order $F(1)-F(3)$ would give $-8$ and contradict the nonnegative graph. Sign, units, and rough scale are valuable checks before accepting a symbolic answer.",
+        "A definite integral cannot always be evaluated by an elementary-looking primitive. The continuous function $\\exp(-x^2)$ has a perfectly valid integral on $[0,1]$ and an accumulation antiderivative $A(x)=\\int_0^x\\exp(-t^2)\\,dt$, but no elementary formula for $A$ is available. The fundamental theorem still holds: $A^{\\prime}(x)=\\exp(-x^2)$ and $\\int_0^1\\exp(-x^2)\\,dx=A(1)-A(0)$. Numerical methods can estimate $A(1)$ with controlled error. The theorem asserts a relationship between derivative and accumulation, not a promise that every answer simplifies to a short symbolic expression.",
+        "When an initial condition is present, use it after finding an antiderivative family. If a particle has $v(t)=3t^2$ metres per second with $t$ in seconds (so the coefficient $3$ has units of metres per second cubed) and position $s(0)=5$ metres, then $s(t)=t^3+C$ metres, with the coefficient of $t^3$ carrying the corresponding units, and $C=5$ metres. Its displacement from $t=1$ to $t=2$ seconds is $s(2)-s(1)=7$ metres, independent of $C$, while its position at $t=2$ seconds is $13$ metres. The integral of $v$ over $[1,2]$ seconds is the displacement $7$ metres, not the final position. This separation prevents a frequent confusion between change, accumulated quantity, and absolute state.",
+        "Antiderivative evaluation also provides an error check for any proposed primitive. If someone claims $\\int_a^b f(x)\\,dx=G(b)-G(a)$, differentiate $G$ on the entire interior and verify $G^{\\prime}=f$. Matching only at endpoints is insufficient: many unrelated functions have the same two endpoint values. Conversely, if $f$ is continuous and a candidate derivative identity holds everywhere inside, endpoint evaluation is exact regardless of how complicated $f$ looks. This is particularly helpful after substitution or integration by parts, where a missing chain factor can be exposed immediately by differentiation. The verification belongs to the proposed antiderivative, not to a few numerical sample points."
+      ],
+      "formula": "∫ₐᵇ f(x) dx = F(b) − F(a), when F′ = f under the stated hypotheses.",
+      "formulaTex": "\\begin{gathered}f\\in C([a,b]),\\quad F\\in C([a,b])\\cap C^1((a,b)),\\quad F^{\\prime}=f\\text{ on }(a,b),\\\\ \\int_a^b f(x)\\,dx=F(b)-F(a).\\end{gathered}"
+    },
+    {
+      "title": "4. Moving endpoints and the chain rule",
+      "paragraphs": [
+        "An upper limit can itself be a function. If $f$ is continuous on an interval containing the relevant endpoints and $g$ is differentiable, write $B(x)=\\int_a^{g(x)} f(t)\\,dt=A(g(x))$. The chain rule gives $B^{\\prime}(x)=f(g(x))g^{\\prime}(x)$. The endpoint moves at speed $g^{\\prime}(x)$, so it contributes that factor as well as the rate evaluated at its current location. The formula remains valid when $g(x)<a$ because oriented integrals already encode the sign.",
+        "When both endpoints move, split the integral at any fixed point $c$ in the domain: $\\int_{u(x)}^{v(x)}f(t)\\,dt=A(v(x))-A(u(x))$, where $A(y)=\\int_c^y f(t)\\,dt$. Differentiating gives $f(v(x))v^{\\prime}(x)-f(u(x))u^{\\prime}(x)$. A moving lower endpoint subtracts accumulation. The endpoints need not remain ordered, and they may coincide. At a crossing the integral is zero, but its derivative can be nonzero because the endpoints may separate at different speeds.",
+        "For example, if $B(x)=\\int_x^{x^2}\\cos(t)\\,dt$, then $B^{\\prime}(x)=2x\\cos(x^2)-\\cos(x)$. This calculation never required us to find the integral first. The same principle handles an integrand such as $\\exp(-t^2)$, whose antiderivative has no elementary expression. Be careful, however, if $x$ also occurs inside the integrand: $\\int_0^x xt\\,dt$ has additional dependence on $x$ and is not covered by simply replacing $t$ with $x$ in the integrand. Here direct calculation gives $x^3/2$ and derivative $3x^2/2$.",
+        "The upper-limit rule is a composition of two maps. First $y\\mapsto A(y)=\\int_a^y f(t)\\,dt$ has derivative $A^{\\prime}(y)=f(y)$. Then $x\\mapsto g(x)$ selects an endpoint $y=g(x)$. The chain rule multiplies by $g^{\\prime}(x)$. For $B(x)=\\int_0^{x^2}(1+t^3)\\,dt$, $B^{\\prime}(x)=[1+(x^2)^3]2x=2x(1+x^6)$. Omitting $2x$ treats the endpoint as though it moved one unit whenever $x$ moves one unit, which is generally false. At $x=0$ the endpoint moves only to second order, so $B^{\\prime}(0)=0$ even though $f(0)=1$.",
+        "A moving lower endpoint contributes a minus sign. If $C(x)=\\int_x^3 t^2\\,dt$, then $C^{\\prime}(x)=-x^2$. The integral is positive for $0\\le x\\le3$, yet decreases as $x$ advances because less area remains. Direct calculation $C(x)=9-x^3/3$ verifies the sign. For two moving endpoints, these effects compete; their order can change without invalidating the formula. A zero-width interval at one input does not imply zero derivative there, just as two runners can meet at a moment while having different velocities.",
+        "When $x$ appears inside the integrand, the boundary-only rule is incomplete. A transparent example is $H(x)=\\int_0^x xt\\,dt$. Holding $x$ fixed while integrating $t$ gives $H(x)=x^3/2$, hence $H^{\\prime}(x)=3x^2/2$. The boundary term alone would be $(x\\cdot x)\\cdot1=x^2$. The missing $x^2/2$ comes from the change of the whole integrand over the existing interval. Under appropriate continuity and differentiability hypotheses, Leibniz's rule adds $\\int_{u(x)}^{v(x)}\\frac{\\partial F}{\\partial x}(x,t)\\,dt$ to the two endpoint terms when the integrand is $F(x,t)$. We will use direct evaluation when possible and state the extra hypothesis when invoking the general rule.",
+        "Units help diagnose a missing endpoint-speed factor. If $f(t)$ is litres per hour and $g(x)$ is time in hours as a function of a dimensionless control $x$, then $f(g(x))g^{\\prime}(x)$ has litres per control unit, the right unit for $dB/dx$. The value $f(g(x))$ alone has litres per hour and cannot be the derivative with respect to $x$ unless $g^{\\prime}$ happens to carry exactly one hour per control unit. The same check works for moving spatial boundaries, where boundary height must be multiplied by boundary speed to yield area change.",
+        "For two moving endpoints, a useful special case is a fixed-width window $u(x)=x$ and $v(x)=x+h$. The derivative of $\\int_x^{x+h}f(t)\\,dt$ with respect to $x$ is $f(x+h)-f(x)$. If $f$ is constant, the derivative is zero, as one expects from a window containing the same amount wherever it sits. If $f$ is increasing, the incoming rate at the right is higher than the outgoing rate at the left, so the accumulated window amount increases. This sign conclusion follows directly from the formula without evaluating the integral. It is a bridge between calculus and rolling measurements in time series.",
+        "An accumulation with a corner can have a differentiable composition with a flat endpoint map. Let $s(t)=1$ for $t<0$ and $s(t)=3$ for $t\\ge0$. Its accumulation from zero is $A(y)=y$ for $y<0$ and $A(y)=3y$ for $y\\ge0$. Both formulas tend to zero, so the accumulation is continuous at zero. The left and right quotients of $A$ at zero are $1$ and $3$, so $A^{\\prime}(0)$ does not exist. Yet $A(x^2)=3x^2$, whose quotient at zero is $3x\\to0$. For $A(x^3)$ the quotient is $x^2$ on the left and $3x^2$ on the right; both tend to zero.",
+        "The same conclusion holds for any differentiable $g$ with $g(0)=g^{\\prime}(0)=0$, even when $g$ crosses zero. The piecewise formula gives $|A(y)|\\le3|y|$ for every real $y$, so $|A(g(h))/h|\\le3|g(h)/h|\\to0$. This direct bound proves $(A\\circ g)^{\\prime}(0)=0$. Writing $A^{\\prime}(0)g^{\\prime}(0)$ would use an undefined factor; the ordinary chain rule does not supply this result. Compare Problem 11.36 with the distinct square-root endpoint failure in Problem 11.34."
+      ],
+      "formula": "d/dx [∫ from u(x) to v(x) f(t) dt] = f(v(x))v′(x) − f(u(x))u′(x).",
+      "formulaTex": "\\frac{d}{dx}\\int_{u(x)}^{v(x)}f(t)\\,dt=f(v(x))v^{\\prime}(x)-f(u(x))u^{\\prime}(x)"
+    },
+    {
+      "title": "5. Substitution transports the endpoints too",
+      "paragraphs": [
+        "Substitution for definite integrals is the chain rule read through the evaluation theorem. Suppose $g$ is continuously differentiable on $[a,b]$ and $f$ is continuous on an interval containing the image of $g$. If $F^{\\prime}=f$, then the derivative of $F(g(x))$ is $f(g(x))g^{\\prime}(x)$. Integrating and evaluating endpoints yields $\\int_a^b f(g(x))g^{\\prime}(x)\\,dx=\\int_{g(a)}^{g(b)} f(u)\\,du$. The variable $u$ labels the transformed input, and its bounds must be values of $u$, not unchanged values of $x$.",
+        "For $\\int_0^1 2x\\cos(x^2)\\,dx$, choose $u=x^2$. The factor $2x\\,dx$ corresponds to $du$, and the endpoints become $u=0$ and $u=1$. The integral equals $\\int_0^1\\cos(u)\\,du=\\sin(1)$. For an interval $[1,2]$, the same substitution would change the bounds to $[1,4]$. Keeping $[1,2]$ in the $u$-integral would silently ask a different question. One can instead find an antiderivative in $u$, substitute back to $x$, and only then use the original $x$-bounds; both methods agree when used consistently.",
+        "Monotonicity of $g$ is not required for this one-dimensional formula with its signed derivative factor. On $[-1,1]$, the substitution $u=x^2$ makes both bounds equal to $1$, and $\\int_{-1}^{1}2x\\cos(x^2)\\,dx=0$. The inward and outward passages cancel. This is not a general instruction to ignore overlapping regions in geometric change of variables; it is a consequence of the chain rule and orientation. Substitution also cannot magically remove a singularity where its continuity hypotheses fail.",
+        "Substitution is most reliable when the transformed differential and bounds are recorded together. In $\\int_1^2\\frac{2x}{1+x^2}\\,dx$, let $u=1+x^2$, so $du=2x\\,dx$ and the bounds become $u=2$ and $u=5$. The integral is $\\int_2^5\\frac{1}{u}\\,du=\\ln(5/2)$. If one retains $x$-bounds $1$ and $2$ after changing the integrand to $1/u$, the resulting $\\ln2$ is a different number. A quick numerical check confirms the integrand is positive and roughly between $0.8$ and $1$, so an answer around $0.916$ is plausible.",
+        "Substitution can reverse orientation. For $\\int_0^1-2x\\exp(-x^2)\\,dx$, set $u=-x^2$; then $du=-2x\\,dx$ and the bounds become $0$ and $-1$. The result $\\int_0^{-1}e^u\\,du=e^{-1}-1$, a negative number as the original integrand requires. Reversing the $u$-bounds to $[-1,0]$ without also introducing a minus sign would produce the opposite answer. The sign of $g^{\\prime}$ and the order of transformed endpoints work together; neither may be ignored.",
+        "The chain-rule derivation avoids a hidden monotonicity assumption. Even when $u=g(x)$ travels forward and then backward, $F(g(b))-F(g(a))$ still equals $\\int_a^b f(g(x))g^{\\prime}(x)\\,dx$, provided the regularity hypotheses hold. What it does not do is replace an unsigned geometric area under $f(g(x))$ with a naive integral over a repeated $u$-range. For unsigned quantities, absolute values and multiplicity matter. In the one-dimensional signed formula here, orientation accounts for retracing automatically. This is why substitution is often more straightforward for signed integrals than for geometric length or area.",
+        "The pattern is recognizable in derivatives: if the integrand is $f(g(x))g^{\\prime}(x)$, choose $u=g(x)$. If the derivative factor is missing, plain substitution may not simplify the expression. For example, $\\int_0^1\\cos(x^2)\\,dx$ does not become $\\sin(1)$, because $d(x^2)=2x\\,dx$ and the original integral has no $2x$ factor. It still exists and can be approximated numerically or represented by a special function. Always verify a proposed antiderivative by differentiating it; this single check catches many invented substitutions.",
+        "The substitution rule has a quick diagnostic: after changing variables, no old variable should remain in the transformed integral, and every transformed bound must be expressed in the new variable. For $\\int_1^2\\frac{2x}{1+x^2}\\,dx$, writing $\\int_1^2\\frac{1}{u}\\,du$ violates the second requirement, while writing $\\int_2^5\\frac{2x}{u}\\,du$ violates the first. Either inconsistency signals an unfinished substitution. If the new variable is not monotone, the signed formula remains valid as shown, but using it to compute geometric area may require splitting the original interval where direction reverses. Keep the desired quantity visible throughout the algebra."
+      ],
+      "formula": "∫ from a to b f(g(x))g′(x) dx = ∫ from g(a) to g(b) f(u) du.",
+      "formulaTex": "\\int_a^b f(g(x))g^{\\prime}(x)\\,dx=\\int_{g(a)}^{g(b)}f(u)\\,du"
+    },
+    {
+      "title": "Moving both endpoints of an accumulated area",
+      "paragraphs": [
+        "A variable upper limit and a variable lower limit can compete. For $0\\le x\\le1$, define $A(x)=\\int_{x^2}^{x}t^2\\,dt$. Because $x^2\\le x$ on this interval and $t^2\\ge0$, $A(x)$ is nonnegative. The two moving boundaries meet at $x=0$ and $x=1$, so $A$ vanishes there. Between the endpoints, the accumulated area is positive. Before differentiating, these geometric facts give useful sign and endpoint checks.",
+        "The fundamental theorem and the chain rule give $A^{\\prime}(x)=x^2\\cdot1-(x^2)^2(2x)=x^2-2x^5$. The first term is the incoming strip at the upper boundary; the second is the strip removed as the lower boundary moves. Its factor $2x$ is the speed of the lower boundary, not part of the integrand. Direct integration checks the result: $A(x)=[t^3/3]_{x^2}^{x}=(x^3-x^6)/3$, whose derivative is indeed $x^2-2x^5$.",
+        "An interior maximum occurs when $x^2(1-2x^3)=0$, so $x=2^{-1/3}$ is the positive interior critical point. The derivative is positive before it and negative afterward. At that point $x^3=1/2$ and $x^6=1/4$, giving $A=(1/2-1/4)/3=1/12$. The endpoint values are zero, so this is the absolute maximum on $[0,1]$. Here an accumulation question becomes an optimization question through differentiation.",
+        "Lesson 4 established the boundary rule under continuity of $f$ and differentiability of both endpoints. Here it is a method choice: use the rule first when only a derivative or extremum is requested, especially if no elementary antiderivative is known; evaluate the integral first when its primitive is simple and the whole accumulation function is useful. In either route keep $u(x)$ and $v(x)$ in the interval on which $f$ is continuous. If the integrand itself depends on $x$, return to the interior term explained in Lesson 4.",
+        "The moving-window example has an illuminating geometry. On $0<x<1$, the upper boundary $x$ moves at speed $1$ while the lower boundary $x^2$ moves at speed $2x$. Early on, the upper edge opens the window faster than the lower edge closes it, so area grows. Later the lower edge moves faster, but the heights at the two edges also differ; the derivative balances both speed and height. The maximum therefore occurs at $x=2^{-1/3}$, not simply where the endpoint speeds match at $x=1/2$. A boundary contribution is height times speed, not speed alone.",
+        "At $x=0$ and $x=1$ the integral $A(x)=\\int_{x^2}^x t^2\\,dt$ vanishes because its endpoints coincide. This does not force a one-sided derivative to vanish at both points of the stated domain $[0,1]$. At $x=1$, the left derivative is $A^{\\prime}_{-}(1)=1-2=-1$, a one-sided rate of decrease as $x$ approaches the endpoint from the left. At $x=0$, the right derivative is $A^{\\prime}_{+}(0)=0$ because both boundary heights vanish. These endpoint facts can be checked directly from $A(x)=(x^3-x^6)/3$. An endpoint value is a state, while a derivative describes how that state changes nearby.",
+        "The exact maximum follows from the sign chart already obtained: $A'(x)>0$ for $0<x<2^{-1/3}$ and $A'(x)<0$ for $2^{-1/3}<x<1$. Since $A(0)=A(1)=0$, the value $1/12$ is an absolute maximum, not just a stationary value. This endpoint comparison is essential in a closed-interval optimization problem.",
+        "The Lesson 6 checkpoint revisits the fixed-width rule from Lesson 4. For a further, optional return after that checkpoint, apply the same boundary reasoning to $B(x)=\\int_x^{\\sqrt{x}}t\\,dt$ on $[0,1]$: evaluate it to check the endpoints before deciding where its maximum lies. The square-root endpoint is not differentiable at zero, so use the evaluated expression for its right derivative there.",
+        "The two methods check each other in the worked example: direct evaluation gives $A(x)=x^3(1-x^3)/3$, while the boundary rule explains the competing strips without first finding a primitive. At an interior point both calculations give $A'(x)=x^2-2x^5$. A rate without an elementary primitive can still have a simple boundary derivative; a simple primitive can expose the value and units of the entire window. Choose according to the requested quantity."
+      ],
+      "formula": "A′(x)=f(v(x))v′(x)−f(u(x))u′(x) for A(x)=∫_{u(x)}^{v(x)}f(t)dt.",
+      "formulaTex": "\\begin{gathered}f\\in C(I),\\quad u,v\\text{ differentiable},\\quad u(x),v(x)\\in I,\\\\ \\begin{aligned}A(x)&=\\int_{u(x)}^{v(x)}f(t)\\,dt,\\\\ A^{\\prime}(x)&=f(v(x))v^{\\prime}(x)-f(u(x))u^{\\prime}(x).\\end{aligned}\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Recovering a tank volume from net flow",
+      "problem": "A tank initially holds $12$ litres. Its net inflow is $r(t)=6-2t$ litres per minute for $0\\le t\\le4$, where $t$ is measured in minutes. Find the volume at four minutes and its maximum during this interval. Assume capacity exceeds $21$ litres.",
+      "steps": [
+        "The polynomial rate is continuous, so $V(t)=12+\\int_0^t(6-2s)\\,ds=12+6t-t^2$. Each term in the accumulated change has units of litres.",
+        "At $t = 4$ the change is $24 - 16 = 8$ litres, giving $V(4) = 20$ litres. This is net gain; the negative rate after minute three represents net outflow.",
+        "Since $V^{\\prime}(t) = 6 - 2t$, the volume increases before $t = 3$ and decreases afterward. Check $V(0) = 12$, $V(3) = 21$, and $V(4) = 20$. The minimum is positive, so the model does not empty the tank.",
+        "A midpoint sum with four one-minute intervals uses rates $5$, $3$, $1$, and $-1$. Multiplying their sum by one minute gives $8$ litres, exactly here because the rate is linear."
+      ],
+      "answer": "$V(4) = 20$ litres; the maximum is $21$ litres at $t = 3$ minutes."
+    },
+    {
+      "title": "A moving window without an elementary antiderivative",
+      "problem": "Find the derivative of $H(x)=\\int_{x^2}^{2x}e^{-t^2}\\,dt$ for real $x$, and evaluate $H^{\\prime}(1)$.",
+      "steps": [
+        "Let $G(u)=\\int_0^u e^{-t^2}\\,dt$. Continuity gives $G^{\\prime}(u)=e^{-u^2}$, and oriented integrals give $H(x)=G(2x)-G(x^2)$ for every real $x$.",
+        "Apply the chain rule to both endpoints: $H^{\\prime}(x)=2e^{-4x^2}-2xe^{-x^4}$.",
+        "At $x=1$ this gives $2e^{-4}-2e^{-1}$. No formula for $H$ itself was required."
+      ],
+      "answer": "$H^{\\prime}(x)=2e^{-4x^2}-2xe^{-x^4}$; $H^{\\prime}(1)\\approx-0.6991276046$."
+    },
+    {
+      "title": "A signed accumulation changes direction",
+      "problem": "Let $A(x)=\\int_0^x(t-1)\\,dt$ for $0\\le x\\le 2$. Locate its minimum and distinguish its zeros from zeros of the rate.",
+      "steps": [
+        "Evaluation gives $A(x)=\\frac{x^2}{2}-x$. The fundamental theorem gives $A^{\\prime}(x)=x-1$.",
+        "$A^{\\prime}$ changes from negative to positive at $x=1$, so $A$ has its minimum $A(1)=-\\frac12$ there.",
+        "$A(0)=A(2)=0$, but the rate $f(x)=x-1$ vanishes only at $x=1$. Zero accumulation and zero instantaneous rate are different conditions."
+      ],
+      "answer": "Minimum $-1/2$ at $x=1$; accumulated total is zero at $x=0$ and $x=2$."
+    },
+    {
+      "title": "Evaluate and cross-check a positive integral",
+      "problem": "Evaluate $\\int_1^3 2x\\,dx$ by the fundamental theorem and verify geometrically.",
+      "steps": [
+        "$F(x)=x^{2}$ is an antiderivative of $2x$ on the whole interval.",
+        "$F(3)-F(1)=9-1=8$.",
+        "The region is a trapezoid of width $2$ and vertical sides $2$ and $6$, giving area $\\frac{(2+6)\\cdot2}{2}=8$."
+      ],
+      "answer": "The integral equals $8$."
+    },
+    {
+      "title": "An initial position fixes the constant",
+      "problem": "A particle has velocity $v(t)=3t^{2}$ metres per second for $t$ in seconds (the coefficient has units of metres per second cubed) and $s(0)=5$ metres. Find $s(t)$, $s(2)$, and displacement on $[1,2]$.",
+      "steps": [
+        "Integrate $v$ to obtain the family $s(t)=t^{3}+C$.",
+        "The initial condition gives $C=5$, so $s(2)=8+5=13$ metres.",
+        "Displacement over $[1,2]$ is $s(2)-s(1)=13-6=7$ metres, equivalently $\\int_1^2 3t^2\\,dt$."
+      ],
+      "answer": "$s(t)=t^{3}+5$ metres; $s(2)=13$ metres; displacement is $7$ metres."
+    },
+    {
+      "title": "A moving upper endpoint needs chain rule",
+      "problem": "Differentiate $B(x)=\\int_0^{x^2}(1+t^3)\\,dt$ and check by direct evaluation.",
+      "steps": [
+        "The accumulation derivative at endpoint $y$ is $1+y^{3}$. Set $y=x^{2}$ and multiply by $y^{\\prime}=2x$.",
+        "Thus $B^{\\prime}(x)=2x(1+x^{6})$.",
+        "Directly, $B(x)=x^2+\\frac{x^8}{4}$, whose derivative is $2x+2x^{7}$, the same expression."
+      ],
+      "answer": "$B^{\\prime}(x)=2x(1+x^{6})$."
+    },
+    {
+      "title": "Transport the bounds in substitution",
+      "problem": "Evaluate $\\int_1^2\\frac{2x}{1+x^2}\\,dx$.",
+      "steps": [
+        "Let $u=1+x^{2}$, so $du=2x dx$.",
+        "At $x=1$, $u=2$; at $x=2$, $u=5$. The transformed integral is $\\int_2^5\\frac{du}{u}$.",
+        "The integrand $1/u$ has antiderivative $\\ln u$ on the positive $u$-interval, giving $\\ln 5-\\ln 2$."
+      ],
+      "answer": "The value is $\\ln (5/2)$."
+    },
+    {
+      "title": "A sliding window of a rising rate",
+      "problem": "Let $W(x)=\\int_x^{x+2}t^2\\,dt$ for $x\\ge 0$. Differentiate by the endpoint rule and verify algebraically.",
+      "steps": [
+        "The moving upper boundary contributes $(x+2)^2$ and the lower boundary subtracts $x^2$, so $W^{\\prime}(x)=(x+2)^2-x^2=4x+4$.",
+        "Direct evaluation gives $W=\\frac{(x+2)^3-x^3}{3}=2x^2+4x+\\frac83$.",
+        "Differentiating the polynomial gives $4x+4$, confirming the rule."
+      ],
+      "answer": "$W^{\\prime}(x)=4x+4$ for $x>0$; at the domain endpoint, the right derivative is $W^{\\prime}_+(0)=4$."
+    }
+  ],
+  "misconceptions": [
+    "“Integration and differentiation always cancel without conditions.” Continuity guarantees the accumulation derivative; a step rate produces a corner at its jump.",
+    "“An antiderivative is unique.” It is determined only up to a constant on an interval; an initial value selects one member.",
+    "“A definite integral gives the amount present.” It gives accumulated change when its integrand is a rate; the initial amount must be added."
+  ],
+  "lab": {
+    "title": "Rebuild a rate from numerical accumulation",
+    "description": "For the dimensionless rate $f(x)=x^2-c$, approximate $A(x)=\\int_0^x f(t)\\,dt$ by midpoint sums, then estimate its derivative by a central difference. Compare that derivative with $f$ and check $A$ against its exact polynomial. All plotted horizontal coordinates are $x$; labels identify the vertical quantities.",
+    "code": "// Adjust c, the midpoint panel count n, and derivative step h.\nconst c = 1;\nconst n = 200;\nconst h = 0.01;\nif (!Number.isInteger(n) || n < 1 || n > 2000 || !Number.isFinite(c) || Math.abs(c) > 100 || !Number.isFinite(h) || h <= 0 || h > 0.5) throw new Error('Use 1 <= n <= 2000, |c| <= 100, and 0 < h <= 0.5.');\nconst f = x => x*x - c;\nconst exact = x => x*x*x/3 - c*x;\nfunction accumulation(x) {\n  const dx = x/n; // Negative x automatically reverses orientation.\n  let sum = 0;\n  for (let j = 0; j < n; j++) sum += f((j+0.5)*dx)*dx;\n  return sum;\n}\nconst area = [], rates = [], slopes = [];\nlet maxAreaError = 0, maxSlopeError = 0;\nfor (let i = 0; i <= 80; i++) {\n  const x = -2 + i/20;\n  const a = accumulation(x);\n  const d = (accumulation(x+h)-accumulation(x-h))/(2*h);\n  area.push([x,a]); rates.push([x,f(x)]); slopes.push([x,d]);\n  maxAreaError = Math.max(maxAreaError,Math.abs(a-exact(x)));\n  maxSlopeError = Math.max(maxSlopeError,Math.abs(d-f(x)));\n}\nplot(area, 'Accumulation A: x versus integral');\nplot(rates, 'Rate f: x versus rate');\nplot(slopes, 'Central difference of A: x versus slope');\nconsole.log('A(2), exact A(2):', accumulation(2), exact(2));\nconsole.log('Maximum accumulation error:', maxAreaError);\nconsole.log('Maximum derivative error:', maxSlopeError);\n",
+    "tasks": [
+      "Before running the code, predict where $A$ increases, decreases, and has turning points for c = 1. Explain why zeros of $A$ and zeros of $f$ answer different questions.",
+      "Change c to 0, then to 2, predicting before each run how the rate zeros and any accumulation extrema change. Decide whether a stationary point must be a turning point, then compare your predictions with the plots.",
+      "Double n while holding h fixed, then restore n and halve h. Compare both reported maximum errors after each change. Explain how midpoint error and central-difference error combine, and why decreasing h indefinitely can amplify floating-point subtraction error.",
+      "Try n = 0 to inspect the validation failure. Explain why agreement of two sampled curves does not prove FTC for a discontinuous integrand."
+    ],
+    "expected": "Defaults give $A(2)$ about 0.66665 versus the exact value $2/3$. Maximum accumulation error is about 0.0000166667; maximum derivative error is about 0.0000333331. Analytically the midpoint approximation is $A_n(x)=\\frac{x^3}{3}-cx-\\frac{x^3}{12n^2}$. If $D_hA_n$ denotes its central difference, then $D_hA_n(x)-f(x)=\\frac{h^2}{3}-\\frac{3x^2+h^2}{12n^2}$, apart from floating-point rounding."
+  },
+  "exercises": [
+    {
+      "question": "Let $A(x) = \\int_2^x (t^2 + 1)\\,dt$. Find $A(2)$, $A'(x)$, and $A(0)$.",
+      "hint": "Use the baseline definition, FTC, and an antiderivative separately.",
+      "solution": "The interval at $x=2$ has zero length, so $A(2)=0$. By the fundamental theorem, $A^{\\prime}(x)=x^2+1$. Using antiderivative $F(t)=t^3/3+t$, $A(0)=F(0)-F(2)=-(8/3+2)=-14/3$. Reversed bounds explain the negative value.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(t)=2t$, find $A(x)=\\int_0^x f(t)\\,dt$ and $A^{\\prime}(x)$.",
+      "hint": "Evaluate or use triangular area.",
+      "solution": "Direct integration gives $A(x)=\\int_0^x2t\\,dt=x^2$. The fundamental theorem or differentiation then gives $A^{\\prime}(x)=2x=f(x)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(t)=t-1$, find $A(x)=\\int_0^x f(t)\\,dt$ and all zeros of $A$ on $[0,2]$.",
+      "hint": "Integrate the linear rate.",
+      "solution": "Integrating yields $A(x)=x^2/2-x=x(x-2)/2$. Thus $A(x)=0$ exactly at $x=0$ and $x=2$ in $[0,2]$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "If $A_a(x)=\\int_a^x f$ and $A_b(x)=\\int_b^x f$, how do they differ?",
+      "hint": "Use interval additivity.",
+      "solution": "Interval additivity gives $A_b(x)=\\int_b^xf=\\int_a^xf-\\int_a^bf=A_a(x)-A_a(b)$. The difference is constant, so their derivatives agree wherever $f$ is continuous.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "A tank starts with $8\\,\\mathrm{L}$ and receives net rate $2t\\,\\mathrm{L}/\\mathrm{min}$ for $0\\le t\\le3$. Find its final volume. For a second tank with the same net rate over the same interval, with $t$ measured in minutes, the volume at $t=3$ is $17\\,\\mathrm L$ but the initial volume is unknown. Recover its initial volume.",
+      "hint": "Add initial amount to accumulated change.",
+      "solution": "Accumulated change is $\\int_0^3 2t\\,dt=[t^2]_0^3=9\\,\\mathrm L$. Adding the initial $8\\,\\mathrm L$ gives $17\\,\\mathrm L$. For the second tank, the signed accumulated change over the same three-minute interval is still $\\int_0^3 2t\\,dt=9\\,\\mathrm L$. Since final volume equals initial volume plus this signed change, its initial volume is $V(0)=V(3)-\\int_0^3 2t\\,dt=17-9=8\\,\\mathrm L$.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "Suppose $f$ equals zero everywhere on $[-1,1]$ except $f(0) = 9$. Does $A(x) = \\int_{-1}^x f(t)\\,dt$ satisfy $A'(0) = f(0)$?",
+      "hint": "Changing a bounded function at one point leaves its Riemann integral unchanged.",
+      "solution": "Changing a bounded integrand at one point does not alter a Riemann integral: the exceptional contribution is at most $9$ times an arbitrarily small width. Hence $A(x)=0$ for all $x$ and $A^{\\prime}(0)=0$, whereas $f(0)=9$. The point-continuity hypothesis of the fundamental theorem fails.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $f(t)=0$ for $t\\ne0$ and $f(0)=9$ on $[-1,1]$. Find $A^{\\prime}(0)$ for $A(x)=\\int_{-1}^x f(t)\\,dt$ and explain why this does not contradict the theorem.",
+      "hint": "Changing a bounded function at one point does not change its Riemann integral.",
+      "solution": "Every interval integral of $f$ is $0$, so $A(x)=0$ on $[-1,1]$ and $A^{\\prime}(0)=0$. Since $f(0)=9$ but $f$ is discontinuous there, the fundamental theorem does not claim $A^{\\prime}(0)=f(0)$.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $f$ be Riemann integrable on $[a,b]$ and $A(x)=\\int_a^x f(t)\\,dt$. For an interior point $c$, state a sufficient continuity condition for $A^{\\prime}(c)=f(c)$.",
+      "hint": "Focus on behavior at $x$.",
+      "solution": "It suffices that $f$ be continuous at $c$. The difference quotient is the average of $f$ over the oriented interval from $c$ to $c+h$, and continuity at $c$ makes that average tend to $f(c)$. Continuity elsewhere on $[a,b]$ is unnecessary for this local derivative conclusion.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(t)=0$ except $f(0)=7$ on $[-1,1]$, find $A^{\\prime}(0)$ when $A(x)=\\int_{-1}^x f$.",
+      "hint": "Single point values have zero integral.",
+      "solution": "A single changed value has zero Riemann integral, so $A(x)=0$ throughout $[-1,1]$ and $A^{\\prime}(0)=0$, although $f(0)=7$. The integrand is discontinuous at $0$.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(t)=-1$ when $t<0$ and $1$ when $t\\ge0$, is its accumulation differentiable at zero?",
+      "hint": "Compare one-sided slopes.",
+      "solution": "The accumulation function is continuous but has left derivative $-1$ and right derivative $1$ at $0$. Since these differ, it is not differentiable there.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Let $f$ be Riemann integrable on $[0,3]$, with $|f(t)|\\le4$ there, and define $A(x)=\\int_0^x f(t)\\,dt$. Bound $|A(2)-A(1)|$.",
+      "hint": "Integrate the magnitude bound over $[1,2]$.",
+      "solution": "Additivity gives $A(2)-A(1)=\\int_1^2f(t)\\,dt$. Thus $|A(2)-A(1)|\\le\\int_1^2|f(t)|\\,dt\\le\\int_1^2 4\\,dt=4$. Equality occurs if $f=4$ throughout that interval.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Find every antiderivative of $\\cos(x)$ on the real line that satisfies $F(0) = 5$.",
+      "hint": "First write the family with its constant.",
+      "solution": "Every antiderivative on the real line is $F(x)=\\sin x+C$, since its derivative is $\\cos x$ and any two antiderivatives differ by a constant. As $F(0)=C=5$, the requested function is $F(x)=\\sin x+5$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "A particle has velocity $v(t)=2t-4$ metres per second on $[0,3]$ seconds and starts at position $7$ metres. Find its final position and total distance.",
+      "hint": "Separate the integral of velocity from the integral of its absolute value.",
+      "solution": "An antiderivative is $V(t)=t^2-4t$. Displacement is $V(3)-V(0)=9-12=-3\\,\\mathrm m$, so final position is $7-3=4\\,\\mathrm m$. Velocity changes sign at $t=2$. Distance on $[0,2]$ is $-[V(2)-V(0)]=4\\,\\mathrm m$ and on $[2,3]$ is $V(3)-V(2)=1\\,\\mathrm m$, totaling $5\\,\\mathrm m$.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "Evaluate $\\int_1^3 2x\\,dx$ and give a geometric check.",
+      "hint": "Use $F(x)=x^2$ or trapezoid area.",
+      "solution": "The fundamental theorem gives $\\int_1^3 2x\\,dx=[x^2]_1^3=9-1=8$. Geometrically, width $2$ with endpoint heights $2$ and $6$ gives trapezoid area $2(2+6)/2=8$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find all antiderivatives of $3x^2$ on the real line.",
+      "hint": "Differentiate $x^3$.",
+      "solution": "All antiderivatives are $x^3+C$, where $C$ is any real constant, because $d(x^3)/dx=3x^2$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Given $s^{\\prime}(t)=3t^2$ and $s(0)=5$, find $s(2)$.",
+      "hint": "Determine the integration constant.",
+      "solution": "Integrating $s^{\\prime}(t)=3t^2$ gives the position family $s(t)=t^3+C$. The initial condition $s(0)=5$ fixes $C=5$; therefore the position at time $2$ is $s(2)=2^3+5=13$.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "Why can $\\int_{-1}^1 \\frac{1}{x}\\,dx$ not be evaluated as $\\ln|1|-\\ln|-1|$?",
+      "hint": "Check continuity over the whole interval.",
+      "solution": "The integrand $1/x$ is undefined and unbounded at $x=0$, so the fundamental theorem cannot be applied across $[-1,1]$. Each one-sided improper integral diverges, despite the finite endpoint expression $\\ln|1|-\\ln|-1|=0$.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Differentiate $Q(x) = \\int_{\\sin(x)}^{x^3} (1 + t^2)\\,dt$.",
+      "hint": "Account for each endpoint velocity and the lower-limit sign.",
+      "solution": "The integrand $1+t^2$ is continuous, so the moving-endpoint rule gives $Q^{\\prime}(x)=(1+x^6)(3x^2)-(1+\\sin^2x)\\cos x$. The lower endpoint contribution has a minus sign, including where the endpoints coincide.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $A^{\\prime}(x)$ when $A(x)=\\int_x^{2x}t^2\\,dt$, and check by evaluating $A$.",
+      "hint": "Apply the moving-endpoint rule at $2x$ and at $x$.",
+      "solution": "The endpoint rule gives $A^{\\prime}(x)=(2x)^2(2)-x^2=7x^2$. Independently, $A(x)=[t^3/3]_x^{2x}=7x^3/3$, whose derivative is also $7x^2$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $B(x)=\\int_{\\sin x}^{x^2}e^t\\,dt$.",
+      "hint": "Both endpoints move; include each endpoint derivative.",
+      "solution": "The moving-endpoint rule gives $B^{\\prime}(x)=e^{x^2}(2x)-e^{\\sin x}\\cos x$. Direct evaluation, $B(x)=e^{x^2}-e^{\\sin x}$, confirms it.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $B(x)=\\int_0^{x^2}(1+t^3)\\,dt$.",
+      "hint": "Apply FTC then chain rule.",
+      "solution": "The fundamental theorem and chain rule give $B^{\\prime}(x)=[1+(x^2)^3](2x)=2x(1+x^6)$. The factor $2x$ is the upper bound's derivative.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $C(x)=\\int_x^3t^2\\,dt$.",
+      "hint": "The lower endpoint removes area.",
+      "solution": "The varying lower limit removes accumulated area, so $C^{\\prime}(x)=-x^2$ by the fundamental theorem and orientation.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Differentiate $H(x)=\\int_{x^2}^{2x}e^{-t^2}\\,dt$.",
+      "hint": "Evaluate integrand at each boundary and multiply by its speed.",
+      "solution": "The upper endpoint $2x$ contributes $2e^{-4x^2}$; the lower endpoint $x^2$ contributes $-2x e^{-x^4}$. Hence $H^{\\prime}(x)=2e^{-4x^2}-2x e^{-x^4}$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $H(x)=\\int_0^x xt\\,dt$, compute $H^{\\prime}$ and explain why boundary-only differentiation fails.",
+      "hint": "The variable $x$ also occurs inside the integrand.",
+      "solution": "Direct evaluation gives $H(x)=x\\int_0^x t\\,dt=x^3/2$, so $H^{\\prime}(x)=3x^2/2$. The boundary term alone is $x^2$; dependence on $x$ inside the integrand adds $x^2/2$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\int_0^2 \\frac{3x^2}{1+x^3}\\,dx$ by substitution.",
+      "hint": "Use $u=1+x^3$ and transform both bounds.",
+      "solution": "Set $u=1+x^3$, so $du=3x^2\\,dx$ and bounds $x=0,2$ become $u=1,9$. Therefore $\\int_0^2\\frac{3x^2}{1+x^3}\\,dx=\\int_1^9du/u=\\ln9$. The denominator stays positive.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_1^2\\frac{2x}{1+x^2}\\,dx$ by substitution.",
+      "hint": "Set $u=1+x^2$ and update bounds.",
+      "solution": "With $u=1+x^2$ and $du=2x\\,dx$, the bounds become $2$ and $5$. Thus $\\int_1^2\\frac{2x}{1+x^2}\\,dx=\\int_2^5du/u=\\ln(5/2)$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^{\\pi/2}2\\sin x\\cos x\\,dx$ by substitution, carrying the transformed bounds explicitly.",
+      "hint": "Set $u=\\sin x$; the bounds become $u=0$ and $u=1$.",
+      "solution": "With $u=\\sin x$ and $du=\\cos x\\,dx$, the integral becomes $\\int_0^1 2u\\,du=[u^2]_0^1=1$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why is $\\int_0^1\\cos(x^2)\\,dx$ not equal to $\\sin(1)$ by $u=x^2$?",
+      "hint": "Identify the missing derivative factor.",
+      "solution": "For $u=x^2$, $du=2x\\,dx$, but the original integrand has no $2x$ factor, so the proposed substitution does not give $\\int_0^1\\cos u\\,du$. In fact, for $0<x<1$ we have $x^2<x$, and cosine is strictly decreasing on $[0,1]$. Thus $\\cos(x^2)>\\cos x$ there, so $\\int_0^1\\cos(x^2)\\,dx>\\int_0^1\\cos x\\,dx=\\sin(1)$.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\int_{-1}^1 2x\\cos(x^2)\\,dx$.",
+      "hint": "Use odd symmetry or substitution.",
+      "solution": "The integrand $2x\\cos(x^2)$ is odd, so its integral over $[-1,1]$ is $0$. Alternatively, an antiderivative is $\\sin(x^2)$, with equal endpoint values.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $W(x)=\\int_x^{x+2}t^2\\,dt$, find $W'$.",
+      "hint": "Subtract the lower-bound contribution.",
+      "solution": "Both endpoints move. The upper bound contributes $(x+2)^2$ and the lower bound subtracts $x^2$, so $W^{\\prime}(x)=(x+2)^2-x^2=4x+4$.",
+      "lesson": 6,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "Continuous rates have differentiable accumulation functions whose derivatives recover the rates.",
+    "The evaluation theorem converts an integral into an antiderivative difference; initial data determine the remaining constant.",
+    "Moving endpoints require chain-rule factors, and definite substitutions require transformed bounds."
+  ],
+  "next": "Chapter 12 develops methods for finding antiderivatives. Chapter 14 returns to numerical evaluation and to intervals where singularities prevent direct use of the continuous-integrand theorem."
+}

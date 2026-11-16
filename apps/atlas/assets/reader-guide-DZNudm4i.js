@@ -1,0 +1,26 @@
+var e=`---
+parent_id: book-electromagnetism-relativity
+chapter_id: reader-guide
+title: "Reader Guide"
+level: advanced-undergraduate
+license: CC BY-SA 4.0
+---
+
+# Reader Guide
+
+A field assigns a physical quantity to each spacetime point of its domain. The domain matters as much as the formula: the Coulomb field is smooth away from a charge, while the charge itself is represented by an integral or distributional statement. Likewise, a potential may exist locally without one single-valued potential existing throughout a punctured region. The first chapter makes these distinctions usable before the electromagnetic laws arrive.
+
+Read [vector fields and line integrals](/calculus/#chapter/25) and [the integral theorems](/calculus/#chapter/26) if work, circulation, flux or boundary orientation is unfamiliar. These chapters develop the geometric meanings of the operators and the hypotheses behind replacing a boundary integral with an interior integral.
+
+For analytical preparation, review [differentiation and its hypotheses](../../proof-safe-real-analysis/continuity-differentiation.md) and [Riemann integration](../../proof-safe-real-analysis/riemann-integration.md). We use differentiation under a finite integral only when the relevant derivatives and domination or compact-support assumptions justify it. An infinite ideal wire or sheet requires a separate symmetry argument or a specified limiting construction. It cannot automatically inherit the decay conditions of a compact charge distribution.
+
+The [Newtonian mechanics chapter](../../action-symmetry-mechanics/newtonian-mechanics.md) supplies work, force, kinetic energy and momentum. The later relativity chapters replace the Newtonian momentum law with its relativistic version and derive its low-speed limit. Knowing the final formula beforehand is unnecessary. The important preparation is understanding what a conservation law says about a complete system and how external forces change that statement.
+
+Chapters on static fields build explicit source-to-field and boundary-value arguments. Maxwell theory then adds time dependence, showing why an instantaneous Coulomb prescription cannot be a complete dynamical theory. The wave and gauge chapters distinguish local equations, initial constraints, boundary conditions and retarded choices. Relativity follows after these ingredients are familiar, so the tensor formulation reorganizes recognizable equations rather than introducing an unexplained array of signs.
+
+Radiation is treated with declared source scales, observation distances and velocity regimes. A dipole approximation is a controlled leading-order model under wavelength and source-size assumptions; it does not describe an arbitrary rapidly varying extended source. Matter introduces additional dynamical or constitutive information. Vacuum Maxwell equations alone do not determine a dielectric's dispersion, a conductor's heating or a magnet's hysteresis.
+
+In a worked example, identify the region, the source, the unknown, the required boundary data and the relevant approximation before manipulating formulas. Carry units through at least one line of the calculation. When a symmetry is used, state the transformations that preserve the entire physical problem, including its boundaries. A symmetric differential equation with asymmetric boundary conditions need not have a symmetric solution.
+
+Exercises include derivations, counterexamples and comparisons of descriptions. Their two hints advance the method in stages; the full solution supplies the reasoning and its limitations. A symbolic numerical result is useful evidence about that one calculation, while a theorem needs its quantified hypotheses and an argument covering the stated class. Read a solution by checking which hypothesis each step uses, then reconstruct it without the reveal.
+`;export{e as default};

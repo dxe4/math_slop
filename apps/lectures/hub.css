@@ -1,0 +1,6 @@
+/* Reading-hub reflow, scoped away from the independently reviewed lectures. */
+.hub,.topbar,footer{overflow-wrap:anywhere}
+.topbar{flex-wrap:wrap}
+.topbar nav{min-width:0;flex-wrap:wrap}
+.wordmark{min-width:0;max-width:100%}
+.hub .button{max-width:100%}

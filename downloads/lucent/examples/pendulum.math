@@ -1,0 +1,27 @@
+# Horizontal coordinate: angle in radians; vertical coordinate: angular velocity.
+# A rigid pendulum obeys theta'' + damping*theta' + frequency^2*sin(theta) = 0.
+# The small-angle approximation replaces sin(theta) by theta. Compare the
+# near-origin loops with harmonic_oscillator.math, then increase the angle.
+# With damping = 0, E = velocity^2/2 + frequency^2*(1-cos(theta)) is constant.
+# E < 2*frequency^2 gives oscillation; E > 2*frequency^2 allows full rotation.
+# Predict what happens near the unstable upright state theta = pi, velocity = 0.
+# Adjust initial speed to move across the energy threshold; compare all 3 curves.
+# Angle is deliberately unwrapped: adjacent wells differ by a complete turn.
+# A trajectory leaving the window continues outside it. Finite RK4 trajectories
+# cannot certify a separatrix or exact energy conservation near its threshold.
+scene "Pendulum: oscillation, rotation, and the energy threshold";
+coordinates equal;
+domain -7 7;
+range -4.5 4.5;
+param frequency = 1 from 0.5 to 1.8;
+param damping = 0 from 0 to 0.8;
+param angle = 1 from 0.1 to 3.1;
+param speed = 0.2 from -2.5 to 2.5;
+param horizon = 24 from 4 to 50;
+field pendulum(x,y) = (y,-frequency^2*sin(x)-damping*y);
+flow pendulum from (angle,speed) time horizon steps 2000 color teal;
+flow pendulum from (angle+0.4,speed) time horizon steps 2000 color rose;
+flow pendulum from (angle,speed+0.5) time horizon steps 2000 color amber;
+point first = (angle,speed) color teal;
+point second = (angle+0.4,speed) color rose;
+point third = (angle,speed+0.5) color amber;

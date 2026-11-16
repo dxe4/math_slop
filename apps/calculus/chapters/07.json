@@ -1,0 +1,443 @@
+{
+  "id": "07",
+  "title": "Rates, linearization, and sensitivity",
+  "subtitle": "How does a small change in a measurement become a change in the quantity we care about?",
+  "prerequisites": [
+    "Chapter 05: derivatives as instantaneous rates and tangent slopes",
+    "Chapter 06: power rule, chain rule, and implicit differentiation",
+    "Chapter 03: numerical error and simple JavaScript loops for the lab"
+  ],
+  "objectives": [
+    "Translate a geometric constraint into an equation relating rates, with consistent units.",
+    "Construct a local linear approximation and distinguish a differential from an actual change.",
+    "Estimate measurement uncertainty and check the estimate against an exact interval.",
+    "Interpret absolute sensitivity and dimensionless elasticity while stating model assumptions."
+  ],
+  "sections": [
+    {
+      "title": "1. One relationship, several changing quantities",
+      "paragraphs": [
+        "Suppose a nearly spherical balloon expands. A camera measures its radius, but we want its volume and the rate at which that volume grows. The geometry gives $V=(4\\pi/3)r^3$. This is a relationship between quantities, not yet between rates. If $r$ is a differentiable function of time $t$, the chain rule turns it into $dV/dt=4\\pi r^2\\,dr/dt$. Both the current radius and its current rate of change matter. Two balloons whose radii increase equally quickly need not gain equal volumes each second.",
+        "A related-rates calculation starts by identifying what varies and writing a relationship that holds throughout an interval of motion. Then differentiate with respect to a common independent variable, usually time. Only after differentiating should you insert values that are true at a particular instant. Substituting $r=10$ before differentiation would turn a changing radius into a constant and destroy the rate information. A quantity genuinely fixed throughout the motion, such as a rigid ladder's length, can be substituted immediately.",
+        "Units provide a useful audit. If radius is in centimetres and time in seconds, then $4\\pi r^2$ has units $\\mathrm{cm}^2$ and $dr/dt$ has units $\\mathrm{cm}/\\mathrm{s}$. Their product has units $\\mathrm{cm}^3/\\mathrm{s}$, as a volume rate should. The derivative $dV/dr$ and the derivative $dV/dt$ answer different questions: one measures volume gained per unit radius, the other volume gained per unit time. A sign is information too. A negative $dr/dt$ describes shrinking; for a positive radius it produces a negative volume rate.",
+        "The equation assumes the balloon remains spherical and that the measured radius describes its whole shape. A changing ellipsoid cannot generally be represented by the same single radius. Nor is geometric volume automatically the amount of gas: pressure and temperature can change. Before differentiating, say what the variables measure and which physical effects the model neglects. Calculus transfers the consequences of an assumed relationship; it does not establish that relationship from observations.",
+        "A fixed geometric constraint can eliminate a variable before differentiation. For a cone whose water surface stays similar to the container, the radius and height may satisfy $r=h/2$. Substituting into $V=\\pi r^2h/3$ gives $V=\\pi h^3/12$ and therefore $dV/dt=(\\pi h^2/4)\\,dh/dt$. If one instead differentiates the three-variable formula, both $r$ and $h$ vary and both derivative terms must appear; inserting $r=h/2$ afterward gives the same result. Substituting a relationship that holds for all times is valid. Substituting a one-time measured height before differentiating is not.",
+        "Related-rates equations inherit domain and sign restrictions. A rigid ladder of length $L$ against a wall satisfies $x^2+y^2=L^2$, with $x,y\\ge0$ while it stays in contact. Differentiation gives $x x^{\\prime}+y y^{\\prime}=0$. If the foot moves outward, $x^{\\prime}>0$ and the top moves downward, $y^{\\prime}<0$ wherever $y>0$. At $y=0$ the formula for $y^{\\prime}$ divides by zero and the idealized ladder reaches a boundary of this configuration. A rate calculated just before that event need not remain valid after contact is lost or the geometry changes.",
+        "Use a diagram to decide what is changing, but let equations—not visual resemblance—determine the rates. An increasing radius and an increasing volume are linked by the chain rule; their numerical rates need not be equal. A cylindrical tank with fixed cross-sectional area $A$ satisfies $V=Ah$, so $V^{\\prime}=Ah^{\\prime}$. If the tank narrows or widens with height, $A$ is no longer a constant and this relation fails. A model of shape is part of the mathematics, not a preface that can be discarded once differentiation starts.",
+        "Measurements at one instant determine only instantaneous conclusions when paired with an exact relation. Knowing a sphere's radius and radius rate at noon gives its volume rate at noon, not its volume tomorrow. Forecasting a finite change requires information about how the radius rate evolves. If it is constant over a specified interval, integrate or use the resulting radius function; otherwise report the derivative as a local rate. This distinction prevents a common misuse of related rates: multiplying an instantaneous rate by a long duration as if the rate had been proved constant.",
+        "The conical-tank rate can be checked without eliminating the radius first. Differentiate $V=\\pi r^2h/3$ while both $r$ and $h$ depend on time: $\\frac{dV}{dt}=\\frac{\\pi}{3}\\left(2rh\\frac{dr}{dt}+r^2\\frac{dh}{dt}\\right)$. Similar triangles give $r=h/2$ and $\\frac{dr}{dt}=\\frac12\\frac{dh}{dt}$ at every instant. Substitution reduces the expression to $\\frac{\\pi h^2}{4}\\frac{dh}{dt}$, exactly the result from $V=\\pi h^3/12$. The agreement is an algebraic cross-check. Keeping $r=h/2$ but incorrectly setting $dr/dt=0$ would omit a real contribution from the expanding water surface. This example shows why every variable in an uneliminated relation must be treated as changing unless a physical constraint makes it constant."
+      ],
+      "formula": "V(t) = (4π/3)[r(t)]³  ⇒  V′(t) = 4π[r(t)]²r′(t)",
+      "formulaTex": "V(t)=\\frac{4\\pi}{3}r(t)^3\\implies V^{\\prime}(t)=4\\pi r(t)^2r^{\\prime}(t)"
+    },
+    {
+      "title": "2. The derivative supplies a local replacement",
+      "paragraphs": [
+        "Let $f$ be differentiable at an interior point $a$ of its domain. For a small increment $h$, its derivative definition says that $[f(a+h)-f(a)]/h$ approaches $f^{\\prime}(a)$. Rearranging suggests replacing $f(a+h)$ by $f(a)+f^{\\prime}(a)h$. This tangent-line model is called the linearization at $a$. As a function of $x$, it is $L(x)=f(a)+f^{\\prime}(a)(x-a)$. It agrees with $f$ in both value and slope at $a$, but generally not at other points.",
+        "Here is the precise local guarantee, obtained directly from differentiability: $f(a+h)=f(a)+f^{\\prime}(a)h+h\\varepsilon(h)$, where $\\varepsilon(h)\\to0$ as $h\\to0$. Thus the absolute discrepancy divided by $|h|$ tends to zero. This does not supply a numerical error tolerance for a particular $h$, nor does it promise that every visually small increment is small enough for your application. The relevant scale depends on the function and the point.",
+        "The notation $dx$ denotes an input increment in the linear model, and $dy=f^{\\prime}(a)\\,dx$ is its predicted output increment. Taking $dx=\\Delta x$ gives $dy\\approx\\Delta y$, where $\\Delta y=f(a+\\Delta x)-f(a)$ is the actual change. The definition of $dy$ is exact; its use as a replacement for $\\Delta y$ is approximate. These symbols help organize changes without requiring us to treat $dx$ as a mysterious number smaller than all ordinary positive numbers.",
+        "For a dimensionless example, take $f(x)=\\sqrt{x}$ at $a=4$. Since $f(4)=2$ and $f^{\\prime}(4)=1/4$, $\\sqrt{4.08}\\approx2+0.08/4=2.02$. Squaring $2.02$ gives $4.0804$, which already shows that the estimate is slightly high. The exact square root is approximately $2.019900988$, so the absolute output error is about $0.000099012$. An approximation becomes useful when this discrepancy is acceptable for the task, not merely when the decimals look close.",
+        "Differentiability promises a first-order approximation, not a universal absolute error. The exact statement $f(a+h)=f(a)+f^{\\prime}(a)h+o(h)$ says the error divided by $|h|$ tends to zero. It does not say the error is always smaller than $h^2$; a function can be differentiable yet have a remainder whose size lies between $|h|$ and $h^2$ in order. For example, $f(x)=|x|^{3/2}$ has derivative zero at the origin and tangent model zero there, but its exact error is $|h|^{3/2}$. That is $o(|h|)$ while it is not bounded by a fixed multiple of $h^2$ near zero.",
+        "Here is the compactness step behind the theorem bridge. Take any sequence of inputs in a closed bounded interval $[u,v]$. Bisect the interval and keep a closed half containing infinitely many terms; repeat inside that half. The halves are nested and their widths tend to zero. Chapter 04's nested-interval argument, which uses the least-upper-bound completeness of $\\mathbb R$, gives one common point $c\\in[u,v]$. From the $k$th retained half choose a sequence term with index larger than the previously chosen index; infinitely many terms there make this possible. Its distance from $c$ is at most that half's width, so these chosen terms form a subsequence converging to $c$. This proves the compactness property used here, including retention of the limit in the original closed interval. If a continuous function on $[u,v]$ were unbounded, inputs with function-value magnitudes exceeding successive integers would have such a convergent subsequence, contradicting continuity at its limit. Its values are therefore bounded.",
+        "Choose inputs whose values approach their supremum; another convergent subsequence and continuity show that the supremum is attained. Repeat for the infimum: this is the extreme value theorem. At an interior extremum where a derivative exists, the right and left difference quotients force that derivative to be zero. A continuous function on $[u,v]$ differentiable on $(u,v)$ with equal endpoint values is then either constant or has an interior extremum, proving Rolle's theorem. For a nondegenerate interval $u<v$, subtracting the secant line from a general $f$ gives equal endpoint values and yields $f'(c)=[f(v)-f(u)]/(v-u)$ for some interior $c$: the mean value theorem. Each use keeps closed-interval continuity and interior differentiability. Chapter 08 revisits these results and their applications.",
+        "A second-derivative bound upgrades the local statement to a usable certificate. If f is continuously differentiable on the closed connecting interval, twice differentiable inside it, and $|f^{\\prime\\prime}(t)|\\le M$ in its interior, the complete two-Rolle proof below gives $|f(a+h)-f(a)-f^{\\prime}(a)h|\\le Mh^2/2$. The bound depends on the entire connecting interval, not just $f^{\\prime\\prime}(a)$. For $\\sqrt{x}$ near $a=4$, $|f^{\\prime\\prime}(x)|=1/(4x^{3/2})$ decreases for positive $x$. On $[3.9,4.1]$ its maximum is at $3.9$, so the formula supplies a rigorous error bound for every input in that interval.",
+        "The differential has units. If $f$ maps metres to square metres, then $f^{\\prime}(a)$ has metres and $dy=f^{\\prime}(a)\\,dx$ has square metres. The output change $\\Delta y$ has the same units, allowing a meaningful comparison. A bare percentage comparison needs a nonzero reference output. For $f(a)=0$, relative error $\\Delta y/f(a)$ is undefined even if the absolute error is tiny. State the nominal input, its uncertainty interval, the tangent estimate, and the units before reporting an approximate output.",
+        "The tangent estimate can be on either side of the true value. For a convex function such as $x^2$, the tangent at $a$ lies below the curve: $f(a+h)-[f(a)+f^{\\prime}(a)h]=h^2\\ge0$. For a concave function such as $\\sqrt{x}$ on positive inputs, the tangent lies above. This sign can be derived from an exact remainder or from a second-derivative theorem introduced in chapter 8. Merely seeing the two curves touch in a plot does not establish which side they occupy throughout a stated interval.",
+        "For the square-root model, an exact remainder is available without invoking a general theorem. Let $s=\\sqrt{4+h}$ with $h>-4$. Rationalization gives $s-2=h/(s+2)$. Subtract the tangent increment $h/4$ and rationalize again: $\\sqrt{4+h}-(2+h/4)=-h^2/[4(\\sqrt{4+h}+2)^2]$. The negative sign proves that the tangent overestimates for every allowed nonzero $h$, not just close inputs. If $|h|\\le0.1$, then $\\sqrt{4+h}\\ge\\sqrt{3.9}$ and the absolute error is at most $0.01/[4(\\sqrt{3.9}+2)^2]$. This is a certified bound on a stated interval; the derivative alone did not provide it. The same algebra explains why the local error scales quadratically as $h\\to0$."
+      ],
+      "formula": "Δy = f(a+Δx) − f(a),    dy = f′(a)Δx,    L(a+Δx) = f(a) + dy",
+      "formulaTex": "\\begin{aligned}\\Delta y&=f(a+\\Delta x)-f(a),\\\\ dy&=f^{\\prime}(a)\\Delta x,\\\\ L(a+\\Delta x)&=f(a)+dy.\\end{aligned}",
+      "theorems": [
+        {
+          "title": "A second derivative bounds linearization error",
+          "statement": "If $f$ is continuously differentiable on the closed interval between $a$ and $x$, twice differentiable in its interior, and $|f^{\\prime\\prime}(t)|\\le M$ there, then $|f(x)-f(a)-f^{\\prime}(a)(x-a)|\\le M(x-a)^2/2$.",
+          "equationTex": "|f(x)-f(a)-f^{\\prime}(a)(x-a)|\\le\\frac{M}{2}(x-a)^2",
+          "proof": [
+            "For $x=a$ the error is zero. Otherwise let $E=f(x)-f(a)-f^{\\prime}(a)(x-a)$, and define $g(t)=f(t)-f(a)-f^{\\prime}(a)(t-a)-E((t-a)/(x-a))^2$ on the closed interval with endpoints $a$ and $x$. Then $g(a)=g(x)=0$ and $g^{\\prime}(a)=0$. Rolle's theorem gives $c$ strictly between $a$ and $x$ with $g^{\\prime}(c)=0$. Apply Rolle again to $g^{\\prime}$ between $a$ and $c$ (in either endpoint order): some $d$ between them has $g^{\\prime\\prime}(d)=0$. Thus $f^{\\prime\\prime}(d)=2E/(x-a)^2$, so $E=f^{\\prime\\prime}(d)(x-a)^2/2$ and $|E|\\le M(x-a)^2/2$. The argument covers both $x<a$ and $x>a$ without an integral.",
+            "This is a certificate, not just the informal statement that tangent error is “small near the point.” For $f(x)=x^2$ at $a=2$, $f^{\\prime\\prime}=2$, so $M=2$ and the bound is $|E|\\le(x-2)^2$. Direct algebra gives exactly $E=(x-2)^2$, making the bound sharp in this case. To guarantee error at most $0.01$, any $|x-2|\\le0.1$ suffices.",
+            "The hypothesis must cover every point between the center and target. A second derivative bounded only at $a$ is not enough for a whole interval. A physical calculation must also keep units: $M$ has output units per input unit squared, so $M(x-a)^2$ returns output units."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Measurement errors and guaranteed intervals",
+      "paragraphs": [
+        "Suppose an instrument reports $x=a$ and the true input differs by an unknown $\\delta$ with $|\\delta|\\le\\eta$. The number $\\eta$ is an absolute uncertainty bound in the input's units. The differential estimate predicts an output uncertainty of approximately $|f^{\\prime}(a)|\\eta$. This is a worst-case first-order estimate, not automatically a rigorous bound and not a probability statement. A tolerance interval does not say that errors are normally distributed or that a particular confidence level applies.",
+        "When the model is continuous and monotone over the entire closed allowed input interval, evaluating its endpoints gives its exact output range within that model. Monotonicity alone gives sharp endpoint bounds, but continuity ensures that every value between them is attained. For a sphere measured as $r=10.00\\,\\mathrm{cm}$ with $|\\delta r|\\le0.05\\,\\mathrm{cm}$, the permitted radius interval is $[9.95,10.05]\\,\\mathrm{cm}$. Since $r^3$ increases for positive $r$, the volume lies between $(4\\pi/3)(9.95)^3\\,\\mathrm{cm}^3$ and $(4\\pi/3)(10.05)^3\\,\\mathrm{cm}^3$. This interval is slightly asymmetric about the volume computed from $10.00\\,\\mathrm{cm}$. Nonlinearity produces that asymmetry even when the input tolerance is symmetric.",
+        "For the sphere, expanding the cubic makes the omitted terms visible: $\\Delta V=4\\pi r^2h+4\\pi rh^2+(4\\pi/3)h^3$. The differential keeps only the first term. If $|h|\\le\\eta$ and $r>\\eta$, the absolute remainder is at most $4\\pi r\\eta^2+(4\\pi/3)\\eta^3$. This algebraic bound needs no numerical sampling. It also explains why reducing the radius tolerance by a factor of ten makes the leading approximation error roughly one hundred times smaller.",
+        "Relative uncertainty compares an absolute uncertainty with the size of the reported quantity. It is meaningful only when that reference value is nonzero. For the sphere, $dV/V=3\\,dr/r$, so a small $0.5\\%$ radius uncertainty produces approximately $1.5\\%$ volume uncertainty. A better instrument cannot remove uncertainty caused by a poor geometric model. Report measurement error and model error separately; a precisely measured nonspherical object can still have an inaccurately inferred spherical volume.",
+        "An uncertainty interval is a set of possible true inputs, not a probability distribution. If a radius is reported as $2.00\\pm0.01\\,\\mathrm{m}$ under an absolute tolerance specification, any radius in $[1.99,2.01]\\,\\mathrm{m}$ is allowed. There is no basis from that statement alone to call the midpoint most likely or to assign a 95% confidence level. To propagate the interval through a monotone function, evaluate the endpoints exactly. For a nonmonotone function, endpoint evaluation may miss an interior maximum or minimum; one must also inspect interior critical points or use another bound.",
+        "For a square's area $A(s)=s^2$, with side $s=5\\pm0.02\\,\\mathrm{m}$, the exact allowed area interval is $[4.98^2,5.02^2]=[24.8004,25.2004]\\,\\mathrm{m}^2$. The differential gives $dA=2s\\,ds$, predicting a symmetric change of $\\pm0.2\\,\\mathrm{m}^2$ about $25\\,\\mathrm{m}^2$. The true upward change is $0.2004\\,\\mathrm{m}^2$ and downward change is $0.1996\\,\\mathrm{m}^2$, so the symmetric differential is close but not a guaranteed enclosure. The exact remainder is $(ds)^2$, which reveals both the sign and size of the discrepancy.",
+        "A derivative bound gives a simpler, sometimes looser guarantee. If $|f^{\\prime}(x)|\\le K$ for every $x$ in $[a-\\eta,a+\\eta]$, the mean value theorem implies $|f(a+\\delta)-f(a)|\\le K|\\delta|\\le K\\eta$ for every allowed $\\delta$. The hypothesis covers the whole interval; using only $|f^{\\prime}(a)|$ gives a first-order estimate. For $A(s)=s^2$ on $[4.98,5.02]$, one may take $K=10.04$, producing a certified area-change bound $10.04(0.02)=0.2008\\,\\mathrm{m}^2$. The exact endpoint maximum $0.2004\\,\\mathrm{m}^2$ is tighter.",
+        "When several measured inputs vary, a one-variable derivative is incomplete. A rectangular area $A=lw$ changes exactly by $\\Delta A=w\\,\\Delta l+l\\,\\Delta w+\\Delta l\\,\\Delta w$. The first two terms form the linear differential; the product is a second-order remainder. If $|\\Delta l|\\le\\eta_l$ and $|\\Delta w|\\le\\eta_w$, the triangle inequality gives a rigorous absolute bound $|\\Delta A|\\le|w|\\eta_l+|l|\\eta_w+\\eta_l\\eta_w$. Later multivariable derivatives organize this pattern, but the algebra already shows why independent tolerances must be accounted for separately.",
+        "For the rectangle with $l=4\\pm0.1\\,\\mathrm{m}$ and $w=3\\pm0.2\\,\\mathrm{m}$, both positive side lengths can vary independently within a rectangle of possible inputs. Since area $lw$ increases with either side on that region, the exact area interval is $[3.9\\cdot2.8,\\;4.1\\cdot3.2]=[10.92,13.12]\\,\\mathrm{m}^2$. The nominal area is $12\\,\\mathrm{m}^2$, giving deviations of $-1.08\\,\\mathrm{m}^2$ and $+1.12\\,\\mathrm{m}^2$. The algebraic bound $|w\\Delta l+l\\Delta w+\\Delta l\\Delta w|\\le1.12\\,\\mathrm{m}^2$ is sharp for the simultaneous upward errors. If measurements are correlated, some corner combinations may be impossible and a smaller feasible-set bound could apply. Do not assume independence or correlation without information about how measurements were obtained."
+      ],
+      "formula": "Estimated absolute output uncertainty ≈ |f′(a)|η; exact checks must account for nonlinear terms.",
+      "formulaTex": "\\begin{gathered}|\\delta|\\le\\eta,\\qquad \\Delta f=f(a+\\delta)-f(a),\\\\ \\text{first-order uncertainty}\\approx |f^{\\prime}(a)|\\eta,\\\\ \\Delta f=f^{\\prime}(a)\\delta+r(\\delta),\\qquad \\frac{r(\\delta)}{\\delta}\\to0\\quad(\\delta\\to0).\\end{gathered}"
+    },
+    {
+      "title": "4. Sensitivity, elasticity, and where the model fails",
+      "paragraphs": [
+        "The derivative $f^{\\prime}(a)$ is a signed local sensitivity: near $a$, an extra unit of input produces approximately $f^{\\prime}(a)$ units of output. Its magnitude measures response size, while its sign gives response direction. Absolute sensitivity depends on units. Reporting volume in cubic millimetres rather than cubic centimetres multiplies its numerical derivative by one thousand, although the physical response has not changed. Comparing bare derivative magnitudes across unrelated measurement conventions can therefore be misleading.",
+        "When $x$ and $f(x)$ are nonzero, define elasticity $E(x)=xf^{\\prime}(x)/f(x)$. It compares fractional output change with fractional input change: $\\Delta f/f(x)\\approx E(x)\\Delta x/x$. For positive $x$ and positive output, it is also the derivative of $\\log f$ with respect to $\\log x$. A power law $f(x)=Cx^p$ with $C>0$ and $x>0$ has constant elasticity $p$. Sphere volume has elasticity 3, and circle area has elasticity 2. Multiplicative changes of measurement units leave these elasticities unchanged.",
+        "As an illustrative demand model, let $Q(p)=Cp^{-2}$ for price $p>0$, with $C$ fixed and positive. Its signed elasticity is $-2$: a small 1% price increase predicts approximately a 2% quantity decrease. Some economic conventions report the positive magnitude of price elasticity instead, so state your sign convention. A finite 10% increase actually multiplies quantity by $1/1.1^2$, about $0.82645$, a decrease of about 17.36%. The differential's 20% decrease is a local estimate extended too far to be exact.",
+        "Small derivatives do not always mean zero uncertainty. At $a=0$, $f(x)=x^2$ has $f^{\\prime}(0)=0$, so the first-order prediction vanishes while an input error $\\delta$ produces the positive output $\\delta^2$. Relative output error based on $f(0)$ is undefined. At a corner such as $|x|$ at zero, no single tangent slope supplies a two-sided linearization. At a physical endpoint, only allowed one-sided changes may make sense. These examples tell us to check differentiability, domain restrictions, nonzero denominators, and neglected higher-order terms before trusting a sensitivity calculation.",
+        "Elasticity can be derived by differentiating logarithms on a positive domain. If $x>0$ and $f(x)>0$, then $d(\\ln f)/d(\\ln x)=[f^{\\prime}(x)/f(x)]/[1/x]=xf^{\\prime}(x)/f(x)$. This is a local ratio of percentage rates, not a fixed percentage rule over every finite interval. If $f(x)=Cx^p$, the exact finite relation is $f(x(1+\\rho))/f(x)=(1+\\rho)^p$, whereas elasticity predicts the first-order ratio $1+p\\rho$. Their difference is governed by higher powers of $\\rho$.",
+        "A negative elasticity records opposite directions of change. For $Q(p)=Cp^{-2}$, raising price by 10% changes quantity by the exact factor $1/1.1^2\\approx0.82645$. The local differential predicts a factor $1-2(0.1)=0.8$, a larger decrease. Halving the percentage change generally reduces the discrepancy, but the sign and size of the error still depend on the model and interval. Do not substitute a large percentage into a derivative formula without checking the exact finite relation when it is available.",
+        "Sensitivity can blow up near a boundary. For $f(x)=\\sqrt{x}$, $f^{\\prime}(x)=1/(2\\sqrt{x})$ grows without bound as $x\\downarrow0$, even though $f(x)$ remains continuous and small. A fixed absolute input uncertainty can have a much larger first-order output effect when the nominal input is close to zero. At exactly zero there is no finite right derivative. Similarly, $1/x$ becomes highly sensitive near its excluded point zero. A reported nominal value close to a domain boundary should trigger a direct interval calculation rather than blind use of a tangent.",
+        "A first-order sensitivity may vanish without the model being insensitive. At $x=0$, the function $x^2$ has derivative zero, yet an uncertainty interval $[-\\eta,\\eta]$ produces output range $[0,\\eta^2]$. The correct conclusion is that the linear contribution vanishes and the leading change is second order. This distinction matters in optimization too: a stationary point may be a minimum, maximum, or neither. The derivative identifies the missing linear term; it does not classify the remaining terms by itself.",
+        "Power-law elasticity has a transparent finite-change error. For $f(x)=Cx^3$ and a fractional input change $\\rho$ with $1+\\rho>0$, the exact output factor is $(1+\\rho)^3=1+3\\rho+3\\rho^2+\\rho^3$. Elasticity three retains only $1+3\\rho$. At $\\rho=0.1$, the exact factor is $1.331$ while the linear prediction is $1.3$; the omitted $0.031$ is a factor difference, not a derivative error in units. When $\\rho$ is halved, the leading omitted term is roughly quartered. This makes the word 'small' quantitative in a particular model. A different function may have a different higher-order remainder, so elasticity alone cannot supply this exact correction."
+      ],
+      "formula": "E(x) = x f′(x)/f(x),    Δf/f(x) ≈ E(x)Δx/x    (x ≠ 0, f(x) ≠ 0)",
+      "formulaTex": "\\begin{aligned}E(x)&=\\frac{x f^{\\prime}(x)}{f(x)},\\\\ \\frac{\\Delta f}{f(x)}&\\approx E(x)\\frac{\\Delta x}{x}\\qquad(x\\ne0,\\ f(x)\\ne0).\\end{aligned}"
+    },
+    {
+      "title": "Turning a measurement uncertainty into a volume estimate",
+      "paragraphs": [
+        "A measured sphere radius is $r=2.00\\pm0.01\\,\\mathrm{m}$. Its volume is $V(r)=(4\\pi/3)r^3$, so the nominal volume is $32\\pi/3\\,\\mathrm{m}^3\\approx33.51\\,\\mathrm{m}^3$. At $r=2\\,\\mathrm{m}$, the derivative is $dV/dr=16\\pi\\,\\mathrm{m}^2$, so $dV=(16\\pi\\,\\mathrm{m}^2)\\,dr$. Using $|dr|\\le0.01\\,\\mathrm{m}$ gives a first-order volume change estimate of at most $0.16\\pi\\,\\mathrm{m}^3\\approx0.503\\,\\mathrm{m}^3$, about $1.5\\%$ of the nominal volume.",
+        "The differential is not an exact worst-case bound. The greatest upward volume change occurs at $r=2.01\\,\\mathrm{m}$, where $V(2.01)-V(2)=(4\\pi/3)(2.01^3-2^3)=0.160801333\\ldots\\pi\\,\\mathrm{m}^3$. The linear estimate $0.16\\pi\\,\\mathrm{m}^3$ is slightly smaller. On the lower side the exact magnitude is $(4\\pi/3)(2^3-1.99^3)=0.159201333\\ldots\\pi\\,\\mathrm{m}^3$. These small second-order differences matter when a tolerance is tight.",
+        "A rigorous bound follows from the mean value theorem. Throughout $[1.99,2.01]\\,\\mathrm{m}$, $V^{\\prime}(r)=4\\pi r^2\\le4\\pi(2.01)^2\\,\\mathrm{m}^2$. Hence for any allowed measured radius $r$, $|V(r)-V(2)|\\le4\\pi(2.01)^2|r-2|\\le0.161604\\pi\\,\\mathrm{m}^3$. This bound is slightly conservative but valid for every input in the stated uncertainty interval. The exact endpoint computation is sharper here because $V$ is increasing.",
+        "The derivative has units m², and multiplying by a radius error in m gives a volume error in m³. Report whether an error number is a first-order estimate, a rigorous upper bound, or an observed difference. A calculator display of several digits cannot erase uncertainty in the input measurement.",
+        "The preceding calculation has three distinct report entries: $V(2)=32\\pi/3\\,\\mathrm{m}^3$ is the nominal modeled volume; $0.16\\pi\\,\\mathrm{m}^3$ is a first-order estimate for a $0.01\\,\\mathrm{m}$ radius change; and $0.160801333\\ldots\\pi\\,\\mathrm{m}^3$ is the exact largest deviation over the stated radius interval. The last is the usable worst-case bound within the spherical model. Labeling each number by its role prevents an approximation from being mistaken for a guarantee.",
+        "The exact endpoint method works because positive sphere volume is strictly increasing with radius. If the measured quantity were a nonmonotone function, the worst case might occur inside the uncertainty interval. For example, $f(x)=1-x^2$ on $[-1,1]$ has its maximum at the interior point zero, not at either endpoint. Before propagating a tolerance by endpoints, justify monotonicity on the entire interval or solve the corresponding extremum problem. This is an instance of the general rule that a computational shortcut has hypotheses.",
+        "Model error can dominate propagated measurement error. If the object is an ellipsoid with axes $a,b,c$, its volume is $4\\pi abc/3$, and no single measured radius uniquely determines it. Fitting a sphere of radius two may produce many accurate digits for the wrong shape. State what observation supports the spherical approximation, and distinguish that modeling uncertainty from the $\\pm0.01\\,\\mathrm{m}$ instrument tolerance. Calculus can propagate uncertainty through a chosen model; it cannot certify that the chosen model describes the object.",
+        "A useful final check is dimensional and numerical. The derivative $dV/dr=4\\pi r^2$ has square-metre units; multiplying by a metre tolerance gives cubic metres. The relative first-order estimate is $3(0.01/2)=0.015$, or $1.5\\%$. An output uncertainty near $0.5\\,\\mathrm{m}^3$ is therefore plausible beside a nominal volume near $33.5\\,\\mathrm{m}^3$. If a calculation instead produces $500\\,\\mathrm{m}^3$ or a unit of $\\mathrm{m}^2$, a unit conversion or derivative factor has probably been lost. Such checks do not prove an answer, but they make errors easier to catch before reporting it.",
+        "An uncertainty report should name the direction as well as the magnitude of a bound when the model is asymmetric. For positive sphere radius, the exact upward deviation from the nominal volume exceeds the exact downward magnitude for the same radius tolerance. Reporting a symmetric interval $V(2)\\pm0.160801333\\ldots\\pi\\,\\mathrm{m}^3$ is still a valid enclosure because it uses the larger magnitude on both sides, but it conceals the tighter lower endpoint. If downstream decisions are sensitive to maximum capacity, use the exact upper endpoint; if they require a single simple worst-case tolerance, state that the symmetric number is conservative on the lower side. Precision in wording is part of error analysis.",
+        "When an exact modeled interval is converted to decimals for a report, round its lower endpoint downward and its upper endpoint upward if a guaranteed enclosure must be preserved. Ordinary rounding to the nearest displayed digit can accidentally shrink the interval and exclude an allowed value. A long calculator expansion of π does not add information about a radius measured only to a hundredth of a metre. Keep the exact expressions for calculation, then choose a displayed precision appropriate to the input tolerance and the decision being made."
+      ],
+      "formula": "At r=2 m, ΔV≈16πΔr; for |Δr|≤0.01 m a rigorous bound is |ΔV|≤0.161604π m³.",
+      "formulaTex": "\\begin{gathered}\\left.\\frac{dV}{dr}\\right|_{r=2\\,\\mathrm m}=16\\pi\\,\\mathrm m^2,\\qquad \\Delta V\\approx(16\\pi\\,\\mathrm m^2)\\Delta r,\\\\ |\\Delta r|\\le0.01\\,\\mathrm m\\quad\\Longrightarrow\\quad |\\Delta V|\\le4\\pi(2.01\\,\\mathrm m)^2|\\Delta r|\\le0.161604\\pi\\,\\mathrm m^3.\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A ladder links two rates",
+      "problem": "A rigid $5\\,\\mathrm{m}$ ladder slides against a vertical wall. Its foot moves away from the wall at $0.2\\,\\mathrm{m/s}$. How quickly is its top falling when the foot is $3\\,\\mathrm{m}$ from the wall?",
+      "steps": [
+        "Let $x$ be the horizontal distance of the foot and $y$ the height of the top, both in metres. While both ends maintain contact, $x^2+y^2=25$ with $x,y\\ge0$.",
+        "Differentiate before inserting the instantaneous distances: $2x\\,dx/dt+2y\\,dy/dt=0$. When $x=3$, the positive height is $y=\\sqrt{25-9}=4$.",
+        "Solve $dy/dt=-(x/y)dx/dt=-(3/4)(0.2)=-0.15\\,\\mathrm{m/s}$. The negative sign refers to decreasing height.",
+        "As a numerical cross-check, constant horizontal speed for the next $0.01\\,\\mathrm{s}$ gives $x=3.002$ and $y=\\sqrt{25-3.002^2}\\approx3.998499218$. The average vertical rate is approximately $-0.150078\\,\\mathrm{m/s}$, close to the instantaneous rate.",
+        "The division by $y$ requires $y>0$. The formula grows without bound as $y$ approaches zero under constant horizontal speed; it does not establish physically realizable motion at the floor, where contact and speed assumptions need reconsideration."
+      ],
+      "answer": "The top is falling at $0.15\\,\\mathrm{m/s}$ at that instant, subject to the rigid-ladder contact model."
+    },
+    {
+      "title": "A radius tolerance becomes a volume tolerance",
+      "problem": "A spherical object has measured radius $10.00\\,\\mathrm{cm}$ with error at most $0.05\\,\\mathrm{cm}$. Estimate its volume uncertainty and compare it with the exact model interval.",
+      "steps": [
+        "The reported volume is $V_0=(4\\pi/3)10^3\\approx4188.790205\\,\\mathrm{cm}^3$. The radius tolerance is $0.05/10=0.005$, or $0.5\\%$.",
+        "At $r=10$, $dV/dr=400\\pi\\,\\mathrm{cm}^2$. The differential uncertainty is $400\\pi(0.05)=20\\pi\\approx62.831853\\,\\mathrm{cm}^3$, or approximately $1.5\\%$ of $V_0$.",
+        "Evaluate the positive-radius endpoints. At $9.95\\,\\mathrm{cm}$, volume is approximately $4126.271987\\,\\mathrm{cm}^3$; at $10.05\\,\\mathrm{cm}$ it is approximately $4251.936741\\,\\mathrm{cm}^3$.",
+        "Equivalently, the exact lower deviation is $-62.518217\\,\\mathrm{cm}^3$ and upper deviation is $+63.146536\\,\\mathrm{cm}^3$, to six decimal places. The linear estimate misses a remainder bounded by $4\\pi(10)(0.05)^2+(4\\pi/3)(0.05)^3\\approx0.314683\\,\\mathrm{cm}^3$.",
+        "This is an interval guaranteed by the radius tolerance and spherical model. It gives no probability for locations within that interval and does not include departures from sphericity."
+      ],
+      "answer": "Volume is approximately $4188.79\\,\\mathrm{cm}^3$ with first-order uncertainty $62.83\\,\\mathrm{cm}^3$; the model's exact interval is approximately $[4126.271987,4251.936741]\\,\\mathrm{cm}^3$."
+    },
+    {
+      "title": "A cylindrical tank turns a volume rate into a level rate",
+      "problem": "A vertical cylinder has fixed radius $2\\,\\mathrm{m}$ and is filled at $3\\,\\mathrm{m}^3/\\mathrm{min}$. Find the water-level rate while its shape remains cylindrical.",
+      "steps": [
+        "Its cross-sectional area is $\\pi(2)^2=4\\pi\\,\\mathrm{m}^2$.",
+        "Volume and height satisfy $V=4\\pi h$ for every level within the cylindrical part.",
+        "Differentiate in time: $dV/dt=4\\pi\\,dh/dt$.",
+        "Substitute the measured volume rate and solve."
+      ],
+      "answer": "$dh/dt=3/(4\\pi)\\,\\mathrm{m/min}$; the rate is constant under the fixed-area model."
+    },
+    {
+      "title": "A cone requires a changing surface radius",
+      "problem": "In a conical container whose water-surface radius is always half its depth, find $dh/dt$ when $h=4\\,\\mathrm{m}$ and $dV/dt=2\\,\\mathrm{m}^3/\\mathrm{min}$.",
+      "steps": [
+        "The similar-triangle relation $r=h/2$ holds throughout the filling process.",
+        "Substitute into $V=\\pi r^2h/3$ to obtain $V=\\pi h^3/12$.",
+        "Differentiate: $dV/dt=(\\pi h^2/4)dh/dt$.",
+        "At $h=4$, the coefficient is $4\\pi\\,\\mathrm{m}^2$; solve for the level rate."
+      ],
+      "answer": "$dh/dt=1/(2\\pi)\\,\\mathrm{m/min}$, assuming the water remains in the conical region."
+    },
+    {
+      "title": "Linearization and a certified square-root error",
+      "problem": "Estimate $\\sqrt{9.2}$ from $a=9$ and bound the error using $|f^{\\prime\\prime}|$ on $[9,9.2]$.",
+      "steps": [
+        "For $f(x)=\\sqrt x$, $f(9)=3$ and $f^{\\prime}(9)=1/6$.",
+        "The tangent estimate is $3+0.2/6=3.033333\\ldots$.",
+        "The second derivative magnitude is $1/(4x^{3/2})$, at most $1/(4\\cdot9^{3/2})=1/108$ on the interval.",
+        "Taylor's bound gives error at most $(1/108)(0.2)^2/2=1/5400\\approx0.0001852$."
+      ],
+      "answer": "Estimate $3.033333\\ldots$ with a certified absolute error no more than $1/5400$."
+    },
+    {
+      "title": "Exact and linear area uncertainty differ",
+      "problem": "A square side is $5\\pm0.02\\,\\mathrm{m}$. Compare the exact area interval with the differential estimate.",
+      "steps": [
+        "The nominal area is $25\\,\\mathrm{m}^2$ and the differential magnitude is $2(5)(0.02)=0.2\\,\\mathrm{m}^2$.",
+        "Because $s^2$ increases for positive $s$, exact endpoints give $[4.98^2,5.02^2]$.",
+        "Calculate the interval $[24.8004,25.2004]\\,\\mathrm{m}^2$.",
+        "Relative to $25\\,\\mathrm{m}^2$, the exact changes are $-0.1996$ and $+0.2004\\,\\mathrm{m}^2$. Thus $[24.8,25.2]$ is a first-order estimate and misses the upper allowed endpoint by $0.0004\\,\\mathrm{m}^2$; use $[24.8004,25.2004]$ for an enclosing interval.",
+        "The upward difference $0.2004$ exceeds the linear estimate by $0.0004\\,\\mathrm{m}^2$; the quadratic remainder accounts for it."
+      ],
+      "answer": "Differential estimate $25\\pm0.2\\,\\mathrm{m}^2$; exact modeled interval $[24.8004,25.2004]\\,\\mathrm{m}^2$."
+    },
+    {
+      "title": "A derivative bound makes an uncertainty guarantee",
+      "problem": "For a square with side length $x$ metres and area $f(x)=x^2$ square metres, if $x=5\\pm0.02$, prove a simple absolute output-error bound with the mean value theorem.",
+      "steps": [
+        "The allowed input interval is $[4.98,5.02]$ metres.",
+        "On it, $|f^{\\prime}(x)|=2x\\le10.04$.",
+        "The mean value theorem gives $|f(x)-f(5)|\\le10.04|x-5|$.",
+        "Use $|x-5|\\le0.02$ to obtain the bound $0.2008$."
+      ],
+      "answer": "Every allowed output lies within $0.2008\\,\\mathrm{m}^2$ of $25\\,\\mathrm{m}^2$; the exact endpoint bound is slightly sharper."
+    },
+    {
+      "title": "Elasticity and finite changes",
+      "problem": "For $Q(p)=Cp^{-2}$, compare the derivative's prediction with the exact quantity change after a $5\\%$ price rise.",
+      "steps": [
+        "The elasticity is $E=pQ^{\\prime}/Q=-2$.",
+        "The first-order prediction is a roughly $10\\%$ decrease, a factor of $0.90$.",
+        "The exact ratio is $Q(1.05p)/Q(p)=1/1.05^2\\approx0.907029$.",
+        "Thus the exact decrease is about $9.297\\%$, smaller than the local $10\\%$ prediction."
+      ],
+      "answer": "Local estimate $-10\\%$; exact modeled change about $-9.297\\%$, for $p>0$."
+    }
+  ],
+  "misconceptions": [
+    "‘$dy$ and $\\Delta y$ are the same.’ The differential is the exact change in the tangent model; the function's actual change includes a remainder. For $f(x)=x^2$ at $x=1$, taking $dx=\\Delta x=0.1$ gives $dy=0.2$ but $\\Delta y=0.21$.",
+    "‘A symmetric input tolerance gives an exactly symmetric output tolerance.’ Nonlinear transformations can make the two endpoint deviations unequal, as sphere volume demonstrates.",
+    "‘Elasticity 3 means the output rises by three units.’ For a differentiable model at a positive input with positive output, elasticity 3 predicts that a small 1% input increase gives roughly a 3% output increase; this percentage comparison is unchanged by multiplicative unit conversions."
+  ],
+  "lab": {
+    "title": "Estimate a changing spherical volume",
+    "description": "Edit the nominal radius and the positive bound maxChange on the magnitude of a radius change, both in centimetres. Two plots compare exact and linear volume changes; a third shows the omitted remainder. Every plot uses the signed radius change in $\\mathrm{cm}$ on the horizontal axis and a volume change or remainder in $\\mathrm{cm}^3$ on the vertical axis. Console rows provide endpoint checks and a local time-rate interpretation. The geometry remains exactly spherical throughout this experiment.",
+    "code": "// Adjustable measurements, in cm; keep 0 < maxChange < radius.\nconst radius = 10;\nconst maxChange = 0.05;\nconst radialSpeed = 0.02; // cm/s, for the instantaneous rate\nif (!Number.isFinite(radius) || !Number.isFinite(maxChange) || !Number.isFinite(radialSpeed) || radius <= 0 || maxChange <= 0 || maxChange >= radius) {\n  throw new Error('Use finite inputs with 0 < maxChange < radius.');\n}\nconst baseVolume = ((4 * Math.PI / 3) * radius * radius) * radius;\nconst sensitivity = 4 * Math.PI * radius ** 2;\nconst relativeTolerance = 3 * (maxChange / radius);\nif (![baseVolume, sensitivity, sensitivity * radialSpeed, relativeTolerance].every(Number.isFinite)) throw new Error('Derived volume or rate overflows; reduce measurements.');\nif (baseVolume === 0 || sensitivity === 0 || relativeTolerance === 0) throw new Error('Positive volume, change, or tolerance is unrepresentable at machine precision.');\nconst peakRemainder = (4 * Math.PI * (radius * maxChange)) * maxChange + ((4 * Math.PI / 3) * maxChange * maxChange) * maxChange;\nif (peakRemainder === 0) throw new Error('Positive volume remainder is below machine resolution.');\nconst exact = [];\nconst linear = [];\nconst residual = [];\nfor (let i = 0; i <= 100; i++) {\n  const h = maxChange * (2 * i / 100 - 1);\n  const prediction = sensitivity * h;\n  // Expanded difference avoids subtracting nearly equal large volumes.\n  const remainder = (4 * Math.PI * (radius * h)) * h + ((4 * Math.PI / 3) * h * h) * h;\n  const change = prediction + remainder;\n  if (remainder !== 0 && change === prediction && (i === 0 || i === 100)) console.log('Remainder is nonzero separately but rounds away when added to the linear change at h =', h);\n  exact.push([h, change]);\n  linear.push([h, prediction]);\n  residual.push([h, remainder]);\n  if (i === 0 || i === 50 || i === 100) {\n    console.log('h (cm), exact change, linear change, remainder (cm³):', h, change, prediction, remainder);\n  }\n}\nif (![exact, linear, residual].every(points => points.every(pair => pair.every(Number.isFinite)))) throw new Error('Volume change overflows; reduce measurements.');\nplot(exact, 'Exact ΔV: x = Δr (cm), y = ΔV (cm³)');\nplot(linear, 'Differential dV: x = Δr (cm), y = dV (cm³)');\nplot(residual, 'Remainder: x = Δr (cm), y = ΔV − dV (cm³)');\nconsole.log('Nominal volume (cm³):', baseVolume);\nconsole.log('Instantaneous volume rate (cm³/s):', sensitivity * radialSpeed);\nconsole.log('First-order relative volume tolerance:', relativeTolerance);",
+    "tasks": [
+      "Before running, predict the sign of exact change minus linear change at each endpoint. Explain your prediction using the cubic expansion.",
+      "Increase maxChange from 0.05 to 0.5, keeping radius fixed. Compare how the linear change and remainder scale, and explain why their factors differ.",
+      "Halve radius while keeping maxChange fixed. Predict how the first-order absolute and relative volume tolerances change; compare the linear-plot endpoints and console value with your prediction. How do the exact endpoint changes differ from this first-order scaling?",
+      "Set maxChange = radius and inspect the deliberate input error. Explain the zero-radius endpoint excluded by the guard and why larger changes would allow negative-radius inputs that no longer describe this sphere.",
+      "Change radialSpeed to a negative value. Explain why the time rate changes sign while the plotted measurement-error comparison stays the same."
+    ],
+    "expected": "At the default inputs, the nominal volume is about $4188.790205\\,\\mathrm{cm}^3$. The differential endpoint changes are approximately $\\pm62.831853\\,\\mathrm{cm}^3$; the exact endpoint changes are approximately $-62.518217\\,\\mathrm{cm}^3$ and $+63.146536\\,\\mathrm{cm}^3$. The instantaneous volume rate is about $25.132741\\,\\mathrm{cm}^3/\\mathrm{s}$, and the first-order relative volume tolerance is $0.015$, or $1.5\\%$. All three plots contain 101 finite points with middle point $(0,0)$. These numerical observations illustrate the algebraic expansion rather than prove it."
+  },
+  "exercises": [
+    {
+      "question": "A circle's radius is $6\\,\\mathrm{cm}$ and increasing at $0.4\\,\\mathrm{cm}/\\mathrm{s}$. Find its area rate and interpret its units.",
+      "hint": "Differentiate $A=\\pi r^2$ with respect to time.",
+      "solution": "The chain rule gives $dA/dt=2\\pi r\\,dr/dt=2\\pi(6)(0.4)=4.8\\pi$ square centimetres per second, about $15.0796$ square centimetres per second. The rate measures area gained per second at the current radius.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "A cylinder of radius $3\\,\\mathrm{m}$ fills at $2\\,\\mathrm{m}^3/\\mathrm{min}$. Find the water-level rate.",
+      "hint": "Use $V=\\pi r^2h$ with fixed radius.",
+      "solution": "With fixed radius $r=3$ metres, $V=9\\pi h$ and $dV/dt=9\\pi\\,dh/dt$. Thus $dh/dt=2/(9\\pi)$ metres per minute. The fixed radius makes this rate constant.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "A sphere has radius $4\\,\\mathrm{cm}$ increasing at $0.2\\,\\mathrm{cm}/\\mathrm{s}$. Find $\\frac{dV}{dt}$ and its units.",
+      "hint": "Differentiate $V=4\\pi r^3/3$ with respect to time.",
+      "solution": "The chain rule gives $dV/dt=4\\pi r^2\\,dr/dt=4\\pi(4)^2(0.2)=12.8\\pi$ cubic centimetres per second. It is positive because the radius is increasing.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "A conical tank fills at $2\\,\\mathrm{m}^3/\\mathrm{min}$. While the water remains in the conical region, its surface radius $r$ is half its depth $h$ at every instant. Find $\\frac{dh}{dt}$ when $h=4\\,\\mathrm{m}$.",
+      "hint": "Substitute $r=h/2$ into the volume formula before differentiating.",
+      "solution": "With $r=h/2$, $V=(\\pi/3)r^2h=\\pi h^3/12$, so $dV/dt=(\\pi h^2/4)\\,dh/dt$. At $h=4$ metres and $dV/dt=2$ cubic metres per minute, $2=4\\pi\\,dh/dt$ and $dh/dt=1/(2\\pi)$ metres per minute.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "A rigid $5\\,\\mathrm{m}$ ladder remains in contact with level ground and a vertical wall. Its foot is $x$ metres from the wall and moves away at $0.5\\,\\mathrm{m}/\\mathrm{s}$. Find the vertical rate of its top when $x=3\\,\\mathrm{m}$.",
+      "hint": "Find $y$ from $x^2+y^2=25$, then differentiate.",
+      "solution": "At $x=3$ metres the positive height is $y=4$ metres. Differentiating $x^2+y^2=25$ with respect to time gives $x\\,dx/dt+y\\,dy/dt=0$. Hence $dy/dt=-(3/4)(0.5)=-0.375$ metres per second; the top descends.",
+      "lesson": 1,
+      "type": "Modeling"
+    },
+    {
+      "question": "Use a linearization at 8 to estimate the cube root of 8.12. State the relevant domain condition.",
+      "hint": "For $f(x)=x^{1/3}$, evaluate $f(8)$ and $f^{\\prime}(8)$.",
+      "solution": "Near $8>0$, $f^{\\prime}(x)=1/(3x^{2/3})$, so $f^{\\prime}(8)=1/12$. The linear estimate is $f(8.12)\\approx2+(0.12)/12=2.01$. Cubing gives $2.01^3=8.120601$, so the estimate is slightly high. The function is differentiable at $8$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use a second-derivative bound to certify the tangent approximation to $\\cos x$ at zero for $|x|\\le0.1$.",
+      "hint": "The tangent is $1$ and $|f^{\\prime\\prime}(x)|=|\\cos x|\\le1$.",
+      "solution": "At $a=0$, $\\cos0=1$ and $-\\sin0=0$, so the tangent model is $1$. Since $|f^{\\prime\\prime}(t)|=|\\cos t|\\le1$, Taylor’s remainder bound gives $|\\cos x-1|\\le x^2/2\\le0.005$ for $|x|\\le0.1$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "Use a tangent at $9$ to estimate $\\sqrt{9.2}$.",
+      "hint": "The derivative of $\\sqrt x$ at $9$ is $1/6$.",
+      "solution": "The tangent model at $9$ is $L(x)=3+(x-9)/6$. It gives $\\sqrt{9.2}\\approx L(9.2)=3+0.2/6\\approx3.033333$. Since $\\sqrt x$ is concave down for $x>0$, the tangent overestimates the actual value.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x)=|x|^{3/2}$, show the tangent approximation at zero has error $o(|h|)$ but not $O(h^2)$.",
+      "hint": "Divide the exact error by $|h|$, then by $h^2$.",
+      "solution": "At zero, $f(h)/h$ has magnitude $|h|^{1/2}\\to0$, so $f^{\\prime}(0)=0$ and the tangent is zero. Its error divided by $|h|$ is $|h|^{1/2}\\to0$, hence $o(|h|)$. But error divided by $h^2$ is $|h|^{-1/2}\\to\\infty$, so it is not $O(h^2)$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f(x)=x^2$ at $a=3$, compare $\\Delta y$ and $dy$ when $\\Delta x=0.1$.",
+      "hint": "Expand $(3+0.1)^2-9$.",
+      "solution": "The differential is $dy=f^{\\prime}(3)\\Delta x=6(0.1)=0.6$. The actual change is $\\Delta y=(3.1)^2-9=0.61$. Their difference $0.01=(\\Delta x)^2$ is the exact neglected quadratic term.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Use $|f^{\\prime\\prime}|\\le1$ to bound the tangent error of $\\cos x$ at $a=0$ for $|x|\\le0.2$.",
+      "hint": "Apply the bound $Mh^2/2$ with $M=1$.",
+      "solution": "The tangent model is $1$ because $\\cos0=1$ and $(\\cos x)^{\\prime}|_{x=0}=0$. Since $|f^{\\prime\\prime}|\\le1$, the error is at most $x^2/2\\le(0.2)^2/2=0.02$ throughout $|x|\\le0.2$.",
+      "lesson": 2,
+      "type": "Proof"
+    },
+    {
+      "question": "A square has measured side $5\\,\\mathrm{m}$ with absolute uncertainty $0.02\\,\\mathrm{m}$. Find a differential area tolerance and an exact interval.",
+      "hint": "Compare $2s\\,ds$ with the endpoint squares $(5\\pm0.02)^2$.",
+      "solution": "The nominal area is $25$ square metres. The differential tolerance is $2(5)(0.02)=0.2$ square metres. Squaring the positive endpoint sides gives the exact interval $[4.98^2,5.02^2]=[24.8004,25.2004]$ square metres. The deviations, $-0.1996$ and $0.2004$, differ because of the quadratic remainder.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "For a sphere of radius $3\\pm0.02\\,\\mathrm{m}$, find the first-order relative volume uncertainty.",
+      "hint": "Use $dV/V=3\\,dr/r$.",
+      "solution": "The first-order relative uncertainty is $3(0.02)/3=0.02$, or $2\\%$. This is a differential approximation, not an exact endpoint bound.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $V(r)=(4\\pi/3)r^3$ on $r\\in[2,2.01]$, give a rigorous upper bound for $V(r)-V(2)$.",
+      "hint": "Use the maximum derivative on $[2,2.01]$.",
+      "solution": "On $[2,2.01]$, $V^{\\prime}(r)=4\\pi r^2$ is positive and at most $4\\pi(2.01)^2$. At $r=2$, the difference is zero. For $2<r\\le2.01$, the polynomial is continuous on $[2,r]$ and differentiable on $(2,r)$, so the mean value theorem supplies $c\\in(2,r)$ with $V(r)-V(2)=V^{\\prime}(c)(r-2)$. Therefore throughout the interval, $0\\le V(r)-V(2)\\le4\\pi(2.01)^2(0.01)=0.161604\\pi$ in cubic units of $r$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "A square side is $5\\pm0.02\\,\\mathrm{m}$. Compute the exact area interval.",
+      "hint": "Area increases with positive side length.",
+      "solution": "The permitted side interval is $[4.98,5.02]$ metres. Squaring its endpoints, since side length is positive, gives the exact area interval $[24.8004,25.2004]$ square metres.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "A square has side length $5\\pm0.02\\,\\mathrm{m}$. Find the differential area estimate for an upward side-length change of $0.02\\,\\mathrm{m}$ and its shortfall relative to the exact upward area change.",
+      "hint": "Compare the upward endpoint change with $2s\\eta$.",
+      "solution": "At $s=5$ metres and $\\eta=0.02$ metres, the differential predicts $2s\\eta=2(5)(0.02)=0.2$ square metres. The true upward change is $25.2004-25=0.2004$ square metres, so the estimate falls short by $0.0004$ square metres.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Use a derivative bound to guarantee the area error for a square side $5\\pm0.02\\,\\mathrm{m}$.",
+      "hint": "Maximize $|A^{\\prime}(s)|=2s$ over the side interval.",
+      "solution": "On $[4.98,5.02]$, $|A^{\\prime}(s)|=2s\\le10.04$ metres. The mean value theorem gives $|A(s)-25|\\le10.04(0.02)=0.2008$ square metres for every allowed side. This bound is valid, though exact endpoint evaluation is sharper.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "If rectangle sides $l=4\\pm0.1\\,\\mathrm{m}$ and $w=3\\pm0.2\\,\\mathrm{m}$, bound the area change from the nominal $12\\,\\mathrm{m}^2$ using algebra.",
+      "hint": "Write the actual sides as $4+\\Delta l$ and $3+\\Delta w$ metres, then expand their product and subtract $12$.",
+      "solution": "Write the actual sides as $4+\\Delta l$ and $3+\\Delta w$ metres, where $|\\Delta l|\\le0.1$ and $|\\Delta w|\\le0.2$. The exact area change is $\\Delta A=(4+\\Delta l)(3+\\Delta w)-12=3\\Delta l+4\\Delta w+\\Delta l\\Delta w$. Therefore $|\\Delta A|\\le3(0.1)+4(0.2)+(0.1)(0.2)=1.12$ square metres for every pair of errors satisfying the bounds.",
+      "lesson": 3,
+      "type": "Modeling"
+    },
+    {
+      "question": "For $f(x)=7x^4$ with $x>0$, find elasticity and estimate the output percentage change caused by a $2\\%$ input decrease.",
+      "hint": "Compute $xf^{\\prime}(x)/f(x)$ and retain the input-change sign.",
+      "solution": "Since $f^{\\prime}(x)=28x^3$, elasticity is $xf^{\\prime}(x)/f(x)=4$. A $-2\\%$ input change predicts approximately $4(-2\\%)=-8\\%$ output change. The exact change is $0.98^4-1=-0.07763184$, or $-7.763184\\%$; curvature accounts for the difference.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Show why zero first-order sensitivity cannot guarantee zero output error, using $f(x)=x^2$ at $a=0$ and $|\\delta|\\le0.1$.",
+      "hint": "Compare $f^{\\prime}(0)\\delta$ with $f(\\delta)-f(0)$.",
+      "solution": "Because $f^{\\prime}(0)=0$, the differential predicts zero change. Yet $f(\\delta)-f(0)=\\delta^2\\in[0,0.01]$ for $|\\delta|\\le0.1$. The remainder is small relative to $|\\delta|$ as $\\delta\\to0$, but it need not vanish for nonzero $\\delta$. Elasticity at zero is undefined because the reference output is zero.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $V=(4\\pi/3)r^3$, derive $\\frac{dV}{V}$ in terms of $\\frac{dr}{r}$ at positive $r$.",
+      "hint": "Divide $4\\pi r^2\\,dr$ by $4\\pi r^3/3$.",
+      "solution": "Differentiating gives $dV=4\\pi r^2\\,dr$. For $r>0$, division by $V=(4\\pi/3)r^3$ gives $dV/V=3\\,dr/r$. This is a local fractional-change prediction, not an exact finite-change identity.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the elasticity of $A(r)=\\pi r^2$ for $r>0$.",
+      "hint": "Compute $rA^{\\prime}(r)/A(r)$.",
+      "solution": "Because $A^{\\prime}(r)=2\\pi r$, elasticity is $r(2\\pi r)/(\\pi r^2)=2$ for $r>0$. A small $1\\%$ radius increase predicts about $2\\%$ area increase; the exact finite multiplier is $(1.01)^2$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the demand model $Q(p)=Cp^{-2}$ with fixed $C>0$ and price $p>0$, find the exact percent change in $Q$ after a $10\\%$ increase in $p$. Compare it with the elasticity prediction and explain why the finite change differs.",
+      "hint": "Compare $Q(1.1p)/Q(p)$ with the local prediction $E_Q(0.1)$; elasticity describes an infinitesimal relative change.",
+      "solution": "The exact ratio is $Q(1.1p)/Q(p)=(1.1)^{-2}=100/121\\approx0.826446$, so demand decreases by $21/121\\approx17.3554\\%$. Elasticity $E_Q=-2$ predicts a local decrease of about $20\\%$ for a $10\\%$ price rise. The price step is finite, and the power law is nonlinear: its exact relative change is $(1+0.1)^{-2}-1$, while elasticity uses the tangent approximation $-2(0.1)$. The difference is the higher-order change omitted by that tangent.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "At $x=0$, $f(x)=x^2$ has zero derivative. What output interval follows from input uncertainty $|x|\\le0.1$?",
+      "hint": "Use the exact square instead of the zero linear term.",
+      "solution": "For $|x|\\le0.1$, the square satisfies $0\\le x^2\\le(0.1)^2=0.01$, so the output interval is $[0,0.01]$. The zero differential at $x=0$ misses this finite quadratic change.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why is the elasticity $xf^{\\prime}(x)/f(x)$ undefined at $x=0$ for $f(x)=x^2$?",
+      "hint": "Check both the input and output reference values.",
+      "solution": "At $x=0$, $f(0)=0$, so $xf^{\\prime}(x)/f(x)$ divides by zero. For $x>0$, the elasticity simplifies to $2$. Its limiting value as $x\\to0^+$ does not define a relative-change ratio at zero output.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $f(x)=\\sqrt{x}$, compare $f^{\\prime}(1)$ with $f^{\\prime}(0.01)$ and explain the uncertainty implication.",
+      "hint": "Use $f^{\\prime}(x)=1/(2\\sqrt x)$ for $x>0$.",
+      "solution": "The slopes are $f^{\\prime}(1)=1/2$ and $f^{\\prime}(0.01)=5$. The same small absolute input change has about ten times the first-order output effect near $0.01$ as near $1$. Near zero, respect the domain and check exact input intervals.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For a sphere with nominal radius $r>0$ and positive radius increment $h$ satisfying $0<h<r$, let $V(r)=4\\pi r^3/3$. Find the ratio of the positive-endpoint remainder $V(r+h)-V(r)-4\\pi r^2h$ to the differential change $4\\pi r^2h$. What happens as $h/r\\to0$? Evaluate the ratio at $r=10\\,\\mathrm{cm}$ and $h=0.05\\,\\mathrm{cm}$.",
+      "hint": "Divide the cubic remainder by $4\\pi r^2h$ for $h>0$.",
+      "solution": "Expanding the cubic gives $V(r+h)-V(r)=4\\pi r^2h+4\\pi rh^2+(4\\pi/3)h^3$. Since $r,h>0$, division by the positive differential change gives the exact ratio $h/r+h^2/(3r^2)$. It tends to zero as $h/r\\to0$. At $r=10\\,\\mathrm{cm}$ and $h=0.05\\,\\mathrm{cm}$, $h/r=0.005$ and the ratio is $0.005008333\\ldots$, or $0.5008333\\ldots\\%$. This percentage compares the remainder with the predicted change, not with nominal volume.",
+      "lesson": 5,
+      "type": "Challenge"
+    },
+    {
+      "question": "A sphere radius is $2\\pm0.01\\,\\mathrm{m}$. Find the first-order and exact upward volume changes.",
+      "hint": "Evaluate $4\\pi r^2\\eta$ and $V(2.01)-V(2)$.",
+      "solution": "The first-order change is $4\\pi(2)^2(0.01)=0.16\\pi$ cubic metres. The exact upward change is $(4\\pi/3)(2.01^3-8)=0.160801333\\ldots\\pi$ cubic metres. The linear estimate is therefore not an upper bound.",
+      "lesson": 5,
+      "type": "Modeling"
+    },
+    {
+      "question": "On $[1.99,2.01]$, use the mean value theorem to bound $|V(r)-V(2)|$ for $V=4\\pi r^3/3$.",
+      "hint": "Use the maximum of $V^{\\prime}(r)=4\\pi r^2$ on the interval.",
+      "solution": "On $[1.99,2.01]$, the largest derivative is $4\\pi(2.01)^2$. Since $|r-2|\\le0.01$, the mean value theorem gives $|V(r)-V(2)|\\le4\\pi(2.01)^2(0.01)=0.161604\\pi$ cubic metres, covering both error directions.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "A device reports $x=0\\pm0.1$ for $f(x)=1-x^2$. Why is checking only output at the input endpoints insufficient for the full range?",
+      "hint": "Find the interior maximum, not only the endpoint values.",
+      "solution": "At $x=\\pm0.1$, $f(x)=0.99$, but at the allowed interior point $x=0$, $f(0)=1$. The exact output interval is $[0.99,1]$. Endpoint checks alone miss the maximum because $f$ is not monotone across the whole input interval.",
+      "lesson": 5,
+      "type": "Interpretation"
+    }
+  ],
+  "summary": [
+    "Related rates come from differentiating a relationship valid throughout the motion, with respect to one common variable.",
+    "Linearization uses the tangent slope to estimate nearby values; a differential is the linear model's change, not the full change.",
+    "Absolute sensitivity carries units, while elasticity compares fractional changes and requires nonzero reference values.",
+    "Measurement tolerance, approximation remainder, and model inadequacy are distinct sources of uncertainty."
+  ],
+  "next": "Chapter 08 develops the mean value theorem and derivative sign tests, giving stronger tools for turning local slopes into statements about whole intervals. Chapter 17 will extend linearization to higher-degree Taylor models with remainder bounds."
+}

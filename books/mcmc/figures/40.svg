@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Sparse precision is different from local covariance</title><desc id="desc">A first-order Gaussian Markov chain has tridiagonal precision but correlations across the whole chain.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Sparse precision is different from local covariance</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">A first-order Gaussian Markov chain has tridiagonal precision but correlations across the whole chain.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">AR(1), |ρ|&lt;1: Cov(xᵢ,xⱼ)=ρ^|i−j| under unit marginal variance. Precision zeros encode conditional independence.</text>
+<rect x="100" y="155" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="580" y="155" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<rect x="136" y="155" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="616" y="155" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="172" y="155" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="652" y="155" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="208" y="155" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="688" y="155" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="244" y="155" width="33" height="33" rx="7" fill="rgb(214,239,255)" stroke="none"/>
+<rect x="724" y="155" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="280" y="155" width="33" height="33" rx="7" fill="rgb(226,251,255)" stroke="none"/>
+<rect x="760" y="155" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="316" y="155" width="33" height="33" rx="7" fill="rgb(234,255,255)" stroke="none"/>
+<rect x="796" y="155" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="100" y="191" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="580" y="191" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="136" y="191" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="616" y="191" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<rect x="172" y="191" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="652" y="191" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="208" y="191" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="688" y="191" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="244" y="191" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="724" y="191" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="280" y="191" width="33" height="33" rx="7" fill="rgb(214,239,255)" stroke="none"/>
+<rect x="760" y="191" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="316" y="191" width="33" height="33" rx="7" fill="rgb(226,251,255)" stroke="none"/>
+<rect x="796" y="191" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="100" y="227" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="580" y="227" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="136" y="227" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="616" y="227" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="172" y="227" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="652" y="227" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<rect x="208" y="227" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="688" y="227" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="244" y="227" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="724" y="227" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="280" y="227" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="760" y="227" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="316" y="227" width="33" height="33" rx="7" fill="rgb(214,239,255)" stroke="none"/>
+<rect x="796" y="227" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="100" y="263" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="580" y="263" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="136" y="263" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="616" y="263" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="172" y="263" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="652" y="263" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="208" y="263" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="688" y="263" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<rect x="244" y="263" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="724" y="263" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="280" y="263" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="760" y="263" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="316" y="263" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="796" y="263" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="100" y="299" width="33" height="33" rx="7" fill="rgb(214,239,255)" stroke="none"/>
+<rect x="580" y="299" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="136" y="299" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="616" y="299" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="172" y="299" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="652" y="299" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="208" y="299" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="688" y="299" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="244" y="299" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="724" y="299" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<rect x="280" y="299" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="760" y="299" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="316" y="299" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="796" y="299" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="100" y="335" width="33" height="33" rx="7" fill="rgb(226,251,255)" stroke="none"/>
+<rect x="580" y="335" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="136" y="335" width="33" height="33" rx="7" fill="rgb(214,239,255)" stroke="none"/>
+<rect x="616" y="335" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="172" y="335" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="652" y="335" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="208" y="335" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="688" y="335" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="244" y="335" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="724" y="335" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="280" y="335" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="760" y="335" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<rect x="316" y="335" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="796" y="335" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="100" y="371" width="33" height="33" rx="7" fill="rgb(234,255,255)" stroke="none"/>
+<rect x="580" y="371" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="136" y="371" width="33" height="33" rx="7" fill="rgb(226,251,255)" stroke="none"/>
+<rect x="616" y="371" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="172" y="371" width="33" height="33" rx="7" fill="rgb(214,239,255)" stroke="none"/>
+<rect x="652" y="371" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="208" y="371" width="33" height="33" rx="7" fill="rgb(196,221,241)" stroke="none"/>
+<rect x="688" y="371" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="244" y="371" width="33" height="33" rx="7" fill="rgb(171,196,216)" stroke="none"/>
+<rect x="724" y="371" width="33" height="33" rx="7" fill="#e9edf1" stroke="none"/>
+<rect x="280" y="371" width="33" height="33" rx="7" fill="rgb(136,161,181)" stroke="none"/>
+<rect x="760" y="371" width="33" height="33" rx="7" fill="#bb5b27" stroke="none"/>
+<rect x="316" y="371" width="33" height="33" rx="7" fill="rgb(85,110,130)" stroke="none"/>
+<rect x="796" y="371" width="33" height="33" rx="7" fill="#167d8d" stroke="none"/>
+<text x="225.00" y="125.00" font-family="system-ui,sans-serif" font-size="18" fill="#275c91" font-weight="400" text-anchor="middle">Covariance Σ: dense</text>
+<text x="705.00" y="125.00" font-family="system-ui,sans-serif" font-size="18" fill="#167d8d" font-weight="400" text-anchor="middle">Precision Q = Σ⁻¹: sparse</text>
+<text x="100.00" y="442.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="start">Darker means larger positive covariance.</text>
+<text x="580.00" y="442.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Teal: positive; orange: negative; pale: zero.</text>
+</svg>

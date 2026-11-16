@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="633.6pt" height="338.4pt" viewBox="0 0 633.6 338.4" xmlns="http://www.w3.org/2000/svg" version="1.1"><title>Conditioning selects the alert population</title><desc>Expected fault and sound counts at four percent and twenty percent prevalence. Alert rows give posterior fault probabilities 0.20 and 0.60.</desc>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>VISUAL01 original analytic illustrations</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 338.4 
+L 633.6 338.4 
+L 633.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 44.856318 138.760752 
+L 176.18989 138.760752 
+L 176.18989 93.382519 
+L 44.856318 93.382519 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="110.523104" y="119.449096" transform="rotate(-0 110.523104 119.449096)">Fault</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 176.18989 138.760752 
+L 307.523462 138.760752 
+L 307.523462 93.382519 
+L 176.18989 93.382519 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="241.856676" y="119.449096" transform="rotate(-0 241.856676 119.449096)">Sound</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 4.057443 184.138984 
+L 44.856318 184.138984 
+L 44.856318 138.760752 
+L 4.057443 138.760752 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="8.137331" y="164.827329" transform="rotate(-0 8.137331 164.827329)">Alert</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 44.856318 184.138984 
+L 176.18989 184.138984 
+L 176.18989 138.760752 
+L 44.856318 138.760752 
+z
+" style="fill: #dcecf2; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="110.523104" y="164.826821" transform="rotate(-0 110.523104 164.826821)">60</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 176.18989 184.138984 
+L 307.523462 184.138984 
+L 307.523462 138.760752 
+L 176.18989 138.760752 
+z
+" style="fill: #dcecf2; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="241.856676" y="164.826821" transform="rotate(-0 241.856676 164.826821)">240</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 4.057443 229.517217 
+L 44.856318 229.517217 
+L 44.856318 184.138984 
+L 4.057443 184.138984 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="8.137331" y="210.205562" transform="rotate(-0 8.137331 210.205562)">Clear</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 44.856318 229.517217 
+L 176.18989 229.517217 
+L 176.18989 184.138984 
+L 44.856318 184.138984 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="110.523104" y="210.205054" transform="rotate(-0 110.523104 210.205054)">20</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 176.18989 229.517217 
+L 307.523462 229.517217 
+L 307.523462 184.138984 
+L 176.18989 184.138984 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="241.856676" y="210.205054" transform="rotate(-0 241.856676 210.205054)">1680</text>
+    </g>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(91.949482 275.565746)">Among alerts: 60 / 300</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(97.117919 290.021527)">P(fault | alert) = 0.20</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="160.918544" y="60.105148" transform="rotate(-0 160.918544 60.105148)">Expected counts · 2,000 items</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="160.918544" y="12.878209" transform="rotate(-0 160.918544 12.878209)">Fault prevalence 4%</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="table_2">
+    <g id="patch_10">
+     <path d="M 361.824078 138.760752 
+L 493.15765 138.760752 
+L 493.15765 93.382519 
+L 361.824078 93.382519 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="427.490864" y="119.449096" transform="rotate(-0 427.490864 119.449096)">Fault</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 493.15765 138.760752 
+L 624.491222 138.760752 
+L 624.491222 93.382519 
+L 493.15765 93.382519 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="558.824436" y="119.449096" transform="rotate(-0 558.824436 119.449096)">Sound</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 321.025203 184.138984 
+L 361.824078 184.138984 
+L 361.824078 138.760752 
+L 321.025203 138.760752 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="325.105091" y="164.827329" transform="rotate(-0 325.105091 164.827329)">Alert</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 361.824078 184.138984 
+L 493.15765 184.138984 
+L 493.15765 138.760752 
+L 361.824078 138.760752 
+z
+" style="fill: #dcecf2; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="427.490864" y="164.826821" transform="rotate(-0 427.490864 164.826821)">300</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 493.15765 184.138984 
+L 624.491222 184.138984 
+L 624.491222 138.760752 
+L 493.15765 138.760752 
+z
+" style="fill: #dcecf2; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="558.824436" y="164.826821" transform="rotate(-0 558.824436 164.826821)">200</text>
+    </g>
+    <g id="patch_15">
+     <path d="M 321.025203 229.517217 
+L 361.824078 229.517217 
+L 361.824078 184.138984 
+L 321.025203 184.138984 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="325.105091" y="210.205562" transform="rotate(-0 325.105091 210.205562)">Clear</text>
+    </g>
+    <g id="patch_16">
+     <path d="M 361.824078 229.517217 
+L 493.15765 229.517217 
+L 493.15765 184.138984 
+L 361.824078 184.138984 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="427.490864" y="210.205054" transform="rotate(-0 427.490864 210.205054)">100</text>
+    </g>
+    <g id="patch_17">
+     <path d="M 493.15765 229.517217 
+L 624.491222 229.517217 
+L 624.491222 184.138984 
+L 493.15765 184.138984 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_19">
+     <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="558.824436" y="210.205054" transform="rotate(-0 558.824436 210.205054)">1400</text>
+    </g>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(405.099742 275.565746)">Among alerts: 300 / 500</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(414.085679 290.021527)">P(fault | alert) = 0.60</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="477.886304" y="60.105148" transform="rotate(-0 477.886304 60.105148)">Expected counts · 2,000 items</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="477.886304" y="12.878209" transform="rotate(-0 477.886304 12.878209)">Fault prevalence 20%</text>
+   </g>
+  </g>
+ </g>
+</svg>

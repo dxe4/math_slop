@@ -1,0 +1,13 @@
+# The first and second columns of R are the images of e1 and e2.
+# Change angle and length. Verify that length and perpendicularity survive.
+scene "Rotation preserves lengths and angles";
+domain -3 3;
+range -3 3;
+coordinates equal;
+param angle = 0.7 from -3.141593 to 3.141593;
+param length = 1.5 from 0.2 to 2.5;
+transform R = (cos(angle),-sin(angle),sin(angle),cos(angle));
+vector original = (length,0) color rose;
+vector image = (length*cos(angle),length*sin(angle)) color amber;
+parametric unitcircle(x) = (cos(x),sin(x)) from 0 to 2*pi color white;
+animate angle from -3.141592 to 3.141592 duration 12;

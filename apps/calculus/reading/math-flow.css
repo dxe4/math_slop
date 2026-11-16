@@ -1,0 +1,24 @@
+
+.math-flow-candidate .math-phrase{display:inline;white-space:normal}
+.math-flow-candidate .inline-math,.math-flow-candidate .inline-math.scrollable{display:inline;white-space:normal;overflow:visible}
+.math-flow-candidate .inline-math .katex{white-space:normal}
+.math-flow-candidate .inline-math.math-flow-compact{display:inline-block;max-width:100%;white-space:nowrap}
+.math-flow-candidate .inline-math.math-flow-compact .katex{white-space:nowrap}
+.math-flow-candidate .math-flow-original-punctuation{position:absolute;left:0;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.math-flow-candidate .math-flow-visible-punctuation{font-family:Georgia,Cambria,"Times New Roman",serif;font-size:calc(1em / 1.21);user-select:none}
+.math-flow-candidate .inline-math.math-flow-atomic{display:inline-block;max-width:100%;min-width:0;overflow-x:auto;white-space:nowrap;outline-offset:2px;padding-block:.4em}
+.math-flow-candidate .inline-math.math-flow-atomic .katex{white-space:nowrap}
+.math-flow-candidate .math-phrase:has(>.math-flow-atomic){display:inline-flex;max-width:100%;min-width:0;flex-wrap:wrap;align-items:baseline}
+.math-flow-candidate .math-phrase:has(>.math-flow-scroll)::after{content:"↔ Scroll formula";display:block;flex-basis:100%;font:0.75em/1.4 system-ui,sans-serif;color:inherit;opacity:.85}
+.math-flow-candidate .math-phrase:has(>.math-flow-scroll-y:not(.math-flow-scroll-x))::after{content:"↕ Scroll formula"}
+.math-flow-candidate .math-phrase:has(>.math-flow-scroll-x.math-flow-scroll-y)::after{content:"↔ ↕ Scroll formula"}
+.math-flow-candidate .inline-math:not(:has(.katex)){overflow-wrap:anywhere}
+.math-flow-candidate .key-result:has(>.typeset-equation.math-flow-scroll-block)::after{content:"↔ Scroll equation";display:block;font:0.75em/1.4 system-ui,sans-serif;color:inherit;opacity:.85}
+.math-flow-candidate .key-result:has(>.typeset-equation.math-flow-scroll-y:not(.math-flow-scroll-x))::after{content:"↕ Scroll equation"}
+.math-flow-candidate .key-result:has(>.typeset-equation.math-flow-scroll-x.math-flow-scroll-y)::after{content:"↔ ↕ Scroll equation"}
+@media print{
+.math-flow-candidate .inline-math.math-flow-atomic{display:inline;max-width:none;overflow:visible;white-space:normal;padding:0}
+.math-flow-candidate .inline-math.math-flow-atomic .katex{white-space:normal}
+.math-flow-candidate .math-phrase:has(>.math-flow-atomic){display:inline;max-width:none}
+.math-flow-candidate .math-phrase:has(>.math-flow-scroll)::after,.math-flow-candidate .key-result:has(>.typeset-equation.math-flow-scroll-block)::after{display:none}
+}

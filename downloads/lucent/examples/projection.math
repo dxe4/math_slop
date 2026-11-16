@@ -1,0 +1,16 @@
+# A unit direction q=(cos(angle),sin(angle)) gives projection (v dot q)*q.
+# The rose residual is perpendicular to the teal line; prove its dot product is 0.
+# Compare distances from v to different points on the line to find the minimum.
+scene "Orthogonal projection and least distance";
+domain -4 4;
+range -4 4;
+coordinates equal;
+param angle = 0.5 from -3.141593 to 3.141593;
+param vx = 2 from -2.5 to 2.5;
+param vy = 1 from -2.5 to 2.5;
+fn coefficient(x) = vx*cos(x)+vy*sin(x);
+segment line from (-5*cos(angle),-5*sin(angle)) to (5*cos(angle),5*sin(angle)) color teal;
+vector original = (vx,vy) color blue;
+vector projection = (coefficient(angle)*cos(angle),coefficient(angle)*sin(angle)) color amber;
+segment residual from (coefficient(angle)*cos(angle),coefficient(angle)*sin(angle)) to (vx,vy) color rose;
+point foot = (coefficient(angle)*cos(angle),coefficient(angle)*sin(angle)) color amber;

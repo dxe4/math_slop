@@ -1,0 +1,2557 @@
+{
+  "schema_version": 1,
+  "lab_id": "22_categorical_conjugacy",
+  "seed": 2222,
+  "method": "Exact conjugacy; log-gamma PMF; independent rational ordered-path enumeration and SciPy references",
+  "source_hashes": {
+    "labs/22_categorical_conjugacy.py": "4ac6890a26122c42f32aefb845983ee62de6a1d001666db1ca6c8dbbc7668b34",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "labs/extension_common.py": "3fdb0437bbd31cff4336dd0c1d6bdadd7f79eb7eb31cea9b216257383e75d56c",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "prior": [
+      2.0,
+      1.0,
+      1.0
+    ],
+    "observed_counts": [
+      5,
+      3,
+      0
+    ],
+    "future_n": 3,
+    "category_order": [
+      "Resolved",
+      "Revisit",
+      "Replacement"
+    ],
+    "seed_used_for_sampling": false,
+    "provenance": {
+      "fictional": true,
+      "population": "Comparable repairs under unchanged service conditions",
+      "classification": "Status at seven days; replacement overrides revisit; otherwise resolved",
+      "horizon": "Next three completed repairs assessed at the same seven-day horizon",
+      "prior_basis": "Stipulated teaching prior, not elicited or estimated from the eight jobs"
+    }
+  },
+  "metrics": {
+    "posterior": [
+      7.0,
+      4.0,
+      1.0
+    ],
+    "posterior_total": 12.0,
+    "theta_mean": [
+      0.5833333333333334,
+      0.3333333333333333,
+      0.08333333333333333
+    ],
+    "theta_covariance": [
+      [
+        0.018696581196581193,
+        -0.014957264957264958,
+        -0.0037393162393162395
+      ],
+      [
+        -0.014957264957264958,
+        0.017094017094017092,
+        -0.0021367521367521365
+      ],
+      [
+        -0.0037393162393162395,
+        -0.0021367521367521365,
+        0.005876068376068375
+      ]
+    ],
+    "future_count_mean": [
+      1.75,
+      1.0,
+      0.25
+    ],
+    "future_count_covariance": [
+      [
+        0.8413461538461536,
+        -0.6730769230769231,
+        -0.16826923076923078
+      ],
+      [
+        -0.6730769230769231,
+        0.7692307692307692,
+        -0.09615384615384615
+      ],
+      [
+        -0.16826923076923078,
+        -0.09615384615384615,
+        0.26442307692307687
+      ]
+    ],
+    "count_vectors": [
+      {
+        "counts": [
+          0,
+          0,
+          3
+        ],
+        "probability": 0.0027472527472527427,
+        "exact_probability": "1/364"
+      },
+      {
+        "counts": [
+          0,
+          1,
+          2
+        ],
+        "probability": 0.010989010989010973,
+        "exact_probability": "1/91"
+      },
+      {
+        "counts": [
+          0,
+          2,
+          1
+        ],
+        "probability": 0.027472527472527458,
+        "exact_probability": "5/182"
+      },
+      {
+        "counts": [
+          0,
+          3,
+          0
+        ],
+        "probability": 0.054945054945054916,
+        "exact_probability": "5/91"
+      },
+      {
+        "counts": [
+          1,
+          0,
+          2
+        ],
+        "probability": 0.0192307692307692,
+        "exact_probability": "1/52"
+      },
+      {
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "probability": 0.07692307692307682,
+        "exact_probability": "1/13"
+      },
+      {
+        "counts": [
+          1,
+          2,
+          0
+        ],
+        "probability": 0.1923076923076919,
+        "exact_probability": "5/26"
+      },
+      {
+        "counts": [
+          2,
+          0,
+          1
+        ],
+        "probability": 0.07692307692307682,
+        "exact_probability": "1/13"
+      },
+      {
+        "counts": [
+          2,
+          1,
+          0
+        ],
+        "probability": 0.3076923076923073,
+        "exact_probability": "4/13"
+      },
+      {
+        "counts": [
+          3,
+          0,
+          0
+        ],
+        "probability": 0.23076923076923034,
+        "exact_probability": "3/13"
+      }
+    ],
+    "replacement_count_pmf": [
+      0.7857142857142845,
+      0.1813186813186811,
+      0.030219780219780175,
+      0.0027472527472527427
+    ],
+    "replacement_at_least_one": 0.214285714285714,
+    "replacement_beta_shapes": [
+      1.0,
+      11.0
+    ],
+    "plugin_replacement_count_pmf": [
+      0.7702546296296298,
+      0.21006944444444453,
+      0.019097222222222217,
+      0.0005787037037037036
+    ],
+    "plugin_at_least_one": 0.22974537037037043,
+    "predictive_inflation": 1.1538461538461537,
+    "expected_conditional_count_covariance": [
+      [
+        0.673076923076923,
+        -0.5384615384615384,
+        -0.1346153846153846
+      ],
+      [
+        -0.5384615384615384,
+        0.6153846153846154,
+        -0.07692307692307693
+      ],
+      [
+        -0.1346153846153846,
+        -0.07692307692307693,
+        0.21153846153846154
+      ]
+    ],
+    "covariance_of_conditional_count_mean": [
+      [
+        0.16826923076923073,
+        -0.1346153846153846,
+        -0.03365384615384615
+      ],
+      [
+        -0.1346153846153846,
+        0.15384615384615383,
+        -0.01923076923076923
+      ],
+      [
+        -0.03365384615384615,
+        -0.01923076923076923,
+        0.05288461538461538
+      ]
+    ],
+    "shared_theta_cross_batch_covariance": [
+      [
+        0.16826923076923073,
+        -0.1346153846153846,
+        -0.03365384615384615
+      ],
+      [
+        -0.1346153846153846,
+        0.15384615384615383,
+        -0.01923076923076923
+      ],
+      [
+        -0.03365384615384615,
+        -0.01923076923076923,
+        0.05288461538461538
+      ]
+    ],
+    "independent_batch_vectors_cross_batch_covariance": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "batch_comparison_condition": "Both groups have size 3; independent batch vectors assume fixed shapes (7,4,1); no hierarchy fitted",
+    "replacement_probability_equal_tail_95": [
+      0.002298972213814267,
+      0.28491415291815436
+    ]
+  },
+  "checks": [
+    {
+      "id": "count_vectors",
+      "actual": 10.0,
+      "expected": 10.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "ordered_reference_states",
+      "actual": 10.0,
+      "expected": 10.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "exact_normalization",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "normalization",
+      "actual": 0.9999999999999984,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "replacement_at_least_one",
+      "actual": 0.214285714285714,
+      "expected": 0.21428571428571427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "replacement_none_beta_ratio",
+      "actual": 0.7857142857142845,
+      "expected": 0.7857142857142857,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "replacement_plugin",
+      "actual": 0.22974537037037043,
+      "expected": 0.22974537037037038,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "prior_log_normalizer",
+      "actual": -1.791759469228055,
+      "expected": -1.791759469228055,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "posterior_log_normalizer",
+      "actual": -9.13129716463573,
+      "expected": -9.131297164635729,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "posterior_shapes.0",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "posterior_shapes.1",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "posterior_shapes.2",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527475,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.01098901098901099,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527472,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054944,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.019230769230769232,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307693,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.19230769230769232,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307693,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923077,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_exact_paths.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.02747252747252742,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.05494505494505487,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "pmf_scipy.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_mean_scipy.0",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_mean_scipy.1",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_mean_scipy.2",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.0.0",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.0.1",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.0.2",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.1.0",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.1.1",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.1.2",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.2.0",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.2.1",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_scipy.2.2",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_mean_enumeration.0",
+      "actual": 1.75,
+      "expected": 1.75,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_mean_enumeration.1",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_mean_enumeration.2",
+      "actual": 0.25,
+      "expected": 0.25,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.0.0",
+      "actual": 0.8413461538461536,
+      "expected": 0.8413461538461539,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.0.1",
+      "actual": -0.6730769230769231,
+      "expected": -0.673076923076923,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.0.2",
+      "actual": -0.16826923076923078,
+      "expected": -0.16826923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.1.0",
+      "actual": -0.6730769230769231,
+      "expected": -0.6730769230769231,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.1.1",
+      "actual": 0.7692307692307692,
+      "expected": 0.7692307692307694,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.1.2",
+      "actual": -0.09615384615384615,
+      "expected": -0.09615384615384616,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.2.0",
+      "actual": -0.16826923076923078,
+      "expected": -0.16826923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.2.1",
+      "actual": -0.09615384615384615,
+      "expected": -0.09615384615384616,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_enumeration.2.2",
+      "actual": 0.26442307692307687,
+      "expected": 0.264423076923077,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.0.0",
+      "actual": 0.8413461538461536,
+      "expected": 0.8413461538461539,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.0.1",
+      "actual": -0.6730769230769231,
+      "expected": -0.6730769230769231,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.0.2",
+      "actual": -0.16826923076923078,
+      "expected": -0.16826923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.1.0",
+      "actual": -0.6730769230769231,
+      "expected": -0.6730769230769231,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.1.1",
+      "actual": 0.7692307692307692,
+      "expected": 0.7692307692307694,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.1.2",
+      "actual": -0.09615384615384615,
+      "expected": -0.09615384615384616,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.2.0",
+      "actual": -0.16826923076923078,
+      "expected": -0.16826923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.2.1",
+      "actual": -0.09615384615384615,
+      "expected": -0.09615384615384616,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_scipy.2.2",
+      "actual": 0.26442307692307687,
+      "expected": 0.2644230769230769,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_row_sums.0",
+      "actual": -4.7704895589362195e-18,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_row_sums.1",
+      "actual": -2.168404344971009e-18,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "theta_covariance_row_sums.2",
+      "actual": -8.673617379884035e-19,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_row_sums.0",
+      "actual": -2.7755575615628914e-16,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_row_sums.1",
+      "actual": -1.1102230246251565e-16,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "count_covariance_row_sums.2",
+      "actual": -5.551115123125783e-17,
+      "expected": 0.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_1.count_0",
+      "actual": 0.09615384615384609,
+      "expected": 0.09615384615384619,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_1.count_0",
+      "actual": 0.0961538461538461,
+      "expected": 0.09615384615384609,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_1.count_1",
+      "actual": 0.28846153846153794,
+      "expected": 0.28846153846153844,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_1.count_1",
+      "actual": 0.28846153846153816,
+      "expected": 0.28846153846153794,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_1.count_2",
+      "actual": 0.38461538461538414,
+      "expected": 0.38461538461538414,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_1.count_2",
+      "actual": 0.38461538461538447,
+      "expected": 0.38461538461538414,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_1.count_3",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923095,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_1.count_3",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_2.count_0",
+      "actual": 0.3296703296703291,
+      "expected": 0.32967032967032966,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_2.count_0",
+      "actual": 0.32967032967032994,
+      "expected": 0.3296703296703291,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_2.count_1",
+      "actual": 0.3956043956043951,
+      "expected": 0.3956043956043957,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_2.count_1",
+      "actual": 0.39560439560439464,
+      "expected": 0.3956043956043951,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_2.count_2",
+      "actual": 0.21978021978021936,
+      "expected": 0.21978021978021953,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_2.count_2",
+      "actual": 0.21978021978021972,
+      "expected": 0.21978021978021936,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_2.count_3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054965,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_2.count_3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_3.count_0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527475,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_3.count_0",
+      "actual": 0.0027472527472527475,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_3.count_1",
+      "actual": 0.030219780219780175,
+      "expected": 0.030219780219780227,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_3.count_1",
+      "actual": 0.03021978021978012,
+      "expected": 0.030219780219780175,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_3.count_2",
+      "actual": 0.1813186813186811,
+      "expected": 0.18131868131868142,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_3.count_2",
+      "actual": 0.18131868131868062,
+      "expected": 0.1813186813186811,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_3.count_3",
+      "actual": 0.7857142857142845,
+      "expected": 0.7857142857142856,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_3.count_3",
+      "actual": 0.7857142857142828,
+      "expected": 0.7857142857142845,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_4.count_0",
+      "actual": 0.7857142857142845,
+      "expected": 0.7857142857142856,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_4.count_0",
+      "actual": 0.7857142857142828,
+      "expected": 0.7857142857142845,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_4.count_1",
+      "actual": 0.1813186813186811,
+      "expected": 0.18131868131868142,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_4.count_1",
+      "actual": 0.18131868131868062,
+      "expected": 0.1813186813186811,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_4.count_2",
+      "actual": 0.030219780219780175,
+      "expected": 0.030219780219780227,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_4.count_2",
+      "actual": 0.03021978021978012,
+      "expected": 0.030219780219780175,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_4.count_3",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527475,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_4.count_3",
+      "actual": 0.0027472527472527475,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_5.count_0",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054965,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_5.count_0",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_5.count_1",
+      "actual": 0.21978021978021936,
+      "expected": 0.21978021978021953,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_5.count_1",
+      "actual": 0.21978021978021972,
+      "expected": 0.21978021978021936,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_5.count_2",
+      "actual": 0.3956043956043951,
+      "expected": 0.3956043956043957,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_5.count_2",
+      "actual": 0.39560439560439464,
+      "expected": 0.3956043956043951,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_5.count_3",
+      "actual": 0.3296703296703291,
+      "expected": 0.32967032967032966,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_5.count_3",
+      "actual": 0.32967032967032994,
+      "expected": 0.3296703296703291,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_6.count_0",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923095,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_6.count_0",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_6.count_1",
+      "actual": 0.38461538461538414,
+      "expected": 0.38461538461538414,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_6.count_1",
+      "actual": 0.38461538461538447,
+      "expected": 0.38461538461538414,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_6.count_2",
+      "actual": 0.28846153846153794,
+      "expected": 0.28846153846153844,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_6.count_2",
+      "actual": 0.28846153846153816,
+      "expected": 0.28846153846153794,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "aggregate_6.count_3",
+      "actual": 0.09615384615384609,
+      "expected": 0.09615384615384619,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "two_category_6.count_3",
+      "actual": 0.0961538461538461,
+      "expected": 0.09615384615384609,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "sequential_batch_shapes.0",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "sequential_batch_shapes.1",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "sequential_batch_shapes.2",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "split_batch_shapes.0",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "split_batch_shapes.1",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "split_batch_shapes.2",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.update.0",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.update.1",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.update.2",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.mean.0",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.mean.1",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.mean.2",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.0.0",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.0.1",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.0.2",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.1.0",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.1.1",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.1.2",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.2.0",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.2.1",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.covariance.2.2",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527458,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_012.prediction.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.update.0",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.update.1",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.update.2",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.mean.0",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.mean.1",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.mean.2",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.0.0",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.0.1",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.0.2",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.1.0",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.1.1",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.1.2",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.2.0",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.2.1",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.covariance.2.2",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527458,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_021.prediction.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.update.0",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.update.1",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.update.2",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.mean.0",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.mean.1",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.mean.2",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.0.0",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.0.1",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.0.2",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.1.0",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.1.1",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.1.2",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.2.0",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.2.1",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.covariance.2.2",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527458,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_102.prediction.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.update.0",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.update.1",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.update.2",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.mean.0",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.mean.1",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.mean.2",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.0.0",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.0.1",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.0.2",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.1.0",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.1.1",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.1.2",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.2.0",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.2.1",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.covariance.2.2",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.0",
+      "actual": 0.0027472527472527475,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527458,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_120.prediction.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.update.0",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.update.1",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.update.2",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.mean.0",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.mean.1",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.mean.2",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.0.0",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.0.1",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.0.2",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.1.0",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.1.1",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.1.2",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.2.0",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.2.1",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.covariance.2.2",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.0",
+      "actual": 0.0027472527472527427,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527458,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_201.prediction.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.update.0",
+      "actual": 1.0,
+      "expected": 1.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.update.1",
+      "actual": 4.0,
+      "expected": 4.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.update.2",
+      "actual": 7.0,
+      "expected": 7.0,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.mean.0",
+      "actual": 0.08333333333333333,
+      "expected": 0.08333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.mean.1",
+      "actual": 0.3333333333333333,
+      "expected": 0.3333333333333333,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.mean.2",
+      "actual": 0.5833333333333334,
+      "expected": 0.5833333333333334,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.0.0",
+      "actual": 0.005876068376068375,
+      "expected": 0.005876068376068375,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.0.1",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.0.2",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.1.0",
+      "actual": -0.0021367521367521365,
+      "expected": -0.0021367521367521365,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.1.1",
+      "actual": 0.017094017094017092,
+      "expected": 0.017094017094017092,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.1.2",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.2.0",
+      "actual": -0.0037393162393162395,
+      "expected": -0.0037393162393162395,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.2.1",
+      "actual": -0.014957264957264958,
+      "expected": -0.014957264957264958,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.covariance.2.2",
+      "actual": 0.018696581196581193,
+      "expected": 0.018696581196581193,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.0",
+      "actual": 0.0027472527472527475,
+      "expected": 0.0027472527472527427,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.1",
+      "actual": 0.010989010989010973,
+      "expected": 0.010989010989010973,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.2",
+      "actual": 0.027472527472527458,
+      "expected": 0.027472527472527458,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.3",
+      "actual": 0.054945054945054916,
+      "expected": 0.054945054945054916,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.4",
+      "actual": 0.0192307692307692,
+      "expected": 0.0192307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.5",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.6",
+      "actual": 0.1923076923076919,
+      "expected": 0.1923076923076919,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.7",
+      "actual": 0.07692307692307682,
+      "expected": 0.07692307692307682,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.8",
+      "actual": 0.3076923076923073,
+      "expected": 0.3076923076923073,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "relabel_210.prediction.9",
+      "actual": 0.23076923076923034,
+      "expected": 0.23076923076923034,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.0.0",
+      "actual": 0.8413461538461537,
+      "expected": 0.8413461538461536,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.0.1",
+      "actual": -0.673076923076923,
+      "expected": -0.6730769230769231,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.0.2",
+      "actual": -0.16826923076923075,
+      "expected": -0.16826923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.1.0",
+      "actual": -0.673076923076923,
+      "expected": -0.6730769230769231,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.1.1",
+      "actual": 0.7692307692307693,
+      "expected": 0.7692307692307692,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.1.2",
+      "actual": -0.09615384615384616,
+      "expected": -0.09615384615384615,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.2.0",
+      "actual": -0.16826923076923075,
+      "expected": -0.16826923076923078,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.2.1",
+      "actual": -0.09615384615384616,
+      "expected": -0.09615384615384615,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "total_covariance_decomposition.2.2",
+      "actual": 0.2644230769230769,
+      "expected": 0.26442307692307687,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Fictional illustration with a stipulated prior; no operational service recommendation or empirical calibration claim.",
+    "One common probability vector assumes conditional independence and stable, exhaustive, exclusive categories.",
+    "The Dirichlet is restricted to positive shapes; a structural zero requires an explicitly reduced support model.",
+    "A marginal Dirichlet-multinomial alone cannot identify uncertainty versus physical batch heterogeneity.",
+    "Independent batch comparison fixes hyperparameters; learning shared hyperparameters also induces cross-batch dependence.",
+    "Enumeration is for small totals; no MCMC or random simulation is required and the seed is metadata only."
+  ]
+}

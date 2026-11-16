@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">An end-to-end project needs an explicit error budget</title><desc id="desc">Each stage answers a different question; every conclusion depends on the previous checks.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">An end-to-end project needs an explicit error budget</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Each stage answers a different question; every conclusion depends on the previous checks.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">A reproducible capstone reports the estimand, assumptions, algorithm, diagnostics, MCSE, sensitivity, and archived code.</text>
+<rect x="55" y="135" width="235" height="100" rx="7" fill="#ffffff" stroke="#275c91"/>
+<text x="172.50" y="178.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">1. Scientific question</text>
+<text x="172.50" y="202.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">Estimand + decision</text>
+<rect x="360" y="135" width="235" height="100" rx="7" fill="#ffffff" stroke="#167d8d"/>
+<text x="477.50" y="178.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">2. Statistical model</text>
+<text x="477.50" y="202.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">Assumptions + priors</text>
+<rect x="665" y="135" width="235" height="100" rx="7" fill="#ffffff" stroke="#bb5b27"/>
+<text x="782.50" y="178.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">3. Numerical target</text>
+<text x="782.50" y="202.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">Transforms + solvers</text>
+<rect x="665" y="325" width="235" height="100" rx="7" fill="#ffffff" stroke="#275c91"/>
+<text x="782.50" y="368.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">4. MCMC computation</text>
+<text x="782.50" y="392.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">Kernels + diagnostics</text>
+<rect x="360" y="325" width="235" height="100" rx="7" fill="#ffffff" stroke="#167d8d"/>
+<text x="477.50" y="368.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">5. Accuracy assessment</text>
+<text x="477.50" y="392.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">MCSE + sensitivity</text>
+<rect x="55" y="325" width="235" height="100" rx="7" fill="#ffffff" stroke="#bb5b27"/>
+<text x="172.50" y="368.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">6. Scientific report</text>
+<text x="172.50" y="392.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">Predictions + limits</text>
+<line x1="295.00" y1="185.00" x2="350.00" y2="185.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="600.00" y1="185.00" x2="655.00" y2="185.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="782.00" y1="240.00" x2="782.00" y2="315.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="660.00" y1="375.00" x2="605.00" y2="375.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="355.00" y1="375.00" x2="300.00" y2="375.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="170.00" y1="315.00" x2="170.00" y2="245.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="186.00" y="281.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">revise</text>
+</svg>

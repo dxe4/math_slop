@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "lab_id": "16_causal",
+  "seed": 1616,
+  "method": "Independent Beta posteriors and g-formula standardisation",
+  "source_hashes": {
+    "labs/16_causal.py": "22546be0e17012b0c310dc864fc03563338b3f46de924e2dcd32e0f9076fd49c",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "labs/extension_common.py": "3fdb0437bbd31cff4336dd0c1d6bdadd7f79eb7eb31cea9b216257383e75d56c",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "row_order": [
+      "Z0_A0",
+      "Z0_A1",
+      "Z1_A0",
+      "Z1_A1"
+    ],
+    "totals": [
+      80,
+      20,
+      20,
+      80
+    ],
+    "successes": [
+      8,
+      6,
+      12,
+      56
+    ],
+    "target_stratum_weights": [
+      0.5,
+      0.5
+    ],
+    "draws": 80000
+  },
+  "metrics": {
+    "adjusted_mean": 0.1563192904656319,
+    "adjusted_variance": 0.005918268951204516,
+    "adjusted_ci90": [
+      0.032369203572585,
+      0.285198514019887
+    ],
+    "draw_mean": 0.15631019364475318,
+    "draw_mean_mcse": 0.0002719896356298461,
+    "pooled_mean": 0.411764705882353,
+    "generator_effect": 0.14999999999999997,
+    "generator_crude_association": 0.41999999999999993,
+    "overlap_failure": [
+      {
+        "absent_cell_prior": [
+          1,
+          1
+        ],
+        "effect_mean": 0.20177383592017736
+      },
+      {
+        "absent_cell_prior": [
+          2,
+          8
+        ],
+        "effect_mean": 0.35177383592017736
+      },
+      {
+        "absent_cell_prior": [
+          8,
+          2
+        ],
+        "effect_mean": 0.05177383592017737
+      }
+    ],
+    "sensitivity": {
+      "model": "Missing-minus-observed counterfactual log odds; fixed scenarios",
+      "draws": 80000,
+      "seed": 1616,
+      "propensities": [
+        0.2,
+        0.8
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "shift_order": [
+        "delta0: Y(0) among treated",
+        "delta1: Y(1) among untreated"
+      ],
+      "surface": [
+        {
+          "delta0": 0.0,
+          "delta1": 0.0,
+          "mean": 0.15631019364475318,
+          "variance": 0.005901427921440714,
+          "ci90": [
+            0.03236920357258503,
+            0.285198514019887
+          ],
+          "probability_positive": 0.9832875,
+          "mean_mcse": 0.00027160237299775,
+          "probability_mcse": 0.00045322721045505996,
+          "paired_change_mean": 0.0,
+          "paired_change_mcse": 0.0
+        },
+        {
+          "delta0": 0.0,
+          "delta1": -0.5,
+          "mean": 0.10728941666219258,
+          "variance": 0.005276697204504338,
+          "ci90": [
+            -0.009330729971801429,
+            0.22948203521413962
+          ],
+          "probability_positive": 0.9337,
+          "mean_mcse": 0.0002568242882912444,
+          "probability_mcse": 0.0008796612274051871,
+          "paired_change_mean": -0.04902077698256064,
+          "paired_change_mcse": 2.7316153567056777e-05
+        },
+        {
+          "delta0": 0.0,
+          "delta1": -1.0,
+          "mean": 0.06579474411476022,
+          "variance": 0.004691757192028163,
+          "ci90": [
+            -0.044194780630781964,
+            0.180839884981885
+          ],
+          "probability_positive": 0.8297125,
+          "mean_mcse": 0.00024217135441738775,
+          "probability_mcse": 0.0013289547929846506,
+          "paired_change_mean": -0.09051544952999299,
+          "paired_change_mcse": 5.561153497278618e-05
+        },
+        {
+          "delta0": 0.5,
+          "delta1": 0.0,
+          "mean": 0.10691574542688385,
+          "variance": 0.005450397926806876,
+          "ci90": [
+            -0.01116826543268974,
+            0.23174980997150213
+          ],
+          "probability_positive": 0.9306125,
+          "mean_mcse": 0.00026101719116771973,
+          "probability_mcse": 0.0008984213574636767,
+          "paired_change_mean": -0.04939444821786933,
+          "paired_change_mcse": 2.0903222588295343e-05
+        },
+        {
+          "delta0": 0.5,
+          "delta1": -0.5,
+          "mean": 0.05789496844432323,
+          "variance": 0.004825588878483146,
+          "ci90": [
+            -0.05228718932140401,
+            0.1760849678173596
+          ],
+          "probability_positive": 0.79335,
+          "mean_mcse": 0.00024560101991042164,
+          "probability_mcse": 0.0014315453952809182,
+          "paired_change_mean": -0.09841522520042997,
+          "paired_change_mcse": 3.438223113663411e-05
+        },
+        {
+          "delta0": 0.5,
+          "delta1": -1.0,
+          "mean": 0.016400295896890876,
+          "variance": 0.0042406301507615035,
+          "ci90": [
+            -0.08682705463877388,
+            0.12691273347058132
+          ],
+          "probability_positive": 0.5867375,
+          "mean_mcse": 0.00023023439552881492,
+          "probability_mcse": 0.0017409645533932835,
+          "paired_change_mean": -0.13990989774786233,
+          "paired_change_mcse": 5.940012166397463e-05
+        },
+        {
+          "delta0": 1.0,
+          "delta1": 0.0,
+          "mean": 0.06264661636478598,
+          "variance": 0.004891556799274414,
+          "ci90": [
+            -0.04872292961813435,
+            0.18098526920914987
+          ],
+          "probability_positive": 0.8121625,
+          "mean_mcse": 0.00024727405846738183,
+          "probability_mcse": 0.0013809171481018964,
+          "paired_change_mean": -0.09366357727996721,
+          "paired_change_mcse": 4.764924552609578e-05
+        },
+        {
+          "delta0": 1.0,
+          "delta1": -0.5,
+          "mean": 0.013625839382225348,
+          "variance": 0.004266584932480534,
+          "ci90": [
+            -0.08964147885172592,
+            0.1251983267107402
+          ],
+          "probability_positive": 0.567775,
+          "mean_mcse": 0.00023093789566895831,
+          "probability_mcse": 0.0017514513602117246,
+          "paired_change_mean": -0.14268435426252785,
+          "paired_change_mcse": 5.489634297188103e-05
+        },
+        {
+          "delta0": 1.0,
+          "delta1": -1.0,
+          "mean": -0.027868833165207007,
+          "variance": 0.0036815309244327722,
+          "ci90": [
+            -0.12343885755855069,
+            0.07553400257892808
+          ],
+          "probability_positive": 0.311825,
+          "mean_mcse": 0.00021452071358125222,
+          "probability_mcse": 0.0016377964211670203,
+          "paired_change_mean": -0.1841790268099602,
+          "paired_change_mcse": 7.32028285202967e-05
+        }
+      ],
+      "target_change": [
+        {
+          "delta0": 0.0,
+          "delta1": 0.0,
+          "weights": [
+            0.8,
+            0.2
+          ],
+          "mean": 0.18796381484620447,
+          "variance": 0.007299655785383172,
+          "ci90": [
+            0.053441741487525264,
+            0.33462347289567346
+          ],
+          "probability_positive": 0.9929875,
+          "mean_mcse": 0.000302069027404813,
+          "probability_mcse": 0.00029502806738829906,
+          "paired_change_mean": 0.03165362120145126,
+          "paired_change_mcse": 0.0001635564663249584
+        },
+        {
+          "delta0": 1.0,
+          "delta1": -1.0,
+          "weights": [
+            0.8,
+            0.2
+          ],
+          "mean": 0.01739515798972003,
+          "variance": 0.004199732145280557,
+          "ci90": [
+            -0.08332154456572298,
+            0.12907272003985754
+          ],
+          "probability_positive": 0.5900375,
+          "mean_mcse": 0.00022912147829482718,
+          "probability_mcse": 0.0017388690598840026,
+          "paired_change_mean": 0.04526399115492704,
+          "paired_change_mcse": 0.0001292597510297846
+        }
+      ],
+      "absent_sampled_cell": [
+        {
+          "absent_cell_prior": [
+            1,
+            1
+          ],
+          "absent_cell_posterior": [
+            1.0,
+            1.0
+          ],
+          "extrapolation_required": true,
+          "delta0": 1.0,
+          "delta1": -1.0,
+          "mean": 0.032626178701816874,
+          "variance": 0.02063822954956525,
+          "ci90": [
+            -0.16381023728275498,
+            0.2969118226259174
+          ],
+          "probability_positive": 0.520525,
+          "mean_mcse": 0.0005079152186827695,
+          "probability_mcse": 0.0017662768907188648,
+          "paired_change_mean": -0.16882980894714883,
+          "paired_change_mcse": 0.00011829744791778684
+        },
+        {
+          "absent_cell_prior": [
+            2,
+            8
+          ],
+          "absent_cell_posterior": [
+            2.0,
+            8.0
+          ],
+          "extrapolation_required": true,
+          "delta0": 1.0,
+          "delta1": -1.0,
+          "mean": 0.17676680631827515,
+          "variance": 0.008759629620770279,
+          "ci90": [
+            0.018370933548927194,
+            0.3254627673027082
+          ],
+          "probability_positive": 0.9674625,
+          "mean_mcse": 0.00033090084656831644,
+          "probability_mcse": 0.0006272839378398549,
+          "paired_change_mean": -0.17553499943934006,
+          "paired_change_mcse": 0.00010039103004205379
+        },
+        {
+          "absent_cell_prior": [
+            8,
+            2
+          ],
+          "absent_cell_posterior": [
+            8.0,
+            2.0
+          ],
+          "extrapolation_required": true,
+          "delta0": 1.0,
+          "delta1": -1.0,
+          "mean": -0.09590300333542875,
+          "variance": 0.003620202531968934,
+          "ci90": [
+            -0.18825716792358976,
+            0.008962516655951741
+          ],
+          "probability_positive": 0.0645875,
+          "mean_mcse": 0.00021272642442727156,
+          "probability_mcse": 0.0008690221145326942,
+          "paired_change_mean": -0.1484859012350032,
+          "paired_change_mcse": 9.874480691035098e-05
+        }
+      ],
+      "limitations": [
+        "Shifts are not learned from the observed outcome likelihood.",
+        "Propensities and target weights are stipulated, with no estimated uncertainty.",
+        "Intervals condition on a scenario; the grid has no posterior probabilities.",
+        "Probability MCSE is a plug-in estimate, unreliable at observed 0 or 1.",
+        "Structural propensity endpoints are rejected by sensitivity_effect."
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "draw_mean",
+      "actual": 0.15631019364475318,
+      "expected": 0.1563192904656319,
+      "atol": 0.0016319378137790766,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "generator_effect",
+      "actual": 0.14999999999999997,
+      "expected": 0.15,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "crude_enumeration",
+      "actual": 0.41999999999999993,
+      "expected": 0.42,
+      "atol": 1e-10,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Consistency, conditional exchangeability and positivity are assumptions.",
+    "An absent high-stratum control cell remains prior-driven; propriety does not identify it."
+  ]
+}

@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A homotopy lecture with three core experiments, an optional joint-continuity clinic, proofs, eight core exercises and two clinic tasks with worked solutions.">
+  <title>Homotopy — When does a loop remember a hole?</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- BEGIN local homotopy screen reflow controls candidate 2026-10-20 -->
+  <style id="homotopy-screen-reflow-controls-candidate">@media screen {
+  .hero h1,
+  #main .lecture-section h2,
+  #main .lecture-section h3,
+  #main .lecture-section p,
+  #main .lecture-section li,
+  #main .lecture-section summary,
+  #main .lecture-section .quiz legend,
+  #main .lecture-section .quiz label,
+  #main .controls label[for="plane-t"],
+  #main .controls label[for="hole-t"],
+  #main .controls label[for="retract-t"],
+  #plane-readout {
+    overflow-wrap: anywhere;
+  }
+
+  #main .split > * {
+    min-width: 0;
+  }
+
+  #main .quiz fieldset {
+    min-inline-size: 0;
+  }
+}
+@media screen {
+  .topbar {
+    flex-wrap: wrap;
+  }
+
+  .topbar .wordmark span {
+    max-width: none;
+    overflow-wrap: anywhere;
+  }
+}
+@media screen { #main .experiment-body > .controls, #main .controls > div { min-width:0; } #main .controls button { overflow-wrap:anywhere; } }
+</style>
+  <!-- END local homotopy screen reflow controls candidate 2026-10-20 -->
+  <script src="model.js" defer></script>
+  <script src="lecture.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to lecture</a>
+<header class="topbar">
+  <a class="wordmark" href="index.html">EULER<span>MATHEMATICAL EDUCATION</span></a>
+  <nav aria-label="Main"><a href="index.html">Study map</a><a href="homotopy.html" aria-current="page">Homotopy lecture</a><a href="index.html">Topology labs</a></nav>
+</header>
+<div class="hero">
+  <div>
+    <div class="eyebrow">Lecture 01 · Topology · 75–90 minutes</div>
+    <h1>When does a loop <br>remember a hole?</h1>
+    <p>Homotopy turns continuous deformation into a mathematical relation. Start with two paths, encounter an obstruction, and build a proof that a loop can remember what it surrounds.</p>
+    <div class="hero-actions"><a class="button" href="#start">Begin the lecture</a><button class="secondary" id="print-lecture" type="button">Print lecture</button></div>
+    <div class="meta"><span>Continuity + vectors</span><span>3 experiments</span><span>8 worked exercises</span><span>Works offline</span></div>
+    <p class="caption"><a href="../../pdfs/lectures/homotopy-lecture.pdf">Lecture PDF</a> · <a href="../../pdfs/lectures/homotopy-instructor.pdf">PDF with worked solutions</a></p>
+  </div>
+  <svg class="hero-art" viewBox="0 0 400 440" role="img" aria-labelledby="hero-title hero-desc">
+    <title id="hero-title">Several loops around one omitted point</title>
+    <desc id="hero-desc">Nested wavy closed curves share a basepoint to the right of a central hole, illustrating deformations that preserve winding.</desc>
+    <defs><pattern id="hero-grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M 28 0 L 0 0 0 28" fill="none" stroke="#345058" stroke-width=".7"/></pattern></defs>
+    <rect width="400" height="440" fill="url(#hero-grid)"/>
+    <g transform="translate(195 230)" fill="none">
+      <path d="M120 0 C150 -120 70 -165 -18 -153 C-140 -165 -165 -35 -132 60 C-101 155 55 163 120 0Z" stroke="#8caaa5" stroke-width="1.5"/>
+      <path d="M120 0 C125 -90 63 -122 -8 -119 C-113 -131 -133 -20 -106 54 C-72 127 69 106 120 0Z" stroke="#85b8a4" stroke-width="2"/>
+      <path d="M120 0 C120 -76 56 -91 -6 -91 C-94 -95 -102 -12 -82 41 C-56 104 79 79 120 0Z" stroke="#bae5c8" stroke-width="3"/>
+      <ellipse cx="10" cy="0" rx="110" ry="72" stroke="#e1eed2" stroke-width="2.5"/>
+      <circle r="8" stroke="#e5a080" stroke-width="2"/>
+      <circle cx="120" cy="0" r="5" fill="#e1eed2"/>
+    </g>
+    <text x="295" y="260" fill="#d8e5db" font-size="14" font-family="Georgia,serif">fixed basepoint</text>
+    <text x="140" y="398" fill="#9fb7b3" font-size="12" font-family="system-ui,sans-serif" letter-spacing="3">DEFORM · PRESERVE · PROVE</text>
+  </svg>
+</div>
+<div class="layout">
+<aside class="sidebar" aria-label="Lecture contents">
+  <div class="eyebrow">In this lecture</div>
+  <ol>
+    <li><a href="#start">00 &nbsp; The question</a></li>
+    <li><a href="#paths">01 &nbsp; Moving paths</a></li>
+    <li><a href="#definition">02 &nbsp; The definition</a></li>
+    <li><a href="#hole">03 &nbsp; The obstruction</a></li>
+    <li><a href="#retraction">04 &nbsp; A safe deformation</a></li>
+    <li><a href="#equivalence">05 &nbsp; Comparing spaces</a></li>
+    <li><a href="#winding">06 &nbsp; Counting turns</a></li>
+    <li><a href="#exercises">07 &nbsp; Your turn</a></li>
+    <li><a href="#next">08 &nbsp; Return and connect</a></li>
+  </ol>
+  <p><small>Predict → experiment → explain → prove.</small></p>
+  <button id="export-notes" type="button" class="secondary">Download notes</button>
+  <p id="notes-status" class="save-status" role="status"></p>
+</aside>
+<main id="main">
+<noscript><div class="callout warning">The complete lecture and solutions are readable without JavaScript. Enable JavaScript to move the curves, check your answers, and save notes.</div></noscript>
+
+<section class="lecture-section" id="start">
+  <span class="number">00 / 5 minutes</span>
+  <h2>A shape is more than its outline</h2>
+  <p class="lead">Draw a closed loop in the plane. Can you shrink it to a point? Now remove the origin. Does your answer change?</p>
+  <p>You will learn to construct a continuous deformation, check exactly which conditions it satisfies, and use winding to explain why some deformations cannot exist. The subject is <strong>homotopy</strong> (roughly, “same by continuous deformation”).</p>
+  <div class="split">
+    <div><h3>What you need</h3><ul><li>Continuous functions and composition.</li><li>Vectors in the plane and their length ‖x‖.</li><li>Sine and cosine parametrizations of a circle.</li></ul></div>
+    <div><h3>What you should be able to do</h3><ul><li>Verify all the conditions on a proposed homotopy.</li><li>Keep endpoints or a basepoint fixed when required.</li><li>Distinguish a homotopy equivalence from a homeomorphism.</li><li>Explain the role of an invariant.</li></ul></div>
+  </div>
+  <details><summary>Preparation if continuity is new</summary><p>A map is continuous when nearby inputs have nearby outputs. In a homotopy there are <em>two inputs</em>: position and deformation time. We require continuity in the pair of inputs, not just in each variable separately. Sums, products, and compositions of continuous real functions are continuous; division is continuous where the denominator is nonzero. These facts justify the constructions below.</p></details>
+  <label class="note" for="note-start">Before experimenting, explain what you think removing a point changes.</label>
+  <textarea class="notes" id="note-start" data-note="prediction" placeholder="My prediction, and my reason…"></textarea>
+  <p class="save-status">Notes are saved in this browser when storage is available. Download a copy to keep them.</p>
+</section>
+
+<section class="lecture-section" id="paths">
+  <span class="number">01 / 10 minutes</span>
+  <h2>Move a path without moving its ends</h2>
+  <p>A <strong>path</strong> in a space Y is a continuous map α : [0, 1] → Y. The input s tells us where a traveler is along the path. Add a second input t to describe how the whole path changes.</p>
+  <div class="equation">α(s) = (4s − 2, sin(πs))<br>β(s) = (4s − 2, −0.7 sin(2πs))<br>H(s, t) = (1 − t)α(s) + tβ(s)<small>Both paths start at a = (−2, 0) and end at b = (2, 0). Here the target is all of ℝ².</small></div>
+  <p><strong>Predict:</strong> will the endpoints move when t changes? Will this formula work for paths in every possible target space?</p>
+  <div class="experiment" aria-label="Experiment 1: path homotopy in the plane">
+    <div class="experiment-head"><h3>Two inputs, one continuous family</h3><span>EXPERIMENT 01</span></div>
+    <div class="experiment-body">
+      <div class="plot"><svg id="plane-svg" viewBox="0 0 560 360" role="img" aria-labelledby="plane-title plane-desc"><title id="plane-title">Interpolating paths in the plane</title><desc id="plane-desc">The solid teal path moves between two dashed paths. Both endpoints remain fixed. A rust marker shows the selected traveler position.</desc><g class="plot-grid"></g><path id="plane-source" class="source-curve" d="M100.000,180.000 L109.000,172.939 L118.000,165.921 L127.000,158.990 L136.000,152.188 L145.000,145.558 L154.000,139.141 L163.000,132.975 L172.000,127.099 L181.000,121.550 L190.000,116.360 L199.000,111.563 L208.000,107.188 L217.000,103.262 L226.000,99.809 L235.000,96.851 L244.000,94.405 L253.000,92.487 L262.000,91.108 L271.000,90.277 L280.000,90.000 L289.000,90.277 L298.000,91.108 L307.000,92.487 L316.000,94.405 L325.000,96.851 L334.000,99.809 L343.000,103.262 L352.000,107.188 L361.000,111.563 L370.000,116.360 L379.000,121.550 L388.000,127.099 L397.000,132.975 L406.000,139.141 L415.000,145.558 L424.000,152.188 L433.000,158.990 L442.000,165.921 L451.000,172.939 L460.000,180.000"/><path id="plane-target" class="target-curve" d="M100.000,180.000 L109.000,189.855 L118.000,199.468 L127.000,208.601 L136.000,217.030 L145.000,224.548 L154.000,230.968 L163.000,236.133 L172.000,239.917 L181.000,242.224 L190.000,243.000 L199.000,242.224 L208.000,239.917 L217.000,236.133 L226.000,230.968 L235.000,224.548 L244.000,217.030 L253.000,208.601 L262.000,199.468 L271.000,189.855 L280.000,180.000 L289.000,170.145 L298.000,160.532 L307.000,151.399 L316.000,142.970 L325.000,135.452 L334.000,129.032 L343.000,123.867 L352.000,120.083 L361.000,117.776 L370.000,117.000 L379.000,117.776 L388.000,120.083 L397.000,123.867 L406.000,129.032 L415.000,135.452 L424.000,142.970 L433.000,151.399 L442.000,160.532 L451.000,170.145 L460.000,180.000"/><path id="plane-curve" class="curve" d="M100.000,180.000 L109.000,172.939 L118.000,165.921 L127.000,158.990 L136.000,152.188 L145.000,145.558 L154.000,139.141 L163.000,132.975 L172.000,127.099 L181.000,121.550 L190.000,116.360 L199.000,111.563 L208.000,107.188 L217.000,103.262 L226.000,99.809 L235.000,96.851 L244.000,94.405 L253.000,92.487 L262.000,91.108 L271.000,90.277 L280.000,90.000 L289.000,90.277 L298.000,91.108 L307.000,92.487 L316.000,94.405 L325.000,96.851 L334.000,99.809 L343.000,103.262 L352.000,107.188 L361.000,111.563 L370.000,116.360 L379.000,121.550 L388.000,127.099 L397.000,132.975 L406.000,139.141 L415.000,145.558 L424.000,152.188 L433.000,158.990 L442.000,165.921 L451.000,172.939 L460.000,180.000"/><circle cx="280" cy="90" id="plane-traveler" class="witness-point" r="5"/><circle cx="100" cy="180" r="5" class="fixed-point"/><circle cx="460" cy="180" r="5" class="fixed-point"/><text x="76" y="208">a</text><text x="468" y="208">b</text></svg><div class="legend"><b>H(·, t)</b><b class="ghost">α and β</b><b class="witness">traveler</b></div></div>
+      <div class="controls">
+        <div><label for="plane-t">Deformation time t = <output id="plane-t-value" for="plane-t">0.00</output></label><input id="plane-t" type="range" min="0" max="1" step="0.01" value="0"><button type="button" data-play="plane-t">Play deformation</button></div>
+        <div><label for="plane-s">Traveler position s = <output id="plane-s-value" for="plane-s">0.50</output></label><input id="plane-s" type="range" min="0" max="1" step="0.01" value="0.5"><span class="readout">Endpoints<strong>always a and b</strong></span><span id="plane-readout" class="caption"></span></div>
+      </div>
+    </div>
+    <p id="plane-print-settings" class="print-settings">Shown setting: deformation t = 0.00; traveler s = 0.50.</p>
+    <p class="caption">Changing s moves one traveler. Changing t moves the entire path. SVG uses sampled points for drawing; the formula gives a continuous map for every pair (s, t).</p>
+  </div>
+  <div class="proof"><h3>Why this works</h3><p>The formula is jointly continuous because it combines continuous functions by addition and multiplication. At t = 0 it is α; at t = 1 it is β. At s = 0 it equals (1 − t)a + ta = a, and similarly H(1, t) = b. Every output lies in ℝ².</p><p>The same construction works in a <strong>convex</strong> subset of ℝᵈ: the line segment between any two points remains in that subset. A punctured plane is not convex.</p></div>
+  <form class="quiz" data-quiz="convex"><fieldset><legend>Check 1. Which fact makes this interpolation safe?</legend><label><input type="radio" name="convex" value="smooth">The two paths look smooth.</label><label><input type="radio" name="convex" value="convex">The target is convex, so every interpolated point stays in it.</label><label><input type="radio" name="convex" value="ends">The two paths have the same endpoints, regardless of target.</label></fieldset><button type="submit">Check reasoning</button><p class="feedback" role="status"></p></form>
+</section>
+
+<section class="lecture-section" id="definition">
+  <span class="number">02 / 8 minutes</span>
+  <h2>The domain is a product</h2>
+  <div class="definition"><h3>Homotopy of maps</h3><p>For continuous maps f, g : X → Y, a <strong>homotopy from f to g</strong> is a continuous map</p><div class="equation">H : X × [0, 1] → Y,<br>H(x, 0) = f(x), &nbsp; H(x, 1) = g(x).</div><p>We write f ≃ g. For each fixed time t, the slice H<sub>t</sub>(x) = H(x, t) is a map X → Y. The whole function H must be continuous in both inputs together.</p></div>
+  <p>A <strong>path homotopy relative to endpoints</strong> adds H(0, t) = a and H(1, t) = b for every t. More generally, “relative to A” means that every point of a specified subset A ⊆ X keeps its image throughout the deformation.</p>
+  <p>A <strong>loop based at p</strong> is a path with α(0) = α(1) = p. A based loop homotopy fixes that point for the entire deformation. A <strong>free</strong> loop homotopy can move it, while keeping each slice closed. These are different requirements.</p>
+  <h3>A verification checklist</h3>
+  <ol><li><strong>Domain and target:</strong> where can each input and output live?</li><li><strong>Joint continuity:</strong> is H continuous on the whole product?</li><li><strong>Initial and final maps:</strong> do t = 0 and t = 1 give the promised maps?</li><li><strong>Relative conditions:</strong> which points must remain fixed?</li></ol>
+  <form class="quiz" data-quiz="continuous"><fieldset><legend>Check 2. We checked that every time slice is a continuous curve. What remains?</legend><label><input type="radio" name="continuous" value="nothing">Nothing; slice continuity is the whole definition.</label><label><input type="radio" name="continuous" value="joint">Joint continuity, the target condition, the initial and final maps, and any fixed points.</label><label><input type="radio" name="continuous" value="injective">Every slice must be injective and have the same length.</label></fieldset><button type="submit">Check reasoning</button><p class="feedback" role="status"></p></form>
+  <details class="continuity-clinic" id="continuity-clinic" data-instructor>
+    <summary>Optional continuity clinic · Can every curve be continuous while the deformation fails?</summary>
+    <p>This 10–15 minute extension makes the joint-continuity condition concrete. The target here is <strong>ℝ</strong>. Each loop is a scalar-valued function; its graph plots input s horizontally and output vertically. Both endpoint <em>values</em> must equal the basepoint 0, even though the graph has different horizontal endpoints.</p>
+    <div class="equation">F(s, t) = (1 − s)st/(s² + t²) &nbsp; if (s, t) ≠ (0, 0),<br>F(0, 0) = 0, &nbsp; (s, t) ∈ [0, 1]².</div>
+    <p><strong>Predict:</strong> at t = 0 the entire slice is zero. Will the tallest point of a slice approach zero as positive t approaches zero? Check the endpoints and the target separately from joint continuity.</p>
+    <div class="experiment" aria-label="Optional experiment: separate continuity and joint continuity">
+      <div class="experiment-head"><h3>Continuous slices can hide a moving peak</h3><span>OPTIONAL CLINIC</span></div>
+      <div class="experiment-body">
+        <div class="plot">
+          <div id="clinic-pan" class="clinic-pan" tabindex="0" role="region" aria-label="Scalar loop graph" aria-describedby="clinic-pan-hint">
+          <svg id="clinic-svg" viewBox="0 0 560 360" role="img" aria-labelledby="clinic-title clinic-desc">
+            <title id="clinic-title">Graph of a scalar-valued loop at a selected time</title>
+            <desc id="clinic-desc">The graph of s mapped to F(s,t), with a fixed vertical scale. The teal curve includes its analytically located peak. Gray marks are eleven fixed grid samples. The origin and the value at s=1 are both zero. The graph is not a planar drawing of the target-space loop.</desc>
+            <defs><clipPath id="clinic-clip"><rect x="50" y="30" width="460" height="270"/></clipPath></defs>
+            <path d="M50 75H510M50 187.5H510" class="gridline"/>
+            <path d="M50 30V300H510" class="axis" fill="none"/>
+            <g clip-path="url(#clinic-clip)"><path id="clinic-grid-curve" class="source-curve" d="M50.000,300.000 L96.000,97.500 L142.000,156.000 L188.000,205.500 L234.000,236.471 L280.000,256.731 L326.000,270.811 L372.000,281.100 L418.000,288.923 L464.000,295.061 L510.000,300.000"/><g id="clinic-grid-points"></g><path id="clinic-curve" class="curve" d="M50.000,300.000 L54.600,255.891 L61.500,196.765 L73.000,129.000 L84.500,100.200 L91.629,96.378 L96.000,97.500 L119.000,123.462 L142.000,156.000 L188.000,205.500 L234.000,236.471 L280.000,256.731 L372.000,281.100 L510.000,300.000"/></g>
+            <circle id="clinic-peak" cx="91.629" cy="96.377" r="5" class="witness-point"/>
+            <text x="14" y="80">0.5</text><text x="28" y="305">0</text><text x="50" y="329">0</text><text id="clinic-extent" x="510" y="329" text-anchor="end">1</text><text x="270" y="349">input s</text><text x="65" y="25">output in ℝ</text>
+          </svg>
+          </div>
+          <p id="clinic-pan-hint" class="clinic-pan-hint caption no-print">On a narrow screen, swipe across the graph, or focus it and use the left and right arrow keys.</p>
+          <div class="legend"><b id="clinic-curve-label">F(·, t)</b><b class="ghost">eleven fixed grid samples</b><b class="witness">analytic peak</b></div>
+        </div>
+        <div class="controls">
+          <div>
+            <label for="clinic-level">Positive time t = 10<sup>−k</sup>, k = <output id="clinic-level-value" for="clinic-level" aria-live="off">1</output></label>
+            <input id="clinic-level" type="range" min="1" max="6" step="1" value="1">
+            <label for="clinic-zero"><input id="clinic-zero" type="checkbox"> Use t = 0 exactly</label>
+            <label for="clinic-zoom"><input id="clinic-zoom" type="checkbox"> Zoom horizontally near the moving peak</label>
+            <label for="clinic-repair"><input id="clinic-repair" type="checkbox"> Compare the repaired family K</label>
+          </div>
+          <div>
+            <span class="readout">Current time<strong id="clinic-time">0.1</strong></span>
+            <span class="readout">Full-slice maximum, rounded<strong id="clinic-maximum">0.452494</strong></span>
+            <span class="readout">Fixed-grid maximum, rounded<strong id="clinic-sampled">0.450000</strong></span>
+            <p id="clinic-witness" class="caption">F(t,t) = 0.45 at t = 0.1.</p>
+          </div>
+        </div>
+      </div>
+      <p class="print-settings" id="clinic-print-settings">Shown: F at t = 0.1, horizontal window [0,1]. Full maximum ≈ 0.452494; eleven-point grid maximum ≈ 0.450000.</p>
+      <p id="clinic-verdict" class="clinic-verdict">Each slice is continuous with both endpoint values 0. The whole F family fails joint continuity at (0,0).</p>
+      <p class="caption">The vertical scale stays fixed at [0, 0.6]. Zoom changes only the horizontal window; its right edge need not be s = 1. Gray samples stay at s = j/10, j = 0,…,10, including when some lie outside the zoomed window. The illustrated curve uses extra drawing points near the analytic peak. The formulas below establish the peak and discontinuity.</p>
+    </div>
+    <div class="proof"><h3>All slices pass, but the family fails</h3>
+      <p>For a fixed positive t, the denominator is at least t², so s ↦ F(s,t) is continuous. At t = 0 it is the zero function. We also have F(0,t) = F(1,t) = 0 for every t. The outputs lie in ℝ. In fact each fixed-s time trace is continuous as well.</p>
+      <p>Joint continuity tests nearby <em>pairs</em> of inputs. On the diagonal s = t = r &gt; 0,</p>
+      <div class="equation">F(r,r) = (1 − r)/2 → 1/2 &nbsp; as r → 0,<br>but F(0,0) = 0.</div>
+      <p>The inputs approach (0,0) while the outputs do not approach its value. Hence F is not a homotopy. This does not prevent a homotopy between its endpoint maps: they are loops in the convex target ℝ.</p>
+    </div>
+    <h3>Repair the family</h3>
+    <div class="equation">g(s) = F(s,1) = (1 − s)s/(s² + 1),<br>K(s,t) = t g(s).</div>
+    <p>K has the same initial map 0 and final map g as F. It is jointly continuous by multiplication of continuous functions and fixes both endpoint values at 0. Its whole-slice bound is |K(s,t)| ≤ t(√2 − 1)/2, which tends to zero with t. Use the comparison control to see the difference.</p>
+    <details><summary>Optional calculus behind the peak readout</summary>
+      <p>For positive t, differentiating F with respect to s gives t(t² − s² − 2st²)/(s² + t²)². The numerator changes from positive to negative at s<sub>*</sub> = t/(√(1+t²)+t). Since F vanishes at both endpoints, this is its unique maximum:</p>
+      <div class="equation">max<sub>s∈[0,1]</sub> F(s,t) = 1/[2(√(1+t²)+t)] → 1/2.<br>max<sub>s∈[0,1]</sub> K(s,t) = t(√2 − 1)/2 → 0.</div>
+      <p>At t = 0 both slices are identically zero, so every s is a maximizer; there is no unique peak. For each fixed positive s, F(s,t) tends to zero as t tends to zero. The moving peak therefore separates pointwise convergence from uniform convergence. If a real-valued family on this compact input square were jointly continuous, uniform continuity would force its slices to approach the initial slice uniformly.</p>
+    </details>
+    <div class="clinic-exercise"><h3>Clinic task A · Give an exact discontinuity witness</h3>
+      <p>Fix ε = 1/4. For any proposed δ &gt; 0, find an input pair within distance δ of (0,0) whose output is more than ε away from zero.</p>
+      <details><summary>Hint</summary><p>Use (r,r), choosing r small enough for both the distance condition and a lower bound on (1−r)/2.</p></details>
+      <details class="solution clinic-solution"><summary>Worked solution</summary><p>Set r = min(δ/4, 1/4). It is positive and lies in the domain. The distance √2r is at most √2δ/4, strictly less than δ. Since r ≤ 1/4, F(r,r) = (1−r)/2 ≥ 3/8 &gt; 1/4. This works for every δ and disproves continuity at the origin.</p></details>
+    </div>
+    <div class="clinic-exercise"><h3>Clinic task B · Explain what the grid cannot prove</h3>
+      <p>For the fixed grid s = j/10, prove its maximum tends to zero as t tends to zero. Why does this not prove the same for the maximum over all s?</p>
+      <details><summary>Hint</summary><p>For a nonzero grid point s, use s²+t² ≥ s² and (1−s)/s ≤ 9.</p></details>
+      <details class="solution clinic-solution"><summary>Worked solution</summary><p>The zero grid point gives zero. Every positive grid point has F(s,t) ≤ (1−s)t/s ≤ 9t. The grid maximum is therefore at most 9t and tends to zero. The full maximum instead tends to 1/2, and the diagonal value (1−t)/2 already gives that obstruction. A finite set of fixed inputs does not control a maximum over every input. A known error bound or other uniform guarantee would be needed.</p></details>
+    </div>
+    <label class="note" for="note-clinic">Explain why this failed family does not contradict the fact that every loop in ℝ can contract.</label>
+    <textarea id="note-clinic" class="notes" data-note="continuity-clinic" placeholder="Which formula fails? Which valid formula has the same endpoint maps?"></textarea>
+    <p class="caption">The underlying separately continuous example st/(s²+t²) appears in the introduction of <a href="https://community.wvu.edu/~kciesiel/ProfessionalStuff/prepF/160.LinCon%26D2_PAMSaccepted.pdf">Ciesielski and Rodríguez-Vidanes’ paper on linearly continuous maps</a>. The endpoint-fixing factor, repaired family, exercises, and peak analysis here are derived for this lecture. The original 75–90 minute route excludes this optional clinic.</p>
+  </details>
+  <div class="callout"><p><strong>Self-intersections are allowed.</strong> A homotopy of maps need not preserve length, angles, injectivity, or an embedded outline. An isotopy imposes additional structure. Keep the definition you are using in view.</p></div>
+</section>
+
+<section class="lecture-section" id="hole">
+  <span class="number">03 / 12 minutes</span>
+  <h2>A plausible contraction fails at one point</h2>
+  <p>Take γ(s) = (cos(2πs), sin(2πs)), a loop based at p = (1, 0). We try to contract it to the constant loop at p using the same interpolation as before.</p>
+  <div class="equation">C(s, t) = (1 − t)γ(s) + t(1, 0).<small>At time t this is a circle centered at (t, 0) with radius 1 − t. Its basepoint stays at (1, 0).</small></div>
+  <p>In ℝ² this is a valid based contraction. In Y = ℝ² ∖ {0}, every output must avoid the origin. <strong>Predict the time and position at which the formula fails.</strong></p>
+  <div class="experiment" aria-label="Experiment 2: a failed contraction in the punctured plane">
+    <div class="experiment-head"><h3>Watch the target condition</h3><span>EXPERIMENT 02</span></div>
+    <div class="experiment-body">
+      <div class="plot"><svg id="hole-svg" viewBox="0 0 560 360" role="img" aria-labelledby="hole-title hole-desc"><title id="hole-title">Attempting to contract the unit circle to its basepoint</title><desc id="hole-desc">The shrinking circle passes through the omitted origin exactly halfway through the proposed deformation.</desc><g class="plot-grid"></g><circle cx="280" cy="180" r="90" class="source-curve"/><path id="hole-curve" class="curve" d="M370.000,180.000 L368.892,165.921 L365.595,152.188 L360.191,139.141 L352.812,127.099 L343.640,116.360 L332.901,107.188 L320.859,99.809 L307.812,94.405 L294.079,91.108 L280.000,90.000 L265.921,91.108 L252.188,94.405 L239.141,99.809 L227.099,107.188 L216.360,116.360 L207.188,127.099 L199.809,139.141 L194.405,152.188 L191.108,165.921 L190.000,180.000 L191.108,194.079 L194.405,207.812 L199.809,220.859 L207.188,232.901 L216.360,243.640 L227.099,252.812 L239.141,260.191 L252.188,265.595 L265.921,268.892 L280.000,270.000 L294.079,268.892 L307.812,265.595 L320.859,260.191 L332.901,252.812 L343.640,243.640 L352.812,232.901 L360.191,220.859 L365.595,207.812 L368.892,194.079 L370.000,180.000"/><circle cx="190" cy="180" id="hole-witness" class="witness-point" r="5"/><circle cx="280" cy="180" r="6" class="origin"/><circle cx="370" cy="180" r="5" class="fixed-point"/><text x="260" y="212">0 omitted</text><text x="375" y="157">p = (1, 0)</text></svg><div class="legend"><b>C(·, t)</b><b class="witness">C(½, t)</b></div></div>
+      <div class="controls">
+        <div><label for="hole-t">Deformation time t = <output id="hole-t-value" for="hole-t">0.00</output></label><input id="hole-t" type="range" min="0" max="1" step="0.01" value="0"><button type="button" data-play="hole-t">Play attempt</button><button id="show-obstruction" class="secondary" type="button">Show exact obstruction</button></div>
+        <div><span class="readout">Distance of this slice from 0<strong id="hole-clearance">1.00</strong></span><span class="readout">Winding of this slice<strong id="hole-winding">1</strong></span><p id="hole-readout" class="caption" aria-live="polite"></p></div>
+      </div>
+    </div>
+    <p id="hole-print-settings" class="print-settings">Shown setting: t = 0.00; minimum distance to 0 is 1.00; winding is 1.</p>
+    <p class="caption">The distance is exactly |1 − 2t|. The winding is 1 before t = ½ and 0 after; at t = ½ it is undefined because this slice is not a loop in the punctured plane. The entire proposed family fails the target condition.</p>
+  </div>
+  <div class="proof"><h3>An exact witness</h3><div class="equation">C(½, ½) = ½(−1, 0) + ½(1, 0) = (0, 0).</div><p>This disproves <em>this formula</em> as a contraction in the punctured plane. It does not yet prove that every possible contraction fails. For that we need an invariant, a quantity that cannot change under a valid homotopy. Winding will provide one.</p></div>
+  <div class="callout warning"><p><strong>“I did not see it cross” is not a proof.</strong> A display uses finitely many frames and points. The exact witness above finds a failure even if an animation skips it. Conversely, a guarantee that every point avoids 0 must come from mathematics, not the resolution of a drawing.</p></div>
+  <label class="note" for="note-obstruction">Explain the difference between rejecting this formula and proving that no contraction exists.</label><textarea class="notes" id="note-obstruction" data-note="obstruction" placeholder="The witness proves… An invariant would prove…"></textarea>
+</section>
+
+<section class="lecture-section" id="retraction">
+  <span class="number">04 / 12 minutes</span>
+  <h2>Flatten the radius and keep the turns</h2>
+  <p>There is a useful deformation that never crosses the origin. Move each nonzero point along its ray until it reaches the unit circle S¹ = {x ∈ ℝ² : ‖x‖ = 1}.</p>
+  <div class="equation">D(x, t) = (1 − t)x + t x/‖x‖ = ((1 − t) + t/‖x‖)x,<br>x ∈ ℝ² ∖ {0}, &nbsp; 0 ≤ t ≤ 1.</div>
+  <div class="proof"><h3>Verify every condition</h3><p>The denominator is nonzero, so D is jointly continuous. Its radius is (1 − t)‖x‖ + t, which is positive. Thus the image stays in the punctured plane. At t = 0, D(x, 0) = x; at t = 1, D(x, 1) = x/‖x‖ lies on S¹. If x already lies on S¹, D(x, t) = x at every time.</p></div>
+  <!-- BEGIN optional radial-proof-explanations 2026-10-20 -->
+  <details class="continuity-clinic radial-proof-clinic" id="radial-proof-explanations">
+    <summary>Optional proof reading · Explain why a step follows</summary>
+    <p>This optional activity adds a planning allowance of about 10–15 minutes, with more time where useful. The original 75–90 minute core route excludes it; neither allowance is an observed completion time. Work on paper or in your own accessible workspace. No response is scored or saved here.</p>
+    <p>The radial proof above already verifies the required conditions. We will practice explaining <em>why</em> a line follows from earlier facts, then change the quantity that defines the target. On narrow screens, focus a formula and use the Left and Right Arrow keys to read across it.</p>
+    <h3>Compare three responses to the same line</h3>
+    <p>The proof says that the radius is positive. Compare these responses:</p>
+    <ol>
+      <li><strong>Repeating:</strong> “The radius is positive.” This states the conclusion again without justifying it.</li>
+      <li><strong>Reporting confidence:</strong> “I understand why the origin is avoided.” This reports a reaction without supplying a mathematical reason.</li>
+      <li><strong>Explaining:</strong> “The input is nonzero, so its norm <var>r</var> is positive. For time <var>t</var> in [0,1], the radius is (1−<var>t</var>)<var>r</var>+<var>t</var>. At time 0 this is <var>r</var>&gt;0; at every positive time the second term is positive and the first is nonnegative. The scaling factor is positive too, so norm homogeneity gives this radius for the deformed point. Thus every output avoids 0, for every input and time.”</li>
+    </ol>
+    <p>The third response connects assumptions to an inference and explains its purpose. These descriptions concern the responses, not types of learners. Another correct explanation is welcome.</p>
+    <div class="equation" tabindex="0" role="region" aria-label="Radial deformation and its radius">
+      <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="D of v comma t equals the quantity one minus t plus t divided by r, multiplied by v; r is the Euclidean norm of v and is positive."><mrow><mi>D</mi><mo>(</mo><mi>v</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>+</mo><mfrac><mi>t</mi><mi>r</mi></mfrac><mo>)</mo><mi>v</mi><mo>,</mo><mspace width="0.4em"/><mi>r</mi><mo>=</mo><msub><mrow><mo>‖</mo><mi>v</mi><mo>‖</mo></mrow><mn>2</mn></msub><mo>&gt;</mo><mn>0</mn></mrow></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The Euclidean norm of D of v comma t equals the quantity one minus t, multiplied by r, plus t; this is positive."><mrow><msub><mrow><mo>‖</mo><mi>D</mi><mo>(</mo><mi>v</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>‖</mo></mrow><mn>2</mn></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo><mi>r</mi><mo>+</mo><mi>t</mi><mo>&gt;</mo><mn>0</mn></mrow></math>
+    </div>
+    <h3>Explain the remaining obligations</h3>
+    <p>Before opening the key, explain these three lines. For each, name the earlier fact that permits the step and the condition it verifies.</p>
+    <ol>
+      <li>The family is jointly continuous on the whole product.</li>
+      <li>Its initial map is the identity, and its terminal map lands on the unit circle.</li>
+      <li>Every point already on the unit circle stays fixed at every time.</li>
+    </ol>
+    <details class="solution radial-proof-solution" id="radial-proof-explanation-key">
+      <summary>Worked explanations of the three lines</summary>
+      <ol>
+        <li>The norm is continuous and never zero on the punctured plane, so its reciprocal is continuous there. Coordinate projections, addition and scalar multiplication are continuous. Combining them gives continuity on the full product of the punctured plane and [0,1]. Differentiability is unnecessary.</li>
+        <li>Substituting time 0 gives <var>D</var>(<var>v</var>,0)=<var>v</var>. At time 1 the output is <var>v</var>/‖<var>v</var>‖, with norm 1 by positive homogeneity. These check the two time maps.</li>
+        <li>For a point of the unit circle, <var>r</var>=1. Its multiplier becomes (1−<var>t</var>)+<var>t</var>=1, so it remains that same point for every time. This fixes the whole subspace, not just one basepoint. It also shows that every circle point occurs in the terminal image.</li>
+      </ol>
+      <p>A strategy summary is: change only radial scale by a positive factor, prove membership for the whole family, and make the factor 1 on the intended retract. A direct zero-exclusion proof can replace a norm bound.</p>
+    </details>
+    <div class="clinic-exercise radial-proof-task" id="radial-proof-changed-task">
+      <h3>Changed task · A rectangular shell with corners</h3>
+      <p>Close the worked explanations and make an attempt. Let <var>I</var>=[0,1] and define:</p>
+      <div class="equation" tabindex="0" role="region" aria-label="Quantity defining the rectangular shell">
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="q of x comma y equals the maximum of the absolute value of x and twice the absolute value of y."><mrow><mi>q</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">max</mi><mo>(</mo><mo>|</mo><mi>x</mi><mo>|</mo><mo>,</mo><mn>2</mn><mo>|</mo><mi>y</mi><mo>|</mo><mo>)</mo></mrow></math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Y is the set of v in the real plane such that one is less than or equal to q of v and q of v is less than or equal to two."><mrow><mi>Y</mi><mo>=</mo><mo>{</mo><mi>v</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mn>2</mn></msup><mo>:</mo><mn>1</mn><mo>≤</mo><mi>q</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>≤</mo><mn>2</mn><mo>}</mo></mrow></math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="B is the set of v in the real plane such that q of v equals one."><mrow><mi>B</mi><mo>=</mo><mo>{</mo><mi>v</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mn>2</mn></msup><mo>:</mo><mi>q</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>}</mo></mrow></math>
+      </div>
+      <p>The set <var>B</var> is the boundary of [−1,1] × [−1/2,1/2]. You may use continuity of absolute value and maximum, and the identity <var>q</var>(λ<var>v</var>)=λ<var>q</var>(<var>v</var>) for λ≥0. Corners are allowed.</p>
+      <ol>
+        <li>A learner copies Euclidean normalization, proposing the following strong deformation retraction of <var>Y</var> onto <var>B</var>. Does it work? Give an exact witness for any failure and state the conditions it violates.</li>
+      </ol>
+      <div class="equation" tabindex="0" role="region" aria-label="Proposed Euclidean normalization">
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="E of v comma t equals the quantity one minus t plus t divided by the Euclidean norm of v, multiplied by v."><mrow><mi>E</mi><mo>(</mo><mi>v</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>+</mo><mfrac><mi>t</mi><msub><mrow><mo>‖</mo><mi>v</mi><mo>‖</mo></mrow><mn>2</mn></msub></mfrac><mo>)</mo><mi>v</mi></mrow></math>
+      </div>
+      <ol start="2">
+        <li>Construct a valid strong deformation retraction of <var>Y</var> onto <var>B</var>. Prove joint continuity, both time maps, membership in <var>Y</var> for every input and time, and fixation of every point of <var>B</var>. Which properties of the original proof survive the changed target?</li>
+      </ol>
+      <p>A failed formula does not prove that every construction must fail. Explaining a supplied proof and producing this construction are different accomplishments. The supplied homogeneity identity is available help, not something you must discover unaided.</p>
+      <details class="radial-proof-hint" id="radial-proof-changed-hint"><summary>Hint after an attempt</summary><p>The original proof controls the quantity defining its target. Which denominator makes the terminal value of <var>q</var> equal to 1?</p></details>
+      <details class="solution radial-proof-solution" id="radial-proof-changed-answer">
+        <summary>Worked answer and universal verification</summary>
+        <p>Take <var>v</var><sub>0</sub>=(1,1/2). It has <var>q</var>(<var>v</var><sub>0</sub>)=1, so it belongs to <var>B</var> and <var>Y</var>. Its Euclidean norm is √5/2. At time 1:</p>
+        <div class="equation" tabindex="0" role="region" aria-label="Exact failed normalization witness">
+          <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="E of v sub zero comma one equals the ordered pair two divided by the square root of five, one divided by the square root of five."><mrow><mi>E</mi><mo>(</mo><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>(</mo><mfrac><mn>2</mn><msqrt><mn>5</mn></msqrt></mfrac><mo>,</mo><mfrac><mn>1</mn><msqrt><mn>5</mn></msqrt></mfrac><mo>)</mo></mrow></math>
+          <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="q of E of v sub zero comma one equals two divided by the square root of five, which is less than one."><mrow><mi>q</mi><mo>(</mo><mi>E</mi><mo>(</mo><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><mn>1</mn><mo>)</mo><mo>)</mo><mo>=</mo><mfrac><mn>2</mn><msqrt><mn>5</mn></msqrt></mfrac><mo>&lt;</mo><mn>1</mn></mrow></math>
+        </div>
+        <p>Thus <var>E</var> leaves <var>Y</var>, fails to land in <var>B</var> at the final time, and fails to fix <var>v</var><sub>0</sub>∈<var>B</var>. At every positive time its <var>q</var>-value is (1−<var>t</var>)+2<var>t</var>/√5&lt;1. Its continuity and initial identity are not the failing conditions. This witness rejects <var>E</var>, not the existence of a different deformation.</p>
+        <p>Replace the Euclidean norm by the quantity that defines the shell:</p>
+        <div class="equation" tabindex="0" role="region" aria-label="Valid deformation of the rectangular shell">
+          <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="H of v comma t equals the quantity one minus t plus t divided by q of v, multiplied by v."><mrow><mi>H</mi><mo>(</mo><mi>v</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>+</mo><mfrac><mi>t</mi><mrow><mi>q</mi><mo>(</mo><mi>v</mi><mo>)</mo></mrow></mfrac><mo>)</mo><mi>v</mi></mrow></math>
+        </div>
+        <p>On <var>Y</var>, the continuous function <var>q</var> is at least 1. Its reciprocal is therefore defined and continuous. Combining it with the projections, addition and scalar multiplication proves joint continuity of <var>H</var> on <var>Y</var>×<var>I</var>, including above corners. No derivative is used.</p>
+        <p>Put <var>a</var>=<var>q</var>(<var>v</var>)∈[1,2] and λ=(1−<var>t</var>)+<var>t</var>/<var>a</var>. The multiplier λ is positive. Positive homogeneity gives:</p>
+        <div class="equation" tabindex="0" role="region" aria-label="Universal shell membership calculation">
+          <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="q of H of v comma t equals lambda times q of v."><mrow><mi>q</mi><mo>(</mo><mi>H</mi><mo>(</mo><mi>v</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>)</mo><mo>=</mo><mi>λ</mi><mi>q</mi><mo>(</mo><mi>v</mi><mo>)</mo></mrow></math>
+          <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Lambda times q of v equals the quantity one minus t, multiplied by a, plus t; the result belongs to the closed interval from one to two."><mrow><mi>λ</mi><mi>q</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo><mi>a</mi><mo>+</mo><mi>t</mi><mo>∈</mo><mo>[</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>]</mo></mrow></math>
+        </div>
+        <p>The expression is a convex combination of <var>a</var>∈[1,2] and 1, so every output remains in <var>Y</var>. At time 0 the map is the identity; at time 1 its <var>q</var>-value is 1, so it lands in <var>B</var>. If <var>v</var>∈<var>B</var>, then <var>a</var>=1 and the multiplier is always 1: every such point stays fixed. This also proves that the terminal image is all of <var>B</var>.</p>
+        <p>For example, <var>v</var>=(2,1/4) has <var>q</var>=2. At time 1/2, <var>H</var>(<var>v</var>,1/2)=(3/2,3/16), with <var>q</var>=3/2; at time 1 it is (1,1/8), with <var>q</var>=1. These values illustrate the argument, while the universal calculation proves it.</p>
+        <p>Continuity, a nonzero denominator, positive homogeneity and the interval bound defining the target survive the change. Roundness and differentiability were unnecessary. An arbitrary positive continuous function cannot simply replace the norm: the homogeneity identity is used at the displayed calculation.</p>
+      </details>
+    </div>
+    <p class="caption">Discuss the reasoning and compare other valid arguments. These prompts support practice; they do not provide a mastery score or evidence that this activity improves learning.</p>
+  </details>
+  <!-- END optional radial-proof-explanations 2026-10-20 -->
+  <p>This is a <strong>strong deformation retraction</strong> of the punctured plane onto the unit circle. The larger space deforms onto the subspace while every point of the subspace stays fixed.</p>
+  <p>Apply it to the following family of loops, each based at (1, 0):</p>
+  <div class="equation">γ<sub>n</sub>(s) = (1 + 0.45 sin²(πs))(cos(2πns), sin(2πns)), &nbsp; n ∈ ℤ.<small>After deformation its radius is 1 + 0.45(1 − t) sin²(πs), always at least 1. The angular component still makes n signed turns.</small></div>
+  <div class="experiment" aria-label="Experiment 3: radial deformation retraction">
+    <div class="experiment-head"><h3>Change the radius, preserve winding</h3><span>EXPERIMENT 03</span></div>
+    <div class="experiment-body">
+      <div class="plot"><svg id="retract-svg" viewBox="0 0 560 360" role="img" aria-labelledby="retract-title retract-desc"><title id="retract-title">Retracting a based loop onto the unit circle</title><desc id="retract-desc">An irregular loop moves radially onto the unit circle, preserving its basepoint and winding.</desc><g class="plot-grid"></g><circle cx="280" cy="180" r="90" class="target-curve"/><path id="retract-source" class="source-curve" d="M370.000,180.000 L369.138,165.882 L366.538,151.882 L362.157,138.139 L355.940,124.826 L347.834,112.166 L337.807,100.435 L325.879,89.958 L312.135,81.097 L296.751,74.236 L280.000,69.750 L262.258,67.979 L243.997,69.195 L225.774,73.575 L208.200,81.176 L191.916,91.916 L177.552,105.567 L165.690,121.756 L156.830,139.980 L151.353,159.624 L149.500,180.000 L151.353,200.376 L156.830,220.020 L165.690,238.244 L177.552,254.433 L191.916,268.084 L208.200,278.824 L225.774,286.425 L243.997,290.805 L262.258,292.021 L280.000,290.250 L296.751,285.764 L312.135,278.903 L325.879,270.042 L337.807,259.565 L347.834,247.834 L355.940,235.174 L362.157,221.861 L366.538,208.118 L369.138,194.118 L370.000,180.000"/><path id="retract-curve" class="curve" d="M370.000,180.000 L369.138,165.882 L366.538,151.882 L362.157,138.139 L355.940,124.826 L347.834,112.166 L337.807,100.435 L325.879,89.958 L312.135,81.097 L296.751,74.236 L280.000,69.750 L262.258,67.979 L243.997,69.195 L225.774,73.575 L208.200,81.176 L191.916,91.916 L177.552,105.567 L165.690,121.756 L156.830,139.980 L151.353,159.624 L149.500,180.000 L151.353,200.376 L156.830,220.020 L165.690,238.244 L177.552,254.433 L191.916,268.084 L208.200,278.824 L225.774,286.425 L243.997,290.805 L262.258,292.021 L280.000,290.250 L296.751,285.764 L312.135,278.903 L325.879,270.042 L337.807,259.565 L347.834,247.834 L355.940,235.174 L362.157,221.861 L366.538,208.118 L369.138,194.118 L370.000,180.000"/><circle cx="280" cy="69.75" id="retract-traveler" class="witness-point" r="5"/><circle cx="280" cy="180" r="6" class="origin"/><circle cx="370" cy="180" r="5" class="fixed-point"/><text x="264" y="211">0 omitted</text><text x="375" y="157">fixed p</text></svg><div class="legend"><b>D(γ<sub>n</sub>, t)</b><b class="ghost">original loop</b><b class="witness">traveler at the selected s</b></div></div>
+      <div class="controls">
+        <div><label for="loop-n">Signed turns n</label><select id="loop-n"><option value="-2">−2 · twice clockwise</option><option value="-1">−1 · clockwise</option><option value="0">0 · out and back</option><option value="1" selected>1 · counterclockwise</option><option value="2">2 · twice counterclockwise</option><option value="3">3 · three counterclockwise</option></select><label for="retract-t">Deformation time t = <output id="retract-t-value" for="retract-t">0.00</output></label><input id="retract-t" type="range" min="0" max="1" step="0.01" value="0"><button type="button" data-play="retract-t">Play retraction</button><label class="note" for="loop-s">Traveler position s = <output id="loop-s-value" for="loop-s">0.25</output></label><input id="loop-s" type="range" min="0" max="1" step="0.01" value="0.25"><button type="button" class="secondary" data-play="loop-s">Play one traversal</button></div>
+        <div><span class="readout">Winding, proved from the formula<strong id="retract-winding">1</strong></span><span class="readout">Radius for every s<strong>at least 1</strong></span><p id="retract-readout" class="caption"></p></div>
+      </div>
+    </div>
+    <p id="retract-print-settings" class="print-settings">Shown setting: n = 1; deformation t = 0.00; traveler s = 0.25; fixed basepoint (1, 0).</p>
+    <p class="caption">A set drawn twice can look like a set drawn once. Winding depends on the parametrized path, including direction and repeated travel. Move s or play a traversal to follow the marked traveler; compare n = 1, n = 2, and n = −1. At n = 0 the loop travels out and back along the positive x-axis.</p>
+  </div>
+  <form class="quiz" data-quiz="radius"><fieldset><legend>Check 3. What proves that this deformation avoids the origin?</legend><label><input type="radio" name="radius" value="samples">All sampled drawing points avoid the origin.</label><label><input type="radio" name="radius" value="positive">The formula gives a strictly positive radius for every input.</label><label><input type="radio" name="radius" value="basepoint">The basepoint is fixed, so every other point is safe.</label></fieldset><button type="submit">Check reasoning</button><p class="feedback" role="status"></p></form>
+  <label class="note" for="note-retraction">Choose n = −2 and n = 0. What changes, and what stays fixed? Justify your answer from the formula.</label><textarea class="notes" id="note-retraction" data-note="retraction" placeholder="Observed change… Preserved feature… Mathematical reason…"></textarea>
+</section>
+
+<section class="lecture-section" id="equivalence">
+  <span class="number">05 / 8 minutes</span>
+  <h2>Different spaces can have the same homotopy type</h2>
+  <p>A <strong>homeomorphism</strong> is a continuous bijection with continuous inverse. A <strong>homotopy equivalence</strong> allows inverse maps whose composites are homotopic to the identity maps.</p>
+  <div class="definition"><p>Spaces X and Y are homotopy equivalent if there are continuous maps f : X → Y and g : Y → X with</p><div class="equation">g ∘ f ≃ id<sub>X</sub>, &nbsp; f ∘ g ≃ id<sub>Y</sub>.</div><p>We write X ≃ Y. Notice the different domains of the two composite maps.</p></div>
+  <p>For X = ℝ² ∖ {0} and Y = S¹, let r(x) = x/‖x‖ and let i be the inclusion of the circle into the punctured plane. Then r ∘ i = id<sub>S¹</sub> exactly, and D supplies id<sub>X</sub> ≃ i ∘ r. They have the same homotopy type.</p>
+  <p>They are not homeomorphic: S¹ is compact, while the punctured plane is not. A continuous image of a compact space is compact, so a homeomorphism could not exist.</p>
+  <div class="table-wrap"><table class="comparison"><caption>Three relations that answer different questions</caption><thead><tr><th>Relation</th><th>Objects being compared</th><th>What is required</th></tr></thead><tbody><tr><td>Homotopy f ≃ g</td><td>Maps with the same domain and target</td><td>A jointly continuous deformation between maps</td></tr><tr><td>Homotopy equivalence X ≃ Y</td><td>Spaces</td><td>Maps in both directions with composites homotopic to identities</td></tr><tr><td>Homeomorphism X ≅ Y</td><td>Spaces</td><td>A continuous bijection with continuous inverse</td></tr></tbody></table></div>
+  <p>A space is <strong>contractible</strong> when its identity map is homotopic to a constant map. A nonempty convex subset of ℝᵈ is contractible using a straight-line homotopy to any chosen point in it. The unit circle is not contractible, as the winding argument below will explain.</p>
+  <form class="quiz" data-quiz="equivalence"><fieldset><legend>Check 4. The interval [0, 1] is contractible. Is it homeomorphic to a single point?</legend><label><input type="radio" name="equivalence" value="yes">Yes, contractibility means there is a homeomorphism.</label><label><input type="radio" name="equivalence" value="no">No. It is homotopy equivalent to a point, but a nondegenerate interval cannot biject onto a point.</label><label><input type="radio" name="equivalence" value="circle">No, because an interval has the same nonzero winding as a circle.</label></fieldset><button type="submit">Check reasoning</button><p class="feedback" role="status"></p></form>
+</section>
+
+<section class="lecture-section" id="winding">
+  <span class="number">06 / 12 minutes</span>
+  <h2>Turn a picture into an obstruction</h2>
+  <p>For a loop γ in the punctured plane based at (1, 0), first normalize it onto the circle. Track an <em>unwrapped</em> angle rather than an angle restricted to one turn.</p>
+  <div class="equation">γ(s)/‖γ(s)‖ = (cos θ(s), sin θ(s)), &nbsp; θ(0) = 0,<br>wind(γ) = θ(1)/(2π) ∈ ℤ.</div>
+  <p>We use the <strong>angle lifting lemma</strong>: a continuous circle-valued path has a unique continuous angle once its initial angle is chosen. The homotopy lifting property also lets us choose the angles continuously across a based path homotopy. One proves these facts by subdividing paths and homotopies into pieces that lie in arcs with a continuous choice of angle. This lemma is the topological ingredient; the rest of the argument is short.</p>
+  <div class="proof"><h3>Why winding cannot change</h3><p>Suppose H is a valid based loop homotopy in the punctured plane. Normalize H and lift its angle continuously, with θ(0, t) = 0. Since the endpoint remains (1, 0), θ(1, t)/(2π) is an integer at every time. It is also continuous in t. A continuous integer-valued function on an interval is constant. Therefore winding is invariant.</p><p>The unit loop has winding 1 and a constant loop has winding 0. They cannot be based homotopic in the punctured plane. For a free contraction, a lift on the parameter square makes (θ(1, t) − θ(0, t))/(2π) a continuous integer too, so allowing the basepoint to move does not remove this obstruction.</p></div>
+  <h3>Why the integer also classifies these loops</h3>
+  <p>After the radial retraction, a loop has a lifted angle θ with θ(0) = 0 and θ(1) = 2πn. Interpolate <em>angles</em>:</p>
+  <div class="equation">K(s, t) = (cos((1 − t)θ(s) + t 2πns),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin((1 − t)θ(s) + t 2πns)).</div>
+  <p>This based homotopy stays on the unit circle and ends at the standard n-turn loop. Concatenating the radial deformation with this one shows that every based loop is homotopic to its standard representative. Equal winding is therefore sufficient as well as necessary <em>in this particular space</em>.</p>
+  <h3>A first view of the fundamental group</h3>
+  <p>The fundamental group π₁(Y, p) consists of based loops up to homotopy relative to endpoints. Its operation follows one loop and then another. Reversing a loop gives an inverse; the constant loop gives the identity. For the punctured plane, winding identifies this operation with addition:</p>
+  <div class="equation">π₁(ℝ² ∖ {0}, (1, 0)) ≅ ℤ,<br>wind(α ∗ β) = wind(α) + wind(β).</div>
+  <div class="callout warning"><p><strong>The space matters.</strong> For a plane with two points removed, a pair of winding numbers does not completely classify based loops. The order of travel around the holes can matter. The fundamental group need not be commutative. Our complete classification by one integer belongs to the punctured plane and the circle.</p></div>
+</section>
+
+<section class="lecture-section" id="exercises">
+  <span class="number">07 / work independently, then compare</span>
+  <h2>Construct, diagnose, and prove</h2>
+  <p>Write an attempt before opening a hint. The solutions explain reasoning; an answer match alone does not establish proof mastery. Exercises 1–4 consolidate the lecture; 5–8 ask you to transfer it.</p>
+
+  <article class="exercise" id="exercise-1"><h3>1. Reverse a homotopy</h3><p>Given H from f to g, construct one from g to f. Check continuity and both endpoint maps.</p><label class="note" for="answer-1">Your attempt</label><textarea id="answer-1" class="notes" data-note="exercise-1"></textarea><details><summary>Hint</summary><p>Run deformation time backward.</p></details><details class="solution"><summary>Worked solution</summary><p>Set J(x, t) = H(x, 1 − t). It is continuous by composition. J(x, 0) = H(x, 1) = g(x), and J(x, 1) = H(x, 0) = f(x). If H is relative to A, J fixes the same images on A. This proves symmetry of the homotopy relation.</p></details></article>
+
+  <article class="exercise" id="exercise-2"><h3>2. Join two deformations</h3><p>Suppose H deforms f to g and J deforms g to h. Write a homotopy from f to h. What must be checked at t = ½?</p><label class="note" for="answer-2">Your attempt</label><textarea id="answer-2" class="notes" data-note="exercise-2"></textarea><details><summary>Hint</summary><p>Use H at twice the speed on the first half of the time interval, then J on the second half.</p></details><details class="solution"><summary>Worked solution</summary><p>Set K(x, t) = H(x, 2t) for 0 ≤ t ≤ ½, and K(x, t) = J(x, 2t − 1) for ½ ≤ t ≤ 1. At the seam both formulas equal g(x). Each piece is continuous on a closed half of the product, so the pasting lemma gives continuity on the whole product. The endpoint maps are f and h. Relative conditions are preserved. Together with the constant homotopy H(x, t) = f(x) and Exercise 1, this proves homotopy is an equivalence relation on maps X → Y.</p></details></article>
+
+  <article class="exercise" id="exercise-3"><h3>3. Repair a bad target</h3><p>A learner proposes H(x, t) = (1 − t)x as a contraction of ℝ² ∖ {0}. Identify the failed condition. Does changing the last frame alone repair it?</p><label class="note" for="answer-3">Your attempt</label><textarea id="answer-3" class="notes" data-note="exercise-3"></textarea><details><summary>Hint</summary><p>Check t = 1 before worrying about the drawing.</p></details><details class="solution"><summary>Worked solution</summary><p>H(x, 1) = 0 is outside the target. If we replace its value at t = 1 by any nonzero constant p, then for every fixed x the limit as t approaches 1 is still 0, not p. That replacement is discontinuous. D(x, t) from the lecture safely retracts onto a circle, but is not a contraction to a point. Winding proves that a contraction in the punctured plane cannot exist.</p></details></article>
+
+  <article class="exercise" id="exercise-4"><h3>4. Compute without trusting a picture</h3><p>Let α(s) = (cos(4πs), sin(4πs)) and β(s) = (cos(−2πs), sin(−2πs)). Find the winding of α, β, their concatenation, and the reverse of α. Which are based homotopic in the punctured plane?</p><label class="note" for="answer-4">Your attempt</label><textarea id="answer-4" class="notes" data-note="exercise-4"></textarea><details><summary>Hint</summary><p>Use the unwrapped angles 4πs and −2πs. Reverse changes the sign.</p></details><details class="solution"><summary>Worked solution</summary><p>The windings are 2, −1, 1, and −2 respectively. No pair in this list has the same winding, so no two are based homotopic in the punctured plane. Their geometric images can all be the same unit circle; it is the parametrized travel that determines winding.</p></details></article>
+
+  <article class="exercise" id="exercise-5"><h3>5. Retract an annulus</h3><p>For A = {x ∈ ℝ² : 1 ≤ ‖x‖ ≤ 2}, construct a strong deformation retraction onto its inner boundary. Prove that intermediate points stay in A.</p><label class="note" for="answer-5">Your attempt</label><textarea id="answer-5" class="notes" data-note="exercise-5"></textarea><details><summary>Hint</summary><p>Try the same radial formula and bound the new radius above and below.</p></details><details class="solution"><summary>Worked solution</summary><p>Use D(x, t) = (1 − t)x + tx/‖x‖. Its radius is (1 − t)‖x‖ + t, a convex combination of a number in [1, 2] with 1, so it remains in [1, 2]. Continuity follows from ‖x‖ ≥ 1. The initial map is the identity, the final image lies on the inner boundary, and every point on that boundary stays fixed.</p></details></article>
+
+  <article class="exercise" id="exercise-6"><h3>6. Change the speed in an arbitrary space</h3><p>For any path α : [0, 1] → Y, prove α(s) and α(s²) are homotopic relative to endpoints. Do not assume Y is a vector space.</p><label class="note" for="answer-6">Your attempt</label><textarea id="answer-6" class="notes" data-note="exercise-6"></textarea><details><summary>Hint</summary><p>Interpolate the <em>inputs</em> to α, rather than adding points in Y.</p></details><details class="solution"><summary>Worked solution</summary><p>Set H(s, t) = α((1 − t)s + ts²). The inner expression lies in [0, 1] and is jointly continuous; composing with α gives a continuous Y-valued map. At t = 0 and t = 1 the slices are α(s) and α(s²). At s = 0 and s = 1 the inputs to α remain 0 and 1. No convexity assumption on Y is used.</p></details></article>
+
+  <article class="exercise" id="exercise-7"><h3>7. Explain the missing proof step</h3><p>Someone says, “The winding is an integer, so it is invariant.” Explain why that is incomplete, and supply the needed argument.</p><label class="note" for="answer-7">Your attempt</label><textarea id="answer-7" class="notes" data-note="exercise-7"></textarea><details><summary>Hint</summary><p>An integer-valued function can jump. What prevents a jump here?</p></details><details class="solution"><summary>Worked solution</summary><p>Being integer-valued alone does not prevent change. We also need continuity in deformation time. The homotopy lifting property applied after normalizing H gives a continuous angle θ(s, t), with θ(0, t) = 0 for a based homotopy. Hence n(t) = θ(1, t)/(2π) is continuous and integer-valued. Since [0, 1] is connected, n is constant. The lifting lemma is substantive; a drawing or separate angle choices at each frame do not replace it.</p></details></article>
+
+  <article class="exercise" id="exercise-8"><h3>8. Compare two nonzero targets</h3><p>Choose points a and b in the punctured plane. Are all paths from a to b homotopic relative to endpoints? Give a counterexample or prove the claim. How does the answer change in all of ℝ²?</p><label class="note" for="answer-8">Your attempt</label><textarea id="answer-8" class="notes" data-note="exercise-8"></textarea><details><summary>Hint</summary><p>To disprove a universal claim you may choose a = b = (1, 0). Or, for distinct endpoints, attach an extra loop to a path.</p></details><details class="solution"><summary>Worked solution</summary><p>No. For a = b = (1, 0), the unit loop and constant loop have different winding. For arbitrary fixed a and b, take a path σ from a to b and first traverse λ<sub>a</sub>(s), the vector a rotated counterclockwise by angle 2πs. This loop stays at radius ‖a‖ and has winding 1. If σ and λ<sub>a</sub> ∗ σ were endpoint homotopic, appending the reverse of σ would give based homotopic loops with windings 0 and 1, a contradiction. The path σ followed by its reverse is contractible by traversing an ever shorter initial portion of σ and then retracing it. In ℝ² every two paths with the same endpoints are endpoint homotopic by straight-line interpolation.</p></details></article>
+</section>
+
+<section class="lecture-section" id="next">
+  <span class="number">08 / a return visit</span>
+  <h2>Rebuild the argument from memory</h2>
+  <p>On a later day, close the formulas and try these prompts. Return to the relevant section only after an attempt.</p>
+  <ol><li>State all conditions for a path homotopy relative to endpoints.</li><li>Write the radial deformation and prove that it avoids the origin.</li><li>Explain why failure of one formula does not prove impossibility.</li><li>Give the continuity argument that turns winding into an obstruction.</li><li>Give homotopy equivalent spaces that are not homeomorphic.</li></ol>
+  <label class="note" for="note-return">Record one gap you want to repair and the explanation you can now give.</label><textarea class="notes" id="note-return" data-note="return-visit"></textarea>
+  <h3>Connect this to the other projects</h3>
+  <p>For the next lecture, try <a href="loops-and-words.html">Loops, words, and the torus</a>. Compare the figure eight with a torus, find a loop that signed counts cannot distinguish, and prove why a filled square changes the answer.</p>
+  <ul><li><strong>Vector calculus:</strong> the field (−y/(x²+y²), x/(x²+y²)) has zero curl away from 0, yet its integral around the unit circle is 2π. The domain condition matters. Continue in <a href="../calculus/index.html#chapter/25">Calculus, Chapter 25</a>.</li><li><strong>Topology:</strong> develop fundamental groups and covering spaces in <a href="../../index.html#/books/topology/11-homotopy-fundamental-group">the topology textbook</a> (or use the <a href="index.html#projects">project reading map</a>).</li><li><strong>Practice:</strong> write a proof first, then use leet_math or Math Atlas for further work in their supported local readers.</li></ul>
+  <h3>Sources and teaching notes</h3>
+  <p>The explanations, formulas, experiments, and exercises here are original. For a full textbook development, read Allen Hatcher’s <a href="https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html">Algebraic Topology, Chapters 0 and 1</a>. The angle lifting lemma and fundamental group require more development than a first lecture can supply.</p>
+  <p>For instructors, the <a href="research/pedagogy-and-homotopy.md">pedagogy review and lecture plan</a> explain the evidence behind prediction, self-explanation, and delayed retrieval, with limits on what that evidence establishes. The 75–90 minute route assumes selected exercises are homework; it is a planning estimate, not a piloted duration.</p>
+  <p class="caption">No learner study has established the effectiveness of this lecture. The checks provide feedback on selected misconceptions; proof quality requires examination of written reasoning.</p>
+</section>
+<section class="lecture-section" id="using-the-lecture"><h2>Study controls, notes and print</h2><p>The time control t changes a whole path; the position control s moves one traveler. Escape pauses an animation. Sliders support their native keyboard controls. The failed contraction pauses at its exact obstruction; radial deformation preserves signed turns, including negative, zero and multiple winding.</p><p>Write an independent attempt before opening a hint or worked answer. Download notes as plain text to retain them, especially with a file URL. Printing excludes study notes and preserves current reveal choices. The supplied learner and instructor PDFs include the optional clinic; their ten worked solutions are closed and open respectively. In the browser, open or close the clinic before printing to choose whether it appears.</p><p>The core assumes continuity, vectors and trigonometric circle parametrizations. Its 75–90 minute route, with selected exercises outside class, is an unpiloted estimate. The optional joint-continuity clinic adds an estimated 10–15 minutes. On narrow screens, focus its labelled graph and use Left and Right Arrow to pan, or swipe it.</p></section>
+</main>
+</div>
+<footer>Euler mathematical education · Original local learning materials · <a href="index.html">Continue the topology sequence</a></footer>
+</body>
+</html>

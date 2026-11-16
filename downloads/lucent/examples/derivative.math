@@ -1,0 +1,11 @@
+# Predict the exact secant slope: 2*a + h. Then compare with f'(a) = 2*a.
+scene "Secants approaching a tangent";
+domain -3 3;
+range -2 6;
+param a = 1 from -2 to 2;
+param h = 0.5 from 0.02 to 1;
+fn f(x) = x^2;
+measure exact_slope = 2*a;
+plot f color blue;
+secant f at a step h;
+tangent f at a;

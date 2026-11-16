@@ -1,0 +1,53 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #182b35;
+  background: #f8faf9;
+  line-height: 1.65;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.page-header, main, footer { width: min(100%, 54rem); margin-inline: auto; padding: 1.25rem; }
+.page-header { padding-top: 2rem; padding-bottom: 0; }
+main { padding-top: .5rem; }
+h1, h2, h3, summary { line-height: 1.3; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+p, li, h1, h2, h3, summary, a { overflow-wrap: anywhere; }
+a { color: #004c76; text-underline-offset: .15em; }
+a:hover { text-decoration-thickness: .15em; }
+a:focus-visible, summary:focus-visible { outline: .2rem solid #a34700; outline-offset: .25rem; }
+ul, ol { padding-inline-start: 1.5rem; }
+li + li { margin-top: .4rem; }
+.skip-link { position: absolute; top: .5rem; left: .5rem; padding: .6rem; background: white; transform: translateY(-200%); z-index: 1; }
+.skip-link:focus { transform: none; }
+.workflow, .source-links { border-inline-start: .25rem solid #547a72; padding-inline-start: 1rem; }
+.form-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1.75rem; }
+.form-links li + li { margin-top: 0; }
+.forms article { margin-block: 2rem; padding-block-start: 1rem; border-top: .15rem solid #b9cbc6; scroll-margin-top: 1rem; }
+.form-meta { color: #3f5962; }
+.authored-text { white-space: pre-wrap; }
+.response-instruction { font-weight: 600; }
+.comparison { margin-block: 1.25rem; border: 1px solid #9cafaa; border-radius: .25rem; background: white; padding: .9rem; }
+.comparison summary { cursor: pointer; font-weight: 700; padding-block: .25rem; }
+.comparison[open] summary { margin-bottom: 1rem; }
+.criteria li { padding-inline-start: .2rem; }
+footer { border-top: 1px solid #b9cbc6; }
+[hidden] { display: none !important; }
+@media (max-width: 38rem) {
+  .form-links { grid-template-columns: minmax(0, 1fr); }
+  .page-header, main, footer { padding-inline: 1rem; }
+}
+@media print {
+  :root { color: black; background: white; font-size: 11pt; }
+  .page-header, main, footer { width: auto; padding: 0; }
+  .skip-link { display: none; }
+  a { color: black; }
+  .workflow, .source-links { border-color: #555; }
+  .forms article { border-color: #555; }
+  .comparison { border-color: #555; padding: .6rem; }
+  h1, h2, h3, summary { break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .form-links { display: block; }
+}

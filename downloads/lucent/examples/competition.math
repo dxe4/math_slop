@@ -1,0 +1,35 @@
+# Each axis is a population divided by its single-species carrying capacity.
+# x' = x*(1-x-a*y), y' = rate*y*(1-y-b*x).
+# Coefficient a measures y's effect on x; b measures x's effect on y.
+# The straight lines are the nonzero nullclines x+a*y=1 and b*x+y=1.
+# They are NOT trajectories: the field is vertical on the first and horizontal
+# on the second. Predict those directions before following the colored paths.
+# For a < 1 and b < 1, positive populations approach stable coexistence.
+# For a > 1 and b > 1, the initial condition decides which population wins.
+# For a < 1 < b, x wins; for b < 1 < a, y wins. Try each case.
+# Change rate: equilibria stay fixed, while the paths and time scale change.
+# If a*b != 1, solve the two linear nullcline equations to find their intersection.
+# A finite trajectory approaching an axis is not evidence of exact extinction.
+# Fixed-step RK4 approximates the differential equations; increase steps in code
+# when experimenting with faster rates or much longer time intervals.
+scene "Competition: nullclines, coexistence, and initial conditions";
+coordinates equal;
+domain -0.1 1.6;
+range -0.1 1.6;
+param a = 0.6 from 0.2 to 1.8;
+param b = 0.5 from 0.2 to 1.8;
+param rate = 1 from 0.2 to 2;
+param initial_x = 0.15 from 0.05 to 0.95;
+param initial_y = 0.4 from 0.05 to 0.95;
+param horizon = 20 from 2 to 40;
+fn x_nullcline(x) = (1-x)/a;
+fn y_nullcline(x) = 1-b*x;
+plot x_nullcline color blue;
+plot y_nullcline color violet;
+field populations(x,y) = (x*(1-x-a*y),rate*y*(1-y-b*x));
+flow populations from (initial_x,initial_y) time horizon steps 1600 color teal;
+flow populations from (0.85,0.1) time horizon steps 1600 color rose;
+flow populations from (0.1,0.85) time horizon steps 1600 color amber;
+point first = (initial_x,initial_y) color teal;
+point second = (0.85,0.1) color rose;
+point third = (0.1,0.85) color amber;

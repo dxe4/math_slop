@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title desc"><title id="title">Extra holding increases asymptotic variance</title><desc id="desc">Two symmetric two-state kernels have switching probabilities a=0.1 and a=0.4 and uniform stationary distribution. Their centered-state autocorrelations are (1-2a)^k.</desc><rect width="960" height="560" fill="#fafbf9"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#233445"/></marker></defs>
+<text x="35.00" y="43.00" fill="#233445" font-family="system-ui,sans-serif" font-size="25" text-anchor="start">Extra holding increases asymptotic variance</text>
+<line x1="90" y1="430" x2="860" y2="430" stroke="#233445" stroke-width="2"/>
+<line x1="90" y1="110" x2="90" y2="430" stroke="#233445" stroke-width="2"/>
+<text x="475.00" y="469.00" fill="#233445" font-family="system-ui,sans-serif" font-size="17" text-anchor="middle">lag k (0 to 12)</text>
+<text x="90.00" y="93.00" fill="#233445" font-family="system-ui,sans-serif" font-size="17" text-anchor="start">autocorrelation ρ(k)</text>
+<polyline points="90.00,130.00 154.17,190.00 218.33,238.00 282.50,276.40 346.67,307.12 410.83,331.70 475.00,351.36 539.17,367.09 603.33,379.67 667.50,389.73 731.67,397.79 795.83,404.23 860.00,409.38" fill="none" stroke="#b45309" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="90.0" cy="130.0" r="4" fill="#b45309"/>
+<circle cx="154.16666666666669" cy="190.0" r="4" fill="#b45309"/>
+<circle cx="218.33333333333334" cy="237.99999999999997" r="4" fill="#b45309"/>
+<circle cx="282.5" cy="276.4" r="4" fill="#b45309"/>
+<circle cx="346.6666666666667" cy="307.12" r="4" fill="#b45309"/>
+<circle cx="410.8333333333333" cy="331.69599999999997" r="4" fill="#b45309"/>
+<circle cx="475.0" cy="351.35679999999996" r="4" fill="#b45309"/>
+<circle cx="539.1666666666667" cy="367.08543999999995" r="4" fill="#b45309"/>
+<circle cx="603.3333333333334" cy="379.66835199999997" r="4" fill="#b45309"/>
+<circle cx="667.5" cy="389.7346816" r="4" fill="#b45309"/>
+<circle cx="731.6666666666666" cy="397.78774527999997" r="4" fill="#b45309"/>
+<circle cx="795.8333333333334" cy="404.230196224" r="4" fill="#b45309"/>
+<circle cx="860.0" cy="409.3841569792" r="4" fill="#b45309"/>
+<polyline points="90.00,130.00 154.17,370.00 218.33,418.00 282.50,427.60 346.67,429.52 410.83,429.90 475.00,429.98 539.17,430.00 603.33,430.00 667.50,430.00 731.67,430.00 795.83,430.00 860.00,430.00" fill="none" stroke="#087f7b" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="90.0" cy="130.0" r="4" fill="#087f7b"/>
+<circle cx="154.16666666666669" cy="370.0" r="4" fill="#087f7b"/>
+<circle cx="218.33333333333334" cy="418.0" r="4" fill="#087f7b"/>
+<circle cx="282.5" cy="427.6" r="4" fill="#087f7b"/>
+<circle cx="346.6666666666667" cy="429.52" r="4" fill="#087f7b"/>
+<circle cx="410.8333333333333" cy="429.904" r="4" fill="#087f7b"/>
+<circle cx="475.0" cy="429.9808" r="4" fill="#087f7b"/>
+<circle cx="539.1666666666667" cy="429.99616" r="4" fill="#087f7b"/>
+<circle cx="603.3333333333334" cy="429.999232" r="4" fill="#087f7b"/>
+<circle cx="667.5" cy="429.9998464" r="4" fill="#087f7b"/>
+<circle cx="731.6666666666666" cy="429.99996928" r="4" fill="#087f7b"/>
+<circle cx="795.8333333333334" cy="429.999993856" r="4" fill="#087f7b"/>
+<circle cx="860.0" cy="429.9999987712" r="4" fill="#087f7b"/>
+<text x="390.00" y="140.00" fill="#b45309" font-family="system-ui,sans-serif" font-size="18" text-anchor="start">switch 0.1 → ρ(k) = 0.8ᵏ; IACT = 9</text>
+<text x="390.00" y="180.00" fill="#087f7b" font-family="system-ui,sans-serif" font-size="18" text-anchor="start">switch 0.4 → ρ(k) = 0.2ᵏ; IACT = 1.5</text>
+<text x="45.00" y="509.00" fill="#233445" font-family="system-ui,sans-serif" font-size="17" text-anchor="start">Here larger off-diagonal probabilities improve asymptotic variance at equal step cost.</text>
+<text x="45.00" y="537.00" fill="#233445" font-family="system-ui,sans-serif" font-size="16" text-anchor="start">Kernel comparisons must also account for computation per transition.</text></svg>

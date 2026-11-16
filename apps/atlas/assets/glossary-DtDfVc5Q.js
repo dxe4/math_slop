@@ -1,0 +1,11 @@
+var e=`---
+parent_id: book-introduction-to-category-theory
+matter_id: glossary
+title: "Glossary"
+license: CC BY-SA 4.0
+---
+
+# Glossary
+
+Category: objects, arrows, composition and identities satisfying the stated axioms. Isomorphism: an arrow with a two-sided inverse. Monomorphism: an arrow cancellable on its left in composition. Epimorphism: an arrow cancellable on its right in composition. Locally small: each collection of arrows with fixed source and target is a set. Functor: an assignment preserving objects, typed arrows, composition and identities. Natural transformation: compatible components commuting with every source arrow. Representable presheaf: a contravariant Set-valued functor naturally isomorphic to maps into one object. Limit: a terminal compatible cone; colimit: an initial compatible cocone. Adjunction: a hom-set bijection natural in both variables. Monad: an endofunctor with natural unit and multiplication satisfying the typed unit and associativity laws. Kan extension: a universal extension comparison of a functor along another functor. Equivalence: functors inverse up to natural isomorphism, with the stated size and representative conventions.
+`;export{e as default};

@@ -1,0 +1,491 @@
+{
+  "id": "21",
+  "title": "Gradients and multivariable differentiation",
+  "subtitle": "How can one linear rule predict a function’s response to every small change in its inputs?",
+  "prerequisites": [
+    "Chapter 20: domains, multivariable limits, continuity, and partial derivatives.",
+    "Chapter 19: vectors, dot products, lengths, and planes.",
+    "Chapters 6–7: the chain rule and one-variable linear approximation."
+  ],
+  "objectives": [
+    "Distinguish differentiability from the existence of partial derivatives.",
+    "Construct a total differential and tangent plane, then measure their approximation error.",
+    "Use Jacobian matrices and the multivariable chain rule to track linked changes.",
+    "Compute directional derivatives and interpret the geometry and units of a gradient.",
+    "Derive regular implicit-surface normals and tangent planes and identify singular exceptions."
+  ],
+  "sections": [
+    {
+      "title": "One approximation for all directions",
+      "paragraphs": [
+        "A partial derivative answers a restricted question: what happens when just one coordinate changes? A physical measurement rarely follows that restriction. Moving a temperature sensor changes both its east–west and north–south coordinates; changing a cylinder’s dimensions changes both radius and height. We need a single approximation that accepts an arbitrary small displacement. The key requirement is that its error becomes negligible compared with the length of that displacement, regardless of the direction of approach.",
+        "Let $f$ be a real-valued function on an open neighborhood of a point $a=(a_1,a_2)$. We call $f$ differentiable at $a$ if there is a linear map $L$ with $f(a+h)=f(a)+L(h)+r(h)$, where $r(h)/\\|h\\|\\to0$ as $h\\to0$. Here $h=(h_1,h_2)$, and $\\|h\\|$ is its Euclidean length. The notation $r(h)=o(\\|h\\|)$ abbreviates this precise limiting statement. The input must remain in the domain. At a boundary, extensions or explicitly one-sided notions need separate treatment; our standard theorems concern interior points.",
+        "Every linear scalar-valued map on the plane has the form $L(h)=Ah_1+Bh_2$. Taking $h$ along each coordinate axis in the differentiability definition shows that $A=f_x(a)$ and $B=f_y(a)$. Thus existing partial derivatives identify the only possible linear approximation, but they do not establish that it works in all directions. Differentiability also implies continuity: the linear term tends to zero, and so does its remainder. This is the multivariable version of the familiar one-variable implication.",
+        "A useful sufficient condition is that the first partial derivatives exist throughout a neighborhood of $a$ and are continuous at $a$. Then $f$ is differentiable there. Proof sketch: split a two-coordinate increment into a horizontal change and a vertical change, apply the one-variable mean value theorem to each, and use continuity of the partials to replace their nearby values by their values at $a$ with an error small compared with $\\|h\\|$. Smooth polynomial, exponential, and trigonometric combinations therefore support linear models wherever their defining expressions are valid.",
+        "The remainder condition is relative to the full displacement length. For $h=(h_1,h_2)$ and $r=\\|h\\|$, an error of size $h_1^2+h_2^2=r^2$ is acceptable because $r^2/r=r\\to0$. An error such as $|h_1|$ can be small in absolute size but is not negligible relative to $r$ along the horizontal axis. The distinction matters when judging numerical approximations: every continuous function has output changes that become small near a point, yet only differentiable functions have a single linear rule whose residual is smaller than distance.",
+        "Consider $f(x,y)=|x|+y^2$ at the origin. The $y$ partial is zero, while the $x$ partial fails because the left and right slopes of $|x|$ differ. No tangent plane exists. By contrast, $f(x,y)=\\sqrt{x^2+y^2}$ has every nonzero-direction slice proportional to $|t|$, so directional derivatives fail as two-sided derivatives along every unit direction. These examples show two kinds of failure; neither should be confused with the subtler chapter-20 function whose coordinate partials exist but continuity fails.",
+        "Continuity of partials is a convenient sufficient condition, not the definition of differentiability. A partial may oscillate near a point while the function still admits a valid linear approximation there. To decide from first principles, subtract the candidate linear term and divide by $r$. If the quotient tends to zero uniformly over nearby directions, differentiability holds. The theorem about continuous partials saves work for smooth formulas, but a proof using that theorem must check a neighborhood and the point actually lies in its interior.",
+        "For a vector-valued map, the derivative is a linear transformation between input and output spaces. Its columns are the responses to unit coordinate changes, while its action on an arbitrary displacement is the corresponding linear combination. The same remainder criterion uses the norm of the input displacement and the norm of the output error. Thinking of the Jacobian as an active map, rather than only a rectangular array of partials, prepares the chain rule and makes coordinate changes easier to track.",
+        "Near a smooth point, a function can have a good tangent plane without being nearly constant. For $f(x,y)=100x+y^2$ at the origin, the plane $z=100x$ predicts a large change under a small horizontal move, but its error $y^2$ is still tiny relative to the displacement length. The size of the gradient measures first-order sensitivity; the differentiability condition measures the quality of that first-order rule. These are separate quantities, so an accurate plane can be steep and a flat plane can have noticeable curvature at finite scale.",
+        "A useful way to audit a claimed derivative is to test three levels of evidence. First, coordinate partials determine a candidate linear map. Second, substitutions along a few special directions can detect a contradiction, though agreement cannot prove the claim. Third, a bound on the full remainder establishes the result for every direction and every curved approach. For example, if $|R(h,k)|\\le C(h^2+k^2)$, then $|R|/r\\le Cr\\to0$. If only $|R|\\le C|h|$ is known, the ratio can remain as large as $C$ on horizontal approaches. The distinction prevents the common error of calling a formula differentiable because its partial derivatives look smooth at just one point. In a model with more inputs, the same logic applies: the error must be small compared with the norm of the entire input change, not only with each coordinate separately.",
+        "The theorem below proves a stronger failure than the earlier nonlinear-rate example. Chapter 20 used a curved path to test a two-variable limit; here the quantity to test is the residual divided by the full input distance. After the proof, compare the moving path with a fixed ray in visual investigation 21.4."
+      ],
+      "formula": "dfₐ(h) = fₓ(a)h₁ + fᵧ(a)h₂;  f(a+h) − f(a) − dfₐ(h) = o(||h||).",
+      "theorems": [
+        {
+          "title": "Differentiability controls every directional rate",
+          "statement": "If $f$ is differentiable at a point with derivative linear map $L$, then every unit-vector directional derivative exists and equals $L(\\mathbf u)$. For a scalar function with partial derivatives, this value is $\\nabla f\\cdot\\mathbf u$.",
+          "proof": [
+            "Differentiability means $f(\\mathbf a+\\mathbf h)=f(\\mathbf a)+L(\\mathbf h)+r(\\mathbf h)$, where $r(\\mathbf h)/\\|\\mathbf h\\|\\to0$ as $\\mathbf h\\to0$. Put $\\mathbf h=t\\mathbf u$ for a fixed unit vector $\\mathbf u$ and nonzero real $t$. Linearity gives $[f(\\mathbf a+t\\mathbf u)-f(\\mathbf a)]/t=L(\\mathbf u)+r(t\\mathbf u)/t$. Since $\\|t\\mathbf u\\|=|t|$, the last term tends to zero from both signs as $t\\to0$. Thus $D_{\\mathbf u}f(\\mathbf a)=L(\\mathbf u)$. Taking $\\mathbf u$ along the coordinate axes recovers the partial derivatives, so $L(h,k)=f_x(\\mathbf a)h+f_y(\\mathbf a)k$.",
+            "The converse is false. Define $q(0,0)=0$ and $q(x,y)=x^2y/(x^4+y^2)$ elsewhere. Along any fixed direction $\\mathbf u=(a,b)$, $q(ta,tb)/t$ tends to $a^2/b$ when $b\\ne0$ and to zero when $b=0$. Every directional derivative at the origin therefore exists. Yet along the curved path $y=x^2$, $q(x,x^2)=1/2$, so $q$ is not continuous at the origin. A function that is not continuous there cannot be differentiable there.",
+            "The directional values in this example are not the values of a single linear map in $\\mathbf u$. In applications, a few measured directions can suggest a gradient, but they cannot by themselves certify a tangent plane. A valid differentiability proof must control the remainder uniformly over all small displacement vectors, including directions that change as the point approaches."
+          ],
+          "equationTex": "D_{\\mathbf u}f(\\mathbf a)=L(\\mathbf u)=\\nabla f(\\mathbf a)\\cdot\\mathbf u"
+        },
+        {
+          "title": "Worked counterexample: linear directional rates without a derivative",
+          "statement": "Define $F(0,0)=0$ and $F(x,y)=x^3y/(x^4+y^2)$ for $(x,y)\\ne(0,0)$. Its domain is all of $\\mathbb R^2$. Show that $F$ is continuous at the origin and that every fixed, two-sided directional derivative there is zero, yet $F$ is not differentiable at the origin.",
+          "proof": [
+            "First check continuity, rather than assuming it from the line tests. Since $(|x|^2-|y|)^2\\ge0$, $2|x^2y|\\le x^4+y^2$. At every nonzero point, $|F(x,y)|=|x|\\,|x^2y|/(x^4+y^2)\\le|x|/2\\le\\sqrt{x^2+y^2}/2$. The same inequality holds at the defined origin. Thus $F(x,y)\\to0=F(0,0)$ as $(x,y)\\to(0,0)$, including along curved approaches.",
+            "The coordinate slices are identically zero: $F(x,0)=F(0,y)=0$. Hence $F_x(0,0)=F_y(0,0)=0$, and the only possible derivative map is $L(h,k)=0$. Check every fixed vector, including nonunit vectors and both signs of the parameter. For $u=(a,b)$ and real $t\\ne0$, $F(ta,tb)/t=t a^3b/(t^2a^4+b^2)$ when $b\\ne0$, which tends to zero as $t\\to0$ from either side because the denominator tends to $b^2>0$. When $b=0$, $F(ta,0)/t=0$ identically; the zero vector also gives zero. Thus $D_uF(0,0)=0=L(u)$ for every fixed $u$. Replacing $u$ by $-u$ gives the same conclusion.",
+            "Now let $x>0$ and approach on $y=x^2$. Direct substitution gives $F(x,x^2)=x^5/(2x^4)=x/2$. The candidate plane predicts zero, while the full Euclidean input distance is $\\rho=\\sqrt{x^2+x^4}=x\\sqrt{1+x^2}$. Therefore $|F(x,x^2)-F(0,0)-L(x,x^2)|/\\rho=1/(2\\sqrt{1+x^2})\\to1/2$, not zero. For $x<0$, the signed value $F=x/2$ reverses but the absolute normalized error has the same limit. The absolute error $|x|/2\\to0$, consistent with continuity, yet it is first order in the distance. No total derivative exists.",
+            "The tested unit direction on the curve is $(x,x^2)/\\rho=(1,x)/\\sqrt{1+x^2}$ for $x>0$; it changes with $x$ and approaches the horizontal direction. Exactly on the horizontal ray, $F(x,0)=0$. Along any fixed nonvertical ray $y=mx$ with $m\\ne0$, $|F(x,mx)|/\\sqrt{x^2+m^2x^2}=|m|\\,|x|/((x^2+m^2)\\sqrt{1+m^2})\\to0$ as $x\\to0$ from either side. Fixed-direction limits say that for each chosen direction a sufficiently small scale works; total differentiability requires one scale to control all nearby directions simultaneously. The bound $|F|/\\rho\\le1/2$ proves continuity but does not shrink to zero. Compare the smooth $G(x,y)=x^2+y^2$: its candidate map is also zero, and $|G-L|/\\rho=\\rho\\to0$ for every direction."
+          ]
+        }
+      ],
+      "formulaTex": "\\begin{gathered}df_{\\mathbf a}(\\mathbf h)=f_x(\\mathbf a)h_1+f_y(\\mathbf a)h_2,\\\\ f(\\mathbf a+\\mathbf h)-f(\\mathbf a)-df_{\\mathbf a}(\\mathbf h)=o(\\|\\mathbf h\\|)\\quad(\\mathbf h\\to\\mathbf0).\\end{gathered}"
+    },
+    {
+      "title": "Tangent planes and measurable error",
+      "paragraphs": [
+        "The graph $z=f(x,y)$ is a surface in three-dimensional space. At a differentiability point $(a,b)$, its tangent plane is the graph of the affine function $T(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$. Affine means a linear expression plus a constant. The graph passes through the original point and reproduces both coordinate slopes. Its deeper property is the vanishing relative error from the definition above. A picture that appears flat from one viewing direction does not provide that property.",
+        "The total differential is $df=f_x\\,dx+f_y\\,dy$: $dx,dy$ are chosen input increments and $df$ is the predicted output change. The actual change is $\\Delta f=df+r(h)$. A quantitative error estimate can be obtained with one-variable calculus. Let $a=(a_1,a_2)$, $h=(h_1,h_2)$, and $g(t)=f(a+th)$ for $0\\le t\\le1$. If the entire segment stays in the domain, $f$ is $C^2$ around it, and $|g''(t)|\\le M\\|h\\|^2$ throughout, one-variable Taylor's theorem gives $|f(a+h)-f(a)-\\nabla f(a)\\cdot h|=|g(1)-g(0)-g'(0)|\\le M\\|h\\|^2/2$. The bound is stronger than differentiability alone.",
+        "Units make the prediction meaningful. If $x$ and $y$ are distances in meters and $f$ is temperature in degrees Celsius, each partial has units degrees Celsius per meter, and each product in $df$ is a temperature change. If the inputs have different units, such as radius in meters and pressure in pascals, the total differential still adds compatible output changes. However, comparing coordinate lengths or asking for a unit direction requires a declared scaling; the Euclidean gradient geometry later in this chapter assumes compatible coordinates or specified dimensionless coordinates.",
+        "To test a local model, choose a displacement, compute the prediction, and compare it with the actual value. Then halve the displacement in the same direction. Smooth curvature usually makes the absolute error decrease by approximately a factor of four. That observed ratio is useful evidence about this experiment, not a universal consequence of differentiability: the definition only promises that error divided by displacement length tends to zero. Near a singularity, or outside the domain, a tangent-plane extrapolation may fail even when the starting derivatives are modest.",
+        "An affine plane is a local statement at a chosen base point. For $f(x,y)=x^2+y^2$, the tangent plane at $(a,b)$ is $z=a^2+b^2+2a(x-a)+2b(y-b)$. Rearrangement gives $z=2ax+2by-a^2-b^2$. At another base point the coefficients change, so the entire curved bowl cannot be represented by one plane. The exact residual is $(x-a)^2+(y-b)^2$; this nonnegative remainder means every tangent plane lies below the bowl, a global fact special to this convex example.",
+        "The segment condition in the preceding estimate is essential. The Hessian $H_f$ is the matrix of second partial derivatives, and the chain rule gives $g''(t)=h^{\\mathsf T}H_f(a+th)h$. Its Euclidean operator norm is $\\|H_f\\|_{\\mathrm{op}}=\\sup_{\\|u\\|=1}\\|H_fu\\|$; Cauchy–Schwarz gives $|h^{\\mathsf T}H_fh|\\le\\|H_f\\|_{\\mathrm{op}}\\|h\\|^2$. Thus a Hessian norm bound $M$ along the whole segment supplies the stated hypothesis on $g''$. On an irregular domain, take a small ball around the interior base point so every chosen segment stays inside it. Chapter 22 develops the matrix test for extrema; here the matrix only certifies an approximation error.",
+        "Measurement precision creates a practical floor. If each observed output carries uncertainty at most $\\eta$, comparing actual and predicted changes at very tiny $h$ can amplify relative uncertainty, because both outputs are nearly equal. A table of shrinking residuals may first show quadratic behavior and then flatten into noise. The mathematical remainder condition concerns exact function values; in data analysis, state the measurement scale and use steps large enough to exceed the noise while small enough for the local approximation to be credible.",
+        "Total differentials compose naturally with small simultaneous changes. Suppose the area of a rectangle is $A=lw$. At $(l,w)=(3,2)$, increments $\\Delta l=0.02$ and $\\Delta w=-0.01$ give $dA=2(0.02)+3(-0.01)=0.01$. The exact change is $dA+\\Delta l\\Delta w=0.0098$. The difference is a product of increments, hence second order. This example also makes clear that $df$ is a signed prediction: one input change can partially offset another.",
+        "The tangent plane of $z=f(x,y)$ is often written $f_x(a,b)(x-a)+f_y(a,b)(y-b)-(z-f(a,b))=0$. Its normal vector is $(f_x,f_y,-1)$. This normal never vanishes because its last component is $-1$, even when the gradient is zero. A horizontal tangent plane occurs at a critical point; it is still a perfectly valid plane. Level surfaces of a general constraint $G(x,y,z)=0$ are different: if $\\nabla G$ vanishes, the standard regular-surface construction may fail.",
+        "For data-based approximations, the base point, displacement, and acceptable output error should all be stated. Suppose a temperature model has a Hessian norm bounded by $4\\,^\\circ\\mathrm{C}/\\mathrm{m}^2$ in a $0.1\\,\\mathrm m$ ball. Taylor's bound gives at most $(2\\,^\\circ\\mathrm{C}/\\mathrm{m}^2)r^2$ of tangent-plane error, where $r$ is the displacement length, so a $0.05\\,\\mathrm m$ move has an error no more than $0.005\\,^\\circ\\mathrm{C}$. This is a guarantee only if the model is twice differentiable throughout the segment and the bound is justified; a fitted numerical Hessian alone might not provide that certainty. If the sensor's measurement uncertainty is $0.1\\,^\\circ\\mathrm{C}$, the theoretical plane error is smaller than the instrument resolution, so comparison with measurements cannot directly verify the bound. The example joins mathematical approximation, physical units, and the limits of an experiment.",
+        "A tangent plane can predict a change of zero along a special displacement without the actual change being zero. For $f(x,y)=x^2+y^2$ at $(1,2)$, choose $h=(2s,-s)$, perpendicular to the gradient $(2,4)$. The linear prediction is $2(2s)+4(-s)=0$, but the exact residual is $(2s)^2+(-s)^2=5s^2>0$ when $s\\ne0$. This is a clean illustration of a level-set tangent: it preserves the function only to first order. To stay exactly on the level circle, the path must bend; a fixed straight-line direction leaves the circle at second order. The same quadratic residual explains why visual agreement near contact can be deceptive at coarse scale."
+      ],
+      "formula": "T(x,y) = f(a,b) + fₓ(a,b)(x−a) + fᵧ(a,b)(y−b).",
+      "formulaTex": "\\begin{gathered}\nT(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b),\\\\\n\\text{for }f\\text{ differentiable at }(a,b).\n\\end{gathered}"
+    },
+    {
+      "title": "The chain rule and the Jacobian",
+      "paragraphs": [
+        "Now suppose the input point moves along a differentiable curve $r(t)=(x(t),y(t))$. If $f$ is differentiable at $r(t)$, substitution of the curve’s linear approximation into the linear approximation for $f$ gives the chain rule. The output rate is $f_x\\,x^{\\prime}+f_y\\,y^{\\prime}$, with the partial derivatives evaluated at the moving point. Each coordinate contributes its sensitivity multiplied by its rate of change. Even if one contribution is positive, another can outweigh it, so a positive $x$ partial alone says little about the total rate along a path.",
+        "For several outputs, collect the linear coefficients into a matrix. A differentiable map $F$ from an open subset of $\\mathbb R^n$ to $\\mathbb R^m$ has derivative represented by its $m$-by-$n$ Jacobian matrix $J_F$. Entry $(i,j)$ is $\\partial F_i/\\partial x_j$: rows correspond to outputs and columns to inputs. Multiplying $J_F(a)$ by an input displacement $h$ gives the first-order output displacement. A scalar-valued function has a one-row Jacobian; its gradient is conventionally written as a column vector, so the two are transposes in standard orthonormal coordinates.",
+        "If $G$ maps input coordinates into the domain of $F$, and $G$ is differentiable at $a$ while $F$ is differentiable at $G(a)$, the composition has Jacobian $J_{F\\circ G}(a)=J_F(G(a))J_G(a)$. Matrix dimensions expose mistakes: an $m$-by-$n$ matrix times an $n$-by-$k$ matrix produces an $m$-by-$k$ derivative. The order follows the actual transformation of increments: first $J_G$ acts, then $J_F$. For $x=x(s,t)$ and $y=y(s,t)$, this yields $\\partial f/\\partial s=f_x\\,x_s+f_y\\,y_s$ and the corresponding formula $\\partial f/\\partial t=f_x\\,x_t+f_y\\,y_t$.",
+        "The word Jacobian sometimes means the matrix and sometimes its determinant. The determinant is defined only for square matrices and measures signed local volume scaling; it is not a replacement for the full derivative map. For polar coordinates $x=r\\cos\\theta$, $y=r\\sin\\theta$, the matrix has rows $(\\cos\\theta,-r\\sin\\theta)$ and $(\\sin\\theta,r\\cos\\theta)$, with determinant $r$. At $r=0$ the angular column vanishes, explaining why this parametrization loses a direction there. Chapter 24 will use the absolute determinant to transform area elements.",
+        "The chain rule is a statement about composition, not about treating $dx$ and $dy$ as independent physical clocks. If $x(t)=t^2$ and $y(t)=\\sin t$, then $f(x(t),y(t))$ changes because both inputs change. At a time when $x^{\\prime}=0$, the $x$ contribution to the instantaneous rate vanishes even if $f_x$ is large. At a time when $f_y=0$, the $y$ motion has no first-order contribution even if $y^{\\prime}$ is large. This separates motion through a field from spatial sensitivity of the field.",
+        "For $f(x,y)=x^2+y^2$ and polar coordinates $x=r\\cos\\theta$, $y=r\\sin\\theta$, the composition is exactly $r^2$. The matrix chain rule predicts $\\partial f/\\partial r=2r$ and $\\partial f/\\partial\\theta=0$. Direct calculation using $f_x=2x$ and $f_y=2y$ gives $2x\\cos\\theta+2y\\sin\\theta=2r$ and $-2xr\\sin\\theta+2yr\\cos\\theta=0$. The cancellation in the angular derivative expresses rotational symmetry, and checking both routes is a useful guard against transposing a Jacobian.",
+        "Dimensions of a Jacobian matter in applications. If $F$ maps two controls to three sensor readings, $J_F$ has three rows and two columns. It cannot be inverted as an ordinary square matrix. A least-squares inverse problem may still estimate controls from readings, but that is an additional optimization problem, not the inverse function theorem. If $G$ maps a single time variable into the two controls, $J_{F\\circ G}$ is a three-by-one column of time rates. Matrix shapes encode the direction of causation.",
+        "At a coordinate singularity, a physical function can remain smooth while the coordinate map loses invertibility. The polar map has determinant $r$, so $r=0$ makes angular changes invisible in Cartesian position. A formula with $1/r$ in its transformed derivatives may blow up there even when the underlying Cartesian function is regular. Do not infer a physical singularity solely from a bad coordinate chart. The origin is better analyzed in Cartesian coordinates or with limits that account for all angles.",
+        "A Jacobian determinant carries orientation as well as scale. For a plane map with determinant $-2$ at a point, a small oriented area is locally reversed and doubled in magnitude. The change-of-variables formula for ordinary area uses the absolute value $2$. For a non-square derivative there is no ordinary determinant, though lengths, surface areas, and volumes can be obtained from related Gram determinants when the map has suitable rank. Chapter 24 develops the square-coordinate cases used in multiple integrals.",
+        "The matrix chain rule can be verified by a small-increment calculation. If $G(a+h)=G(a)+J_G(a)h+o(\\|h\\|)$ and $F(b+k)=F(b)+J_F(b)k+o(\\|k\\|)$ at $b=G(a)$, substitute $k=G(a+h)-G(a)$. Differentiability of $G$ makes $k=O(\\|h\\|)$, so the remainder from $F$ is also $o(\\|h\\|)$. The linear part becomes $J_F(G(a))J_G(a)h$. This argument explains both the matrix order and why differentiability of both component maps is required. Merely possessing some partial derivatives of $F$ and $G$ at their points does not justify composing them as Jacobians. A dimensional check then confirms the product's output and input spaces, but it is a check on the argument rather than a substitute for its hypotheses."
+      ],
+      "formula": "d/dt f(r(t)) = ∇f(r(t)) · r′(t);  J(F ∘ G)(a) = JF(G(a))JG(a).",
+      "formulaTex": "\\begin{gathered}\n\\frac{d}{dt}f(\\mathbf r(t))=\\nabla f(\\mathbf r(t))\\cdot\\mathbf r^{\\prime}(t),\\\\\nJ_{F\\circ G}(\\mathbf a)=J_F(G(\\mathbf a))J_G(\\mathbf a),\\\\\n\\mathbf r\\text{ differentiable at }t,\\quad f\\text{ differentiable at }\\mathbf r(t),\\\\\nG\\text{ differentiable at }\\mathbf a,\\quad F\\text{ differentiable at }G(\\mathbf a).\n\\end{gathered}"
+    },
+    {
+      "title": "Directional rates and gradient geometry",
+      "paragraphs": [
+        "For a unit vector $u$, define $D_uf(a)$ as the limit of $[f(a+tu)-f(a)]/t$ as $t$ tends to zero, when it exists. The parameter $t$ measures signed distance in input space because $\\|u\\|=1$. If $f$ is differentiable, applying its linear model to $tu$ proves $D_uf(a)=\\nabla f(a)\\cdot u$, where $\\nabla f=(f_x,f_y)$. A vector $v$ that is not normalized instead measures change per unit parameter along $a+tv$; the resulting rate is scaled by $\\|v\\|$. Always state whether a problem supplies a direction or a velocity.",
+        "Write the dot product as $\\|\\nabla f\\|\\cos\\phi$ for a unit direction making angle $\\phi$ with a nonzero gradient. The maximum directional derivative is $\\|\\nabla f\\|$ and occurs in the gradient direction. The minimum is $-\\|\\nabla f\\|$ in the opposite direction. Perpendicular directions have zero first-order change. This conclusion uses the Cauchy–Schwarz inequality and applies at the point: it does not promise the fastest finite route to a distant target. At a zero gradient every first-order directional rate vanishes, but the function may still rise, fall, or have a saddle through second-order effects.",
+        "If a differentiable curve lies on the level set $f=c$, its output is constant. The chain rule therefore gives $\\nabla f\\cdot r^{\\prime}=0$. At a regular point where $\\nabla f$ is nonzero, the gradient is normal to the smooth level curve; in three variables it is normal to a regular level surface. For the graph $z=f(x,y)$, write $H(x,y,z)=f(x,y)-z$. Its normal $(f_x,f_y,-1)$ immediately reproduces the tangent-plane equation. At singular level points where the gradient vanishes, this normal argument cannot determine a tangent.",
+        "The differentiability hypothesis cannot be replaced by the existence of all directional derivatives. Consider $q(x,y)=x^3/(x^2+y^2)$ away from the origin and $q(0,0)=0$. It is continuous there because $|q|\\le|x|$. Every directional derivative exists and equals $u_1^3$ for a unit vector $u$. Yet its partials at the origin are $1$ and $0$, which would predict the linear rule $D_uq=u_1$. For $u=(1/\\sqrt2,1/\\sqrt2)$, these values differ. Thus $q$ has directional rates in every direction without possessing a total derivative. This example explains why the lab must start with a justified smooth function.",
+        "The phrase ‘steepest direction’ uses a choice of distance. In orthonormal Cartesian coordinates with compatible input units, $df(h)=\\nabla f\\cdot h$, and Cauchy–Schwarz gives the largest rate among Euclidean unit displacements. Rescaling an axis changes the component numbers and can change which direction counts as unit length. For inputs with different physical units, declare scales or a weighted norm before comparing directions; the same linear differential then remains valid, while the optimizing direction can change.",
+        "For $f(x,y)=x^2+4y^2$, the gradient at $(1,1)$ is $(2,8)$. Along $u=(3/5,4/5)$, the directional rate is $2(3/5)+8(4/5)=38/5$. Along the tangent to the ellipse $f=5$ at that point, one can choose $v=(-4,1)/\\sqrt{17}$; the dot product vanishes. The function may still change at second order along a straight step in that direction, because a straight line only approximates the curved level set locally.",
+        "An exact path on a regular level curve obeys $f(r(t))=c$ for a whole interval, so its derivative vanishes at every differentiable point on that path. This does not imply that every vector perpendicular to the gradient traces a level curve when followed as a straight line. At a point it specifies a tangent direction. To construct a finite level-set route one must continually update the direction or solve the level equation. Local geometry should not be overextended into a global path claim.",
+        "The directional derivative formula can also identify the largest possible decrease: choose $u=-\\nabla f/\\|\\nabla f\\|$ when the gradient is nonzero. A small step $h=\\alpha u$ then predicts $\\Delta f\\approx-\\alpha\\|\\nabla f\\|$. The approximation may fail to decrease the function for an excessively large $\\alpha$, because curvature can overwhelm the linear term. Optimization algorithms therefore pair a direction with step-size control. Chapter 22 turns that local idea into a computational method and distinguishes algorithmic progress from proof of optimality.",
+        "At a zero gradient, first-order measurements contain no directional preference. For $f=x^2+y^2$ the origin is a minimum; for $f=-x^2-y^2$ it is a maximum; for $f=x^2-y^2$ it is a saddle. All three gradients vanish at the origin. Their quadratic terms, not their first derivatives, determine the distinction. This is why a gradient arrow visualization should not silently classify stationary points; it shows only the local linear part of the surface.",
+        "The gradient field of $f(x,y)=x^2+4y^2$ is $(2x,8y)$. At points on the same ellipse $x^2+4y^2=c$, arrows generally have different lengths, so equal output does not mean equal local sensitivity. Near the narrow ends of the ellipse, the $y$ component can dominate. A contour plot by itself shows equal values, while gradient arrows show how rapidly and in which direction the value changes. Their perpendicularity follows from differentiability and regularity, but the lengths also depend on the axis scale. Reading both layers together gives more information than either one alone.",
+        "The worked counterexample in Lesson 21.1 makes this warning sharper: $F=x^3y/(x^4+y^2)$, defined as zero at the origin, has $D_uF(0,0)=0$ for every fixed two-sided direction, exactly the linear rule $L(u)=0$, and is continuous there. Visual investigation 21.4 compares fixed rays with a moving curved approach and a genuinely differentiable quadratic. Predict the normalized errors before revealing its proof; a finite sweep of rays cannot certify a uniform remainder."
+      ],
+      "formula": "Dᵤf(a) = ∇f(a)·u for differentiable f and ||u|| = 1;  max Dᵤf(a) = ||∇f(a)||.",
+      "formulaTex": "\\begin{gathered}\nD_{\\mathbf u}f(\\mathbf a)=\\nabla f(\\mathbf a)\\cdot\\mathbf u\n\\quad(\\|\\mathbf u\\|=1),\\\\\n\\max_{\\|\\mathbf u\\|=1}D_{\\mathbf u}f(\\mathbf a)=\\|\\nabla f(\\mathbf a)\\|,\n\\quad f\\text{ differentiable at }\\mathbf a.\n\\end{gathered}"
+    },
+    {
+      "title": "Proving a tangent plane with a remainder bound",
+      "paragraphs": [
+        "Finding partial derivatives gives a candidate tangent plane, but differentiability asks whether one plane approximates the surface in every direction. Consider $f(x,y)=\\sqrt{1+x^2+2y^2}$, with dimensionless coordinates. At the origin $f(0,0)=1$. Each coordinate slice has derivative zero there, so the candidate plane is $z=1$. That calculation by itself is insufficient: a function can have both partial derivatives without being differentiable. We therefore estimate the residual directly.",
+        "Write $u=x^2+2y^2$ and $r=\\sqrt{x^2+y^2}$. Since $u\\ge0$, rationalization gives $f(x,y)-1=u/(\\sqrt{1+u}+1)$. The denominator is at least $2$, and $u\\le2r^2$, so $0\\le f(x,y)-1\\le u/2\\le r^2$. Divide by $r$ for nonzero $(x,y)$: $0\\le|f(x,y)-1|/r\\le r\\to0$. This is precisely the two-variable differentiability condition with linear map $L(h,k)=0$. The bound covers every direction and every curved approach at once. It also shows why the plane becomes relatively accurate as the distance shrinks.",
+        "A second-order model captures structure that the tangent plane misses. The one-variable Taylor expansion of $\\sqrt{1+u}$ at $u=0$ gives $1+u/2$ plus a remainder. For $u\\ge0$, the second derivative of $\\sqrt{1+u}$ has magnitude at most $1/4$, so the degree-one remainder in $u$ has magnitude at most $u^2/8$. Substituting $u=x^2+2y^2$ yields $f(x,y)=1+x^2/2+y^2+E$, with $|E|\\le(x^2+2y^2)^2/8\\le r^4/2$. The surface rises twice as rapidly in the $y$ direction at quadratic order even though both first partials vanish at the origin.",
+        "This is the local geometry behind a Hessian. The second-order coefficients form the diagonal quadratic expression $x^2/2+y^2$, so the Hessian at the origin is $\\operatorname{diag}(1,2)$. The origin is a strict local, indeed global, minimum because the radicand is at least 1 and equals 1 only when $x=y=0$. A vanishing gradient alone would identify only a critical point; the exact inequality and the second-order model classify it.",
+        "For a measured surface, one would also check units: adding $1$, $x^2$, and $y^2$ requires nondimensional coordinates or coefficients carrying reciprocal squared input units. The algebraic proof does not excuse a dimensionally inconsistent model.",
+        "The rationalization argument gives a stronger result than merely claiming continuity. Since $0\\le f-1\\le r^2$, an error tolerance of $\\varepsilon$ for the plane's output is guaranteed whenever $r<\\sqrt\\varepsilon$. For relative first-order error below $\\varepsilon$, the bound $(f-1)/r\\le r$ says $r<\\varepsilon$ suffices. The different choices of radius answer different questions: absolute output error versus error compared with input displacement. Keeping these tolerances separate avoids confusing a good numerical estimate at one scale with a differentiability proof.",
+        "The same proof pattern handles $f(x,y)=\\sqrt{c+x^2+ay^2}$ at the origin when $c>0$ and $a\\ge0$. Rationalization yields $f-\\sqrt c=(x^2+ay^2)/(\\sqrt{c+x^2+ay^2}+\\sqrt c)$. The denominator is at least $2\\sqrt c$, so the residual is bounded by $\\max(1,a)r^2/(2\\sqrt c)$. The tangent plane is $z=\\sqrt c$. If $c=0$, the function behaves like a norm and generally has a cusp at the origin; the positive baseline inside the square root is essential.",
+        "For the quadratic approximation, the error is fourth order in $r$ because $u$ itself is second order. The estimate $|E|\\le r^4/2$ therefore predicts that halving $r$ reduces this bound by a factor of sixteen. In contrast, the tangent-plane error bound $r^2$ falls by a factor of four. These are bounds, not exact equality for every direction; along the $x$-axis and $y$-axis the constants differ. Checking a few directions can illustrate the order, while the derived inequality supplies the uniform guarantee.",
+        "A local minimum can be established without a Hessian test when an exact inequality is available. Here $1+x^2+2y^2\\ge1$, with strict inequality away from the origin, so $f(x,y)>1$ for every nonzero input. This global comparison is simpler and stronger than checking a positive-definite Hessian only near zero. The Hessian remains useful when no obvious exact comparison exists. Choose the shortest valid argument, and distinguish a local second-order certificate from a global algebraic inequality.",
+        "Finally, changing the coordinate scale changes the numerical Hessian entries and the apparent curvature. If $x$ is replaced by $X=10x$, then $x^2/2$ becomes $X^2/200$. The physical surface is unchanged; only its coordinate description differs. An interpretation of “twice as rapidly” is meaningful here because the chapter explicitly uses dimensionless $x$ and $y$ with the same scale. In a physical model, coefficients and units must be carried through the coordinate substitution before comparing directional curvature.",
+        "A remainder bound can be turned into a decision about a safe step. For $g(x,y)=\\sqrt{4+x^2+3y^2}$, the error of the constant plane $z=2$ is at most $3r^2/4$. If an application tolerates an output error no larger than $0.03$, it suffices to keep $r\\le0.2$ because $3(0.2)^2/4=0.03$. This radius is sufficient, not necessarily maximal: the bound uses the worst direction and a denominator estimate that may be loose. A numerical sample along one direction cannot enlarge the guaranteed radius for all directions. This distinction between a conservative certificate and observed performance reappears in numerical integration, differential-equation solvers, and optimization algorithms. It is also a reason to record explicit constants rather than only writing $O$-notation."
+      ],
+      "formula": "0 ≤ f(x,y)−1 ≤ r²; hence |f(x,y)−1|/r ≤ r → 0.",
+      "formulaTex": "\\begin{gathered}\nf(x,y)=\\sqrt{1+x^2+2y^2},\\qquad r=\\sqrt{x^2+y^2}>0,\\\\\n0\\le f(x,y)-1\\le r^2,\\\\\n0\\le\\frac{|f(x,y)-1|}{r}\\le r\\longrightarrow0\\quad(r\\to0^+).\n\\end{gathered}"
+    },
+    {
+      "title": "Normals and tangent planes on regular level surfaces",
+      "paragraphs": [
+        "Write a level surface as $F(x,y,z)=0$, with $F\\in C^1$ on an open neighborhood of $P$ and $F(P)=0$. If $\\nabla F(P)\\ne\\mathbf0$, the chain rule along any differentiable on-surface curve $\\mathbf r(t)$ through $P$ gives $\\nabla F(P)\\cdot\\mathbf r'(t_0)=0$. This proves a necessary condition on tangent velocities. It does not yet prove that the nearby zero set is a two-dimensional surface: that needs a local graph.",
+        "Choose a coordinate with nonzero partial derivative, say $F_z(P)\\ne0$. The local graph lemma below derives a unique $C^1$ height $z=g(x,y)$ from the one-variable IVT and MVT, then obtains its two tangent directions. It is local: another branch may exist outside its box. Changing to $-F$ reverses the chosen normal but leaves the set and tangent plane unchanged. If $F_x$ or $F_y$ is nonzero instead, permute coordinates. The theorem card gives the construction rather than assuming implicit differentiation before existence is proved.",
+        "For $F=x^2/4-y^2-z$ at $P=(2,0,1)$, $F(P)=0$ and the world gradient is $(1,0,-1)$. The actual graph $z=x^2/4-y^2$ has $g_x(P)=1$, $g_y(P)=0$, so its tangent plane is $z-1=x-2$, equivalently $x-z=1$. Its unit normals are $\\pm(1,0,-1)/\\sqrt2$. A screen rotation changes the drawing, not these world-coordinate values.",
+        "The regularity hypothesis is sufficient, not necessary for a smooth set. At the apex of $F=x^2/4+y^2-z^2=0$, $\\nabla F=0$; the generator velocities $(2,0,1)$, $(-2,0,1)$, and $(0,1,1)$ have determinant $-4$, so no single two-dimensional plane contains them all. This cone has no tangent plane there for that geometric reason. By contrast, $F=z^3$ has zero gradient on its zero set, yet that set is exactly the smooth plane $z=0$. A failed theorem hypothesis alone cannot classify the set.",
+        "For a separate branch check, $F=x^2+y^2+z^2-1$ near $(0,0,1)$ has one positive-height graph $z=\\sqrt{1-x^2-y^2}$; its lower sphere branch lies outside a small box around $z=1$. Try linked problems 34–36 after the lemma. First make an unaided regular-plane calculation, then use the proof and the singular comparisons to explain what each conclusion actually requires.",
+        "The displayed graph example also lets us check the converse tangent-direction claim explicitly. At $P=(2,0,1)$, let $\\mathbf u=(1,0,1)$ and $\\mathbf v=(0,1,0)$. They are independent and perpendicular to the normal $(1,0,-1)$. Every vector $\\mathbf w=(a,b,c)$ satisfying the normal equation $a-c=0$ equals $a\\mathbf u+b\\mathbf v$. For any fixed real $a,b$, the curve $\\mathbf r(t)=(2+at,bt,(2+at)^2/4-b^2t^2)$ lies on the actual surface for small real $t$, passes through $P$ at zero, and has velocity $(a,b,a)$. Thus every direction in the claimed tangent plane is realized by an on-surface curve here. The local graph lemma supplies the analogous conclusion in the general regular case; the chain-rule necessary condition alone does not.",
+        "A tangent direction does not say that its straight line remains on the surface. Taking $a=1,b=0$, the tangent line is $P+t\\mathbf u=(2+t,0,1+t)$. Substitution into $F$ gives $t^2/4$, which is nonzero for every $t\\ne0$. The true on-surface curve instead has height $1+t+t^2/4$. Its difference from the tangent line is quadratic in the parameter, while their positions and first derivatives agree at zero. This is the concrete first-order meaning of the tangent plane: it records local linear change without discarding the surface curvature.",
+        "The regular-level-set test is sufficient: a nonzero gradient supplies a normal and a local tangent plane. A zero gradient only blocks that test for the chosen formula. First identify the zero set, then test its actual first-order geometry. Different formulas can define the same set with different gradients.",
+        "At the origin, $H=(z-x^2-y^2)^3$ and $K=z^2-x^2-y^2$ both have zero gradient. Yet $H=0$ is the graph $z=x^2+y^2$. Its height above $z=0$ is $h^2+k^2$, and $(h^2+k^2)/\\sqrt{h^2+k^2}\\to0$. For $K=0$, three independent generator velocities pass through the origin; no plane contains them all. Also $G=z-x^2-y^2$ defines the same set as $H$ while $\\nabla G(0)=(0,0,1)$. Work Problem 21.37 before opening its answer."
+      ],
+      "formula": "If F(P)=0, F is continuously differentiable near P, and ∇F(P)≠0, the tangent plane is ∇F(P)·(x−P)=0.",
+      "formulaTex": "F(P)=0,\\quad F\\in C^1,\\quad\\nabla F(P)\\ne\\mathbf0\\quad\\Longrightarrow\\quad\\nabla F(P)\\cdot(\\mathbf x-P)=0.",
+      "theorems": [
+        {
+          "title": "A regular level set has a local graph and tangent plane",
+          "statement": "Let $F$ be $C^1$ on an open neighborhood of $P=(x_0,y_0,z_0)$, with $F(P)=0$ and $F_z(P)\\ne0$. Near $P$, its zero set is the graph of a unique $C^1$ function $z=g(x,y)$, and the actual tangent plane is $\\nabla F(P)\\cdot(\\mathbf x-P)=0$. A nonzero $F_x$ or $F_y$ gives the same conclusion after permuting coordinates.",
+          "equationTex": "g_x=-\\frac{F_x}{F_z},\\qquad g_y=-\\frac{F_y}{F_z},\\qquad \\nabla F(P)\\cdot(\\mathbf x-P)=0",
+          "proof": [
+            "Write $q_0=(x_0,y_0)$. Replacing $F$ by $-F$ if necessary makes $F_z(P)>0$. Continuity of $F_z$ gives a closed rectangular box $K$ around $P$, contained in the open domain, and $m>0$ such that $F_z\\ge m$ everywhere on $K$. Choose $s>0$ so the full segment from $z_0-s$ to $z_0+s$ lies inside $K$. The one-variable MVT at $q_0$ gives $F(q_0,z_0-s)\\le-ms<0<ms\\le F(q_0,z_0+s)$. Continuity of $F$ at these two endpoints gives a smaller open horizontal rectangle $U$ around $q_0$ where both strict signs persist. Shrink $U$ so its closure, its coordinate segments, and all vertical segments between those heights remain inside $K$.",
+            "For every $q=(x,y)\\in U$, continuity in $z$ and the persistent endpoint signs give a root $g(q)\\in(z_0-s,z_0+s)$ by IVT. On this vertical interval $F_z\\ge m$, so MVT makes $z\\mapsto F(q,z)$ strictly increasing; the root is unique there. Therefore every zero in the smaller open box belongs to this graph, and $g(q_0)=z_0$. No claim is made about zeros on distant branches.",
+            "The continuous coordinate partials are bounded on compact $K$: $|F_x|\\le C_x$, $|F_y|\\le C_y$. For $q=(x,y)$ and $q^{\\prime}=(x^{\\prime},y^{\\prime})$ in $U$, split the horizontal move at height $g(q^{\\prime})$ into an $x$ step and a $y$ step. Both segments lie in $K$, so coordinate MVT gives $|F(q,g(q^{\\prime}))-F(q^{\\prime},g(q^{\\prime}))|\\le C_x|x-x^{\\prime}|+C_y|y-y^{\\prime}|$. Vertical MVT at $q$, using $F(q,g(q))=F(q^{\\prime},g(q^{\\prime}))=0$, then gives $m|g(q)-g(q^{\\prime})|\\le C_x|x-x^{\\prime}|+C_y|y-y^{\\prime}|$. If the heights coincide, this inequality is immediate without a zero-length MVT. Hence $g$ is continuous.",
+            "Fix $(x,y)\\in U$ and nonzero small $h$ with $(x+h,y)\\in U$. Split the difference of the two zero equations at $F(x,y,g(x+h,y))$. Coordinate MVTs on segments inside $K$ give $0=hF_x(x+\\theta_hh,y,g(x+h,y))+(g(x+h,y)-g(x,y))F_z(x,y,\\zeta_h)$, where $0<\\theta_h<1$ and $\\zeta_h$ lies between the heights. If the heights coincide, choose $\\zeta_h$ at their common value; the equation still holds. Divide by $h\\ne0$ and by $F_z\\ge m$, never by the height difference. Continuity of $g$ and the partials gives $g_x=-F_x/F_z$ at $(x,y,g(x,y))$. The identical $y$-coordinate argument gives $g_y=-F_y/F_z$.",
+            "These ratios are continuous on $U$ because the partials and $g$ are continuous and $F_z$ stays away from zero. By the continuous-partials differentiability criterion of lesson 21.1, $g$ is differentiable. Its independent graph tangent vectors at $P$ are $(1,0,g_x(q_0))$ and $(0,1,g_y(q_0))$. Both dot to zero with $\\nabla F(P)$ by the derived ratios; as independent vectors they span its two-dimensional orthogonal plane. The differentiable graph therefore has the actual tangent plane $F_x(P)(x-x_0)+F_y(P)(y-y_0)+F_z(P)(z-z_0)=0$. The same argument applies after permuting coordinates when another partial is nonzero."
+          ]
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Constructing and testing a tangent-plane model",
+      "problem": "For $f(x,y)=x^2+xy+2y^2$ on $\\mathbb R^2$, estimate $f(1.02,0.99)$ using the tangent plane at $(1,1)$, and calculate the error.",
+      "steps": [
+        "Compute $f(1,1)=4$, $f_x=2x+y$, and $f_y=x+4y$. The gradient at the base point is $(3,5)$. Polynomial partials are continuous, so differentiability is established.",
+        "The tangent plane is $T(x,y)=4+3(x-1)+5(y-1)$. With $\\mathbf h=(0.02,-0.01)$, the predicted change is $0.06-0.05=0.01$.",
+        "Direct substitution gives $1.0404+1.0098+1.9602=4.0104$. Expanding the polynomial shows the exact remainder is $h_1^2+h_1h_2+2h_2^2=0.0004$.",
+        "Halving $\\mathbf h$ gives an error of $0.0001$ exactly. The displacement length is about $0.02236$ initially, so the original error divided by length is about $0.01789$; halving $\\mathbf h$ halves that ratio."
+      ],
+      "answer": "The estimate is $4.01$, underestimating the true value $4.0104$ by $0.0004$. The quadratic remainder verifies the linear model’s first-order accuracy."
+    },
+    {
+      "title": "A moving sensor and its best direction",
+      "problem": "Let $T(x,y)=20+x^2+2y$, where coordinates are numerical meter values and $T$ is in degrees Celsius. A sensor follows $x(t)=t$ and $y(t)=t^2$, with $t$ measured in seconds. Find its temperature rate at $t=1$ and the largest directional rate at that location.",
+      "steps": [
+        "At $t=1$ the sensor is at $(1,1)$. The gradient is $(2x,2)=(2,2)$ degrees Celsius per meter, and the velocity is $(1,2)$ meters per second.",
+        "The chain rule gives $dT/dt=(2,2)\\cdot(1,2)=6$ degrees Celsius per second. Independently, substituting the path gives $T(t)=20+3t^2$, whose derivative is $6t$.",
+        "The largest rate per meter is $\\|\\nabla T\\|=2\\sqrt2$, attained along $\\mathbf u=(1/\\sqrt2,1/\\sqrt2)$. The sensor’s current direction is $(1/\\sqrt5,2/\\sqrt5)$, yielding $6/\\sqrt5$ degrees Celsius per meter.",
+        "Multiplying that directional rate by the speed $\\sqrt5$ meters per second recovers the time rate $6$. The distinct units distinguish direction from motion."
+      ],
+      "answer": "The time rate is $6\\,{}^\\circ\\mathrm{C/s}$; the maximum directional rate is $2\\sqrt2\\,{}^\\circ\\mathrm{C/m}$ toward $(1,1)/\\sqrt2$."
+    },
+    {
+      "title": "A remainder proves differentiability",
+      "problem": "Prove that $f(x,y)=x^2+xy+y^2$ is differentiable at the origin and find its tangent plane.",
+      "steps": [
+        "The coordinate partials at zero are both zero, so $L(h,k)=0$ is the only possible derivative.",
+        "The exact residual is $h^2+hk+k^2$. Since $|hk|\\le(h^2+k^2)/2$, its magnitude is at most $3r^2/2$.",
+        "Divide by $r$: $|\\text{residual}|/r\\le3r/2\\to0$ uniformly."
+      ],
+      "answer": "The tangent plane is $z=0$; $f$ is differentiable because its remainder is $O(r^2)$."
+    },
+    {
+      "title": "A plane with a signed error",
+      "problem": "Find the tangent plane to $f=x^2+y^2$ at $(1,2)$, then compare it with $f(1.1,1.8)$.",
+      "steps": [
+        "At $(1,2)$, $f=5$ and $\\nabla f=(2,4)$, so $T=5+2(x-1)+4(y-2)$.",
+        "The increments are $(0.1,-0.2)$; $T=5+0.2-0.8=4.4$.",
+        "The exact quadratic residual is $0.1^2+(-0.2)^2=0.05$, so $f=4.45$."
+      ],
+      "answer": "The tangent plane predicts $4.4$, under by $0.05$."
+    },
+    {
+      "title": "A two-stage chain rule",
+      "problem": "For $f(x,y)=x^2+y^2$ with $x=t^2,y=\\sin t$, find $d(f\\circ\\mathbf r)/dt$ at $t=0$.",
+      "steps": [
+        "The gradient at $\\mathbf r(0)=(0,0)$ is $(0,0)$, while $\\mathbf r^{\\prime}(0)=(0,1)$.",
+        "The chain rule gives $\\nabla f\\cdot\\mathbf r^{\\prime}=0$.",
+        "Directly, $f(\\mathbf r(t))=t^4+\\sin^2t$ and its derivative at zero is also zero.",
+        "Since $|\\sin t|\\le|t|$, $\\left|(t^4+\\sin^2t)/t\\right|\\le|t|^3+|t|\\to0$. The point has nonzero velocity $(0,1)$ at $t=0$, but its output has no first-order change."
+      ],
+      "answer": "The time rate is zero at $t=0$ despite nonzero motion in $y$."
+    },
+    {
+      "title": "Jacobian dimensions and product",
+      "problem": "Let $F(u,v)=(u+v,uv,u^2)$ and $G(t)=(t,t^2)$. Find $J(F\\circ G)(1)$.",
+      "steps": [
+        "$JF(u,v)$ has rows $(1,1)$, $(v,u)$, and $(2u,0)$; $JG(t)$ is the column $(1,2t)$.",
+        "At $t=1$, $G(1)=(1,1)$, so multiply the $3$-by-$2$ matrix by $(1,2)$.",
+        "The resulting column is $(3,3,2)$. Direct composition gives $(t+t^2,t^3,t^2)$, whose derivative at $1$ matches."
+      ],
+      "answer": "$J(F\\circ G)(1)=(3,3,2)^\\mathsf T$."
+    },
+    {
+      "title": "A normalized direction",
+      "problem": "For $f=x^2+4y^2$ at $(1,1)$, find its maximum directional rate and the rate toward $(4,5)$.",
+      "steps": [
+        "The gradient is $(2,8)$, with magnitude $\\sqrt{68}=2\\sqrt{17}$.",
+        "The displacement toward $(4,5)$ is $(3,4)$, so its unit direction is $(3/5,4/5)$.",
+        "Dotting gives $2(3/5)+8(4/5)=38/5$."
+      ],
+      "answer": "The maximum rate is $2\\sqrt{17}$; the specified directional rate is $38/5$."
+    },
+    {
+      "title": "A rationalized tangent plane",
+      "problem": "For $g(x,y)=\\sqrt{4+x^2+3y^2}$, prove the plane $z=2$ at the origin has a quadratic error bound.",
+      "steps": [
+        "Set $u=x^2+3y^2\\le3r^2$. Rationalize $g-2=u/(\\sqrt{4+u}+2)$.",
+        "The denominator is at least $4$, so $0\\le g-2\\le3r^2/4$.",
+        "Dividing by $r$ gives an upper bound $3r/4\\to0$, which proves differentiability with zero linear part."
+      ],
+      "answer": "The tangent plane is $z=2$, with error at most $3r^2/4$."
+    },
+    {
+      "title": "A normal to a saddle",
+      "problem": "Find the tangent plane and unit normals to $z=x^2/4-y^2$ at $(0,1,-1)$.",
+      "steps": [
+        "Take $F=x^2/4-y^2-z$. Direct substitution gives $F(0,1,-1)=0$.",
+        "The gradient $(x/2,-2y,-1)$ becomes $(0,-2,-1)$, which is nonzero.",
+        "The gradient plane is $-2(y-1)-(z+1)=0$. Dividing by $\\sqrt5$ gives either orientation of the unit normal."
+      ],
+      "answer": "The plane is $z=1-2y$ and the unit normals are $\\pm(0,2,1)/\\sqrt5$."
+    }
+  ],
+  "misconceptions": [
+    "“Existing partial derivatives guarantee a tangent plane.” They identify its candidate coefficients, but differentiability requires a remainder estimate valid across all approaches; $q(x,y)=\\frac{x^3}{x^2+y^2}$ for $(x,y)\\ne(0,0)$, with $q(0,0)=0$, has both partials at the origin but is not differentiable there.",
+    "“The gradient points along a level curve.” At a regular point it is perpendicular to the curve, since the function has zero rate along the curve.",
+    "“A zero directional derivative means no change.” It means no first-order change at that point; $f(x,y)=x^2+y^2$ rises in every nonzero direction from the origin despite all its directional derivatives being zero there."
+  ],
+  "lab": {
+    "title": "Explore directional rates across angles",
+    "description": "At a chosen point on $f(x,y)=x^2+xy+2y^2$, compare the gradient prediction with forward and central finite differences. Horizontal plot coordinates are angles in radians, and vertical coordinates are output units per unit input distance. Printed values also test the tangent plane.",
+    "code": "// Adjust the base point and positive step size; coordinates are dimensionless.\nconst a = 1, b = 1, step = 0.1;\nif (![a, b].every(Number.isFinite)) throw new Error('Use finite base coordinates.');\nif (!(step > 0 && Number.isFinite(step))) throw new Error('Use a finite positive step.');\nconst f = (x, y) => x*x + x*y + 2*y*y;\nconst gx = 2*a + b, gy = a + 4*b;\nif (![gx, gy, f(a,b)].every(Number.isFinite)) throw new Error('Derived base value overflows; reduce coordinates.');\nconst exact = [], forward = [], central = [];\nlet maxForwardError = 0, maxCentralError = 0;\nfor (let i = 0; i <= 180; i++) {\n  const angle = 2*Math.PI*i/180;\n  const ux = Math.cos(angle), uy = Math.sin(angle);\n  const predicted = gx*ux + gy*uy;\n  const plus = f(a+step*ux, b+step*uy);\n  const minus = f(a-step*ux, b-step*uy);\n  const fd = (plus-f(a,b))/step;\n  const cd = (plus-minus)/(2*step);\n  if (![angle, predicted, plus, minus, fd, cd].every(Number.isFinite)) throw new Error('Derived directional sample overflows; reduce inputs.');\n  exact.push([angle, predicted]);\n  forward.push([angle, fd]);\n  central.push([angle, cd]);\n  maxForwardError = Math.max(maxForwardError, Math.abs(fd-predicted));\n  maxCentralError = Math.max(maxCentralError, Math.abs(cd-predicted));\n}\nif (![1, 0.5, 0.25].every(scale => { const dx = 0.02 * scale, dy = -0.01 * scale; return [f(a,b) + gx*dx + gy*dy, f(a+dx,b+dy)].every(Number.isFinite); })) throw new Error('Tangent-plane sample overflows; reduce coordinates.');\nplot(exact, 'Gradient rate: angle (rad), output/input');\nplot(forward, 'Forward difference: angle (rad), output/input');\nplot(central, 'Central difference: angle (rad), output/input');\nconsole.log('Gradient:', gx, gy, 'maximum rate:', Math.hypot(gx,gy));\nconsole.log('Maximum sampled errors: forward, central', maxForwardError, maxCentralError);\nfor (const scale of [1, 0.5, 0.25]) {\n  const dx = 0.02*scale, dy = -0.01*scale;\n  const predicted = f(a,b) + gx*dx + gy*dy;\n  console.log('scale, plane, actual, absolute error:', scale, predicted, f(a+dx,b+dy), Math.abs(f(a+dx,b+dy)-predicted));\n}",
+    "tasks": [
+      "Before running, use the gradient $(3,5)$ to predict the unit direction of maximum rate at the default point. Why should the rate graph have both positive and negative values?",
+      "Halve step. Predict the change in forward-difference error and compare it with the central-difference error.",
+      "Move the base point to $(0,0)$ by editing a and b. Explain why the exact rate graph becomes zero while forward differences remain positive.",
+      "Try step=1e-12. Explain why floating-point subtraction can worsen the central result, and why finite angle samples do not prove a global maximum."
+    ],
+    "expected": "At the default point $(1,1)$, the gradient is $(3,5)$ and the maximum directional rate is $\\sqrt{34}\\approx5.830951895$. With step=0.1, the largest sampled forward error is about $0.2207$, while the central error is below $10^{-12}$. Tangent-plane errors at scales $1$, $1/2$, and $1/4$ are approximately $0.0004$, $0.0001$, and $0.000025$. Central differences are exact for this quadratic in exact arithmetic, so their residual is rounding error."
+  },
+  "exercises": [
+    {
+      "question": "Find the tangent plane to $z=e^{xy}$ at $(1,0)$. Estimate the value at $(1.01,0.02)$.",
+      "hint": "Compute $f$, $f_x$, and $f_y$ at $(1,0)$ before linearizing.",
+      "solution": "For $f=e^{xy}$, $f(1,0)=1$, $f_x=ye^{xy}$, and $f_y=xe^{xy}$. The base partials are $0$ and $1$, so the tangent plane is $z=T(x,y)=1+y$. At $(1.01,0.02)$ it predicts $1.02$; the true value is $e^{0.0202}\\approx1.0204054$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Show $x^2+xy+y^2$ is differentiable at zero.",
+      "hint": "Bound $|xy|$ by $r^2/2$, where $r=\\sqrt{x^2+y^2}$.",
+      "solution": "At the origin, the candidate linear derivative is zero. With $r=\\sqrt{x^2+y^2}$ and $|xy|\\le r^2/2$, $|x^2+xy+y^2|\\le3r^2/2$. Dividing by $r$ gives at most $3r/2\\to0$, proving differentiability with derivative zero.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Does continuity of f at a point alone guarantee a tangent plane?",
+      "hint": "Consider $f(x,y)=|x|$ at the origin.",
+      "solution": "No. The function $f(x,y)=|x|$ is continuous at the origin but has no $x$ partial derivative there, so it has no tangent plane as a differentiable graph.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Explain why a differentiable scalar function is continuous at its differentiability point.",
+      "hint": "Use $f(a+h)-f(a)=L(h)+R(h)$ with $R(h)/\\|h\\|\\to0$.",
+      "solution": "Differentiability gives $f(a+h)-f(a)=L(h)+R(h)$, where $L$ is linear and $R(h)/\\|h\\|\\to0$. As $h\\to0$, both $L(h)\\to0$ and $R(h)=\\|h\\|[R(h)/\\|h\\|]\\to0$, proving continuity.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the Jacobian of $F(u,v)=(u+v,uv,u^2)$.",
+      "hint": "Differentiate each output with respect to $u$ and $v$.",
+      "solution": "The Jacobian is $JF(u,v)=\\begin{pmatrix}1&1\\\\v&u\\\\2u&0\\end{pmatrix}$: each row differentiates one output component with respect to $(u,v)$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f(x,y)=x^2-y^2$ at $(1,2)$, compute the directional derivative in the unit direction of $v=(3,4)$. Give a unit direction with zero derivative.",
+      "hint": "Normalize $(3,4)$; zero rate requires a vector perpendicular to the gradient.",
+      "solution": "The gradient at $(1,2)$ is $\\nabla f=(2,-4)$. The unit direction is $\\mathbf u=(3,4)/5$, giving $D_{\\mathbf u}f=(2,-4)\\cdot(3,4)/5=-2$. A perpendicular unit direction is $(2,1)/\\sqrt5$, since $(2,-4)\\cdot(2,1)=0$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the tangent plane of $z=x^2+y^2$ at $(1,2)$.",
+      "hint": "Use the value $5$ and gradient $(2,4)$.",
+      "solution": "At $(1,2)$, $f=5$, $f_x=2$, and $f_y=4$. Thus the tangent plane is $z=5+2(x-1)+4(y-2)$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f=x^2+y^2$ at $(1,2)$, find exact tangent-plane error for increment $(h,k)$.",
+      "hint": "Expand $f(1+h,2+k)$ and subtract its linear model.",
+      "solution": "Expansion gives $f(1+h,2+k)=5+2h+4k+h^2+k^2$. The tangent plane gives $T(1+h,2+k)=5+2h+4k$, so the exact error is $h^2+k^2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can a tangent plane to $x^2+y^2$ lie above the surface at a different point?",
+      "hint": "Use the exact residual between the surface and tangent plane.",
+      "solution": "No. At any displacement $(h,k)$ from the tangency point, surface minus tangent plane is $h^2+k^2\\ge0$. The plane never lies above the surface.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For $A=lw$ at $(3,2)$, estimate change when $l$ rises $0.02$ and $w$ falls $0.01$.",
+      "hint": "Use $dA=w\\,dl+l\\,dw$ at $(3,2)$.",
+      "solution": "The differential at $(3,2)$ is $dA=2\\,dl+3\\,dw=2(0.02)+3(-0.01)=0.01$ area units. Direct substitution gives $\\Delta A=(3.02)(1.99)-6=0.0098$. The difference $-0.0002=dl\\,dw$ is the omitted product.",
+      "lesson": 2,
+      "type": "Modeling"
+    },
+    {
+      "question": "Let $F(x,y)=(x^2+y,xy)$ and $G(s,t)=(s+t,s-t)$. Compute $J(F \\circ G)$ at $(1,0)$.",
+      "hint": "Evaluate $JF$ at $G(1,0)$, then multiply $JF\\,JG$ in that order.",
+      "solution": "We have $G(1,0)=(1,1)$, $JF(1,1)=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$, and $JG=\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$. Their product is $J(F\\circ G)(1,0)=\\begin{pmatrix}3&1\\\\2&0\\end{pmatrix}$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f=x^2+y^2$ and $x=t^2,y=\\sin t$, find $df/dt$ at $t=0$.",
+      "hint": "Apply $df/dt=f_xx^{\\prime}+f_yy^{\\prime}$.",
+      "solution": "The chain rule gives $df/dt=2x\\,x^{\\prime}+2y\\,y^{\\prime}$. At $t=0$, $x=t^2=0$ and $y=\\sin t=0$, so $df/dt=0$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the polar map $P(r,\\theta)=(r\\cos\\theta,r\\sin\\theta)$ on $r>0$, find $\\det J_P$. Explain its limiting value as $r\\downarrow0$.",
+      "hint": "Compute the determinant of $\\partial(x,y)/\\partial(r,\\theta)$.",
+      "solution": "The derivative columns are $(\\cos\\theta,\\sin\\theta)$ and $(-r\\sin\\theta,r\\cos\\theta)$, so $\\det J_P=r$. It tends to $0$ as $r\\downarrow0$, where the angular column vanishes. The usual domain $r\\ge0$ has a boundary there; a two-sided $r$-derivative at zero uses the smooth extension to signed $r$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $F$ be a $C^1$ map between open subsets of $\\mathbb R^2$, and suppose $\\det J_F(a)<0$. What does this mean for orientation and infinitesimal area near $a$?",
+      "hint": "Separate the sign from $|\\det J|$.",
+      "solution": "The derivative $J_F(a)$ is invertible and reverses orientation. It multiplies infinitesimal oriented area by $\\det J_F(a)$; ordinary area is scaled by $|\\det J_F(a)|$.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Suppose $G:\\mathbb R\\to\\mathbb R^2$ is differentiable at $t$ and $F:\\mathbb R^2\\to\\mathbb R^3$ is differentiable at $G(t)$. What is the shape of $J(F\\circ G)(t)$?",
+      "hint": "Multiply the dimensions of $JF$ and $JG$.",
+      "solution": "$J_F(G(t))$ has shape $3\\times2$ and $J_G(t)$ has shape $2\\times1$. The chain rule gives $J_{F\\circ G}(t)=J_F(G(t))J_G(t)$, with shape $3\\times1$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Prove that the first-order change vanishes along a differentiable curve on the level set $x^2+4y^2=4$. Find its normal at $(0,1)$.",
+      "hint": "Differentiate the constant level value along a curve on the ellipse.",
+      "solution": "For a differentiable curve $\\mathbf r(t)=(x(t),y(t))$ on the level set, differentiating $x(t)^2+4y(t)^2=4$ gives $2xx^{\\prime}+8yy^{\\prime}=0$. Thus $\\nabla f=(2x,8y)$ is normal to the velocity. At $(0,1)$ the nonzero normal is $(0,8)$ and the tangent line is $y=1$.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "A cylinder has $V=\\pi r^2h$, with $r=2\\,\\mathrm m$ and $h=5\\,\\mathrm m$. Estimate the volume change for $dr=0.01\\,\\mathrm m$ and $dh=-0.02\\,\\mathrm m$, and compare with the exact change.",
+      "hint": "Compute $V_r\\,dr+V_h\\,dh$, then substitute the perturbed dimensions.",
+      "solution": "At $r=2\\,\\mathrm m$, $h=5\\,\\mathrm m$, $V_r=2\\pi rh=20\\pi\\,\\mathrm{m^2}$ and $V_h=\\pi r^2=4\\pi\\,\\mathrm{m^2}$. The estimate is $dV=20\\pi(0.01)+4\\pi(-0.02)=0.12\\pi\\,\\mathrm{m^3}\\approx0.376991\\,\\mathrm{m^3}$. Exactly, $\\Delta V=\\pi[(2.01)^2(4.98)-20]=0.119698\\pi\\,\\mathrm{m^3}\\approx0.376042\\,\\mathrm{m^3}$, smaller by $0.000302\\pi\\,\\mathrm{m^3}$.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Explain why every first directional derivative of $f(x,y)=\\sqrt{1+x^2+2y^2}$ at the origin is zero although the function is not locally constant.",
+      "hint": "Along unit direction $(a,b)$, rationalize $f(ta,tb)-1$.",
+      "solution": "For unit $(a,b)$, set $c=a^2+2b^2>0$. Rationalization gives $[f(ta,tb)-1]/t=tc/[\\sqrt{1+t^2c}+1]\\to0$. Yet $f(x,y)>1$ at every nonzero nearby point, so all first directional rates vanish at a strict minimum.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "For $q(0,0)=0$ and $q(x,y)=\\frac{x^2y}{x^4+y^2}$ away from zero, compute the directional derivative at the origin along $u=(1/\\sqrt2,1/\\sqrt2)$. Then show that q is discontinuous at the origin and explain why it has no tangent plane there.",
+      "hint": "First substitute $(x,y)=t(a,b)$ and divide $q(tu)$ by $t$. Then test the curved path $y=x^2$ to check continuity and the tangent-plane condition.",
+      "solution": "For $\\mathbf u=(a,b)$ with $a=b=1/\\sqrt2$, $q(ta,tb)/t=a^2b/(t^2a^4+b^2)\\to a^2/b=1/\\sqrt2$. Along $y=x^2$, $q=1/2$, so the function is discontinuous and has no tangent plane at the origin.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "For $f=x^2+4y^2$ at $(1,1)$, compute the directional derivative in the unit direction of $(3,4)$.",
+      "hint": "Normalize the direction $(3,4)$ before taking a dot product.",
+      "solution": "At $(1,1)$, $\\nabla f=(2,8)$. The unit direction is $(3,4)/5$, so $D_{\\mathbf u}f=(2,8)\\cdot(3,4)/5=38/5$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "At $(1,1)$ for $f=x^2+4y^2$, give a unit tangent to the level curve.",
+      "hint": "Choose a vector perpendicular to $\\nabla f(1,1)$.",
+      "solution": "The gradient at $(1,1)$ is $(2,8)$. The vector $(-4,1)$ is perpendicular to it and has norm $\\sqrt{17}$, so a unit tangent is $(-4,1)/\\sqrt{17}$ or its negative.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Let $f$ be differentiable at an interior point $a$, with $\\nabla f(a)=(2,8)$. What is the maximum directional derivative over unit directions?",
+      "hint": "Use Cauchy–Schwarz for $\\nabla f\\cdot\\mathbf u$ with $\\|\\mathbf u\\|=1$.",
+      "solution": "Because $f$ is differentiable at $a$, $D_{\\mathbf u}f(a)=\\nabla f(a)\\cdot\\mathbf u$. For $\\|\\mathbf u\\|=1$, Cauchy–Schwarz gives $D_{\\mathbf u}f(a)\\le\\sqrt{2^2+8^2}=2\\sqrt{17}$, with equality at $\\mathbf u=(1,4)/\\sqrt{17}$.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does $\\nabla f=0$ classify a stationary point?",
+      "hint": "Compare $x^2+y^2$ with $x^2-y^2$ at the origin.",
+      "solution": "No. Both $x^2+y^2$ and $x^2-y^2$ have $\\nabla f(0,0)=0$, but the first has a minimum and the second a saddle. A zero gradient alone does not classify the point.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Explain why observing correct coordinate slopes for $q(x,y)=x^3/(x^2+y^2)$, $q(0,0)=0$, fails to establish differentiability at the origin.",
+      "hint": "Compute the partials, then test the candidate linear map along $y=x$.",
+      "solution": "The partials at the origin are $q_x=1$ and $q_y=0$, giving candidate linear map $L(x,y)=x$. Along $(x,y)=(t,t)$, $q(t,t)=t/2$, so $|q-L|/\\sqrt{x^2+y^2}=|t/2|/(\\sqrt2|t|)=1/(2\\sqrt2)$. Since this does not tend to zero, $q$ is not differentiable there.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Use the second-order model from the case study to estimate $f(0.1,0.2)=\\sqrt{1+0.1^2+2\\cdot0.2^2}$, and certify an error bound.",
+      "hint": "Set $u=x^2+2y^2$ and use $\\sqrt{1+u}\\approx1+u/2$ with error at most $u^2/8$.",
+      "solution": "Here $u=x^2+2y^2=0.1^2+2(0.2)^2=0.09$. The second-order model gives $1+u/2=1.045$; the bound $u^2/8=0.0010125$ certifies its error. Indeed $\\sqrt{1.09}\\approx1.04403065$ lies within that bound.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Show $\\sqrt{4+x^2+3y^2}$ is differentiable at zero with derivative zero.",
+      "hint": "Rationalize and bound $x^2+3y^2$ by $3r^2$.",
+      "solution": "Let $r=\\sqrt{x^2+y^2}$. Rationalization gives $\\sqrt{4+x^2+3y^2}-2=(x^2+3y^2)/(\\sqrt{4+x^2+3y^2}+2)\\le3r^2/4$. Dividing by $r$ gives at most $3r/4\\to0$, so the derivative at the origin is zero.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "Find the Hessian of $\\sqrt{1+x^2+2y^2}$ at zero.",
+      "hint": "Use $\\sqrt{1+u}=1+u/2+O(u^2)$ with $u=x^2+2y^2$.",
+      "solution": "Writing $u=x^2+2y^2$, $\\sqrt{1+u}=1+u/2+O(u^2)$. The quadratic part is $x^2/2+y^2$, whose second partials at the origin are $1$ and $2$, with mixed partial $0$. Thus $Hf(0,0)=\\operatorname{diag}(1,2)$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "What happens to the tangent-plane error bound $r^2$ when distance is halved?",
+      "hint": "Replace $r$ by $r/2$ in the quadratic upper bound.",
+      "solution": "If the error is bounded by $Cr^2$, then at distance $r/2$ the bound is $C(r/2)^2=Cr^2/4$. Halving distance quarters this quadratic upper bound.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Prove the origin is a global minimum of $\\sqrt{1+x^2+2y^2}$.",
+      "hint": "Compare the radicand with $1$ and identify the equality case.",
+      "solution": "Since $x^2\\ge0$ and $2y^2\\ge0$, $\\sqrt{1+x^2+2y^2}\\ge1$. Equality requires $x=y=0$, so the origin is the unique global minimum, with value $1$.",
+      "lesson": 5,
+      "type": "Proof"
+    },
+    {
+      "question": "If $c>0$, find a bound for $\\sqrt{c+x^2+ay^2}-\\sqrt c$ when $a\\ge0$.",
+      "hint": "Rationalize, then use $x^2+ay^2\\le\\max(1,a)r^2$.",
+      "solution": "Let $r^2=x^2+y^2$. Rationalization gives $\\sqrt{c+x^2+ay^2}-\\sqrt c=(x^2+ay^2)/(\\sqrt{c+x^2+ay^2}+\\sqrt c)$. With $a\\ge0$, the numerator is at most $\\max(1,a)r^2$ and the denominator at least $2\\sqrt c$. Hence $0\\le\\sqrt{c+x^2+ay^2}-\\sqrt c\\le\\max(1,a)r^2/(2\\sqrt c)$.",
+      "lesson": 5,
+      "type": "Challenge"
+    }
+  ],
+  "summary": [
+    "Differentiability provides one linear approximation whose error is negligible relative to the full input displacement.",
+    "The total differential predicts small changes, while the tangent plane represents that prediction geometrically.",
+    "Jacobians organize linear input-output relations; the chain rule composes them by matrix multiplication.",
+    "For differentiable functions in Euclidean coordinates, the gradient determines all directional rates and is normal to regular level sets."
+  ],
+  "next": "Chapter 22 uses gradients to locate candidate extrema and studies second derivatives, constraints, and boundary points to decide which candidates actually optimize a function."
+}

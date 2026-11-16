@@ -1,0 +1,446 @@
+{
+  "id": "23",
+  "title": "Double and triple integrals",
+  "subtitle": "How can a collection of tiny contributions become the mass, volume, or balance point of a region?",
+  "prerequisites": [
+    "Definite integrals and the fundamental theorem of calculus (chapters 10–11).",
+    "Improper integration and comparison tests (chapter 14).",
+    "Coordinates, functions of several variables, and continuity (chapters 19–20)."
+  ],
+  "objectives": [
+    "Translate a planar region or solid into consistent integration bounds.",
+    "Evaluate iterated integrals and explain when changing their order is justified.",
+    "Use double and triple integrals for volume, mass, and moments with correct units.",
+    "Distinguish integrable singularities from divergent accumulation and assess grid approximations."
+  ],
+  "sections": [
+    {
+      "title": "Accumulation over an area",
+      "paragraphs": [
+        "A one-variable integral adds contributions from small intervals. A double integral adds contributions from small patches of a plane. Imagine a thin sheet whose density varies with position. A patch of area $\\Delta A$ near $(x,y)$ has approximate mass $\\rho(x,y)\\Delta A$. Adding these masses and refining the patches gives the sheet’s total mass. If coordinates are measured in metres and density in kilograms per square metre, each summand and the final integral have units of kilograms.",
+        "For a rectangle $R=[a,b]\\times[c,d]$, subdivide both coordinate intervals. Choose a sample point $(x_i^*,y_j^*)$ in each small rectangle and sum $\\sum_{i,j}f(x_i^*,y_j^*)\\Delta x_i\\Delta y_j$. The double Riemann integral exists when these sums approach the same finite value as the largest patch diameter tends to zero, independently of the sample choices. Continuity on a closed rectangle is a convenient sufficient hypothesis. The factor $\\Delta x_i\\Delta y_j$ matters: summing values alone counts samples rather than physical area.",
+        "The notation $\\iint_R f\\,dA$ records both the field being accumulated and its domain. When $f\\ge0$ is a height, this gives volume above $R$ and below $z=f(x,y)$. For heights that change sign it gives signed volume, so positive and negative contributions can cancel. Geometric volume between surfaces $z=u(x,y)$ and $z=v(x,y)$ with $u\\le v$ is instead $\\iint_R(v-u)\\,dA$ over their common projection. The integral $\\iint_D1\\,dA=\\operatorname{area}(D)$ gives area, not a mysterious special kind of volume.",
+        "A general bounded region can be enclosed in a rectangle and its integrand $f$ set to zero outside the region. For continuous $f$ on a region with a piecewise smooth boundary, the boundary does not affect the integral because it has area zero. This does not mean the boundary is irrelevant computationally: a coarse grid can include too much or too little area near it. Refinement has to resolve geometry as well as changes in the function.",
+        "A double integral is the limit of weighted sums, not simply two antiderivatives written side by side. Partition a region into small pieces $A_i$ with area $\\Delta A_i$ and choose a point $p_i$ in each. The sum $\\sum_i f(p_i)\\Delta A_i$ records the accumulated quantity. If $f$ is continuous on a compact region with a well-behaved boundary, refining the largest piece diameter drives these sums toward a common value. This construction explains why the factor $dA$ carries square units and why changing a region changes the integral even if the formula for $f$ stays fixed.",
+        "For a constant integrand $f=c$, the integral over $D$ is $\\iint_D c\\,dA=c\\operatorname{area}(D)$. This simple check catches missing bounds and unit errors. If $D$ is a unit triangle of area $1/2\\,\\mathrm{m}^2$ and $c=6\\,\\mathrm{kg}/\\mathrm{m}^2$, the total mass must be $3\\,\\mathrm{kg}$. A calculation returning $6\\,\\mathrm{kg}$ has likely treated the triangle as a square. With variable density $\\rho$ attaining extrema on $D$, one can bound the mass by $\\rho_{\\min}\\operatorname{area}(D)\\le\\iint_D\\rho\\,dA\\le\\rho_{\\max}\\operatorname{area}(D)$. Such bounds are useful sanity checks before accepting a complicated antiderivative.",
+        "Signed volume differs from physical volume. If $f$ changes sign, $\\iint_D f\\,dA$ subtracts regions below the reference plane from those above. The geometric volume between $z=f(x,y)$ and $z=0$ is $\\iint_D|f|\\,dA$, provided the integral exists. For $f(x,y)=x$ on the symmetric square $D=[-1,1]^2$, the signed integral is $0$ by odd symmetry, but the physical volume is positive. Decide what the application asks for before dropping an absolute value or interpreting a negative answer.",
+        "A Riemann sum can use corners, midpoints, or any selected point in each cell when the function is integrable and the mesh tends to zero. At finite resolution, these choices can produce different approximations. For $f(x,y)=x^2+y^2$ on $[0,1]^2$, a lower-left rule underestimates because the function grows in both coordinates, while an upper-right rule overestimates. Midpoint values often reduce error for smooth functions, but a singularity or discontinuous boundary can spoil familiar rates. The limiting integral is independent of sample choices under its hypotheses; finite grids are approximations.",
+        "Average value over a region is $\\dfrac{1}{\\operatorname{area}(D)}\\iint_D f\\,dA$ when $0<\\operatorname{area}(D)<\\infty$. This normalizes accumulation back to the units of $f$. If $f$ is temperature, the integral has temperature times area units, while the average has temperature units. A weighted average with nonnegative density $\\rho$ and positive finite mass instead divides $\\iint_D f\\rho\\,dA$ by $\\iint_D\\rho\\,dA$. Keeping the denominator visible prevents confusing a total quantity with a typical value. The same structure later appears in probability expectations."
+      ],
+      "formula": "∬R f dA = lim Σ f(x*,y*)ΔA; area(D) = ∬D 1 dA.",
+      "formulaTex": "\\begin{gathered}\\iint_R f\\,dA=\\lim_{\\|P\\|\\to0}\\sum_i f(x_i^*,y_i^*)\\,\\Delta A_i,\\\\ \\operatorname{area}(D)=\\iint_D1\\,dA.\\end{gathered}"
+    },
+    {
+      "title": "Iterated integrals and the conditions behind Fubini",
+      "paragraphs": [
+        "An iterated integral calculates the area accumulation by slices. In $\\int_a^b\\bigl[\\int_c^d f(x,y)\\,dy\\bigr]\\,dx$, hold $x$ fixed while integrating in $y$. The inner integral becomes a function of $x$; integrate that function next. The differentials tell you the evaluation order from inside to outside. They also tell you which symbols act as constants during each calculation. For example, integrating $xy$ in $y$ gives $xy^2/2$ because $x$ is fixed.",
+        "For a continuous $f$ on a closed rectangle $R=[a,b]\\times[c,d]$, the double integral equals either iterated integral. Uniform continuity here means: for every $\\varepsilon>0$ one distance $\\delta>0$ controls $|f(P)-f(Q)|<\\varepsilon$ for every pair $P,Q\\in R$ closer than $\\delta$. The theorem card turns that one uniform threshold into an inner-sum error bound and proves continuity of the integrated slice function. Use the continuous-rectangle result first; the broader measure version below is an optional later return.",
+        "Fubini’s theorem is particularly simple for continuous functions on rectangles, but the order of operations remains literal. In $\\int_0^1\\int_0^2(x+2y)\\,dy\\,dx$, integrate in $y$ first while $x$ acts as a constant. The inner result is $2x+4$, and the outer integral is $5$. Reversing order gives $\\int_0^2\\int_0^1(x+2y)\\,dx\\,dy=5$. Writing new bounds that describe a different rectangle would invalidate the comparison even if the algebraic integrand were unchanged.",
+        "Without an applicable hypothesis, two iterated calculations need not agree. On the unit square away from the origin let $f(x,y)=\\dfrac{x^2-y^2}{(x^2+y^2)^2}$. For $x>0$, its $y$-antiderivative is $y/(x^2+y^2)$, so integrating $y$ first and then $x$ improperly gives $\\pi/4$; the reverse order gives $-\\pi/4$. The exceptional edge slice and outer endpoint must be treated improperly, not silently assigned a value. In polar coordinates near the corner, $|f|\\,dA=|\\cos2\\theta|\\,dr\\,d\\theta/r$; on any angular sector where $|\\cos2\\theta|$ stays positive its radial integral diverges. Thus absolute integrability fails, and Fubini does not identify the two iterated values.",
+        "Optional later return: measure theory extends area beyond rectangles. A set has area zero if it can be covered by a countable collection of rectangles with arbitrarily small total area; ‘almost everywhere’ permits exceptions on such a set. A measurable function has threshold sets $\\{(x,y):f(x,y)>t\\}$ to which this extended area theory applies for every real $t$. If a signed measurable function has finite $\\iint|f|$, the broader Fubini theorem permits exchanging order despite exceptional slices. For a nonnegative measurable function, Tonelli permits exchange even when the common value is infinite. These are wider theorems with their own hypotheses. Work the continuous closed-rectangle proof here; return to measure theory later, and use the singular example now to see why an order swap needs a hypothesis.",
+        "The signed corner example has different iterated values because cancellation depends on integration order near its singular corner; its absolute integral diverges. A finite antiderivative in each order does not justify exchanging them. Check where a denominator vanishes and whether the relevant improper integral converges.",
+        "The order of integration can change difficulty dramatically even when both orders are valid. On the triangle $0\\le x\\le y\\le1$, $\\iint_D e^{y^2}\\,dA$ is easiest with $x$ inside: $\\int_0^1\\int_0^y e^{y^2}\\,dx\\,dy=\\int_0^1 ye^{y^2}\\,dy=(e-1)/2$. Trying $y$ inside first introduces an antiderivative of $e^{y^2}$ that is not elementary. Reversing order is a geometric operation first and an algebraic convenience second. The sketch determines the new bounds before any integration begins.",
+        "A reliable check after reversing order is to test an interior point, a boundary point, and an exterior point against both descriptions. For the triangle above, $(1/4,3/4)$ should be admitted as interior, $(1/2,1/2)$ should lie on the boundary, and $(3/4,1/4)$ should be rejected. If both candidate descriptions behave that way and use the correct axis projections, the setup is plausible. This check does not replace a geometric proof of equivalence, but it catches swapped inequalities quickly. In higher-dimensional integrals, testing representative points becomes even more valuable because nested bounds are harder to visualize.",
+        "The order reversal in the $e^{y^2}$ triangle has a useful interpretation as weighted slices. At height $y$, the horizontal length is $y$, so that slice contributes $ye^{y^2}\\,dy$. The factor $y$ is geometric, not the result of a formal algebraic trick; it is precisely the width of the region at that height. If the region instead had width $1-y$, the remaining one-variable integrand would be $(1-y)e^{y^2}$, which is not simplified in the same way. Choosing an order therefore means choosing a slice geometry whose width interacts well with the integrand. A convincing solution records both the slice length and its variable range before evaluating the integral."
+      ],
+      "formula": "For continuous f on R: ∬R f dA = ∫a^b ∫c^d f(x,y) dy dx = ∫c^d ∫a^b f(x,y) dx dy.",
+      "formulaTex": "\\begin{gathered}\nR=[a,b]\\times[c,d],\\qquad f\\in C(R),\\\\\n\\iint_R f\\,dA\n=\\int_a^b\\!\\int_c^d f(x,y)\\,dy\\,dx\n=\\int_c^d\\!\\int_a^b f(x,y)\\,dx\\,dy.\n\\end{gathered}",
+      "theorems": [
+        {
+          "title": "Why integration order agrees on a rectangle",
+          "statement": "If $f$ is continuous on a closed rectangle $R=[a,b]\\times[c,d]$, either iterated integral equals the double integral over $R$.",
+          "equationTex": "\\iint_R f\\,dA=\\int_a^b\\left(\\int_c^d f(x,y)\\,dy\\right)dx=\\int_c^d\\left(\\int_a^b f(x,y)\\,dx\\right)dy",
+          "proof": [
+            "Let $R=[a,b]\\times[c,d]$ and define $\\omega(\\delta)=\\sup\\{|f(P)-f(Q)|:P,Q\\in R,\\ \\|P-Q\\|\\le\\delta\\}$. Continuity on compact $R$ makes $f$ uniformly continuous, so $\\omega(\\delta)\\to0$ as $\\delta\\downarrow0$. It also makes $f$ bounded. The oscillation of $f$ within a cell of diameter at most $\\delta$ is at most $\\omega(\\delta)$, so upper and lower rectangular sums differ by at most $(b-a)(d-c)\\omega(\\delta)$. Hence the double Riemann integral exists and every sufficiently fine tagged grid sum has that limit.",
+            "For each fixed $x$, the continuous slice $y\\mapsto f(x,y)$ is Riemann integrable; put $g(x)=\\int_c^d f(x,y)\\,dy$. For any $x,x^{\\prime}\\in[a,b]$, $|g(x)-g(x^{\\prime})|\\le\\int_c^d|f(x,y)-f(x^{\\prime},y)|\\,dy\\le(d-c)\\omega(|x-x^{\\prime}|)$. Thus $g$ is continuous and its outer Riemann integral exists. This continuity step is needed before taking the outer-sum limit.",
+            "Choose any outer tagged partition with tags $x_i^*$ and any inner tagged $y$-partition of mesh at most $\\delta$. At each fixed $x_i^*$, compare the inner sum with the integral over each $y$-subinterval: their difference is bounded by its width times $\\omega(\\delta)$, because the sampled and integrated values are at most $\\delta$ apart. Summing gives $|S_y(x_i^*)-g(x_i^*)|\\le(d-c)\\omega(\\delta)$, uniformly in $i$. Multiplying by outer widths and summing gives $|S_{R}-\\sum_i g(x_i^*)\\Delta x_i|\\le(b-a)(d-c)\\omega(\\delta)$. As both meshes tend to zero, the first sum tends to the double integral and the second to $\\int_a^b g(x)\\,dx$. Their limits therefore agree.",
+            "Interchange $x$ and $y$ in the same argument to obtain the other iterated order. The proof uses the full closed rectangle and continuity; on a nonrectangular region the bounds must describe the actual slices, and an unbounded signed integrand needs a separate convergence theorem. Finite regrouping alone would not justify either limiting passage."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Geometry determines the bounds",
+      "paragraphs": [
+        "A vertically simple region has a description $a\\le x\\le b$ and $g_1(x)\\le y\\le g_2(x)$. Its integral is $\\int_a^b\\int_{g_1(x)}^{g_2(x)}f(x,y)\\,dy\\,dx$. Each vertical line meets the region in one interval, possibly collapsing at an endpoint. A horizontally simple description instead uses $c\\le y\\le d$ and $h_1(y)\\le x\\le h_2(y)$, leading to integration in $dx\\,dy$. Curved bounds belong to the inner integral; the outer bounds describe the full projection on its coordinate axis.",
+        "To reverse order, first sketch or describe the inequalities. Find the new projection, then solve for the lower and upper intersection of a slice with the boundary. Do not merely swap $dx$ and $dy$ while retaining the old bounds. If the active boundary changes as the outer variable moves, split the integral there. Regions with holes or multiple components often require several simple pieces. Add their integrals, avoiding overlap of positive area.",
+        "For the part of the unit square below $y=x^2$, vertical bounds are $0\\le x\\le1$, $0\\le y\\le x^2$. At fixed $0\\le y\\le1$, $x\\ge0$ and $y\\le x^2$ give $\\sqrt y\\le x\\le1$. Thus $\\int_0^1\\int_0^{x^2}f(x,y)\\,dy\\,dx=\\int_0^1\\int_{\\sqrt y}^1f(x,y)\\,dx\\,dy$. The point $(3/4,1/4)$ belongs to the region and rejects the incorrect $x\\le\\sqrt y$ bound. The exterior point $(2/5,3/10)$ satisfies the incorrect $x\\ge y$ bound, but $3/10>(2/5)^2$, so it violates $y\\le x^2$. These checks expose extra or missing area without replacing the slice proof.",
+        "Changing order is useful when one antiderivative is unavailable or awkward. On $0\\le x\\le y\\le1$, integrating $e^{y^2}$ first in $y$ has no elementary antiderivative. Using $x$ as the inner variable gives $0\\le y\\le1$ and $0\\le x\\le y$. The $x$-integral is simply $ye^{y^2}$, whose $y$-integral is $(e-1)/2$. No approximation was needed; the geometry created a factor that makes substitution work.",
+        "Some regions are not simple in one direction without splitting. A disk with a central hole has horizontal slices that can consist of two disjoint intervals. One can split the integral into left and right pieces, subtract the inner disk from the outer disk, or use polar coordinates. Each approach describes the same domain but has different algebraic convenience. A single pair of lower and upper bounds that bridges the hole would integrate over points that do not belong to the region.",
+        "A region bounded by $y=x$ and $y=x^2$ for $0\\le x\\le1$ has vertical bounds $x^2\\le y\\le x$. Reversing them requires solving $x^2\\le y$ and $y\\le x$: for fixed $0\\le y\\le1$, $y\\le x\\le\\sqrt y$. The area can be computed either way: $\\int_0^1(x-x^2)\\,dx=1/6$ or $\\int_0^1(\\sqrt y-y)\\,dy=1/6$. Agreement of two independently derived setups is a strong check, but both could share a conceptual error if the region was misunderstood, so a sketch remains useful.",
+        "For triple integrals, a solid between $z=u(x,y)$ and $z=v(x,y)$ is easiest when $z$ is innermost. If the integrand is $1$, integrating $dz$ immediately gives the height $v-u$, reducing the triple integral to a double integral over the base. If density depends on $z$, that inner integral produces an areal mass density. This slicing viewpoint makes units transparent: density in $\\mathrm{kg}/\\mathrm{m}^3$ times height in $\\mathrm m$ gives $\\mathrm{kg}/\\mathrm{m}^2$, then integration over area in $\\mathrm{m}^2$ gives $\\mathrm{kg}$.",
+        "An order diagram can prevent dependency errors. In $\\int_a^b\\int_{g_1(x)}^{g_2(x)}\\int_{u(x,y)}^{v(x,y)}f(x,y,z)\\,dz\\,dy\\,dx$, the $z$ limits may depend on $x$ and $y$, the $y$ limits may depend on $x$, and outer $x$ limits are constants. Once $z$ is integrated away, its symbol cannot appear in the remaining bounds. Reversing order requires new projections and inequalities, not a mechanical permutation of differentials. This is a structural rule, independent of the particular antiderivatives."
+      ],
+      "formula": "D = {(x,y): a ≤ x ≤ b, g₁(x) ≤ y ≤ g₂(x)} ⇒ ∬D f dA = ∫a^b ∫g₁(x)^g₂(x) f dy dx.",
+      "formulaTex": "\\begin{gathered}\nD=\\{(x,y):a\\le x\\le b,\\ g_1(x)\\le y\\le g_2(x)\\},\\\\\n\\iint_D f\\,dA=\\int_a^b\\!\\int_{g_1(x)}^{g_2(x)}f(x,y)\\,dy\\,dx,\\\\\n\\text{for continuous }f,g_1,g_2\\text{ with }g_1\\le g_2\\text{ on }[a,b].\n\\end{gathered}"
+    },
+    {
+      "title": "Mass, moments, and three-dimensional slices",
+      "paragraphs": [
+        "For a sheet of nonnegative areal density $\\rho$, its mass is $M=\\iint_D\\rho\\,dA$. The first moment about the y-axis is $\\iint_D x\\rho\\,dA$, while the moment about the x-axis is $\\iint_D y\\rho\\,dA$. The coordinate multiplying the density is the distance coordinate perpendicular to the named axis, with its sign. If $0<M<\\infty$ and these moments are finite, the centre of mass is $\\bar x=(\\iint_D x\\rho\\,dA)/M$ and $\\bar y=(\\iint_D y\\rho\\,dA)/M$. First moments have units kg m; dividing by mass returns a length.",
+        "The centroid is the centre of mass for uniform density. For a nonuniform sheet, a geometric symmetry only forces a coordinate of the centre of mass when the density shares that symmetry. Rotational inertia is a different moment: about the $z$-axis through the origin it is $I_z=\\iint_D(x^2+y^2)\\rho\\,dA$, with units $\\mathrm{kg}\\,\\mathrm{m}^2$. Squared distance weights material far from the axis more heavily and never introduces negative contributions.",
+        "A triple integral replaces patches by small boxes with volume $\\Delta V=\\Delta x\\Delta y\\Delta z$. For a solid $E$ lying above a planar domain $D$ between surfaces $z=u(x,y)$ and $z=v(x,y)$, integrate $z$ first: $\\iiint_E f\\,dV=\\iint_D\\left[\\int_{u(x,y)}^{v(x,y)}f(x,y,z)\\,dz\\right]dA$. For $f=1$, the inner answer $v-u$ recovers the double-integral volume formula. Volumetric density has units $\\mathrm{kg}/\\mathrm{m}^3$, so its triple integral gives mass.",
+        "There are six possible orders for three coordinates, but not six identical sets of bounds. An outer variable cannot have limits involving an inner variable that has already been integrated away. For the tetrahedron $E=\\{(x,y,z):x,y,z\\ge0,\\ x+y+z\\le1\\}$, one valid order is $0\\le x\\le1$, $0\\le y\\le1-x$, $0\\le z\\le1-x-y$. Integrating $1$ gives $\\iiint_E1\\,dV=\\int_0^1(1-x)^2/2\\,dx=1/6$. Integrating the function $z$ gives the first moment $\\iiint_E z\\,dV=1/24$, so symmetry yields the uniform-density centroid $(1/4,1/4,1/4)$.",
+        "For the triangle $D=\\{(x,y):0\\le y\\le x\\le1\\}$ with constant density $\\rho_0$, area is $1/2$ and mass is $\\rho_0/2$. Its centroid is $(2/3,1/3)$, not the midpoint of the bounding square. This can be checked by moments: $\\iint_D x\\,dA=1/3$ and $\\iint_D y\\,dA=1/6$; divide each by area $1/2$. These exact values provide a comparison for nonuniform density. If a density increases with $x$, the center of mass should shift toward the $x=1$ side, but the amount must be calculated.",
+        "Moments have units of mass times distance. With density in $\\mathrm{kg}/\\mathrm{m}^2$ and coordinates in metres, $M$ is in $\\mathrm{kg}$ while $\\iint_D x\\rho\\,dA$ is in $\\mathrm{kg}\\,\\mathrm m$. Dividing gives a length. A reported center of mass outside the convex hull of a nonnegative-density sheet is impossible: each coordinate is a weighted average of coordinates in the region. This bound is a powerful diagnostic. It fails if the “density” takes negative values, because signed weights no longer model ordinary mass.",
+        "For a three-dimensional solid, mass is $M=\\iiint_E\\rho\\,dV$ and the $x$ coordinate of its center of mass is $\\bar x=\\dfrac1M\\iiint_E x\\rho\\,dV$ when $0<M<\\infty$ and the moment is finite. Moments of inertia use squared distances from an axis: for the $z$-axis, $I_z=\\iiint_E(x^2+y^2)\\rho\\,dV$. These quantities answer different questions. A center of mass locates balance; moment of inertia measures resistance to rotational acceleration and has units $\\mathrm{kg}\\,\\mathrm{m}^2$. The same integration machinery handles both once the physical factor in the integrand is identified.",
+        "Symmetry can remove work when both region and density respect it. If a lamina and its density are invariant under $x\\mapsto-x$, then the $x$ moment is zero because $x\\rho$ is odd, so $\\bar x=0$ when the total mass is positive. If the region is symmetric but density is heavier on one side, the conclusion fails. Before using symmetry, check the entire integrand and the domain transformation. For a volume, analogous reflection arguments can set one or more center coordinates to zero without evaluating every triple integral.",
+        "A density that is nonnegative but zero on a large part of the region still yields a valid center of mass if total mass $M>0$. If $M=0$, division by $M$ is undefined; the “center” cannot be obtained from the formula. In probability, the analogous normalization requires total probability $1$. This condition is easy to omit when manipulating symbols. State mass positivity before dividing and verify it numerically when a density is supplied as data rather than as a simple formula."
+      ],
+      "formula": "M = ∭E ρ dV; (x̄,ȳ,z̄) = (1/M)(∭E xρ dV, ∭E yρ dV, ∭E zρ dV).",
+      "formulaTex": "\\begin{gathered}\nM=\\iiint_E\\rho\\,dV,\\qquad 0<M<\\infty,\\\\\n\\begin{aligned}\n\\bar x&=\\frac1M\\iiint_E x\\rho\\,dV,\\\\\n\\bar y&=\\frac1M\\iiint_E y\\rho\\,dV,\\\\\n\\bar z&=\\frac1M\\iiint_E z\\rho\\,dV,\n\\end{aligned}\\\\\n\\rho\\ge0,\\qquad\\iiint_E(|x|+|y|+|z|)\\rho\\,dV<\\infty.\n\\end{gathered}"
+    },
+    {
+      "title": "Singularities and numerical evidence",
+      "paragraphs": [
+        "Unbounded density does not automatically imply infinite mass. On $0<x\\le1$, $0\\le y\\le1$, the density $x^{-p}$ is nonnegative. Truncate at $x=\\varepsilon>0$, evaluate, and let $\\varepsilon$ decrease to zero. Since the y-interval has length $1$, the answer reduces to $\\int_0^1 x^{-p}\\,dx$. It is finite exactly when $p<1$, with value $1/(1-p)$. At $p=1$ it grows as $-\\log\\varepsilon$; for $p>1$ it diverges as a negative power of $\\varepsilon$.",
+        "The location and dimension of a singularity matter. The preceding example is singular along an entire edge. In the next chapter, polar coordinates show how the shrinking area around an isolated point changes the threshold. Always specify the domain, excluded set, and limiting procedure. For nonnegative functions, expanding truncated domains gives a well-defined accumulation, possibly infinite. For signed functions, cancellation can conceal infinite positive and negative contributions, as in the failed Fubini example.",
+        "A midpoint grid over a bounding rectangle is a practical approximation: test whether each midpoint lies inside the region, add its function value if it does, and multiply by the cell area. For a smooth function on a rectangle, midpoint quadrature has a familiar second-order refinement pattern. A curved region represented by an inclusion test introduces a discontinuity at its boundary, so the same rate should not be assumed. Boundary choices can cause irregular convergence even when the original function is smooth.",
+        "The lab uses a triangle and compares with an exact result. Points falling exactly on the diagonal are assigned half weight; this special rule handles this particular grid geometry symmetrically and is not a universal boundary correction. Change the inequality or density and observe which patterns persist. A finite list of improving values is evidence about an implementation, not proof of convergence or of a theorem’s hypotheses.",
+        "To evaluate $\\int_0^1x^{-p}\\,dx$, truncate at $\\varepsilon>0$. For $p\\ne1$ the value from $\\varepsilon$ to $1$ is $\\dfrac{1-\\varepsilon^{1-p}}{1-p}$; it tends to $1/(1-p)$ when $p<1$ and diverges when $p>1$. At $p=1$ it is $-\\ln\\varepsilon$ and also diverges. This threshold assumes a strip of constant $y$-width. If the region narrows toward $x=0$, its width contributes another power of $x$ and can change the threshold. Singular strength and available area must be considered together.",
+        "On the triangular region $D=\\{(x,y):0\\le y\\le x\\le1\\}$, the $x$-slice width is $x$. Thus $\\iint_Dx^{-p}\\,dA=\\int_0^1x^{1-p}\\,dx$, which is finite precisely when $p<2$. A density with $p=3/2$ is nonintegrable on a unit-width strip but integrable on this narrowing triangle. This result also gives a quick check of numerical grids: the first few cells near $x=0$ may dominate, and a coarse midpoint rule can badly underestimate the remaining contribution even when the exact integral is finite.",
+        "An isolated point singularity in two dimensions has a different area scale. In polar coordinates, a ring of radius $r$ and thickness $dr$ has area approximately $2\\pi r\\,dr$. Therefore a radial integrand $r^{-p}$ has near-zero mass proportional to $\\int_0^\\delta r^{1-p}\\,dr$, finite for $p<2$ when $\\delta>0$. This is a preview of chapter 24’s Jacobian factor $r$. The exponent threshold is not a memorized property of the formula alone; it comes from multiplying singular magnitude by shrinking geometry.",
+        "Grid convergence is evidence, not a guaranteed error bound. A function may have a narrow spike between sample points that successive midpoint grids miss, or a singularity may concentrate most mass in an unresolved region. For smooth functions with known derivative bounds, numerical-analysis theorems can bound quadrature error; for arbitrary sampled data, additional assumptions are needed. Report grid size, rule, domain handling, and observed changes, and distinguish an estimated error from a proven tolerance.",
+        "Boundary-cell treatment affects a finite grid. Counting a cell whose midpoint lies in $D$ assigns its full area even if the boundary cuts through it; excluding it assigns zero. Both schemes can converge for a piecewise smooth boundary as the mesh refines, but their leading finite-grid errors differ. Exact polygon clipping or weighted boundary fractions may improve accuracy for simple shapes. The lab’s half-weight diagonal is a special symmetry choice for its triangle, not a universal rule for every curved or oblique boundary.",
+        "A subtle numerical danger appears when a singular integral is convergent but barely so. On the triangle, $p=1.99$ gives exact total mass $1/(2-p)=100$, even though every finite cutoff leaves out a large near-edge contribution. At cutoff $\\varepsilon=0.01$, the omitted mass is $\\varepsilon^{2-p}/(2-p)\\approx95.5$, so the visible truncated integral is only about $4.5$. A grid that never samples sufficiently close to $x=0$ could look stable around a small value while missing most of the mass. Analytic tail estimates are therefore especially important near a convergence threshold. The same issue arises in probability distributions with heavy tails and in improper one-variable integrals. This quantitative tail calculation also gives a practical refinement target."
+      ]
+    },
+    {
+      "title": "A nonuniform lamina: mass and center of mass",
+      "paragraphs": [
+        "Consider a thin triangular lamina occupying $D=\\{(x,y):0\\le y\\le x\\le1\\}$, with $x$ and $y$ measured in metres. Suppose its surface mass density is $\\rho(x,y)=(6\\,\\mathrm{kg}/\\mathrm{m}^3)x$. The coefficient has units kg/m³ so multiplying by $x$ in metres produces kg/m², the correct units for surface density. Density increases toward the right edge. The region has geometric area $1/2\\,\\mathrm{m}^2$, but mass is not simply that area times the density at a single arbitrary point.",
+        "A vertical slice at $x$ runs from $y=0$ to $y=x$. Its mass contribution is approximately $\\rho(x,y)\\,dy\\,dx$. Integrating gives $M=\\int_0^1\\int_0^x6x\\,dy\\,dx=\\int_0^{1}6x^2\\,dx=2\\,\\mathrm{kg}$, using the units of the opening. Reversing order describes the same triangle with $0\\le y\\le1$ and $y\\le x\\le1$. It gives $M=\\int_0^1\\int_y^{1}6x\\,dx\\,dy=\\int_0^{1}3(1-y^2)\\,dy=2\\,\\mathrm{kg}$. This independent setup checks both the geometry and the algebra. The triangular bounds cannot be replaced by a unit-square integral without adding material outside the lamina.",
+        "The moment about the $y$-axis is $\\iint_Dx\\rho\\,dA=\\int_0^1\\int_0^x6x^2\\,dy\\,dx=\\int_0^{1}6x^3\\,dx=\\tfrac32\\,\\mathrm{kg}\\,\\mathrm m$. Therefore $\\bar x=(\\tfrac32\\,\\mathrm{kg}\\,\\mathrm m)/(2\\,\\mathrm{kg})=\\tfrac34\\,\\mathrm m$. The moment about the $x$-axis is $\\iint_Dy\\rho\\,dA=\\int_0^{1}6x\\bigl[y^2/2\\bigr]_{y=0}^{y=x}\\,dx=\\int_0^{1}3x^3\\,dx=\\tfrac34\\,\\mathrm{kg}\\,\\mathrm m$. Therefore $\\bar y=(\\tfrac34\\,\\mathrm{kg}\\,\\mathrm m)/(2\\,\\mathrm{kg})=\\tfrac38\\,\\mathrm m$. The resulting center $(3/4,3/8)$ lies inside the triangle and is shifted toward the high-density right side.",
+        "For comparison, a uniform lamina on the same triangle has centroid $(2/3,1/3)$. The nonuniform density moves both coordinates upward and rightward in this geometry. A visual grid estimate should approach the exact moments as cells shrink, but the two exact iterated integrals provide stronger checks than a picture. If $\\rho$ were allowed to be negative, the formula would no longer describe ordinary mass, although the signed integral would remain mathematically defined.",
+        "The workflow generalizes: draw the region, choose bounds, integrate density for total mass, integrate coordinate times density for moments, and divide each moment by the same total mass. Keep mass, moment, and position units distinct at every step.",
+        "The density $\\rho=6x$ is zero along the vertical edge $x=0$ and rises toward $x=1$. Since the triangular slice at $x$ has width $x$, mass per unit $x$ is $6x^2$ in the chosen units. That combines two effects: the sheet gets wider and denser as $x$ increases. Integrating from $x=1/2$ to $1$ gives $2-2(1/2)^3=7/4\\,\\mathrm{kg}$, so $7/8$ of the $2\\,\\mathrm{kg}$ total lies in the right half by $x$ coordinate. This large fraction is plausible from the slice formula before any arithmetic is done.",
+        "The center’s $y$ coordinate is $3/8\\,\\mathrm m$, while its $x$ coordinate is $3/4\\,\\mathrm m$. A point $(3/4,3/8)$ lies inside the triangle because $0\\le3/8\\le3/4\\le1$. If a computed coordinate had $y>x$, the result would conflict with the convexity of this region and nonnegative mass density. The location also lies to the right and above the uniform centroid $(2/3,1/3)$. Comparing these geometric facts with the integral result is part of solving a modeling problem, not optional decoration.",
+        "If the coefficient $6$ were changed to a positive constant $C$, total mass and both moments would scale by $C/6$, but the center of mass would remain $(3/4,3/8)$. The normalization by $M$ cancels a uniform density multiplier. By contrast, changing the shape of the density, such as replacing $x$ by $x^2$, shifts the center because it changes relative weights across the sheet. This distinction helps when calibrating a model: total mass can determine an overall scale, while balance measurements can test the spatial pattern.",
+        "A finite-grid simulation of the lamina should use cell mass $m_i=\\rho(x_i,y_i)\\Delta A_i$ and compute weighted coordinate sums, then divide by the summed mass $M\\approx\\sum_i m_i$. Averaging the coordinates of accepted midpoints without density weights would estimate the geometric centroid instead. If the grid cuts the triangular boundary, cells must be handled consistently across mass and moments; otherwise their errors may not cancel in the ratio. Comparing against exact mass and center values gives a stronger validation than observing that successive grids look similar."
+      ],
+      "formula": "M=2 kg; x̄=(∫∫_D xρ dA)/M=3/4 m; ȳ=(∫∫_D yρ dA)/M=3/8 m.",
+      "formulaTex": "\\begin{gathered}\nD=\\{(x,y):0\\le y\\le x\\le1\\,\\mathrm m\\},\\quad\n\\rho(x,y)=\\left(6\\,\\frac{\\mathrm{kg}}{\\mathrm m^3}\\right)x,\\\\\n\\begin{aligned}\nM&=\\iint_D\\rho\\,dA=2\\,\\mathrm{kg},\\\\\n\\bar x&=\\frac1M\\iint_D x\\rho\\,dA=\\tfrac34\\,\\mathrm m,\\\\\n\\bar y&=\\frac1M\\iint_D y\\rho\\,dA=\\tfrac38\\,\\mathrm m.\n\\end{aligned}\n\\end{gathered}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Mass and balance of a triangular sheet",
+      "problem": "Let $D=\\{(x,y):x\\ge0,\\ y\\ge0,\\ x+y\\le1\\}$, with coordinates in metres and density $\\rho(x,y)=2\\ \\mathrm{kg/m^2}+(1\\ \\mathrm{kg/m^3})x$. Find its mass and centre of mass.",
+      "steps": [
+        "Vertical slices give $0\\le x\\le1$ and $0\\le y\\le1-x$. Thus $M=\\int_0^1(2+x)(1-x)\\,dx=\\int_0^1(2-x-x^2)\\,dx=7/6\\ \\mathrm{kg}$.",
+        "The $y$-axis moment is $\\int_0^1x(2+x)(1-x)\\,dx=\\int_0^1(2x-x^2-x^3)\\,dx=5/12\\ \\mathrm{kg\\,m}$.",
+        "The $x$-axis moment is $(1/2)\\int_0^1(2+x)(1-x)^2\\,dx=(1/2)\\int_0^1(2-3x+x^3)\\,dx=3/8\\ \\mathrm{kg\\,m}$.",
+        "Divide each coordinate moment by $7/6$. The denser right side shifts the $x$-coordinate above the uniform centroid’s $1/3$; the $y$-coordinate falls below $1/3$."
+      ],
+      "answer": "$M=7/6\\ \\mathrm{kg}$; $(\\bar x,\\bar y)=(5/14,9/28)\\ \\mathrm m$. Both coordinates are positive and their sum is less than $1$, placing the balance point inside the triangle."
+    },
+    {
+      "title": "Reversing a curved region",
+      "problem": "Evaluate $\\int_0^1\\int_0^{x^2}2y\\,dy\\,dx$ and write an equivalent integral in the reverse order.",
+      "steps": [
+        "Direct evaluation gives $\\int_0^1x^4\\,dx=1/5$.",
+        "The region lies below $y=x^2$ in the unit square. Its horizontal description is $0\\le y\\le1$ and $\\sqrt y\\le x\\le1$.",
+        "The reverse integral is $\\int_0^1\\int_{\\sqrt y}^1 2y\\,dx\\,dy=\\int_0^1(2y-2y^{3/2})\\,dy=1-4/5$.",
+        "The integrand is continuous on the bounded region, whose boundary is piecewise smooth. These hypotheses justify using both descriptions for the same double integral."
+      ],
+      "answer": "Both orders give $1/5$. The bounds describe the same points, while the slice lengths differ."
+    },
+    {
+      "title": "A constant-density scale check",
+      "problem": "A triangular sheet has coordinates measured in metres and vertices $(0,0),(1,0),(1,1)$ and constant density $6\\ \\mathrm{kg/m^2}$. Find its mass and units.",
+      "steps": [
+        "The region is $0\\le y\\le x\\le1$ and has area $1/2\\ \\mathrm{m^2}$ when coordinates are metres.",
+        "Mass is $\\int_0^1\\int_0^x6\\,dy\\,dx=6\\int_0^1x\\,dx=3$.",
+        "Density $\\mathrm{kg/m^2}$ times area $\\mathrm{m^2}$ gives kilograms."
+      ],
+      "answer": "The sheet has mass $3\\ \\mathrm{kg}$."
+    },
+    {
+      "title": "Reversing a curved region",
+      "problem": "Reverse the order of $\\int_0^1\\int_0^{x^2}f(x,y)\\,dy\\,dx$.",
+      "steps": [
+        "The region has $0\\le x\\le1$ and $0\\le y\\le x^2$.",
+        "For fixed $y$ between zero and one, $x^2\\ge y$ and $x\\ge0$ imply $x\\ge\\sqrt y$.",
+        "The right edge is $x=1$."
+      ],
+      "answer": "The reversed integral is $\\int_0^1\\int_{\\sqrt y}^1 f(x,y)\\,dx\\,dy$."
+    },
+    {
+      "title": "An integral made elementary by order",
+      "problem": "Evaluate $\\iint_D e^{y^2}\\,dA$ on $D=\\{(x,y):0\\le x\\le y\\le1\\}$.",
+      "steps": [
+        "Use $y$ outside: $\\int_0^1\\int_0^y e^{y^2}\\,dx\\,dy$.",
+        "The $x$ integral contributes a factor $y$.",
+        "Substitute $u=y^2$ in $\\int_0^1y e^{y^2}\\,dy$."
+      ],
+      "answer": "The value is $(e-1)/2$."
+    },
+    {
+      "title": "Mass and center for a uniform triangle",
+      "problem": "Find the centroid of $D=\\{(x,y):0\\le y\\le x\\le1\\}$ with uniform density.",
+      "steps": [
+        "Area is $\\int_0^1x\\,dx=1/2$.",
+        "The first moment about the $y$-axis (for $\\bar x$) is $\\int_0^1x\\cdot x\\,dx=1/3$.",
+        "The first moment about the $x$-axis (for $\\bar y$) is $\\int_0^1[x^2/2]\\,dx=1/6$. Divide both by area."
+      ],
+      "answer": "The centroid is $(2/3,1/3)$."
+    },
+    {
+      "title": "A singularity softened by a narrowing region",
+      "problem": "Find for which $p$ the integral of $x^{-p}$ over $0\\le y\\le x\\le1$ is finite.",
+      "steps": [
+        "Truncate $x$ at $\\varepsilon>0$ and integrate over $y$ first.",
+        "The slice width $x$ changes the remaining integrand to $x^{1-p}$.",
+        "The truncated integral is $\\int_\\varepsilon^1x^{1-p}\\,dx$. If $p<2$, its limit is $1/(2-p)$. At $p=2$ it is $-\\ln\\varepsilon\\to\\infty$; for $p>2$, its lower-end power term also diverges.",
+        "The power integral near zero converges if $1-p>-1$."
+      ],
+      "answer": "The double integral is finite exactly when $p<2$."
+    },
+    {
+      "title": "A density-weighted half region",
+      "problem": "For $\\rho=6x$ on $D=\\{(x,y):0\\le y\\le x\\le1\\}$, find the fraction of mass where $x\\ge1/2$.",
+      "steps": [
+        "The $x$-slice mass density is $6x^2$, so total mass is $2$.",
+        "Integrate $6x^2$ from $1/2$ to $1$ to obtain $2-1/4=7/4$.",
+        "Divide by total mass $2$."
+      ],
+      "answer": "The right-half fraction is $7/8$."
+    }
+  ],
+  "misconceptions": [
+    "“Reversing order means exchanging the differentials.” Bounds must also be reconstructed from the region; otherwise the new expression may describe a different set or contain invalid variable dependencies.",
+    "“A finite grid result proves an improper integral converges.” On the strip $0<x\\le1$, $0\\le y\\le1$, the divergent integral of $x^{-1}$ has a finite midpoint sum at every finite resolution. Only a limiting argument establishes convergence.",
+    "“The moment about the $x$-axis uses $x\\rho$.” It uses $y\\rho$: $y$ is the perpendicular signed coordinate. The $x$-coordinate of the centre of mass comes from the moment about the $y$-axis."
+  ],
+  "lab": {
+    "title": "Approximate a two-dimensional integral on a grid",
+    "description": "Approximate the mass of the triangular sheet $D=\\{(x,y):0\\le x\\le1,\\ 0\\le y\\le1-x\\}$ using midpoint cells on the unit square. Edit slope and sizes. The table reports numerical mass, exact mass, and absolute error; the line plot shows error against grid subdivisions $n$. Coordinates are measured in metres, the constant term 2 in the density has units kg/m², and slope has units kg/m³.",
+    "code": "// Density is 2 + slope*x; nonnegative slopes model heavier material to the right.\nconst slope = 1;\nconst sizes = [4, 8, 16, 32, 64, 128];\nif (!Number.isFinite(slope) || slope < 0) throw new Error('Use a finite nonnegative slope.');\nif (!Array.isArray(sizes) || sizes.length < 1 || sizes.length > 2000) throw new Error('sizes must contain 1 to 2000 grids.');\nconst exact = 1 + slope / 6;\nconst errors = [];\nconsole.log('n | approximate mass (kg) | exact mass (kg) | absolute error (kg)');\nfor (const n of sizes) {\n  if (!Number.isInteger(n) || n < 1 || n > 256) throw new Error('n must be an integer from 1 to 256.');\n  let sum = 0;\n  for (let i = 0; i < n; i++) {\n    const x = (i + 0.5) / n;\n    for (let j = 0; j < n; j++) {\n      // i+j+1 compares the midpoint with x+y=1 without roundoff ambiguity.\n      const diagonal = i + j + 1;\n      const weight = diagonal < n ? 1 : diagonal === n ? 0.5 : 0;\n      sum += weight * (2 + slope*x) / (n*n);\n    }\n  }\n  const mass = sum;\n  const error = Math.abs(mass-exact);\n  console.log(n, mass.toFixed(10), exact.toFixed(10), error.toExponential(4));\n  errors.push([n, error]);\n}\nif (errors.length >= 2) plot(errors, 'x: subdivisions n; y: absolute mass error (kg)');\nelse console.log('Only one grid: refinement plot needs at least two points.');",
+    "tasks": [
+      "Before running, predict whether the approximation overestimates or underestimates $7/6\\,\\mathrm{kg}$ and whether doubling the grid count $n$ halves or quarters the error. Then run the defaults.",
+      "Set slope to 0 and explain the resulting exact area accumulation. Try slope = 3 and compare the errors with the defaults.",
+      "In the weight assignment, change the diagonal case from 0.5 to 1, then to 0; rerun each time. How does including or excluding all diagonal cells change the refinement pattern, even though the true boundary has zero area?",
+      "Would replacing the density expression 2 + slope*x with 1/x let finite grid outputs establish finite mass? Analyze the improper integral over the triangle before making that code edit. If you do run it, the hard-coded exact mass and absolute-error column no longer apply."
+    ],
+    "expected": "For slope=1, the exact mass is $7/6\\,\\mathrm{kg}$. At $n=4$, the mass is $1.171875\\,\\mathrm{kg}$ and the absolute error is about $0.0052083333\\,\\mathrm{kg}$; at $n=128$, the mass is about $1.1666717529\\,\\mathrm{kg}$ and the error about $0.0000050863\\,\\mathrm{kg}$. In exact arithmetic this half-weight rule gives $M_n=7/6+1/(12n^2)$ kg, so each doubling quarters the error. With slope=0, the result is exactly $1\\,\\mathrm{kg}$ in exact arithmetic; floating accumulation can leave a tiny residual."
+  },
+  "exercises": [
+    {
+      "question": "Evaluate $\\iint_R (x+2y)\\,dA$ on $R=[0,2]\\times[0,1]$.",
+      "hint": "Integrate in $y$ first while treating $x$ as constant.",
+      "solution": "The inner integral is $\\int_0^1(x+2y)\\,dy=x+1$. The outer integral is $\\int_0^2(x+1)\\,dx=[x^2/2+x]_0^2=4$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the volume below $z=4-x-y$ and above the square $0\\le x,y\\le1$, with all lengths in metres.",
+      "hint": "Check that the height is nonnegative on the square.",
+      "solution": "On the square, $4-x-y$ ranges from $2$ to $4$ metres. Thus $V=\\int_0^1\\int_0^1(4-x-y)\\,dy\\,dx=\\int_0^1(7/2-x)\\,dx=3\\,\\mathrm{m}^3$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $\\iint_D 6\\,dA$ for $D=\\{0\\le y\\le x\\le1\\}$.",
+      "hint": "Find the triangle's area, then multiply by the constant integrand.",
+      "solution": "The triangular region has area $1/2$, so $\\iint_D 6\\,dA=6(1/2)=3$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "What are units of $\\iint_D T\\,dA$ if $T$ is $^\\circ\\mathrm C$ and coordinates are metres?",
+      "hint": "Multiply temperature units by area units.",
+      "solution": "The integral has units $^\\circ\\mathrm C\\cdot\\mathrm m^2$. If $D$ has finite, nonzero area, dividing by that area gives the average temperature in $^\\circ\\mathrm C$.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the average of $x+y$ on $[0,1]^2$.",
+      "hint": "Use the unit area and the separate averages of $x$ and $y$.",
+      "solution": "The square has area $1$. Each coordinate averages $1/2$, so the average of $x+y$ is $1/2+1/2=1$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "If $f$ changes sign, is $\\iint f\\,dA$ always geometric volume?",
+      "hint": "Distinguish signed height from nonnegative geometric height.",
+      "solution": "No. The integral $\\iint_D f\\,dA$ gives signed volume when $f$ changes sign. Geometric volume between the graph and $z=0$ is $\\iint_D |f|\\,dA$.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate $\\iint_{[0,1]\\times[0,2]}(x+2y)\\,dA$ in both orders.",
+      "hint": "Hold one coordinate fixed for each order.",
+      "solution": "Integrating $y$ first gives $\\int_0^1(2x+4)\\,dx=5$. Integrating $x$ first gives $\\int_0^2(1/2+2y)\\,dy=5$. Both orders agree because the integrand is continuous on the rectangle.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^1\\int_0^2(x+2y)\\,dy\\,dx$.",
+      "hint": "Integrate with respect to $y$ before $x$.",
+      "solution": "The inner integral is $\\int_0^2(x+2y)\\,dy=2x+4$. Then $\\int_0^1(2x+4)\\,dx=1+4=5$. The outer antiderivative is $x^2+4x$, evaluated at the bounds zero and one.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\iint e^{y^2}\\,dA$ on $0\\le x\\le y\\le1$.",
+      "hint": "Integrate in $x$ first, then substitute $u=y^2$.",
+      "solution": "On $0\\le x\\le y\\le1$, the $x$ interval has length $y$. Thus $\\int_0^1\\int_0^y e^{y^2}\\,dx\\,dy=\\int_0^1 ye^{y^2}\\,dy=(e-1)/2$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why can two iterated integrals disagree for a singular signed integrand?",
+      "hint": "Check whether the integrand is absolutely integrable.",
+      "solution": "Absolute integrability permits Fubini’s order exchange. A singular signed integrand can have nonintegrable positive and negative parts, so its two iterated orders can produce different cancellations. If two finite iterated values disagree, there is no finite Lebesgue double integral. A separately defined principal value uses a different convention.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Reverse the order of $\\int_0^2\\int_{x/2}^1 f(x,y)\\,dy\\,dx$ for continuous $f$.",
+      "hint": "Rewrite $y\\ge x/2$ as a bound on $x$.",
+      "solution": "The original region has $0\\le x\\le2$ and $x/2\\le y\\le1$. Reversing gives $0\\le y\\le1$ and $0\\le x\\le2y$, hence $\\int_0^1\\int_0^{2y}f(x,y)\\,dx\\,dy$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\iint_D(x+y)\\,dA$ for $D=\\{0\\le y\\le x\\le1\\}$ in both integration orders.",
+      "hint": "Draw the triangle and describe both vertical and horizontal slices.",
+      "solution": "Vertical slices give $\\int_0^1\\int_0^x(x+y)\\,dy\\,dx=\\int_0^1(3x^2/2)\\,dx=1/2$. Horizontal slices give $\\int_0^1\\int_y^1(x+y)\\,dx\\,dy=1/2$ as well.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Reverse $\\int_0^1\\int_0^{x^2} f\\,dy\\,dx$.",
+      "hint": "Solve $y\\le x^2$ for nonnegative $x$.",
+      "solution": "The region $0\\le x\\le1$, $0\\le y\\le x^2$ becomes $0\\le y\\le1$, $\\sqrt y\\le x\\le1$. Thus the reversed integral is $\\int_0^1\\int_{\\sqrt y}^1 f\\,dx\\,dy$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Describe the region between $y=x^2$ and $y=x$, $0\\le x\\le1$, using $y$ outside.",
+      "hint": "At fixed height, solve both curve equations for $x$.",
+      "solution": "For $0\\le y\\le1$, the inequalities $x^2\\le y\\le x$ become $y\\le x\\le\\sqrt y$. The horizontal slice runs from the line $x=y$ to the parabola branch $x=\\sqrt y$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the area between $y=x^2$ and $y=x$ on $[0,1]$.",
+      "hint": "Integrate upper curve minus lower curve.",
+      "solution": "Since $x\\ge x^2$ on $[0,1]$, the area is $\\int_0^1(x-x^2)\\,dx=[x^2/2-x^3/3]_0^1=1/6$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why may an annulus need two horizontal x intervals?",
+      "hint": "Draw a horizontal slice crossing the hole.",
+      "solution": "Through the hole, a horizontal slice meets two disconnected pieces of the annulus. One continuous $x$ interval would include points outside the region.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Find the mass of $E=\\{0\\le x\\le1\\,\\mathrm m,\\ 0\\le y\\le2\\,\\mathrm m,\\ 0\\le z\\le3\\,\\mathrm m\\}$ with volumetric density $\\rho(x,y,z)=(1\\,\\mathrm{kg}/\\mathrm m^4)z$.",
+      "hint": "Use the two horizontal lengths before integrating $z$.",
+      "solution": "Integrating $z$ first gives $M=\\iiint_E\\rho\\,dV=(1\\,\\mathrm{kg}/\\mathrm m^4)(1\\,\\mathrm m)(2\\,\\mathrm m)((3\\,\\mathrm m)^2/2)=9\\,\\mathrm{kg}$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find the centroid of $0\\le y\\le x\\le1$ with uniform density.",
+      "hint": "Compute area and the first moments separately.",
+      "solution": "The area is $A=\\int_0^1x\\,dx=1/2$. The moments are $\\iint_D x\\,dA=\\int_0^1x^2\\,dx=1/3$ and $\\iint_D y\\,dA=\\int_0^1x^2/2\\,dx=1/6$. Dividing by $A$ gives centroid $(2/3,1/3)$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Can a nonnegative-density center of mass lie outside the convex hull of the sheet?",
+      "hint": "Interpret the center of mass as a weighted average.",
+      "solution": "No, assuming finite positive mass and finite first moments. The weights $\\rho\\,dA/M$ are nonnegative and total one, so the center lies in the closed convex hull of the mass support. Signed density would invalidate this argument.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For a solid of density $\\rho$, write moment of inertia about the $z$-axis.",
+      "hint": "Use squared distance from the $z$ axis.",
+      "solution": "The squared distance from the axis is $x^2+y^2$, so $I_z=\\iiint_E(x^2+y^2)\\rho\\,dV$. Its units are mass times length squared.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "For which real $p$ is $\\iint_D x^{-p}\\,dA$ finite when $D$ is $0<x\\le1$, $0\\le y\\le x$?",
+      "hint": "Account for the shrinking vertical slice width.",
+      "solution": "The slice width is $x$, so $\\iint_D x^{-p}\\,dA=\\int_0^1x^{1-p}\\,dx$. This is finite exactly when $1-p>-1$, or $p<2$, with value $1/(2-p)$. At $p=2$ it diverges logarithmically.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "A midpoint estimate changes little on two successive grids. Does that certify a prescribed error tolerance?",
+      "hint": "Consider a narrow peak missed by both grids.",
+      "solution": "No. Similar midpoint estimates can both miss substantial mass or converge slowly near a singularity. Their difference is not a certified error bound; a guarantee needs verified assumptions and a valid bound.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For which $p$ is $\\int_0^1x^{-p}\\,dx$ finite?",
+      "hint": "Truncate the lower endpoint at $\\varepsilon>0$ before taking a limit.",
+      "solution": "For $p\\ne1$, $\\int_\\varepsilon^1x^{-p}\\,dx=(1-\\varepsilon^{1-p})/(1-p)$. This tends to a finite value only for $p<1$. At $p=1$, $\\int_\\varepsilon^1x^{-1}\\,dx=-\\ln\\varepsilon\\to\\infty$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For which $p$ is $\\iint_{0\\le y\\le x\\le1}x^{-p}\\,dA$ finite?",
+      "hint": "Integrating over $y$ contributes a factor of $x$.",
+      "solution": "Since the vertical width is $x$, $\\iint_D x^{-p}\\,dA=\\int_0^1x^{1-p}\\,dx$. This converges exactly when $1-p>-1$, that is, $p<2$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Do two similar midpoint-grid estimates prove a chosen error tolerance?",
+      "hint": "Think of a narrow spike unresolved by both grids.",
+      "solution": "No. Two close estimates provide convergence evidence only. A certified tolerance requires hypotheses supporting a rigorous error bound or another independent certificate.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "For the case-study lamina on $0\\le y\\le x\\le1\\,\\mathrm{m}$ with areal density $\\rho(x,y)=(6\\,\\mathrm{kg}/\\mathrm{m}^3)x$, find the fraction of mass where $x\\ge0.5\\,\\mathrm{m}$.",
+      "hint": "Integrate vertical slices over $1/2\\le x\\le1$.",
+      "solution": "The selected mass is $\\int_{1/2}^1\\int_0^x6x\\,dy\\,dx=\\int_{1/2}^16x^2\\,dx=7/4\\,\\mathrm{kg}$. Dividing by total mass $2\\,\\mathrm{kg}$ gives fraction $7/8$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the lamina $D=\\{0\\le y\\le x\\le1\\,\\mathrm m\\}$ with areal density $\\rho(x,y)=(6\\,\\mathrm{kg}/\\mathrm m^3)x$, find its total mass.",
+      "hint": "Integrate with respect to $y$ first.",
+      "solution": "The vertical width is $x$, so $M=\\int_0^1\\int_0^x6x\\,dy\\,dx=\\int_0^16x^2\\,dx=2\\,\\mathrm{kg}$ with the case-study units.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the lamina $D=\\{0\\le y\\le x\\le1\\,\\mathrm m\\}$ with areal density $\\rho(x,y)=(6\\,\\mathrm{kg}/\\mathrm m^3)x$, find the fraction of its mass where $x\\ge\\tfrac12\\,\\mathrm m$.",
+      "hint": "Compare the selected mass with the total mass.",
+      "solution": "The selected mass is $\\int_{1/2}^16x^2\\,dx=7/4\\,\\mathrm{kg}$. The total is $2\\,\\mathrm{kg}$, so the fraction is $(7/4)/2=7/8$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Assume a nonnegative lamina density $\\rho$ has finite positive total mass and finite first moments. Prove that multiplying $\\rho$ by any constant $c>0$ leaves its center of mass unchanged.",
+      "hint": "Track the common factor in mass and both first moments.",
+      "solution": "Let $M=\\iint_D\\rho\\,dA>0$, $M_y=\\iint_Dx\\rho\\,dA$, and $M_x=\\iint_Dy\\rho\\,dA$. Scaling density by $c>0$ scales all three by $c$, so $\\bar x=cM_y/(cM)=M_y/M$ and $\\bar y=cM_x/(cM)=M_x/M$.",
+      "lesson": 6,
+      "type": "Proof"
+    },
+    {
+      "question": "How should a midpoint-grid center of mass account for variable density?",
+      "hint": "Weight each accepted cell by its local density times area.",
+      "solution": "For each cell choose a representative point $(x_i,y_i)$ and a consistent effective in-region area $a_i$. Set $m_i=\\rho(x_i,y_i)a_i$. Then $M\\approx\\sum_i m_i$, $M_y\\approx\\sum_i x_i m_i$, and $M_x\\approx\\sum_i y_i m_i$. If $\\sum_i m_i>0$, estimate $\\bar x\\approx M_y/M$ and $\\bar y\\approx M_x/M$.",
+      "lesson": 6,
+      "type": "Modeling"
+    }
+  ],
+  "summary": [
+    "A multiple integral accumulates function values weighted by area or volume; units identify what is being accumulated.",
+    "Iterated integrals follow slices through the geometry. Reversing order requires new bounds and an appropriate Fubini or Tonelli hypothesis.",
+    "Density integrals give mass; coordinate-weighted integrals give first moments and centres of mass when the required quantities are finite.",
+    "Singularities require limits, and numerical refinement provides evidence whose reliability depends on both the integrand and the domain."
+  ],
+  "next": "Chapter 24 changes coordinates to simplify curved regions and introduces the Jacobian factor that converts coordinate rectangles into physical area or volume. The same accumulation ideas then normalize probability densities and compute expectations."
+}

@@ -1,0 +1,1 @@
+var e={key:`description`,array:!1,value:`A prerequisite-aware map of mathematics from first encounters with number through modern pure, applied, computational, and research mathematics.`};export{e as default};

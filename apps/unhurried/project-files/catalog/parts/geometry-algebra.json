@@ -1,0 +1,3984 @@
+{
+  "topics": [
+    {
+      "id": "ga-linear-algebra",
+      "title": "Linear algebra",
+      "summary": "Vectors, matrices and the geometry of linear maps.",
+      "entryPrerequisites": [
+        "signed numbers",
+        "coordinates"
+      ]
+    },
+    {
+      "id": "ga-geometry",
+      "title": "Euclidean and non-Euclidean geometry",
+      "summary": "Constructions, invariants and models where the parallel postulate changes.",
+      "entryPrerequisites": [
+        "angle and triangle basics"
+      ]
+    },
+    {
+      "id": "ga-topology",
+      "title": "Topology",
+      "summary": "Open sets, continuity, compactness and loops with hypotheses kept visible.",
+      "entryPrerequisites": [
+        "sets and functions",
+        "reading a short proof"
+      ]
+    },
+    {
+      "id": "ga-abstract-algebra",
+      "title": "Abstract algebra",
+      "summary": "Symmetry, groups, rings and the role of structure-preserving maps.",
+      "entryPrerequisites": [
+        "functions",
+        "modular arithmetic",
+        "reading a short proof"
+      ]
+    },
+    {
+      "id": "ga-differential-geometry",
+      "title": "Differential geometry",
+      "summary": "Curves, surfaces, geodesics and curvature from calculus.",
+      "entryPrerequisites": [
+        "derivatives",
+        "vectors in the plane"
+      ]
+    },
+    {
+      "id": "ga-algebraic-geometry",
+      "title": "Algebraic geometry",
+      "summary": "Polynomial zero sets and a carefully limited path toward affine geometry.",
+      "entryPrerequisites": [
+        "polynomial algebra",
+        "coordinates"
+      ]
+    },
+    {
+      "id": "ga-category-theory",
+      "title": "Category theory",
+      "summary": "Objects, arrows and universal constructions in concrete examples.",
+      "entryPrerequisites": [
+        "functions",
+        "sets",
+        "reading a short proof"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "ga-la-vector-addition",
+      "title": "A walk is a vector",
+      "topic": "ga-linear-algebra",
+      "level": "L1",
+      "hook": "Two routes reach the same cafe.",
+      "outcome": "Add and scale displacement vectors; distinguish a vector from its chosen coordinates.",
+      "prerequisites": [
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "(a,b)+(c,d)=(a+c,b+d)",
+      "visual": "Head-to-tail arrows beside a coordinate table.",
+      "proof": "Full proof of component addition from coordinate displacements; defer abstract vector spaces.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [],
+        "editionPrerequisites": [
+          "signed numbers and coordinate pairs (refreshed here)"
+        ],
+        "rationale": "Signed coordinates are explicitly refreshed before component arithmetic; the empty catalogue list hid that entry assumption.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "signed numbers and coordinate pairs (refreshed here)"
+      ],
+      "tags": [
+        "displacement",
+        "vector-addition",
+        "scalar-multiplication"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-dot-product",
+      "title": "Why the dot product measures alignment",
+      "topic": "ga-linear-algebra",
+      "level": "L1",
+      "hook": "How much of a wind pushes along a road?",
+      "outcome": "Compute a projection and state the nonzero-vector condition.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "library:book-euclidean-geometry-trigonometry:area-pythagorean-theorem",
+        "library:book-euclidean-geometry-trigonometry:sine-cosine-rules"
+      ],
+      "formula": "u·v=||u||||v||cos θ",
+      "visual": "Angle slider, projected length and signed numeric readout.",
+      "proof": "Proof sketch from the cosine rule; full derivation offered in a proof drawer.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "right triangles",
+          "vectors in the plane"
+        ],
+        "editionPrerequisites": [
+          "coordinate pairs and right triangles (refreshed here)"
+        ],
+        "rationale": "Coordinates and right triangles are refreshed, but the angle identity explicitly assumes the cosine rule rather than proving it.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "coordinate pairs and right triangles (refreshed here)",
+        "cosine rule (assumed for the angle identity)"
+      ],
+      "tags": [
+        "dot-product",
+        "orthogonal-projection",
+        "signed-components"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-linear-map",
+      "title": "A matrix is a rule for moving space",
+      "topic": "ga-linear-algebra",
+      "level": "L1",
+      "hook": "A grid becomes a slanted grid.",
+      "outcome": "Find a 2×2 map from the images of basis vectors; test linearity.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "explorations:ga-la-vector-addition"
+      ],
+      "formula": "A(xe_1+ye_2)=xAe_1+yAe_2",
+      "visual": "Grid deformation with image of each basis arrow and a value table.",
+      "proof": "Full proof by linearity; a drawn grid alone is not the argument.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "coordinates",
+          "vector addition"
+        ],
+        "editionPrerequisites": [
+          "coordinate pairs",
+          "vector addition and scalar multiplication (refreshed here)"
+        ],
+        "rationale": "The capsule refreshes addition and scalar multiplication; coordinate pairs remain the entry language.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "coordinate pairs",
+        "vector addition and scalar multiplication (refreshed here)"
+      ],
+      "tags": [
+        "linear-maps",
+        "basis-images",
+        "matrix-columns"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-systems",
+      "title": "When two equations meet",
+      "topic": "ga-linear-algebra",
+      "level": "L1",
+      "hook": "Two constraints may cross, coincide or miss.",
+      "outcome": "Solve a 2×2 system and interpret zero, one or infinitely many solutions.",
+      "prerequisites": [
+        "explorations:refresher:algebra",
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "Ax=b",
+      "visual": "Lines and row operations shown in matched panels.",
+      "proof": "Full proof of equivalence for each reversible row operation.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "linear equations",
+          "coordinates"
+        ],
+        "editionPrerequisites": [
+          "linear equations and coordinate pairs (refreshed here)"
+        ],
+        "rationale": "The capsule and reversible elimination use linear equations and coordinate pairs, with the notation refreshed locally.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "linear equations and coordinate pairs (refreshed here)"
+      ],
+      "tags": [
+        "linear-systems",
+        "row-operations",
+        "solution-sets"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-determinant",
+      "title": "What determinant actually counts",
+      "topic": "ga-linear-algebra",
+      "level": "L1",
+      "hook": "Does a map crush a square to a line?",
+      "outcome": "Compute signed area scaling and use det≠0 to detect invertibility in 2D.",
+      "prerequisites": [
+        "explorations:refresher:coordinates",
+        "explorations:refresher:vectors",
+        "library:book-euclidean-geometry-trigonometry:area-pythagorean-theorem"
+      ],
+      "formula": "det [[a,b],[c,d]]=ad-bc",
+      "visual": "Unit square mapped to parallelogram with oriented area readout.",
+      "proof": "Full 2D area derivation; higher-dimensional determinant deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "2×2 matrices",
+          "area"
+        ],
+        "editionPrerequisites": [
+          "coordinate pairs",
+          "2×2 matrix columns (refreshed here)",
+          "parallelogram area (refreshed here)"
+        ],
+        "rationale": "The body refreshes matrix columns and parallelogram area and uses coordinate pairs for its signed-area derivation.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "coordinate pairs",
+        "2×2 matrix columns (refreshed here)",
+        "parallelogram area (refreshed here)"
+      ],
+      "tags": [
+        "determinants",
+        "signed-area",
+        "singular-matrices"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-rank-nullity",
+      "title": "Missing dimensions have to go somewhere",
+      "topic": "ga-linear-algebra",
+      "level": "L2",
+      "hook": "A camera flattens depth.",
+      "outcome": "Compute kernel and image for a small map and explain rank-nullity in finite dimensions.",
+      "prerequisites": [
+        "explorations:ga-la-linear-map",
+        "explorations:ga-la-systems",
+        "explorations:ga-la-basis"
+      ],
+      "formula": "dim ker A+dim im A=dim domain",
+      "visual": "Input grid collapsing along kernel directions; dimension table.",
+      "proof": "Full finite-dimensional proof by extending a kernel basis.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "linear maps",
+          "systems of equations",
+          "basis"
+        ],
+        "editionPrerequisites": [
+          "linear maps, homogeneous systems and basis (refreshed here)"
+        ],
+        "rationale": "The body uses homogeneous systems, linear maps and bases, all recalled in its capsule, before a finite-dimensional proof.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "linear maps, homogeneous systems and basis (refreshed here)"
+      ],
+      "tags": [
+        "rank-nullity",
+        "kernels",
+        "image-spaces"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-basis",
+      "title": "Coordinates depend on a basis",
+      "topic": "ga-linear-algebra",
+      "level": "L2",
+      "hook": "The same vector has two address systems.",
+      "outcome": "Change basis in R² and distinguish the vector from its coordinate column.",
+      "prerequisites": [
+        "explorations:ga-la-vector-addition"
+      ],
+      "formula": "[v]_B=P^{-1}[v]_E",
+      "visual": "Two draggable bases and synchronized coordinate tables.",
+      "proof": "Full proof of coordinate conversion when P is invertible.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "vectors",
+          "linear independence"
+        ],
+        "editionPrerequisites": [
+          "vector arithmetic and independence (refreshed here)"
+        ],
+        "rationale": "The capsule refreshes independence and vector arithmetic before the planar coordinate-change argument.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "vector arithmetic and independence (refreshed here)"
+      ],
+      "tags": [
+        "change-of-basis",
+        "coordinates",
+        "linear-independence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-eigenvectors",
+      "title": "Directions a map does not turn",
+      "topic": "ga-linear-algebra",
+      "level": "L2",
+      "hook": "Stretch a rubber sheet and find unmoved directions.",
+      "outcome": "Solve simple eigenpairs and explain when a real matrix has no real eigenvectors.",
+      "prerequisites": [
+        "explorations:ga-la-determinant",
+        "explorations:ga-la-systems",
+        "library:book-algebra-and-functions:quadratic-equations"
+      ],
+      "formula": "Av=λv, v≠0",
+      "visual": "Unit-circle arrows before and after transformation; mark eigenlines.",
+      "proof": "Full 2×2 characteristic equation; existence in arbitrary dimension deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "determinant",
+          "linear maps",
+          "quadratic equations"
+        ],
+        "editionPrerequisites": [
+          "2×2 determinant, systems and quadratic equations (refreshed here)"
+        ],
+        "rationale": "The capsule recalls the determinant criterion and homogeneous systems; the calculation additionally needs quadratic equations.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "2×2 determinant, systems and quadratic equations (refreshed here)"
+      ],
+      "tags": [
+        "eigenvectors",
+        "characteristic-polynomials",
+        "matrix-powers"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-least-squares",
+      "title": "The closest answer to an impossible system",
+      "topic": "ga-linear-algebra",
+      "level": "L2",
+      "hook": "Measurements disagree; what fit is best?",
+      "outcome": "Derive the normal equations for a full-column-rank least-squares problem.",
+      "prerequisites": [
+        "explorations:ga-la-dot-product",
+        "explorations:ga-la-systems"
+      ],
+      "formula": "AᵀAx=Aᵀb",
+      "visual": "Data points, fitted line and residual orthogonality readout.",
+      "proof": "Full orthogonality proof under full-column-rank hypothesis; numerical conditioning deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "dot product",
+          "matrix transpose",
+          "systems"
+        ],
+        "editionPrerequisites": [
+          "dot product, transpose and systems (refreshed here)"
+        ],
+        "rationale": "The capsule explains transpose and dot products before deriving normal equations for a matrix system.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "dot product, transpose and systems (refreshed here)"
+      ],
+      "tags": [
+        "least-squares",
+        "normal-equations",
+        "orthogonal-residuals"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-la-svd",
+      "title": "Rotate, stretch, rotate",
+      "topic": "ga-linear-algebra",
+      "level": "L3",
+      "hook": "A complicated map can have simple principal directions.",
+      "outcome": "Interpret singular values as axis lengths for a real 2×2 map.",
+      "prerequisites": [
+        "explorations:ga-la-dot-product",
+        "explorations:ga-la-eigenvectors",
+        "library:book-linear-algebra-structure-proofs:finite-dimensional-spectral-theorems"
+      ],
+      "formula": "A=UΣVᵀ",
+      "visual": "Unit circle to ellipse with axis labels and matrix table.",
+      "proof": "Proof sketch via eigenvectors of AᵀA; full general spectral theorem deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ],
+      "catalogFields": [
+        "linear-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "eigenvectors",
+          "dot product",
+          "orthogonal matrices"
+        ],
+        "editionPrerequisites": [
+          "dot product, eigenvectors and orthogonal matrices (refreshed here)"
+        ],
+        "rationale": "The capsule refreshes orthogonal matrices and eigenvectors, but explicitly invokes the real symmetric 2×2 spectral theorem as an unproved dependency.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "dot product, eigenvectors and orthogonal matrices (refreshed here)",
+        "real symmetric 2×2 spectral theorem (used without proof)"
+      ],
+      "tags": [
+        "singular-values",
+        "orthogonal-matrices",
+        "principal-axes"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-triangle-inequality",
+      "title": "Why a detour cannot be shorter",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "Can a bent path beat the direct route?",
+      "outcome": "Prove the triangle inequality for Euclidean vectors.",
+      "prerequisites": [
+        "library:book-precalculus:vectors-plane",
+        "library:book-euclidean-geometry-trigonometry:coordinates-lines-distance-circles"
+      ],
+      "formula": "||u+v||≤||u||+||v||",
+      "visual": "Two-segment route and straight route with exact lengths.",
+      "proof": "Full proof from Cauchy–Schwarz, with its 2D proof supplied locally.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "distance",
+        "vectors in the plane"
+      ],
+      "tags": [
+        "triangle-inequality",
+        "euclidean-norm",
+        "equality-cases"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-compass-bisector",
+      "title": "A compass bisects an angle",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "Build an exact half-angle without measuring it.",
+      "outcome": "Construct an angle bisector and identify the congruence theorem used.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:circles-chords-tangents-angles",
+        "library:book-euclidean-geometry-trigonometry:congruent-triangles"
+      ],
+      "formula": "∠AOB=∠BOC",
+      "visual": "Stepwise compass arcs with labelled equal radii.",
+      "proof": "Full proof by side-side-side triangle congruence; state ideal straightedge-and-compass assumptions.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "circle",
+        "triangle congruence"
+      ],
+      "tags": [
+        "angle-bisectors",
+        "compass-constructions",
+        "triangle-congruence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-parallel-postulate",
+      "title": "One parallel axiom, different worlds",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "What if a line has more than one parallel through a point?",
+      "outcome": "Separate Euclidean, spherical and hyperbolic parallel claims and the meaning of line in each model.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:points-lines-angles"
+      ],
+      "formula": "Euclidean: exactly one parallel through P outside ℓ",
+      "visual": "Three model cards with line definitions and incidence table.",
+      "proof": "Proof sketch/model evidence only; consistency and independence require deeper foundations.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "lines",
+        "angles"
+      ],
+      "tags": [
+        "parallel-postulate",
+        "geometric-models",
+        "parallel-lines"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-angle-sum",
+      "title": "Where triangle angle sums come from",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "Every school triangle seems to add to 180°.",
+      "outcome": "Prove the Euclidean angle-sum theorem and locate its parallel-postulate use.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:parallel-lines-angle-sums"
+      ],
+      "formula": "α+β+γ=π",
+      "visual": "Triangle with movable vertices and a parallel through one vertex.",
+      "proof": "Full Euclidean proof; counterexample statement for hyperbolic triangles.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "alternate interior angles"
+      ],
+      "tags": [
+        "triangle-angle-sums",
+        "parallel-lines",
+        "euclidean-proof"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-similarity",
+      "title": "Why scale preserves shape",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "A map and a city block share angles but not lengths.",
+      "outcome": "Use AA similarity to derive a proportionality equation under Euclidean hypotheses.",
+      "prerequisites": [
+        "explorations:ga-geo-angle-sum",
+        "explorations:refresher:fractions"
+      ],
+      "formula": "a/b=a′/b′",
+      "visual": "Nested similar triangles and side-ratio table.",
+      "proof": "Full proof from parallel-line intercept theorem; local proof capsule includes that theorem.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "triangle angle sum",
+        "ratios"
+      ],
+      "tags": [
+        "similar-triangles",
+        "intercept-theorem",
+        "scale-factors"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-circle-theorems",
+      "title": "The angle at the circumference",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "The same chord seems to subtend the same angle.",
+      "outcome": "Prove the inscribed-angle theorem for points on one arc.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:congruent-triangles",
+        "explorations:ga-geo-angle-sum"
+      ],
+      "formula": "∠APB=(1/2)∠AOB",
+      "visual": "Circle with moving P and explicit arc restriction.",
+      "proof": "Full case-based proof; warns that moving P across the chord changes the intercepted arc.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "isosceles triangles",
+        "angle sum"
+      ],
+      "tags": [
+        "inscribed-angles",
+        "intercepted-arcs",
+        "cyclic-quadrilaterals"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-poincare-disk",
+      "title": "Straight lines inside a curved disk",
+      "topic": "ga-geometry",
+      "level": "L2",
+      "hook": "Circular arcs can be geodesics.",
+      "outcome": "Identify Poincaré disk geodesics and distinguish Euclidean drawing size from hyperbolic distance.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:coordinates-lines-distance-circles",
+        "explorations:refresher:coordinates",
+        "library:book-precalculus:limits-rates-preview"
+      ],
+      "formula": "ds=2|dz|/(1-|z|²), |z|<1",
+      "visual": "Disk with orthogonal-circle geodesics and sampled distance table.",
+      "proof": "Proof sketch using disk metric; derivation of all geodesics deferred.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/",
+        "https://e.math.cornell.edu/people/bdozier/math6640-fall23/course_notes/course_notes6640.pdf"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "circles",
+          "coordinates",
+          "limits"
+        ],
+        "editionPrerequisites": [
+          "circles",
+          "coordinates",
+          "limits",
+          "basic integration and logarithms (for the optional distance derivation)"
+        ],
+        "rationale": "The body allows the radial formula without its integral derivation; integration and logarithms apply to that optional derivation and are labelled accordingly.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "circles",
+        "coordinates",
+        "limits",
+        "basic integration and logarithms (for the optional distance derivation)"
+      ],
+      "tags": [
+        "poincare-disk",
+        "hyperbolic-metric",
+        "geodesics"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-hyperbolic-defect",
+      "title": "Triangle area from missing angle",
+      "topic": "ga-geometry",
+      "level": "L3",
+      "hook": "In the hyperbolic plane, smaller angle sum measures area.",
+      "outcome": "Use the curvature −1 area formula for a geodesic triangle and state its units.",
+      "prerequisites": [
+        "explorations:ga-geo-poincare-disk",
+        "library:book-precalculus:radians-unit-circle",
+        "calculus:12",
+        "library:book-differential-geometry-curves-surfaces:gauss-bonnet",
+        "library:book-differential-geometry-curves-surfaces:constant-curvature-hyperbolic-plane"
+      ],
+      "formula": "Area(T)=π-(α+β+γ) (K=-1)",
+      "visual": "Geodesic triangle with angle and area readouts.",
+      "proof": "Proof sketch via Gauss–Bonnet; full theorem deferred.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/",
+        "https://e.math.cornell.edu/people/bdozier/math6640-fall23/course_notes/course_notes6640.pdf"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Poincaré disk model",
+        "radian angles",
+        "integration"
+      ],
+      "tags": [
+        "angular-defect",
+        "hyperbolic-area",
+        "gauss-bonnet"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-spherical-triangles",
+      "title": "Three right angles on a sphere",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "A spherical triangle can have three 90° corners.",
+      "outcome": "Construct the octant triangle and distinguish great-circle geodesics from latitude lines.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:solids-volume-surface-area",
+        "library:book-euclidean-geometry-trigonometry:points-lines-angles"
+      ],
+      "formula": "α+β+γ=3π/2 for the octant",
+      "visual": "Globe model and three great-circle arcs with angle table.",
+      "proof": "Full verification for octant; general spherical excess theorem deferred.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "sphere",
+        "right angle"
+      ],
+      "tags": [
+        "spherical-triangles",
+        "great-circles",
+        "spherical-excess"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-geo-pick-theorem",
+      "title": "Count area with lattice points",
+      "topic": "ga-geometry",
+      "level": "L1",
+      "hook": "A jagged polygon has an exact area from a count.",
+      "outcome": "Apply Pick’s theorem to simple lattice polygons and explain why holes need adjustment.",
+      "prerequisites": [
+        "library:book-euclidean-geometry-trigonometry:area-pythagorean-theorem",
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "A=I+B/2-1",
+      "visual": "Lattice polygon editor with interior and boundary counts.",
+      "proof": "Proof sketch by triangulating into primitive lattice triangles; full existence argument deferred.",
+      "sources": [
+        "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "polygon area",
+        "integer coordinates"
+      ],
+      "tags": [
+        "pick-theorem",
+        "lattice-polygons",
+        "boundary-counts"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-open-sets",
+      "title": "Open means room to move",
+      "topic": "ga-topology",
+      "level": "L2",
+      "hook": "A point near an edge may still be inside.",
+      "outcome": "Test openness in R with the metric-ball definition and distinguish open from closed.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems"
+      ],
+      "formula": "U open ⇔ ∀x∈U ∃ε>0: (x-ε,x+ε)⊂U",
+      "visual": "Number line and epsilon interval with boundary cases.",
+      "proof": "Full proofs for standard open and non-open intervals; arbitrary topological spaces deferred.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "intervals",
+        "absolute value"
+      ],
+      "tags": [
+        "open-sets",
+        "neighborhoods",
+        "subspace-topology"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-continuity",
+      "title": "Continuity without drawing a curve",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "A function can be tested by what it does to open sets.",
+      "outcome": "Show continuity equivalence with open preimages for maps between metric spaces.",
+      "prerequisites": [
+        "explorations:ga-top-open-sets",
+        "library:book-introduction-to-proof:functions",
+        "calculus:04"
+      ],
+      "formula": "f continuous ⇔ f⁻¹(V) open for every open V",
+      "visual": "Domain and codomain interval mapping with inverse-image readout.",
+      "proof": "Full proof in metric spaces; no claim that a plot proves continuity.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "open sets",
+        "function preimages",
+        "epsilon-delta continuity"
+      ],
+      "tags": [
+        "continuity",
+        "open-preimages",
+        "metric-spaces"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-homeomorphism",
+      "title": "When two shapes count as the same",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "Can an interval be stretched into a circle?",
+      "outcome": "Define homeomorphism and test examples using compactness or cut points.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "explorations:ga-top-continuity"
+      ],
+      "formula": "f:X→Y bijective, f and f⁻¹ continuous",
+      "visual": "Bendable interval beside circle; endpoint/cut-point table.",
+      "proof": "Full proof that [0,1] and a circle are not homeomorphic via cut points after defining them.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "continuity"
+      ],
+      "tags": [
+        "homeomorphisms",
+        "cut-points",
+        "topological-invariants"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-compactness",
+      "title": "Why finite subcovers matter",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "An infinite blanket collection may have a finite selection.",
+      "outcome": "Use open-cover compactness and prove [a,b] is compact in R.",
+      "prerequisites": [
+        "explorations:ga-top-open-sets",
+        "library:book-proof-safe-real-analysis:quantifiers-completeness"
+      ],
+      "formula": "∀ open covers {U_i}, ∃ finite subcover",
+      "visual": "Cover strips on an interval with finite selection log.",
+      "proof": "Full interval proof using supremum; requires least-upper-bound property of R.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "open sets",
+        "supremum of bounded real sets"
+      ],
+      "tags": [
+        "compactness",
+        "finite-subcovers",
+        "supremum-arguments"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-connectedness",
+      "title": "A gap you cannot cover up",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "What makes one piece truly one piece?",
+      "outcome": "State connectedness by separation and prove continuous images of connected spaces are connected.",
+      "prerequisites": [
+        "explorations:ga-top-open-sets",
+        "explorations:ga-top-continuity",
+        "library:book-introduction-to-proof:functions"
+      ],
+      "formula": "X≠U∪V for disjoint nonempty relatively open U,V",
+      "visual": "Two-color partition trials for interval and union of intervals.",
+      "proof": "Full proof of image theorem; converse not asserted.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "open sets",
+        "continuity",
+        "set images"
+      ],
+      "tags": [
+        "connectedness",
+        "separations",
+        "continuous-images"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-quotient",
+      "title": "Glue edges, change a space",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "A rectangle can become a cylinder by identifying edges.",
+      "outcome": "Define quotient topology and verify one cylinder edge-identification example.",
+      "prerequisites": [
+        "explorations:relations-equivalence",
+        "explorations:ga-top-open-sets",
+        "explorations:ga-top-continuity"
+      ],
+      "formula": "V⊂X/~ open ⇔ q⁻¹(V) open in X",
+      "visual": "Rectangle edge labels and glued cylinder with quotient map readout.",
+      "proof": "Full verification of the quotient rule; classification of surfaces deferred.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "equivalence relations",
+        "open sets",
+        "continuity"
+      ],
+      "tags": [
+        "quotient-topology",
+        "equivalence-classes",
+        "cylinder"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-euler-characteristic",
+      "title": "What survives triangulation",
+      "topic": "ga-topology",
+      "level": "L1",
+      "hook": "A cube and a tetrahedron both give two.",
+      "outcome": "Compute V−E+F for closed triangulated surfaces and name its scope.",
+      "prerequisites": [],
+      "formula": "χ=V−E+F",
+      "visual": "Triangulated sphere and torus with live V,E,F table.",
+      "proof": "Proof sketch of invariance under subdivision; full triangulation-independence deferred.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "vertices",
+          "edges",
+          "faces"
+        ],
+        "editionPrerequisites": [
+          "vertices and edges (defined here)",
+          "counting",
+          "a simple path or tree (defined here)"
+        ],
+        "rationale": "Graph terms and spanning trees are introduced locally; counting is the entry skill. The proof is explicitly conditional on a stated plane-separation lemma.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "vertices and edges (defined here)",
+        "counting",
+        "a simple path or tree (defined here)",
+        "plane-separation lemma (stated without proof)"
+      ],
+      "tags": [
+        "euler-characteristic",
+        "plane-graphs",
+        "spanning-trees"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-loop-homotopy",
+      "title": "Can a loop be shrunk?",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "A loop around a puncture refuses to disappear.",
+      "outcome": "Define based loop homotopy and contrast disk and punctured-plane examples.",
+      "prerequisites": [
+        "explorations:ga-top-continuity",
+        "library:book-topology-proof-counterexample:connectedness-paths-and-components",
+        "explorations:relations-equivalence"
+      ],
+      "formula": "H:[0,1]²→X; H(0,t)=γ₀(t), H(1,t)=γ₁(t), H(s,0)=H(s,1)=x₀",
+      "visual": "Loop deformation with basepoint and puncture markers.",
+      "proof": "Proof sketch using winding number for punctured plane; full π₁ computation deferred.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "continuous maps",
+        "paths",
+        "equivalence relations"
+      ],
+      "tags": [
+        "based-homotopy",
+        "loop-contraction",
+        "winding-obstructions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-winding-number",
+      "title": "Count turns without trusting a picture",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "A loop can wind twice even while self-crossing.",
+      "outcome": "Compute winding number for polygonal loops avoiding the origin and state homotopy invariance.",
+      "prerequisites": [
+        "library:book-precalculus:radians-unit-circle",
+        "library:book-topology-proof-counterexample:connectedness-paths-and-components"
+      ],
+      "formula": "wind(γ,0)=(1/2π)Δ arg γ",
+      "visual": "Path editor with unwrapped angle trace and integer readout.",
+      "proof": "Proof sketch from continuous lifting of argument; lifting theorem deferred.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "angles",
+        "continuous paths",
+        "integer sums"
+      ],
+      "tags": [
+        "winding-number",
+        "angle-lifting",
+        "polygonal-loops"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-top-fundamental-group-circle",
+      "title": "Loops around the circle form integers",
+      "topic": "ga-topology",
+      "level": "L3",
+      "hook": "Walking around a circle composes like addition.",
+      "outcome": "State π₁(S¹)≅Z and prove the group law given the lifting lemma.",
+      "prerequisites": [
+        "explorations:ga-top-loop-homotopy",
+        "explorations:ga-alg-symmetry-group",
+        "explorations:ga-top-winding-number"
+      ],
+      "formula": "π₁(S¹)≅(Z,+)",
+      "visual": "Circle loop and real-line lift with endpoints and winding readout.",
+      "proof": "Proof sketch conditional on path and homotopy lifting; full lifting proof deferred.",
+      "sources": [
+        "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf",
+        "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/pages/syllabus/",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+      ],
+      "catalogFields": [
+        "topology"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "based homotopy",
+        "groups",
+        "winding number"
+      ],
+      "tags": [
+        "fundamental-group",
+        "circle",
+        "path-lifting"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-symmetry-group",
+      "title": "A square as an algebra machine",
+      "topic": "ga-abstract-algebra",
+      "level": "L1",
+      "hook": "How many distinct ways can a square be moved onto itself?",
+      "outcome": "Compose square symmetries and identify identity and inverses.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "explorations:discovery:infinity-in-half",
+        "explorations:discovery:order-of-moves"
+      ],
+      "formula": "D₄={r^k,sr^k: k=0,1,2,3}",
+      "visual": "Square transform buttons and an 8×8 composition table.",
+      "proof": "Full closure/identity/inverse/associativity argument using composition of bijections.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "functions",
+          "angles"
+        ],
+        "editionPrerequisites": [
+          "functions and bijections (refreshed here)",
+          "quarter-turns and reflections"
+        ],
+        "rationale": "The body recalls bijections and checks concrete quarter-turn and reflection actions; general angle knowledge alone is too vague.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "functions and bijections (refreshed here)",
+        "quarter-turns and reflections"
+      ],
+      "tags": [
+        "square-symmetries",
+        "dihedral-groups",
+        "noncommutativity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-modular-clock",
+      "title": "Clock arithmetic is a group",
+      "topic": "ga-abstract-algebra",
+      "level": "L1",
+      "hook": "Why does adding hours wrap around?",
+      "outcome": "Verify the group axioms for addition modulo n and locate additive inverses.",
+      "prerequisites": [
+        "explorations:divisibility"
+      ],
+      "formula": "Z/nZ with [a]+[b]=[a+b]",
+      "visual": "Clock dial and residue table for varying n≥2.",
+      "proof": "Full proof including well-definedness under congruence classes.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "integer addition",
+          "remainders"
+        ],
+        "editionPrerequisites": [
+          "integer addition",
+          "divisibility and remainders (refreshed here)"
+        ],
+        "rationale": "The capsule defines congruence through divisibility and refreshes residue classes before the addition proof.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "integer addition",
+        "divisibility and remainders (refreshed here)"
+      ],
+      "tags": [
+        "modular-addition",
+        "residue-classes",
+        "additive-inverses"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-order",
+      "title": "How long until a symmetry returns?",
+      "topic": "ga-abstract-algebra",
+      "level": "L2",
+      "hook": "Repeat a rotation until it becomes the identity.",
+      "outcome": "Compute element order in a finite group and relate it to a cyclic subgroup.",
+      "prerequisites": [
+        "explorations:ga-alg-symmetry-group"
+      ],
+      "formula": "ord(g)=min{k>0:g^k=e}",
+      "visual": "Repeated transformation strip with return counter.",
+      "proof": "Full proof that powers repeat and form a subgroup in finite groups.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "group operation",
+          "identity"
+        ],
+        "editionPrerequisites": [
+          "group operation and identity (refreshed here)",
+          "pigeonhole principle (explained here)"
+        ],
+        "rationale": "The capsule recalls group operations and identity; the proof explains its pigeonhole step locally.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "group operation and identity (refreshed here)",
+        "pigeonhole principle (explained here)"
+      ],
+      "tags": [
+        "element-order",
+        "cyclic-subgroups",
+        "group-powers"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-lagrange",
+      "title": "Why subgroup sizes divide",
+      "topic": "ga-abstract-algebra",
+      "level": "L3",
+      "hook": "Can a 6-element group contain a 4-element subgroup?",
+      "outcome": "Apply Lagrange’s theorem and distinguish its converse from the theorem.",
+      "prerequisites": [
+        "explorations:ga-alg-symmetry-group",
+        "library:book-algebra-patterns-structure:groups-subgroups-generated-structure",
+        "explorations:functions-inverse"
+      ],
+      "formula": "|G|=[G:H]|H|",
+      "visual": "Coset partition tiles and exact count.",
+      "proof": "Full finite-group proof by disjoint equal-sized left cosets.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "groups",
+          "subgroups",
+          "bijections"
+        ],
+        "editionPrerequisites": [
+          "groups and subgroups (refreshed here)",
+          "bijections (refreshed here)"
+        ],
+        "rationale": "Groups, subgroups and bijections are recalled before the coset-partition proof.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "groups and subgroups (refreshed here)",
+        "bijections (refreshed here)"
+      ],
+      "tags": [
+        "lagrange-theorem",
+        "cosets",
+        "subgroup-orders"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-homomorphism",
+      "title": "A map that respects the operation",
+      "topic": "ga-abstract-algebra",
+      "level": "L3",
+      "hook": "A complicated group may cast a simpler shadow.",
+      "outcome": "Test homomorphisms and compute kernel/image for Z→Z/nZ.",
+      "prerequisites": [
+        "explorations:ga-alg-symmetry-group",
+        "explorations:refresher:functions",
+        "explorations:ga-alg-modular-clock"
+      ],
+      "formula": "φ(ab)=φ(a)φ(b)",
+      "visual": "Input/output Cayley table with operation-preserving squares.",
+      "proof": "Full verification for modular reduction and kernel subgroup; isomorphism theorem deferred.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "groups",
+          "functions",
+          "modular arithmetic"
+        ],
+        "editionPrerequisites": [
+          "groups and functions (refreshed here)",
+          "modular classes (refreshed here)"
+        ],
+        "rationale": "The capsule refreshes group maps and modular classes; these are the concrete ingredients of the example.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "groups and functions (refreshed here)",
+        "modular classes (refreshed here)"
+      ],
+      "tags": [
+        "group-homomorphisms",
+        "kernels",
+        "images"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-quotient-group",
+      "title": "Collapse a normal subgroup",
+      "topic": "ga-abstract-algebra",
+      "level": "L3",
+      "hook": "What if all multiples of n count as zero?",
+      "outcome": "Construct Z/nZ as a quotient and state why normality is required in general groups.",
+      "prerequisites": [
+        "explorations:ga-alg-lagrange",
+        "explorations:relations-equivalence"
+      ],
+      "formula": "(aN)(bN)=abN for N normal in G",
+      "visual": "Coset partitions with selected representatives and multiplication result.",
+      "proof": "Full well-definedness proof for normal subgroups; converse necessity shown.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "cosets",
+          "homomorphisms",
+          "equivalence relations"
+        ],
+        "editionPrerequisites": [
+          "cosets and subgroups (refreshed here)",
+          "group inverses",
+          "equivalence-class representatives (refreshed here)"
+        ],
+        "rationale": "The body uses subgroup cosets, inverses and representative changes; a prior homomorphism theorem is not an input to its well-definedness proof.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "cosets and subgroups (refreshed here)",
+        "group inverses",
+        "equivalence-class representatives (refreshed here)"
+      ],
+      "tags": [
+        "quotient-groups",
+        "normal-subgroups",
+        "representative-independence"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-ring-polynomials",
+      "title": "Polynomials are numbers with a variable",
+      "topic": "ga-abstract-algebra",
+      "level": "L2",
+      "hook": "What algebraic rules survive when coefficients become polynomials?",
+      "outcome": "Verify key ring rules in R[x] and distinguish polynomial from polynomial function over finite fields.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:expressions-laws-factorising"
+      ],
+      "formula": "(f+g)(x)=f(x)+g(x)",
+      "visual": "Coefficient arrays and evaluations over R and F₂.",
+      "proof": "Full distributivity proof by finite sums; equality-of-functions caveat proved with x²−x over F₂.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "polynomial operations",
+          "integer arithmetic"
+        ],
+        "editionPrerequisites": [
+          "polynomial arithmetic (refreshed here)",
+          "commutative ring laws (refreshed here)"
+        ],
+        "rationale": "The capsule refreshes commutative ring laws and polynomial arithmetic, rather than assuming integer coefficients alone.",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "polynomial arithmetic (refreshed here)",
+        "commutative ring laws (refreshed here)"
+      ],
+      "tags": [
+        "polynomial-rings",
+        "coefficient-convolution",
+        "polynomial-functions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-ideals",
+      "title": "Remainders as quotient rings",
+      "topic": "ga-abstract-algebra",
+      "level": "L3",
+      "hook": "Modulo n is a way to collapse an entire ideal.",
+      "outcome": "Define ideals in Z and prove every ideal is nZ.",
+      "prerequisites": [
+        "explorations:euclidean-algorithm",
+        "explorations:ga-alg-ring-polynomials"
+      ],
+      "formula": "Z/nZ=Z/(n)",
+      "visual": "Integer-line multiples, cosets and residue readout.",
+      "proof": "Full proof using least positive element; zero ideal handled separately.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "divisibility",
+          "ring operations",
+          "well-ordering"
+        ],
+        "editionPrerequisites": [
+          "integer division",
+          "ring operations (refreshed here)",
+          "well-ordering (stated here)"
+        ],
+        "rationale": "The integer-ideal proof needs division with remainder and the stated well-ordering principle; ring operations are recalled locally.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "integer division",
+        "ring operations (refreshed here)",
+        "well-ordering (stated here)"
+      ],
+      "tags": [
+        "ideals",
+        "quotient-rings",
+        "integer-generators"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-fields",
+      "title": "Why division sometimes fails modulo n",
+      "topic": "ga-abstract-algebra",
+      "level": "L2",
+      "hook": "3 has an inverse mod 7, but 2 fails mod 6.",
+      "outcome": "Prove Z/nZ is a field exactly when n is prime (n≥2).",
+      "prerequisites": [
+        "explorations:bezout",
+        "explorations:ga-alg-modular-clock",
+        "explorations:ga-alg-ring-polynomials"
+      ],
+      "formula": "[a]⁻¹ exists ⇔ gcd(a,n)=1",
+      "visual": "Multiplication tables with nonzero inverse highlights.",
+      "proof": "Full proof using Bézout and zero divisors; Bézout stated with local refresher.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "greatest common divisor",
+          "modular arithmetic",
+          "rings"
+        ],
+        "editionPrerequisites": [
+          "gcd and Bézout identity (refreshed here)",
+          "modular arithmetic",
+          "rings (refreshed here)"
+        ],
+        "rationale": "The unit criterion explicitly uses the stated Bézout identity, with a Euclidean-algorithm refresher; gcd alone did not name this input.",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "gcd and Bézout identity (refreshed here)",
+        "modular arithmetic",
+        "rings (refreshed here)"
+      ],
+      "tags": [
+        "finite-fields",
+        "modular-inverses",
+        "zero-divisors"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-alg-sylow-scope",
+      "title": "Why prime powers force subgroups",
+      "topic": "ga-abstract-algebra",
+      "level": "L3",
+      "hook": "Group orders can force subgroups to exist.",
+      "outcome": "State the first Sylow theorem accurately and work one small-order consequence.",
+      "prerequisites": [
+        "explorations:ga-alg-lagrange",
+        "explorations:strong-induction",
+        "explorations:ga-alg-symmetry-group"
+      ],
+      "formula": "|G|=p^n m, p∤m ⇒ ∃H≤G, |H|=p^n",
+      "visual": "Order factorization and subgroup possibility table.",
+      "proof": "Theorem statement plus worked consequence only; Sylow proof deferred and clearly labelled.",
+      "sources": [
+        "https://scholarworks.sfasu.edu/ebooks/23/",
+        "https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/"
+      ],
+      "catalogFields": [
+        "abstract-algebra"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "catalogPrerequisites": [
+          "Lagrange theorem",
+          "finite groups",
+          "prime factorization"
+        ],
+        "editionPrerequisites": [
+          "Lagrange theorem (refreshed here)",
+          "prime factorization",
+          "finite groups"
+        ],
+        "rationale": "The body recalls Lagrange and applies first Sylow as a stated external theorem to finite groups and prime factorizations.",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Lagrange theorem (refreshed here)",
+        "prime factorization",
+        "finite groups"
+      ],
+      "tags": [
+        "sylow-existence",
+        "group-actions",
+        "prime-power-subgroups"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-arc-length",
+      "title": "A curve has a speedometer",
+      "topic": "ga-differential-geometry",
+      "level": "L2",
+      "hook": "A bent path is longer than its chord.",
+      "outcome": "Compute arc length from a smooth parametrization and explain regularity.",
+      "prerequisites": [
+        "explorations:refresher:derivatives",
+        "explorations:calc-area-accumulates",
+        "explorations:refresher:vectors"
+      ],
+      "formula": "L(γ)=∫_a^b ||γ′(t)|| dt",
+      "visual": "Curve with equal-time and equal-distance markers; length readout.",
+      "proof": "Proof sketch from polygonal approximations for C¹ curves; convergence details deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "derivatives",
+        "definite integrals",
+        "vectors"
+      ],
+      "tags": [
+        "arc-length",
+        "speed-integrals",
+        "backtracking"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-parameterization",
+      "title": "Different clocks, same curve",
+      "topic": "ga-differential-geometry",
+      "level": "L2",
+      "hook": "Walk the same path at a different speed.",
+      "outcome": "Verify arc-length invariance under smooth increasing reparameterization.",
+      "prerequisites": [
+        "explorations:calc-chain-rule-lenses",
+        "explorations:calc-substitution-accounting",
+        "explorations:ga-dg-arc-length"
+      ],
+      "formula": "L(γ∘φ)=L(γ) for φ′>0",
+      "visual": "One trace with two time markers and matched cumulative lengths.",
+      "proof": "Full proof by chain rule and substitution; nonregular pauses discussed separately.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "chain rule",
+        "integration by substitution",
+        "arc length"
+      ],
+      "tags": [
+        "reparameterization",
+        "curve-orientation",
+        "regularity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-curvature-plane",
+      "title": "How sharply does a curve turn?",
+      "topic": "ga-differential-geometry",
+      "level": "L3",
+      "hook": "A circle and a straight line differ by turning rate.",
+      "outcome": "Calculate signed curvature of regular plane curves and its value for a circle.",
+      "prerequisites": [
+        "calculus:06",
+        "explorations:ga-la-determinant",
+        "explorations:ga-dg-arc-length"
+      ],
+      "formula": "κ=det(γ′,γ″)/||γ′||³",
+      "visual": "Tangent arrow and osculating-circle approximation with numeric curvature.",
+      "proof": "Full derivation from derivative of unit tangent for regular C² curves.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "first and second derivatives",
+        "determinant",
+        "arc length"
+      ],
+      "tags": [
+        "signed-curvature",
+        "regular-plane-curves",
+        "ellipse-curvature"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-frenet",
+      "title": "The moving frame of a plane curve",
+      "topic": "ga-differential-geometry",
+      "level": "L3",
+      "hook": "Carry coordinate axes along a path.",
+      "outcome": "Use Frenet equations for a unit-speed plane curve and explain sign conventions.",
+      "prerequisites": [
+        "explorations:ga-dg-arc-length",
+        "explorations:ga-dg-curvature-plane"
+      ],
+      "formula": "T′=κN; N′=−κT",
+      "visual": "Moving orthonormal frame with signed curvature trace.",
+      "proof": "Full proof by differentiating T·T and T·N; restricted to oriented plane curves.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "unit-speed curves",
+        "plane curvature"
+      ],
+      "tags": [
+        "plane-frenet-frame",
+        "unit-tangents",
+        "left-normals"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-surface-patches",
+      "title": "A surface needs local coordinates",
+      "topic": "ga-differential-geometry",
+      "level": "L3",
+      "hook": "A globe needs more than one flat map.",
+      "outcome": "Define a regular surface patch and identify coordinate singularities on a sphere.",
+      "prerequisites": [
+        "calculus:20",
+        "calculus:19"
+      ],
+      "formula": "X_u×X_v≠0",
+      "visual": "Sphere coordinate grid with pole warning and derivative table.",
+      "proof": "Full rank check away from poles; manifold atlas theory deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "partial derivatives",
+        "cross product"
+      ],
+      "tags": [
+        "surface-patches",
+        "rank-condition",
+        "coordinate-singularities"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-first-fundamental-form",
+      "title": "Measuring on a surface",
+      "topic": "ga-differential-geometry",
+      "level": "L3",
+      "hook": "How long is a route drawn on a curved surface?",
+      "outcome": "Compute local length from the first fundamental form of a parameterized surface.",
+      "prerequisites": [
+        "explorations:ga-la-dot-product",
+        "explorations:ga-dg-surface-patches",
+        "explorations:ga-dg-arc-length"
+      ],
+      "formula": "ds²=E du²+2F du dv+G dv²",
+      "visual": "Parameter-grid route with metric coefficients and numeric length.",
+      "proof": "Full derivation from dX=X_u du+X_v dv for regular patches.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "dot product",
+        "surface patches",
+        "curve length"
+      ],
+      "tags": [
+        "first-fundamental-form",
+        "surface-metrics",
+        "nonorthogonal-coordinates"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-geodesics",
+      "title": "Locally straight on a curved surface",
+      "topic": "ga-differential-geometry",
+      "level": "L3",
+      "hook": "Flights follow great circles on an ideal sphere.",
+      "outcome": "Define a geodesic by locally stationary length and verify great circles as sphere examples.",
+      "prerequisites": [
+        "explorations:ga-dg-first-fundamental-form",
+        "library:book-euclidean-geometry-trigonometry:solids-volume-surface-area"
+      ],
+      "formula": "∇_{γ′}γ′=0",
+      "visual": "Sphere path comparison, local length table and great-circle candidate.",
+      "proof": "Proof sketch via constrained acceleration; general existence and minimization range deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "surface length",
+        "variational intuition",
+        "sphere"
+      ],
+      "tags": [
+        "geodesics",
+        "normal-acceleration",
+        "cylinder-helix"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-gaussian-curvature",
+      "title": "One curvature, two principal bends",
+      "topic": "ga-differential-geometry",
+      "level": "L3",
+      "hook": "A saddle bends both up and down.",
+      "outcome": "Compute Gaussian curvature for sphere and saddle patches and distinguish intrinsic from extrinsic claims.",
+      "prerequisites": [
+        "explorations:ga-dg-surface-patches",
+        "calculus:06",
+        "explorations:ga-la-determinant"
+      ],
+      "formula": "K=k₁k₂",
+      "visual": "Principal normal sections and signed k₁,k₂,K readouts.",
+      "proof": "Proof sketch of shape-operator computation; Theorema Egregium deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "surface patches",
+        "second derivatives",
+        "matrix determinant"
+      ],
+      "tags": [
+        "gaussian-curvature",
+        "principal-curvatures",
+        "shape-operator"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-gauss-bonnet",
+      "title": "Curvature adds up to topology",
+      "topic": "ga-differential-geometry",
+      "level": "L4",
+      "hook": "A sphere has a fixed total bend.",
+      "outcome": "State Gauss–Bonnet for a compact oriented closed surface and calculate the sphere case.",
+      "prerequisites": [
+        "explorations:ga-dg-gaussian-curvature",
+        "calculus:26",
+        "explorations:ga-top-euler-characteristic"
+      ],
+      "formula": "∫_M K dA=2πχ(M)",
+      "visual": "Triangulated sphere with curvature integral and χ table.",
+      "proof": "Theorem stated and sphere calculation shown; general proof deferred with hypotheses explicit.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "Gaussian curvature",
+        "surface area",
+        "Euler characteristic"
+      ],
+      "tags": [
+        "gauss-bonnet",
+        "total-curvature",
+        "round-torus"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-dg-parallel-transport",
+      "title": "A direction can change after a round trip",
+      "topic": "ga-differential-geometry",
+      "level": "L4",
+      "hook": "Carry an arrow around a spherical triangle.",
+      "outcome": "Compute spherical holonomy for one explicit triangle and relate it to enclosed area.",
+      "prerequisites": [
+        "explorations:ga-dg-geodesics",
+        "library:book-precalculus:radians-unit-circle",
+        "explorations:ga-dg-first-fundamental-form"
+      ],
+      "formula": "Δθ≡Area/R² (mod 2π) for a positively oriented simple spherical loop",
+      "visual": "Arrow transport along octant edges with angle/area readout.",
+      "proof": "Proof sketch via Gauss–Bonnet for the octant; general holonomy theorem deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-950-differential-geometry-fall-2008/"
+      ],
+      "catalogFields": [
+        "differential-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "sphere geodesics",
+        "angles",
+        "surface metric"
+      ],
+      "tags": [
+        "parallel-transport",
+        "holonomy",
+        "spherical-octant"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-zero-loci",
+      "title": "Draw the solutions of a polynomial",
+      "topic": "ga-algebraic-geometry",
+      "level": "L1",
+      "hook": "One equation can make a line, circle or cusp.",
+      "outcome": "Plot real zero loci and distinguish an equation from its set of real solutions.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:expressions-laws-factorising",
+        "explorations:refresher:coordinates"
+      ],
+      "formula": "V_R(f)={(x,y)∈R²:f(x,y)=0}",
+      "visual": "Equation editor with contour and sampled residual table.",
+      "proof": "Direct substitution verifies examples; no inference about global shape from pixels.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "polynomial evaluation",
+        "coordinates"
+      ],
+      "tags": [
+        "polynomial-zero-sets",
+        "real-complex-distinction",
+        "equation-membership"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-intersections",
+      "title": "Two curves, how many meetings?",
+      "topic": "ga-algebraic-geometry",
+      "level": "L1",
+      "hook": "A line can meet a circle twice, once or never over R.",
+      "outcome": "Solve line-circle intersections by substitution and compare real and complex counts.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:quadratic-equations",
+        "library:book-precalculus:complex-numbers-polar-form"
+      ],
+      "formula": "y=mx+b, x²+y²=1",
+      "visual": "Line-circle slider with roots and discriminant table.",
+      "proof": "Full quadratic derivation; Bézout theorem explicitly deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "quadratic formula",
+        "complex numbers refresher"
+      ],
+      "tags": [
+        "curve-intersections",
+        "quadratic-discriminants",
+        "tangency"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-tangent-algebraic",
+      "title": "Tangents from derivatives of equations",
+      "topic": "ga-algebraic-geometry",
+      "level": "L3",
+      "hook": "A curve equation hides its tangent line.",
+      "outcome": "Find the tangent at a smooth real point of F(x,y)=0 and detect singular-point failure.",
+      "prerequisites": [
+        "calculus:20",
+        "calculus:21"
+      ],
+      "formula": "F_x(p)(x-p_x)+F_y(p)(y-p_y)=0 if ∇F(p)≠0",
+      "visual": "Curve and gradient arrow with tangent equation readout.",
+      "proof": "Full first-order derivation under nonzero-gradient hypothesis; singular analysis deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "partial derivatives",
+        "linear approximation"
+      ],
+      "tags": [
+        "algebraic-tangents",
+        "gradients",
+        "implicit-function-theorem"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-singular-cusp-node",
+      "title": "When a curve has no single tangent",
+      "topic": "ga-algebraic-geometry",
+      "level": "L3",
+      "hook": "A cusp and crossing both defeat a smooth-curve rule.",
+      "outcome": "Classify the origin of y²=x³ and y²=x²(x+1) by local branches/tangent cones.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:expressions-laws-factorising",
+        "explorations:ga-ag-tangent-algebraic",
+        "calculus:04"
+      ],
+      "formula": "F(p)=F_x(p)=F_y(p)=0",
+      "visual": "Zoomable cusp and node with branch approximations and coefficient table.",
+      "proof": "Full local algebra for these two examples; general singularity classification deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "polynomial factoring",
+        "tangent formula",
+        "limits"
+      ],
+      "tags": [
+        "curve-singularities",
+        "cusps-and-nodes",
+        "tangent-cones"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-projective-points",
+      "title": "Where parallel lines meet",
+      "topic": "ga-algebraic-geometry",
+      "level": "L3",
+      "hook": "Affine parallel lines can meet at infinity after completion.",
+      "outcome": "Use homogeneous coordinates to compute a point at infinity for two parallel projective lines.",
+      "prerequisites": [
+        "library:book-algebra-and-functions:linear-equations-inequalities-systems",
+        "explorations:relations-equivalence"
+      ],
+      "formula": "[x:y:z]=[λx:λy:λz], λ≠0",
+      "visual": "Affine chart z=1 and projective boundary with coordinate table.",
+      "proof": "Full calculation in P²; general projective geometry axioms deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "linear equations",
+        "equivalence classes"
+      ],
+      "tags": [
+        "homogeneous-coordinates",
+        "projective-lines",
+        "points-at-infinity"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-bezout-scope",
+      "title": "Bézout for a line and a conic",
+      "topic": "ga-algebraic-geometry",
+      "level": "L4",
+      "hook": "A line and conic seem to meet twice only after careful counting.",
+      "outcome": "State plane Bézout with complex projective curves, no common component, and multiplicity; compute a tangent example.",
+      "prerequisites": [
+        "explorations:ga-ag-projective-points",
+        "library:book-precalculus:complex-numbers-polar-form",
+        "library:book-algebra-and-functions:polynomials-factor-theorem"
+      ],
+      "formula": "Σ_p I_p(C,D)=deg(C)deg(D)",
+      "visual": "Line-conic intersections and multiplicity table, including tangency.",
+      "proof": "Theorem stated, tangent example derived; general intersection-multiplicity proof deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "projective points",
+        "complex numbers",
+        "polynomial degree"
+      ],
+      "tags": [
+        "line-conic-intersections",
+        "intersection-multiplicity",
+        "bezout-hypotheses"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-coordinate-rings",
+      "title": "Turn geometry into a ring",
+      "topic": "ga-algebraic-geometry",
+      "level": "L3",
+      "hook": "The same curve can be studied through polynomials on it.",
+      "outcome": "Construct R[x,y]/(f) for a simple curve and explain the quotient relation.",
+      "prerequisites": [
+        "explorations:ga-alg-ring-polynomials",
+        "explorations:ga-alg-ideals",
+        "explorations:relations-equivalence"
+      ],
+      "formula": "R[x,y]/(y-x²)≅R[x]",
+      "visual": "Parabola point and equivalent polynomial expression table.",
+      "proof": "Full explicit isomorphism by substitution y↦x²; general correspondence deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/",
+        "https://stacks.math.columbia.edu/download/schemes.pdf"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "polynomial rings",
+        "ideals",
+        "equivalence relations"
+      ],
+      "tags": [
+        "coordinate-rings",
+        "polynomial-quotients",
+        "parabola"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-nullstellensatz-scope",
+      "title": "The Nullstellensatz in one variable",
+      "topic": "ga-algebraic-geometry",
+      "level": "L4",
+      "hook": "x and x² vanish at the same complex points but differ algebraically.",
+      "outcome": "State the algebraically closed-field radical ideal/zero-set correspondence and test a one-variable example.",
+      "prerequisites": [
+        "explorations:ga-alg-ideals",
+        "library:book-precalculus:complex-numbers-polar-form",
+        "explorations:ga-ag-zero-loci"
+      ],
+      "formula": "I(V(I))=√I over algebraically closed k",
+      "visual": "Ideals (x),(x²), radical and zero-set comparison table.",
+      "proof": "Theorem statement and example only; Nullstellensatz proof deferred; false over R without modification.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/",
+        "https://stacks.math.columbia.edu/download/schemes.pdf"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "ideals",
+        "complex numbers",
+        "zero loci"
+      ],
+      "tags": [
+        "one-variable-nullstellensatz",
+        "radical-ideals",
+        "algebraically-closed-fields"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-ag-affine-scheme-window",
+      "title": "Why a ring can describe more than visible points",
+      "topic": "ga-algebraic-geometry",
+      "level": "L4",
+      "hook": "A polynomial relation may retain multiplicity invisible in a plot.",
+      "outcome": "Identify prime ideals as points of Spec A and contrast k[x]/(x²) with k[x]/(x).",
+      "prerequisites": [
+        "library:book-algebra-patterns-structure:ring-homomorphisms-ideals-quotients",
+        "explorations:ga-ag-coordinate-rings"
+      ],
+      "formula": "Spec(A)={p⊂A:p prime}",
+      "visual": "Two ring cards with same classical point and different nilpotent arithmetic.",
+      "proof": "Full elementary calculation of the single prime ideal in both examples; sheaves and general schemes deferred.",
+      "sources": [
+        "https://stacks.math.columbia.edu/browse",
+        "https://ocw.mit.edu/courses/18-900-geometry-and-topology-in-the-plane-spring-2023/pages/syllabus/",
+        "https://stacks.math.columbia.edu/download/schemes.pdf"
+      ],
+      "catalogFields": [
+        "commutative-algebra-algebraic-geometry"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "prime ideals",
+        "quotient rings",
+        "Zariski open sets"
+      ],
+      "tags": [
+        "prime-spectrum",
+        "nilpotents",
+        "dual-numbers"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-objects-arrows",
+      "title": "Relationships before ingredients",
+      "topic": "ga-category-theory",
+      "level": "L1",
+      "hook": "A network of composable routes is a category.",
+      "outcome": "Check objects, arrows, identity and associativity in the path category of a finite acyclic directed graph.",
+      "prerequisites": [
+        "explorations:refresher:functions"
+      ],
+      "formula": "h∘(g∘f)=(h∘g)∘f",
+      "visual": "Finite acyclic directed graph and composition table including identities.",
+      "proof": "Full verification for path concatenation, including empty paths.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "directed graphs"
+      ],
+      "tags": [
+        "path-categories",
+        "arrow-composition",
+        "identity-arrows"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-commuting-diagrams",
+      "title": "Two routes, one result",
+      "topic": "ga-category-theory",
+      "level": "L1",
+      "hook": "Does processing then summarizing equal summarizing then processing?",
+      "outcome": "Read and verify a commuting square of finite-set functions.",
+      "prerequisites": [
+        "explorations:refresher:functions"
+      ],
+      "formula": "g∘f=k∘h",
+      "visual": "Four finite sets, arrow maps and element-by-element table.",
+      "proof": "Full finite-set verification; a diagram without arrow definitions is insufficient.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "open"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "composition"
+      ],
+      "tags": [
+        "commuting-squares",
+        "function-equality",
+        "typed-composition"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-functors",
+      "title": "A structure-preserving translation",
+      "topic": "ga-category-theory",
+      "level": "L2",
+      "hook": "Send a collection of sets and functions into another world.",
+      "outcome": "Check that a functor preserves identities and composition in a concrete finite category.",
+      "prerequisites": [
+        "explorations:ga-cat-objects-arrows",
+        "explorations:refresher:functions"
+      ],
+      "formula": "F(g∘f)=F(g)∘F(f)",
+      "visual": "Source and target category cards with image-arrow table.",
+      "proof": "Full verification for the chosen example; size issues deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "categories",
+        "function composition"
+      ],
+      "tags": [
+        "covariant-functors",
+        "composition-preservation",
+        "path-categories"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-natural-transformations",
+      "title": "A translation between translations",
+      "topic": "ga-category-theory",
+      "level": "L2",
+      "hook": "Two recipes can produce compatible answers object by object.",
+      "outcome": "Verify naturality for a concrete pair of functors on a finite category.",
+      "prerequisites": [
+        "explorations:ga-cat-functors",
+        "explorations:ga-cat-commuting-diagrams"
+      ],
+      "formula": "G(f)∘η_X=η_Y∘F(f)",
+      "visual": "Naturality square with finite-value table for each arrow.",
+      "proof": "Full check of every generating arrow; explains why this suffices for composites.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "functors",
+        "commuting diagrams"
+      ],
+      "tags": [
+        "natural-transformations",
+        "naturality-squares",
+        "component-functions"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-products",
+      "title": "Pairing as a universal property",
+      "topic": "ga-category-theory",
+      "level": "L2",
+      "hook": "What makes a pair the right answer to two questions?",
+      "outcome": "Prove the universal property of X×Y in Set and distinguish it from its coordinate presentation.",
+      "prerequisites": [
+        "explorations:refresher:functions",
+        "explorations:ga-cat-objects-arrows"
+      ],
+      "formula": "⟨f,g⟩:Z→X×Y, π₁∘⟨f,g⟩=f, π₂∘⟨f,g⟩=g",
+      "visual": "Commuting triangle with unique mediator and element table.",
+      "proof": "Full existence and uniqueness proof in Set; products in other categories deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "functions",
+        "ordered pairs",
+        "categories"
+      ],
+      "tags": [
+        "categorical-products",
+        "universal-properties",
+        "unique-mediators"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-limits",
+      "title": "A pullback matches shared data",
+      "topic": "ga-category-theory",
+      "level": "L4",
+      "hook": "Join two datasets only where their keys agree.",
+      "outcome": "Construct a pullback in Set and prove its universal property for finite examples.",
+      "prerequisites": [
+        "explorations:ga-cat-products",
+        "explorations:ga-cat-functors",
+        "explorations:refresher:functions"
+      ],
+      "formula": "X×_Z Y={(x,y):f(x)=g(y)}",
+      "visual": "Two sets mapped to shared key set, matching-pair table.",
+      "proof": "Full existence/uniqueness proof in Set; database semantics treated as analogy.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "products",
+        "functors",
+        "functions"
+      ],
+      "tags": [
+        "pullbacks",
+        "matching-pairs",
+        "compatible-cones"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-adjunction",
+      "title": "Free construction and forgetful map",
+      "topic": "ga-category-theory",
+      "level": "L4",
+      "hook": "A set can generate a free monoid of words.",
+      "outcome": "State the free-monoid/underlying-set adjunction and verify its bijection for one finite example.",
+      "prerequisites": [
+        "library:book-algebra-patterns-structure:operations-structures-homomorphisms",
+        "explorations:ga-cat-functors",
+        "explorations:refresher:functions"
+      ],
+      "formula": "Hom_Mon(F(X),M)≅Hom_Set(X,U(M))",
+      "visual": "Generator mapping extended to words, with commutative evaluation table.",
+      "proof": "Full extension/uniqueness proof for free monoids; general adjunction theory deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "monoids",
+        "functors",
+        "function sets"
+      ],
+      "tags": [
+        "free-monoids",
+        "free-forgetful-adjunction",
+        "universal-extension"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-yoneda-preview",
+      "title": "Know an object by its maps",
+      "topic": "ga-category-theory",
+      "level": "L4",
+      "hook": "An object can be probed by all arrows into it.",
+      "outcome": "For a locally small category C and contravariant F:C^op→Set, state Yoneda and prove one finite-category instance.",
+      "prerequisites": [
+        "explorations:ga-cat-functors",
+        "explorations:ga-cat-natural-transformations"
+      ],
+      "formula": "Nat(Hom_C(-,A),F)≅F(A), F:C^op→Set",
+      "visual": "Probe-object arrows and element table in a small category.",
+      "proof": "Finite instance proved; general Yoneda proof sketched with naturality and identity arrow.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "deep"
+      },
+      "prerequisiteLabels": [
+        "functors",
+        "natural transformations",
+        "representable functors"
+      ],
+      "tags": [
+        "yoneda-lemma",
+        "representable-functors",
+        "contravariance"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "id": "ga-cat-monoidal",
+      "title": "Put processes side by side",
+      "topic": "ga-category-theory",
+      "level": "L2",
+      "hook": "Some operations compose in sequence and in parallel.",
+      "outcome": "Check interchange for Cartesian product of finite sets and functions, with associativity up to the canonical bijection.",
+      "prerequisites": [
+        "explorations:ga-cat-objects-arrows",
+        "explorations:ga-cat-products",
+        "explorations:refresher:functions"
+      ],
+      "formula": "(g⊗g′)∘(f⊗f′)=(g∘f)⊗(g′∘f′)",
+      "visual": "Two string diagrams and explicit paired-input table.",
+      "proof": "Full verification of interchange in Set; associator isomorphisms are stated explicitly, and general coherence is deferred.",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/resources/18-s097iap19textbook_pdf/",
+        "https://math.jhu.edu/~eriehl/context/"
+      ],
+      "catalogFields": [
+        "category-theory"
+      ],
+      "metadataProvenance": {
+        "lifecycleStatus": "published",
+        "nativeLevel": "bridge"
+      },
+      "prerequisiteLabels": [
+        "categories",
+        "products",
+        "function composition"
+      ],
+      "tags": [
+        "cartesian-monoidal-structure",
+        "interchange-law",
+        "associators"
+      ],
+      "updated": "2026-11-14",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "courses": [
+    {
+      "id": "ga-la-primer",
+      "title": "Linear maps: a first look (selected foundations)",
+      "topic": "ga-linear-algebra",
+      "prerequisites": [
+        "signed numbers",
+        "coordinates",
+        "linear equations"
+      ],
+      "outcomes": [
+        "Add vectors and read a 2×2 matrix as a map.",
+        "Interpret one small linear system geometrically."
+      ],
+      "modules": [
+        {
+          "title": "Vectors and maps",
+          "articleIds": [
+            "ga-la-vector-addition",
+            "ga-la-linear-map"
+          ]
+        },
+        {
+          "title": "Meeting constraints",
+          "articleIds": [
+            "ga-la-systems"
+          ]
+        }
+      ],
+      "capstone": "Design a two-step 2D transformation and explain its effect on a grid.",
+      "assessment": "Two worked examples, three untimed transfer problems and a written explanation of one map.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 3.5
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-linear-algebra"
+    },
+    {
+      "id": "ga-la-accelerated",
+      "title": "Linear algebra refresher through geometry (selected core)",
+      "topic": "ga-linear-algebra",
+      "prerequisites": [
+        "school algebra",
+        "coordinates",
+        "trigonometry basics"
+      ],
+      "outcomes": [
+        "Solve 2×2 systems and change coordinates.",
+        "Relate determinant, kernel, rank and eigenvectors."
+      ],
+      "modules": [
+        {
+          "title": "Coordinates",
+          "articleIds": [
+            "ga-la-vector-addition",
+            "ga-la-dot-product",
+            "ga-la-basis"
+          ]
+        },
+        {
+          "title": "Maps and equations",
+          "articleIds": [
+            "ga-la-linear-map",
+            "ga-la-systems",
+            "ga-la-determinant",
+            "ga-la-rank-nullity"
+          ]
+        },
+        {
+          "title": "Stable directions",
+          "articleIds": [
+            "ga-la-eigenvectors"
+          ]
+        }
+      ],
+      "capstone": "Diagnose whether a given 2×2 map is invertible and describe its eigendirections.",
+      "assessment": "Mixed computation and short-proof set with a counterexample to an overbroad eigenvector claim.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-linear-algebra"
+    },
+    {
+      "id": "ga-la-deep",
+      "title": "Selected linear algebra proofs and applications",
+      "topic": "ga-linear-algebra",
+      "prerequisites": [
+        "2×2 matrices",
+        "basis and independence",
+        "dot product",
+        "proof fluency"
+      ],
+      "outcomes": [
+        "Prove rank-nullity in finite dimensions.",
+        "Derive normal equations under full column rank.",
+        "Interpret a 2D singular value decomposition."
+      ],
+      "modules": [
+        {
+          "title": "Finite-dimensional structure",
+          "articleIds": [
+            "ga-la-linear-map",
+            "ga-la-basis",
+            "ga-la-rank-nullity",
+            "ga-la-determinant"
+          ]
+        },
+        {
+          "title": "Spectral and fitting ideas",
+          "articleIds": [
+            "ga-la-eigenvectors",
+            "ga-la-least-squares",
+            "ga-la-svd"
+          ]
+        }
+      ],
+      "capstone": "Fit an inconsistent dataset and explain the residual geometry and singular values.",
+      "assessment": "Submit complete proofs of rank-nullity and least-squares orthogonality plus a numerical interpretation; full spectral theorem excluded.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 14
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-linear-algebra"
+    },
+    {
+      "id": "ga-geo-primer",
+      "title": "Geometry you can construct (selected Euclidean ideas)",
+      "topic": "ga-geometry",
+      "prerequisites": [
+        "angle and triangle basics",
+        "isosceles-triangle facts"
+      ],
+      "outcomes": [
+        "Carry out two exact constructions.",
+        "Explain why Euclidean triangle angles sum to π."
+      ],
+      "modules": [
+        {
+          "title": "Lengths and constructions",
+          "articleIds": [
+            "ga-geo-triangle-inequality",
+            "ga-geo-compass-bisector"
+          ]
+        },
+        {
+          "title": "Angles",
+          "articleIds": [
+            "ga-geo-angle-sum",
+            "ga-geo-circle-theorems"
+          ]
+        }
+      ],
+      "capstone": "Construct and justify an angle bisector and a circle-angle configuration.",
+      "assessment": "Untimed diagram annotations plus written congruence and parallel-line reasons.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-geometry"
+    },
+    {
+      "id": "ga-geo-accelerated",
+      "title": "From Euclid to other geometries (selected models)",
+      "topic": "ga-geometry",
+      "prerequisites": [
+        "Euclidean triangles",
+        "ratios",
+        "coordinate plane",
+        "informal limits"
+      ],
+      "outcomes": [
+        "Identify assumptions behind familiar theorems.",
+        "Compare spherical and disk-model geodesics."
+      ],
+      "modules": [
+        {
+          "title": "Euclidean toolkit",
+          "articleIds": [
+            "ga-geo-angle-sum",
+            "ga-geo-similarity",
+            "ga-geo-circle-theorems"
+          ]
+        },
+        {
+          "title": "Changing the model",
+          "articleIds": [
+            "ga-geo-parallel-postulate",
+            "ga-geo-spherical-triangles",
+            "ga-geo-poincare-disk"
+          ]
+        }
+      ],
+      "capstone": "Write a comparison of one triangle theorem across Euclidean, spherical and hyperbolic settings.",
+      "assessment": "Model-specific calculation and assumption audit; no proof of hyperbolic consistency.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-geometry"
+    },
+    {
+      "id": "ga-geo-deep",
+      "title": "Selected area and curvature bridges in geometry",
+      "topic": "ga-geometry",
+      "prerequisites": [
+        "calculus basics",
+        "Euclidean proof fluency",
+        "radian measure"
+      ],
+      "outcomes": [
+        "Prove Euclidean angle and circle claims.",
+        "Compute Pick area and a hyperbolic triangle defect under stated model assumptions."
+      ],
+      "modules": [
+        {
+          "title": "Classical proofs",
+          "articleIds": [
+            "ga-geo-triangle-inequality",
+            "ga-geo-angle-sum",
+            "ga-geo-circle-theorems",
+            "ga-geo-pick-theorem"
+          ]
+        },
+        {
+          "title": "Non-Euclidean models",
+          "articleIds": [
+            "ga-geo-parallel-postulate",
+            "ga-geo-poincare-disk",
+            "ga-geo-hyperbolic-defect"
+          ]
+        }
+      ],
+      "capstone": "Compare one lattice polygon area with one hyperbolic triangle area, stating why the formulas measure different geometries.",
+      "assessment": "Written proofs for classical claims and a conditional Gauss–Bonnet application; full hyperbolic metric development excluded.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 13
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-geometry"
+    },
+    {
+      "id": "ga-top-primer",
+      "title": "Topology through intervals and surfaces (selected gateway)",
+      "topic": "ga-topology",
+      "prerequisites": [
+        "sets",
+        "functions",
+        "absolute value"
+      ],
+      "outcomes": [
+        "Test openness for simple subsets of R with an epsilon interval.",
+        "Compute Euler characteristic for simple closed triangulated surfaces without treating it as a complete invariant."
+      ],
+      "modules": [
+        {
+          "title": "Local room",
+          "articleIds": [
+            "ga-top-open-sets"
+          ]
+        },
+        {
+          "title": "Counting a surface",
+          "articleIds": [
+            "ga-top-euler-characteristic"
+          ]
+        }
+      ],
+      "capstone": "Test whether two subsets of R are open, then count V,E,F on two triangulations of a sphere.",
+      "assessment": "Definitions check, explicit boundary counterexample and labelled Euler counts; no topological equivalence inferred from animation.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 3
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-topology"
+    },
+    {
+      "id": "ga-top-accelerated",
+      "title": "Topology refresher with explicit hypotheses (selected core)",
+      "topic": "ga-topology",
+      "prerequisites": [
+        "sets and functions",
+        "metric-space basics",
+        "proof by contradiction",
+        "equivalence relations"
+      ],
+      "outcomes": [
+        "Use open-preimage continuity.",
+        "Prove connected-image and interval-compactness claims."
+      ],
+      "modules": [
+        {
+          "title": "Spaces and maps",
+          "articleIds": [
+            "ga-top-open-sets",
+            "ga-top-continuity",
+            "ga-top-homeomorphism"
+          ]
+        },
+        {
+          "title": "Global properties",
+          "articleIds": [
+            "ga-top-connectedness",
+            "ga-top-compactness"
+          ]
+        },
+        {
+          "title": "Identifications",
+          "articleIds": [
+            "ga-top-quotient",
+            "ga-top-euler-characteristic"
+          ]
+        }
+      ],
+      "capstone": "Compare circle and closed interval using a topological invariant and justify every property invoked.",
+      "assessment": "Two full short proofs, counterexample search and an untimed quotient-space explanation.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-topology"
+    },
+    {
+      "id": "ga-top-deep",
+      "title": "Selected topology proofs and loop invariants",
+      "topic": "ga-topology",
+      "prerequisites": [
+        "epsilon-delta continuity",
+        "least-upper-bound property",
+        "groups",
+        "proof fluency"
+      ],
+      "outcomes": [
+        "Prove selected compactness and connectedness theorems.",
+        "Use winding number and the circle fundamental-group statement with lifting assumptions."
+      ],
+      "modules": [
+        {
+          "title": "Point-set proofs",
+          "articleIds": [
+            "ga-top-open-sets",
+            "ga-top-continuity",
+            "ga-top-connectedness",
+            "ga-top-compactness",
+            "ga-top-quotient"
+          ]
+        },
+        {
+          "title": "Loop invariants",
+          "articleIds": [
+            "ga-top-loop-homotopy",
+            "ga-top-winding-number",
+            "ga-top-fundamental-group-circle"
+          ]
+        }
+      ],
+      "capstone": "Write a proof dossier for one point-set result and a conditional winding-number argument.",
+      "assessment": "Full proofs for point-set tasks; loop task must identify the deferred lifting lemma and may not claim a complete π₁ proof.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-topology"
+    },
+    {
+      "id": "ga-alg-primer",
+      "title": "Symmetry and modular arithmetic (selected group gateway)",
+      "topic": "ga-abstract-algebra",
+      "prerequisites": [
+        "functions",
+        "integer remainders"
+      ],
+      "outcomes": [
+        "Check a group operation on a square or clock.",
+        "Find inverses and element orders in finite examples."
+      ],
+      "modules": [
+        {
+          "title": "Concrete groups",
+          "articleIds": [
+            "ga-alg-symmetry-group",
+            "ga-alg-modular-clock"
+          ]
+        },
+        {
+          "title": "Repeated action",
+          "articleIds": [
+            "ga-alg-order"
+          ]
+        }
+      ],
+      "capstone": "Build the square-symmetry composition table and identify one noncommuting pair.",
+      "assessment": "Operation-table check and two short axiom justifications.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-abstract-algebra"
+    },
+    {
+      "id": "ga-alg-accelerated",
+      "title": "Groups and rings refresher (selected core)",
+      "topic": "ga-abstract-algebra",
+      "prerequisites": [
+        "functions",
+        "modular arithmetic",
+        "basic proof methods",
+        "greatest common divisor"
+      ],
+      "outcomes": [
+        "Use cosets and homomorphisms.",
+        "Distinguish rings from fields in modular examples."
+      ],
+      "modules": [
+        {
+          "title": "Groups",
+          "articleIds": [
+            "ga-alg-symmetry-group",
+            "ga-alg-order",
+            "ga-alg-lagrange",
+            "ga-alg-homomorphism"
+          ]
+        },
+        {
+          "title": "Rings",
+          "articleIds": [
+            "ga-alg-ring-polynomials",
+            "ga-alg-ideals",
+            "ga-alg-fields"
+          ]
+        }
+      ],
+      "capstone": "Explain why Z/7Z supports division by every nonzero residue while Z/6Z does not.",
+      "assessment": "Short proofs of Lagrange and prime-field criterion plus counterexamples to false converses.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-abstract-algebra"
+    },
+    {
+      "id": "ga-alg-deep",
+      "title": "Selected group and ring proofs",
+      "topic": "ga-abstract-algebra",
+      "prerequisites": [
+        "proof fluency",
+        "finite groups",
+        "polynomial algebra"
+      ],
+      "outcomes": [
+        "Prove quotient-group well-definedness under normality.",
+        "Use ideal and field arguments in Z and Z/nZ.",
+        "State the scope of Sylow without claiming its proof."
+      ],
+      "modules": [
+        {
+          "title": "Finite group structure",
+          "articleIds": [
+            "ga-alg-order",
+            "ga-alg-lagrange",
+            "ga-alg-homomorphism",
+            "ga-alg-quotient-group",
+            "ga-alg-sylow-scope"
+          ]
+        },
+        {
+          "title": "Ring structure",
+          "articleIds": [
+            "ga-alg-ring-polynomials",
+            "ga-alg-ideals",
+            "ga-alg-fields"
+          ]
+        }
+      ],
+      "capstone": "Construct two quotients and explain which relations are collapsed and why the operations are well-defined.",
+      "assessment": "Full proofs for Lagrange, quotient and prime-field claims; Sylow is assessed as theorem interpretation only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-abstract-algebra"
+    },
+    {
+      "id": "ga-dg-primer",
+      "title": "Curves that bend (selected calculus geometry)",
+      "topic": "ga-differential-geometry",
+      "prerequisites": [
+        "single-variable derivatives",
+        "vectors",
+        "definite integrals"
+      ],
+      "outcomes": [
+        "Calculate length of a parametrized curve.",
+        "Interpret curvature for a circle and a line."
+      ],
+      "modules": [
+        {
+          "title": "Lengths",
+          "articleIds": [
+            "ga-dg-arc-length",
+            "ga-dg-parameterization"
+          ]
+        },
+        {
+          "title": "Bending",
+          "articleIds": [
+            "ga-dg-curvature-plane"
+          ]
+        }
+      ],
+      "capstone": "Compare two parametrizations of the same circular arc and their lengths.",
+      "assessment": "Calculation, units check and a short explanation of regularity.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4.5
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-differential-geometry"
+    },
+    {
+      "id": "ga-dg-accelerated",
+      "title": "From curves to surfaces (selected foundations)",
+      "topic": "ga-differential-geometry",
+      "prerequisites": [
+        "single and multivariable calculus",
+        "dot product",
+        "cross product"
+      ],
+      "outcomes": [
+        "Compute local metric coefficients.",
+        "Identify regular surface patches and geodesic candidates."
+      ],
+      "modules": [
+        {
+          "title": "Curve toolkit",
+          "articleIds": [
+            "ga-dg-arc-length",
+            "ga-dg-curvature-plane",
+            "ga-dg-frenet"
+          ]
+        },
+        {
+          "title": "Surface toolkit",
+          "articleIds": [
+            "ga-dg-surface-patches",
+            "ga-dg-first-fundamental-form",
+            "ga-dg-geodesics"
+          ]
+        }
+      ],
+      "capstone": "Compute a sphere-patch metric and compare lengths of two candidate routes.",
+      "assessment": "Derivative checks, metric calculation and a written warning about pole coordinates.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 9
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-differential-geometry"
+    },
+    {
+      "id": "ga-dg-deep",
+      "title": "Selected curvature and Gauss–Bonnet applications",
+      "topic": "ga-differential-geometry",
+      "prerequisites": [
+        "multivariable calculus",
+        "linear algebra",
+        "surface metric",
+        "proof fluency"
+      ],
+      "outcomes": [
+        "Compute Gaussian curvature in selected patches.",
+        "Apply Gauss–Bonnet with orientation and compactness hypotheses.",
+        "Explain one spherical holonomy calculation."
+      ],
+      "modules": [
+        {
+          "title": "Local geometry",
+          "articleIds": [
+            "ga-dg-surface-patches",
+            "ga-dg-first-fundamental-form",
+            "ga-dg-geodesics",
+            "ga-dg-gaussian-curvature"
+          ]
+        },
+        {
+          "title": "Global bridge",
+          "articleIds": [
+            "ga-dg-gauss-bonnet",
+            "ga-dg-parallel-transport"
+          ]
+        }
+      ],
+      "capstone": "Derive the octant area/holonomy relation and state precisely which theorem is being invoked.",
+      "assessment": "Local metric and curvature calculations plus a conditional theorem application; general Gauss–Bonnet proof excluded.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-differential-geometry"
+    },
+    {
+      "id": "ga-ag-primer",
+      "title": "Polynomial pictures with exact checks (selected gateway)",
+      "topic": "ga-algebraic-geometry",
+      "prerequisites": [
+        "school polynomial algebra",
+        "coordinate plane"
+      ],
+      "outcomes": [
+        "Plot and verify real polynomial zero sets.",
+        "Find line-circle intersections with an equation."
+      ],
+      "modules": [
+        {
+          "title": "Equations as loci",
+          "articleIds": [
+            "ga-ag-zero-loci",
+            "ga-ag-intersections"
+          ]
+        }
+      ],
+      "capstone": "Analyze a one-parameter line-circle family, including tangent and no-real-point cases by discriminant.",
+      "assessment": "Exact substitution and discriminant reasoning; plots are exploratory evidence only.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 3
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-algebraic-geometry"
+    },
+    {
+      "id": "ga-ag-accelerated",
+      "title": "Curves, singularities and projective points (selected core)",
+      "topic": "ga-algebraic-geometry",
+      "prerequisites": [
+        "polynomial algebra",
+        "complex numbers",
+        "partial derivatives",
+        "basic proof methods",
+        "equivalence relations"
+      ],
+      "outcomes": [
+        "Distinguish smooth and singular points.",
+        "Compute a simple projective point at infinity.",
+        "State Bézout with its required hypotheses."
+      ],
+      "modules": [
+        {
+          "title": "Local curves",
+          "articleIds": [
+            "ga-ag-zero-loci",
+            "ga-ag-tangent-algebraic",
+            "ga-ag-singular-cusp-node"
+          ]
+        },
+        {
+          "title": "Projective completion",
+          "articleIds": [
+            "ga-ag-projective-points",
+            "ga-ag-bezout-scope"
+          ]
+        }
+      ],
+      "capstone": "Audit a claimed curve-intersection count for missing complex, projective and multiplicity assumptions.",
+      "assessment": "Exact computations and theorem-scope critique; no full Bézout proof.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8.5
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-algebraic-geometry"
+    },
+    {
+      "id": "ga-ag-deep",
+      "title": "Affine algebraic geometry windows (selected foundations)",
+      "topic": "ga-algebraic-geometry",
+      "prerequisites": [
+        "rings and ideals",
+        "complex numbers",
+        "projective coordinates",
+        "proof fluency"
+      ],
+      "outcomes": [
+        "Build a coordinate-ring isomorphism in a concrete example.",
+        "Use radical ideals to distinguish set and scheme-level information.",
+        "Compute Spec for one nilpotent ring."
+      ],
+      "modules": [
+        {
+          "title": "Algebra of curves",
+          "articleIds": [
+            "ga-ag-zero-loci",
+            "ga-ag-tangent-algebraic",
+            "ga-ag-coordinate-rings"
+          ]
+        },
+        {
+          "title": "Beyond visible points",
+          "articleIds": [
+            "ga-ag-nullstellensatz-scope",
+            "ga-ag-affine-scheme-window",
+            "ga-ag-projective-points",
+            "ga-ag-bezout-scope"
+          ]
+        }
+      ],
+      "capstone": "Compare k[x]/(x) and k[x]/(x²): classical points, ideals and nilpotents, with k algebraically closed.",
+      "assessment": "Full explicit ring calculations; Nullstellensatz and general schemes are theorem statements with deferred proofs.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 16
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-algebraic-geometry"
+    },
+    {
+      "id": "ga-cat-primer",
+      "title": "Arrows and diagrams (selected category gateway)",
+      "topic": "ga-category-theory",
+      "prerequisites": [
+        "sets",
+        "functions",
+        "function composition"
+      ],
+      "outcomes": [
+        "Check identities and associative composition in a path category.",
+        "Verify a commuting square by values.",
+        "Test one finite functor for preservation of identities and composition."
+      ],
+      "modules": [
+        {
+          "title": "An arrow language",
+          "articleIds": [
+            "ga-cat-objects-arrows",
+            "ga-cat-commuting-diagrams"
+          ]
+        },
+        {
+          "title": "One translation between diagrams",
+          "articleIds": [
+            "ga-cat-functors"
+          ]
+        }
+      ],
+      "capstone": "Build a four-object finite diagram and check whether two routes agree.",
+      "assessment": "Element-by-element diagram checks, a short associativity argument and a finite-functor verification; abstract applications excluded.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "primer",
+        "hours": 4
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-category-theory"
+    },
+    {
+      "id": "ga-cat-accelerated",
+      "title": "Functors and universal properties (selected core)",
+      "topic": "ga-category-theory",
+      "prerequisites": [
+        "sets and functions",
+        "proof fluency",
+        "finite algebra examples"
+      ],
+      "outcomes": [
+        "Verify a functor and natural transformation.",
+        "Prove the product property in Set."
+      ],
+      "modules": [
+        {
+          "title": "Mappings between categories",
+          "articleIds": [
+            "ga-cat-objects-arrows",
+            "ga-cat-functors",
+            "ga-cat-natural-transformations"
+          ]
+        },
+        {
+          "title": "Universal objects",
+          "articleIds": [
+            "ga-cat-products",
+            "ga-cat-limits"
+          ]
+        }
+      ],
+      "capstone": "Construct a pullback of finite-set functions and prove its mediator is unique.",
+      "assessment": "Commuting-diagram verification and full existence/uniqueness proof.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "accelerated",
+        "hours": 8.5
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-category-theory"
+    },
+    {
+      "id": "ga-cat-deep",
+      "title": "Selected universal constructions in Set and Mon",
+      "topic": "ga-category-theory",
+      "prerequisites": [
+        "categories and functors",
+        "monoids",
+        "proof fluency",
+        "contravariant functors"
+      ],
+      "outcomes": [
+        "Prove Set product and pullback universal properties.",
+        "Explain free-monoid adjunction.",
+        "Interpret a finite Yoneda instance and its variance."
+      ],
+      "modules": [
+        {
+          "title": "Universal constructions",
+          "articleIds": [
+            "ga-cat-products",
+            "ga-cat-limits",
+            "ga-cat-adjunction"
+          ]
+        },
+        {
+          "title": "Natural structure",
+          "articleIds": [
+            "ga-cat-natural-transformations",
+            "ga-cat-yoneda-preview",
+            "ga-cat-monoidal"
+          ]
+        }
+      ],
+      "capstone": "Write a small proof dossier comparing product, pullback and free-monoid universal arrows.",
+      "assessment": "Full proofs for Set/Mon constructions; finite Yoneda proof plus clearly labelled general sketch.",
+      "status": "published",
+      "metadataProvenance": {
+        "type": "deep",
+        "hours": 15
+      },
+      "retained": true,
+      "seriesId": "unhurried-ga-category-theory"
+    }
+  ],
+  "labs": [
+    {
+      "id": "ga-lab-matrix-grid",
+      "title": "Matrix grid studio",
+      "topic": "ga-linear-algebra",
+      "articleIds": [
+        "ga-la-linear-map",
+        "ga-la-determinant"
+      ],
+      "controls": [
+        "four matrix entries as numeric fields and arrow keys",
+        "reset to identity",
+        "show basis arrows"
+      ],
+      "readout": "Mapped basis vectors, input/output coordinate table, determinant and signed unit-square area.",
+      "invariant": "For every vector v=x e1+y e2, Av=x Ae1+y Ae2; area scale equals |det A|.",
+      "pitfalls": "Singular maps collapse area; negative determinant reverses orientation; sliders alone cannot certify a general theorem.",
+      "accessibleFallback": "Keyboard fields, tabular point samples and an SVG-free text walkthrough of each transformed basis vector.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-eigen-ellipse",
+      "title": "Eigenlines and ellipse",
+      "topic": "ga-linear-algebra",
+      "articleIds": [
+        "ga-la-eigenvectors",
+        "ga-la-svd"
+      ],
+      "controls": [
+        "2×2 matrix numeric fields",
+        "unit vector angle",
+        "toggle real eigenlines"
+      ],
+      "readout": "Av, eigenvalue candidates, singular values and sampled unit-circle image.",
+      "invariant": "For real A, squared singular values equal eigenvalues of AᵀA.",
+      "pitfalls": "A real rotation may have no real eigenvectors; eigenvectors and singular vectors differ.",
+      "accessibleFallback": "Numeric table of sampled vectors and an announced no-real-eigenvector state.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-compass",
+      "title": "Compass construction bench",
+      "topic": "ga-geometry",
+      "articleIds": [
+        "ga-geo-compass-bisector",
+        "ga-geo-circle-theorems"
+      ],
+      "controls": [
+        "angle via numeric field",
+        "construction step buttons",
+        "equal-radius toggle"
+      ],
+      "readout": "Equal radii, triangle side lengths and final angle comparison.",
+      "invariant": "The bisector construction relies on equal radii and SSS congruence.",
+      "pitfalls": "Degenerate zero angle and imprecise pixel intersections must not be presented as exact proof.",
+      "accessibleFallback": "Numbered construction instructions with a labelled congruence table.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-hyperbolic-triangle",
+      "title": "Three triangle models",
+      "topic": "ga-geometry",
+      "articleIds": [
+        "ga-geo-angle-sum",
+        "ga-geo-spherical-triangles",
+        "ga-geo-hyperbolic-defect"
+      ],
+      "controls": [
+        "model selector",
+        "three vertices via keyboard coordinates",
+        "reset example"
+      ],
+      "readout": "Model, geodesic definition, three angles, angle sum and area when supported.",
+      "invariant": "Euclidean sum π; sphere octant example 3π/2; hyperbolic curvature −1 area equals defect.",
+      "pitfalls": "Screen-circle arcs are not Euclidean straight lines; disk boundary is infinitely far away; numerical angles are approximate.",
+      "accessibleFallback": "Preset exact examples and a text table of model-specific claims, assumptions and computed angles.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-open-sets",
+      "title": "Epsilon-neighborhood tester",
+      "topic": "ga-topology",
+      "articleIds": [
+        "ga-top-open-sets",
+        "ga-top-continuity"
+      ],
+      "controls": [
+        "set example selector",
+        "point coordinate",
+        "epsilon numeric field",
+        "preimage toggle"
+      ],
+      "readout": "Membership, neighborhood containment and counterexample point when available.",
+      "invariant": "An open set in R gives each of its points some contained epsilon interval.",
+      "pitfalls": "Passing finitely many samples does not prove openness; boundary points need exact tests.",
+      "accessibleFallback": "Keyboard-selectable standard sets and symbolic interval inclusion table.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-euler",
+      "title": "Triangulation counter",
+      "topic": "ga-topology",
+      "articleIds": [
+        "ga-top-euler-characteristic",
+        "ga-top-quotient"
+      ],
+      "controls": [
+        "sphere or torus preset",
+        "subdivision step",
+        "show V E F counts"
+      ],
+      "readout": "V, E, F, χ and a labelled edge-identification table.",
+      "invariant": "For a closed triangulated surface, allowed subdivision preserves V−E+F.",
+      "pitfalls": "Nonmanifold gluing, missing faces or boundary changes interpretation; χ alone does not classify all spaces.",
+      "accessibleFallback": "Text list of vertices, edges and faces with count deltas after each subdivision.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-square-symmetry",
+      "title": "Square symmetry composer",
+      "topic": "ga-abstract-algebra",
+      "articleIds": [
+        "ga-alg-symmetry-group",
+        "ga-alg-order"
+      ],
+      "controls": [
+        "first symmetry selector",
+        "second symmetry selector",
+        "apply order toggle"
+      ],
+      "readout": "Image of labelled vertices, composition result, inverse and order.",
+      "invariant": "Composition of square symmetries stays in D4; associative law comes from function composition.",
+      "pitfalls": "Order matters for a reflection and rotation; an animation is not a group-axiom proof.",
+      "accessibleFallback": "Keyboard-operated selectors with full permutation and Cayley-table row readout.",
+      "priority": "P0",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-modular",
+      "title": "Modular arithmetic workbench",
+      "topic": "ga-abstract-algebra",
+      "articleIds": [
+        "ga-alg-modular-clock",
+        "ga-alg-fields"
+      ],
+      "controls": [
+        "modulus n from 2 to 24",
+        "operation selector",
+        "residue a"
+      ],
+      "readout": "Residue table, additive inverse, multiplicative inverse if any and gcd(a,n).",
+      "invariant": "A nonzero residue is invertible mod n exactly when gcd(a,n)=1.",
+      "pitfalls": "Modulus 1 is excluded from field claim; zero divisors appear for composite n.",
+      "accessibleFallback": "Plain table of all residue operations and a text Euclidean-algorithm trace.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-curvature",
+      "title": "Curve curvature microscope",
+      "topic": "ga-differential-geometry",
+      "articleIds": [
+        "ga-dg-arc-length",
+        "ga-dg-curvature-plane"
+      ],
+      "controls": [
+        "curve preset",
+        "parameter numeric field",
+        "speed scale"
+      ],
+      "readout": "Position, unit tangent, signed curvature and cumulative arc length.",
+      "invariant": "For regular C² curves, signed curvature is det(γ′,γ″)/||γ′||³ and is unchanged by orientation-preserving reparameterization.",
+      "pitfalls": "At zero speed curvature formula is undefined; graph appearance depends on aspect ratio.",
+      "accessibleFallback": "Numeric derivative table, formula substitution and named regularity status.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-sphere-metric",
+      "title": "Sphere path measurer",
+      "topic": "ga-differential-geometry",
+      "articleIds": [
+        "ga-dg-first-fundamental-form",
+        "ga-dg-geodesics"
+      ],
+      "controls": [
+        "radius numeric field",
+        "latitude and longitude endpoints",
+        "path preset"
+      ],
+      "readout": "Metric coefficients, path length estimate, exact great-circle central angle when applicable.",
+      "invariant": "For sphere radius R, great-circle arc length is R times central angle for the shorter arc.",
+      "pitfalls": "Latitude circles except equator are not geodesics; coordinate poles are singular.",
+      "accessibleFallback": "Coordinate-free dot-product central-angle calculation and a segment-length table.",
+      "priority": "P2",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-polynomial-loci",
+      "title": "Polynomial zero-set explorer",
+      "topic": "ga-algebraic-geometry",
+      "articleIds": [
+        "ga-ag-zero-loci",
+        "ga-ag-singular-cusp-node"
+      ],
+      "controls": [
+        "approved polynomial preset",
+        "real window bounds",
+        "sample point coordinates"
+      ],
+      "readout": "Residual F(x,y), gradient when defined, exact special-point checks.",
+      "invariant": "Displayed real points satisfy F=0 to stated numerical tolerance; exact named examples use symbolic substitution.",
+      "pitfalls": "Pixel absence is not proof of no zeros; near singularities numerical gradients mislead.",
+      "accessibleFallback": "Preset equations, symbolic sample calculations and a coordinate table of verified points.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-projective-intersection",
+      "title": "Line and conic intersections",
+      "topic": "ga-algebraic-geometry",
+      "articleIds": [
+        "ga-ag-intersections",
+        "ga-ag-projective-points",
+        "ga-ag-bezout-scope"
+      ],
+      "controls": [
+        "line slope/intercept or homogeneous coefficients",
+        "tangent preset",
+        "real/complex toggle"
+      ],
+      "readout": "Roots, discriminant, homogeneous point at infinity and intersection multiplicity for the preset tangency.",
+      "invariant": "Line and conic have total intersection multiplicity two over complex projective plane if no component is shared.",
+      "pitfalls": "Real affine plot can hide complex or infinite intersections; the full Bézout theorem is not proved by the widget.",
+      "accessibleFallback": "Exact polynomial elimination and roots table with multiplicity and chart labels.",
+      "priority": "P2",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-commuting",
+      "title": "Commuting diagram checker",
+      "topic": "ga-category-theory",
+      "articleIds": [
+        "ga-cat-commuting-diagrams",
+        "ga-cat-functors"
+      ],
+      "controls": [
+        "finite-set preset",
+        "arrow mapping selectors",
+        "input element selector"
+      ],
+      "readout": "Both path outputs for every element and the first mismatch.",
+      "invariant": "A finite-set square commutes iff the two composites agree on every input element.",
+      "pitfalls": "One tested element cannot establish equality of functions; arrow domains/codomains must match.",
+      "accessibleFallback": "Fully keyboard-controlled function tables with a row-by-row equality verdict.",
+      "priority": "P1",
+      "status": "published"
+    },
+    {
+      "id": "ga-lab-pullback",
+      "title": "Pullback matching table",
+      "topic": "ga-category-theory",
+      "articleIds": [
+        "ga-cat-products",
+        "ga-cat-limits"
+      ],
+      "controls": [
+        "finite sets X,Y,Z presets",
+        "functions f and g as tables",
+        "candidate pair selector"
+      ],
+      "readout": "All pairs (x,y) with f(x)=g(y), projection maps and candidate mediator.",
+      "invariant": "The Set pullback contains exactly compatible pairs and each compatible cone has a unique mediator.",
+      "pitfalls": "Database join analogy omits bag semantics and missing values; avoid claiming all joins are pullbacks.",
+      "accessibleFallback": "Text matching-pair table and stepwise universal-property proof using an arbitrary element.",
+      "priority": "P2",
+      "status": "published"
+    }
+  ]
+}

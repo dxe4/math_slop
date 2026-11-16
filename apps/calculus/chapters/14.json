@@ -1,0 +1,498 @@
+{
+  "id": "14",
+  "title": "Numerical and improper integration",
+  "subtitle": "How can we approximate an integral responsibly when exact formulas, finite intervals, or bounded integrands are unavailable?",
+  "prerequisites": [
+    "Definite integrals and their units from chapter 10",
+    "The fundamental theorem and substitution from chapter 11",
+    "Antiderivatives from chapter 12; limits from chapter 4",
+    "Loops, functions, and numerical error from chapter 3"
+  ],
+  "objectives": [
+    "Compute composite trapezoidal and Simpson approximations and choose valid error bounds.",
+    "Explain adaptive refinement and distinguish an error estimate from a guarantee.",
+    "Define improper integrals through independent limits and test their convergence.",
+    "Separate quadrature error from truncation error and distinguish principal values from ordinary integrals."
+  ],
+  "sections": [
+    {
+      "title": "1. Replace the curve with pieces we can integrate",
+      "paragraphs": [
+        "An integral can exist even when its antiderivative has no convenient formula. Measurements may give only sampled values, and a physical model may be easy to evaluate but difficult to integrate symbolically. Numerical quadrature replaces the integrand by a simpler function whose integral is known. Unlike a symbolic answer, a decimal approximation needs an account of its accuracy. Begin by recording the interval, the assumptions about the function, and the units of the answer.",
+        "Partition $[a,b]$ into $n$ equal subintervals of width $h=(b-a)/n$, with $x_i=a+ih$ and $f_i=f(x_i)$. The composite trapezoidal rule joins adjacent samples by straight lines. Each strip contributes $h(f_i+f_{i+1})/2$. Summing counts the interior samples twice and the two endpoint samples once. For a convex function, every chord lies above the graph, so the approximation overestimates the integral; a concave function reverses the inequality. This geometric statement assumes the function remains convex or concave throughout each strip.",
+        "Simpson’s rule groups subintervals in pairs and integrates the quadratic interpolant through each group’s three equally spaced samples. Consequently $n$ must be a positive even integer. Its weights alternate $4$ and $2$ between endpoint weights $1$. Although the interpolants are quadratic, symmetry makes the rule exact for every polynomial of degree at most three. Higher algebraic accuracy does not mean the rule is always a better choice: rough data, singularities, and limited sample locations may violate the conditions that make its accuracy predictable.",
+        "The Simpson weights come from one symmetric pair. Center three nodes at $-h,0,h$ and integrate their three quadratic Lagrange basis polynomials over $[-h,h]$; their integrals are $h/3,4h/3,h/3$. Therefore the pair contributes $h[f(-h)+4f(0)+f(h)]/3$. A cubic minus its quadratic interpolant is a multiple of $t(t^2-h^2)$, which is odd, so its integral over this pair is zero too. Joining pairs shares their endpoints and produces the composite $1,4,2,4,\\ldots,2,4,1$ weights; the number of subintervals must be even.",
+        "If $x$ is time in seconds and $f(x)$ is a flow rate in litres per second, every weighted height is still a rate, while multiplication by $h$ produces litres. Numerical integration does not remove unit checks. With measured data, quadrature error also differs from measurement error: repeatedly refining a formula cannot recover detail the measurements never recorded.",
+        "The trapezoidal rule is exact for every affine function because the graph and its chord coincide on each panel. For $f(x)=x^2$ on $[0,1]$, one panel gives $T_1=(0+1)/2=1/2$, above the exact $1/3$ because the quadratic is convex. Two panels give $T_2=(1/2)[(0+1)/2+1/4]=3/8$. The error shrinks as panels refine but does not vanish after a finite number. This small calculation connects geometry, weights, and error direction. It is more instructive than memorizing only the composite formula.",
+        "A Simpson pair uses $[c-h,c+h]$ with midpoint $c$ and positive half-width $h$. Its weights $1,4,1$ integrate every cubic exactly; the first possible smooth error therefore comes from fourth-order variation, measured by $f^{(4)}$. On $[0,1]$, two subintervals give $S_2(x^2)=1/3$ exactly and $S_2(x^4)=5/24$, versus $\\int_0^1x^4\\,dx=1/5$. The latter error is $1/120$. Lesson 2 derives a bound for every $C^4$ function; this one monomial is a check of its constant, not a general proof.",
+        "Composite formulas require correct endpoint weights. For even $n$, Simpson's rule is $S_n=\\frac h3[f_0+f_n+4\\sum_{j=1}^{n/2}f_{2j-1}+2\\sum_{j=1}^{n/2-1}f_{2j}]$. The odd-indexed interior nodes carry weight four, even-indexed interior nodes weight two, and endpoints weight one. A common implementation mistake gives both endpoints weight four or uses odd $n$, destroying the rule's derivation. Trapezoidal weights give $T_n=h[(f_0+f_n)/2+\\sum_{i=1}^{n-1}f_i]$. Printing or checking the weights on a small even $n$ is a cheap software test before trusting a long numerical run.",
+        "A measurement table changes the question. If samples are only available at fixed times, decreasing $h$ in a quadrature program would require inventing new data by interpolation. That may estimate the integral under an interpolation model, but it does not reduce measurement uncertainty. Conversely, if $f$ is a known formula that can be evaluated at new points, refinement is meaningful. Report whether the input is a continuous model, sampled data with interpolation, or noisy measurements. The same weighted-sum formula can have very different reliability under those three circumstances.",
+        "When building a quadrature rule from samples, distinguish interpolation from integration. The trapezoidal rule first replaces $f$ by a piecewise linear interpolant passing through measured nodes; then it integrates that interpolant exactly. Simpson replaces $f$ on each pair of panels by a quadratic interpolant. The numerical answer is therefore exact for the surrogate curve but approximate for the original one. Error analysis asks how far the surrogate's accumulated area can be from the true area. This viewpoint makes clear why a missed narrow spike matters: the interpolant never sees it. It also explains why smoother functions often permit better accuracy from the same sample count."
+      ],
+      "formula": "Tₙ = h[(f₀+fₙ)/2 + Σᵢ₌₁ⁿ⁻¹ fᵢ].  Sₙ = (h/3)[f₀+fₙ + 4Σodd i fᵢ + 2Σeven interior i fᵢ], n even.",
+      "formulaTex": "\\begin{aligned}T_n&=h\\left[\\frac{f_0+f_n}{2}+\\sum_{i=1}^{n-1}f_i\\right],\\\\ S_n&=\\frac h3\\left[f_0+f_n+4\\sum_{j=1}^{n/2}f_{2j-1}+2\\sum_{j=1}^{n/2-1}f_{2j}\\right],\\quad n\\text{ even}.\\end{aligned}",
+      "theorems": [
+        {
+          "title": "Why the trapezoidal rule has a quadratic global error",
+          "statement": "If $f$ has a continuous second derivative on $[a,b]$ with $|f^{\\prime\\prime}|\\le M$, the composite trapezoidal rule with $n$ equal panels has error at most $\\frac{M(b-a)^3}{12n^2}$.",
+          "equationTex": "\\left|\\int_a^b f(x)\\,dx-T_n\\right|\\le\\frac{M(b-a)^3}{12n^2}",
+          "proof": [
+            "On one panel $[x_i,x_{i+1}]$ of width $h$, let $L_i$ be the straight line through the two endpoint values. The panel trapezoid is exactly $\\int_{x_i}^{x_{i+1}}L_i(x)\\,dx$. The linear-interpolation remainder, obtained by applying Rolle’s theorem twice to a function with zeros at both endpoints, has the form $f(x)-L_i(x)=\\frac{f^{\\prime\\prime}(\\xi_x)}2(x-x_i)(x-x_{i+1})$ for some point $\\xi_x$ in the panel. Therefore $|f(x)-L_i(x)|\\le\\frac M2(x-x_i)(x_{i+1}-x)$.",
+            "Integrating the last quadratic over one panel gives error at most $Mh^3/12$. Add the $n$ panel bounds: total error is at most $nMh^3/12=M(b-a)^3/(12n^2)$ because $h=(b-a)/n$. For convex $f$, each chord lies above the curve, so the trapezoidal estimate is an overestimate; that sign is an extra check, not part of the absolute bound.",
+            "The bound is a guarantee only if the second derivative exists and is bounded on the entire interval. For an endpoint singularity or a sharp corner, the formula cannot simply be reused. Refinement data may still suggest convergence, but a different theorem or transformed integral is needed for a certificate."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Bounds, estimates, and where refinement helps",
+      "paragraphs": [
+        "Let $a<b$ and use $n\\ge2$ equal subintervals, with $n$ even for Simpson's rule. If $f\\in C^2[a,b]$ and $|f''|\\le M_2$ throughout, the trapezoidal proof in Lesson 1 gives $|I-T_n|\\le M_2(b-a)^3/(12n^2)$. If $f\\in C^4[a,b]$ and $|f^{(4)}|\\le M_4$ throughout, the proof below gives $|I-S_n|\\le M_4(b-a)^5/(180n^4)$, where $I=\\int_a^b f(x)\\,dx$. One Simpson pair has length $2h$, where $h=(b-a)/n$; its error is at most $M_4h^5/90$. Adding $n/2$ such pair bounds gives the displayed composite result. A whole-interval derivative bound certifies an error, while values at a few sampled points do not certify a derivative maximum.",
+        "For a smooth model, doubling $n$ often reduces trapezoidal error by about four and Simpson error by about sixteen once a nonzero leading error term dominates. Thus $|T_{2n}-T_n|/3$ and $|S_{2n}-S_n|/15$ estimate the finer errors under those asymptotic models. The proof below gives a worst-case certificate for $C^4$ Simpson integration even when that leading coefficient vanishes. The refinement quotients remain estimates: cancellation, an unresolved narrow feature, or nonsmoothness can make two wrong answers agree.",
+        "Adaptive refinement spends more samples where the function needs them. On one interval compute a Simpson value $S$, then split at its midpoint and compute the sum $S_{\\mathrm{left}}+S_{\\mathrm{right}}$. Compare $|S_{\\mathrm{left}}+S_{\\mathrm{right}}-S|/15$ with a local error budget. Accept the fine result if the estimate is small; otherwise subdivide again. Split the error budget between children so their budgets sum to the parent budget. A practical algorithm also limits depth and evaluations and reports failure if its budget cannot be met. Quietly accepting a maximum-depth result would hide uncertainty.",
+        "The estimator works best when the function is sufficiently smooth and sampled structure represents its true variation. A narrow peak between all initial nodes may be missed entirely. Known breakpoints should therefore be supplied by splitting the domain before integration. At very fine spacing, subtraction and summation roundoff compete with discretization error. More samples are not a substitute for examining the function, a convergence study, and an independent check when one is available.",
+        "A rigorous error bound begins by bounding derivatives on the entire interval. For $f(x)=e^x$ on $[0,1]$, every derivative equals $e^x$, so $M_2=M_4=e$ is justified because $e^x$ increases and reaches $e$ at $x=1$. The trapezoidal bound is $e/(12n^2)$, and Simpson's is $e/(180n^4)$. For $n=10$, these are approximately $0.002265$ and $0.000001510$ respectively. The actual errors can be much smaller; the formulas certify worst cases under their hypotheses. If $f$ has a kink, the required derivative continuity fails and these quoted bounds cannot simply be applied.",
+        "The refinement estimate comes from an error model, not from magic constants. Suppose $T_n=I+C/n^2+\\text{smaller terms}$. Then $T_{2n}-T_n\\approx C/(4n^2)-C/n^2=-3C/(4n^2)$, while the fine error is $C/(4n^2)$. Its magnitude is therefore about $|T_{2n}-T_n|/3$. Replacing the exponent two by four produces the Simpson divisor 15. If the leading error coefficient vanishes or a narrow feature is unresolved, the estimate may mislead. A certified derivative bound remains a different, stronger statement.",
+        "Adaptive methods should split at known non-smooth points before relying on smooth-panel estimates. For $f(x)=|x|$ on $[-1,1]$, a panel spanning zero has a kink, while two panels split at zero see exact straight lines. A smooth-method error formula involving $f^{\\prime\\prime}$ on the whole interval is inapplicable, but the integral is easy: each triangle has area $1/2$, total $1$. This example shows that knowing structure can outperform blind uniform refinement. It also warns against letting a program silently assume differentiability merely because it can evaluate $f$ numerically.",
+        "An error budget is a promise about the final reported number. If a tolerance is $10^{-4}$ and an improper tail is bounded by $4\\cdot10^{-5}$, only $6\\cdot10^{-5}$ remains for quadrature and roundoff. A method that uses the full $10^{-4}$ on the finite interval cannot certify the combined target. In adaptive recursion, each child's allowed contribution should sum to the parent's, and termination caused by iteration limits should be reported as incomplete. Distinguish estimated error, proven bound, and floating-point display precision in the final result.",
+        "A derivative-based certificate can be conservative by design. For $e^x$ on $[0,1]$, the fourth derivative bound $e$ is attained only at the right endpoint, yet Simpson's formula uses that worst value to cover the whole interval. A smaller observed error is welcome but does not invalidate the bound. To claim a tighter rigorous number, one needs a sharper bound on the relevant derivative or a different theorem, not merely more displayed digits. If measurements include uncertainty, add a separate bound for uncertainty in the sampled heights. A quadrature theorem for an exact $f$ does not automatically cover noisy $f$-values.",
+        "A practical convergence study reports several resolutions and their differences rather than one rounded output. For a smooth model, compute $T_n$, $T_{2n}$, and $T_{4n}$; if successive differences shrink by roughly a factor of four, the expected second-order regime may have begun. Repeat with Simpson and its factor of sixteen when its hypotheses hold. This observation helps diagnose implementation errors and nonsmooth regions, but it remains empirical. A certified bound from a derivative maximum or an interval method is needed for a guarantee. Keep raw values long enough to see whether apparent stability is merely rounding to the same printed decimal.",
+        "The sampled-shuttle project distinguishes sensor error from unknown motion between observations. A bound becomes possible when additional information is supplied. In a new calibration case, velocity readings are all $2\\,\\mathrm{m/s}$ at the exact times $0,1,2,3,4\\,\\mathrm s$, each with absolute output error at most $\\eta=(1/10)\\,\\mathrm{m/s}$. Assume the global bound $|v(t)-v(s)|\\le L|t-s|$ throughout the interval, with $L=(2/5)\\,\\mathrm{m/s^2}$. This Lipschitz condition permits corners. It is supplied information, not something certified by the sampled slopes. No probability distribution or averaging of sensor errors is assumed.",
+        "Let $d(t)$ be the time distance to the nearest observation. Every allowed velocity lies between $v_-(t)=2\\,\\mathrm{m/s}-\\eta-Ld(t)$ and $v_+(t)=2\\,\\mathrm{m/s}+\\eta+Ld(t)$. The distance function is $1$-Lipschitz, so both envelopes obey the variation bound and all reading tolerances. On each unit-time panel, the area under $d$ is $(1/4)\\,\\mathrm{s^2}$. Thus the sharp displacement interval is $[36/5,44/5]\\,\\mathrm m=[7.2,8.8]\\,\\mathrm m$: each endpoint is realized by an envelope. Since $d(t)\\le(1/2)\\,\\mathrm s$, the lower envelope is at least $(17/10)\\,\\mathrm{m/s}>0$; these are also distance bounds.",
+        "Trapezoidal and Simpson estimates from the reported constant heights both give $8\\,\\mathrm m$. Their agreement does not identify the true integral. The supplied variation and sensor bounds instead produce a proved interval, and explicit allowed curves attain its endpoints. These piecewise-linear extremizers have corners, so the earlier $C^2$ trapezoidal and $C^4$ Simpson error theorems cannot simply be applied to them. The theorem below also handles nonuniform times and unequal reports, after checking that any curve can satisfy the data at all.",
+        "For $n$ uniform panels covering $[0,4]\\,\\mathrm s$, there are $n+1$ readings, including both endpoints. If all newly obtained reports are again $2\\,\\mathrm{m/s}$ with the same tolerance and variation bound, the sharp radius about $8\\,\\mathrm m$ is $R_n=[2/5+8/(5n)]\\,\\mathrm m$. Refinement means obtaining the additional readings; interpolation does not supply them. Only the second term shrinks. A common sensor offset of $\\pm(1/10)\\,\\mathrm{m/s}$ remains allowed at every resolution, so averaging away the $(2/5)\\,\\mathrm m$ contribution would require information not supplied here."
+      ],
+      "formula": "Certified bound: a proved upper limit under stated hypotheses. Refinement estimate: evidence based on an assumed error pattern.",
+      "formulaTex": "\\begin{aligned}I&=\\int_a^b f(x)\\,dx,\\\\ |I-T_n|&\\le\\frac{M_2(b-a)^3}{12n^2}\\quad(f\\in C^2[a,b],\\ |f^{\\prime\\prime}|\\le M_2),\\\\ |I-S_n|&\\le\\frac{M_4(b-a)^5}{180n^4}\\quad(f\\in C^4[a,b],\\ |f^{(4)}|\\le M_4,\\ n\\text{ even}),\\\\ |I-T_{2n}|&\\approx\\frac{|T_{2n}-T_n|}{3}\\quad\\text{if leading error scales as }n^{-2},\\\\ |I-S_{2n}|&\\approx\\frac{|S_{2n}-S_n|}{15}\\quad\\text{if leading error scales as }n^{-4}.\\end{aligned}",
+      "theorems": [
+        {
+          "title": "Why the composite Simpson bound holds",
+          "statement": "Let $a<b$, let $f\\in C^4[a,b]$, and suppose $|f^{(4)}(x)|\\le M_4$ for every $x\\in[a,b]$. If $n\\ge2$ is an even number of equal subintervals, then $|S_n-\\int_a^b f(x)\\,dx|\\le M_4(b-a)^5/(180n^4)$.",
+          "equationTex": "\\left|S_n-\\int_a^b f(x)\\,dx\\right|\\le\\frac{M_4(b-a)^5}{180n^4}\\qquad(n\\ge2\\text{ even})",
+          "proof": [
+            "Normalize one pair to $[-1,1]$. Set $Q(g)=[g(-1)+4g(0)+g(1)]/3$ and $L(g)=Q(g)-\\int_{-1}^{1}g(t)\\,dt$. Direct integration shows $L(1)=L(t)=L(t^2)=L(t^3)=0$. For $g\\in C^4[-1,1]$, form the finite cubic $P(x)=\\sum_{k=0}^{3}g^{(k)}(-1)(x+1)^k/k!$ and put $R=g-P$. Then $R,R',R'',R'''$ all vanish at $-1$, and linearity gives $L(g)=L(R)$. This uses a finite polynomial, not a later infinite Taylor-series theorem.",
+            "Apply integration by parts four times to $J_x=\\int_{-1}^{x}R^{(4)}(t)(x-t)^3/6\\,dt$. The successive integral kernels become $(x-t)^2/2$, $(x-t)$, $1$, and finally the integral of $R'$. At the upper endpoint each polynomial factor before the last step is zero; at $-1$ each boundary term contains one of $R'''(-1),R''(-1),R'(-1),R(-1)$, all zero. The final step gives $J_x=R(x)-R(-1)=R(x)$. Hence $R(x)=\\int_{-1}^{x}g^{(4)}(t)(x-t)^3/6\\,dt$. In particular, $R(0)$ uses only $-1\\le t\\le0$, while $R(1)$ uses the whole pair.",
+            "For the remaining integral $J=\\int_{-1}^{1}R(x)\\,dx$, integrate by parts with the successive primitives $x-1$, $-(1-x)^2/2$, $-(1-x)^3/6$, and $-(1-x)^4/24$. The four boundary products are $[R(x)(x-1)]$, $[-R'(x)(1-x)^2/2]$, $[-R''(x)(1-x)^3/6]$, and $[-R'''(x)(1-x)^4/24]$, each evaluated from $-1$ to $1$. At $1$ its polynomial factor vanishes; at $-1$ its derivative of $R$ vanishes. After each cancellation the integral becomes successively $\\int R'(1-x)$, $\\int R''(1-x)^2/2$, $\\int R'''(1-x)^3/6$, and $\\int R^{(4)}(1-x)^4/24$. Thus $J=\\int_{-1}^{1}g^{(4)}(t)(1-t)^4/24\\,dt$. Only ordinary finite-interval integration by parts is used.",
+            "Substitute the two point formulas and $J$ into $L(R)=[4R(0)+R(1)]/3-J$. The coefficient of $g^{(4)}(t)$ is $K(t)=2(-t)^3/9+(1-t)^3/18-(1-t)^4/24$ on $-1\\le t\\le0$, and $K(t)=(1-t)^3/18-(1-t)^4/24$ on $0\\le t\\le1$. Expanding and refactoring gives respectively $(1+t)^3(1-3t)/72$ and $(1-t)^3(1+3t)/72$. Both are nonnegative. By symmetry their combined area is $2\\int_0^1(1-t)^3(1+3t)/72\\,dt=(2/72)(1/4+3/20)=1/90$. Therefore $L(g)=\\int_{-1}^{1}g^{(4)}(t)K(t)\\,dt$, and $|L(g)|\\le\\sup|g^{(4)}|/90$. A nonnegative fourth derivative makes the Simpson value at least the integral.",
+            "For a pair $[c-h,c+h]$ set $g(u)=f(c+hu)$. The physical quadrature-minus-integral error is $hL(g)$, and the chain rule gives $g^{(4)}(u)=h^4f^{(4)}(c+hu)$. Thus one pair contributes at most $M_4h^5/90=M_4(2h)^5/2880$ in absolute value. With $h=(b-a)/n$ there are $n/2$ pairs, so the triangle inequality gives $(n/2)M_4h^5/90=M_4(b-a)^5/(180n^4)$. The units are $(f/x^4)x^5=f\\,x$, the units of the integral. The $x^4$ calculation in Lesson 1 has $M_4=24$, $n=2$, and error $1/120$, exactly its bound; finite polynomial checks support the constant, while the kernel identity proves the general $C^4$ claim"
+          ]
+        },
+        {
+          "title": "Sharp integral bounds from noisy readings and global variation",
+          "statement": "Let $a=t_0<\\cdots<t_n=b$, with $n\\ge1$, exact input locations, reported values $y_i$, a common tolerance $\\eta\\ge0$ and global Lipschitz bound $L\\ge0$. Consider all real-valued $f$ on $[a,b]$ satisfying $|f(t)-f(s)|\\le L|t-s|$ and $|f(t_i)-y_i|\\le\\eta$. This class is nonempty exactly when $|y_i-y_j|\\le2\\eta+L|t_i-t_j|$ for every pair $i,j$. When it is nonempty, the following bounds are sharp, with both integral endpoints attained.",
+          "equationTex": "\\begin{gathered}\n\\ell(t)=\\max_{0\\le i\\le n}\\{y_i-\\eta-L|t-t_i|\\},\\\\\nu(t)=\\min_{0\\le i\\le n}\\{y_i+\\eta+L|t-t_i|\\},\\\\\n\\int_a^b\\ell(t)\\,dt\\ \\le\\ \\int_a^b f(t)\\,dt\\ \\le\\ \\int_a^b u(t)\\,dt.\n\\end{gathered}",
+          "proof": [
+            "Necessity follows from $|y_i-y_j|\\le|y_i-f(t_i)|+|f(t_i)-f(t_j)|+|f(t_j)-y_j|\\le2\\eta+L|t_i-t_j|$. Check every pair: adjacent noisy differences alone need not suffice. For sufficiency, the pairwise condition and triangle inequality give $y_i-y_j-2\\eta\\le L|t_i-t_j|\\le L(|t-t_i|+|t-t_j|)$. Thus each lower cone is at most each upper cone at every $t$, so $\\ell(t)\\le u(t)$.",
+            "Each cone is $L$-Lipschitz. A finite maximum or minimum preserves this bound: for a maximum, each value at $t$ is at most the maximum at $s$ plus $L|t-s|$; reverse $s,t$ for the other direction. The minimum is analogous. At a sampled input, the cone from that same observation gives $y_i-\\eta\\le\\ell(t_i)\\le u(t_i)\\le y_i+\\eta$. Consequently both envelopes satisfy all tolerances and the global variation bound. They are continuous, so their integrals exist.",
+            "Every admissible $f$ is above each lower cone and below each upper cone, by its reading tolerance and Lipschitz condition. Integrating gives the enclosure. Taking $f=\\ell$ or $f=u$ attains its respective endpoint, so neither can be improved using only the stated information. Convex combinations $(1-\\theta)\\ell+\\theta u$, with $0\\le\\theta\\le1$, remain admissible and fill the intermediate integral values. The class includes corners; extra assumptions such as differentiability, monotonicity or positivity would be additional restrictions.",
+            "For constant reports $y_i=c$, write $d(t)=\\min_i|t-t_i|$. Then $\\ell=c-\\eta-Ld$ and $u=c+\\eta+Ld$. On a panel of width $h_i=t_{i+1}-t_i$, the distance graph is a triangle of height $h_i/2$, so its integral is $h_i^2/4$. The exact integral center is $c(b-a)$ and the sharp radius is $\\eta(b-a)+(L/4)\\sum_{i=0}^{n-1}h_i^2$. This formula assumes constant reports and an endpoint-covering grid; unequal readings require the actual cone envelopes.",
+            "For uniform spacing, $h_i=(b-a)/n$, giving $R_n=\\eta(b-a)+L(b-a)^2/(4n)$. In the stated velocity case this is $[2/5+8/(5n)]\\,\\mathrm m$. When $L>0$ and $b>a$, the shape contribution is positive for every finite grid and tends to zero under uniform refinement. The limiting radius $\\eta(b-a)$ therefore cannot be reached by any finite grid in this constant-report class. This floor is a worst-case statement about the supplied tolerances, not a statistical confidence interval."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "measurement-quadrature",
+        "title": "What can the sensor record actually certify?",
+        "introduction": "Use exact input times, deterministic reading tolerances and the stated global variation bound. Construct allowed curves before claiming a sharp interval. Distinguish the number of panels from the number of readings; refinement requires new data rather than interpolated heights.",
+        "tasks": [
+          {
+            "title": "Refine the record and count the readings",
+            "question": "Keep $L=(2/5)\\,\\mathrm{m/s^2}$ and $\\eta=(1/10)\\,\\mathrm{m/s}$ on $[0,4]\\,\\mathrm s$. On each new uniform grid, every newly measured report is $2\\,\\mathrm{m/s}$. Find the sharp integral interval for $n=8$ panels. Find the least panel count and reading count that certify error at most $(1/2)\\,\\mathrm m$ about $8\\,\\mathrm m$, then repeat for error strictly less than $(1/2)\\,\\mathrm m$. Can any finite endpoint-covering grid certify error at most $(2/5)\\,\\mathrm m$ from these constant reports? Explain why taking more readings does not justify averaging the sensor tolerance away.",
+            "hint": "Use $R_n=[2/5+8/(5n)]\\,\\mathrm m$ for the uniform grids and retain the strict or non-strict inequality. There are $n+1$ readings. For a general finite endpoint-covering grid, every panel width is positive, so $\\sum h_i^2>0$. A common offset is allowed by the individual tolerance bounds.",
+            "solution": "For $n=8$, the sharp radius is $(3/5)\\,\\mathrm m$, giving $[37/5,43/5]\\,\\mathrm m=[7.4,8.6]\\,\\mathrm m$; nine readings are needed. The two constant-report cone envelopes attain the integral endpoints.\n\nThe condition $2/5+8/(5n)\\le1/2$ is $n\\ge16$. Thus the least sufficient uniform design has $16$ panels and $17$ readings. For the strict inequality, $n>16$, so the least counts are $17$ panels and $18$ readings. At $n=16$ the radius is exactly $1/2$, so that boundary does not meet the strict request.\n\nEvery finite endpoint-covering grid has radius $(2/5)\\,\\mathrm m+(L/4)\\sum h_i^2$, strictly greater than $(2/5)\\,\\mathrm m$. The lower and upper envelopes make this a genuine impossibility for that finite record, not merely failure of a conservative bound. The constant velocities $(2\\pm1/10)\\,\\mathrm{m/s}$ remain allowed at every resolution, so a common unknown sensor offset alone contributes $(2/5)\\,\\mathrm m$. Independence or cancellation of errors was not supplied."
+          },
+          {
+            "title": "Change both the spacing and the measured heights",
+            "question": "Now use times $t=(0,1,3,4)\\,\\mathrm s$ and reports $y=(2,11/5,13/5,12/5)\\,\\mathrm{m/s}$, with the same $L,\\eta$. Integrate the reported piecewise-linear interpolant, then find the sharp true-integral interval by constructing and integrating the full cone envelopes. Are these also distance bounds? A report reuses the old radius $(4/5)\\,\\mathrm m$ around the new interpolant integral: is that enclosure valid? Finally, classify replacing only the report at $t=3\\,\\mathrm s$ by $3\\,\\mathrm{m/s}$ or $(31/10)\\,\\mathrm{m/s}$. Does a reported neighboring slope above $L$ by itself prove inconsistency?",
+            "hint": "Find intersections of the lower and upper cones; do not assume uniform gaps or constant reports. On each panel, integrate every active straight segment. Test noisy-data feasibility using every pair of readings. To establish distance as well as displacement, bound the lower envelope away from zero.",
+            "solution": "The reported interpolant has integral $(47/5)\\,\\mathrm m$. Taking the maximum of all lower cones gives interior switches at $1/4,3/2,15/4\\,\\mathrm s$; the upper minimum switches at $3/4,5/2,13/4\\,\\mathrm s$. On $[0,1]$, $[1,3]$, $[3,4]$, the lower integrals are $77/40,43/10,93/40\\,\\mathrm m$, and the upper integrals are $91/40,53/10,107/40\\,\\mathrm m$.\n\nTheir sums give the sharp interval $[171/20,41/4]\\,\\mathrm m=[8.55,10.25]\\,\\mathrm m$, with radius $(17/20)\\,\\mathrm m$. Both envelopes attain its endpoints. A nearest reading is at most $1\\,\\mathrm s$ away, so $\\ell(t)\\ge(3/2)\\,\\mathrm{m/s}>0$ and every allowed velocity is positive and the interval bounds distance too. Reusing radius $4/5$ gives $[43/5,51/5]\\,\\mathrm m=[8.6,10.2]\\,\\mathrm m$, excluding allowed extremal integrals.\n\nThe replacement report $3$ is feasible: true node values $(2,21/10,29/10,5/2)\\,\\mathrm{m/s}$ fit all tolerances and their linear interpolation has slopes bounded by $L$. Its last reported slope has magnitude $(3/5)\\,\\mathrm{m/s^2}>L$, which does not invalidate noisy data. The report $31/10$ is infeasible: its difference from $12/5$ is $(7/10)\\,\\mathrm{m/s}>2\\eta+L(1\\,\\mathrm s)=(3/5)\\,\\mathrm{m/s}$. There is then no admissible curve, rather than a larger certified integral interval."
+          }
+        ]
+      }
+    },
+    {
+      "title": "3. Infinite intervals require a limit and a tail budget",
+      "paragraphs": [
+        "An unbounded interval is not handled by substituting infinity into an ordinary definite-integral formula. If $f$ is integrable on every finite interval $[a,R]$, define $\\int_a^\\infty f(x)\\,dx$ as $\\lim_{R\\to\\infty}\\int_a^R f(x)\\,dx$, provided that limit exists and is finite. Otherwise the improper integral diverges. A graph that approaches the axis need not have finite accumulated area: $1/x$ tends to zero but its integral on $[1,R]$ equals $\\log R$, which grows without bound.",
+        "The power family gives a useful reference. Integrating $x^{-p}$ from $1$ to $R$ gives $(R^{1-p}-1)/(1-p)$ when $p\\ne1$, and $\\log R$ when $p=1$. Letting $R$ increase proves that $\\int_1^\\infty x^{-p}\\,dx$ converges exactly when $p>1$, with value $1/(p-1)$. For $p>1$ the omitted tail beyond $R$ is exactly $R^{1-p}/(p-1)$. A $p$ only slightly above $1$ gives a finite total but extremely slow tail decay.",
+        "Numerical work truncates the interval at a finite $R$ and then approximates $\\int_a^R f(x)\\,dx$. Its total error is at most the quadrature error on $[a,R]$ plus the magnitude of the omitted tail. Decide how to divide a requested tolerance between those sources. For $f(x)=e^{-x}$ on $[0,\\infty)$, the tail is $e^{-R}$. Choosing $R$ so $e^{-R}$ is at most half the tolerance leaves the other half for quadrature. Reporting a tiny refinement estimate on $[0,R]$ alone says nothing about the omitted tail.",
+        "If both endpoints are infinite, choose a finite $c$ and require both $\\int_{-\\infty}^c f(x)\\,dx$ and $\\int_c^\\infty f(x)\\,dx$ to converge separately. The choice of $c$ does not change the answer when both limits exist. Coupling the left and right cutoffs introduces a different limiting procedure, whose cancellation may conceal divergence. The same care will be needed for interior singularities.",
+        "The convergence of $\\int_1^\\infty x^{-p}\\,dx$ can be read from the exact finite expression. For $p>1$, $R^{1-p}$ tends to zero and the limit is $1/(p-1)$. For $p<1$, the power grows without bound; for $p=1$, $\\log R$ grows without bound. Even if $p=1.01$, convergence is extremely slow: the tail after $R$ is $100R^{-0.01}$. At $R=10^6$ the tail is still about $87.1$. A plot of $x^{-1.01}$ over an ordinary window looks close to zero, but its remaining area is huge relative to a tight tolerance.",
+        "Comparison can establish convergence without a primitive. For $x\\ge1$, $0\\le1/(x^2+3)\\le1/x^2$. Since $\\int_1^\\infty x^{-2}\\,dx$ converges, so does the smaller nonnegative integrand. This argument does not evaluate its exact value. For a lower-bound divergence example, if $f(x)\\ge1/x$ for all sufficiently large $x$, then $\\int_a^\\infty f(x)\\,dx$ diverges for any such $a$ because the harmonic tail does. The direction of inequalities matters: being smaller than a divergent function gives no answer, and being larger than a convergent function gives no answer.",
+        "A truncation certificate uses a tail bound in the original units. For $\\int_0^\\infty e^{-x}\\,dx$, the omitted tail after $R$ is exactly $e^{-R}$. To make it no larger than $5\\cdot10^{-6}$, choose $R\\ge-\\ln(5\\cdot10^{-6})\\approx12.2061$. Taking $R=13$ suffices. If the finite-interval quadrature is then certified within another $5\\cdot10^{-6}$, the total absolute error is at most $10^{-5}$. This is an example of combining an analytic tail estimate with a numerical finite computation rather than asking quadrature to handle infinity as an endpoint.",
+        "For a function that changes sign on an infinite interval, cancellation can yield conditional convergence; the nonnegative power test alone is then insufficient. Absolute convergence of $\\int_a^\\infty|f(x)|\\,dx$ guarantees ordinary convergence, but the converse can fail. A separate example is $\\int_1^\\infty(\\sin x)/x\\,dx$, which converges conditionally under a Dirichlet-type argument, while $\\int_1^\\infty|\\sin x|/x\\,dx$ diverges. Proving those claims needs more analysis than the simple comparison tools here. The practical lesson is to state whether a tail bound controls absolute magnitude or relies on cancellation before reporting numerical accuracy.",
+        "Choosing a cutoff $R$ for an infinite interval should be driven by the tail, not by where the plot looks flat. For $f(x)=1/x^2$, the tail after $R$ is $1/R$, so three decimal places in the total require $R$ of order thousands if no correction is used. For $e^{-x}$, the tail is $e^{-R}$, so a cutoff near $14$ already makes it below $10^{-6}$. Both functions approach zero, but at very different rates. This contrast is why a numerical integral on $[a,R]$ needs an analytic or separately validated tail estimate. Refining panels on a too-short interval only solves the truncated problem more precisely."
+      ],
+      "formula": "|∫ₐ^∞ f − Q[a,R]| ≤ |∫ₐᴿ f − Q[a,R]| + |∫ᴿ^∞ f|, when the improper integral converges.",
+      "formulaTex": "\\begin{aligned}I&=\\int_a^\\infty f(x)\\,dx=\\lim_{R\\to\\infty}\\int_a^R f(x)\\,dx,\\\\ |I-Q[a,R]|&\\le\\left|\\int_a^R f(x)\\,dx-Q[a,R]\\right|\\\\ &\\quad+\\left|\\int_R^\\infty f(x)\\,dx\\right|\\qquad(I\\text{ convergent},\\ R>a).\\end{aligned}"
+    },
+    {
+      "title": "4. Singular endpoints and comparison tests",
+      "paragraphs": [
+        "An integrand may become unbounded at an endpoint of a finite interval. If $f$ is integrable on $[a+\\varepsilon,b]$ for every $\\varepsilon>0$, define $\\int_a^b f=\\lim_{\\varepsilon\\to0^+}\\int_{a+\\varepsilon}^b f$ when this limit is finite. Never evaluate a closed quadrature rule at a point where $f$ is undefined. Deleting the bad endpoint from a sample list does not by itself approximate the limiting integral accurately; the unsampled neighbourhood still has area.",
+        "Near zero the reference family reverses the infinite-tail condition: $\\int_0^1 x^{-p}\\,dx$ converges exactly when $p<1$ and then equals $1/(1-p)$. For $p=1$ there is logarithmic divergence; for $p>1$ there is power divergence. This reversal is about which limit is taken. In particular $1/\\sqrt{x}$ is unbounded at zero but has finite integral $2$ on $[0,1]$. A bounded graph is not required for improper convergence, and an unbounded graph is not proof of divergence.",
+        "For nonnegative functions with $0\\le f\\le g$ near the problematic endpoint, convergence of the integral of $g$ implies convergence of the integral of $f$; divergence of the integral of $f$ implies divergence of the integral of $g$. These conclusions follow because the truncated integrals increase and are bounded above in the convergent case. This is a proof sketch using the monotone bounded principle for accumulated areas. Comparing only in the reverse direction proves nothing. If $f/g$ tends to a finite positive number, the two nonnegative integrals have the same convergence behaviour, because eventually each bounds a positive constant multiple of the other.",
+        "A substitution can remove an integrable singularity before numerical work. For $\\int_0^1 x^{-1/2}\\,dx$ set $x=t^2$ on truncated intervals with $t>0$. Then $dx=2t\\,dt$ and $x^{-1/2}\\,dx=2\\,dt$. The transformed integrand extends continuously to $t=0$ and is easy to integrate. Establish the transformation away from the singular endpoint first, then pass to the limit. For signed functions, convergence of $\\int|f|$ is sufficient for convergence; direct nonnegative comparison cannot simply be applied to a sign-changing integrand without explanation.",
+        "The local power rule at zero can be verified with a finite cutoff. For $p\\ne1$, $\\int_\\varepsilon^1 x^{-p}\\,dx=[1-\\varepsilon^{1-p}]/(1-p)$. If $p<1$, $\\varepsilon^{1-p}\\to0$ and the limit is $1/(1-p)$. If $p>1$, $\\varepsilon^{1-p}$ grows without bound while the denominator is negative, so the positive integral diverges to $+\\infty$. At $p=1$, the finite value is $-\\ln\\varepsilon$ and also diverges. This calculation shows why the threshold is one and why the inequality reverses relative to the tail at infinity.",
+        "Deleting an endpoint neighbourhood creates a quantifiable bias when the singularity is integrable. For $f(x)=x^{-1/2}$, the area omitted from $[0,\\varepsilon]$ is $2\\sqrt{\\varepsilon}$. With $\\varepsilon=10^{-4}$, that is $0.02$, so a highly accurate quadrature on $[\\varepsilon,1]$ still underestimates the full value $2$ by $0.02$. For $x^{-3/4}$, the omitted area is $4\\varepsilon^{1/4}$, which decays even more slowly. A program that merely avoids an undefined sample can therefore print many stable digits for the wrong truncated question.",
+        "The comparison test is local: behavior away from the singular point contributes only a finite ordinary integral when the function is continuous there. To test $\\int_0^1 x^{-1/2}/(1+x)\\,dx$, note that $1/(1+x)$ lies between $1/2$ and $1$ on $[0,1]$, so the integrand lies between one-half and one times $x^{-1/2}$. This proves convergence and bounds the value between $1$ and $2$. It does not require finding the exact antiderivative $2\\arctan\\sqrt{x}$. Such bounds are useful even when an exact value is available, because they independently catch scale errors.",
+        "An interior singularity requires two separate limits. For $f(x)=1/\\sqrt{|x|}$ on $[-1,1]$, each side converges: substitution $t=-x$ on the left and $t=x$ on the right gives $2+2=4$. For $f(x)=1/x$, neither side converges, although symmetric cancellation produces a principal value. The difference is not simply that one function is even and the other odd; it is the power of the singularity in absolute value and the requirement that each one-sided integral be finite. Always split first and test each piece.",
+        "The reference powers also support limit comparison. If a nonnegative $f(x)$ behaves like $Cx^{-p}$ near zero, with $C>0$, then $f$ and $x^{-p}$ have the same convergence status when the ratio tends to $C$. To make this rigorous, choose a small interval where the ratio lies between $C/2$ and $2C$, then compare both integrals. The same argument works at infinity. Saying two graphs “look alike” is not enough; the ratio bound supplies the inequality needed for the comparison test. It also reveals why lower-order terms often do not change convergence."
+      ],
+      "formula": "At infinity: ∫₁^∞ x⁻ᵖ dx converges iff p>1. At zero: ∫₀¹ x⁻ᵖ dx converges iff p<1.",
+      "formulaTex": "\\begin{aligned}\\int_1^\\infty x^{-p}\\,dx&=\\frac1{p-1}\\quad(p>1),&\\text{diverges for }p&\\le1,\\\\ \\int_0^1 x^{-p}\\,dx&=\\frac1{1-p}\\quad(p<1),&\\text{diverges for }p&\\ge1.\\end{aligned}"
+    },
+    {
+      "title": "5. Cancellation and the principal value distinction",
+      "paragraphs": [
+        "If $f$ is singular at an interior point $c$, split the integral there. The ordinary improper integral exists only if both one-sided integrals converge separately to finite values. For $1/x$ on $[-1,1]$, the left integral tends to $-\\infty$ and the right integral to $+\\infty$. Adding these symbols is not an allowed operation that produces zero. The ordinary improper integral diverges.",
+        "The Cauchy principal value deliberately imposes symmetric cutoffs. For this example, $\\int_{-1}^{-\\varepsilon}dx/x+\\int_\\varepsilon^1 dx/x=0$ for every $\\varepsilon>0$, so the principal value is zero. Choosing the left cutoff $\\varepsilon$ and the right cutoff $2\\varepsilon$ instead produces $-\\log 2$. Different coupling gives a different outcome, revealing why symmetry must not be silently built into the definition of an ordinary integral.",
+        "A responsible strategy therefore starts with domain analysis. Locate singularities, decide convergence analytically when possible, transform or split troublesome regions, bound excluded tails, and only then apply a numerical rule. State whether the result is an ordinary integral, a principal value, or a finite truncation. The lab below contrasts a smooth convergence study with endpoint truncation so that numerical stability and mathematical existence remain separate questions.",
+        "Principal value can be a useful mathematical object, but it answers a different limiting question. For $1/x$ on $[-1,1]$, symmetric holes $[-\\varepsilon,\\varepsilon]$ force exact cancellation. If the right hole is twice as wide, the combined truncated value is $-\\ln2$ for every $\\varepsilon>0$, so the limiting number depends on the imposed coupling. The ordinary improper integral avoids this ambiguity by requiring each one-sided integral to converge independently. In a numerical program, a symmetric grid may accidentally compute a principal value while labeling the output an integral. The label must match the definition used.",
+        "Even a finite principal value is not guaranteed by visual oddness if the truncation is not symmetric or the interval is not balanced around the singularity. On $[-1,2]$, the symmetric-hole principal value of $1/x$ is $\\ln2$, while the ordinary improper integral still diverges. This value comes from cancellation near zero plus a remaining positive interval from $1$ to $2$. It may be appropriate in some transform theories, but it must be explicitly requested. When a physical density or rate is nonnegative, principal-value cancellation is usually not a meaningful substitute for missing mass or flow.",
+        "The evaluation theorem from chapter 11 cannot be applied across a singular point because its continuity hypothesis fails. Writing $F(b)-F(a)$ after finding a primitive on each side is a formal shortcut that can hide two divergent pieces. Instead compute $\\int_a^{c-\\varepsilon}f(x)\\,dx$ and $\\int_{c+\\delta}^b f(x)\\,dx$ separately, then let $\\varepsilon\\to0^+$ and $\\delta\\to0^+$ independently. Only if both limits are finite may their sum be called the ordinary improper integral. This procedure also determines whether numerical quadrature can be meaningfully applied to each truncated piece with a tail error estimate.",
+        "A sound numerical report should include the mathematical status of the integral. For a convergent improper integral, state the finite truncation, the bound on what was excluded, the quadrature method and bound or estimate, and the final precision. For a divergent integral, report divergence rather than a large cutoff-dependent number. For a principal value, name the symmetric or otherwise specified cutoff and do not imply ordinary convergence. These distinctions matter more than adding extra displayed decimal places.",
+        "The word “cancellation” has two meanings that should not be confused. A convergent signed integral may have positive and negative finite contributions that cancel partly; this is ordinary integration. A principal value of $1/x$ instead cancels two contributions whose magnitudes individually diverge. The latter cancellation depends on a coordinated cutoff and cannot be rearranged freely. This is analogous to the danger in conditionally convergent series: order or grouping may matter. In applications, specify the limiting procedure that the measurement or model actually represents rather than selecting a symmetric cutoff solely because it produces a convenient answer.",
+        "When a singularity is only removable, the situation is different again. If $f(x)=\\sin x/x$ for $x\\ne0$ and $f(0)=1$, the function extends continuously across zero, so ordinary Riemann integration applies on a closed interval around it. No one-sided divergent pieces need to be cancelled. A numerical implementation may evaluate the limit near zero with a stable special formula rather than directly dividing two tiny values. Classify the discontinuity first: removable, integrable unbounded, nonintegrable, or a case where a principal value is explicitly of interest. The correct computational treatment follows from that classification."
+      ]
+    },
+    {
+      "title": "Removing a singularity before numerical quadrature",
+      "paragraphs": [
+        "An integrable singularity can defeat an ordinary quadrature rule at an endpoint. The function $f(x)=1/\\sqrt{x}$ is unbounded as $x\\to0^+$, yet the improper integral $\\int_0^1 x^{-1/2}\\,dx$ exists. By definition it is $\\lim_{\\varepsilon\\to0^+}\\int_\\varepsilon^1 x^{-1/2}\\,dx=\\lim_{\\varepsilon\\to0^+}(2-2\\sqrt{\\varepsilon})=2$. A trapezoidal or Simpson rule applied directly with $x=0$ as a sample asks for $f(0)$, which is undefined. Replacing $f(0)$ with an arbitrary finite number changes the sampled algorithm without resolving the singular behavior.",
+        "A change of variables makes this example numerically regular. Set $x=u^2$ for $u\\in[0,1]$. On $u>0$, $dx=2u\\,du$ and $x^{-1/2}=1/u$, so their product is exactly $2\\,du$. The transformed integrand extends continuously to $u=0$ by assigning value $2$ there. Thus $\\int_0^1 x^{-1/2}\\,dx=\\int_0^1 2\\,du=2$. A one-panel trapezoidal rule is now exact, because it integrates a constant. The substitution does not change the mathematical integral; it changes coordinates so the endpoint is easier for a sampler to handle.",
+        "This technique has a precise limit. For $\\int_0^1 dx/x$, the same $x=u^2$ substitution gives $2\\,du/u$ on $u>0$, which still diverges at zero. A coordinate change cannot turn a genuinely divergent integral into a convergent one. More generally, $\\int_0^1 x^{-p}\\,dx$ converges when $p<1$ and diverges when $p\\ge1$. If $p<1$, a substitution $x=u^q$ can be chosen so the transformed power $u^{q(1-p)-1}$ is bounded near zero when $q(1-p)\\ge1$. The transformed endpoint must still be understood through the original improper limit.",
+        "For an infinite interval, a mapping may move infinity to a finite endpoint. For example $x=1/u$ sends $\\int_1^\\infty x^{-2}\\,dx$ to $\\int_0^1 1\\,du$ after reversing bounds and simplifying the Jacobian. The new endpoint $u=0$ corresponds to $x=\\infty$, so convergence remains a limiting question even though the transformed integrand is regular. The variable change, its Jacobian, and its transformed bounds all matter.",
+        "Numerical agreement after transformation is useful evidence only after the improper integral has been shown to exist. Report the transformation and the handling of the endpoint so another reader can reproduce the result. Near singularities, compare at least two resolutions or use an analytic bound on the omitted tail rather than reporting unexplained digits.",
+        "The substitution $x=u^2$ illustrates a general design principle: choose coordinates that flatten the troublesome behavior. For $x^{-p}$ with $p<1$, $x=u^q$ transforms the factor into $q u^{q(1-p)-1}\\,du$. Taking $q\\ge1/(1-p)$ makes the exponent nonnegative, so the new integrand is bounded at $u=0$. For $p=1/2$, $q=2$ makes it constant; for $p=2/3$, $q=3$ does the same. The transformed integral and original improper limit agree by applying substitution first on $[\\varepsilon,1]$ and then letting $\\varepsilon\\to0^+$.",
+        "A change of variable can regularize the formula but not the data. If measured samples are sparse near a singular endpoint, transforming their coordinates does not invent the missing behavior; an analytic model is needed to justify extrapolation. Conversely, if the formula is known, evaluating the transformed integrand near its now-regular endpoint can be much more stable than evaluating the original very large $f(x)$. State whether the transformation is mathematical, numerical, or both. The same analytic identity may have different computational consequences depending on how values are obtained.",
+        "At infinity, $x=1/u$ maps $[1,R]$ to $[1,1/R]$ in reverse order. The differential is $dx=-u^{-2}\\,du$; for $x^{-2}$ the product becomes $-du$, so $\\int_1^R x^{-2}\\,dx=\\int_{1/R}^1du=1-1/R$. Letting $R\\to\\infty$ yields one. The negative Jacobian and reversed endpoints cancel correctly. Missing either would produce a negative area for a positive integrand. For $x^{-1}$ the transformed integrand is $du/u$, still singular at zero and divergent. A finite transformed interval does not by itself imply a finite integral.",
+        "A numerical method should be validated against examples with known answers before an unfamiliar application. The transformed $x^{-1/2}$ case has exact value $2$ and constant transformed integrand, so even a single trapezoid panel should return $2$. The original endpoint form should be rejected by a rule that requires $f(0)$, rather than silently replacing infinity with zero or a large finite cap. An implementation can then be tested on a less trivial integrable singularity, comparing refinements with an analytic tail bound. These checks test the software's handling of domain and error, not just its arithmetic.",
+        "The transformed integrand should be evaluated at the new endpoint only after a valid extension has been identified. For $x=u^2$ in $\\int_0^1 x^{-1/2}\\,dx$, the algebra $2u/u=2$ holds for $u>0$, and its limit as $u\\to0^+$ is $2$, so assigning the transformed endpoint value $2$ is justified. Writing the original expression as “infinity times zero” at $u=0$ would be meaningless. For $x=u^2$ in $\\int_0^1 dx/x$, the transformed expression $2/u$ has no finite endpoint limit, so there is no analogous regular extension. The limit determines whether the coordinate change truly removes the numerical singularity."
+      ],
+      "formula": "∫₀¹ x^(−1/2)dx = lim[ε→0⁺](2−2√ε)=2; with x=u² the transformed integrand is 2.",
+      "formulaTex": "\\begin{aligned}\\int_0^1 x^{-1/2}\\,dx&=\\lim_{\\varepsilon\\to0^+}\\int_{\\varepsilon}^1 x^{-1/2}\\,dx=\\lim_{\\varepsilon\\to0^+}(2-2\\sqrt{\\varepsilon})=2,\\\\ x=u^2:\\qquad x^{-1/2}\\,dx&=2\\,du\\quad(u>0),\\qquad \\int_0^1 2\\,du=2.\\end{aligned}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Certifying an integral without knowing its exact value first",
+      "problem": "Approximate $\\int_0^1e^x\\,dx$ with Simpson’s rule and certify absolute error below $0.000001$.",
+      "steps": [
+        "Here $f^{(4)}(x)=e^x$, so $M_{4}=e$ on $[0,1]$. The bound is $\\frac e{180n^4}$, with $n$ even.",
+        "Requiring $n^4\\ge\\frac e{180\\cdot0.000001}$ gives $n$ at least about $11.09$. Choose the next even integer, $n=12$.",
+        "Using $h=1/12$ and Simpson weights gives approximately $1.718282288438$. The bound $\\frac e{180\\cdot12^4}$ is about $0.00000072827$.",
+        "As an independent check, FTC gives $e-1\\approx1.718281828459$. The actual error is about $0.00000045998$, below the bound."
+      ],
+      "answer": "$S_{12} \\approx 1.718282288438$, with certified absolute error less than $7.29\\times10^{-7}$. The computation is dimensionless."
+    },
+    {
+      "title": "Truncating a singular density",
+      "problem": "A rod occupies $0<x\\le 1$ metre and has linear density $\\lambda(x)=(1\\,\\mathrm{kg/m})\\sqrt{(1\\,\\mathrm m)/x}$. Find its mass and the mass omitted below $x=0.0001\\,\\mathrm{m}$.",
+      "steps": [
+        "Set $u=\\frac{x}{1\\,\\mathrm m}$. Then $\\lambda(x)\\,dx=(1\\,\\mathrm{kg})u^{-1/2}\\,du$. The dimensionless integral has the integrable power $p=1/2$.",
+        "Integrate from a lower bound $u=\\varepsilon$ to $u=1$: $(1\\,\\mathrm{kg})[2\\sqrt u]_{\\varepsilon}^{1}=2(1-\\sqrt\\varepsilon)\\,\\mathrm{kg}$. Taking $\\varepsilon \\to 0$ gives $2\\,\\mathrm{kg}$.",
+        "The omitted segment has mass $2\\sqrt{0.0001}\\,\\mathrm{kg}=0.02\\,\\mathrm{kg}$. Even a seemingly tiny cutoff loses one percent of the total mass.",
+        "The substitution $u=t^{2}$ turns the total mass integral into $(1\\,\\mathrm{kg})\\int_0^1 2\\,dt$. Trapezoidal and Simpson rules now give the exact mathematical value for every valid panel count, apart from floating-point effects."
+      ],
+      "answer": "Total mass $2\\,\\mathrm{kg}$; truncation at $0.0001\\,\\mathrm{m}$ omits $0.02\\,\\mathrm{kg}$. The infinite endpoint density is an idealized model with finite mass."
+    },
+    {
+      "title": "One panel reveals quadrature geometry",
+      "problem": "Approximate $\\int_0^1x^2\\,dx$ with one and two trapezoidal panels, then compare to exact and Simpson values.",
+      "steps": [
+        "The exact integral is $1/3$. One trapezoid gives $T_1=\\frac{0+1}{2}=\\frac12$.",
+        "For two panels $h=1/2$, $T_2=h\\left[\\frac{f(0)+f(1)}2+f\\left(\\frac12\\right)\\right]=\\frac12\\left(\\frac12+\\frac14\\right)=\\frac38$.",
+        "Simpson with two panels gives $S_2=\\frac h3\\left[f(0)+4f\\left(\\frac12\\right)+f(1)\\right]=\\frac13$ exactly. Convexity explains the trapezoid overestimates."
+      ],
+      "answer": "$T_1=\\frac12,\\quad T_2=\\frac38,\\quad S_2=\\frac13$, and the exact value is $1/3$."
+    },
+    {
+      "title": "A smooth error certificate",
+      "problem": "How many trapezoidal panels guarantee error at most $10^{-4}$ for $\\int_0^1\\cos x\\,dx$?",
+      "steps": [
+        "On $[0,1]$, $f^{\\prime\\prime}=-\\cos x$ and $|f^{\\prime\\prime}|\\le 1$, so the bound is $1/(12n^{2})$.",
+        "Require $1/(12n^{2})\\le 10^{-4}$, or $n^{2}\\ge 833.333...$ .",
+        "Since $28^{2}=784$ and $29^{2}=841$, $n=29$ is the smallest integer satisfying this sufficient bound."
+      ],
+      "answer": "Twenty-nine equal trapezoidal panels certify the requested error."
+    },
+    {
+      "title": "A tail budget for an exponential",
+      "problem": "Approximate $\\int_0^\\infty e^{-x}\\,dx$ by truncating at $R=13$. Bound the omitted tail.",
+      "steps": [
+        "The exact tail from $R$ to infinity is $\\int_R^\\infty e^{-x}\\,dx=e^{-R}$.",
+        "At $R=13$ it is about $2.26033\\times10^{-6}$.",
+        "A further finite-interval quadrature bound below $7.73967\\times10^{-6}$ would keep total absolute error below $10^{-5}$; using half the budget for each also works."
+      ],
+      "answer": "The tail is $e^{-13}\\approx2.26\\times10^{-6}$."
+    },
+    {
+      "title": "An integrable endpoint spike",
+      "problem": "Evaluate $\\int_0^1x^{-3/4}\\,dx$ and the integral contribution omitted by cutting off $x<10^{-4}$.",
+      "steps": [
+        "On $[\\varepsilon ,1]$, the antiderivative is $4x^{1/4}$, giving $4[1-\\varepsilon^{1/4}]$.",
+        "As $\\varepsilon \\to 0$, the improper integral converges to $4$.",
+        "The omitted $[0,10^{-4}]$ contribution is $4(10^{-4})^{1/4}=4\\cdot0.1=0.4$."
+      ],
+      "answer": "The full integral is $4$; the stated cutoff loses $0.4$."
+    },
+    {
+      "title": "Principal value is not ordinary convergence",
+      "problem": "Analyze $\\int_{-1}^1\\frac1x\\,dx$ and its symmetric principal value.",
+      "steps": [
+        "The left truncated integral $\\int_{-1}^{-\\varepsilon}\\frac{dx}{x}=\\ln\\varepsilon$ tends to $-\\infty$.",
+        "The right truncated integral $\\int_{\\varepsilon}^1\\frac{dx}{x}=-\\ln\\varepsilon$ tends to $+\\infty$. Neither one-sided improper integral is finite.",
+        "Their symmetric sum is zero for every $\\varepsilon$, so the principal value is zero. The ordinary improper integral diverges."
+      ],
+      "answer": "Ordinary integral diverges; symmetric Cauchy principal value equals zero."
+    },
+    {
+      "title": "Regularize a power singularity",
+      "problem": "Use $x=u^{3}$ to evaluate $\\int_0^1x^{-2/3}\\,dx$.",
+      "steps": [
+        "On $x>0$ set $x=u^{3}$; then $dx=3u^{2}du$ and $x^{-2/3}=u^{-2}$.",
+        "Their product is $3du$; the transformed integrand extends continuously to $u=0$.",
+        "Integrate from $u=0$ to $1$ after taking the improper limit: value $3$."
+      ],
+      "answer": "The improper integral converges to $3$."
+    }
+  ],
+  "misconceptions": [
+    "“Two refinements agree, so the error is certified.” Agreement can miss an unsampled spike; a certificate needs a valid bound or additional justified information.",
+    "“An odd function integrates to zero across a symmetric interval.” This requires an existing integral. For $f(x)=1/x$ on $[-1,1]$, the ordinary improper integral diverges, while its symmetric Cauchy principal value is zero.",
+    "“A convergent improper integral is easy to compute.” Slow tails and endpoint singularities can require analytic bounds or a change of variables."
+  ],
+  "lab": {
+    "title": "Compare quadrature error and singular behavior",
+    "description": "The first table prints errors for $e^x$ on $[0,1]$ as $n$ doubles. The second compares quadrature of $x^{-p}$ on $[\\varepsilon,1]$ with its exact truncated integral. Change p and the panel count; cutoff loss and quadrature error are different quantities. Plot horizontal coordinates are $n$ and $-\\log_{10}(\\varepsilon)$, respectively.",
+    "code": "// Adjustable: try p = 0.5, 0.9, 1, or 1.2; use an even panel count.\nconst p = 0.5;\nconst panels = 512;\nif (!Number.isFinite(p) || p < 0 || p > 2) throw new Error('Use 0 <= p <= 2.');\nif (!Number.isInteger(panels) || panels < 2 || panels > 32768 || panels % 2) throw new Error('Use an even panel count from 2 to 32768.');\nfunction integrate(f, a, b, n, simpson) {\n  const h = (b-a)/n;\n  let sum = simpson ? f(a)+f(b) : (f(a)+f(b))/2;\n  for (let i=1; i<n; i++) sum += (simpson ? (i%2 ? 4 : 2) : 1)*f(a+i*h);\n  return sum*h/(simpson ? 3 : 1);\n}\nconst trap = [], simp = [];\nconst exact = Math.E-1;\nconsole.log('Smooth integral: n, trapezoid absolute error, Simpson absolute error');\nfor (let n=4; n<=128; n*=2) {\n  const et = Math.abs(integrate(Math.exp,0,1,n,false)-exact);\n  const es = Math.abs(integrate(Math.exp,0,1,n,true)-exact);\n  trap.push([n,et]); simp.push([n,es]);\n  console.log(n,et,es);\n}\nplot(trap,'e^x trapezoid error; x = panels n');\nplot(simp,'e^x Simpson error; x = panels n');\nconst truncated = [], numerical = [];\nconsole.log('Power integral: epsilon, exact truncated value, Simpson value, quadrature error');\nfor (let k=1; k<=5; k++) {\n  const epsilon = 10**(-k);\n  const value = p===1 ? -Math.log(epsilon) : -Math.expm1((1-p)*Math.log(epsilon))/(1-p);\n  const estimate = integrate(x=>x**(-p),epsilon,1,panels,true);\n  truncated.push([k,value]); numerical.push([k,estimate]);\n  console.log(epsilon,value,estimate,Math.abs(estimate-value));\n}\nplot(truncated,'Exact truncated integral; x = -log10(epsilon)');\nplot(numerical,'Simpson truncated integral; x = -log10(epsilon)');\nconsole.log(p<1 ? 'Full integral value = '+1/(1-p) : 'Full integral diverges.');\nconsole.log('For p=0.5, substitution x=t^2 gives:',integrate(t=>2,0,1,panels,true));",
+    "tasks": [
+      "Predict the error reduction factors for the smooth example before running. Compare consecutive rows with the factors four and sixteen.",
+      "Keep p = 0.5 and increase panels from 512 to 2048. Compare the power-integral rows; the smooth-function table does not use panels. Explain why reducing $\\varepsilon$ with a fixed panel count can worsen the numerical answer.",
+      "Change p to 1 and 1.2. Use the exact truncated values and the power criterion to explain why no finite limiting answer exists.",
+      "For p = 0.9, calculate the missing mass $\\varepsilon^{1-p}/(1-p)$ at $\\varepsilon=0.1$ and compare it with that row's quadrature error. Can a small quadrature error alone guarantee a small total error?"
+    ],
+    "expected": "For $n=4$, the $e^x$ trapezoidal error is about 0.0089400761 and the Simpson error about 0.0000370135. With the default p = 0.5 and panels = 512, the exact truncated values at $\\varepsilon=0.1$ and $\\varepsilon=10^{-5}$ are 1.3675444680 and 1.9936754447; the full integral is 2. The transformed constant-integrand computation returns 2. Fixed-panel Simpson values need not approach 2 as $\\varepsilon$ shrinks. At p = 0 the integrand is the constant 1, so the endpoint is proper and the full integral is 1."
+  },
+  "exercises": [
+    {
+      "question": "Compute $T_2$ and $S_2$ for $\\int_0^2 x^2\\,dx$. Explain the direction of error.",
+      "hint": "Use $f(0)=0$, $f(1)=1$, and $f(2)=4$; compare with the exact integral.",
+      "solution": "With panel width $h=1$, $T_2=(0+4)/2+1=3>8/3$, as convexity predicts. Simpson's rule gives $S_2=(0+4\\cdot1+4)/3=8/3$, exact for this quadratic.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $T_1$ for $\\int_0^1 x^2\\,dx$.",
+      "hint": "Use endpoint average times width.",
+      "solution": "One trapezoid has width $1$ and endpoint heights $0$ and $1$, so $T_1=1(0+1)/2=1/2$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $T_2$ for $\\int_0^1 x^2\\,dx$.",
+      "hint": "Use nodes $0,1/2,1$.",
+      "solution": "With panel width $1/2$ and values $0,1/4,1$, $T_2=(1/2)[(0+1)/2+1/4]=3/8$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Find $S_2$ for $\\int_0^1 x^4\\,dx$.",
+      "hint": "Use Simpson weights $1,4,1$.",
+      "solution": "With $h=1/2$ and values $0,1/16,1$, $S_2=(h/3)[0+4(1/16)+1]=5/24\\approx0.208333$. The exact integral is $1/5$.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why must composite Simpson's $n$ be even?",
+      "hint": "Panels are grouped in pairs.",
+      "solution": "Each quadratic interpolant spans two adjacent equal subintervals and three nodes. The composite rule pairs all $n$ panels, so $n$ must be even.",
+      "lesson": 1,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Using the composite trapezoidal rule and the bound $|f^{\\prime\\prime}(x)|\\le1$ on $[0,1]$, what is the least positive integer panel count that certifies an error at most $0.0001$ for $\\int_0^1\\cos x\\,dx$?",
+      "hint": "Use $|f^{\\prime\\prime}|\\le1$ and round upward.",
+      "solution": "The trapezoidal bound is $1/(12n^2)$. Requiring $1/(12n^2)\\le0.0001$ gives $n^2\\ge833.333\\ldots$, so $n=29$ is the least integer certified by this bound.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "How many equal trapezoidal panels certify error below $0.001$ for $\\int_0^1 e^x\\,dx$ using $|f^{\\prime\\prime}|\\le e$?",
+      "hint": "Solve $e/(12n^2)<0.001$.",
+      "solution": "Since $|f^{\\prime\\prime}(x)|=e^x\\le e$ on $[0,1]$, require $e/(12n^2)<0.001$, or $n^2>e/0.012\\approx226.52$. Thus $n=16$ suffices; $n=15$ does not meet this bound.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $f=e^x$ on $[0,1]$, give justified $M_2$ and $M_4$ bounds.",
+      "hint": "All derivatives of $e^x$ are $e^x$.",
+      "solution": "On $[0,1]$, both $|f^{\\prime\\prime}(x)|$ and $|f^{(4)}(x)|$ equal $e^x$, whose maximum is $e$. Thus $M_2=M_4=e$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "How many trapezoid panels guarantee error $\\le10^{-4}$ for $\\int_0^1\\cos x\\,dx$?",
+      "hint": "Use $M_2\\le1$ and the bound $1/(12n^2)$.",
+      "solution": "The bound $1/(12n^2)\\le10^{-4}$ requires $n^2\\ge1/0.0012=833.333\\ldots$. Therefore $n=29$ is the least certified panel count.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "If $T_n-I\\approx C/n^2$, estimate the fine error from $T_n$ and $T_{2n}$.",
+      "hint": "Subtract the leading $C/n^2$ error terms.",
+      "solution": "If $T_n-I\\approx C/n^2$, then $T_{2n}-I\\approx C/(4n^2)$ and $T_{2n}-T_n\\approx-3C/(4n^2)$. Thus the fine error magnitude is approximately $|T_{2n}-T_n|/3$, an estimate rather than a certificate.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why can a narrow peak make $T_n$ and $T_{2n}$ agree while both are wrong?",
+      "hint": "Consider sample locations.",
+      "solution": "If neither grid samples a narrow peak, both $T_n$ and $T_{2n}$ can omit its area. Agreement of the two sampled sums does not establish accuracy without a smoothness bound or separate check.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Determine whether $\\int_1^\\infty \\frac{1}{x^2+3}\\,dx$ converges without finding an antiderivative.",
+      "hint": "Compare with a convergent power.",
+      "solution": "For $x\\ge1$, $0\\le1/(x^2+3)\\le1/x^2$. Since $\\int_1^\\infty x^{-2}\\,dx=1$ converges, comparison proves the given integral converges and is at most $1$.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "Choose a truncation $R$ for $\\int_0^\\infty e^{-x}\\,dx$ so a total error budget of $0.00001$ leaves half for quadrature.",
+      "hint": "The exact tail beyond $R$ is $e^{-R}$.",
+      "solution": "Allocate $5\\times10^{-6}$ to the tail, so require $e^{-R}\\le5\\times10^{-6}$, or $R\\ge\\ln(200000)\\approx12.2061$. Taking $R=13$ gives tail $e^{-13}\\approx2.26033\\times10^{-6}$. A separately certified quadrature error at most $5\\times10^{-6}$ then keeps total error below $10^{-5}$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $\\int_1^\\infty x^{-1.01}\\,dx$ converge, and what is its value?",
+      "hint": "Use the $p>1$ criterion.",
+      "solution": "Since $1.01>1$, the integral converges. Evaluating the power antiderivative gives $\\int_1^\\infty x^{-1.01}\\,dx=1/(1.01-1)=100$.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Bound the tail of $\\int_1^\\infty x^{-2}\\,dx$ after $R=100$.",
+      "hint": "Use the exact p-tail formula.",
+      "solution": "The exact tail is $\\int_{100}^\\infty x^{-2}\\,dx=[-x^{-1}]_{100}^\\infty=1/100=0.01$. Hence $0.01$ is also a sharp tail bound.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $\\int_1^\\infty\\frac{1}{x^2+3}\\,dx$ converge?",
+      "hint": "Compare with $1/x^2$.",
+      "solution": "For $x\\ge1$, $0\\le1/(x^2+3)\\le1/x^2$. Since the comparison integral has a finite tail, the given integral converges.",
+      "lesson": 3,
+      "type": "Proof"
+    },
+    {
+      "question": "For $\\int_0^\\infty e^{-x}\\,dx$, what $R$ makes the tail $\\le10^{-6}$?",
+      "hint": "The tail equals $e^{-R}$.",
+      "solution": "Solve $e^{-R}\\le10^{-6}$ to get $R\\ge\\ln(10^6)\\approx13.8155$. Thus $R=14$ suffices.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Evaluate $\\int_0^1 x^{-3/4}\\,dx$ and determine the error caused by deleting $[0,0.0001]$.",
+      "hint": "Integrate first from $\\varepsilon$ to $1$.",
+      "solution": "The truncated integral is $\\int_\\varepsilon^1x^{-3/4}\\,dx=4(1-\\varepsilon^{1/4})\\to4$. The omitted area is $4\\varepsilon^{1/4}$. For $\\varepsilon=10^{-4}$ it is $0.4$, or $10\\%$ of the total.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Determine convergence and value of $\\int_0^1 x^{-3/4}\\,dx$.",
+      "hint": "Use the exponent criterion at $x=0$.",
+      "solution": "Since $-3/4>-1$, the endpoint integral converges. Its value is $[4x^{1/4}]_0^1=4$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "What area is missed by omitting $[0,10^{-4}]$ for $x^{-1/2}$?",
+      "hint": "Integrate the short interval.",
+      "solution": "Integrate the singular function over the omitted interval. An antiderivative is $2\\sqrt x$, so the area missed is $\\int_0^{10^{-4}}x^{-1/2}\\,dx=[2\\sqrt x]_0^{10^{-4}}=2\\cdot10^{-2}=0.02$. The improper limit at zero is finite.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $\\int_0^1\\frac{dx}{x}$ converge?",
+      "hint": "Use a logarithmic cutoff $\\varepsilon>0$.",
+      "solution": "The cutoff integral is $\\int_\\varepsilon^1 dx/x=-\\ln\\varepsilon\\to+\\infty$ as $\\varepsilon\\to0^+$. Hence the improper integral diverges.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $\\int_{-1}^1\\frac{1}{\\sqrt{|x|}}\\,dx$ converge?",
+      "hint": "Split at $x=0$ and test each side.",
+      "solution": "By symmetry, each one-sided integral is $\\int_0^1x^{-1/2}\\,dx=2$. Both converge, so the full improper integral equals $2+2=4$.",
+      "lesson": 4,
+      "type": "Fluency"
+    },
+    {
+      "question": "A numerical program returns zero for $\\int_{-2}^2 \\frac{1}{x}\\,dx$ by using symmetric samples. Is zero the improper integral?",
+      "hint": "Evaluate the two one-sided limits independently.",
+      "solution": "The left one-sided integral tends to $-\\infty$ and the right to $+\\infty$, so the ordinary improper integral diverges. Symmetric cutoffs cancel to principal value $0$; that imposed cancellation does not make the ordinary integral converge.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What is the ordinary improper value of $\\int_{-1}^1\\frac{dx}{x}$?",
+      "hint": "Test both one-sided limits.",
+      "solution": "The left one-sided integral tends to $-\\infty$ and the right one to $+\\infty$. Since neither is finite, the ordinary improper integral diverges.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What is the symmetric principal value of $\\int_{-1}^1\\frac{dx}{x}$?",
+      "hint": "Use equal $\\varepsilon$ holes on both sides of $0$.",
+      "solution": "For $0<\\varepsilon<1$, $\\int_{-1}^{-\\varepsilon}dx/x+\\int_\\varepsilon^1dx/x=\\ln\\varepsilon-\\ln\\varepsilon=0$. Thus the symmetric principal value is $0$.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $0<\\varepsilon<1/2$, truncate $\\int_{-1}^1 dx/x$ at $-\\varepsilon$ on the left and $2\\varepsilon$ on the right. What is the sum of the two truncated integrals?",
+      "hint": "Integrate logarithms on each side.",
+      "solution": "The left cutoff contributes $\\ln\\varepsilon$ and the right cutoff at $2\\varepsilon$ contributes $-\\ln(2\\varepsilon)$. Their sum is $\\ln\\varepsilon-\\ln(2\\varepsilon)=-\\ln2$, showing dependence on the paired cutoffs.",
+      "lesson": 5,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does $\\int_{-1}^2\\frac{dx}{x}$ still diverge despite a finite principal value?",
+      "hint": "Each one-sided integral near zero diverges.",
+      "solution": "Each one-sided integral near $0$ diverges, so the ordinary improper integral fails. Under symmetric holes, $\\int_{-1}^{-\\varepsilon}dx/x+\\int_\\varepsilon^2dx/x=\\ln2$; this is the specified principal value.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Evaluate the improper integral $\\int_0^1 x^{-2/3}\\,dx$ and use $x=u^3$ to remove its endpoint singularity.",
+      "hint": "Define an improper limit first; then use $x=u^3$ for $u>0$.",
+      "solution": "Directly, $\\lim_{\\varepsilon\\to0^+}\\int_\\varepsilon^1x^{-2/3}\\,dx=\\lim_{\\varepsilon\\to0^+}[3x^{1/3}]_\\varepsilon^1=3$. With $x=u^3$, $dx=3u^2\\,du$ and $x^{-2/3}=u^{-2}$ for $u>0$, so the transformed integrand is constant $3$ and extends continuously to $u=0$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "Show that mapping $x=1/u$ does not make $\\int_1^\\infty\\frac{dx}{x}$ converge.",
+      "hint": "Transform the differential and reverse the bounds.",
+      "solution": "With $x=1/u$, $dx=-du/u^2$ and $1/x=u$, so $dx/x=-du/u$. Bounds $x=1,\\infty$ become $u=1,0$, giving $\\int_0^1du/u$. It diverges logarithmically, just as the original does.",
+      "lesson": 6,
+      "type": "Interpretation"
+    },
+    {
+      "question": "A heat-flux model is $q(t)=1/\\sqrt t$ kilojoules per minute for $0<t\\le1$ minute. A direct closed Newton–Cotes rule cannot sample $t=0$. Transform the total heat integral to remove the endpoint singularity, evaluate it, and give the resulting units.",
+      "hint": "Set $t=u^2$ so $dt=2u\\,du$; simplify for $u>0$.",
+      "solution": "For $t=u^2$, $dt=2u\\,du$ and $q(t)\\,dt=(1/u)(2u\\,du)=2\\,du$ for $u>0$. The transformed integrand extends continuously to $u=0$, so total heat is $\\int_0^1 2\\,du=2\\,\\mathrm{kJ}$.",
+      "lesson": 6,
+      "type": "Modeling"
+    }
+  ],
+  "summary": [
+    "Trapezoidal and Simpson rules approximate bounded-interval integrals; their standard bounds require controlled derivatives.",
+    "Adaptive refinement allocates samples using local estimates that must be interpreted with their assumptions.",
+    "Improper integrals are limits; every singular endpoint and infinite tail must converge independently.",
+    "Comparison and substitutions guide computation, while total error includes excluded tails and endpoint regions.",
+    "A principal value is a specified cancellation limit and need not equal an existing ordinary improper integral."
+  ],
+  "next": "Chapter 15 transfers the questions of convergence, comparison, and neglected tails from integrals to infinite sums. The power-integral criteria become a foundation for the integral test for series."
+}

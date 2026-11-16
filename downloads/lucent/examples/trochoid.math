@@ -1,0 +1,24 @@
+# A wheel of radius radius rolls right without slipping.
+# Its center advances radius*t while it turns clockwise through t radians.
+# A pen at distance offset from the center traces the amber trochoid.
+# Set offset = radius to make a cycloid, offset < radius for a curtate curve,
+# or offset > radius for loops. The latter pen lies outside the wheel.
+# Predict when the pen's horizontal velocity radius-offset*cos(t) is negative.
+# At offset = radius, both velocity components vanish at contact: a cusp forms.
+# Drag t to inspect those moments, or play the animation for two revolutions.
+# The trace is sampled: a sharp cusp's appearance depends on display resolution.
+scene "Rolling wheel: the geometry of a trochoid";
+coordinates equal;
+domain -2.5 20;
+range -2 4;
+param radius = 1 from 0.6 to 1.4;
+param offset = 1 from 0 to 1.8;
+param t = 0 from 0 to 12.566370614359172;
+animate t from 0 to 12.566370614359172 duration 12;
+parametric trace(x) = (radius*x-offset*sin(x),radius-offset*cos(x)) from 0 to 12.566370614359172 color amber;
+parametric wheel(x) = (radius*t+radius*cos(x),radius+radius*sin(x)) from 0 to 6.283185307179586 color blue;
+segment ground from (-2.5,0) to (20,0) color white;
+segment spoke from (radius*t,radius) to (radius*t-offset*sin(t),radius-offset*cos(t)) color rose;
+point center = (radius*t,radius) color blue;
+point pen = (radius*t-offset*sin(t),radius-offset*cos(t)) color rose;
+point contact = (radius*t,0) color teal;

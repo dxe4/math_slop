@@ -1,0 +1,477 @@
+{
+  "id": "16",
+  "title": "Convergence tests and approximation",
+  "subtitle": "When does an infinite sum exist, and how many terms make its approximation trustworthy?",
+  "prerequisites": [
+    "Chapter 15: sequences, partial sums, geometric series, comparison tests and p-series.",
+    "Chapter 14: improper integrals and numerical error.",
+    "Chapter 3: finite precision, loops and absolute error."
+  ],
+  "objectives": [
+    "Distinguish absolute convergence, conditional convergence and divergence.",
+    "Apply alternating-series, ratio and root tests with their hypotheses and inconclusive cases.",
+    "Select a useful convergence test from the structure of a series.",
+    "Turn a remainder theorem into a justified computational stopping criterion.",
+    "Explain why changing the order of a conditionally convergent series can change its sum."
+  ],
+  "sections": [
+    {
+      "title": "1. Cancellation and absolute convergence",
+      "paragraphs": [
+        "A series is still a limit of partial sums: for real terms $a_n$, $S_n=a_1+\\cdots+a_n$ and $S=\\lim S_n$, if that finite limit exists. Adding negative terms creates cancellation, so the positive-term tests from Chapter 15 no longer apply directly to the signed sum. They do apply to $\\sum|a_n|$. If this new series converges, the original series is absolutely convergent. If the original converges but its absolute-value series diverges, it is conditionally convergent. These are properties of infinite tails, unaffected by changing finitely many terms.",
+        "Absolute convergence implies convergence. A proof sketch uses the Cauchy criterion: a real series converges exactly when every sufficiently late finite tail has arbitrarily small magnitude. The triangle inequality gives $|a_{m+1}+\\cdots+a_n|\\le |a_{m+1}|+\\cdots+|a_n|$. Convergence of the absolute-value series makes the right side small for all $n>m$ sufficiently large, so the signed series satisfies the same criterion. The converse fails because cancellation may control the signed tails without controlling their total magnitude.",
+        "For example, $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^2$ converges absolutely because $\\sum_{n=1}^{\\infty}1/n^2$ is a convergent $p$-series. The series $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n$ will converge by the next section, but $\\sum_{n=1}^{\\infty}1/n$ diverges, so it is conditional. In contrast, $\\sum_{n=1}^{\\infty}(-1)^n$ has terms that fail to approach zero and therefore diverges. Alternating signs alone do not imply convergence. Throughout these examples $n$ starts at $1$ and all values are dimensionless; if a series represents a physical quantity, every term and every absolute error tolerance must have that quantity’s units.",
+        "Absolute convergence is powerful because it controls every rearranged tail by a positive total. For $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^2$, the absolute tail after $N$ terms is bounded by $1/N$ through the integral test, so the signed tail has at most that magnitude as well. This bound is often less sharp than the alternating next-term estimate $1/(N+1)^2$, but it needs no cancellation to hold. It also explains why changing the order of terms leaves the total unchanged. The two bounds answer different questions: one controls arbitrary signs or rearrangements; the other exploits the original alternating order.",
+        "Conditional convergence is not “almost divergence.” It is genuine convergence of the prescribed sequence of partial sums, but its absolute magnitudes have infinite total. The alternating harmonic series has finite sum $\\ln 2$ while $\\sum_{n=1}^{\\infty}1/n$ diverges. Numerical summation in its original order can therefore approximate $\\ln 2$ with a certified next-term error, yet rearranging terms may change the sum. A practical model must specify the order in which signed contributions occur. If the terms represent chronological gains and losses, that order is part of the phenomenon rather than a presentational choice.",
+        "To classify a signed series, test absolute convergence separately. If $\\sum|a_n|$ converges, stop: the original converges absolutely. If $\\sum|a_n|$ diverges, the original may still converge conditionally or may diverge; use a signed-series test. For $\\sum_{n=1}^{\\infty}(-1)^{n-1}/\\sqrt n$, magnitudes decrease to zero, so the alternating test gives convergence, while the absolute series is a $p$-series with $p=1/2$ and diverges. For $\\sum_{n=1}^{\\infty}(-1)^n$, the magnitudes do not tend to zero, so both the term test and the alternating hypotheses fail. This decision order avoids mistaking “not absolute” for “not convergent.”",
+        "The triangle-inequality proof can be read quantitatively. If the absolute tail from $N+1$ onward is at most $\\varepsilon$, then every finite signed block after $N$ has magnitude at most $\\varepsilon$, and the eventual signed remainder has magnitude at most $\\varepsilon$. This is a direct truncation certificate. It works for any arrangement of the same late terms as long as their absolute total is bounded. Conditional convergence lacks such an order-independent absolute budget, which is why it needs more delicate cancellation estimates and why naïve parallel reductions can change the apparent result.",
+        "The distinction between absolute and conditional convergence also affects algebra with two series. Absolutely convergent series can be combined and rearranged with strong control of tails, while a conditional sum depends on its prescribed order. This does not mean ordinary linearity fails for two convergent series in their original synchronized order: $\\sum_{n=1}^{\\infty}(a_n+b_n)=\\sum_{n=1}^{\\infty}a_n+\\sum_{n=1}^{\\infty}b_n$ follows from finite partial-sum linearity and limits. The danger arises when changing the order of infinitely many signed terms or assigning values to divergent pieces. State the operation being performed before using a familiar finite-sum law in an infinite setting. The same distinction matters whenever infinite signed contributions appear in a physical model."
+      ],
+      "formula": "Absolute convergence: ∑|aₙ| < ∞. Conditional convergence: ∑aₙ converges but ∑|aₙ| diverges.",
+      "formulaTex": "\\begin{aligned}\\sum_{n=1}^{\\infty}|a_n|<\\infty&\\quad\\Longrightarrow\\quad\\sum_{n=1}^{\\infty}a_n\\text{ converges absolutely},\\\\ \\sum_{n=1}^{\\infty}a_n\\text{ converges},\\quad\\sum_{n=1}^{\\infty}|a_n|=\\infty&\\quad\\Longrightarrow\\quad\\sum_{n=1}^{\\infty}a_n\\text{ converges conditionally}.\\end{aligned}"
+    },
+    {
+      "title": "2. Alternating sums trap their limit",
+      "paragraphs": [
+        "Let $b_n\\ge0$ decrease monotonically to zero. Then $\\sum(-1)^{n-1}b_n$ converges. It suffices for these conditions to hold from some index onward, since a finite prefix does not affect convergence. Both requirements matter: a nonzero limiting magnitude fails the term test, while magnitudes that approach zero without suitable control need not yield a convergent alternating sum. Check monotonicity algebraically or with a derivative, rather than inferring it from a short plot.",
+        "A proof sketch reveals the error estimate. With the first term positive, even partial sums increase because $S_{2k+2}-S_{2k}=b_{2k+1}-b_{2k+2}\\ge0$. Odd partial sums decrease, and each even partial sum lies below the neighboring odd ones. They are bounded monotone sequences. Their separation is $b_{2k+1}$, which tends to zero, so their limits agree. Thus the infinite sum is trapped between consecutive partial sums; successive additions approach it from opposite sides.",
+        "Consequently, provided the omitted magnitudes $b_{N+1},b_{N+2},\\ldots$ are nonnegative and nonincreasing to zero, the remainder after $N$ terms has magnitude at most $b_{N+1}$ and, unless zero, the sign of the first omitted term. If monotonicity begins only eventually, choose $N$ so that the whole omitted tail satisfies this condition. For the alternating harmonic series, $N=99$ gives an error at most $1/100=0.01$. This is a sufficient guarantee, not a claim that the actual error is exactly $0.01$ or that $99$ is the fewest terms giving that accuracy. A guarantee for a rounded decimal answer also requires knowing that the whole enclosing interval rounds the same way; merely counting printed digits is not a proof.",
+        "The alternating harmonic sum equals $\\ln 2$. One way to establish this without assuming a power-series theorem is to integrate the finite identity $\\frac1{1+x}=\\sum_{k=0}^{N-1}(-x)^k+\\frac{(-x)^N}{1+x}$ on $[0,1]$. The polynomial integrates to $S_N=\\sum_{k=0}^{N-1}\\frac{(-1)^k}{k+1}$, while the remaining integral has magnitude at most $\\int_0^1 x^N\\,dx=1/(N+1)$, which vanishes. The left side integrates to $\\ln 2$. This supplies an independent reference for the lab.",
+        "The alternating remainder theorem gives both magnitude and direction. Whenever the omitted tail satisfies its hypotheses, with positive first term, odd partial sums overestimate and even partial sums underestimate the limit. If $N$ is even, the next omitted term is positive, so $0\\le S-S_N\\le b_{N+1}$; if $N$ is odd, $-b_{N+1}\\le S-S_N\\le0$. This interval is stronger than an unsigned error statement. For $\\ln 2$, $S_{10}$ is below the true value by at most $1/11$. A certified decimal may require an interval narrower than the rounding cell, not simply a small-looking next term.",
+        "For $b_n=1/n^2$ and tolerance $10^{-4}$, require $1/(N+1)^2\\le10^{-4}$. Thus $N+1\\ge100$ and $N=99$ suffices for a non-strict bound. If the task says error strictly below $10^{-4}$, require $N+1>100$, so $N\\ge100$. The parity of $N$ tells the sign of the error, but not its exact magnitude. This threshold example makes the relation between mathematical inequalities and integer stopping rules explicit. A program should use the same strictness convention as the reported guarantee.",
+        "Decreasing magnitudes are a real hypothesis, even when the prescribed plus-minus pattern holds. For $k\\ge1$, set $b_{2k-1}=k^{-1/2}$ and $b_{2k}=k^{-1/2}-k^{-1}$. Every $b_n$ is nonnegative and $b_n\\to0$; $b_2=0$, while all later magnitudes are positive, so the nonzero tail has strict alternating signs. Yet each signed pair is $b_{2k-1}-b_{2k}=1/k$, so the even partial sums equal the divergent harmonic partial sums. The magnitudes rise from $b_{2k}$ to $b_{2k+1}$: indeed $k^{-1/2}-(k+1)^{-1/2}<1/k$. Thus the series does not converge, and a next-term bound cannot be invoked. If monotonicity begins only after a finite prefix, apply the alternating theorem to that tail instead.",
+        "For a proved alternating tail, the enclosing partial sums give a practical interval, not just a decimal. Compute two neighboring sums and check whether that whole interval lies inside one rounding cell. If it straddles a rounding boundary, calculate more terms even when the next-term bound looks small. This uses the signed enclosure proved above; the nonmonotone counterexample shows why a short plotted pattern cannot supply it.",
+        "The alternating bound can be inefficient near a desired precision even though it is rigorous. For $\\ln 2$, the next-term bound after $N$ terms is $1/(N+1)$, so guaranteeing absolute error below $10^{-6}$ needs one million terms under this bound: $N=999{,}999$ gives equality, whereas $N=1{,}000{,}000$ gives a strict bound. A different representation or an acceleration method may reach the same precision with far fewer evaluations. Yet acceleration introduces its own proof obligations; a fast decimal without a valid tail estimate is not automatically preferable to a slower certified result. The chapter’s theorem teaches a safe baseline and clarifies what a more advanced numerical method must improve.",
+        "Alternation is one way for signed terms to cancel. A broader method studies $A_n=\\sum_{j=1}^n c_j$, the accumulated coefficient sum, before weighting each $c_n$ by a decreasing $w_n$. The individual coefficients can be bounded while their accumulated sums drift without bound. Conversely, bounded accumulated sums need not converge: a periodic pattern can keep revisiting several values. Summation by parts turns this bounded cancellation into convergence of $\\sum c_nw_n$ when the nonnegative weights decrease to zero.",
+        "The argument starts with a finite identity, so no rearrangement of an infinite conditionally convergent series is needed. Replace $c_n$ by $A_n-A_{n-1}$ and shift one finite sum. The result combines a boundary term with $A_n(w_n-w_{n+1})$. When the weights are nonincreasing, these successive weight differences are nonnegative and their total telescopes. Bounded $A_n$ therefore controls an absolutely convergent difference-weighted series, while the boundary term tends to zero.",
+        "A useful remainder interval retains the actual value of $A_N$. If $L\\le A_n\\le U$, the interval is $(L-A_N)w_{N+1}\\le R_N\\le(U-A_N)w_{N+1}$. Different positions within a cancellation cycle can give different signed information. If only $|A_n|\\le C$ is known, the general consequence is $|R_N|\\le2Cw_{N+1}$; a bound of $Cw_{N+1}$ needs additional information. The interval is a certificate, not a claim of the exact error or the best possible bound for every particular sequence.",
+        "The two optional tasks change the cancellation mechanism while keeping all terms dimensionless. The first period has bounded accumulated sums even though its signs do not alternate. In the second task, a fixed change in every third coefficient leaves the coefficients bounded, the sign pattern unchanged and the weighted terms approaching zero, but introduces a persistent drift in their accumulated sums. This changes the term values; it is not a rearrangement of one series. The ordinary sequence of partial sums remains the definition throughout."
+      ],
+      "formula": "Rₙ = S − Sₙ; under the alternating-series hypotheses, |Rₙ| ≤ bₙ₊₁.",
+      "formulaTex": "\\begin{gathered}a_n=(-1)^{n-1}b_n,\\qquad b_n\\ge0,\\quad b_n\\downarrow0,\\\\ S_N=\\sum_{n=1}^N a_n,\\qquad R_N=S-S_N,\\qquad |R_N|\\le b_{N+1}.\\end{gathered}",
+      "theorems": [
+        {
+          "title": "The alternating-series remainder has a direction",
+          "statement": "If $b_n$ decreases to zero and is nonnegative, the series $b_1-b_2+b_3-\\cdots$ converges, and the error after $N$ terms has the sign of the first omitted term and magnitude at most $b_{N+1}$.",
+          "equationTex": "|S-S_N|\\le b_{N+1}",
+          "proof": [
+            "Even partial sums increase: $S_{2n+2}-S_{2n}=b_{2n+1}-b_{2n+2}\\ge0$. Odd partial sums decrease: $S_{2n+3}-S_{2n+1}=-b_{2n+2}+b_{2n+3}\\le0$. Every even partial sum is below its neighboring odd partial sum. The two monotone sequences are bounded by one another and therefore have limits.",
+            "The gap $S_{2n+1}-S_{2n}=b_{2n+1}$ tends to zero, so the two limits are the same number $S$. It lies between consecutive partial sums. Consequently the distance from $S_N$ to $S$ is no larger than the next term magnitude $b_{N+1}$. An odd partial sum of this plus-first series lies above $S$; an even one lies below. This is stronger information than an unsigned decimal approximation.",
+            "If the magnitudes fail to decrease, the alternating appearance of plus and minus signs alone does not justify the bound. For example, terms that stay near one cannot form a convergent series because their terms do not tend to zero. Check the hypotheses on the actual $b_n$ before choosing a truncation count."
+          ]
+        },
+        {
+          "title": "Bounded coefficient partial sums control a decreasing weighted tail",
+          "statement": "Let $c_n$ be real and set $A_0=0$, $A_n=\\sum_{j=1}^n c_j$. Suppose finite constants $L,U$ satisfy $L\\le A_n\\le U$ for every $n\\ge1$. Let $w_n\\ge0$ be nonincreasing with $w_n\\to0$. Then $\\sum_{n=1}^\\infty c_nw_n$ converges. For every integer $N\\ge0$, its remainder $R_N$ satisfies the interval below. The finite identity holds for all integers $M>N\\ge0$.",
+          "equationTex": "\\begin{gathered}\n\\sum_{n=N+1}^{M}c_nw_n\n=A_Mw_{M+1}-A_Nw_{N+1}\\\\\n\\qquad+\\sum_{n=N+1}^{M}A_n(w_n-w_{n+1}),\\\\\n(L-A_N)w_{N+1}\\le R_N\\le(U-A_N)w_{N+1}.\n\\end{gathered}",
+          "proof": [
+            "Use $c_n=A_n-A_{n-1}$ and expand the left side as the difference of two finite sums. Shift the index in the second sum and retain both endpoint terms. This gives the displayed identity. It uses only finite algebra and therefore does not presume convergence or permit a rearrangement of infinitely many terms.",
+            "Put $K=\\max(|L|,|U|)$. Since $w_n-w_{n+1}\\ge0$, the absolute values of the difference-weighted terms are bounded by $K(w_n-w_{n+1})$. Their sum from $N+1$ through $M$ is at most $K(w_{N+1}-w_{M+1})\\le Kw_{N+1}$. Comparison with this telescoping positive series proves absolute convergence. Also $|A_Mw_{M+1}|\\le Kw_{M+1}\\to0$. Taking $N=0$ in the finite identity therefore proves convergence of the original weighted series.",
+            "For a general $N$, take $M\\to\\infty$ to get $R_N=-A_Nw_{N+1}+\\sum_{n=N+1}^{\\infty}A_n(w_n-w_{n+1})$. The nonnegative differences sum to $w_{N+1}$. Bounding each $A_n$ between $L$ and $U$ gives the two endpoints claimed. If $w_{N+1}=0$, all later weights vanish and the interval gives the exact zero remainder.",
+            "With only $|A_n|\\le C$, choose $L=-C$ and $U=C$; then both remainder endpoints have magnitude at most $2Cw_{N+1}$. The factor cannot generally be replaced by one: take $c=(-1,2,0,\\ldots)$ and $w=(1,1,0,\\ldots)$. All $|A_n|\\le1$, but $R_1=2$ and $w_2=1$. The sharper phase intervals in the first task use more information than a single absolute bound."
+          ]
+        }
+      ],
+      "investigation": {
+        "id": "bounded-partial-sums",
+        "title": "Cancellation cycles and persistent periodic bias",
+        "introduction": "All coefficients and weights here are exact dimensionless model values, and the term order stays fixed. Write $H_0=0$, $H_m=\\sum_{k=1}^m1/k$ for $m\\ge1$, and $S_N=\\sum_{n=1}^Nc_n/n$. Derive finite identities before taking limits. The second task changes coefficient values rather than reordering the first task's terms.",
+        "tasks": [
+          {
+            "title": "A three-term cycle beyond alternating signs",
+            "question": "Let $c_n$ repeat the period $(1,1,-2)$ and take $w_n=1/n$. Prove that $\\sum_{n=1}^\\infty c_n/n$ converges conditionally and find its sum without subtracting divergent infinite series. Derive the theorem's remainder interval separately for $N\\equiv0,1,2\\pmod3$. Which intervals determine a nonnegative or nonpositive remainder, and what sign information is missing from the phase-one interval?",
+            "hint": "Calculate $A_N$ over one coefficient cycle. For $3m$ terms, start with $H_{3m}$ and adjust its terms at indices divisible by three. Interpret the resulting finite harmonic-number difference as a Riemann sum on $[1,3]$. Apply $L=0$, $U=2$ in the proved tail interval.",
+            "solution": "The accumulated coefficient sums cycle through $1,2,0$, so $A_N=N\\bmod3$ and the theorem proves convergence. Since $|c_n|\\ge1$, the absolute-value series dominates the divergent harmonic series. Thus the convergence is conditional.\n\nFor $m\\ge1$, finite algebra gives $S_{3m}=H_{3m}-H_m=\\frac1m\\sum_{j=m+1}^{3m}1/(j/m)$. This is a right-endpoint Riemann sum for $\\int_1^3dt/t=\\ln3$. The one or two additional terms after $3m$ tend to zero, so the entire sequence of partial sums has limit $\\ln3$. No value is assigned to a difference of divergent infinite sums.\n\nThe theorem gives $R_N\\in[-A_N/(N+1),(2-A_N)/(N+1)]$. Thus phase zero gives $[0,2/(N+1)]$, phase one gives $[-1/(N+1),1/(N+1)]$, and phase two gives $[-2/(N+1),0]$. The first and third certify nonnegative and nonpositive remainders respectively. The phase-one interval alone does not determine the sign. These are proved enclosures, not sharp-error claims for this fixed periodic sequence."
+          },
+          {
+            "title": "Change the period by a fixed small bias",
+            "question": "Fix one real $\\epsilon$ with $|\\epsilon|\\le1/2$ and replace the coefficient period by $(1,1,-2+\\epsilon)$, keeping $w_n=1/n$ and the original order. Let $A_N^{(\\epsilon)}$ and $S_N^{(\\epsilon)}$ denote the coefficient and weighted partial sums. Derive exact relations to the first task for every $N\\ge0$, then classify the whole infinite series for negative, zero and positive $\\epsilon$. Explain why bounded coefficients, the unchanged sign pattern and terms tending to zero do not settle convergence.",
+            "hint": "Among the first $N$ terms, precisely $\\lfloor N/3\\rfloor$ coefficients change, at indices $3k$. The coefficient change is $\\epsilon$, while its weighted contribution is $\\epsilon/(3k)$. Keep $\\epsilon$ fixed across all cycles and take limits only after the finite correction has been summed.",
+            "solution": "Put $m=\\lfloor N/3\\rfloor$. For every $N\\ge0$, $A_N^{(\\epsilon)}=A_N+\\epsilon m$ and $S_N^{(\\epsilon)}=S_N+(\\epsilon/3)H_m$, with $H_0=0$. These are finite identities, including unfinished cycles.\n\nIf $\\epsilon=0$, the first task gives conditional convergence to $\\ln3$. If $\\epsilon>0$, then $H_m\\to+\\infty$ while $S_N\\to\\ln3$, so the entire sequence $S_N^{(\\epsilon)}$ tends to $+\\infty$. If $\\epsilon<0$, it tends to $-\\infty$. This is a statement about all partial sums, not only the subsequence ending at completed cycles.\n\nFor the stipulated range, the third coefficient stays between $-5/2$ and $-3/2$, so the sign pattern stays two positive terms followed by one negative term. Every coefficient has magnitude at most $5/2$ and every weighted term tends to zero. Nevertheless $A_{3m}^{(\\epsilon)}=\\epsilon m$ is unbounded unless $\\epsilon=0$. The failed hypothesis is bounded accumulated coefficient sums. An arbitrarily small fixed nonzero bias persists through infinitely many cycles. Failure of this sufficient hypothesis alone would not prove divergence; here the exact harmonic correction does."
+          }
+        ]
+      }
+    },
+    {
+      "title": "3. Ratio and root tests measure geometric decay",
+      "paragraphs": [
+        "The ratio test examines $L=\\lim|a_{n+1}/a_n|$, provided the terms are nonzero eventually and the limit exists, possibly as infinity. If $L<1$, the series converges absolutely. If $L>1$, including infinity, it diverges because its terms cannot tend to zero. If $L=1$, the test gives no conclusion. Factorials and products often simplify in a ratio, making this test much more useful than direct comparison for those expressions.",
+        "For the ratio-test case $L<1$, choose $L<q<1$. Beyond one index every ratio satisfies $|a_{n+1}|\\le q|a_n|$, so the magnitudes are bounded by a geometric tail. If the bound holds from the first omitted term onward, the tail after $N$ terms is at most $|a_{N+1}|/(1-q)$. For $L>1$, choose $1<q<L$; eventually $|a_{n+1}|\\ge q|a_n|$. A nonzero term then has later magnitudes at least $|a_K|q^{n-K}$, which cannot tend to zero, so the series diverges by the term test. The same argument works when $L=\\infty$ by choosing any fixed $q>1$. Neither a ratio limit nor finitely many measured ratios is automatically a valid finite-index tail bound.",
+        "The root test instead examines $L=\\lim_{n\\to\\infty}|a_n|^{1/n}$. Again $L<1$ gives absolute convergence, $L>1$ gives divergence, and $L=1$ is inconclusive. Powers involving $n$ in the exponent are natural candidates: for $a_n=\\left(\\frac{n}{2n+1}\\right)^n$, the $n$th root tends to $1/2$, so the series converges. The same geometric comparison explains the result. Root tests can handle some sequences with zero terms that make a ratio undefined. More general versions use a limit superior, but here we apply the stated limit version only when its limit exists.",
+        "To justify the root test directly, if $L<1$, choose $L<q<1$. Eventually $|a_n|^{1/n}\\le q$, so $|a_n|\\le q^n$ and geometric comparison proves absolute convergence. If $L>1$, choose $1<q<L$. Eventually $|a_n|\\ge q^n$, so the terms cannot tend to zero. The limit $L=1$ supplies neither comparison.",
+        "The boundary $L=1$ is a genuine loss of information. Both $\\sum_{n=1}^{\\infty}1/n$ and $\\sum_{n=1}^{\\infty}1/n^2$ have ratio and root limits equal to $1$, yet the first diverges and the second converges. Neither test distinguishes the alternating harmonic series from its divergent absolute-value series at that boundary. Return to comparison, an integral test, or alternating cancellation. An inconclusive test is not evidence for either answer.",
+        "The ratio test is often decisive for factorial terms. For $a_n=n!/3^n$, the ratio $a_{n+1}/a_n=(n+1)/3$ grows without bound. In particular the terms eventually increase instead of tending to zero, so the series diverges. For $a_n=3^n/n!$, the ratio is $a_{n+1}/a_n=3/(n+1)\\to0$, and the series converges absolutely. These two expressions contain the same ingredients but in opposite positions. Writing the ratio carefully is more reliable than a vague claim that “factorials grow faster” without checking which quantity is in the numerator.",
+        "A ratio limit below one proves eventual geometric domination, but the exact limit is not usually a valid bound at every finite index. For $a_n=n/2^n$, the ratio $a_{n+1}/a_n=(n+1)/(2n)$ tends to $1/2$ but exceeds $1/2$ for every $n$. Starting after $n=10$, one may use a safe $q=0.6$ because $(n+1)/(2n)\\le0.55$ for $n\\ge10$. Then a positive tail beginning with $a_{11}$ is bounded by $a_{11}/(1-0.6)$. A sharper exact tail can be derived by differentiating a finite geometric sum, but a proven $q$ already certifies a useful error.",
+        "For $a_n=[n/(n+1)]^n$, the root limit is $1$, so the root test is inconclusive. But $a_n=(1+1/n)^{-n}\\to e^{-1}\\ne0$; the term test proves divergence. This contrasts with the earlier $[n/(2n+1)]^n$, whose root limit is $1/2$ and proves absolute convergence. The conclusion at $L=1$ must come from another argument, not from naming the root test again.",
+        "If a sequence has occasional zero terms, the ratio $a_{n+1}/a_n$ may be undefined infinitely often. The root test can still apply to $|a_n|^{1/n}$ if its limit exists. Conversely, oscillating $n$th-root values may prevent that ordinary limit even when a limsup version could settle the question. The tests stated in this chapter have explicit hypotheses; do not silently substitute a handful of numerical ratios for a limit. In many elementary examples, direct comparison is shorter and clearer than forcing a test whose limit is awkward.",
+        "Ratio and root tests are often described as measuring exponential decay. If their limiting value is $q<1$, then beyond some index terms are bounded by a geometric pattern with ratio slightly larger than $q$ but still below $1$. This eventually overwhelms polynomial factors. If $q>1$, terms fail to shrink to zero. At $q=1$ the exponential scale is neutral; finer polynomial or logarithmic behavior decides convergence. The $p$-series pair $1/n$ and $1/n^2$ is the canonical warning. A limit of $1$ means the selected test lacks resolution, not that the terms are “almost convergent.”"
+      ],
+      "formula": "L < 1 ⇒ absolute convergence; L > 1 ⇒ divergence; L = 1 ⇒ no conclusion (ratio or root test).",
+      "formulaTex": "\\begin{gathered}\\text{Either }L=\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|\\quad(a_n\\ne0\\text{ eventually}),\\\\ \\text{or }L=\\lim_{n\\to\\infty}|a_n|^{1/n};\\qquad\\text{the chosen limit must exist.}\\\\ L<1\\Longrightarrow\\sum a_n\\text{ converges absolutely},\\\\ L>1\\Longrightarrow\\sum a_n\\text{ diverges},\\qquad L=1\\Longrightarrow\\text{no conclusion}.\\end{gathered}"
+    },
+    {
+      "title": "4. Order matters when cancellation does the work",
+      "paragraphs": [
+        "For a finite sum, reordering terms does not change the answer. The corresponding infinite statement is safe for an absolutely convergent real series: every rearrangement containing each term exactly once converges to the same sum. A proof idea is to choose a finite group containing almost all the absolute mass. Once a rearrangement has included that group, all remaining contributions have small total magnitude, whatever order they appear in.",
+        "Conditional convergence behaves differently. The positive terms of a conditionally convergent real series have infinite total sum, and the negative terms have total sum $-\\infty$. Otherwise the convergence of their difference would force both totals finite and hence absolute convergence. To approach any chosen real target, add unused positive terms until crossing above it, then unused negative terms until crossing below it, and repeat. Each crossing uses the next available terms of that sign. Their magnitudes tend to zero, so the overshoots shrink to zero. This outlines why a suitable rearrangement can converge to the chosen target.",
+        "This is not permission to manipulate divergent quantities as ordinary numbers. Writing “infinity minus infinity” does not define a sum. Nor does the theorem say every rearrangement changes a conditional sum. The original order is part of the definition, and particular rearrangements may preserve the value or fail to converge. Regrouping consecutive terms without changing their order preserves the sum of an already convergent series; reordering terms is a different operation. Numerical parallel summation also changes rounding behavior even for finite sums, a separate issue from the infinite rearrangement theorem.",
+        "Why does absolute convergence permit arbitrary rearrangement? Given $\\varepsilon>0$, choose a finite prefix whose omitted absolute tail is below $\\varepsilon$. A rearrangement eventually includes every term in that prefix, though perhaps in a different order. From then on, its partial sum differs from the original total only by terms taken from the small absolute tail, with total magnitude below a controlled multiple of $\\varepsilon$. The argument uses the ability to make the total absolute mass outside a finite set small. A conditionally convergent series does not provide that protection because its positive and negative masses are individually infinite.",
+        "The alternating harmonic series illustrates the danger concretely. Its original order is $1-1/2+1/3-1/4+\\cdots$ and converges to $\\ln 2$. A new order taking two unused positive reciprocal terms for each unused negative term still uses every term but changes how quickly positive mass accumulates relative to negative mass; it can converge to a different value. The rigorous rearrangement theorem constructs orders for any chosen real target. One should not infer that finite partial sums with the same set of terms differ mathematically: the issue is which growing finite sets define the limit. The new value can be calculated. Let $H_m=\\sum_{j=1}^m1/j$. After $k$ groups of two unused positive terms and one unused negative term, $T_k=H_{4k}-\\frac12H_{2k}-\\frac12H_k=(H_{4k}-H_{2k})+\\frac12(H_{2k}-H_k)$. Integral comparison on the intervals $[2k,4k]$ and $[k,2k]$ shows that each parenthesized difference tends to $\\ln2$. Thus $T_k\\to\\frac32\\ln2$, whereas the original order tends to $\\ln2$.",
+        "Grouping must preserve the original sequence of partial sums in an appropriate sense. If a convergent series is grouped into consecutive finite blocks, the grouped partial sums form a subsequence of the original partial sums and hence have the same limit. But expanding brackets or reordering terms inside an infinite formal expression may define a different sequence of partial sums. For example, writing $1-1+1-1+\\cdots$ as $(1-1)+(1-1)+\\cdots$ gives zeros while writing $1+(-1+1)+(-1+1)+\\cdots$ gives ones; the original series diverges, so neither grouping creates an ordinary sum. First prove convergence before relying on regrouping.",
+        "In numerical work, finite sums are mathematically order-independent but floating-point rounding is not associative. Summing tiny positive and negative values in different orders can change the last bits, even for an absolutely convergent target. This is separate from the theorem that a conditionally convergent infinite series can change its real limit under rearrangement. A careful computation records the mathematical order, a tail bound, and numerical sensitivity. The first establishes which sum is intended; the second controls truncation; the third addresses machine arithmetic.",
+        "The rearrangement result for conditional real series assumes every original term appears exactly once in the new order. Omitting all negative terms, repeating selected positive terms, or changing term values is a different construction. The proof's alternating overshoot procedure uses unused positive terms and unused negative terms in sequence, so it eventually consumes each side. The overshoots shrink because individual terms tend to zero, while each side has unlimited total mass to cross the target again. These details explain both the power and the precise scope of the theorem."
+      ]
+    },
+    {
+      "title": "5. From choosing a test to choosing a tolerance",
+      "paragraphs": [
+        "Begin with the term test: if $a_n$ does not tend to zero, stop and report divergence. Next inspect structure. Geometric and telescoping forms deserve direct treatment. Positive terms resembling powers suggest comparison or the integral test. Alternating signs suggest checking decreasing magnitudes and their limit, while also testing absolute convergence separately. Factorials suggest ratios; an entire expression raised to $n$ suggests roots. This is a decision strategy, not a rigid sequence of mandatory tests.",
+        "To approximate a convergent sum, convergence alone is insufficient: obtain a quantitative tail bound $B_N$. For an absolute tolerance $\\varepsilon>0$, stop only when $B_N\\le\\varepsilon$, or report that the computation budget ended before certification. An alternating next-term estimate applies only with its hypotheses; a positive series requires a suitable integral or geometric tail bound. The tempting rule “stop when the current term is small” is invalid in general. Harmonic terms become arbitrarily small even though their accumulated sum diverges.",
+        "There are two errors to separate. A remainder theorem bounds truncation error in exact arithmetic. The computer also incurs representation and summation errors. At ordinary tolerances the latter may be much smaller, but requesting an extremely small $\\varepsilon$ does not make floating-point arithmetic exact. Repeated runs, compensated summation, and higher precision can investigate numerical sensitivity; rigorous floating-point guarantees require additional error analysis. Relative tolerances also need care near a zero sum, where relative error is undefined or unstable. A dimensionless relative tolerance does not replace a physically meaningful absolute tolerance.",
+        "The lab compares $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^p$ with $\\sum_{n=1}^{\\infty}1/n^p$ for $p>0$. The signed series converges for every such $p$; it is conditional for $0<p\\le1$ and absolute for $p>1$. At $p=0$ the terms do not vanish, so the code rejects that endpoint instead of applying an invalid estimate. The displayed partial sums illustrate these claims over a finite interval; only the tests establish the infinite conclusions.",
+        "Before the mixed transfer, check three elementary choices independently. For positive $1/(n^2+1)$, comparison with $1/n^2$ works while a ratio limit of $1$ is silent. For $n!/3^n$, the ratio $(n+1)/3\\to\\infty$ proves that terms fail to vanish. For $(-1)^{n-1}/n$, verify decreasing magnitudes and limit zero, then compare absolute values with the divergent harmonic series. State the hypothesis and decisive inequality or limit, not only a test name. Next attempt the existing Problem 16.34 unaided as a mixed choice across alternating, factorial, and outer-$n$th-power structures; it is linked below as an extension after the basic lesson checks. Return to this method list only after committing your own three classifications.",
+        "A tolerance should be tied to the quantity being approximated. If a series models energy in joules, an absolute error of $0.01\\,\\mathrm{J}$ has clear meaning. A relative tolerance of $1\\%$ requires a nonzero reference magnitude; near a sum of zero, relative error can be arbitrarily large or undefined despite tiny absolute error. In a signed series with cancellation, the total may be much smaller than individual terms. Choose the metric before computing $N$, then use a theorem that bounds that metric. Printing six decimal places does not establish six correct decimals.",
+        "The first omitted term is a tail bound only in special structures. For a positive geometric series with ratio $0\\le r<1$, the tail is the first omitted term divided by $1-r$; this exceeds that term unless $r=0$. For an alternating decreasing series, cancellation traps the tail within the first omitted magnitude. For a positive $p$-series, an integral estimate bounds the entire tail. The same numerical stopping line can be valid in one case and false in another. A robust summation routine should accept a tail-bound function or theorem-specific certificate rather than assuming every series behaves like an alternating one.",
+        "When a signed partial sum cancels large contributions, compensated summation or higher precision can expose sensitivity; neither proves a floating-point error bound. Report the mathematical tail certificate separately from representation and summation error. This distinction matters even when the exact truncation error is tiny, because a numerical partial sum can still be inaccurate.",
+        "A theorem-specific stopping rule should report the index convention. If $S_N=\\sum_{n=1}^{N}a_n$ includes terms indexed $n=1$ through $N$, the first omitted term is indexed $N+1$. For a series starting at $n=0$, the same phrase “after $N$ terms” ends at $n=N-1$. Confusing number of terms with final index is a common off-by-one source in code and hand calculations. Write the partial sum explicitly in the answer, then evaluate the remainder formula at its correct first omitted index. The difference can matter exactly at a tolerance threshold."
+      ]
+    },
+    {
+      "title": "Choosing a truncation from a proved tail bound",
+      "paragraphs": [
+        "Suppose we need the positive-series sum $\\sum_{n=1}^{\\infty}\\frac1{n^2}$ within $0.001$ using a partial sum. Since $f(x)=1/x^2$ is positive and decreasing for $x\\ge1$, the integral-test remainder satisfies $\\int_{N+1}^{\\infty}\\frac{dx}{x^2}\\le R_N\\le\\int_N^{\\infty}\\frac{dx}{x^2}$. Thus $1/(N+1)\\le R_N\\le1/N$. Taking $N=1000$ certifies error at most $0.001$, even though the exact sum is not needed for this decision.",
+        "Now consider the alternating series $\\sum_{n=1}^{\\infty}(-1)^{n+1}/n^2$. Its term magnitudes decrease to zero, so the alternating-series remainder after $N$ terms has magnitude at most $1/(N+1)^2$. $N=31$ gives $1/32^2\\approx0.0009766$, already below $0.001$. These are different sums; the comparison illustrates how sign structure can greatly reduce a certified truncation budget when the alternating-test hypotheses hold.",
+        "The positive-series bound brackets the unknown answer: $S_N+1/(N+1)\\le S\\le S_N+1/N$. The alternating partial sum comes with a direction as well: an odd partial sum lies above its limit and an even one below for this starting sign pattern. Reporting the sign or interval is more informative than printing a decimal with unexplained digits.",
+        "Neither remainder rule is universal. If terms do not decrease toward zero, the alternating bound is unavailable. If $f$ fails to be positive and decreasing, the simple integral-test rectangle comparison needs replacement. A numerical stopping rule should cite the hypotheses that make its error certificate valid.",
+        "The positive $p=2$ series gives a one-sided enclosure because every omitted term is positive. With $N$ terms, $S_N+1/(N+1)\\le S\\le S_N+1/N$. At $N=1000$, this interval has width about one millionth, even though the simpler statement “error $\\le0.001$” sounds much weaker. The lower and upper tail estimates can therefore certify more digits than either bound alone might suggest. The exact sum is $\\pi^2/6$, but the enclosure does not require that identity. This is valuable when an exact closed form is unknown.",
+        "For the alternating $p=2$ series, $N=31$ yields next-term magnitude $1/32^2\\approx0.00097656$ and an odd partial sum above the limit. The certified interval is $[S_{31}-1/32^2,S_{31}]$. If instead $N=32$, the partial sum lies below the limit and the next-term bound is $1/33^2$. A numerical report can choose whichever parity provides a convenient one-sided guarantee. The error decreases roughly like the next term here, but the bound follows from monotonicity, not from a graph of a few partial sums.",
+        "To find the smallest $N$ promised by a particular bound, solve the inequality before rounding to an integer. For the positive series with upper bound $1/N$, error at most $0.0005$ requires $N\\ge2000$. For the alternating squared series with bound $1/(N+1)^2$, the same tolerance requires $N+1\\ge\\sqrt{2000}\\approx44.72$, so $N\\ge44$. These are sufficient counts from the chosen theorems; actual error may fall below the tolerance earlier. A claim of minimal actual term count would need a sharper analysis of the true remainder.",
+        "A certificate should survive a change in display format. If an answer is rounded to three decimal places, verify that every value in its certified interval rounds to the same three-place number. An error bound of $0.0005$ around a displayed center can straddle a rounding threshold, so the printed digits may not be guaranteed even when the absolute error target is met. Reporting the interval or a one-sided bound avoids ambiguity. This is a simple but important link between mathematical error estimates and honest numerical communication.",
+        "When comparing two algorithms, use the same requested error and account for each method’s assumptions. The positive $1/n^2$ sum needs $2000$ terms under the upper integral bound for error at most $0.0005$; its alternating counterpart needs only $44$ under the next-term bound. This does not say alternation makes every computation forty-five times easier: the sums are different and the bounds have different sharpness. It says that known sign structure can certify cancellation of a tail that would otherwise have to be bounded by total positive mass. The distinction is mathematical and practical."
+      ],
+      "formula": "For Σ1/n², 1/(N+1)≤R_N≤1/N; for Σ(−1)^(n+1)/n², |R_N|≤1/(N+1)².",
+      "formulaTex": "\\begin{aligned}R_N^{\\mathrm{pos}}&=\\sum_{n=N+1}^\\infty\\frac1{n^2},&\\frac1{N+1}&\\le R_N^{\\mathrm{pos}}\\le\\frac1N,\\\\ R_N^{\\mathrm{alt}}&=\\sum_{n=N+1}^\\infty\\frac{(-1)^{n+1}}{n^2},&|R_N^{\\mathrm{alt}}|&\\le\\frac1{(N+1)^2}\\quad(N\\ge1).\\end{aligned}"
+    }
+  ],
+  "examples": [
+    {
+      "title": "A certified approximation to ln 2",
+      "problem": "Use the alternating harmonic series to approximate $\\ln2$ with truncation error at most $0.001$.",
+      "steps": [
+        "The magnitudes $b_n=1/n$ decrease to zero, so the alternating remainder theorem applies.",
+        "Require $1/(N+1)\\le0.001$. Thus $N+1\\ge1000$ and $N=999$ is sufficient.",
+        "The computed partial sum is approximately $0.693647430560$. Because $999$ is odd, this lies above the exact sum. The first omitted term is $-0.001$.",
+        "Therefore $\\ln2$ lies between $S_{999}-0.001$ and $S_{999}$. As a numerical cross-check, Math.log(2) is approximately $0.693147180560$, giving actual error about $0.00050025$."
+      ],
+      "answer": "$999$ terms suffice; $S_{999}\\approx0.693647430560$, with exact-arithmetic truncation error at most $0.001$."
+    },
+    {
+      "title": "A ratio bound that also controls the tail",
+      "problem": "Show that $\\sum_{n=1}^{\\infty}n/2^n$ converges and bound the error after $10$ terms.",
+      "steps": [
+        "For positive terms $a_n=n/2^n$, the ratio is $a_{n+1}/a_n=(n+1)/(2n)$, which tends to $1/2$. Hence the series converges absolutely.",
+        "For $n\\ge11$, the ratio is at most $6/11$. The first omitted term after $N=10$ is $11/2048$.",
+        "Bound the tail by $(11/2048)/(1-6/11)=121/10240\\approx0.01181640625$. This $q$ bounds all the required subsequent ratios, rather than just their limit.",
+        "For a cross-check, the finite identity $\\sum_{n=1}^{N}n/2^n=2-(N+2)/2^N$ follows by induction. At $N=10$ the sum is $1.98828125$, and its actual tail is $0.01171875$."
+      ],
+      "answer": "The ratio test proves convergence, and a geometric majorant guarantees a tail below $0.011817$ after $10$ terms."
+    },
+    {
+      "title": "Conditional convergence requires two tests",
+      "problem": "Classify $\\sum_{n=1}^{\\infty}(-1)^{n-1}/\\sqrt n$.",
+      "steps": [
+        "The magnitudes $b_n=1/\\sqrt n$ are positive, decreasing, and tend to zero, so the alternating series converges.",
+        "The absolute-value series $\\sum1/\\sqrt n$ is a $p$-series with $p=1/2\\le1$ and diverges.",
+        "The original therefore converges conditionally, not absolutely."
+      ],
+      "answer": "Conditionally convergent."
+    },
+    {
+      "title": "A certified alternating decimal",
+      "problem": "How many terms of $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^2$ guarantee truncation error at most $10^{-4}$?",
+      "steps": [
+        "The alternating magnitudes $1/n^2$ decrease to zero.",
+        "After $N$ terms, $|R_N|\\le1/(N+1)^2$. Require $N+1\\ge100$.",
+        "Thus $N=99$ suffices for $\\le10^{-4}$. For a strict error below $10^{-4}$, use $N=100$."
+      ],
+      "answer": "$N=99$ certifies the non-strict tolerance; $N=100$ certifies a strict one."
+    },
+    {
+      "title": "Factorial position changes the ratio outcome",
+      "problem": "Classify $\\sum_{n=1}^{\\infty}n!/3^n$ and $\\sum_{n=1}^{\\infty}3^n/n!$.",
+      "steps": [
+        "For $n!/3^n$, the ratio of consecutive terms is $(n+1)/3\\to\\infty$; terms eventually grow and the series diverges.",
+        "For $3^n/n!$, the ratio is $3/(n+1)\\to0<1$.",
+        "The second series converges absolutely by the ratio test."
+      ],
+      "answer": "The first diverges; the second converges absolutely."
+    },
+    {
+      "title": "A safe finite-index ratio bound",
+      "problem": "Bound the tail of $\\sum_{n=1}^{\\infty}n/2^n$ after $N=10$ by a geometric comparison.",
+      "steps": [
+        "For $a_n=n/2^n$, $a_{n+1}/a_n=(n+1)/(2n)$. For $n\\ge11$ this is at most $6/11<0.6$.",
+        "The ratio $1/2+1/(2n)$ decreases with $n$, so $6/11$ is the largest ratio needed after $a_{11}$. Choosing $q=0.6$ simplifies the geometric sum but loosens it; $q=6/11$ gives $R_{10}\\le121/10240$, versus $55/4096$.",
+        "The first omitted term is $a_{11}=11/2048$. Every later term is at most $0.6$ times its predecessor.",
+        "Therefore $R_{10}\\le(11/2048)/(1-0.6)=55/4096\\approx0.01343$. The true tail is smaller."
+      ],
+      "answer": "The series converges, and $R_{10}\\le55/4096$ by this safe comparison."
+    },
+    {
+      "title": "A root-test boundary needs another argument",
+      "problem": "Classify $\\sum_{n=1}^{\\infty}[n/(n+1)]^n$.",
+      "steps": [
+        "The $n$th root of its $n$th term is $n/(n+1)\\to1$, so the root test is inconclusive.",
+        "The terms themselves tend to $e^{-1}>0$, a standard exponential limit.",
+        "Because the terms do not tend to zero, the series diverges by the necessary term test."
+      ],
+      "answer": "The series diverges; $L=1$ did not decide it."
+    },
+    {
+      "title": "Two different certified term budgets",
+      "problem": "Use the stated remainder bounds to get error at most $0.0005$ for $\\sum_{n=1}^{\\infty}1/n^2$ and $\\sum_{n=1}^{\\infty}(-1)^{n+1}/n^2$.",
+      "steps": [
+        "For the positive series, $R_N\\le1/N$, so $N\\ge2000$ suffices.",
+        "For the alternating series, $|R_N|\\le1/(N+1)^2$. Require $(N+1)^2\\ge2000$.",
+        "Since $44^2=1936$ and $45^2=2025$, $N=44$ suffices under the alternating bound."
+      ],
+      "answer": "Sufficient counts are $2000$ positive terms and $44$ alternating terms."
+    }
+  ],
+  "misconceptions": [
+    "“A term smaller than the tolerance guarantees the whole tail is small.” Many small terms can accumulate; a valid remainder estimate must bound their total.",
+    "“A ratio-test limit $L=1$ means divergence.” The convergent series $\\sum_{n=1}^{\\infty}\\frac{1}{n^2}$ and divergent series $\\sum_{n=1}^{\\infty}\\frac{1}{n}$ both have $L=1$.",
+    "“Any rearrangement has the same sum because addition commutes.” Every rearrangement of an absolutely convergent real series has the same sum. A rearrangement of a conditionally convergent real series can change its sum or destroy convergence; its original order specifies its sum."
+  ],
+  "lab": {
+    "title": "Contrast alternating and absolute convergence",
+    "description": "Change the exponent p, tolerance and term budget. Plot partial sums against term count $n$ for the signed series and its absolute-value series. The console reports a next-term truncation bound and, when p = 1, checks the signed sum against $\\ln 2$.",
+    "code": "// Adjust p > 0, tolerance > 0, and integer maxTerms (up to 20000).\nconst p = 1;\nconst tolerance = 0.001;\nconst maxTerms = 1200;\nif (!(p > 0 && Number.isFinite(p))) throw new Error('p must be positive and finite.');\nif (!(tolerance > 0 && Number.isFinite(tolerance))) throw new Error('Use a positive finite tolerance.');\nif (!Number.isInteger(maxTerms) || maxTerms < 1 || maxTerms > 20000) throw new Error('Use 1 to 20000 terms.');\nlet signed = 0, absolute = 0, used = 0, bound = Infinity;\nconst signedPoints = [], absolutePoints = [];\nconst stride = Math.max(1, Math.ceil(maxTerms / 1000));\nfor (let n = 1; n <= maxTerms; n++) {\n  const magnitude = 1 / Math.pow(n, p);\n  signed += (n % 2 === 1 ? 1 : -1) * magnitude;\n  absolute += magnitude;\n  used = n;\n  bound = 1 / Math.pow(n + 1, p);\n  if (n === 1 || n % stride === 0 || bound <= tolerance || n === maxTerms) {\n    signedPoints.push([n, signed]);\n    absolutePoints.push([n, absolute]);\n  }\n  if (bound <= tolerance) break;\n}\nif (signedPoints.length >= 2) {\n  plot(signedPoints, 'Alternating partial sum; x = term count n');\n  plot(absolutePoints, 'Absolute-value partial sum; x = term count n');\n} else console.log('Only one term count: reader plots need at least two points.');\nconsole.log('p, terms, signed sum, absolute sum:', p, used, signed, absolute);\nconsole.log('Next-term truncation bound:', bound);\nconsole.log(bound <= tolerance ? 'Truncation target met (roundoff not certified).' : 'Budget reached; requested truncation tolerance not certified.');\nconsole.log(p > 1 ? 'Absolute convergence by p-series test.' : 'Conditional convergence by alternating and p-series tests.');\nif (p === 1) console.log('Absolute discrepancy from Math.log(2):', Math.abs(signed - Math.log(2)));",
+    "tasks": [
+      "Before running, predict which curve stays bounded when p = 1 and which partial sums lie above $\\ln 2$.",
+      "Set p = 2 and compare the two curves. Explain why both series now converge without assuming that a flattening plot proves convergence.",
+      "Set p = 0.5 with the default budget and tolerance. Does the code certify the requested tolerance? Calculate a sufficient term count by hand.",
+      "Set p = 0 and interpret the validation error mathematically. Why would blindly using the same stopping theorem be wrong?",
+      "Reduce the tolerance to 1e-12. Distinguish reaching the term budget from proving divergence, and distinguish the truncation bound from floating-point error."
+    ],
+    "expected": "With the default p = 1, tolerance = 0.001 and maxTerms = 1200, the run stops after $N=999$ terms. The signed sum is approximately 0.693647430560, the next-term bound is 0.001, and the discrepancy from $\\ln 2$ is approximately 0.000500250000. The absolute sum is approximately 7.484470861. For p = 0.5, the default budget does not certify 0.001: $N\\ge999999$ is sufficient by the theorem, beyond the allowed budget."
+  },
+  "exercises": [
+    {
+      "question": "Classify $\\sum(-1)^{n-1}/\\sqrt n$, starting at $n = 1$.",
+      "hint": "Check decreasing alternating magnitudes and the absolute-value $p$-series.",
+      "solution": "The magnitudes $1/\\sqrt n$ decrease to $0$, so the alternating test gives convergence. But $\\sum 1/\\sqrt n$ diverges because $p=1/2\\le1$; convergence is conditional.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify $\\sum\\frac{(-1)^{n-1}}{n^2}$.",
+      "hint": "Check whether $\\sum 1/n^2$ converges.",
+      "solution": "Absolute values give $\\sum 1/n^2$, which converges since $p=2>1$. Thus the signed series converges absolutely.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify $\\sum\\frac{(-1)^{n-1}}{\\sqrt n}$.",
+      "hint": "Apply the alternating and absolute-value $p$-series tests.",
+      "solution": "The magnitudes $1/\\sqrt n$ decrease to $0$, while $\\sum 1/\\sqrt n$ diverges as a $p=1/2$ series. The signed series converges conditionally.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Does $\\sum(-1)^n$ converge?",
+      "hint": "Check whether the terms tend to $0$.",
+      "solution": "No. The terms alternate between $1$ and $-1$, so they do not tend to $0$, a necessary condition for series convergence.",
+      "lesson": 1,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does absolute convergence imply convergence?",
+      "hint": "Use the triangle inequality on finite tails.",
+      "solution": "If $\\sum|a_n|$ converges, its tails satisfy $\\sum_{k=m}^n|a_k|\\to0$ as $m\\to\\infty$. Since $|\\sum_{k=m}^na_k|\\le\\sum_{k=m}^n|a_k|$, signed partial sums are Cauchy and converge.",
+      "lesson": 1,
+      "type": "Proof"
+    },
+    {
+      "question": "What is the least number of terms certified to give truncation error at most $0.0001$ in $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^2$ by the alternating next-term bound?",
+      "hint": "Bound the first omitted term by $1/(N+1)^2$.",
+      "solution": "The alternating bound is $|R_N|\\le1/(N+1)^2$. Requiring this to be at most $10^{-4}$ gives $N+1\\ge100$, so $N=99$ is the least term count certified by this bound.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For the alternating harmonic series, decide whether $S_{10}$ is above or below the sum and bound its error.",
+      "hint": "Use the parity of $10$ and the first omitted magnitude.",
+      "solution": "The even partial sum $S_{10}$ is below $S$. The next omitted magnitude is $1/11$, so $0<S-S_{10}\\le1/11$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^2$, what is the error bound after the first $N=9$ terms?",
+      "hint": "Bound the first omitted magnitude; determine the sign of the next term.",
+      "solution": "The first omitted term after $N=9$ is negative, so $S_9$ is above the sum. The alternating bound gives $|R_9|\\le1/10^2=0.01$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "How many terms of $\\sum_{n=1}^{\\infty}(-1)^{n-1}/n^2$ ensure $\\lvert R_N\\rvert\\le10^{-4}$ by the alternating next-term bound?",
+      "hint": "Solve $1/(N+1)^2\\le10^{-4}$.",
+      "solution": "The alternating-series bound gives $|R_N|\\le1/(N+1)^2$. Thus $N+1\\ge100$, and the least certified count is $N=99$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "For alternating harmonic series, is $S_{10}$ above or below $\\ln 2$?",
+      "hint": "Use the sign of the first omitted term to locate the limit relative to $S_{10}$.",
+      "solution": "Because $10$ is even, $S_{10}<\\ln2$. The first omitted magnitude bounds the error by $1/11$.",
+      "lesson": 2,
+      "type": "Fluency"
+    },
+    {
+      "question": "Why does the alternating-series theorem alone not justify a next-term error bound when magnitudes are not eventually nonincreasing?",
+      "hint": "Identify the monotonicity hypothesis needed for bracketing.",
+      "solution": "The bracketing proof needs the magnitudes to decrease eventually to $0$. Without decreasing magnitudes, consecutive partial sums need not bracket a limit, so the next-term bound has no justification.",
+      "lesson": 2,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Determine convergence of $\\sum_{n=1}^{\\infty} n!/3^n$.",
+      "hint": "Compute the ratio of successive positive terms.",
+      "solution": "For $a_n=n!/3^n$, $a_{n+1}/a_n=(n+1)/3\\to\\infty$. Eventually the terms grow and fail to approach $0$, so the series diverges.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Apply the root test to $\\sum\\left(\\frac{2n+1}{3n}\\right)^n$.",
+      "hint": "Take the $n$th root to remove the outer exponent.",
+      "solution": "For positive terms, $\\sqrt[n]{a_n}=(2n+1)/(3n)\\to2/3<1$. The root test proves absolute convergence; finite initial terms do not change it.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify $\\sum\\frac{n!}{3^n}$.",
+      "hint": "Compute the ratio of successive terms.",
+      "solution": "The ratio is $a_{n+1}/a_n=(n+1)/3\\to\\infty$. Terms fail to approach $0$, so the series diverges.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Classify $\\sum\\frac{3^n}{n!}$.",
+      "hint": "Compute the ratio of successive terms.",
+      "solution": "The ratio is $a_{n+1}/a_n=3/(n+1)\\to0<1$. The ratio test proves absolute convergence.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "Apply the root test to $\\sum\\left(\\frac{n}{2n+1}\\right)^n$.",
+      "hint": "Take the $n$th root of the positive term.",
+      "solution": "The positive terms satisfy $\\sqrt[n]{a_n}=n/(2n+1)\\to1/2<1$, so the root test proves absolute convergence.",
+      "lesson": 3,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $a_n=1/n^2$, what does $\\lim_{n\\to\\infty}|a_{n+1}/a_n|$ say about the convergence of $\\sum_{n=1}^{\\infty}1/n^2$?",
+      "hint": "The successive-term ratio tends to $1$; recall what that limit means for the ratio test.",
+      "solution": "For $a_n=1/n^2$, the successive-term ratio is $a_{n+1}/a_n=n^2/(n+1)^2\\to1$. The ratio test is inconclusive at $1$; this series converges by the $p=2$ test.",
+      "lesson": 3,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Explain why any rearrangement of $\\sum(-1)^{n-1}/n^2$ has the same sum, but the same argument does not work for $\\sum(-1)^{n-1}/n$.",
+      "hint": "Use the absolute tail to bound every reordered tail.",
+      "solution": "For $\\sum(-1)^{n-1}/n^2$, the absolute series $\\sum1/n^2$ converges. Once a reordering includes enough original terms, every omitted absolute tail is arbitrarily small, so every reordering has the same sum. The absolute series $\\sum1/n$ diverges, so this argument does not apply to the conditional alternating harmonic series.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Why does absolute convergence protect every rearrangement?",
+      "hint": "Choose a finite prefix whose remaining absolute sum is small.",
+      "solution": "Absolute convergence gives a finite prefix after which the total omitted absolute magnitude is arbitrarily small. Once any reordering includes that prefix, the magnitude of its remaining sum is bounded by that tail, so its limit is unchanged.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Can rearranging a conditionally convergent real series change its sum?",
+      "hint": "Consider the separately infinite positive and negative parts.",
+      "solution": "Yes. A conditionally convergent real series has positive and negative parts with unbounded totals; suitable rearrangements can converge to different prescribed real values.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Does grouping consecutive finite blocks change the sum of an already convergent series?",
+      "hint": "Grouped partial sums form a subsequence of the original partial sums.",
+      "solution": "If the original partial sums tend to $S$, sums after consecutive finite blocks are a subsequence of those partial sums. That subsequence also tends to $S$.",
+      "lesson": 4,
+      "type": "Proof"
+    },
+    {
+      "question": "Why cannot $1-1+1-1+\\cdots$ be assigned an ordinary sum by grouping pairs?",
+      "hint": "Inspect the original partial sums before regrouping.",
+      "solution": "The original partial sums of $1-1+1-1+\\cdots$ alternate between $1$ and $0$, so there is no ordinary sum. Pairing terms does not make the original sequence of partial sums converge.",
+      "lesson": 4,
+      "type": "Interpretation"
+    },
+    {
+      "question": "An algorithm stops summing $\\sum 1/n$ when $1/n < 0.000001$. Explain why its reported error claim is invalid.",
+      "hint": "Check whether $\\sum 1/n$ has a finite tail.",
+      "solution": "The harmonic series $\\sum1/n$ diverges. Terms eventually satisfy $1/n<10^{-6}$, but the remaining infinite positive tail has no finite sum, so this rule certifies no approximation error.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "What is the first test to try for any proposed series?",
+      "hint": "First test whether $a_n\\to0$.",
+      "solution": "If $a_n\\not\\to0$, the series diverges by the term test. If $a_n\\to0$, that necessary condition alone does not settle convergence.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "Why is stopping $\\sum\\frac1n$ when a term falls below $10^{-6}$ invalid?",
+      "hint": "A small summand need not imply a small remaining sum.",
+      "solution": "The harmonic series diverges, so no finite partial sum has a finite series value to approximate, even when each later term is below $10^{-6}$.",
+      "lesson": 5,
+      "type": "Interpretation"
+    },
+    {
+      "question": "How many terms of $\\sum_{n=1}^{\\infty}1/n^2$ suffice for a certified error no greater than 0.0005 using the integral bound?",
+      "hint": "Use the upper integral remainder bound $R_N\\le1/N$.",
+      "solution": "The integral bound gives $R_N\\le\\int_N^{\\infty}x^{-2}\\,dx=1/N$. Thus $N=2000$ certifies $R_N\\le0.0005$.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "How many terms of $\\sum_{n=1}^\\infty\\frac{(-1)^{n+1}}{n^2}$ certify error below $0.0001$?",
+      "hint": "Use the alternating-series bound: the first omitted magnitude is $1/(N+1)^2$; require it to be below $10^{-4}$.",
+      "solution": "The alternating bound requires $1/(N+1)^2<10^{-4}$, hence $N+1>100$ and $N\\ge100$. At $N=99$ the bound equals $10^{-4}$, so it does not certify a strict inequality.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\sum_{n=1}^{\\infty}1/n^2$, what is the least integer $N$ certified to give error $\\le0.0005$ using $R_N\\le1/N$ after the first $N$ terms?",
+      "hint": "Solve $1/N\\le0.0005$ for an integer $N$.",
+      "solution": "The stated bound requires $1/N\\le0.0005=1/2000$. Thus $N=2000$ is the least integer certified by this bound.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "For $\\sum_{n=1}^{\\infty}(-1)^{n+1}/n^2$, what least number $N$ of terms gives error $\\le0.0005$ by the alternating next-term bound?",
+      "hint": "Use $1/(N+1)^2\\le0.0005$.",
+      "solution": "We need $1/(N+1)^2\\le0.0005$, or $N+1\\ge\\sqrt{2000}\\approx44.72$. Hence $N=44$ is the least certified term count.",
+      "lesson": 6,
+      "type": "Fluency"
+    },
+    {
+      "question": "A controller approximates the infinite alternating sum $\\sum_{n=0}^{\\infty}(-1)^n/n!$ by its partial sum $\\sum_{n=0}^N(-1)^n/n!$. How large must $N$ be to certify absolute error below $10^{-5}$, and how many terms are evaluated?",
+      "hint": "Compare $1/8!$ and $1/9!$ with $10^{-5}$, counting indices from $0$.",
+      "solution": "To certify the error against the infinite alternating sum, require $1/(N+1)!<10^{-5}$. Since $1/8!\\approx2.48\\times10^{-5}$ is too large but $1/9!\\approx2.76\\times10^{-6}$ works, choose $N=8$. Indices $0$ through $8$ give nine evaluated terms.",
+      "lesson": 6,
+      "type": "Fluency"
+    }
+  ],
+  "summary": [
+    "Absolute convergence controls every tail by total magnitude; conditional convergence relies on cancellation.",
+    "Alternating, ratio and root tests have specific hypotheses and failure cases. A ratio or root limit of 1 is inconclusive.",
+    "A certified truncation tolerance comes from a remainder bound; computational budgets and floating-point error require separate reporting."
+  ],
+  "next": "Chapter 17 lets series depend on a variable. Ratio and root tests will locate intervals of convergence, while endpoint tests and Taylor remainder bounds decide where polynomial approximations are justified."
+}

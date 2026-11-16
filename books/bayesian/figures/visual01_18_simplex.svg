@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="633.6pt" height="338.4pt" viewBox="0 0 633.6 338.4" xmlns="http://www.w3.org/2000/svg" version="1.1"><title>Three probabilities share one constrained space</title><desc>A triangle encodes probability triples summing to one; the Dirichlet(4,3,2) mean and an arrow transferring 0.1 from category two to one stay on the simplex.</desc>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>VISUAL01 original analytic illustrations</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 338.4 
+L 633.6 338.4 
+L 633.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 85.106224 277.159795 
+L 338.323465 277.159795 
+L 211.714845 57.867231 
+L 85.106224 277.159795 
+" clip-path="url(#pd677192c42)" style="fill: none; stroke: #165a85; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <defs>
+     <path id="m9219bdcf4d" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: #9a4615"/>
+    </defs>
+    <g clip-path="url(#pd677192c42)">
+     <use xlink:href="#m9219bdcf4d" x="197.64722" y="228.428114" style="fill: #9a4615; stroke: #9a4615"/>
+    </g>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="80.04188" y="289.820657" transform="rotate(-0 80.04188 289.820657)">p₁ = 1</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: end" x="343.38781" y="289.820657" transform="rotate(-0 343.38781 289.820657)">p₂ = 1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="211.714845" y="47.738542" transform="rotate(-0 211.714845 47.738542)">p₃ = 1</text>
+   </g>
+   <g id="patch_2">
+    <path d="M 195.647324 228.428114 
+Q 184.987096 228.428114 176.562937 228.428114 
+" style="fill: none; stroke: #236647; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 181.362937 230.828114 
+L 176.562937 228.428114 
+L 181.362937 226.028114 
+" style="fill: none; stroke: #236647; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 361.297938 157.09394 
+Q 280.390268 192.361013 199.482598 227.628086 
+" style="fill: none; stroke: #555555; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(358.580845 124.145158)">Mean (4/9, 3/9, 2/9)</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(358.580845 137.348166)">Arrow: transfer 0.1</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(358.580845 150.551174)">from p₂ to p₁</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(83.764845 303.271272)">Barycentric probabilities · p₁ + p₂ + p₃ = 1</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(55.52547 317.674553)">Triangle position encodes three unitless coordinates</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle" x="316.8" y="12.878209" transform="rotate(-0 316.8 12.878209)">Probability vectors live on a simplex</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd677192c42">
+   <rect x="54.720156" y="18.878209" width="524.159689" height="316.521551"/>
+  </clipPath>
+ </defs>
+</svg>

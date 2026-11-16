@@ -1,0 +1,27 @@
+# A phase portrait records position horizontally and velocity vertically.
+# The field is the first-order system x' = y, y' = -omega^2*x - damping*y.
+# Predict the direction of motion at the rightmost point before following a curve.
+# At damping = 0, energy E = (y^2 + omega^2*x^2)/2 is constant:
+# trajectories are ellipses, and the physical period is 2*pi/omega.
+# With damping > 0, E' = -damping*y^2, so trajectories lose energy.
+# Underdamped paths spiral inward; strong damping approaches rest without loops.
+# Change position and velocity to compare three nearby initial states.
+# Increasing omega makes the restoring force stronger and changes ellipse shape.
+# The curves use fixed-step RK4. They are numerical approximations, not proofs
+# of energy conservation; long integration can accumulate error.
+scene "Harmonic oscillator: position, velocity, and energy";
+coordinates equal;
+domain -3.5 3.5;
+range -5 5;
+param omega = 1 from 0.4 to 2;
+param damping = 0 from 0 to 1.5;
+param position = 1.8 from 0.2 to 2.5;
+param velocity = 0.3 from -1.5 to 1.5;
+param horizon = 20 from 2 to 40;
+field oscillator(x,y) = (y, -omega^2*x-damping*y);
+flow oscillator from (position,velocity) time horizon steps 1600 color teal;
+flow oscillator from (0.65*position,velocity+0.4) time horizon steps 1600 color rose;
+flow oscillator from (-0.7*position,velocity-0.4) time horizon steps 1600 color amber;
+point first = (position,velocity) color teal;
+point second = (0.65*position,velocity+0.4) color rose;
+point third = (-0.7*position,velocity-0.4) color amber;

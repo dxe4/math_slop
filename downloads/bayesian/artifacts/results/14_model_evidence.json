@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "lab_id": "14_model_evidence",
+  "seed": 1414,
+  "method": "Normal marginal likelihood and exact model averaging",
+  "source_hashes": {
+    "labs/14_model_evidence.py": "9c75c716ddfececc8a3601cf4ce0adced08ca89f0a6678ea228484d61820e2e2",
+    "labs/common.py": "fb8932531d18e660a24b344f77a995c2fcaca282ef40616121ee2e80ca60a0ee",
+    "labs/extension_common.py": "3fdb0437bbd31cff4336dd0c1d6bdadd7f79eb7eb31cea9b216257383e75d56c",
+    "requirements.lock": "f12559ca79dc2cc40c400c26557295d9de062e085a32dfcb30b83bd7bb68c378",
+    "llm/teaching.json": "5a6bcfd55657d2a530c4d2ada50e15764818cff822d6a975865b2a7310209bd9"
+  },
+  "parameters": {
+    "readings": [
+      1.1,
+      1.5,
+      1.9
+    ],
+    "observation_sd": 1,
+    "alternative_prior_sds": [
+      0.5,
+      2.0,
+      10.0
+    ],
+    "prior_model1_probability": 0.5
+  },
+  "metrics": {
+    "log_evidence_null": -6.291815599614019,
+    "comparisons": [
+      {
+        "prior_sd": 0.5,
+        "log_evidence_alternative": -5.125194922153158,
+        "log_bayes_factor": 1.1666206774608607,
+        "model1_weight": 0.7625336442112723,
+        "offset_mean": 0.6428571428571428,
+        "offset_variance": 0.14285714285714285,
+        "mixture_predictive_mean": 0.4902001998501036,
+        "mixture_predictive_variance": 1.1837658417150239
+      },
+      {
+        "prior_sd": 2.0,
+        "log_evidence_alternative": -4.45890566296017,
+        "log_bayes_factor": 1.8329099366538486,
+        "model1_weight": 0.8621080182927467,
+        "offset_mean": 1.3846153846153846,
+        "offset_variance": 0.3076923076923077,
+        "mixture_predictive_mean": 1.1936880253284186,
+        "mixture_predictive_variance": 1.4931717081169653
+      },
+      {
+        "prior_sd": 10.0,
+        "log_evidence_alternative": -5.781583356573153,
+        "log_bayes_factor": 0.5102322430408659,
+        "model1_weight": 0.6248609160804152,
+        "offset_mean": 1.495016611295681,
+        "offset_variance": 0.33222591362126247,
+        "mixture_predictive_mean": 0.9341774492896572,
+        "mixture_predictive_variance": 1.7315182865555712
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "log_evidence_quadrature_tau_0.5",
+      "actual": -5.1251949221531605,
+      "expected": -5.125194922153158,
+      "atol": 1e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "log_evidence_quadrature_tau_2.0",
+      "actual": -4.458905662960171,
+      "expected": -4.45890566296017,
+      "atol": 1e-09,
+      "rtol": 0.0,
+      "passed": true
+    },
+    {
+      "id": "log_evidence_quadrature_tau_10.0",
+      "actual": -5.781583356573173,
+      "expected": -5.781583356573153,
+      "atol": 1e-09,
+      "rtol": 0.0,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Prior widths are fixed sensitivity scenarios, not fitted parameters.",
+    "Model probabilities are conditional on these two specified models."
+  ]
+}

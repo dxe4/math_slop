@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Reversible jump matches augmented dimensions</title><desc id="desc">A one-parameter model plus one auxiliary variable maps to a two-parameter model.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Reversible jump matches augmented dimensions</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">A one-parameter model plus one auxiliary variable maps to a two-parameter model.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Split map: a = θ + u, b = θ − u; inverse θ = (a+b)/2, u = (a−b)/2; |det J| = 2.</text>
+<rect x="65" y="150" width="310" height="120" rx="7" fill="#ffffff" stroke="#275c91"/>
+<text x="220.00" y="191.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">Model 1</text>
+<text x="220.00" y="215.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">θ ∈ ℝ  plus  u ∈ ℝ</text>
+<text x="220.00" y="239.00" font-family="system-ui,sans-serif" font-size="16" fill="#275c91" font-weight="400" text-anchor="middle">augmented dimension = 2</text>
+<rect x="580" y="150" width="310" height="120" rx="7" fill="#ffffff" stroke="#167d8d"/>
+<text x="735.00" y="191.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">Model 2</text>
+<text x="735.00" y="215.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">(a,b) ∈ ℝ²</text>
+<text x="735.00" y="239.00" font-family="system-ui,sans-serif" font-size="16" fill="#167d8d" font-weight="400" text-anchor="middle">dimension = 2</text>
+<line x1="385.00" y1="185.00" x2="570.00" y2="185.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="475.00" y="165.00" font-family="system-ui,sans-serif" font-size="17" fill="#233443" font-weight="400" text-anchor="middle">split</text>
+<line x1="570.00" y1="245.00" x2="385.00" y2="245.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="475.00" y="230.00" font-family="system-ui,sans-serif" font-size="17" fill="#233443" font-weight="400" text-anchor="middle">merge</text>
+<rect x="170" y="340" width="610" height="92" rx="7" fill="#ffffff" stroke="#bb5b27"/>
+<text x="475.00" y="379.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">Acceptance includes target ratio × move-probability ratio</text>
+<text x="475.00" y="403.00" font-family="system-ui,sans-serif" font-size="16" fill="#bb5b27" font-weight="400" text-anchor="middle">× auxiliary-density ratio × absolute Jacobian determinant</text>
+</svg>

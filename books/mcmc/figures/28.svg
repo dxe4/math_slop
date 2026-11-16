@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Resampling creates a particle genealogy</title><desc id="desc">Particles branch when selected multiple times; extinct ancestors leave no descendants.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Resampling creates a particle genealogy</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">Particles branch when selected multiple times; extinct ancestors leave no descendants.</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Schematic genealogy, four particles per time. Resampling fights weight collapse but reduces ancestry diversity.</text>
+<circle cx="110.00" cy="150.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="110.00" cy="225.00" r="11" fill="#167d8d" stroke="#167d8d" stroke-width="2"/>
+<circle cx="110.00" cy="300.00" r="11" fill="#bb5b27" stroke="#bb5b27" stroke-width="2"/>
+<circle cx="110.00" cy="375.00" r="11" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<text x="110.00" y="430.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="middle">t = 0</text>
+<line x1="120.00" y1="150.00" x2="275.00" y2="150.00" stroke="#275c91" stroke-width="2"/>
+<line x1="120.00" y1="150.00" x2="275.00" y2="225.00" stroke="#275c91" stroke-width="2"/>
+<line x1="120.00" y1="300.00" x2="275.00" y2="300.00" stroke="#bb5b27" stroke-width="2"/>
+<line x1="120.00" y1="375.00" x2="275.00" y2="375.00" stroke="#82909b" stroke-width="2"/>
+<circle cx="285.00" cy="150.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="285.00" cy="225.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="285.00" cy="300.00" r="11" fill="#bb5b27" stroke="#bb5b27" stroke-width="2"/>
+<circle cx="285.00" cy="375.00" r="11" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<text x="285.00" y="430.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="middle">t = 1</text>
+<line x1="295.00" y1="150.00" x2="450.00" y2="150.00" stroke="#275c91" stroke-width="2"/>
+<line x1="295.00" y1="225.00" x2="450.00" y2="225.00" stroke="#275c91" stroke-width="2"/>
+<line x1="295.00" y1="225.00" x2="450.00" y2="300.00" stroke="#275c91" stroke-width="2"/>
+<line x1="295.00" y1="375.00" x2="450.00" y2="375.00" stroke="#82909b" stroke-width="2"/>
+<circle cx="460.00" cy="150.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="460.00" cy="225.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="460.00" cy="300.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="460.00" cy="375.00" r="11" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<text x="460.00" y="430.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="middle">t = 2</text>
+<line x1="470.00" y1="225.00" x2="625.00" y2="150.00" stroke="#275c91" stroke-width="2"/>
+<line x1="470.00" y1="225.00" x2="625.00" y2="225.00" stroke="#275c91" stroke-width="2"/>
+<line x1="470.00" y1="300.00" x2="625.00" y2="300.00" stroke="#275c91" stroke-width="2"/>
+<line x1="470.00" y1="375.00" x2="625.00" y2="375.00" stroke="#82909b" stroke-width="2"/>
+<circle cx="635.00" cy="150.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="635.00" cy="225.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="635.00" cy="300.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="635.00" cy="375.00" r="11" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<text x="635.00" y="430.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="middle">t = 3</text>
+<line x1="645.00" y1="150.00" x2="800.00" y2="150.00" stroke="#275c91" stroke-width="2"/>
+<line x1="645.00" y1="150.00" x2="800.00" y2="225.00" stroke="#275c91" stroke-width="2"/>
+<line x1="645.00" y1="225.00" x2="800.00" y2="300.00" stroke="#275c91" stroke-width="2"/>
+<line x1="645.00" y1="375.00" x2="800.00" y2="375.00" stroke="#82909b" stroke-width="2"/>
+<circle cx="810.00" cy="150.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="810.00" cy="225.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="810.00" cy="300.00" r="11" fill="#275c91" stroke="#275c91" stroke-width="2"/>
+<circle cx="810.00" cy="375.00" r="11" fill="#82909b" stroke="#82909b" stroke-width="2"/>
+<text x="810.00" y="430.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="middle">t = 4</text>
+<text x="100.00" y="110.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Four initial ancestors</text>
+<text x="640.00" y="110.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Two surviving initial ancestors</text>
+</svg>

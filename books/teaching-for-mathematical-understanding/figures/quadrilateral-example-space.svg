@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" role="img" aria-labelledby="title desc">
+  <title id="title">Examples and nonexamples for a simple quadrilateral</title>
+  <desc id="desc">Positive examples, in SVG coordinates, are the square 50,85 150,85 150,185 50,185; rotated rectangle 215,105 345,75 365,165 235,195; parallelogram 430,95 555,95 515,190 390,190; and simple concave quadrilateral 70,230 200,230 105,285 70,340, whose visibly inward vertex 105,285 is reflex. Nonexamples are the open chain 630,95 700,70 755,140 680,180 625,145 and the closed path M790,75 L860,100 Q820,155 855,205 L785,190 Z with a curved side.</desc>
+  <rect x="1" y="1" width="898" height="388" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <g font-family="system-ui, sans-serif" fill="#172033" text-anchor="middle">
+    <text x="300" y="38" font-size="19" font-weight="700">Examples: simple, closed, four straight sides</text>
+    <text x="745" y="38" font-size="19" font-weight="700">Nonexamples</text>
+  </g>
+  <g fill="#dbeafe" fill-opacity=".65" stroke="#1d4ed8" stroke-width="4">
+    <polygon points="50,85 150,85 150,185 50,185"/>
+    <polygon points="215,105 345,75 365,165 235,195"/>
+    <polygon points="430,95 555,95 515,190 390,190"/>
+    <polygon points="70,230 200,230 105,285 70,340"/>
+  </g>
+  <g fill="none" stroke="#b91c1c" stroke-width="4">
+    <polyline points="630,95 700,70 755,140 680,180 625,145"/>
+    <path d="M790 75L860 100Q820 155 855 205L785 190Z"/>
+  </g>
+  <g font-family="system-ui, sans-serif" fill="#172033" text-anchor="middle" font-size="14">
+    <text x="100" y="210">square</text><text x="290" y="215">rotated rectangle</text><text x="472" y="215">parallelogram</text>
+    <text x="135" y="365">concave quadrilateral</text><text x="690" y="218">open chain</text><text x="823" y="235">one curved side</text>
+  </g>
+  <path d="M590 55V350" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7 7"/>
+</svg>

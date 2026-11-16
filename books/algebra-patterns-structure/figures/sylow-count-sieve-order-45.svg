@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" role="img" aria-labelledby="title desc">
+  <title id="title">Sylow count sieve for a group of order 45</title>
+  <desc id="desc">For p equals 5, divisibility gives candidates 1, 3, 9 and congruence modulo 5 leaves 1. For p equals 3, divisibility gives candidates 1, 5 and congruence modulo 3 leaves 1. Both Sylow subgroups are therefore normal.</desc>
+  <rect x="1" y="1" width="838" height="338" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <text x="420" y="40" text-anchor="middle" fill="#172033" font-family="system-ui, sans-serif" font-size="20" font-weight="700">|G| = 45 = 3² · 5</text>
+  <g font-family="system-ui, sans-serif" fill="#172033">
+    <text x="55" y="100" font-size="18" font-weight="700">p = 5</text>
+    <text x="55" y="225" font-size="18" font-weight="700">p = 3</text>
+    <text x="145" y="78" font-size="14">divisor candidates</text>
+    <text x="145" y="203" font-size="14">divisor candidates</text>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="20" text-anchor="middle">
+    <g fill="#e2e8f0" stroke="#475569" stroke-width="2"><rect x="140" y="90" width="90" height="48" rx="8"/><rect x="250" y="90" width="90" height="48" rx="8"/><rect x="360" y="90" width="90" height="48" rx="8"/><rect x="140" y="215" width="90" height="48" rx="8"/><rect x="250" y="215" width="90" height="48" rx="8"/></g>
+    <text x="185" y="121" fill="#172033">1</text><text x="295" y="121" fill="#172033">3</text><text x="405" y="121" fill="#172033">9</text>
+    <text x="185" y="246" fill="#172033">1</text><text x="295" y="246" fill="#172033">5</text>
+    <text x="525" y="117" fill="#172033" font-size="17">n₅ ≡ 1 (mod 5)</text>
+    <text x="525" y="242" fill="#172033" font-size="17">n₃ ≡ 1 (mod 3)</text>
+    <g fill="#dcfce7" stroke="#15803d" stroke-width="3"><rect x="675" y="90" width="100" height="48" rx="8"/><rect x="675" y="215" width="100" height="48" rx="8"/></g>
+    <text x="725" y="121" fill="#166534" font-weight="700">n₅ = 1</text><text x="725" y="246" fill="#166534" font-weight="700">n₃ = 1</text>
+  </g>
+  <g stroke="#334155" stroke-width="3" fill="none"><path d="M462 114H654"/><path d="M352 239H654"/></g>
+  <g fill="#b91c1c" font-family="system-ui, sans-serif" font-size="26" font-weight="700"><text x="287" y="128">×</text><text x="397" y="128">×</text><text x="287" y="253">×</text></g>
+  <text x="420" y="310" text-anchor="middle" fill="#172033" font-family="system-ui, sans-serif" font-size="16">count 1 means the Sylow subgroup is unique, hence normal</text>
+</svg>

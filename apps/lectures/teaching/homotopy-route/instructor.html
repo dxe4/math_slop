@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Instructor keys, task-specific scoring anchors, and exposure notes for three short homotopy assessment forms.">
+  <title>Homotopy route · instructor key</title>
+  <link rel="stylesheet" href="pack.css">
+</head>
+<body class="instructor">
+<a class="skip" href="#main">Skip to instructor key</a>
+<header class="sheet">
+  <p class="metadata">Homotopy route · pack v1.0.0 · instructor resource · unpiloted</p>
+  <h1>Instructor key and evidence guide</h1>
+  <p>These keys accompany the <a href="baseline.html">baseline form A</a>, <a href="immediate.html">immediate form B</a>, and <a href="delayed.html">delayed form C</a>. Follow the administration and exposure rules in the <a href="../../../../index.html#/downloads/lectures/teaching/homotopy-route/README">route guide</a>. The optional C-S construction is reported separately.</p>
+  <p class="callout"><strong>This page contains answers.</strong> Keep it separate from prompt-only handouts during an independent attempt. An unlinked local file remains accessible when its directory is served; that is not secure answer reservation. Record actual exposure.</p>
+  <nav aria-label="Instructor contents" class="screen-only"><p><a href="#use">Using the anchors</a> · <a href="#exposure">Exposure matrix</a> · <a href="#form-a">Form A</a> · <a href="#form-b">Form B</a> · <a href="#form-c">Form C</a> · <a href="#stretch">Optional C-S</a></p></nav>
+</header>
+<main class="sheet" id="main">
+<section id="use">
+  <h2>Using the anchors</h2>
+  <p>Use the same supplied reference card in each phase. It permits the definition of endpoint-fixed homotopy, straight interpolation with a codomain check, winding invariance in the punctured plane, and the closed-loop obstruction formed from two endpoint-fixed paths. Applying a supplied fact is assessed here; proving the winding or lifting theorem is <strong>not applicable</strong> to these tasks.</p>
+  <p>Throughout this key, <var>I</var> = [0, 1], <var>X</var> = ℂ ∖ {0}, <var>u</var>(<var>s</var>) = <var>s</var>(1 − <var>s</var>), and ω<sub>k</sub>(<var>s</var>) = e<sup>2πik s</sup>. A based homotopy at 1 has both vertical edges fixed at 1. A free loop homotopy requires its two vertical edges to agree, but permits their common value to move.</p>
+  <p>For each task, record <strong>Missing/incorrect</strong>, <strong>Partial</strong>, or <strong>Clear</strong> separately for each of the four dimensions below. Copy a short piece of response evidence and note the precise gap. An unanswered item or a missed follow-up is <strong>missing data</strong>, not an incorrect mathematical response. Keep an original attempt separate from later helped or revised work.</p>
+  <ul>
+    <li><strong>Definition/theorem:</strong> Does the response choose and apply the relevant mathematical relation or fact?</li>
+    <li><strong>Hypotheses/scope:</strong> Does it identify the domain, target, relative conditions, and restrictions needed here?</li>
+    <li><strong>Witness/construction:</strong> Does it supply an exact valid formula, counterexample, or invariant calculation?</li>
+    <li><strong>Proof/quantifiers:</strong> Does its argument cover every permitted input, and support the stated conclusion?</li>
+  </ul>
+  <p>All four dimensions apply to every core task as written. Use “not applicable” only for an obligation genuinely removed in a documented adaptation, with the reason recorded; it must not replace an omitted required check. In particular, not reproducing a theorem proof from the supplied card is not a deficiency. A theorem name is also not compulsory if the response states and correctly uses the fact.</p>
+  <p>Accept every mathematically valid method, including a different formula, witness, or proof. The displayed anchors guide judgment; they are not an exhaustive answer matcher. Where reviewers disagree, retain both judgments and their reasons before agreeing on a description. Do not add the dimensions into a pass, mastery, or phase total. These forms are not difficulty-equated, and uncontrolled changes between phases do not establish a learning effect.</p>
+</section>
+
+<section id="exposure">
+  <h2>Exposure matrix</h2>
+  <p>The descriptions “near practice” and “strategy transfer” express the intended relationship to the public route, not a validated distance or difficulty scale. No item should be described as unseen solely because its exact formula is new. Record which public pages, exercises, hints, keys, other forms, and later lectures were actually seen, together with assistance and the actual delay.</p>
+  <dl>
+    <dt><strong>A1 and B1 · near practice: moving basepoint</strong></dt>
+    <dd>The <a href="../../homotopy.html#definition">lecture definition</a> distinguishes fixed endpoints from free loop homotopy. The public <a href="../../research/pedagogy-and-homotopy.md">pedagogy note</a>, Exercise 1 / Solution 1, checks all four edges; Exercise 9 / Solution 9 rejects an angle interpolation because intermediate paths are not closed. A1 and B1 instead remain closed while their common basepoint moves. This is a changed failure, within a familiar boundary audit.</dd>
+    <dt><strong>A2 and B2 · near practice: interpolation inside a safe region</strong></dt>
+    <dd>The <a href="../../homotopy.html#paths">lecture path construction</a> and pedagogy Exercise 2 / Solution 2 already construct an endpoint-fixed straight interpolation. The note’s “Straight line homotopy and convexity” section explicitly warns that nonconvexity removes a general guarantee without invalidating every particular formula. Here a positive real-part bound supplies the needed guarantee inside <var>X</var>.</dd>
+    <dt><strong>A3 and B3 · near practice: winding obstruction and changed target</strong></dt>
+    <dd>The <a href="../../homotopy.html#winding">winding section</a>, <a href="../../homotopy.html#exercise-4">lecture Exercise 4</a>, and pedagogy Exercise 7 / Solution 7 already compute winding and compare positive-radius loops. The <a href="../../homotopy.html#hole">failed contraction</a> and <a href="../../homotopy.html#exercise-8">lecture Exercise 8</a> compare the punctured and whole planes. The nonlinear angle and radii here do not make this an independent new strategy.</dd>
+    <dt><strong>C1 · strategy transfer: affirmative formula audit</strong></dt>
+    <dd>The same public convexity warning applies, while many public counterexamples reject a candidate. C1 requires an exact global avoidance argument that validates a different family in the nonconvex target. If this affirmative family or its norm argument has already been shown, record that exposure rather than labeling the response independent transfer.</dd>
+    <dt><strong>C2 · transfer of hypotheses: arbitrary paths</strong></dt>
+    <dd>Interpolation is already public and already occurs in A2/B2. The change is from checking particular formulas to using a universal bound on arbitrary continuous paths with different common endpoints. This is transfer of a supplied hypothesis, not a new construction method.</dd>
+    <dt><strong>C3 · strategy transfer with substantial public overlap</strong></dt>
+    <dd><a href="../../homotopy.html#exercise-8">Lecture Exercise 8 and its solution</a> already compare paths with fixed, possibly distinct endpoints by appending a reversed path and applying winding. C3 supplies particular semicircles and asks the learner to recognize the loop that must be formed. It changes representation and required selection of a known strategy; it is not strategy transfer from wholly unexposed material. The reference card supplies the required path-to-loop implication in every phase.</dd>
+    <dt><strong>C-S · optional change of method: straighten a nonconvex space</strong></dt>
+    <dd>The lecture’s <a href="../../homotopy.html#hole">failed formula</a>, <a href="../../homotopy.html#exercise-3">Exercise 3</a>, and pedagogy Exercise 3 / Solution 3 distinguish one invalid formula from general impossibility. Radial, translated radial, and three-dimensional retractions are already solved in the lecture or pedagogy Exercises 4, 5, and 10. C-S instead supplies a change of coordinates to a half-plane. Report this optional construction separately, including prior exposure to that method.</dd>
+  </dl>
+  <p class="note">Baseline is an administration phase, not a claim of no previous knowledge. The baseline attempt, common reference card, and each earlier assessment can themselves provide practice or cues for later work. The exposure record makes those limits visible.</p>
+</section>
+
+<section id="form-a">
+  <h2>Form A · baseline keys</h2>
+  <article class="task" id="a1">
+    <h3>A1 · A closed family with a moving basepoint</h3>
+    <p><strong>Prompt:</strong> Assess <var>K</var>(<var>s</var>, <var>t</var>) = e<sup>2πi(s+t)</sup> as a based homotopy at 1 from ω<sub>1</sub> to itself. Explain exactly what passes and what fails, and give a valid based replacement if needed.</p>
+    <p><strong>Key:</strong> <var>K</var> is jointly continuous and lies on the unit circle, hence in <var>X</var>. At <var>t</var> = 0 and 1 it equals ω<sub>1</sub>. For every <var>t</var>,</p>
+    <p class="mathline">K(0, t) = K(1, t) = e<sup>2πit</sup>.</p>
+    <p>Thus every slice is a closed loop, but the common endpoint is −1 at <var>t</var> = ½. It is a free loop homotopy, not a based homotopy at 1. The stationary family <var>J</var>(<var>s</var>, <var>t</var>) = e<sup>2πis</sup> is a valid based replacement: it is jointly continuous, nonzero, has the required time slices, and both endpoints are 1 for all <var>t</var>.</p>
+    <p><strong>Alternatives:</strong> Any time where e<sup>2πit</sup> ≠ 1 is a valid failure witness. Any fully verified based self-homotopy is an acceptable replacement. Different winding numbers are not involved; rejecting this <var>K</var> cannot exclude all replacements.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Treats closed slices as sufficient for based homotopy. <strong>Partial:</strong> Mentions fixed endpoints without distinguishing the moving common endpoint. <strong>Clear:</strong> Correctly distinguishes free loop homotopy from based homotopy.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Claims a zero or wrong time slice without a valid check. <strong>Partial:</strong> Checks only the failed edge. <strong>Clear:</strong> Identifies joint continuity, nonzero values, both time slices, closure, and the fixed-basepoint failure; verifies these for the replacement as relevant.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives no valid witness or replacement. <strong>Partial:</strong> Supplies an exact failed edge value or a valid replacement, but not both. <strong>Clear:</strong> Supplies both, for example the value −1 at <var>t</var> = ½ and the stationary family.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Uses a picture or concludes no based homotopy can exist. <strong>Partial:</strong> Reaches the right verdict with incomplete universal checks. <strong>Clear:</strong> Uses an exact counterexample for this formula and verifies the replacement for every pair (<var>s</var>, <var>t</var>).</dd>
+    </dl>
+  </article>
+
+  <article class="task" id="a2">
+    <h3>A2 · Construct inside a positive half-plane</h3>
+    <p><strong>Prompt:</strong> Join α(<var>s</var>) = 1 + i<var>u</var>(<var>s</var>) to β(<var>s</var>) = 1 + <var>u</var>(<var>s</var>) − i<var>u</var>(<var>s</var>) by an endpoint-fixed homotopy in <var>X</var>. Verify the construction.</p>
+    <p><strong>Key:</strong> Both endpoints of both paths are 1, since <var>u</var>(0) = <var>u</var>(1) = 0. Straight interpolation gives</p>
+    <p class="mathline">H(s, t) = (1 − t)α(s) + tβ(s)<br>= 1 + tu(s) + i(1 − 2t)u(s).</p>
+    <p>This is jointly continuous by sums and products of continuous functions. Its time-zero and time-one slices are α and β, and <var>H</var>(0, <var>t</var>) = <var>H</var>(1, <var>t</var>) = 1 for every <var>t</var>. Since <var>u</var>(<var>s</var>) ≥ 0 on <var>I</var>, its real part is 1 + <var>t u</var>(<var>s</var>) ≥ 1. Hence it never equals 0 anywhere on <var>I</var> × <var>I</var>.</p>
+    <p><strong>Alternatives:</strong> Interpolation within the convex right half-plane is a valid argument if the response verifies both paths lie there. A two-stage homotopy through the constant path at 1 also works, provided its seam, time slices, relative endpoints, and avoidance are checked. Convexity of all of <var>X</var> is false and is not needed.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Gives only another path or invokes false convexity of <var>X</var>. <strong>Partial:</strong> Chooses interpolation without identifying the endpoint-fixed requirement. <strong>Clear:</strong> Constructs a two-parameter endpoint-fixed homotopy, using a valid safe-region argument.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Omits the puncture or changes the requested endpoints. <strong>Partial:</strong> Checks some boundary conditions or avoidance only at selected times. <strong>Clear:</strong> Checks joint continuity, the two time slices, both fixed endpoints, and membership in <var>X</var> on the whole parameter square.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives an invalid or undefined family. <strong>Partial:</strong> Gives a correct candidate without an exact avoidance estimate. <strong>Clear:</strong> Gives a valid family and an explicit estimate such as Re <var>H</var> ≥ 1.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Relies on a plot or a few values. <strong>Partial:</strong> Has a valid strategy with an omitted boundary or continuity argument. <strong>Clear:</strong> Justifies every required property for all <var>s</var>, <var>t</var> ∈ <var>I</var>.</dd>
+    </dl>
+  </article>
+
+  <article class="task" id="a3">
+    <h3>A3 · Different winding, different target</h3>
+    <p><strong>Prompt:</strong> Compare γ(<var>s</var>) = (1 + <var>u</var>(<var>s</var>))e<sup>2πi(s+s²)</sup> and δ(<var>s</var>) = e<sup>−2πis</sup>. Can they be based homotopic in <var>X</var>? How does the answer change in all of ℂ? Justify both conclusions.</p>
+    <p><strong>Key:</strong> Both are continuous based loops at 1. The radius 1 + <var>u</var>(<var>s</var>) is positive, so the normalized γ has angle lift θ(<var>s</var>) = <var>s</var> + <var>s</var><sup>2</sup>, starting at 0 and ending at 2. The normalized δ has lift −<var>s</var>, ending at −1. Their windings are 2 and −1. Winding is invariant under a based homotopy in <var>X</var>, so none exists there.</p>
+    <p>In ℂ, use <var>H</var>(<var>s</var>, <var>t</var>) = (1 − <var>t</var>)γ(<var>s</var>) + <var>t</var>δ(<var>s</var>). This is jointly continuous, has the required time slices, and fixes the common endpoint 1 because both paths have that endpoint. All complex values are allowed, so no puncture-avoidance proof is required. Winding about 0 cannot obstruct a homotopy allowed to pass through 0.</p>
+    <p><strong>Alternatives:</strong> A correctly stated degree calculation after normalization or an equivalent lifted-angle obstruction is valid. Any verified endpoint-fixed construction in ℂ is acceptable. Failure of straight interpolation in <var>X</var>, by itself, would not prove impossibility there.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Infers equivalence from the common circle image or applies winding invariance in all of ℂ. <strong>Partial:</strong> Names winding without connecting unequal values to nonexistence. <strong>Clear:</strong> Correctly applies winding invariance in <var>X</var> and interpolation in ℂ.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Ignores closure, basepoint, or the changed codomain. <strong>Partial:</strong> Assumes these conditions without checking them. <strong>Clear:</strong> Establishes continuous nonzero based loops at 1, notes the positive radius, and scopes the obstruction to homotopies avoiding 0.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Has incorrect windings and no valid whole-plane construction. <strong>Partial:</strong> Gives correct windings or a valid whole-plane family, with the other component incomplete. <strong>Clear:</strong> Gives exact lifts or equivalent calculations yielding 2 and −1, and a valid ℂ-valued family.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Merely rejects one candidate or trusts the drawing. <strong>Partial:</strong> Gives the correct two verdicts with an incomplete obstruction or construction check. <strong>Clear:</strong> Excludes every based homotopy in <var>X</var> by the invariant and verifies a whole-plane homotopy for all parameters.</dd>
+    </dl>
+  </article>
+</section>
+
+<section id="form-b">
+  <h2>Form B · immediate keys</h2>
+  <article class="task" id="b1">
+    <h3>B1 · The basepoint returns, but moves in between</h3>
+    <p><strong>Prompt:</strong> Assess <var>K</var>(<var>s</var>, <var>t</var>) = e<sup>2πi(−s+t(1−t))</sup> as a based homotopy at 1 from ω<sub>−1</sub> to itself. Explain what passes and what fails, and give a valid based replacement if needed.</p>
+    <p><strong>Key:</strong> The formula is jointly continuous and nonzero. Since <var>t</var>(1 − <var>t</var>) = 0 at times 0 and 1, those slices equal ω<sub>−1</sub>. For each time,</p>
+    <p class="mathline">K(0, t) = K(1, t) = e<sup>2πit(1−t)</sup>.</p>
+    <p>It is a free loop homotopy. At <var>t</var> = ½ the common endpoint is e<sup>πi/2</sup> = i, so it is not based at 1. Use the stationary replacement <var>J</var>(<var>s</var>, <var>t</var>) = e<sup>−2πis</sup>; it is jointly continuous and nonzero, has the required time slices, and fixes both endpoints at 1 for every time.</p>
+    <p><strong>Alternatives:</strong> Any exact time with a common endpoint different from 1 suffices. For 0 &lt; <var>t</var> &lt; 1, the quantity <var>t</var>(1 − <var>t</var>) lies in (0, ¼], so every such time gives a failure. Other fully verified based self-homotopies are acceptable.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Takes returning to the basepoint at times 0 and 1 as sufficient. <strong>Partial:</strong> Notices an endpoint issue but does not distinguish free and based homotopy. <strong>Clear:</strong> Correctly identifies a free loop homotopy with a moving common basepoint.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Incorrectly claims nonclosure or a zero value. <strong>Partial:</strong> Checks only a failed boundary value. <strong>Clear:</strong> Checks continuity, nonzero values, the two time slices, closed slices, and the failed fixed-basepoint condition, then verifies the replacement.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives neither an exact failed edge value nor a valid replacement. <strong>Partial:</strong> Supplies one of them. <strong>Clear:</strong> Gives both, such as the endpoint i at time ½ and the stationary family.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Infers general impossibility from this failure. <strong>Partial:</strong> Gives correct conclusions with a missing universal replacement check. <strong>Clear:</strong> Rejects this formula by one exact witness and validates a replacement for every parameter pair.</dd>
+    </dl>
+  </article>
+
+  <article class="task" id="b2">
+    <h3>B2 · A second safe interpolation</h3>
+    <p><strong>Prompt:</strong> Join α(<var>s</var>) = 1 − 2i<var>u</var>(<var>s</var>) to β(<var>s</var>) = 1 + 2<var>u</var>(<var>s</var>) + i<var>u</var>(<var>s</var>) by an endpoint-fixed homotopy in <var>X</var>. Verify the construction.</p>
+    <p><strong>Key:</strong> Both paths have both endpoints equal to 1. Straight interpolation gives</p>
+    <p class="mathline">H(s, t) = 1 + 2tu(s) + i(−2 + 3t)u(s).</p>
+    <p>The formula is jointly continuous, equals α at time 0 and β at time 1, and equals 1 at <var>s</var> = 0 and 1 for every time. Because <var>u</var>(<var>s</var>) ≥ 0 and <var>t</var> ≥ 0, Re <var>H</var>(<var>s</var>, <var>t</var>) = 1 + 2<var>t u</var>(<var>s</var>) ≥ 1. It is therefore <var>X</var>-valued on the entire square.</p>
+    <p><strong>Alternatives:</strong> A convex right-half-plane argument or a verified two-stage route through the constant path at 1 is valid. A plot of intermediate paths is evidence about a drawing, not the required proof of avoidance.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Supplies only a path or claims <var>X</var> is convex. <strong>Partial:</strong> Selects interpolation without its endpoint-fixed interpretation. <strong>Clear:</strong> Uses the homotopy definition and a valid safe-region argument.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Allows a zero or changes the prescribed endpoints. <strong>Partial:</strong> Checks only some time slices, relative edges, or membership conditions. <strong>Clear:</strong> Checks joint continuity, both time slices, both fixed endpoints, and avoidance on all of <var>I</var> × <var>I</var>.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives an invalid family. <strong>Partial:</strong> Gives a correct formula without a valid uniform avoidance argument. <strong>Clear:</strong> Gives a valid family and an exact estimate such as Re <var>H</var> ≥ 1.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Relies on samples or appearance. <strong>Partial:</strong> Gives a sound strategy with an omitted verification. <strong>Clear:</strong> Justifies the construction for every <var>s</var>, <var>t</var> ∈ <var>I</var>.</dd>
+    </dl>
+  </article>
+
+  <article class="task" id="b3">
+    <h3>B3 · A clockwise nonlinear angle</h3>
+    <p><strong>Prompt:</strong> Compare γ(<var>s</var>) = (1 + 2<var>u</var>(<var>s</var>))e<sup>−2πi(s+s²)</sup> and δ(<var>s</var>) = e<sup>2πis</sup>. Can they be based homotopic in <var>X</var>? How does the answer change in all of ℂ? Justify both conclusions.</p>
+    <p><strong>Key:</strong> The positive radius 1 + 2<var>u</var>(<var>s</var>) and the endpoint values show that both are continuous nonzero based loops at 1. A normalized angle lift for γ is −<var>s</var> − <var>s</var><sup>2</sup>, giving winding −2. The lift <var>s</var> for δ gives winding 1. Since winding is invariant under based homotopies in <var>X</var>, no such homotopy exists there.</p>
+    <p>In ℂ, the family <var>H</var>(<var>s</var>, <var>t</var>) = (1 − <var>t</var>)γ(<var>s</var>) + <var>t</var>δ(<var>s</var>) is jointly continuous, has the correct time slices, and fixes both endpoints at 1. It is allowed to take the value 0. The whole-plane claim therefore has a valid construction.</p>
+    <p><strong>Alternatives:</strong> A correct normalized degree or lifted-angle argument can replace the displayed lift calculation. Accept a different verified whole-plane homotopy. A wrong sign in a winding is a calculation error; whether the response otherwise states and uses the obstruction correctly should be recorded separately.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Uses equality of images as a homotopy test or extends winding invariance across 0. <strong>Partial:</strong> Names the invariant without its obstruction implication. <strong>Clear:</strong> Uses unequal winding in <var>X</var> and a valid construction in ℂ.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Ignores the based-loop conditions or changed target. <strong>Partial:</strong> Assumes positive radius or endpoint values without checking them. <strong>Clear:</strong> Checks the loops at 1 and positivity, and explains why the obstruction applies only while avoiding 0.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives no correct invariant calculation or whole-plane family. <strong>Partial:</strong> Completes only one, or makes a winding calculation error within an otherwise relevant method. <strong>Clear:</strong> Obtains exact windings −2 and 1 and gives a valid ℂ-valued family.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Rejects just one candidate as if it excluded all. <strong>Partial:</strong> Has the right conclusions with a gap in their justification. <strong>Clear:</strong> Excludes every based homotopy in <var>X</var> and verifies a construction in ℂ for the whole square.</dd>
+    </dl>
+  </article>
+</section>
+
+<section id="form-c">
+  <h2>Form C · delayed keys</h2>
+  <article class="task" id="c1">
+    <h3>C1 · An affirmative audit in a nonconvex target</h3>
+    <p><strong>Prompt:</strong> Someone rejects <var>U</var>(<var>s</var>, <var>t</var>) = (cos 2π<var>s</var>, [1 + <var>t</var>(1 − <var>t</var>)] sin 2π<var>s</var>) as a based self-homotopy of the unit loop because the punctured plane is nonconvex. Assess that rejection and verify your verdict.</p>
+    <p><strong>Key:</strong> The rejection is invalid. Nonconvexity prevents a general interpolation guarantee; it does not invalidate an arbitrary particular family. This <var>U</var> is jointly continuous. At times 0 and 1 it is the unit loop, and at <var>s</var> = 0 and 1 it is (1, 0) at every time. Let <var>a</var> = 1 + <var>t</var>(1 − <var>t</var>). For <var>t</var> ∈ <var>I</var>, <var>a</var> ≥ 1, so</p>
+    <p class="mathline">‖U(s, t)‖² = cos²(2πs) + a² sin²(2πs)<br>≥ cos²(2πs) + sin²(2πs) = 1.</p>
+    <p>Consequently <var>U</var> is a valid based homotopy in ℝ² ∖ {0} from the unit loop to itself.</p>
+    <p><strong>Alternatives:</strong> A direct zero test works: if the first coordinate vanishes, the sine is ±1 and its coefficient <var>a</var> is positive, so the second coordinate is nonzero. This covers all pairs without requiring the norm bound. Equality of the two endpoint loops alone would not validate this particular family.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Accepts the blanket nonconvexity rejection or uses same winding as sufficient to validate this formula. <strong>Partial:</strong> Says nonconvexity is inconclusive without assessing <var>U</var>. <strong>Clear:</strong> Separates a general sufficient condition from verification of a particular based homotopy.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Misses a time or basepoint condition. <strong>Partial:</strong> Checks the four edges but omits joint continuity or global avoidance, or vice versa. <strong>Clear:</strong> Checks joint continuity, both prescribed time slices, the fixed basepoint, and avoidance for the full parameter square.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives no valid avoidance calculation. <strong>Partial:</strong> Observes the positive coefficient without completing the zero test or norm estimate. <strong>Clear:</strong> Gives an exact bound ‖<var>U</var>‖² ≥ 1 or a complete zero-exclusion argument.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Uses finitely many plotted ellipses as proof. <strong>Partial:</strong> Gives an affirmative verdict with an unfinished universal check. <strong>Clear:</strong> Demonstrates validity for every <var>s</var>, <var>t</var> ∈ <var>I</var> and explains why the stated rejection does not follow.</dd>
+    </dl>
+  </article>
+
+  <article class="task" id="c2">
+    <h3>C2 · Use a bound for arbitrary paths</h3>
+    <p><strong>Prompt:</strong> Continuous paths α, β : <var>I</var> → ℂ share endpoints 1 + i and 2 − i, and satisfy Re α(<var>s</var>), Re β(<var>s</var>) ≥ ⅓ for every <var>s</var>. Construct and verify an endpoint-fixed homotopy between them in <var>X</var>.</p>
+    <p><strong>Key:</strong> Define <var>H</var>(<var>s</var>, <var>t</var>) = (1 − <var>t</var>)α(<var>s</var>) + <var>t</var>β(<var>s</var>). Continuity of the paths and of scalar multiplication and addition implies joint continuity on <var>I</var> × <var>I</var>. The time slices are α and β. Because both paths have the same prescribed endpoints,</p>
+    <p class="mathline">H(0, t) = 1 + i, &nbsp; H(1, t) = 2 − i,<br>Re H(s, t) ≥ (1 − t)/3 + t/3 = 1/3.</p>
+    <p>The real-part bound holds for every pair and excludes 0, proving membership in <var>X</var>. These are paths between distinct endpoints, not based loops at 1; there is no need to assign each a loop winding.</p>
+    <p><strong>Alternatives:</strong> It is enough to invoke and check convexity of the closed half-plane {<var>z</var> : Re <var>z</var> ≥ ⅓}, which is contained in <var>X</var>. A verified two-stage construction through a common path in that half-plane with the same prescribed endpoints also works. The stated assumptions supply a universal bound; inventing formulas for α and β would not address arbitrary given paths.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Requires based loops or claims <var>X</var> is convex. <strong>Partial:</strong> Names interpolation without relating it to endpoint-fixed homotopy. <strong>Clear:</strong> Uses endpoint-fixed interpolation with the supplied safe half-plane.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Assumes new path formulas or changes either endpoint to 1. <strong>Partial:</strong> Uses the bound but omits continuity or an endpoint check. <strong>Clear:</strong> Uses only the given continuity, shared endpoints, universal bound, and nonnegative interpolation weights on <var>I</var>.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives no valid general family. <strong>Partial:</strong> Gives interpolation without a complete bound. <strong>Clear:</strong> Gives a valid family and proves Re <var>H</var> ≥ ⅓, or gives an equivalent exact safe-region proof.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Checks chosen example paths or finitely many parameters. <strong>Partial:</strong> Has a correct construction but leaves a required general step implicit. <strong>Clear:</strong> Proves the claim for every pair of paths satisfying the assumptions and every parameter pair.</dd>
+    </dl>
+  </article>
+
+  <article class="task" id="c3">
+    <h3>C3 · Form a loop before using winding</h3>
+    <p><strong>Prompt:</strong> Compare α(<var>s</var>) = e<sup>πis</sup> and β(<var>s</var>) = e<sup>−πis</sup>, both from 1 to −1. Are they homotopic relative to endpoints in <var>X</var>? How does the answer change in ℂ? You may use the reference-card fact that endpoint-fixed homotopic paths make α ∗ β̄ nullhomotopic, where β̄(<var>r</var>) = β(1 − <var>r</var>).</p>
+    <p><strong>Key:</strong> Neither α nor β is a closed loop, so the supplied integer loop winding should not be assigned separately to them. Concatenate α with the reverse of β, traveling each on half the interval:</p>
+    <p class="mathline">(α ∗ β̄)(s) = α(2s) = e<sup>2πis</sup> for 0 ≤ s ≤ ½,<br>(α ∗ β̄)(s) = β̄(2s − 1) = e<sup>−πi(2−2s)</sup> = e<sup>2πis</sup> for ½ ≤ s ≤ 1.</p>
+    <p>The two formulas meet at −1. This is the unit loop based at 1 with winding 1. If α and β were endpoint-fixed homotopic in <var>X</var>, the supplied implication would make this loop nullhomotopic there. Winding invariance would then force winding 0, a contradiction. Thus no such path homotopy exists in <var>X</var>.</p>
+    <p>In ℂ, straight interpolation gives</p>
+    <p class="mathline">H(s, t) = cos(πs) + i(1 − 2t)sin(πs).</p>
+    <p>It is jointly continuous, has time slices α and β, and fixes 1 and −1 at the two endpoints. At (<var>s</var>, <var>t</var>) = (½, ½) it is 0, which is permitted in ℂ. That last observation rejects this particular formula in <var>X</var>; the winding argument above excludes all endpoint-fixed formulas there.</p>
+    <p><strong>Alternatives:</strong> A lift of an assumed path homotopy to real angles also works: the initial α lift runs from 0 to ½, whereas the β lift starting at 0 ends at −½; a fixed endpoint at −1 cannot change the lifted terminal angle continuously between distinct elements of ½ + ℤ. The lifting fact must be stated if used beyond the card. An equivalent degree argument for the concatenated loop is acceptable.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Assigns integer loop windings to these nonclosed paths without a justified extension. <strong>Partial:</strong> Suggests joining or reversing paths without the nullhomotopy implication. <strong>Clear:</strong> Forms the appropriate closed loop and applies the permitted path-to-loop obstruction, or gives a correct lifted-angle argument.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Treats the paths as loops at 1 or ignores the fixed terminal point −1. <strong>Partial:</strong> Recognizes the endpoints but incompletely checks the chosen obstruction’s conditions or the whole-plane family. <strong>Clear:</strong> Checks continuous paths in <var>X</var> and the relative endpoints in both target settings; checks the concatenation’s seam and basepoint when using that method, or the fixed initial lift and discrete terminal lift when using lifted angles.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives an incorrect concatenation or only a picture. <strong>Partial:</strong> Gives the correct loop winding or the correct ℂ-valued construction, with the other incomplete. <strong>Clear:</strong> Computes a valid obstruction such as α ∗ β̄ = ω<sub>1</sub>, and gives a valid whole-plane homotopy.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Uses the one zero of straight interpolation as the sole nonexistence proof. <strong>Partial:</strong> Reaches both correct conclusions but leaves the contradiction or universal construction verification incomplete. <strong>Clear:</strong> Excludes every endpoint-fixed homotopy in <var>X</var> and verifies a construction for all parameters in ℂ.</dd>
+    </dl>
+  </article>
+</section>
+
+<section id="stretch">
+  <h2>C-S · optional construction, reported separately</h2>
+  <article class="task" id="cs">
+    <h3>Contract a nonconvex hypograph</h3>
+    <p><strong>Prompt:</strong> Let <var>Y</var> = {(<var>x</var>, <var>y</var>) ∈ ℝ² : <var>y</var> &lt; <var>x</var><sup>2</sup>} and <var>p</var> = (0, −1). Show that straight interpolation to <var>p</var> can fail, then construct a contraction of <var>Y</var> to <var>p</var> that fixes <var>p</var>. You may use the supplied continuous mutually inverse maps <var>T</var>(<var>x</var>, <var>y</var>) = (<var>x</var>, <var>x</var><sup>2</sup> − <var>y</var>) and <var>T</var><sup>−1</sup>(<var>a</var>, <var>b</var>) = (<var>a</var>, <var>a</var><sup>2</sup> − <var>b</var>), which identify <var>Y</var> with ℝ × (0, ∞).</p>
+    <p><strong>Failure witness:</strong> The point (2, 3) lies in <var>Y</var> because 3 &lt; 4. Its straight path to <var>p</var> passes through (1, 1) at time ½, where <var>y</var> = <var>x</var><sup>2</sup>. This boundary point is excluded. The witness invalidates that contraction formula; it does not prove <var>Y</var> noncontractible.</p>
+    <p><strong>Construction through coordinates:</strong> <var>T</var> and its displayed inverse are continuous polynomial maps, and direct substitution verifies both inverse identities. It takes <var>Y</var> onto the upper half-plane <var>b</var> &gt; 0 and takes <var>p</var> to (0, 1). Contract that convex half-plane to (0, 1), then return by <var>T</var><sup>−1</sup>:</p>
+    <p class="mathline">H((x, y), t) = T<sup>−1</sup>((1 − t)T(x, y) + t(0, 1))<br>= ((1 − t)x, (1 − t)y − t − t(1 − t)x²).</p>
+    <p><strong>Direct verification:</strong> The resulting map is jointly continuous on <var>Y</var> × <var>I</var>. At time 0 it is the identity and at time 1 it is the constant <var>p</var>. For <var>p</var>, the second coordinate is −(1 − <var>t</var>) − <var>t</var> = −1, so <var>p</var> stays fixed. Writing (<var>H</var><sub>x</sub>, <var>H</var><sub>y</sub>) for its coordinates gives</p>
+    <p class="mathline">H<sub>x</sub>² − H<sub>y</sub> = (1 − t)(x² − y) + t &gt; 0.</p>
+    <p>The strict inequality holds at time 0 because <var>x</var><sup>2</sup> − <var>y</var> &gt; 0, at time 1 because the expression is 1, and at intermediate times because it is a convex combination of positive numbers. Thus every intermediate point lies in <var>Y</var>. This contracts <var>Y</var> to <var>p</var>, fixing <var>p</var> throughout.</p>
+    <p><strong>Alternatives:</strong> The composed coordinate construction is sufficient without expanding its second coordinate. The learner may use the supplied inverse, continuity, and half-plane identification without proving those facts again; they must justify the transported family’s membership, continuity, boundary conditions, and fixed point. Accept any other valid contraction and any exact failure witness for the naive interpolation. Neither proving the entire target convex nor invoking winding is needed.</p>
+    <dl class="rubric">
+      <dt>Definition/theorem</dt><dd><strong>Missing/incorrect:</strong> Infers noncontractibility from a failed formula or confuses retraction onto a larger set with contraction to <var>p</var>. <strong>Partial:</strong> Suggests changing coordinates without identifying the resulting contraction. <strong>Clear:</strong> Uses the contraction definition and a valid coordinate or direct construction, distinguishing one failure from general impossibility.</dd>
+      <dt>Hypotheses/scope</dt><dd><strong>Missing/incorrect:</strong> Allows the boundary <var>y</var> = <var>x</var><sup>2</sup> or changes <var>Y</var>. <strong>Partial:</strong> Checks only some required properties of the transported or direct family. <strong>Clear:</strong> Establishes joint continuity, both time maps, the fixed point, and strict membership in <var>Y</var>, correctly using the supplied coordinate facts if that method is chosen.</dd>
+      <dt>Witness/construction</dt><dd><strong>Missing/incorrect:</strong> Gives neither an exact failure nor a valid family. <strong>Partial:</strong> Completes the witness or the contraction, but not both. <strong>Clear:</strong> Gives both an exact failure witness and a valid contraction with an exact membership argument.</dd>
+      <dt>Proof/quantifiers</dt><dd><strong>Missing/incorrect:</strong> Checks sampled points or treats a proposed formula as self-validating. <strong>Partial:</strong> Gives the right strategy with an omitted universal or strict-boundary step. <strong>Clear:</strong> Rejects the naive construction with one witness and proves the replacement for every (<var>x</var>, <var>y</var>) ∈ <var>Y</var> and every <var>t</var> ∈ <var>I</var>.</dd>
+    </dl>
+    <p class="note">C-S is optional and changes the construction method. Keep its response and the amount of scaffolding separate from the three core tasks. It is not a comparable fourth component of a phase score.</p>
+  </article>
+</section>
+
+<section id="recording">
+  <h2>What the record can support</h2>
+  <p>Report item-level mathematical evidence: for example, whether the response checked the moving basepoint, used a safe-region estimate, or distinguished a failed formula from an invariant obstruction. Report the form, material version, actual delay, exposure, assistance, adaptations, missing responses, and scorer uncertainty alongside that evidence. Do not invent learner samples or infer population, causal, psychometric, pass, or mastery conclusions from these authored materials.</p>
+  <p>Software checks, exact-key review, accessible reading, and print checks can establish properties of this resource’s delivery. They do not establish that the lecture improves learning or that the three forms are interchangeable measures.</p>
+  <p class="screen-only"><a href="../../../../index.html#/downloads/lectures/teaching/homotopy-route/README">Return to the route guide</a> · <a href="baseline.html">Form A</a> · <a href="immediate.html">Form B</a> · <a href="delayed.html">Form C</a></p>
+</section>
+</main>
+</body>
+</html>

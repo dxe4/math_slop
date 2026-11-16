@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc"><title id="title">Right censoring records survival beyond observation</title><desc id="desc">An event contributes a density f(t); a right-censored observation contributes survival S(c).</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#82909b"/></marker></defs>
+<rect width="960" height="540" rx="14" fill="#f7f8fa"/>
+<text x="35.00" y="40.00" font-family="system-ui,sans-serif" font-size="24" fill="#233443" font-weight="700" text-anchor="start">Right censoring records survival beyond observation</text>
+<text x="35.00" y="70.00" font-family="system-ui,sans-serif" font-size="14" fill="#233443" font-weight="400" text-anchor="start">An event contributes a density f(t); a right-censored observation contributes survival S(c).</text>
+<line x1="35.00" y1="488.00" x2="925.00" y2="488.00" stroke="#d4dce3" stroke-width="1"/>
+<text x="35.00" y="508.00" font-family="system-ui,sans-serif" font-size="13" fill="#233443" font-weight="400" text-anchor="start">Likelihood contribution: [h(t)]ᵟ S(t), with δ=1 for an observed event and δ=0 for independent right censoring.</text>
+<line x1="160.00" y1="420.00" x2="830.00" y2="420.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="160.00" y1="420.00" x2="160.00" y2="140.00" stroke="#82909b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="495.00" y="455.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="middle">follow-up time</text>
+<text x="160.00" y="125.00" font-family="system-ui,sans-serif" font-size="15" fill="#233443" font-weight="400" text-anchor="start">individual</text>
+<text x="65.00" y="170.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Person 1</text>
+<line x1="165.00" y1="165.00" x2="349.00" y2="165.00" stroke="#275c91" stroke-width="4"/>
+<circle cx="349.00" cy="165.00" r="8" fill="#bb5b27" stroke="#bb5b27" stroke-width="2"/>
+<text x="369.00" y="170.00" font-family="system-ui,sans-serif" font-size="14" fill="#bb5b27" font-weight="400" text-anchor="start">event</text>
+<text x="65.00" y="235.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Person 2</text>
+<line x1="165.00" y1="230.00" x2="606.60" y2="230.00" stroke="#275c91" stroke-width="4"/>
+<line x1="606.60" y1="218.00" x2="606.60" y2="242.00" stroke="#167d8d" stroke-width="4"/>
+<text x="626.60" y="235.00" font-family="system-ui,sans-serif" font-size="14" fill="#167d8d" font-weight="400" text-anchor="start">censored</text>
+<text x="65.00" y="300.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Person 3</text>
+<line x1="165.00" y1="295.00" x2="487.00" y2="295.00" stroke="#275c91" stroke-width="4"/>
+<circle cx="487.00" cy="295.00" r="8" fill="#bb5b27" stroke="#bb5b27" stroke-width="2"/>
+<text x="507.00" y="300.00" font-family="system-ui,sans-serif" font-size="14" fill="#bb5b27" font-weight="400" text-anchor="start">event</text>
+<text x="65.00" y="365.00" font-family="system-ui,sans-serif" font-size="16" fill="#233443" font-weight="400" text-anchor="start">Person 4</text>
+<line x1="165.00" y1="360.00" x2="735.40" y2="360.00" stroke="#275c91" stroke-width="4"/>
+<line x1="735.40" y1="348.00" x2="735.40" y2="372.00" stroke="#167d8d" stroke-width="4"/>
+<text x="755.40" y="365.00" font-family="system-ui,sans-serif" font-size="14" fill="#167d8d" font-weight="400" text-anchor="start">censored</text>
+</svg>

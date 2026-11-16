@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "api": "ExtensionHMM.fixed({observations, initial1, p01, p10, emission1})",
+  "semantics": "Fixed parameters only; no transition before observation one or empty-sequence prediction.",
+  "atol": 1e-12,
+  "log_evidence_comparison": "For tiny-case large log magnitude, allow 1e-10 absolute error; probabilities remain 1e-12.",
+  "error_messages": "Exact message wording may differ; status and impossibleAt must agree.",
+  "helper_sha256": "939c24bcbf147b64f61e76f2321ede47c716ac6b8db362fcc466d920f3370abe",
+  "cases": [
+    {
+      "name": "rational_default",
+      "inputs": {
+        "observations": [
+          1,
+          0
+        ],
+        "initial1": 0.5,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [
+          1,
+          0
+        ],
+        "logEvidence": -1.5847452998437288,
+        "filtered1": [
+          0.7999999999999999,
+          0.3170731707317073
+        ],
+        "smoothed1": [
+          0.6829268292682926,
+          0.3170731707317073
+        ],
+        "nextState1": 0.40853658536585363,
+        "nextObservation1": 0.4451219512195122,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "empty",
+      "inputs": {
+        "observations": [],
+        "initial1": 0.3,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [],
+        "logEvidence": 0.0,
+        "filtered1": [],
+        "smoothed1": [],
+        "nextState1": 0.3,
+        "nextObservation1": 0.38,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "one_observation",
+      "inputs": {
+        "observations": [
+          0
+        ],
+        "initial1": 0.5,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [
+          0
+        ],
+        "logEvidence": -0.6931471805599453,
+        "filtered1": [
+          0.19999999999999998
+        ],
+        "smoothed1": [
+          0.19999999999999998
+        ],
+        "nextState1": 0.35,
+        "nextObservation1": 0.41000000000000003,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "equal_emissions",
+      "inputs": {
+        "observations": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "initial1": 0.5,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.3,
+          0.3
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "logEvidence": -3.121295496529337,
+        "filtered1": [
+          0.5,
+          0.49999999999999994,
+          0.5000000000000001,
+          0.5
+        ],
+        "smoothed1": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "nextState1": 0.5,
+        "nextObservation1": 0.3,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "deterministic_alternating",
+      "inputs": {
+        "observations": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "initial1": 0,
+        "p01": 1,
+        "p10": 1,
+        "emission1": [
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "logEvidence": 0.0,
+        "filtered1": [
+          0.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "smoothed1": [
+          0.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "nextState1": 0.0,
+        "nextObservation1": 0.0,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "absorbing_one",
+      "inputs": {
+        "observations": [
+          1,
+          1,
+          1
+        ],
+        "initial1": 1,
+        "p01": 0,
+        "p10": 0,
+        "emission1": [
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [
+          1,
+          1,
+          1
+        ],
+        "logEvidence": 0.0,
+        "filtered1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "smoothed1": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nextState1": 1.0,
+        "nextObservation1": 1.0,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "impossible_first",
+      "inputs": {
+        "observations": [
+          1
+        ],
+        "initial1": 0,
+        "p01": 0.2,
+        "p10": 0.3,
+        "emission1": [
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "status": "impossible_evidence",
+        "message": "Evidence has zero probability",
+        "impossibleAt": 1
+      }
+    },
+    {
+      "name": "impossible_third",
+      "inputs": {
+        "observations": [
+          0,
+          0,
+          1
+        ],
+        "initial1": 0,
+        "p01": 0,
+        "p10": 0.3,
+        "emission1": [
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "status": "impossible_evidence",
+        "message": "Evidence has zero probability",
+        "impossibleAt": 3
+      }
+    },
+    {
+      "name": "tiny_possible",
+      "inputs": {
+        "observations": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "initial1": 1e-300,
+        "p01": 0,
+        "p10": 0,
+        "emission1": [
+          0,
+          1e-200
+        ]
+      },
+      "expected": {
+        "status": "ok",
+        "observations": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "logEvidence": -6216.979751083923,
+        "filtered1": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "smoothed1": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nextState1": 1.0,
+        "nextObservation1": 1e-200,
+        "informationSets": {
+          "filter": "each observed prefix",
+          "smoother": "full supplied sequence",
+          "forecast": "full supplied sequence; fixed parameters"
+        }
+      }
+    },
+    {
+      "name": "fractional_observation",
+      "inputs": {
+        "observations": [
+          0.5
+        ],
+        "initial1": 0.5,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "invalid_input",
+        "message": "observations must be binary integers",
+        "impossibleAt": null
+      }
+    },
+    {
+      "name": "too_long",
+      "inputs": {
+        "observations": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial1": 0.5,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "invalid_input",
+        "message": "observations must be a numeric binary vector of length 0..12",
+        "impossibleAt": null
+      }
+    },
+    {
+      "name": "invalid_probability",
+      "inputs": {
+        "observations": [
+          1,
+          0
+        ],
+        "initial1": 0.5,
+        "p01": 1.1,
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "invalid_input",
+        "message": "p01 must be in [0,1]",
+        "impossibleAt": null
+      }
+    },
+    {
+      "name": "wrong_emission_shape",
+      "inputs": {
+        "observations": [
+          1,
+          0
+        ],
+        "initial1": 0.5,
+        "p01": 0.25,
+        "p10": 0.25,
+        "emission1": [
+          0.2
+        ]
+      },
+      "expected": {
+        "status": "invalid_input",
+        "message": "emission1 must have exactly two entries",
+        "impossibleAt": null
+      }
+    },
+    {
+      "name": "blank_probability",
+      "inputs": {
+        "observations": [
+          1,
+          0
+        ],
+        "initial1": 0.5,
+        "p01": "",
+        "p10": 0.25,
+        "emission1": [
+          0.2,
+          0.8
+        ]
+      },
+      "expected": {
+        "status": "invalid_input",
+        "message": "p01 must be a finite scalar probability",
+        "impossibleAt": null
+      }
+    }
+  ],
+  "rational_anchor": {
+    "filtered1": [
+      "4/5",
+      "13/41"
+    ],
+    "smoothed1": [
+      "28/41",
+      "13/41"
+    ],
+    "evidence": "41/200",
+    "nextState1": "67/164",
+    "nextObservation1": "73/164"
+  },
+  "learning_semantics": {
+    "first_observation": "State posterior updates from rho*emission; transition posterior remains prior because no transition has been observed.",
+    "empty": "Next state is S1 under fixed initial law.",
+    "later_prefix": "Both parameter weights and state messages use only y_1:t.",
+    "smoother": "Full-sequence transition posterior AND backward state information.",
+    "forecast": "Preserve coupling of final state and transitions; share pair through trajectory."
+  }
+}

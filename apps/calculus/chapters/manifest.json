@@ -1,0 +1,477 @@
+[
+  {
+    "id": "01",
+    "part": "Foundations",
+    "title": "Functions and mathematical language",
+    "topics": [
+      "Sets, intervals, inequalities, absolute value",
+      "domain and range",
+      "composition and inverse functions",
+      "graph transformations",
+      "mathematical statements and counterexamples"
+    ],
+    "lab": "Build and compare transformed functions",
+    "project": "Diagnose domain restrictions and explain a graph"
+  },
+  {
+    "id": "02",
+    "part": "Foundations",
+    "title": "Algebra, trigonometry, and coordinates",
+    "topics": [
+      "Factoring and rational expressions",
+      "powers and logarithms",
+      "radians and unit circle",
+      "identities",
+      "Cartesian and polar coordinates",
+      "dimensional consistency",
+      "hyperbolic functions and real inverse branches"
+    ],
+    "lab": "Compare sine with its small-angle approximation",
+    "project": "Prepare an algebra and trigonometry reference"
+  },
+  {
+    "id": "03",
+    "part": "Foundations",
+    "title": "Computing with numbers and functions",
+    "topics": [
+      "Variables and functions in JavaScript",
+      "arrays and loops",
+      "Math API",
+      "plotting samples",
+      "floating-point arithmetic",
+      "absolute and relative error",
+      "experiments versus proofs"
+    ],
+    "lab": "Explore cancellation and finite precision",
+    "project": "Write a reusable function sampler"
+  },
+  {
+    "id": "04",
+    "part": "Differential calculus",
+    "title": "Limits and continuity",
+    "topics": [
+      "One-sided and two-sided limits",
+      "limit laws",
+      "squeeze theorem",
+      "epsilon-delta definition with worked linear proof",
+      "infinite limits and asymptotes",
+      "continuity",
+      "intermediate value theorem"
+    ],
+    "lab": "Inspect removable and jump discontinuities",
+    "project": "Distinguish graphical evidence from a limit proof"
+  },
+  {
+    "id": "05",
+    "part": "Differential calculus",
+    "title": "Derivatives from first principles",
+    "topics": [
+      "Average and instantaneous rates",
+      "difference quotient",
+      "tangent line",
+      "differentiability implies continuity",
+      "corners and cusps",
+      "higher derivatives",
+      "units"
+    ],
+    "lab": "Move secants toward a tangent",
+    "project": "Derive a derivative directly from its definition"
+  },
+  {
+    "id": "06",
+    "part": "Differential calculus",
+    "title": "Differentiation techniques",
+    "topics": [
+      "Power, product, quotient and chain rules",
+      "exponential and logarithmic derivatives",
+      "trigonometric and inverse trigonometric derivatives",
+      "implicit and logarithmic differentiation",
+      "inverse-function derivative",
+      "hyperbolic and inverse-hyperbolic derivatives"
+    ],
+    "lab": "Compare symbolic derivatives with central differences",
+    "project": "Differentiate a mixed family of functions"
+  },
+  {
+    "id": "07",
+    "part": "Differential calculus",
+    "title": "Rates, linearization, and sensitivity",
+    "topics": [
+      "Related rates",
+      "differentials",
+      "local linear approximations",
+      "error propagation",
+      "elasticity",
+      "derivative as sensitivity",
+      "model assumptions"
+    ],
+    "lab": "Estimate a changing geometric quantity",
+    "project": "Analyze a measurement-error scenario"
+  },
+  {
+    "id": "08",
+    "part": "Differential calculus",
+    "title": "Theorems and the shape of functions",
+    "topics": [
+      "Extreme value theorem",
+      "Rolle and mean value theorems",
+      "monotonicity",
+      "critical points",
+      "first and second derivative tests",
+      "concavity and inflection",
+      "L’Hôpital with hypotheses"
+    ],
+    "lab": "Inspect derivative sign charts",
+    "project": "Explain global and local behavior with theorem hypotheses"
+  },
+  {
+    "id": "09",
+    "part": "Differential calculus",
+    "title": "Optimization and root finding",
+    "topics": [
+      "Closed-interval optimization",
+      "modeling objectives and constraints",
+      "boundary checks",
+      "Newton method",
+      "bisection",
+      "convergence and failure cases",
+      "elementary gradient descent"
+    ],
+    "lab": "Compare Newton and bisection iterations",
+    "project": "Optimize a constrained design and justify the result"
+  },
+  {
+    "id": "10",
+    "part": "Integral calculus",
+    "title": "Accumulation and the definite integral",
+    "topics": [
+      "Signed area",
+      "Riemann sums",
+      "partitions and integrability",
+      "integral properties",
+      "average value",
+      "displacement versus distance"
+    ],
+    "lab": "Vary sample choice and partition size",
+    "project": "Build a Riemann-sum integrator"
+  },
+  {
+    "id": "11",
+    "part": "Integral calculus",
+    "title": "The fundamental theorem of calculus",
+    "topics": [
+      "Accumulation functions",
+      "both parts of FTC with hypotheses and proof ideas",
+      "antiderivatives and constants",
+      "variable limits and chain rule",
+      "substitution for definite integrals"
+    ],
+    "lab": "Compare accumulation and its derivative",
+    "project": "Connect a rate model to total change"
+  },
+  {
+    "id": "12",
+    "part": "Integral calculus",
+    "title": "Techniques of integration",
+    "topics": [
+      "Substitution",
+      "integration by parts",
+      "trigonometric integrals and substitutions",
+      "partial fractions",
+      "completing the square",
+      "choosing methods",
+      "nonelementary antiderivatives",
+      "branch-safe hyperbolic substitution"
+    ],
+    "lab": "Check candidate antiderivatives numerically",
+    "project": "Create a justified integration decision guide"
+  },
+  {
+    "id": "13",
+    "part": "Integral calculus",
+    "title": "Geometric and physical applications",
+    "topics": [
+      "Areas between curves",
+      "disk, washer and shell volumes",
+      "arc length",
+      "surface area of revolution",
+      "work with varying forces",
+      "density, mass and center of mass"
+    ],
+    "lab": "Approximate a solid of revolution",
+    "project": "Model a physical quantity with units and an integral"
+  },
+  {
+    "id": "14",
+    "part": "Integral calculus",
+    "title": "Numerical and improper integration",
+    "topics": [
+      "Trapezoidal and Simpson rules",
+      "error bounds and assumptions",
+      "adaptive refinement",
+      "infinite intervals",
+      "endpoint singularities",
+      "comparison tests",
+      "principal value distinction"
+    ],
+    "lab": "Compare quadrature error and singular behavior",
+    "project": "Select and validate an integration strategy"
+  },
+  {
+    "id": "15",
+    "part": "Sequences and series",
+    "title": "Sequences and infinite series",
+    "topics": [
+      "Sequence convergence",
+      "monotone bounded theorem",
+      "geometric and telescoping series",
+      "partial sums",
+      "divergence test",
+      "integral and comparison tests",
+      "p-series"
+    ],
+    "lab": "Plot partial sums and tails",
+    "project": "Distinguish small terms from a convergent series"
+  },
+  {
+    "id": "16",
+    "part": "Sequences and series",
+    "title": "Convergence tests and approximation",
+    "topics": [
+      "Absolute and conditional convergence",
+      "alternating series and remainder",
+      "ratio and root tests",
+      "rearrangement caveat",
+      "selecting tests",
+      "computational stopping criteria"
+    ],
+    "lab": "Contrast alternating and absolute convergence",
+    "project": "Choose a justified error tolerance"
+  },
+  {
+    "id": "17",
+    "part": "Sequences and series",
+    "title": "Power series and Taylor models",
+    "topics": [
+      "Radius and interval of convergence including endpoints",
+      "termwise differentiation and integration",
+      "Taylor and Maclaurin series",
+      "Taylor remainder",
+      "analytic versus smooth functions",
+      "local approximation",
+      "formal series coefficients versus convergent functions"
+    ],
+    "lab": "Vary expansion center and polynomial degree",
+    "project": "Certify an approximation on a specified interval"
+  },
+  {
+    "id": "18",
+    "part": "Geometry and motion",
+    "title": "Parametric curves and polar calculus",
+    "topics": [
+      "Parametric derivatives and second derivatives",
+      "speed",
+      "arc length",
+      "polar area",
+      "polar arc length",
+      "intersections and tracing multiplicity",
+      "focus-directrix conics and polar hyperbola branches"
+    ],
+    "lab": "Trace a parametric and a polar curve",
+    "project": "Compute geometric quantities with correct parameter bounds"
+  },
+  {
+    "id": "19",
+    "part": "Geometry and motion",
+    "title": "Vectors, space, and motion",
+    "topics": [
+      "Vectors in two and three dimensions",
+      "dot and cross products",
+      "lines and planes",
+      "vector-valued functions",
+      "velocity and acceleration",
+      "curvature",
+      "tangential and normal acceleration",
+      "world-coordinate space curves and projection limits"
+    ],
+    "lab": "Sample a space curve and its speed",
+    "project": "Analyze motion in three dimensions"
+  },
+  {
+    "id": "20",
+    "part": "Multivariable calculus",
+    "title": "Functions of several variables",
+    "topics": [
+      "Domains and level sets",
+      "surfaces",
+      "multivariable limits",
+      "path dependence",
+      "continuity",
+      "partial and higher partial derivatives",
+      "Clairaut hypotheses",
+      "axis-aligned quadrics and horizontal traces"
+    ],
+    "lab": "Compare approach paths to a two-variable limit",
+    "project": "Interpret level curves and partial derivatives"
+  },
+  {
+    "id": "21",
+    "part": "Multivariable calculus",
+    "title": "Gradients and multivariable differentiation",
+    "topics": [
+      "Differentiability and total differential",
+      "tangent planes",
+      "multivariable chain rule",
+      "Jacobian",
+      "directional derivatives",
+      "gradient geometry",
+      "local linear models",
+      "regular implicit-surface normals and tangent planes"
+    ],
+    "lab": "Explore directional rates across angles",
+    "project": "Construct and test a tangent-plane model"
+  },
+  {
+    "id": "22",
+    "part": "Multivariable calculus",
+    "title": "Multivariable optimization",
+    "topics": [
+      "Critical points",
+      "Hessian test",
+      "saddles and degenerate cases",
+      "compact-domain boundary analysis",
+      "Lagrange multipliers and regularity",
+      "constrained extrema",
+      "gradient descent"
+    ],
+    "lab": "Compare descent paths on a quadratic",
+    "project": "Check both interior and constrained candidates"
+  },
+  {
+    "id": "23",
+    "part": "Multivariable calculus",
+    "title": "Double and triple integrals",
+    "topics": [
+      "Iterated integrals",
+      "Fubini conditions",
+      "general planar regions",
+      "reversing order",
+      "volume, mass and moments",
+      "triple integrals",
+      "integrable singularities"
+    ],
+    "lab": "Approximate a two-dimensional integral on a grid",
+    "project": "Set up an integral from geometry"
+  },
+  {
+    "id": "24",
+    "part": "Multivariable calculus",
+    "title": "Change of variables and probability",
+    "topics": [
+      "Polar, cylindrical and spherical coordinates",
+      "Jacobian determinant and absolute value",
+      "transformed domains",
+      "joint probability densities",
+      "marginal densities and expectation",
+      "normalization"
+    ],
+    "lab": "Compare Cartesian and polar integration",
+    "project": "Normalize and analyze a continuous density"
+  },
+  {
+    "id": "25",
+    "part": "Vector calculus",
+    "title": "Vector fields and line integrals",
+    "topics": [
+      "Vector fields",
+      "scalar and vector line integrals",
+      "work and circulation",
+      "conservative fields",
+      "potential functions",
+      "path independence",
+      "domain topology"
+    ],
+    "lab": "Compare work along two paths",
+    "project": "Test conservativeness with domain assumptions"
+  },
+  {
+    "id": "26",
+    "part": "Vector calculus",
+    "title": "Green, Stokes, and divergence theorems",
+    "topics": [
+      "Green theorem and orientation",
+      "parametrized surfaces",
+      "surface integrals and flux",
+      "curl and divergence",
+      "Stokes theorem",
+      "divergence theorem",
+      "unifying boundary principles"
+    ],
+    "lab": "Check a theorem numerically on a simple region",
+    "project": "Choose the correct theorem and verify orientation"
+  },
+  {
+    "id": "27",
+    "part": "Differential equations",
+    "title": "Differential equations and dynamical models",
+    "topics": [
+      "Slope fields",
+      "initial value problems",
+      "separable and first-order linear equations",
+      "exponential and logistic models",
+      "equilibria and stability",
+      "existence and uniqueness hypotheses",
+      "second-order constant-coefficient equations",
+      "forced responses, variation of parameters, and convergent ODE series"
+    ],
+    "lab": "Compare exponential and logistic growth",
+    "project": "Solve and interpret an initial value problem"
+  },
+  {
+    "id": "28",
+    "part": "Differential equations",
+    "title": "Numerical dynamics and capstone projects",
+    "topics": [
+      "Euler and improved Euler",
+      "Runge–Kutta 4",
+      "consistency, convergence and stability",
+      "systems and phase planes",
+      "step-size studies",
+      "reproducibility",
+      "capstones in motion, optimization and accumulation",
+      "implicit Euler and fast-decay accuracy"
+    ],
+    "lab": "Compare integrators on an equation with known solution",
+    "project": "Publish a reproducible mathematical investigation"
+  },
+  {
+    "id": "29",
+    "part": "Multivariable and vector calculus",
+    "title": "Differential forms and the general Stokes theorem",
+    "topics": [
+      "Alternating forms and wedge products",
+      "Pullback and oriented integration",
+      "Exterior derivative and d squared equals zero",
+      "Induced boundary orientation",
+      "General Stokes theorem and its classical cases",
+      "Closed versus exact forms and domain obstructions"
+    ],
+    "lab": "Annular circulation: polygons, orientation, and a proved error bound",
+    "project": "Audit a Stokes calculation by degree, domain, coverage, and orientation"
+  },
+  {
+    "id": "30",
+    "part": "Multivariable and vector calculus",
+    "title": "Implicit functions and constrained systems",
+    "topics": [
+      "Local inverse theorem",
+      "Implicit function theorem and invertible derivative blocks",
+      "Implicit derivative and sensitivity matrices",
+      "Regular constraints and tangent spaces",
+      "Local branches and singular counterexamples",
+      "Constrained systems and parameter dependence"
+    ],
+    "lab": "A branch prediction and its actual error",
+    "project": "Select an invertible constraint block and certify a local branch"
+  }
+]

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" role="img" aria-labelledby="title desc">
+  <title id="title">Material element mapped from reference to current configuration</title>
+  <desc id="desc">A square reference area element labeled dA zero maps through chi to a sheared parallelogram labeled dA equals J dA zero. A lower annotation states rho J equals rho zero.</desc>
+  <style>
+    .ink{fill:none;stroke:#172033;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.accent{fill:#0f766e;fill-opacity:.16;stroke:#0f766e;stroke-width:4}.arrow{fill:none;stroke:#b45309;stroke-width:4;marker-end:url(#arrow)}.label{fill:#172033;font:20px system-ui,sans-serif}.small{fill:#172033;font:17px system-ui,sans-serif}.point{fill:#be185d}
+    @media (prefers-color-scheme:dark){.ink{stroke:#edf2ff}.accent{fill:#2dd4bf;fill-opacity:.18;stroke:#5eead4}.arrow{stroke:#fbbf24}.label,.small{fill:#edf2ff}.point{fill:#f472b6}}
+  </style>
+  <defs><marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="context-stroke"/></marker></defs>
+  <path class="accent" d="M90 70H270V250H90Z"/>
+  <circle class="point" cx="90" cy="250" r="6"/>
+  <text class="label" x="120" y="48">reference element</text>
+  <text class="label" x="142" y="170">dA₀</text>
+  <text class="small" x="72" y="280">material point X</text>
+  <path class="arrow" d="M310 160C360 105 400 105 445 150"/>
+  <text class="label" x="356" y="103">χ(·, t)</text>
+  <path class="accent" d="M480 80L690 110L660 240L450 210Z"/>
+  <circle class="point" cx="450" cy="210" r="6"/>
+  <text class="label" x="515" y="48">current element</text>
+  <text class="label" x="535" y="166">dA = J dA₀</text>
+  <text class="small" x="458" y="280">same point x = χ(X,t)</text>
+  <text class="label" x="295" y="306">mass balance: ρJ = ρ₀</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-labelledby="title desc">
+  <title id="title">Backward induction on a finite game graph</title>
+  <desc id="desc">Position A moves to B or C. B moves to terminal D. C moves to terminal D or E. D and E are P positions, B and C are N positions, and A is a P position.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#334155"/></marker></defs>
+  <rect x="1" y="1" width="718" height="338" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <g fill="none" stroke="#334155" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M360 80L225 145"/><path d="M360 80L495 145"/>
+    <path d="M215 190L285 260"/><path d="M485 190L315 260"/><path d="M505 190L540 260"/>
+  </g>
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <g fill="#fef3c7" stroke="#a16207" stroke-width="3"><circle cx="360" cy="65" r="34"/><circle cx="215" cy="165" r="34"/><circle cx="505" cy="165" r="34"/></g>
+    <g fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"><circle cx="295" cy="280" r="34"/><circle cx="545" cy="280" r="34"/></g>
+    <g fill="#172033" font-size="18" font-weight="700"><text x="360" y="61">A</text><text x="215" y="161">B</text><text x="505" y="161">C</text><text x="295" y="276">D</text><text x="545" y="276">E</text></g>
+    <g font-size="15" font-weight="700"><text x="360" y="82" fill="#854d0e">P</text><text x="215" y="182" fill="#854d0e">N</text><text x="505" y="182" fill="#854d0e">N</text><text x="295" y="297" fill="#1d4ed8">P · terminal</text><text x="545" y="297" fill="#1d4ed8">P · terminal</text></g>
+  </g>
+</svg>
