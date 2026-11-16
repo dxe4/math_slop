@@ -42,6 +42,50 @@
     </script>
     <link rel="icon" href="./mark.svg" type="image/svg+xml" />
     <title>Math Atlas — See how mathematics connects</title>
+    <script>
+      // Static edition: this app serves only the labs (#/labs?lab=…) and About.
+      // Its library pages need the Euler server's data, so every other Atlas
+      // route opens the matching page of the main site instead.
+      (() => {
+        const site = '../../index.html#/';
+        const target = () => {
+          const raw = location.hash.replace(/^#\/?/, '');
+          const [path, query = ''] = raw.split('?');
+          const parts = path.split('/').filter(Boolean).map(decodeURIComponent);
+          const q = new URLSearchParams(query);
+          const enc = s => encodeURIComponent(s);
+          const [head, a, b] = parts;
+          if (head === 'labs' && q.get('lab')) return null;
+          if (head === 'about') return null;
+          if (!head) return site;
+          if (head === 'books' || head === 'read') return site + ['books', a, b].filter(Boolean).map(enc).join('/');
+          if (head === 'labs') return site + 'labs';
+          if (head === 'blogs') return site + 'articles';
+          if (head === 'paths') return site + 'courses';
+          if (head === 'explore' || head === 'map') return site + 'fields';
+          if (head === 'search') return site + (q.get('q') ? 'search?q=' + enc(q.get('q')) : 'search');
+          if (head === 'saved') return site;
+          return site + 'search?q=' + enc(parts[parts.length - 1].replace(/[-_]+/g, ' '));
+        };
+        const go = () => { const t = target(); if (t) location.replace(t); };
+        go();
+        addEventListener('hashchange', go);
+        // Atlas search also needs server data: use the main site's search.
+        const isSearch = el => el && /search/i.test(el.getAttribute('aria-label') || el.textContent || '');
+        addEventListener('click', event => {
+          const button = event.target.closest?.('header button');
+          if (!isSearch(button)) return;
+          event.preventDefault(); event.stopImmediatePropagation();
+          location.assign(site + 'search');
+        }, true);
+        addEventListener('keydown', event => {
+          if (event.key !== '/' || event.ctrlKey || event.metaKey || event.altKey) return;
+          if (event.target.closest?.('input, textarea, select, [contenteditable="true"]')) return;
+          event.preventDefault(); event.stopImmediatePropagation();
+          location.assign(site + 'search');
+        }, true);
+      })();
+    </script>
     <script type="module" crossorigin src="./assets/index-CqiFd9ll.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-BpQH8Ho1.js">
     <link rel="modulepreload" crossorigin href="./assets/base-path-86vEGx49.js">
@@ -49,7 +93,7 @@
     <link rel="modulepreload" crossorigin href="./assets/vocabulary-CJM9U2DP.js">
     <link rel="modulepreload" crossorigin href="./assets/catalog-client-Zmx-RusP.js">
     <link rel="stylesheet" crossorigin href="./assets/index-_N4z2YRi.css">
-  <style>.euler-breadcrumb ol{display:flex;flex-wrap:wrap;gap:0 .5em;margin:0 0 1rem;padding:0;list-style:none;font-size:.9rem}.euler-breadcrumb li+li::before{content:"\203A";padding-inline-end:.5em;opacity:.7}</style></head>
+  <style>.euler-breadcrumb ol{display:flex;flex-wrap:wrap;gap:0 .5em;margin:0 0 1rem;padding:.75rem 20px 0;list-style:none;font-size:.9rem}.euler-breadcrumb li+li::before{content:"\203A";padding-inline-end:.5em;opacity:.7}</style></head>
   <body>
     <div id="root"><a class="skip-link" href="#main-content">Skip to content</a><main id="main-content" tabindex="-1" class="inner-page page-shell empty-state"><h1>Explore the mathematical atlas</h1><p role="status">Opening the topic map, reading paths and mathematical library.</p><noscript><p>Enable JavaScript and reload to use this interactive reader.</p></noscript></main></div>
   </body>
